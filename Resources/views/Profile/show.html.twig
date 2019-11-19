@@ -1,0 +1,109 @@
+{% extends "layout.html.twig" %}
+{% block title %}{{ parent() }} :: My Profile{% endblock %}
+
+{% block pageTitle %}<i class="fa fa-user-md"></i> My Profile{% endblock %}
+
+{% block content %}
+    {# {% include 'IAUsersBundle:Profile/partial:_profile-header.html.twig' %} #}
+    <div class="container-fluid  dashboard-content">
+    	<!-- ============================================================== -->
+        <!-- pageheader -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="page-header">
+                    <h2 class="pageheader-title">Profile</h2>
+                    <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+                    <div class="page-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            {{ knp_menu_render('breadcrumbs', {'template': 'menu/breadcrumb.html.twig'}) }}
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end pageheader -->
+        <!-- ============================================================== -->
+                
+        <div class="row">
+            <!-- ============================================================== -->
+            <!-- basic tabs  -->
+            <!-- ============================================================== -->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                	<h5 class="card-header">My Profile</h5>
+                	<div class="card-body">
+                		<div class="tab-regular">
+                            <ul class="nav nav-tabs " id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="home" aria-selected="true">Details</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="membership-tab" data-toggle="tab" href="#membership" role="tab" aria-controls="profile" aria-selected="false">Membership</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="activity-tab" data-toggle="tab" href="#activity" role="tab" aria-controls="contact" aria-selected="false">Activity</a>
+                                </li>
+                            </ul>
+                    		<div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="home-tab">
+                                    {% include 'IAUsersBundle:Profile/tab:_profile-edit-form.html.twig' %}
+                                </div>
+                                <div class="tab-pane fade" id="membership" role="tabpanel" aria-labelledby="profile-tab">
+                                    {% include 'IAUsersBundle:Profile/tab:_profile-membership.html.twig' %}
+                                </div>
+                                <div class="tab-pane fade" id="activity" role="tabpanel" aria-labelledby="contact-tab">
+                               
+                                    {% include 'IAUsersBundle:Profile/tab:_profile-activity.html.twig' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block modals %}
+	<div class="modal fade" id="dialogSelectPayment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+            		<h5 class="modal-title" id="exampleModalLabel">Select Payment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    	<span aria-hidden="true">&times;</span>
+                    </button>
+          		</div>
+                <div class="modal-body">
+                	<fieldset id="paymentMethodOptions" class="fieldset-project-fields" style="min-height:100px;" >
+                        {#<legend>Payment Method Options</legend>#}
+                        <div><span>Price:</span> <span class="price"></span></div>
+                        <div id="boxPaymentMethodOptions" class="form-horizontal">
+                            <input type="hidden" name="packagePlanId" id="packagePlanId" value="" />
+                            {% for method in paymentMethods %}
+                            <div class="form-group">
+                                <label class="custom-control custom-radio">
+                                    <input class="custom-control-input selectPaymentMethod" type="radio" name="paymentMethod" data-url="{{ path(method.route, {'planId': 1}) }}" value="{{ method.name }}" />
+                                    <span class="custom-control-label">{{ method.name }}</span>
+                                </label>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </fieldset>
+                    <fieldset id="paymentMethodOptions2" class="fieldset-project-fields" style="min-height:100px; display:none;" >
+                    	<div id="boxPaymentMethodOptions2" class="form-horizontal"></div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body_scripts %}
+	{{ parent() }}
+	
+    {{ encore_entry_script_tags( 'profile', null, 'new-template' ) }}  
+{% endblock %}

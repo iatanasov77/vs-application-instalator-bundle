@@ -1,0 +1,52 @@
+<h3>Membership</h3>
+<section class="panel">
+    <div class="panel-body bio-graph-info">
+        <h1>Available Packages and Plans</h1>
+        <div class="row">
+            {% for pack in packages %}
+            	{% for plan in pack.getPlans() %}
+	                <fieldset class="fieldset-project-fields" style="width: 100%;">
+	                    <legend  class="w-auto">{{ pack.title }} </legend>
+                        <div class="row">
+	                        <div class="d-flex justify-content-between align-items-center">
+	                            <div class="col-lg-12 col-lg-offset-1">
+	                                <span>{{ plan.getPlan() }} </span>: {{ plan.getPrice() }} {{ plan.getCurrency() }}
+	                            </div>
+	                            {% if ( subscription and subscriptionDetails.active ) %}
+	                            	{% if ( subscription.paymentDetails.packagePlan.id == plan.id ) %}
+		                                <span style="color:red; font-weight: bold;">Subscribed</span>
+		                                
+		                                {% if subscription.getPaymentMethod() == 'paypal_express_checkout_recurring_payment' %}
+		                                	<div class="ml-4">
+		                                    	<a class="btn btn-primary btn-sm" href="{{ path( 'ia_payment_paypal_express_checkout_cancel_recurring_payment', {'paymentId': subscription.getPaymentDetails().getId()} ) }}">
+		                                    		Cancel Recurring Payment
+		                                    	</a>
+		                                    </div>
+		                                {% endif %}
+									{% endif %}
+	                            {% else %}
+	                                <a class="btn btn-primary" 
+	                                    data-remote="false"  
+	                                    data-toggle="modal" 
+	                                    data-target="#dialogSelectPayment" 
+	                                    
+	                                    data-price="{{ plan.getPrice() }}"
+	                                    data-planid="{{ plan.getId() }}"
+	                                    
+	                                    href="{{ path('ia_paid_membership_checkout_select_method', {'planId': plan.getId()}) }}"
+	                                >Subscribe</a>
+	                            {% endif %}
+	                        </div>
+                        </div>
+	                </fieldset>
+	                <div class="row"><div class="col-lg-12 col-lg-offset-1">&nbsp;</div></div>
+	            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section>
+    <div class="row">
+    </div>
+</section>
+

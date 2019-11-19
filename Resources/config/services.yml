@@ -1,0 +1,24 @@
+parameters:
+#    ia_users.example.class: IA\UsersBundle\Example
+
+services:
+    ia_users.form.type.users:
+        class: IA\UsersBundle\Form\UserCrudFormType
+        tags:
+            - { name: form.type, alias: 'ia_users_users' }
+        arguments: ['@doctrine']
+        
+    ia_users.form.type.registration:
+        class: IA\UsersBundle\Form\RegistrationFormType
+        tags:
+            - { name: form.type, alias: ia_user_registration }
+    ia_user.registration_listener:
+        class: IA\UsersBundle\EventListener\RegistrationListener
+        arguments: []
+        tags:
+            - { name: kernel.event_subscriber }
+    ia_user.password_resetting:
+        class: IA\UsersBundle\EventListener\PasswordResettingListener
+        arguments: ['@router']
+        tags:
+            - { name: kernel.event_subscriber }
