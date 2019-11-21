@@ -1,0 +1,9 @@
+parameters:
+#    ia_cms.example.class: IACmsBundle\Example
+
+services:
+    ia_cms.form.type.pages:
+        class: IA\CmsBundle\Form\PageForm
+        tags:
+            - { name: form.type, alias: 'ia_cms_pages' }
+        arguments: ['@doctrine']
