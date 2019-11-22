@@ -1,9 +1,12 @@
-{% extends "layout.html.twig" %}
+{% extends "layout/concept-master/layout.html.twig" %}
 {% block title %}{{ parent() }} :: List Pages{% endblock %}
 
-{% block pageTitle %}<i class="icon_genius"></i> List Pages{% endblock %}
-
 {% block content %}
+	<div class="row">   
+        <div class="col-lg-12">
+        	<a class="btn btn-primary" href="{{ path('ia_cms_pages_create') }}">Create New Page</a>
+       	</div>
+    </div>
     <div class="row">   
         <div class="col-lg-12">
             <section class="panel">
@@ -51,7 +54,7 @@
     </div>
 {% endblock %}
 
-{% block endDocumentScripts %}
+{% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
         jQuery("#btnDelete").on("click", function (e) {

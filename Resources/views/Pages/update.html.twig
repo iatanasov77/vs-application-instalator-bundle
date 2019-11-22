@@ -1,12 +1,5 @@
-{% extends "layout.html.twig" %}
-{% block head_styles %}
-    {{ parent() }}
-    {% stylesheets filter='uglifycss, cssrewrite' output="assets/build/wct.css"
-        'bundles/iawebcontentthief/css/styles.css'
-    %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-{% endblock %}
+{% extends "layout/concept-master/layout.html.twig" %}
+
 {% block title %}{{ parent() }} :: Edit Page{% endblock %}
 
 {% block pageTitle %}<i class="icon_genius"></i> Edit Page{% endblock %}
@@ -39,4 +32,3 @@
         </div>
     </div>
 {% endblock content %}
-
