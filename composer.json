@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "IA\\UsersBundle\\": ""
+            "IA\\CmsBundle\\": ""
         }
     },
     "minimum-stability" : "dev"
