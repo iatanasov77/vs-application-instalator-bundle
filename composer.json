@@ -13,7 +13,6 @@
     ],
     "require": {
         "php": "^5.5.9 || ^7.0",
-        "doctrine/doctrine-bundle": "*",
        	"sylius/resource-bundle": "^1.6",
        	"knplabs/knp-menu-bundle": "^2.0",
        	"friendsofsymfony/ckeditor-bundle": "^2.0"
