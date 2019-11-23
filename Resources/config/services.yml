@@ -42,6 +42,8 @@ services:
     app.breadcrumbs_menu:
         class: Knp\Menu\MenuItem
         factory: ["@app.menu_builder", breadcrumbsMenu]
-        arguments: ["@knp_menu.factory"]
+        arguments:
+            - '@knp_menu.factory'
+            - '[]'
         tags:
             - { name: knp_menu.menu, alias: breadcrumbs }

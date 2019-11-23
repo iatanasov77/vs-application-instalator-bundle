@@ -31,8 +31,11 @@ class IACmsExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration( $configuration, $configs );
         
-        $definition = $container->getDefinition( 'app.main_menu' );
-        $definition->replaceArgument( 1, $config['menu']['mainMenu'] );
+        $mainMenu = $container->getDefinition( 'app.main_menu' );
+        $mainMenu->replaceArgument( 1, $config['menu']['mainMenu'] );
+        
+        $bcMenu = $container->getDefinition( 'app.breadcrumbs_menu' );
+        $bcMenu->replaceArgument( 1, $config['menu']['mainMenu'] );
     }
     
     public function prepend(ContainerBuilder $container)

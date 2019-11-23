@@ -44,7 +44,7 @@ class MenuBuilder implements ContainerAwareInterface
         return $menu;
     }
     
-    public function profileMenu(FactoryInterface $factory)
+    public function profileMenu( FactoryInterface $factory )
     {
         $menu = $factory->createItem('root');
         
@@ -55,9 +55,9 @@ class MenuBuilder implements ContainerAwareInterface
         return $menu;
     }
     
-    public function breadcrumbsMenu(FactoryInterface $factory)
+    public function breadcrumbsMenu( FactoryInterface $factory, $menuConfig )
     {
-        $bcmenu = $this->mainMenu($factory);
+        $bcmenu = $this->mainMenu( $factory, $menuConfig );
         return $this->getCurrentMenuItem($bcmenu) ?: $factory->createItem('Edit');
     }
     
