@@ -20,7 +20,7 @@ class IACmsExtension extends Extension
      * {@inheritDoc}
      */
     public function load( array $configs, ContainerBuilder $container )
-    {var_dump($configs); die;
+    {
         /*
          * Load Service and parameters
          */
