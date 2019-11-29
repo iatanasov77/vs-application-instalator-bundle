@@ -15,7 +15,7 @@ class PagesController extends ResourceController
     {
         $er = $this->getDoctrine()->getRepository( 'IA\CmsBundle\Entity\Page' );
         
-        return $this->render( '@IACmsBundle/Pages/index.html.twig', [
+        return $this->render( '@IACms/Pages/index.html.twig', [
             'items' => $er->findAll(),
         ]);
     }
@@ -49,7 +49,7 @@ class PagesController extends ResourceController
             return $this->redirect($this->generateUrl('ia_web_content_thief_fieldsets_list'));
         }
 
-        return $this->render( '@IACmsBundle/Pages/update.html.twig', [
+        return $this->render( '@IACms/Pages/update.html.twig', [
             'form' => $form->createView(),
             'item' => $oPage
         ]);
