@@ -3,7 +3,7 @@ ia_cms_pages:
     resource: |
         alias: ia_cms.pages
         path: /pages
-        templates: "IACmsBundle:Pages"
+        templates: "@IACms/Pages"
     type: sylius.resource
 
 
