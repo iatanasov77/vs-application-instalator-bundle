@@ -3,7 +3,7 @@
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Yaml\Yaml;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\Matcher\Voter\RouteVoter;
@@ -18,20 +18,23 @@ class MenuBuilder implements ContainerAwareInterface
     
     protected $isAdmin;
     
-    public function __construct( AuthorizationChecker $securityContext, RequestStack $requestStack )
+    protected $menuConfig;
+    
+    public function __construct( AuthorizationChecker $securityContext, string $config_file )
     {
-        $this->requestStack = $requestStack;
-        $this->securityContext = $securityContext;
-        $this->isLoggedIn = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
-        $this->isAdmin = $this->securityContext->isGranted('ROLE_ADMIN');
+        $this->securityContext  = $securityContext;
+        
+        $config                 = Yaml::parse( file_get_contents( $config_file ) );
+        $this->menuConfig       = $config['ia_cms']['menu']['mainMenu'];
+        
+        $this->isLoggedIn       = $this->securityContext->isGranted( 'IS_AUTHENTICATED_FULLY' );
+        $this->isAdmin          = $this->securityContext->isGranted( 'ROLE_ADMIN' );
     }
     
-    public function mainMenu( FactoryInterface $factory, $menuConfig )
+    public function mainMenu( FactoryInterface $factory )
     {
-        $request    = $this->requestStack->getCurrentRequest();
-        $menu       = $factory->createItem('root');
-        
-        foreach ( $menuConfig as $mg ) { // Menu Groups
+        $menu       = $factory->createItem( 'root' );
+        foreach ( $this->menuConfig as $mg ) { // Menu Groups
             $menu->addChild( $mg['name'], [
                 'uri' => 'javascript:;', 'attributes' => ['iconClass' => 'icon_document_alt']
             ]);
@@ -55,9 +58,9 @@ class MenuBuilder implements ContainerAwareInterface
         return $menu;
     }
     
-    public function breadcrumbsMenu( FactoryInterface $factory, $menuConfig )
+    public function breadcrumbsMenu( FactoryInterface $factory )
     {
-        $bcmenu = $this->mainMenu( $factory, $menuConfig );
+        $bcmenu = $this->mainMenu( $factory );
         return $this->getCurrentMenuItem($bcmenu) ?: $factory->createItem('Edit');
     }
     
