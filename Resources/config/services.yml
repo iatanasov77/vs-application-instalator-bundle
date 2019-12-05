@@ -18,17 +18,15 @@ services:
     ###########################################################
     app.menu_builder:
         class: IA\CmsBundle\Component\Menu\MenuBuilder
-        arguments: 
-            - '@security.authorization_checker'
+        arguments: ["@security.authorization_checker", "%menu.config_file%"]
         calls:
           - [ setContainer ]
 
     app.main_menu:
+        autowire: false
         class: Knp\Menu\MenuItem
         factory: ["@app.menu_builder", mainMenu]
-        arguments:
-            - '@knp_menu.factory'
-            - '[]'
+        arguments: ["@knp_menu.factory"]
         tags:
             - { name: knp_menu.menu, alias: main }
             
@@ -40,10 +38,9 @@ services:
             - { name: knp_menu.menu, alias: profile }
     
     app.breadcrumbs_menu:
+        autowire: false
         class: Knp\Menu\MenuItem
         factory: ["@app.menu_builder", breadcrumbsMenu]
-        arguments:
-            - '@knp_menu.factory'
-            - '[]'
+        arguments: ["@knp_menu.factory"]
         tags:
             - { name: knp_menu.menu, alias: breadcrumbs }

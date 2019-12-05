@@ -34,16 +34,9 @@ class MenuBuilder implements ContainerAwareInterface
     public function mainMenu( FactoryInterface $factory )
     {
         $menu       = $factory->createItem( 'root' );
-        foreach ( $this->menuConfig as $mg ) { // Menu Groups
-            $menu->addChild( $mg['name'], [
-                'uri' => 'javascript:;', 'attributes' => ['iconClass' => 'icon_document_alt']
-            ]);
-            
-            foreach ( $mg['childs'] as $mi ) { // Menu Group Items
-                $menu[$mg['name']]->addChild( $mi['name'], ['route' => $mi['route']] );
-            }
-        }
         
+        $this->build( $menu, $this->menuConfig );
+
         return $menu;
     }
     
@@ -81,4 +74,19 @@ class MenuBuilder implements ContainerAwareInterface
         return null;
     }
     
+    
+    private function build( &$menu, $config )
+    {
+        foreach ( $config as $mg ) {
+            $menu->addChild( $mg['name'], [
+                'uri'       => isset( $mg['uri'] ) ? $mg['uri'] : null,
+                'route'     => isset( $mg['route'] ) ? $mg['route'] : null,
+                'attributes'=> isset( $mg['attributes'] ) ? $mg['attributes'] : [],
+            ]);
+            
+            if ( isset( $mg['childs'] ) && is_array( $mg['childs'] ) ) {
+                $this->build( $menu[$mg['name']], $mg['childs'] );
+            }
+        }
+    }
 }
