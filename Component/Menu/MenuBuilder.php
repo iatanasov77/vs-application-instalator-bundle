@@ -99,10 +99,9 @@ class MenuBuilder implements ContainerAwareInterface
                 }
             }
             
+            $child  = $menu->addChild( $mg['name'], $params );
             if ( isset( $mg['display'] ) && $mg['display'] == false ) {
-                $menu->addChild( $mg['name'], $params )->setDisplay( false );
-            } else {
-                $menu->addChild( $mg['name'], $params );
+                $child->setDisplay( false );
             }
             
             if ( isset( $mg['childs'] ) && is_array( $mg['childs'] ) ) {
