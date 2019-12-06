@@ -21,11 +21,7 @@ class Configuration implements ConfigurationInterface
         
         $treeBuilder->getRootNode()
             ->children()
-                ->arrayNode( 'menu' )
-                    ->children()
-                        ->variableNode( 'mainMenu')->end()
-                    ->end()
-                ->end()
+                ->variableNode( 'menu' )->end()
             ->end()
         ;
         

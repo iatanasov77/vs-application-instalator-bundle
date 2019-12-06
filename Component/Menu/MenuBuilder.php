@@ -25,7 +25,7 @@ class MenuBuilder implements ContainerAwareInterface
         $this->securityContext  = $securityContext;
         
         $config                 = Yaml::parse( file_get_contents( $config_file ) );
-        $this->menuConfig       = $config['ia_cms']['menu']['mainMenu'];
+        $this->menuConfig       = $config['ia_cms']['menu'];
         
         $this->isLoggedIn       = $this->securityContext->isGranted( 'IS_AUTHENTICATED_FULLY' );
         $this->isAdmin          = $this->securityContext->isGranted( 'ROLE_ADMIN' );
@@ -35,18 +35,16 @@ class MenuBuilder implements ContainerAwareInterface
     {
         $menu       = $factory->createItem( 'root' );
         
-        $this->build( $menu, $this->menuConfig );
+        $this->build( $menu, $this->menuConfig['mainMenu'] );
 
         return $menu;
     }
     
     public function profileMenu( FactoryInterface $factory )
     {
-        $menu = $factory->createItem('root');
+        $menu = $factory->createItem( 'root' );
         
-        $menu->addChild('My Profile', array('route' => 'ia_users_profile_show', 'attributes' => array('iconClass' => 'fas fa-user mr-2')));
-        $menu->addChild('Log Out', array('route' => 'app_logout', 'attributes' => array('iconClass' => 'fas fa-power-off mr-2')));
-        $menu->addChild('Documentation', array('uri' => 'javascript:;', 'attributes' => array('iconClass' => 'fas fa-cog mr-2')));
+        $this->build( $menu, $this->menuConfig['profileMenu'] );
         
         return $menu;
     }
@@ -54,19 +52,19 @@ class MenuBuilder implements ContainerAwareInterface
     public function breadcrumbsMenu( FactoryInterface $factory )
     {
         $bcmenu = $this->mainMenu( $factory );
-        return $this->getCurrentMenuItem($bcmenu) ?: $factory->createItem('Edit');
+        return $this->getCurrentMenuItem( $bcmenu ) ?: $factory->createItem( 'Edit' );
     }
     
-    public function getCurrentMenuItem($menu)
+    public function getCurrentMenuItem( $menu )
     {
-        $voter = new RouteVoter($this->container->get('request_stack'));
+        $voter = new RouteVoter( $this->container->get( 'request_stack' ) );
         
-        foreach ($menu as $item) {
+        foreach ( $menu as $item ) {
             if ($voter->matchItem($item)) {
                 return $item;
             }
             
-            if ($item->getChildren() && $currentChild = $this->getCurrentMenuItem($item)) {
+            if ( $item->getChildren() && $currentChild = $this->getCurrentMenuItem( $item ) ) {
                 return $currentChild;
             }
         }
