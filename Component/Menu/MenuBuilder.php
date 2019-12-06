@@ -35,6 +35,9 @@ class MenuBuilder implements ContainerAwareInterface
     {
         $menu       = $factory->createItem( 'root' );
         
+        if ( ! isset( $this->menuConfig['mainMenu'] ) ) {
+            throw new \Exception( '"mainMenu" node must be provided at "ia_cms.yaml" config file.' );
+        }
         $this->build( $menu, $this->menuConfig['mainMenu'] );
 
         return $menu;
@@ -44,6 +47,9 @@ class MenuBuilder implements ContainerAwareInterface
     {
         $menu = $factory->createItem( 'root' );
         
+        if ( ! isset( $this->menuConfig['profileMenu'] ) ) {
+            throw new \Exception( '"profileMenu" node must be provided at "ia_cms.yaml" config file.' );
+        }
         $this->build( $menu, $this->menuConfig['profileMenu'] );
         
         return $menu;
