@@ -84,15 +84,18 @@ class MenuBuilder implements ContainerAwareInterface
     private function build( &$menu, $config )
     {
         foreach ( $config as $mg ) {
-            
             $params = [
                 'uri'       => isset( $mg['uri'] ) ? $mg['uri'] : null,
                 'route'     => isset( $mg['route'] ) ? $mg['route'] : null,
                 'attributes'=> isset( $mg['attributes'] ) ? $mg['attributes'] : [],
             ];
             if ( isset( $mg['routeParameters'] ) && is_array( $mg['routeParameters'] ) ) {
-                foreach( $mg['routeParameters'] as $rp ) {
-                    $params['routeParameters'][$rp]  =  $this->request->get( $rp );
+                foreach( $mg['routeParameters'] as $rp => $type ) {
+                    if ( $type == 'int' ) {
+                        $params['routeParameters'][$rp] = (int)$this->request->get( $rp );
+                    } else {
+                        $params['routeParameters'][$rp] = $this->request->get( $rp );
+                    }
                 }
             }
             
