@@ -20,6 +20,8 @@ class MenuBuilder implements ContainerAwareInterface
     
     protected $menuConfig;
     
+    protected $request;
+    
     public function __construct( AuthorizationChecker $securityContext, string $config_file )
     {
         $this->securityContext  = $securityContext;
@@ -33,7 +35,8 @@ class MenuBuilder implements ContainerAwareInterface
     
     public function mainMenu( FactoryInterface $factory )
     {
-        $menu       = $factory->createItem( 'root' );
+        $this->request  = $this->container->get( 'request_stack' )->getCurrentRequest();
+        $menu           = $factory->createItem( 'root' );
         
         if ( ! isset( $this->menuConfig['mainMenu'] ) ) {
             throw new \Exception( '"mainMenu" node must be provided at "ia_cms.yaml" config file.' );
@@ -58,7 +61,7 @@ class MenuBuilder implements ContainerAwareInterface
     public function breadcrumbsMenu( FactoryInterface $factory )
     {
         $bcmenu = $this->mainMenu( $factory );
-        return $this->getCurrentMenuItem( $bcmenu ) ?: $factory->createItem( 'Edit' );
+        return $this->getCurrentMenuItem( $bcmenu );
     }
     
     public function getCurrentMenuItem( $menu )
@@ -66,7 +69,7 @@ class MenuBuilder implements ContainerAwareInterface
         $voter = new RouteVoter( $this->container->get( 'request_stack' ) );
         
         foreach ( $menu as $item ) {
-            if ($voter->matchItem($item)) {
+            if ( $voter->matchItem( $item ) ) {
                 return $item;
             }
             
@@ -78,15 +81,26 @@ class MenuBuilder implements ContainerAwareInterface
         return null;
     }
     
-    
     private function build( &$menu, $config )
     {
         foreach ( $config as $mg ) {
-            $menu->addChild( $mg['name'], [
+            
+            $params = [
                 'uri'       => isset( $mg['uri'] ) ? $mg['uri'] : null,
                 'route'     => isset( $mg['route'] ) ? $mg['route'] : null,
                 'attributes'=> isset( $mg['attributes'] ) ? $mg['attributes'] : [],
-            ]);
+            ];
+            if ( isset( $mg['routeParameters'] ) && is_array( $mg['routeParameters'] ) ) {
+                foreach( $mg['routeParameters'] as $rp ) {
+                    $params['routeParameters'][$rp]  =  $this->request->get( $rp );
+                }
+            }
+            
+            if ( isset( $mg['display'] ) && $mg['display'] == false ) {
+                $menu->addChild( $mg['name'], $params )->setDisplay( false );
+            } else {
+                $menu->addChild( $mg['name'], $params );
+            }
             
             if ( isset( $mg['childs'] ) && is_array( $mg['childs'] ) ) {
                 $this->build( $menu[$mg['name']], $mg['childs'] );
