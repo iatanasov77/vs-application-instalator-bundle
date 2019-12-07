@@ -46,7 +46,7 @@ class PagesController extends ResourceController
             $em->persist( $form->getData() );
             $em->flush();
             
-            return $this->redirect($this->generateUrl( 'ia_web_content_thief_fieldsets_list' ) );
+            return $this->redirect($this->generateUrl( 'ia_cms_pages_index' ) );
         }
 
         return $this->render( '@IACms/Pages/update.html.twig', [

@@ -97,12 +97,12 @@ class Page implements ResourceInterface, SlugAwareInterface
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getCategory(): ?PageCategory
     {
         return $this->category;
     }
     
-    public function setCategory(?Category $category): self
+    public function setCategory(?PageCategory $category): self
     {
         $this->category = $category;
         

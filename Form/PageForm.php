@@ -32,12 +32,11 @@ class PageForm extends AbstractResourceType implements ContainerAwareInterface
     {
         $builder
             ->add( 'enabled', CheckboxType::class, ['label' => 'Enabled'] )
-            ->add( 'category_id', EntityType::class, [
+            ->add( 'category', EntityType::class, [
                 'label' => 'Category',
                 'class' => 'IA\CmsBundle\Entity\PageCategory',
                 'choice_label' => 'title',
                 'placeholder' => '--- Choose a Category ---',
-                "mapped" => false,
                 'required' => true
             ])
             ->add( 'title', TextType::class, ['label' => 'Title'] )
