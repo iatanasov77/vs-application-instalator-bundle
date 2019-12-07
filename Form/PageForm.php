@@ -1,6 +1,4 @@
-<?php
-
-namespace IA\CmsBundle\Form;
+<?php namespace IA\CmsBundle\Form;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -14,12 +12,13 @@ use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class PageForm extends AbstractResourceType implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
     
-    public function __construct($container = null)
+    public function __construct( $container = null )
     {
         $this->container = $container;
     }
@@ -29,10 +28,18 @@ class PageForm extends AbstractResourceType implements ContainerAwareInterface
         return 'ia_cms_pages';
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {        
+    public function buildForm( FormBuilderInterface $builder, array $options )
+    {
         $builder
             ->add( 'enabled', CheckboxType::class, ['label' => 'Enabled'] )
+            ->add( 'category', EntityType::class, [
+                'label' => 'Category',
+                'class' => 'IA\CmsBundle\Entity\PageCategory',
+                'choice_label' => 'title',
+                'placeholder' => '--- Choose a Category ---',
+                "mapped" => false,
+                'required' => true
+            ])
             ->add( 'title', TextType::class, ['label' => 'Title'] )
             ->add( 'slug', TextType::class, ['label' => 'Slug'] )
             
@@ -46,12 +53,11 @@ class PageForm extends AbstractResourceType implements ContainerAwareInterface
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions( OptionsResolver $resolver ): void
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'IA\CmsBundle\Entity\Page'
-        ));
+        ]);
     }
-
 }
 

@@ -1,6 +1,4 @@
-<?php
-
-namespace IA\CmsBundle\Entity;
+<?php namespace IA\CmsBundle\Entity;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
@@ -48,49 +46,66 @@ class Page implements ResourceInterface, SlugAwareInterface
      * @ORM\Column(name="text", type="text", precision=0, scale=0, nullable=false, unique=false)
      */
     private $text;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="PageCategory", inversedBy="pages")
+     */
+    private $category;
+    
 
-    function getId()
+    public function getId()
     {
         return $this->id;
     }
 
-    function getSlug() : ?string
+    public function getSlug() : ?string
     {
         return $this->slug;
     }
 
-    function getTitle()
+    public function getTitle()
     {
         return $this->title;
     }
 
-    function getText()
+    public function getText()
     {
         return $this->text;
     }
 
-    function setId($id)
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
     }
 
-    function setSlug($slug=null) : void
+    public function setSlug($slug=null) : void
     {
         $this->slug = $slug;
         //return $this;
     }
 
-    function setTitle($title)
+    public function setTitle($title)
     {
         $this->title = $title;
         return $this;
     }
 
-    function setText($text)
+    public function setText($text)
     {
         $this->text = $text;
         return $this;
     }
 
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+    
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+        
+        return $this;
+    }
 }
