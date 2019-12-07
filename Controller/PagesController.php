@@ -43,10 +43,10 @@ class PagesController extends ResourceController
             }
             
             $em = $this->getDoctrine()->getManager();
-            $em->persist($form->getData());
+            $em->persist( $form->getData() );
             $em->flush();
             
-            return $this->redirect($this->generateUrl('ia_web_content_thief_fieldsets_list'));
+            return $this->redirect($this->generateUrl( 'ia_web_content_thief_fieldsets_list' ) );
         }
 
         return $this->render( '@IACms/Pages/update.html.twig', [
