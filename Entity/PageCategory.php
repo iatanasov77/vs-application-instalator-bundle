@@ -1,6 +1,8 @@
 <?php namespace IA\CmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Table(name="IA_Cms_PageCategories")
@@ -57,7 +59,7 @@ class PageCategory
     }
     
     /**
-     * @return Collection|Product[]
+     * @return Collection|Page[]
      */
     public function getPages(): Collection
     {
