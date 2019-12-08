@@ -21,7 +21,7 @@ class ProfileController extends Controller
         //var_dump( $this->container->getParameter( 'ia_payment.accounts' ) ); die;
         $subscriptionDetails    = $this->userSubscriptionDetails();
         
-        return $this->render( 'IAUsersBundle:Profile:show.html.twig', [
+        return $this->render( '@IAUsers/Profile/show.html.twig', [
             'user'                  => $this->getUser(),
             'subscription'          => $this->getUser()->getSubscription(),
             'subscriptionDetails'   => $subscriptionDetails,
