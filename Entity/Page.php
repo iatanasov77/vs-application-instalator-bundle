@@ -9,7 +9,7 @@ use Sylius\Component\Resource\Model\SlugAwareInterface;
 /**
  * Page
  *
- * @ORM\Table(name="IA_Cms_Pages")
+ * @ORM\Table(name="IACMS_Pages")
  * @ORM\Entity(repositoryClass="IA\CmsBundle\Entity\Repository\PagesRepository")
  */
 class Page implements ResourceInterface, SlugAwareInterface

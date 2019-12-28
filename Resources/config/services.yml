@@ -44,3 +44,18 @@ services:
         arguments: ["@knp_menu.factory"]
         tags:
             - { name: knp_menu.menu, alias: breadcrumbs }
+
+    ###########################################################
+    # Taxonomy services
+    ###########################################################
+    ia_cms.form.type.taxonomy_vocabulary:
+        class: IACmsBundle\Form\TaxonomyVocabularyForm
+        tags:
+            - { name: form.type, alias: 'ia_cms_taxonomy_vocabularies' }
+        arguments: ['@doctrine']
+        
+    ia_cms.form.type.taxonomy_term:
+        class: IACmsBundle\Form\TaxonomyTermForm
+        tags:
+            - { name: form.type, alias: 'ia_cms_taxonomy_terms' }
+        arguments: ['@doctrine']

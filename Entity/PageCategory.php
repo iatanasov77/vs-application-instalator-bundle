@@ -5,7 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * @ORM\Table(name="IA_Cms_PageCategories")
+ * @ORM\Table(name="IACMS_PageCategories")
  * @ORM\Entity(repositoryClass="IA\CmsBundle\Entity\Repository\PagesRepository")
  */
 class PageCategory

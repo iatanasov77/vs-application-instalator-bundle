@@ -6,4 +6,38 @@ ia_cms_pages:
         templates: "@IACms/Pages"
     type: sylius.resource
 
+ia_cms_taxonomy_vocabularies:
+    resource: |
+        alias: ia_cms.taxonomy_vocabularies
+        except: ['show']
+        path: /vocabularies
+        templates: "IACmsBundle:TaxonomyVocabularies"
+    type: sylius.resource
 
+ia_cms_taxonomy_vocabularies_update:
+    path: /vocabularies/{id}/edit
+    methods: [GET, POST]
+    defaults:
+        _controller: ia_cms.controller.taxonomy_vocabularies:updateAction
+        _sylius:
+            template: IACmsBundle:TaxonomyVocabularies:update.html.twig
+            
+# Terms Controller
+ia_cms_taxonomy_terms:
+    resource: |
+        alias: ia_cms.taxonomy_terms
+        except: ['show']
+        path: /{vocabularyId}/terms
+        templates: "IACmsBundle:TaxonomyTerms"
+    type: sylius.resource
+
+ia_cms_taxonomy_terms_create:
+    path: /{vocabularyId}/terms/new
+    methods: [GET, POST]
+    defaults:
+        _controller: ia_cms.controller.taxonomy_terms:createAction
+        _sylius:
+            template: IACmsBundle:TaxonomyTerms:create.html.twig
+            factory:
+                method: createNewTerm
+                arguments: [$vocabularyId]
