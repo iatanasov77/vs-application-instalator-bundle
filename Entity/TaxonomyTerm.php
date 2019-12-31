@@ -6,13 +6,11 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 
 /**
- * Term
- *
- * @ORM\Table(name="IACMS_TaxonomyTerm")
+ * @ORM\Entity
+ * @ORM\Table(name="IACMS_TaxonomyTerms")
  * @Gedmo\Tree(type="nested")
- * @ORM\Entity(repositoryClass="IACmsBundle\Entity\Repository\TaxonomyTermsRepository")
  */
-class TaxonomyTerm implements ResourceInterface
+class TaxonomyTerm //implements ResourceInterface
 {
     use ToggleableTrait;
     
@@ -31,19 +29,6 @@ class TaxonomyTerm implements ResourceInterface
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=255, nullable=true)
-     */
-    private $description;
-
-    /**
-     * @Gedmo\Slug(fields={"name"})
-     * @ORM\Column(length=128, unique=true)
-     */
-    private $slug;
 
     /**
      * @var datetime $created
@@ -81,19 +66,19 @@ class TaxonomyTerm implements ResourceInterface
 
     /**
      * @Gedmo\TreeRoot
-     * @ORM\Column(name="root", type="integer", nullable=true)
+     * @ORM\Column(name="root_id", type="integer", nullable=true)
      */
     private $root;
 
     /**
      * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="Term", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="TaxonomyTerm", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="Term", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="TaxonomyTerm", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     private $children;

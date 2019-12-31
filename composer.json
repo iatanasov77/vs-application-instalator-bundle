@@ -17,6 +17,9 @@
        	"knplabs/knp-menu-bundle": "^2.0",
        	"friendsofsymfony/ckeditor-bundle": "^2.0"
     },
+    "require-dev": {
+    	"wasinger/bundle-asset-provider-bundle": "dev-master"
+    },
     "conflict": {
         "doctrine/doctrine-bundle": "<1.3",
         "symfony/doctrine-bridge": "<2.7"

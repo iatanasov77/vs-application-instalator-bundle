@@ -21,12 +21,12 @@
                                 {{ item.id }}
                             </td>
                             <td>
-                                <a href="{{ path('ia_taxonomy_vocabularies_update', {'id': item.id}) }}">
+                                <a href="{{ path('ia_cms_taxonomy_vocabularies_update', {'id': item.id}) }}">
                                     {{ item.slug }}
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ path('ia_taxonomy_vocabularies_update', {'id': item.id}) }}">
+                                <a href="{{ path('ia_cms_taxonomy_vocabularies_update', {'id': item.id}) }}">
                                     {{ item.name }}
                                 </a>
                             </td>
@@ -34,13 +34,13 @@
                             <td>
                                 <div class="btn-group">
                                     <div class="btn-group">
-                                        <a class="btn btn-success" href="{{ path('ia_taxonomy_terms_create', {'vocabularyId': item.id}) }}" title="Add Terms">
+                                        <a class="btn btn-success" href="{{ path('ia_cms_taxonomy_vocabularies_create', {'vocabularyId': item.id}) }}" title="Add Terms">
                                             <i class="icon_plus_alt2"></i>
                                         </a>
-                                        <a class="btn btn-primary" href="{{ path('ia_taxonomy_vocabularies_update', {'id': item.id}) }}" title="Edit">
+                                        <a class="btn btn-primary" href="{{ path('ia_cms_taxonomy_vocabularies_update', {'id': item.id}) }}" title="Edit">
                                             <i class="glyphicon glyphicon-pencil"></i>
                                         </a>
-                                        <a class="btn btn-danger btnDelete" href="{{ path('ia_taxonomy_vocabularies_delete', {'id': item.id}) }}" title="Delete">
+                                        <a class="btn btn-danger btnDelete" href="{{ path('ia_cms_taxonomy_vocabularies_delete', {'id': item.id}) }}" title="Delete">
                                             <i class="icon_close_alt2"></i>
                                         </a>
                                     </div>

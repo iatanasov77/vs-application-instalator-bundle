@@ -1,9 +1,11 @@
 <?php namespace IA\CmsBundle\Entity;
 
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\ToggleableTrait;
+
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * Vocabulary
@@ -14,6 +16,7 @@ use Sylius\Component\Resource\Model\ToggleableTrait;
 class TaxonomyVocabulary implements ResourceInterface
 {
     use ToggleableTrait;
+    use TimestampableEntity;
     
     /**
      * @var integer
@@ -37,28 +40,6 @@ class TaxonomyVocabulary implements ResourceInterface
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
-
-    /**
-     * @Gedmo\Slug(fields={"name"})
-     * @ORM\Column(length=128, unique=true)
-     */
-    private $slug;
-
-    /**
-     * @var datetime $created
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
-     */
-    private $created;
-
-    /**
-     * @var datetime $updated
-     *
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(type="datetime")
-     */
-    private $updated;
 
     /**
     * @ORM\OneToMany(targetEntity="TaxonomyTerm", mappedBy="vocabulary", cascade={"remove","persist"})
