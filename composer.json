@@ -14,11 +14,9 @@
     "require": {
         "php": "^5.5.9 || ^7.0",
        	"sylius/resource-bundle": "^1.6",
+       	"wasinger/bundle-asset-provider-bundle": "dev-master",
        	"knplabs/knp-menu-bundle": "^2.0",
        	"friendsofsymfony/ckeditor-bundle": "^2.0"
-    },
-    "require-dev": {
-    	"wasinger/bundle-asset-provider-bundle": "dev-master"
     },
     "conflict": {
         "doctrine/doctrine-bundle": "<1.3",
