@@ -25,23 +25,3 @@ ia_cms_taxonomy_vocabularies_update:
 ia_cms_taxonomy_vocabulary_terms:
     path: /vocabularies/{id}/terms
     controller: IA\CmsBundle\Controller\TaxonomyTermsController::terms
-           
-# Terms Controller
-ia_cms_taxonomy_terms:
-    resource: |
-        alias: ia_cms.taxonomy_terms
-        except: ['show']
-        path: /{vocabularyId}/terms
-        templates: "IACmsBundle:TaxonomyTerms"
-    type: sylius.resource
-
-ia_cms_taxonomy_terms_create:
-    path: /{vocabularyId}/terms/new
-    methods: [GET, POST]
-    defaults:
-        _controller: ia_cms.controller.taxonomy_terms:createAction
-        _sylius:
-            template: IACmsBundle:TaxonomyTerms:create.html.twig
-            factory:
-                method: createNewTerm
-                arguments: [$vocabularyId]
