@@ -60,8 +60,10 @@ class MenuBuilder implements ContainerAwareInterface
     
     public function breadcrumbsMenu( FactoryInterface $factory )
     {
-        $bcmenu = $this->mainMenu( $factory );
-        return $this->getCurrentMenuItem( $bcmenu );
+        $bcmenu     = $this->mainMenu( $factory );
+        $breadcrumb = $this->getCurrentMenuItem( $bcmenu );
+        
+        return $breadcrumb ? $breadcrumb : $factory->createItem( 'root' );
     }
     
     public function getCurrentMenuItem( $menu )
