@@ -4,6 +4,8 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\Matcher\Voter\RouteVoter;
@@ -12,25 +14,21 @@ class MenuBuilder implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
     
-    protected $securityContext;
+    protected $security;
     
-    protected $isLoggedIn;
-    
-    protected $isAdmin;
+    protected $router;
     
     protected $menuConfig;
     
     protected $request;
     
-    public function __construct( AuthorizationChecker $securityContext, string $config_file )
+    public function __construct( string $config_file, AuthorizationChecker $security, RouterInterface $router )
     {
-        $this->securityContext  = $securityContext;
+        $config             = Yaml::parse( file_get_contents( $config_file ) );
+        $this->menuConfig   = $config['ia_cms']['menu'];
         
-        $config                 = Yaml::parse( file_get_contents( $config_file ) );
-        $this->menuConfig       = $config['ia_cms']['menu'];
-        
-        $this->isLoggedIn       = $this->securityContext->isGranted( 'IS_AUTHENTICATED_FULLY' );
-        $this->isAdmin          = $this->securityContext->isGranted( 'ROLE_ADMIN' );
+        $this->security     = $security;
+        $this->router       = $router;
     }
     
     public function mainMenu( FactoryInterface $factory )
@@ -87,10 +85,18 @@ class MenuBuilder implements ContainerAwareInterface
     {
         foreach ( $config as $mg ) {
             $params = [
-                'uri'       => isset( $mg['uri'] ) ? $mg['uri'] : null,
-                'route'     => isset( $mg['route'] ) ? $mg['route'] : null,
-                'attributes'=> isset( $mg['attributes'] ) ? $mg['attributes'] : [],
+                'uri'               => isset( $mg['uri'] ) ? $mg['uri'] : null,
+                'route'             => isset( $mg['route'] ) ? $mg['route'] : null,
+                'routeParameters'   => isset( $mg['routeParameters'] ) ? $mg['routeParameters'] : [],
+                'attributes'        => isset( $mg['attributes'] ) ? $mg['attributes'] : [],
             ];
+            
+            if ( $params['route'] ) {
+                $path       = $this->router->generate( $params['route'], $params['routeParameters'], RouterInterface::ABSOLUTE_PATH );
+                if ( $this->security->isGranted( $path ) === VoterInterface::ACCESS_DENIED )
+                    continue;
+            }
+
             if ( isset( $mg['routeParameters'] ) && is_array( $mg['routeParameters'] ) ) {
                 foreach( $mg['routeParameters'] as $rp => $type ) {
                     if ( $type == 'int' ) {
@@ -110,5 +116,13 @@ class MenuBuilder implements ContainerAwareInterface
                 $this->build( $menu[$mg['name']], $mg['childs'] );
             }
         }
+    }
+    
+    protected function routeAllowed( $route, $routeParams )
+    {
+        $security       = ['ROLE_ADMIN','ROLE_SUPPORT']; // can be empty array as well or security expression packed into an array
+        $rolesToCheck   = ['ROLE_USER', 'ROLE_EDITOR', 'ROLE_PEER', 'ROLE_SUPPORT', 'ROLE_ADMIN'];
+        
+        $allowed_roles = $this->pathRoles->getRolesForRoute( $route, $routeParams, $rolesToCheck, $security );
     }
 }

@@ -18,7 +18,7 @@ services:
     ###########################################################
     app.menu_builder:
         class: IA\CmsBundle\Component\Menu\MenuBuilder
-        arguments: ["@security.authorization_checker", "%menu.config_file%"]
+        arguments: ["%menu.config_file%", "@security.authorization_checker", "@router"]
         calls:
           - [ setContainer ]
 
