@@ -4,7 +4,6 @@ use FOS\UserBundle\Model\User as BaseUser;
 //use Uecode\Bundle\ApiKeyBundle\Model\ApiKeyUser as BaseUser;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Doctrine\ORM\Mapping as ORM;
-use IA\Component\Utils;
 
 /**
  * @ORM\Entity
@@ -12,6 +11,12 @@ use IA\Component\Utils;
  */
 class User extends BaseUser implements ResourceInterface
 {
+    /**
+     * FOR USERS WITH SUBSCRIPTION DERIVE THIS ENTITY AND ADD USING
+     * THE TRAIT `IA\UsersBundle\Entity\Trait\UserSubscriptionTrait` FORM THIS BUNDLE
+     */
+    //use Trait\UserSubscriptionTrait;
+    
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -24,12 +29,6 @@ class User extends BaseUser implements ResourceInterface
      * @ORM\JoinColumn(name="user_info_id", referencedColumnName="id")
      */
     protected $userInfo;
-
-    /**
-     * @ORM\OneToOne(targetEntity="IA\UsersBundle\Entity\UserSubscription", inversedBy="user")
-     * @ORM\JoinColumn(name="subscriptionId", referencedColumnName="id")
-     */
-    protected $subscription;
     
     /**
      * @ORM\OneToMany(targetEntity="IA\UsersBundle\Entity\UserActivity", mappedBy="user")
@@ -57,19 +56,6 @@ class User extends BaseUser implements ResourceInterface
     public function setUserInfo( $userInfo )
     {
         $this->userInfo = $userInfo;
-        
-        return $this;
-    }
-    
-    public function getSubscription() 
-    {
-        return $this->subscription;
-    }
-
-    public function setSubscription(&$subscription)
-    {
-        $subscription->setUser($this);
-        $this->subscription = $subscription;
         
         return $this;
     }
