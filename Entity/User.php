@@ -13,9 +13,9 @@ class User extends BaseUser implements ResourceInterface
 {
     /**
      * FOR USERS WITH SUBSCRIPTION DERIVE THIS ENTITY AND ADD USING
-     * THE TRAIT `IA\UsersBundle\Entity\Trait\UserSubscriptionTrait` FORM THIS BUNDLE
+     * THE TRAIT `IA\UsersBundle\Entity\Traits\UserSubscriptionTrait` FORM THIS BUNDLE
      */
-    //use Trait\UserSubscriptionTrait;
+    //use Traits\UserSubscriptionTrait;
     
     /**
      * @ORM\Id

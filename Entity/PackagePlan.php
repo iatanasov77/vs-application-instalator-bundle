@@ -3,13 +3,12 @@
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use IA\PaymentBundle\Model\CheckoutOrderInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="IAUM_Packages_Plans")
  */
-class PackagePlan implements ResourceInterface, CheckoutOrderInterface
+class PackagePlan implements ResourceInterface //, \IA\PaymentBundle\Model\CheckoutOrderInterface
 {
     use ToggleableTrait;
 

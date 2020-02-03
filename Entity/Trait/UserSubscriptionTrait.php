@@ -1,4 +1,4 @@
-<?php namespace IA\UsersBundle\Entity\Trait;
+<?php namespace IA\UsersBundle\Entity\Traits;
 
 trait UserSubscriptionTrait
 {
