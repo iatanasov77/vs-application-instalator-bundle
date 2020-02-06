@@ -23,7 +23,7 @@ class UserNotification
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="IA\UsersBundle\Entity\User", inversedBy="activities")
+     * @ORM\ManyToOne(targetEntity="IA\UsersBundle\Entity\User", inversedBy="notifications")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     private $user;
