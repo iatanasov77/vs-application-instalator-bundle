@@ -16,9 +16,10 @@ class UserGroup extends BaseGroup
      */
     protected $id;
     
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="groups")
-     *
-     */
-    protected $users;
+    protected $roles;
+    
+    public function __construct( $roles = [] )
+    {
+        $this->roles = $roles;
+    }
 }

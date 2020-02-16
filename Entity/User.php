@@ -4,6 +4,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 //use Uecode\Bundle\ApiKeyBundle\Model\ApiKeyUser as BaseUser;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -31,6 +32,15 @@ class User extends BaseUser implements ResourceInterface
     protected $userInfo;
     
     /**
+     * @ORM\ManyToMany(targetEntity="IA\UsersBundle\Entity\UserGroup")
+     * @ORM\JoinTable(name="IAUM_Users_Groups",
+     *      joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="groupId", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
+    
+    /**
      * @ORM\OneToMany(targetEntity="IA\UsersBundle\Entity\UserActivity", mappedBy="user")
      */
     protected $activities;
@@ -39,6 +49,12 @@ class User extends BaseUser implements ResourceInterface
      * @ORM\OneToMany(targetEntity="IA\UsersBundle\Entity\UserNotification", mappedBy="user")
      */
     protected $notifications;
+    
+    public function __construct()
+    {
+        $this->groups    = new ArrayCollection();
+        parent::__construct();
+    }
     
     // She ti eba i formite
     public function __get( $var )
