@@ -16,7 +16,8 @@
        	"sylius/resource-bundle": "^1.6",
        	
        	"knplabs/knp-menu-bundle": "^2.0",
-       	"friendsofsymfony/ckeditor-bundle": "^2.0"
+       	"friendsofsymfony/ckeditor-bundle": "^2.0",
+       	"egeloen/form-extra-bundle": "^2.0"
     },
     "conflict": {
         "doctrine/doctrine-bundle": "<1.3",
