@@ -1,12 +1,12 @@
-<?php namespace IA\UsersBundle\Entity;
+<?php namespace IA\UsersBundle\Entity\Model;
 
+use FOS\UserBundle\Model\User as BaseUser;
+//use Uecode\Bundle\ApiKeyBundle\Model\ApiKeyUser as BaseUser;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="IAUM_Users")
- */
-class User extends Model\User
+class User extends BaseUser implements ResourceInterface
 {
     /**
      * FOR USERS WITH SUBSCRIPTION DERIVE THIS ENTITY AND ADD USING
@@ -28,6 +28,15 @@ class User extends Model\User
     protected $userInfo;
     
     /**
+     * @ORM\ManyToMany(targetEntity="IA\UsersBundle\Entity\UserGroup")
+     * @ORM\JoinTable(name="IAUM_Users_Groups",
+     *      joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="groupId", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
+    
+    /**
      * @ORM\OneToMany(targetEntity="IA\UsersBundle\Entity\UserActivity", mappedBy="user")
      */
     protected $activities;
@@ -39,6 +48,7 @@ class User extends Model\User
     
     public function __construct()
     {
+        $this->groups    = new ArrayCollection();
         parent::__construct();
     }
     

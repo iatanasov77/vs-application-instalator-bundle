@@ -4,7 +4,7 @@ use FOS\UserBundle\Model\Group as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserGroupRepository")
+ * @ORM\Entity
  * @ORM\Table(name="IAUM_UserGroups")
  */
 class UserGroup extends BaseGroup
@@ -16,9 +16,11 @@ class UserGroup extends BaseGroup
      */
     protected $id;
     
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="groups")
-     *
-     */
-    protected $users;
+    protected $roles;
+    
+    public function __construct( $roles = [] )
+    {
+        $this->roles = $roles;
+        parent::__construct();
+    }
 }

@@ -42,6 +42,11 @@ class UsersCrudController extends ResourceController
             
             $userManager = $this->get('fos_user.user_manager');
             $user = $userManager->createUser();
+            
+            //$repository = $em->getRepository( 'IA\UsersBundle\Entity\UserGroup' );
+            //$group = $repository->findOneByName( 'SomeGroup' );
+            //$user->addGroup( $group );
+            
             $user->setUsername( $username );
             $user->setEmail( $email );
             $user->setEmailCanonical( $email );
