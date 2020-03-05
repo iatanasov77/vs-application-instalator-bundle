@@ -40,6 +40,11 @@ class User extends BaseUser implements ResourceInterface
      */
     protected $notifications;
     
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    
     // She ti eba i formite
     public function __get( $var )
     {
