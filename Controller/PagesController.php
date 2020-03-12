@@ -36,12 +36,9 @@ class PagesController extends ResourceController
         $oPage = $id ? $er->findOneBy(array('id' => $id)) : new Page();
         
         $form = $this->createForm( PageForm::class, $oPage );
-        if( $request->isMethod('POST') ) {
-            $form->handleRequest($request);
-            if($form->isValid()) {
-                // Ãƒï¿½Ã¢â‚¬â„¢Ãƒï¿½Ã‚Â°Ãƒï¿½Ã‚Â»Ãƒï¿½Ã‚Â¸Ãƒï¿½Ã‚Â´Ãƒï¿½Ã‚Â°Ãƒâ€˜Ã¢â‚¬Â Ãƒï¿½Ã‚Â¸Ãƒâ€˜Ã¯Â¿Â½Ãƒâ€˜Ã¢â‚¬Å¡Ãƒï¿½Ã‚Â° Ãƒï¿½Ã‚Â³Ãƒâ€˜Ã…Â Ãƒâ€˜Ã¢â€šÂ¬Ãƒï¿½Ã‚Â¼Ãƒï¿½Ã‚Â¸
-            }
-            
+        
+        $form->handleRequest( $request );
+        if( $form->isSubmitted() ) { // && $form->isValid()
             $em = $this->getDoctrine()->getManager();
             $em->persist( $form->getData() );
             $em->flush();
