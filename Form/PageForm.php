@@ -35,7 +35,7 @@ class PageForm extends AbstractResourceType implements ContainerAwareInterface
             ->add( 'category', EntityType::class, [
                 'label' => 'Category',
                 'class' => 'IA\CmsBundle\Entity\PageCategory',
-                'choice_label' => 'title',
+                'choice_label' => 'name',
                 'placeholder' => '--- Choose a Category ---',
                 'required' => true
             ])

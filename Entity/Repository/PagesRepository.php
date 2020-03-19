@@ -1,9 +1,6 @@
-<?php
-
-namespace IA\CmsBundle\Entity\Repository;
+<?php namespace IA\CmsBundle\Entity\Repository;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-
 
 /**
  * PagesRepository

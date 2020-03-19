@@ -1,61 +1,88 @@
 <?php namespace IA\CmsBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
+ * @Gedmo\Tree(type="nested")
  * @ORM\Table(name="IACMS_PageCategories")
- * @ORM\Entity(repositoryClass="IA\CmsBundle\Entity\Repository\PagesRepository")
+ * @ORM\Entity(repositoryClass="IA\CmsBundle\Entity\Repository\PageCategoryRepository")
  */
 class PageCategory
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
     
     /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=64, precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(type="string")
      */
-    private $title;
+    private $name;
     
     /**
      * @ORM\OneToMany(targetEntity="Page", mappedBy="category")
      */
     private $pages;
     
+    /**
+     * @Gedmo\TreeLeft()
+     * @ORM\Column(type="integer")
+     */
+    private $lft;
+    
+    /**
+     * @Gedmo\TreeLevel()
+     * @ORM\Column(type="integer")
+     */
+    private $lvl;
+    
+    /**
+     * @Gedmo\TreeRight()
+     * @ORM\Column(type="integer")
+     */
+    private $rgt;
+    
+    /**
+     * @Gedmo\TreeRoot()
+     * @ORM\ManyToOne(targetEntity="PageCategory",cascade={"persist"})
+     * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $root;
+    
+    /**
+     * @Gedmo\TreeParent()
+     * @ORM\ManyToOne(targetEntity="PageCategory", inversedBy="children",cascade={"persist"})
+     * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $parent;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="PageCategory", mappedBy="parent",cascade={"persist"})
+     * @ORM\OrderBy({"lft" = "ASC"})
+     */
+    private $children;
+    
+    
     public function __construct()
     {
-        $this->pages = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
     
+    /**
+     * Get id
+     *
+     * @return integer
+     */
     public function getId()
     {
         return $this->id;
-    }
-    
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-    
-    public function getTitle()
-    {
-        return $this->title;
-    }
-    
-    public function setTitle($title)
-    {
-        $this->title = $title;
-        return $this;
     }
     
     /**
@@ -64,5 +91,32 @@ class PageCategory
     public function getPages(): Collection
     {
         return $this->pages;
+    }
+    
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    public function setName($name)
+    {
+        $this->name = $name;
+        
+        return $this;
+    }
+    
+    public function getRoot()
+    {
+        return $this->root;
+    }
+    
+    public function setParent(PageCategory $parent = null)
+    {
+        $this->parent = $parent;
+    }
+    
+    public function getParent()
+    {
+        return $this->parent;
     }
 }
