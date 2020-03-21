@@ -7,11 +7,11 @@ ia_cms_pages:
     type: sylius.resource
 
 ia_cms_page_categories_index:
-    path: /pages/categories
-    controller: App\Controller\Admin\PagesCategoryController::index
+    path: /page_categories
+    controller: IA\CmsBundle\Controller\PagesCategoryController::index
 ia_cms_page_categories_create:
-    path: /pages/categories/new
-    controller: App\Controller\Admin\PagesCategoryController::create
+    path: /page_categories/new
+    controller: IA\CmsBundle\Controller\PagesCategoryController::create
 ia_cms_page_categories_update:
-    path: /pages/categories/{id}/edit
-    controller: App\Controller\Admin\PagesCategoryController::update
+    path: /page_categories/{id}/edit
+    controller: IA\CmsBundle\Controller\PagesCategoryController::update
