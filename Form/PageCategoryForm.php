@@ -31,9 +31,6 @@ class PageCategoryForm extends AbstractResourceType implements ContainerAwareInt
         $builder
             ->add( 'name', TextType::class, ['label' => 'Title'] )
             
-            ->add( 'parentId', HiddenType::class, ['mapped' => false] )
-            ->add( 'parentTreeSelect', TextType::class, ['label' => 'Parent Category', 'mapped' => false, 'required' => false] )
-            
             ->add( 'parent', EntityType::class, [
                 'label'         => 'Parent Category',
                 'class'         => PageCategory::class,

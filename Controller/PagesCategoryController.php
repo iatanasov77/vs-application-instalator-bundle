@@ -40,13 +40,8 @@ class PagesCategoryController extends Controller
         
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {
-            $em         = $this->getDoctrine()->getManager();
-            $er         = $this->getDoctrine()->getRepository( 'IA\CmsBundle\Entity\PageCategory' );
-            $category   = $form->getData();
-            
-            $category->setParent( $er->find( $form->get( "parentId" )->getData() ) );
-            
-            $em->persist( $category );
+            $em = $this->getDoctrine()->getManager();
+            $em->persist( $form->getData() );
             $em->flush();
             
             return $this->redirect( $this->generateUrl( 'ia_cms_page_categories_index' ) );
