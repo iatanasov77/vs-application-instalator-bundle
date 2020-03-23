@@ -9,7 +9,7 @@ use IA\CmsBundle\Form\PageForm;
 
 class PagesController extends ResourceController
 {
-    public function listAction()
+    public function indexAction( Request $request ) : Response
     {
         $er = $this->getDoctrine()->getRepository( 'IA\CmsBundle\Entity\Page' );
         
