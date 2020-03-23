@@ -37,11 +37,16 @@ class PagesController extends ResourceController
         
         $form->handleRequest( $request );
         if( $form->isSubmitted() ) { // && $form->isValid()
-            $em = $this->getDoctrine()->getManager();
-            $em->persist( $form->getData() );
+            $em     = $this->getDoctrine()->getManager();
+            $entity = $form->getData();
+            $em->persist( $entity );
             $em->flush();
             
-            return $this->redirect($this->generateUrl( 'ia_cms_pages_index' ) );
+            if ($form->getClickedButton() && 'btnApply' === $form->getClickedButton()->getName()) {
+                return $this->redirect( $this->generateUrl( 'ia_cms_page_categories_update', ['id' => $entity->getId()] ) );
+            } else {
+                return $this->redirect( $this->generateUrl( 'ia_cms_pages_index' ) );
+            }
         }
 
         return $this->render( '@IACms/Pages/update.html.twig', [

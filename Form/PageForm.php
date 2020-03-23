@@ -47,6 +47,7 @@ class PageForm extends AbstractResourceType implements ContainerAwareInterface
                 'config'    => ['uiColor' => '#ffffff'],
             ])
             
+            ->add( 'btnApply', SubmitType::class, ['label' => 'Apply'] )
             ->add( 'btnSave', SubmitType::class, ['label' => 'Save'] )
             ->add( 'btnCancel', ButtonType::class, ['label' => 'Cancel'] )
         ;
