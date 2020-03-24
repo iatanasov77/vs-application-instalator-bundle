@@ -22,6 +22,11 @@ class User extends BaseUser implements ResourceInterface
     protected $id;
     
     /**
+     * @ORM\Column(name="preferedLocale", type="string", options={"default" : "en"})
+     */
+    protected $preferedLocale;
+    
+    /**
      * @ORM\OneToOne(targetEntity="IA\UsersBundle\Entity\UserInfo", cascade={"persist"})
      * @ORM\JoinColumn(name="user_info_id", referencedColumnName="id")
      */
@@ -58,6 +63,18 @@ class User extends BaseUser implements ResourceInterface
         if ( property_exists ( 'IA\UsersBundle\Entity\UserInfo' , $var ) ) {
             return $this->userInfo ? $this->userInfo->$var : null;
         }
+    }
+    
+    public function getPreferedLocale()
+    {
+        return $this->preferedLocale;
+    }
+    
+    public function setPreferedLocale( $preferedLocale )
+    {
+        $this->userInfo = $preferedLocale;
+        
+        return $this;
     }
     
     public function getUserInfo()
