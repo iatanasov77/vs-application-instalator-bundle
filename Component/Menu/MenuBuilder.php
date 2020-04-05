@@ -2,6 +2,7 @@
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Routing\RouterInterface;
@@ -22,6 +23,9 @@ class MenuBuilder implements ContainerAwareInterface
     
     protected $request;
     
+    // ContainerBuilder
+    protected $cb;
+    
     public function __construct( string $config_file, AuthorizationChecker $security, RouterInterface $router )
     {
         $config             = Yaml::parse( file_get_contents( $config_file ) );
@@ -29,6 +33,8 @@ class MenuBuilder implements ContainerAwareInterface
         
         $this->security     = $security;
         $this->router       = $router;
+        
+        $this->cb           = new ContainerBuilder();
     }
     
     public function mainMenu( FactoryInterface $factory )
@@ -90,6 +96,11 @@ class MenuBuilder implements ContainerAwareInterface
                 'routeParameters'   => isset( $mg['routeParameters'] ) ? $mg['routeParameters'] : [],
                 'attributes'        => isset( $mg['attributes'] ) ? $mg['attributes'] : [],
             ];
+            
+            //@NOTE Resolve ENV['HOST'] in the uri's
+            if ( $params['uri'] ) {
+                $params['uri'] = $this->cb->resolveEnvPlaceholders( $params['uri'], true );
+            }
             
             if ( $params['route'] ) {
                 $path       = $this->router->generate( $params['route'], $params['routeParameters'], RouterInterface::ABSOLUTE_PATH );
