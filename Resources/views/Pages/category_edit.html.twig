@@ -44,7 +44,6 @@
                     
                         {{ form_start(form, { 'attr': {'class': 'form-horizontal '} }) }}
                             {{ form_widget(form._token) }}
-                            {{ form_widget(form.parentId) }}
                 
                             {% if form_errors(form) is not empty %}
                                 <div class="alert alert-block alert-danger fade in">
@@ -54,18 +53,26 @@
                                     <strong>Error!</strong> {{ form_errors(form) }}
                                 </div>
                             {% endif %}
-                                
+                            
                             <div class="form-group">
-                                {{ form_label(form.parentTreeSelect, null, {
+                                {{ form_label(form.locale, null, {
                                     'label_attr': {'class': 'col-form-label'}
                                     }) 
                                 }}
-                                {{ form_widget(form.parentTreeSelect, {
-                                	'attr': {
-                                		'class': 'form-control',
-                                		'data-url': path( 'vsorg_pages_category_tree' ),
-                                		'autocomplete': "off"
-                                	}
+                                
+                                {{ form_widget(form.locale, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                             
+                            <div class="form-group">
+                                {{ form_label(form.parent, null, {
+                                    'label_attr': {'class': 'col-form-label'}
+                                    })
+                                }}
+                                {{ form_widget(form.parent, {
+                                    'attr': {
+                                        'class': 'easyui-combotree',
+                                        'data-options': ''
+                                    }
                                 }) }}
                             </div>
                             
@@ -95,10 +102,10 @@
 {% endblock %}
 
 
-
+{#
 {% block body_scripts %}
     {{ parent() }}
    
 	{{ encore_entry_script_tags( 'pages_categories_edit' ) }}
 {% endblock %}
-
+#}

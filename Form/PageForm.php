@@ -5,6 +5,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -31,6 +32,12 @@ class PageForm extends AbstractResourceType implements ContainerAwareInterface
     public function buildForm( FormBuilderInterface $builder, array $options )
     {
         $builder
+            ->add( 'locale', ChoiceType::class, [
+                'label'     => 'Locale',
+                'choices'  => \array_flip( \IA\ApplicationCoreBundle\Component\I18N::LanguagesAvailable() ),
+                'mapped'    => false,
+            ])
+            
             ->add( 'enabled', CheckboxType::class, ['label' => 'Enabled'] )
             ->add( 'category', EntityType::class, [
                 'label' => 'Category',

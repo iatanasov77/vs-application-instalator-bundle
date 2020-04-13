@@ -62,8 +62,12 @@ class PagesCategoryController extends Controller
         
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist( $form->getData() );
+            $em         = $this->getDoctrine()->getManager();
+            $category   = $form->getData();
+            $category->setTranslatableLocale( $form['locale']->getData() );
+            //$category->addTranslation( new \IA\CmsBundle\Entity\PageCategoryTranslation($form['locale']->getData(), 'name', $category->getName()));
+            
+            $em->persist( $category );
             $em->flush();
             
             return $this->redirect( $this->generateUrl( 'ia_cms_page_categories_index' ) );

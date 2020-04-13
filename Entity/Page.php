@@ -9,6 +9,7 @@ use Sylius\Component\Resource\Model\SlugAwareInterface;
 /**
  * Page
  *
+ * @Gedmo\TranslationEntity(class="IA\ApplicationCoreBundle\Entity\Translation")
  * @ORM\Table(name="IACMS_Pages")
  * @ORM\Entity(repositoryClass="IA\CmsBundle\Entity\Repository\PagesRepository")
  */
@@ -36,6 +37,7 @@ class Page implements ResourceInterface, SlugAwareInterface
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="title", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
      */
     private $title;
@@ -43,6 +45,7 @@ class Page implements ResourceInterface, SlugAwareInterface
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="text", type="text", precision=0, scale=0, nullable=false, unique=false)
      */
     private $text;
@@ -52,7 +55,21 @@ class Page implements ResourceInterface, SlugAwareInterface
      */
     private $category;
     
-
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     * and it is not necessary because globally locale can be set in listener
+     */
+    private $locale;
+    
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+        
+        return $this;
+    }
+    
     public function getId()
     {
         return $this->id;

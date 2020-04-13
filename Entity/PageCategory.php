@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
+ * @Gedmo\TranslationEntity(class="IA\ApplicationCoreBundle\Entity\Translation")
  * @Gedmo\Tree(type="nested")
  * @ORM\Table(name="IACMS_PageCategories")
  * @ORM\Entity(repositoryClass="IA\CmsBundle\Entity\Repository\PageCategoryRepository")
@@ -23,6 +24,7 @@ class PageCategory
     
     /**
      * @ORM\Column(type="string")
+     * @Gedmo\Translatable
      */
     private $name;
     
@@ -69,10 +71,24 @@ class PageCategory
      */
     private $children;
     
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     * and it is not necessary because globally locale can be set in listener
+     */
+    private $locale;
     
     public function __construct()
     {
-        $this->posts = new ArrayCollection();
+        $this->posts        = new ArrayCollection();
+    }
+    
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+        
+        return $this;
     }
     
     /**

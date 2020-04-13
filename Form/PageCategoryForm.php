@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Event\PostSetDataEvent;
 
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
@@ -29,6 +30,12 @@ class PageCategoryForm extends AbstractResourceType implements ContainerAwareInt
     public function buildForm( FormBuilderInterface $builder, array $options )
     {
         $builder
+            ->add( 'locale', ChoiceType::class, [
+                'label'     => 'Locale',
+                'choices'  => \array_flip( \IA\ApplicationCoreBundle\Component\I18N::LanguagesAvailable() ),
+                'mapped'    => false,
+            ])
+        
             ->add( 'name', TextType::class, ['label' => 'Title'] )
             
             ->add( 'parent', EntityType::class, [
@@ -42,16 +49,6 @@ class PageCategoryForm extends AbstractResourceType implements ContainerAwareInt
             ->add( 'btnSave', SubmitType::class, ['label' => 'Save'] )
             ->add( 'btnCancel', ButtonType::class, ['label' => 'Cancel'] )
         ;
-        
-        /*
-        $builder->addEventListener( FormEvents::POST_SET_DATA, function ( PostSetDataEvent $event )
-        {
-            $parent   = $event->getData()->getParent();
-            if( $parent) {
-                $event->getForm()->get( "parentId" )->setData( $parent->getId() );
-            }
-        });
-        */
     }
     
     public function configureOptions( OptionsResolver $resolver ): void

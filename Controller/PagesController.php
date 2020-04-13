@@ -39,6 +39,9 @@ class PagesController extends ResourceController
         if( $form->isSubmitted() ) { // && $form->isValid()
             $em     = $this->getDoctrine()->getManager();
             $entity = $form->getData();
+            
+            $entity->setTranslatableLocale( $form['locale']->getData() );
+            
             $em->persist( $entity );
             $em->flush();
             
