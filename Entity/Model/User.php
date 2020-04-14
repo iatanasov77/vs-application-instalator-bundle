@@ -1,12 +1,12 @@
-<?php namespace IA\UsersBundle\Entity;
+<?php namespace IA\UsersBundle\Entity\Model;
 
+use FOS\UserBundle\Model\User as BaseUser;
+//use Uecode\Bundle\ApiKeyBundle\Model\ApiKeyUser as BaseUser;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="IAUM_Users")
- */
-class User extends Model\User
+class User extends BaseUser implements ResourceInterface
 {
     /**
      * FOR USERS WITH SUBSCRIPTION DERIVE THIS ENTITY AND ADD USING
@@ -22,16 +22,24 @@ class User extends Model\User
     protected $id;
     
     /**
+     * @ORM\Column(name="preferedLocale", type="string", options={"default" : "en"})
+     */
+    protected $preferedLocale;
+    
+    /**
      * @ORM\OneToOne(targetEntity="IA\UsersBundle\Entity\UserInfo", cascade={"persist"})
      * @ORM\JoinColumn(name="user_info_id", referencedColumnName="id")
      */
     protected $userInfo;
-
+    
     /**
-     * @ORM\OneToOne(targetEntity="IA\UsersBundle\Entity\Model\SubscriptionInterface", inversedBy="user")
-     * @ORM\JoinColumn(name="subscriptionId", referencedColumnName="id")
+     * @ORM\ManyToMany(targetEntity="IA\UsersBundle\Entity\UserGroup")
+     * @ORM\JoinTable(name="IAUM_Users_Groups",
+     *      joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="groupId", referencedColumnName="id")}
+     * )
      */
-    protected $subscription;
+    protected $groups;
     
     /**
      * @ORM\OneToMany(targetEntity="IA\UsersBundle\Entity\UserActivity", mappedBy="user")
@@ -45,6 +53,7 @@ class User extends Model\User
     
     public function __construct()
     {
+        $this->groups    = new ArrayCollection();
         parent::__construct();
     }
     
@@ -54,6 +63,18 @@ class User extends Model\User
         if ( property_exists ( 'IA\UsersBundle\Entity\UserInfo' , $var ) ) {
             return $this->userInfo ? $this->userInfo->$var : null;
         }
+    }
+    
+    public function getPreferedLocale()
+    {
+        return $this->preferedLocale;
+    }
+    
+    public function setPreferedLocale( $preferedLocale )
+    {
+        $this->userInfo = $preferedLocale;
+        
+        return $this;
     }
     
     public function getUserInfo()
