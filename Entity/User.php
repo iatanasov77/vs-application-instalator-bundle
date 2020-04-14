@@ -26,7 +26,7 @@ class User extends BaseUser implements ResourceInterface
     protected $userInfo;
 
     /**
-     * @ORM\OneToOne(targetEntity="IA\UsersBundle\Entity\UserSubscription", inversedBy="user")
+     * @ORM\OneToOne(targetEntity="IA\UsersBundle\Entity\Model\SubscriptionInterface", inversedBy="user")
      * @ORM\JoinColumn(name="subscriptionId", referencedColumnName="id")
      */
     protected $subscription;
