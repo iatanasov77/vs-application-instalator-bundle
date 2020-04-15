@@ -31,6 +31,10 @@ class PageForm extends AbstractResourceType implements ContainerAwareInterface
 
     public function buildForm( FormBuilderInterface $builder, array $options )
     {
+        if ( ! isset( $options['classCategory'] ) ) {
+            throw new \Exception( 'PagesForm: option classCategory not passed !!!' );
+        }
+        
         $builder
             ->add( 'locale', ChoiceType::class, [
                 'label'     => 'Locale',
@@ -40,11 +44,11 @@ class PageForm extends AbstractResourceType implements ContainerAwareInterface
             
             ->add( 'enabled', CheckboxType::class, ['label' => 'Enabled'] )
             ->add( 'category', EntityType::class, [
-                'label' => 'Category',
-                'class' => 'IA\CmsBundle\Entity\PageCategory',
-                'choice_label' => 'name',
-                'placeholder' => '--- Choose a Category ---',
-                'required' => true
+                'label'         => 'Category',
+                'class'         => $options['classCategory'],
+                'choice_label'  => 'name',
+                'placeholder'   => '--- Choose a Category ---',
+                'required'      => true
             ])
             ->add( 'title', TextType::class, ['label' => 'Title'] )
             ->add( 'slug', TextType::class, ['label' => 'Slug'] )

@@ -40,7 +40,7 @@ class PageCategoryForm extends AbstractResourceType implements ContainerAwareInt
             
             ->add( 'parent', EntityType::class, [
                 'label'         => 'Parent Category',
-                'class'         => PageCategory::class,
+                'class'         => $options['classCategory'],
                 'placeholder'   => '-- Set As Root --',
                 'choice_label'  => 'name',
                 'required'      => false
