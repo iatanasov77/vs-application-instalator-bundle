@@ -53,8 +53,8 @@ class PageCategoryForm extends AbstractResourceType implements ContainerAwareInt
     
     public function configureOptions( OptionsResolver $resolver ): void
     {
-        $resolver->setDefaults([
-            'data_class' => PageCategory::class
-        ]);
+//         $resolver->setDefaults([
+//             'data_class' => PageCategory::class
+//         ]);
     }
 }
