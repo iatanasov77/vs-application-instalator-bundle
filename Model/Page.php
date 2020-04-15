@@ -20,7 +20,7 @@ class Page implements ResourceInterface, SlugAwareInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -28,7 +28,7 @@ class Page implements ResourceInterface, SlugAwareInterface
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(name="slug", type="string", length=255, nullable=false, unique=true)
      */
-    private $slug;
+    protected $slug;
 
     /**
      * @var string
@@ -36,7 +36,7 @@ class Page implements ResourceInterface, SlugAwareInterface
      * @Gedmo\Translatable
      * @ORM\Column(name="title", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string
@@ -44,12 +44,12 @@ class Page implements ResourceInterface, SlugAwareInterface
      * @Gedmo\Translatable
      * @ORM\Column(name="text", type="text", precision=0, scale=0, nullable=false, unique=false)
      */
-    private $text;
+    protected $text;
     
     /**
      * @ORM\ManyToOne(targetEntity="PageCategory", inversedBy="pages")
      */
-    private $category;
+    protected $category;
     
     /**
      * @Gedmo\Locale
@@ -57,7 +57,7 @@ class Page implements ResourceInterface, SlugAwareInterface
      * this is not a mapped field of entity metadata, just a simple property
      * and it is not necessary because globally locale can be set in listener
      */
-    private $locale;
+    protected $locale;
     
     public function setTranslatableLocale($locale)
     {

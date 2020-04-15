@@ -66,9 +66,12 @@ class PageForm extends AbstractResourceType implements ContainerAwareInterface
 
     public function configureOptions( OptionsResolver $resolver ): void
     {
-//         $resolver->setDefaults([
-//             'data_class' => 'IA\CmsBundle\Entity\Page'
-//         ]);
+        $resolver->setDefaults([
+            'classCategory' => '',
+            //'data_class' => Page::class
+        ]);
+        
+        $resolver->setAllowedTypes( 'classCategory', 'string' );
     }
 }
 

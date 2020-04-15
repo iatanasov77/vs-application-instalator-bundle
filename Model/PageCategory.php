@@ -14,56 +14,56 @@ class PageCategory
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
     
     /**
      * @ORM\Column(type="string")
      * @Gedmo\Translatable
      */
-    private $name;
+    protected $name;
     
     /**
      * @ORM\OneToMany(targetEntity="Page", mappedBy="category")
      */
-    private $pages;
+    protected $pages;
     
     /**
      * @Gedmo\TreeLeft()
      * @ORM\Column(type="integer")
      */
-    private $lft;
+    protected $lft;
     
     /**
      * @Gedmo\TreeLevel()
      * @ORM\Column(type="integer")
      */
-    private $lvl;
+    protected $lvl;
     
     /**
      * @Gedmo\TreeRight()
      * @ORM\Column(type="integer")
      */
-    private $rgt;
+    protected $rgt;
     
     /**
      * @Gedmo\TreeRoot()
      * @ORM\ManyToOne(targetEntity="PageCategory",cascade={"persist"})
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
      */
-    private $root;
+    protected $root;
     
     /**
      * @Gedmo\TreeParent()
      * @ORM\ManyToOne(targetEntity="PageCategory", inversedBy="children",cascade={"persist"})
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
      */
-    private $parent;
+    protected $parent;
     
     /**
      * @ORM\OneToMany(targetEntity="PageCategory", mappedBy="parent",cascade={"persist"})
      * @ORM\OrderBy({"lft" = "ASC"})
      */
-    private $children;
+    protected $children;
     
     /**
      * @Gedmo\Locale
@@ -71,11 +71,11 @@ class PageCategory
      * this is not a mapped field of entity metadata, just a simple property
      * and it is not necessary because globally locale can be set in listener
      */
-    private $locale;
+    protected $locale;
     
     public function __construct()
     {
-        $this->posts        = new ArrayCollection();
+        $this->pages        = new ArrayCollection();
     }
     
     public function setTranslatableLocale($locale)
