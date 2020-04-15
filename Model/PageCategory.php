@@ -1,16 +1,10 @@
-<?php namespace IA\CmsBundle\Entity;
+<?php namespace IA\CmsBundle\Model;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @Gedmo\TranslationEntity(class="IA\ApplicationCoreBundle\Entity\Translation")
- * @Gedmo\Tree(type="nested")
- * @ORM\Table(name="IACMS_PageCategories")
- * @ORM\Entity(repositoryClass="IA\CmsBundle\Entity\Repository\PageCategoryRepository")
- */
 class PageCategory
 {
     /**

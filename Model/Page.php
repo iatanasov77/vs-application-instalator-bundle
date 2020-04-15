@@ -1,4 +1,4 @@
-<?php namespace IA\CmsBundle\Entity;
+<?php namespace IA\CmsBundle\Model;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
@@ -7,11 +7,7 @@ use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 
 /**
- * Page
- *
- * @Gedmo\TranslationEntity(class="IA\ApplicationCoreBundle\Entity\Translation")
- * @ORM\Table(name="IACMS_Pages")
- * @ORM\Entity(repositoryClass="IA\CmsBundle\Entity\Repository\PagesRepository")
+ * Page Model
  */
 class Page implements ResourceInterface, SlugAwareInterface
 {

@@ -1,4 +1,4 @@
-<?php namespace IA\CmsBundle\Entity\Repository;
+<?php namespace IA\CmsBundle\Repository;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface as ResourceRepositoryInterface;
@@ -10,15 +10,7 @@ use Doctrine\ORM\Query\Expr\Join;
 
 
 /**
- * TermsRepository
- * 
- * Ð�ÐºÐ¾ Ð¼Ð¾Ð¶ÐµÑ… Ð´Ð° Ð¸Ð·Ð¿Ð¾Ð»Ð·Ð²Ð°Ð¼ 'Gedmo Doctrine Extensions - dev-master' Ñ‰Ñ�Ñ… Ð´Ð° Ð¸Ð·Ð¿Ð¾Ð»Ð·Ð²Ð°Ð¼ Ð·Ð° 
- * Ð±Ð°Ð·Ð¾Ð² ÐºÐ»Ð°Ñ� Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository,
- * Ð° Ð·Ð° NestedTree Ñ‰Ñ�Ñ… Ð´Ð° Ð¸Ð·Ð¿Ð¾Ð»Ð·Ð²Ð°Ð¼ Ñ‚Ñ€ÐµÐ¹Ñ‚Ð° Ð½Ð° Gedmo Gedmo\Tree\Traits\Repository\ORM\NestedTreeRepositoryTrait
- * 
- * Ð½Ð¾ Ð½Ðµ Ñ�Ñ‚Ð°Ð²Ð° Ñ‰Ð¾Ñ‚Ð¾ Ð² SyliusResourceBundle Ð¸Ð·Ð¿Ð¾Ð»Ð·Ð²Ð°Ñ‚ Ñ�Ñ‚Ð°Ñ€Ð° Ð²ÐµÑ€Ñ�Ð¸Ñ� Ð½Ð° Stof Doctrine Extensions, Ð° Ñ‚Ðµ
- * Ð¾Ñ‚ Ñ�Ð²Ð¾Ñ� Ñ�Ñ‚Ñ€Ð°Ð½Ð° Ð·Ð°Ð²Ð¸Ñ�Ñ�Ñ‚ Ð¾Ñ‚ Ñ�Ñ‚Ð°Ñ€Ð° Ð²ÐµÑ€Ñ�Ð¸Ñ� Ð½Ð° Gedmo Doctrine Extension
- * 
+ * TaxonomyTermsRepository Model
  */
 class TaxonomyTermsRepository extends NestedTreeRepository implements ResourceRepositoryInterface
 {

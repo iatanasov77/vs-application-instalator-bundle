@@ -1,4 +1,4 @@
-<?php namespace IA\CmsBundle\Entity\Repository;
+<?php namespace IA\CmsBundle\Repository;
 
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
