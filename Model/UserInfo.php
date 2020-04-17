@@ -1,11 +1,7 @@
-<?php namespace IA\UsersBundle\Entity;
+<?php namespace VS\UsersBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="IAUM_UsersInfo")
- */
 class UserInfo
 {
     /**

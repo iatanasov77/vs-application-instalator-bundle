@@ -1,4 +1,4 @@
-<?php namespace IA\UsersBundle\Form;
+<?php namespace VS\UsersBundle\Form;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\AbstractType;
@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
-use IA\UsersBundle\Form\Type\PackagePlanType;
+use VS\UsersBundle\Form\Type\PackagePlanType;
 
 class PlanFormType extends AbstractType
 {

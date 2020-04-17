@@ -1,4 +1,4 @@
-<?php namespace IA\UsersBundle\Form;
+<?php namespace VS\UsersBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
-use IA\UsersBundle\Entity\UserInfo;
+use VS\UsersBundle\Entity\UserInfo;
 
 class ProfileFormType extends AbstractType
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace IA\UsersBundle\Entity;
+namespace VS\UsersBundle\Model;
 
-class UserRoles
+class UserRole
 {
     //const DEFAULT = 'ROLE_USER';
     const SUPER_ADMIN = 'ROLE_SUPER_ADMIN';

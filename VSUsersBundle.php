@@ -1,10 +1,8 @@
-<?php
-
-namespace IA\UsersBundle;
+<?php namespace VS\UsersBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class IAUsersBundle extends Bundle
+class VSUsersBundle extends Bundle
 {
     public function getParent()
     {

@@ -1,7 +1,7 @@
 {
-	"name": "iatanasov77/vs-users-bundle",
+	"name": "vankosoft/users-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony IAUsersBundle",
+    "description": "Symfony VSUsersBundle",
     "keywords": ["User management"],
     "homepage": "https://github.com/iatanasov77/vs-users-bundle",
     "license": "MIT",
@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "IA\\UsersBundle\\": ""
+            "VS\\UsersBundle\\": ""
         }
     },
     "minimum-stability" : "dev"

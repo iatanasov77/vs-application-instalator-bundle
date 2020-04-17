@@ -1,16 +1,12 @@
-<?php namespace IA\UsersBundle\Entity;
+<?php namespace VS\UsersBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="IAUM_Users")
- */
-class User extends Model\User
+class UserWithAllRelations extends Model\UserWithAllRelations
 {
     /**
      * FOR USERS WITH SUBSCRIPTION DERIVE THIS ENTITY AND ADD USING
-     * THE TRAIT `IA\UsersBundle\Entity\Traits\UserSubscriptionTrait` FORM THIS BUNDLE
+     * THE TRAIT `VS\UsersBundle\Entity\Traits\UserSubscriptionTrait` FORM THIS BUNDLE
      */
     //use Traits\UserSubscriptionTrait;
     
@@ -22,24 +18,24 @@ class User extends Model\User
     protected $id;
     
     /**
-     * @ORM\OneToOne(targetEntity="IA\UsersBundle\Entity\UserInfo", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="VS\UsersBundle\Entity\UserInfo", cascade={"persist"})
      * @ORM\JoinColumn(name="user_info_id", referencedColumnName="id")
      */
     protected $userInfo;
 
     /**
-     * @ORM\OneToOne(targetEntity="IA\UsersBundle\Entity\Model\SubscriptionInterface", inversedBy="user")
+     * @ORM\OneToOne(targetEntity="VS\UsersBundle\Entity\Model\SubscriptionInterface", inversedBy="user")
      * @ORM\JoinColumn(name="subscriptionId", referencedColumnName="id")
      */
     protected $subscription;
     
     /**
-     * @ORM\OneToMany(targetEntity="IA\UsersBundle\Entity\UserActivity", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="VS\UsersBundle\Entity\UserActivity", mappedBy="user")
      */
     protected $activities;
     
     /**
-     * @ORM\OneToMany(targetEntity="IA\UsersBundle\Entity\UserNotification", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="VS\UsersBundle\Entity\UserNotification", mappedBy="user")
      */
     protected $notifications;
     
@@ -51,7 +47,7 @@ class User extends Model\User
     // She ti eba i formite
     public function __get( $var )
     {
-        if ( property_exists ( 'IA\UsersBundle\Entity\UserInfo' , $var ) ) {
+        if ( property_exists ( 'VS\UsersBundle\Entity\UserInfo' , $var ) ) {
             return $this->userInfo ? $this->userInfo->$var : null;
         }
     }

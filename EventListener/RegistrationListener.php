@@ -1,11 +1,11 @@
 <?php
 
-namespace IA\UsersBundle\EventListener;
+namespace VS\UsersBundle\EventListener;
 
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use IA\UsersBundle\Entity\UserRoles;
+use VS\UsersBundle\Entity\UserRoles;
 
 /**
  * Listener responsible for adding the default user role at registration

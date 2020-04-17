@@ -1,23 +1,23 @@
 <?php
 
-namespace IA\UsersBundle\Controller;
+namespace VS\UsersBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Spatie\Url\Url as SpatieUrl;
 
-use IA\UsersBundle\Entity\User;
-use IA\UsersBundle\Entity\UserInfo;
-use IA\UsersBundle\Form\UserFormType;
-use IA\UsersBundle\Form\Type\UserInfoFormType;
+use VS\UsersBundle\Entity\User;
+use VS\UsersBundle\Entity\UserInfo;
+use VS\UsersBundle\Form\UserFormType;
+use VS\UsersBundle\Form\Type\UserInfoFormType;
 
 class UsersCrudController extends ResourceController
 {
     public function indexAction( Request $request ): Response
     {
         return $this->render('IAUsersBundle:UsersCrud:index.html.twig', [
-            'users' => $this->getDoctrine()->getRepository( 'IA\UsersBundle\Entity\User' )->findAll()
+            'users' => $this->getDoctrine()->getRepository( 'VS\UsersBundle\Entity\User' )->findAll()
         ]);
     }
     
@@ -26,7 +26,7 @@ class UsersCrudController extends ResourceController
         //$id = Url::ProjectsUrlGetId();
         $id = $this->getId();
         
-        $er = $this->getDoctrine()->getRepository( 'IA\UsersBundle\Entity\User' );
+        $er = $this->getDoctrine()->getRepository( 'VS\UsersBundle\Entity\User' );
         $user = $id ? $er->find($id) : new User();
         
         $form = $this->createForm( UserFormType::class, $user );
@@ -43,7 +43,7 @@ class UsersCrudController extends ResourceController
             $userManager = $this->get('fos_user.user_manager');
             $user = $userManager->createUser();
             
-            //$repository = $em->getRepository( 'IA\UsersBundle\Entity\UserGroup' );
+            //$repository = $em->getRepository( 'VS\UsersBundle\Entity\UserGroup' );
             //$group = $repository->findOneByName( 'SomeGroup' );
             //$user->addGroup( $group );
             
@@ -71,7 +71,7 @@ class UsersCrudController extends ResourceController
         //$id = Url::ProjectsUrlGetId();
         $id = $this->getId();
         
-        $er = $this->getDoctrine()->getRepository( 'IA\UsersBundle\Entity\User' );
+        $er = $this->getDoctrine()->getRepository( 'VS\UsersBundle\Entity\User' );
         $user = $id ? $er->find($id) : new User();
         
         //$form = $this->createForm( UserFormType::class, $user );

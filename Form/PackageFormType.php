@@ -1,4 +1,4 @@
-<?php namespace IA\UsersBundle\Form;
+<?php namespace VS\UsersBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 
-use IA\UsersBundle\Form\Type\PackagePlanType;
+use VS\UsersBundle\Form\Type\PackagePlanType;
 
 class PackageFormType extends AbstractResourceType implements ContainerAwareInterface
 {
@@ -50,7 +50,7 @@ class PackageFormType extends AbstractResourceType implements ContainerAwareInte
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(array(
-            'data_class' => 'IA\UsersBundle\Entity\Package'
+            'data_class' => 'VS\UsersBundle\Entity\Package'
         ));
     }
 

@@ -1,16 +1,10 @@
-<?php namespace IA\UsersBundle\Entity;
+<?php namespace VS\UsersBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
 use IA\PaymentBundle\Entity\PaymentDetails;
 
-/**
- * Plan
- *
- * @ORM\Table(name="IAUM_UsersNotifications")
- * @ORM\Entity(repositoryClass="IA\UsersBundle\Entity\Repository\UserSubscriptionRepository")
- */
-class UserNotification
+class UserActivity
 {
 
     /**
@@ -23,7 +17,7 @@ class UserNotification
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="IA\UsersBundle\Entity\User", inversedBy="notifications")
+     * @ORM\ManyToOne(targetEntity="VS\UsersBundle\Entity\User", inversedBy="activities")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     private $user;
@@ -31,9 +25,9 @@ class UserNotification
     /**
      * @var type
      *
-     * @ORM\Column(name="notification", type="string", length=255, nullable=false)
+     * @ORM\Column(name="activity", type="string", length=255, nullable=false)
      */
-    private $notification;
+    private $activity;
 
     /**
      *
@@ -79,15 +73,15 @@ class UserNotification
         return $this;
     }
     
-    function setNotification($notification)
+    function setActivity($activity)
     {
-        $this->notification = $notification;
+        $this->activity = $activity;
         
         return $this;
     }
 
-    function getNotification()
+    function getActivity()
     {
-        return $this->notification;
+        return $this->activity;
     }
 }

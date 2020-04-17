@@ -1,4 +1,4 @@
-<?php namespace IA\UsersBundle\Form\Type;
+<?php namespace VS\UsersBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,7 +20,7 @@ class PackagePlanType extends AbstractType
     {
         $builder
         ->add( 'plan', EntityType::class, array(
-                'class' => 'IA\UsersBundle\Entity\Plan',
+                'class' => 'VS\UsersBundle\Entity\Plan',
                 'choice_label' => 'title',
                 'required' => false
             ))
@@ -32,7 +32,7 @@ class PackagePlanType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'IA\UsersBundle\Entity\PackagePlan'
+            'data_class' => 'VS\UsersBundle\Entity\PackagePlan'
         ));
     }
 

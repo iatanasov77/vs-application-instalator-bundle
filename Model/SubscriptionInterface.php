@@ -1,4 +1,4 @@
-<?php namespace IA\UsersBundle\Entity\Model;
+<?php namespace VS\UsersBundle\Entity\Model;
 
 interface SubscriptionInterface
 {

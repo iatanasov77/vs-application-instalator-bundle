@@ -1,12 +1,10 @@
-<?php
-
-namespace IA\UsersBundle\Controller;
+<?php namespace VS\UsersBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\Serializer\SerializerBuilder;
 
-use IA\UsersBundle\Entity\User;
+use VS\UsersBundle\Entity\User;
 
 class ApiController extends Controller
 {
@@ -59,7 +57,7 @@ class ApiController extends Controller
     	$data = $this->get("request")->getContent();
 
         $serializer = SerializerBuilder::create()->build();
-        $contact = $serializer->deserialize($data, 'IA\UsersBundle\Entity\User', 'json');
+        $contact = $serializer->deserialize($data, 'VS\UsersBundle\Entity\User', 'json');
         $phones = $contact->getPhones();
 
         $entityManager = $this->getDoctrine()->getManager();

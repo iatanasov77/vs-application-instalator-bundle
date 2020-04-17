@@ -1,6 +1,6 @@
 <?php
 
-namespace IA\UsersBundle\EventListener;
+namespace VS\UsersBundle\EventListener;
 
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;

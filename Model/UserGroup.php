@@ -1,12 +1,8 @@
-<?php namespace IA\UsersBundle\Entity;
+<?php namespace VS\UsersBundle\Model;
 
 use FOS\UserBundle\Model\Group as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="IAUM_UserGroups")
- */
 class UserGroup extends BaseGroup
 {
     /**

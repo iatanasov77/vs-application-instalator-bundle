@@ -1,12 +1,12 @@
 <?php
 
-namespace IA\UsersBundle\Form;
+namespace VS\UsersBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use IA\UsersBundle\Form\Type\ProfileType;
+use VS\UsersBundle\Form\Type\ProfileType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -25,12 +25,12 @@ class RegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'IA\UsersBundle\Entity\User',
+            'data_class' => 'VS\UsersBundle\Entity\User',
             'csrf_token_id' => 'registration',
             // BC for SF < 2.8
             //'intention'  => 'registration',
             'allow_extra_fields' => true,
-            'data_class' => 'IA\UsersBundle\Entity\User',
+            'data_class' => 'VS\UsersBundle\Entity\User',
         ));
     }
 

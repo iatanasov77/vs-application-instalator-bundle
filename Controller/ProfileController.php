@@ -1,9 +1,9 @@
-<?php namespace IA\UsersBundle\Controller;
+<?php namespace VS\UsersBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-use IA\UsersBundle\Form\ProfileFormType;
+use VS\UsersBundle\Form\ProfileFormType;
 
 class ProfileController extends Controller
 {

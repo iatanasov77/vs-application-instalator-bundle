@@ -1,9 +1,9 @@
-<?php namespace IA\UsersBundle\Entity\Traits;
+<?php namespace VS\UsersBundle\Model\Trait;
 
 trait UserSubscriptionTrait
 {
     /**
-     * @ORM\OneToOne(targetEntity="IA\UsersBundle\Entity\UserSubscription", inversedBy="user")
+     * @ORM\OneToOne(targetEntity="VS\UsersBundle\Entity\UserSubscription", inversedBy="user")
      * @ORM\JoinColumn(name="subscriptionId", referencedColumnName="id")
      */
     protected $subscription;

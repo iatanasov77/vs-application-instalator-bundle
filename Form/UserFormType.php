@@ -1,6 +1,6 @@
 <?php
 
-namespace IA\UsersBundle\Form;
+namespace VS\UsersBundle\Form;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,9 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
-use IA\UsersBundle\Form\Type\UserInfoFormType;
-use IA\UsersBundle\Entity\User;
-use IA\UsersBundle\Entity\UserInfo;
+use VS\UsersBundle\Form\Type\UserInfoFormType;
+use VS\UsersBundle\Entity\User;
+use VS\UsersBundle\Entity\UserInfo;
 
 class UserFormType extends AbstractResourceType  implements ContainerAwareInterface
 {
