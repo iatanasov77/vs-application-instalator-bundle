@@ -10,11 +10,9 @@ use IA\CmsBundle\Form\PageForm;
 class PagesController extends ResourceController
 {
     public function indexAction( Request $request ) : Response
-    {
-        $er = $this->getDoctrine()->getRepository( 'IA\CmsBundle\Entity\Page' );
-        
+    {   
         return $this->render( '@IACms/Pages/index.html.twig', [
-            'items' => $er->findAll(),
+            'items' => $this->getPagesRepository()->findAll(),
         ]);
     }
     
@@ -25,15 +23,14 @@ class PagesController extends ResourceController
     
     public function updateAction( Request $request ) : Response
     {
-        return $this->editAction( 1, $request );
+        return $this->editAction( $request->attributes->get( 'id' ), $request );
     }
     
     public function editAction( $id, Request $request )
     {
-        $er = $this->getDoctrine()->getRepository( 'IA\CmsBundle\Entity\Page' );
-        $oPage = $id ? $er->findOneBy(array('id' => $id)) : new Page();
-        
-        $form = $this->createForm( PageForm::class, $oPage );
+        $er     = $this->getPagesRepository();
+        $oPage  = $id ? $er->findOneBy( ['id' => $id] ) : $er->createNew();
+        $form   = $this->createForm( PageForm::class, $oPage );
         
         $form->handleRequest( $request );
         if( $form->isSubmitted() ) { // && $form->isValid()
@@ -56,6 +53,11 @@ class PagesController extends ResourceController
             'form' => $form->createView(),
             'item' => $oPage
         ]);
+    }
+    
+    protected function getPagesRepository()
+    {
+        return $this->get( 'ia_cms.repository.pages' );
     }
 }
     
