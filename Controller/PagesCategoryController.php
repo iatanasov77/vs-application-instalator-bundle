@@ -1,6 +1,7 @@
 <?php  namespace IA\CmsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,7 +19,7 @@ use IA\CmsBundle\Form\PageCategoryForm;
  * http://drib.tech/programming/hierarchical-data-relational-databases-symfony-4-doctrine
  * https://github.com/dribtech/hierarchical-data-tutorial-part-2
  */
-class PagesCategoryController extends Controller
+class PagesCategoryController extends ResourceController
 {
     public function index( Request $request ): Response
     {

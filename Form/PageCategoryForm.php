@@ -20,12 +20,12 @@ use IA\CmsBundle\Entity\PageCategory;
 
 class PageCategoryForm extends AbstractResourceType implements ContainerAwareInterface
 {
-    use ContainerAwareTrait;
+//     use ContainerAwareTrait;
     
-    public function __construct( $container = null )
-    {
-        $this->container = $container;
-    }
+//     public function __construct( $container = null )
+//     {
+//         $this->container = $container;
+//     }
     
     public function buildForm( FormBuilderInterface $builder, array $options )
     {
@@ -51,13 +51,13 @@ class PageCategoryForm extends AbstractResourceType implements ContainerAwareInt
         ;
     }
     
-    public function configureOptions( OptionsResolver $resolver ): void
-    {
-        $resolver->setDefaults([
-            'classCategory' => '',
-            //'data_class' => PageCategory::class
-        ]);
+//     public function configureOptions( OptionsResolver $resolver ): void
+//     {
+//         $resolver->setDefaults([
+//             'classCategory' => '',
+//             //'data_class' => PageCategory::class
+//         ]);
         
-        $resolver->setAllowedTypes( 'classCategory', 'string' );
-    }
+//         $resolver->setAllowedTypes( 'classCategory', 'string' );
+//     }
 }
