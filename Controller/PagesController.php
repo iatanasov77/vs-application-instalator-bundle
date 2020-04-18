@@ -4,7 +4,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
-use IA\CmsBundle\Entity\Page;
 use IA\CmsBundle\Form\PageForm;
 
 class PagesController extends ResourceController

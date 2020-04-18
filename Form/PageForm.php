@@ -15,18 +15,16 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class PageForm extends AbstractResourceType implements ContainerAwareInterface
+class PageForm extends AbstractResourceType
 {
-    use ContainerAwareTrait;
+    /** @var EventSubscriberInterface */
+    private $categoryClass;
     
-    public function __construct( $container = null )
+    public function __construct( string $dataClass, string $categoryClass )
     {
-        $this->container = $container;
-    }
-    
-    public function getName()
-    {
-        return 'ia_cms_pages';
+        parent::__construct( $dataClass );
+        
+        $this->categoryClass = $categoryClass;
     }
 
     public function buildForm( FormBuilderInterface $builder, array $options )
@@ -45,7 +43,7 @@ class PageForm extends AbstractResourceType implements ContainerAwareInterface
             ->add( 'enabled', CheckboxType::class, ['label' => 'Enabled'] )
             ->add( 'category', EntityType::class, [
                 'label'         => 'Category',
-                'class'         => $options['classCategory'],
+                'class'         => $this->categoryClass,
                 'choice_label'  => 'name',
                 'placeholder'   => '--- Choose a Category ---',
                 'required'      => true
@@ -66,12 +64,15 @@ class PageForm extends AbstractResourceType implements ContainerAwareInterface
 
     public function configureOptions( OptionsResolver $resolver ): void
     {
-        $resolver->setDefaults([
-            'classCategory' => '',
-            //'data_class' => Page::class
-        ]);
+        parent::configureOptions( $resolver );
         
-        $resolver->setAllowedTypes( 'classCategory', 'string' );
+        $resolver
+            ->setDefaults([
+                'classCategory' => '',
+                //'data_class' => Page::class
+            ])
+            ->setAllowedTypes( 'classCategory', 'string' )
+        ;
     }
 }
 

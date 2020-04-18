@@ -1,6 +1,6 @@
 <?php namespace IA\CmsBundle\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -14,14 +14,18 @@ use Symfony\Component\Config\Definition\Processor;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class IACmsExtension extends Extension
+class IACmsExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritDoc}
      */
-    public function load( array $configs, ContainerBuilder $container )
+    public function load( array $config, ContainerBuilder $container )
     {
-        $loader = new Loader\YamlFileLoader($container, new FileLocator( __DIR__.'/../Resources/config' ) );
+        
+        $config = $this->processConfiguration( $this->getConfiguration([], $container), $config );
+        $loader = new Loader\YamlFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
+        //var_dump($config); die;
+        $this->registerResources( 'vs_cms', $config['driver'], $config['resources'], $container );
         $loader->load( 'services.yml' );
     }
 }

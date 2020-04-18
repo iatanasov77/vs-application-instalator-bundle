@@ -1,3 +1,6 @@
+imports:
+    - { resource: services/form.yaml }
+
 parameters:
 #    ia_cms.example.class: IACmsBundle\Example
 
