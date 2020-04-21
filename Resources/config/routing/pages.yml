@@ -1,17 +1,21 @@
-
 ia_cms_pages:
     resource: |
-        alias: ia_cms.pages
+        alias: vs_cms.pages
         path: /pages
         templates: "@IACms/Pages"
     type: sylius.resource
 
 ia_cms_page_categories_index:
     path: /page_categories
-    controller: IA\CmsBundle\Controller\PagesCategoryController::index
+    controller: VS\CmsBundle\Controller\PagesCategoryController::index
 ia_cms_page_categories_create:
     path: /page_categories/new
-    controller: IA\CmsBundle\Controller\PagesCategoryController::create
+    controller: VS\CmsBundle\Controller\PagesCategoryController::create
 ia_cms_page_categories_update:
     path: /page_categories/{id}/edit
-    controller: IA\CmsBundle\Controller\PagesCategoryController::update
+    controller: VS\CmsBundle\Controller\PagesCategoryController::update
+
+ia_cms_pages_tree:
+    path: /json/pages-tree
+    controller: VS\CmsBundle\Controller\PagesExtController::tree
+    

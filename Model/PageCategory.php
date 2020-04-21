@@ -1,4 +1,4 @@
-<?php namespace IA\CmsBundle\Model;
+<?php namespace VS\CmsBundle\Model;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
@@ -6,6 +6,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
+/**
+ * Page Category Model
+ *
+ * @ORM\MappedSuperclass
+ */
 class PageCategory implements ResourceInterface
 {
     /**

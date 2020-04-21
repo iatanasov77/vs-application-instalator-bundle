@@ -1,4 +1,4 @@
-<?php  namespace IA\CmsBundle\Controller;
+<?php  namespace VS\CmsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -6,8 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use IA\CmsBundle\Entity\PageCategory;
-use IA\CmsBundle\Form\PageCategoryForm;
+use VS\CmsBundle\Entity\PageCategory;
+use VS\CmsBundle\Form\PageCategoryForm;
 
 /**
  * Documentation
@@ -23,7 +23,7 @@ class PagesCategoryController extends ResourceController
 {
     public function index( Request $request ): Response
     {
-        $er = $this->getDoctrine()->getRepository( 'IA\CmsBundle\Entity\PageCategory' );
+        $er = $this->getDoctrine()->getRepository( 'VS\CmsBundle\Entity\PageCategory' );
         
         $categories = $er->childrenHierarchy();
         //var_dump( $categories ); die;
@@ -56,7 +56,7 @@ class PagesCategoryController extends ResourceController
     
     public function update( Request $request ) : Response
     {
-        $er         = $this->getDoctrine()->getRepository( 'IA\CmsBundle\Entity\PageCategory' );
+        $er         = $this->getDoctrine()->getRepository( 'VS\CmsBundle\Entity\PageCategory' );
         $oCategory = $er->find( $request->attributes->get( 'id' ) );
         //var_dump( $oBlogPost->getChildren() ); die;
         $form       = $this->createForm( PageCategoryForm::class, $oCategory, ['data' => $oCategory, 'method' => 'PUT'] );
@@ -66,7 +66,7 @@ class PagesCategoryController extends ResourceController
             $em         = $this->getDoctrine()->getManager();
             $category   = $form->getData();
             $category->setTranslatableLocale( $form['locale']->getData() );
-            //$category->addTranslation( new \IA\CmsBundle\Entity\PageCategoryTranslation($form['locale']->getData(), 'name', $category->getName()));
+            //$category->addTranslation( new \VS\CmsBundle\Entity\PageCategoryTranslation($form['locale']->getData(), 'name', $category->getName()));
             
             $em->persist( $category );
             $em->flush();

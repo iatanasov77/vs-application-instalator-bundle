@@ -1,10 +1,10 @@
-<?php namespace IA\CmsBundle\Controller;
+<?php namespace VS\CmsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
-use IA\CmsBundle\Form\PageForm;
+use VS\CmsBundle\Form\PageForm;
 
 class PagesController extends ResourceController
 {
@@ -56,7 +56,7 @@ class PagesController extends ResourceController
     
     protected function getPagesRepository()
     {
-        return $this->get( 'ia_cms.repository.pages' );
+        return $this->get( 'vs_cms.repository.pages' );
     }
 }
     

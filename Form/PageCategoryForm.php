@@ -1,4 +1,4 @@
-<?php namespace IA\CmsBundle\Form;
+<?php namespace VS\CmsBundle\Form;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
-use IA\CmsBundle\Entity\PageCategory;
+use VS\CmsBundle\Entity\PageCategory;
 
 class PageCategoryForm extends AbstractResourceType implements ContainerAwareInterface
 {

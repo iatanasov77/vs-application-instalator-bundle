@@ -1,4 +1,4 @@
-<?php namespace IA\CmsBundle\Component;
+<?php namespace VS\CmsBundle\Component;
 
 use Spatie\Url\Url as SpatieUrl;
 

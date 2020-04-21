@@ -1,15 +1,18 @@
-<?php namespace IA\CmsBundle\Model;
+<?php namespace VS\CmsBundle\Model;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 
+use VS\ApplicationBundle\Model\Interfaces\PageInterface;
+
 /**
  * Page Model
+ * 
+ * @ORM\MappedSuperclass
  */
-class Page implements ResourceInterface, SlugAwareInterface
+class Page implements PageInterface, SlugAwareInterface
 {
     use ToggleableTrait;
     

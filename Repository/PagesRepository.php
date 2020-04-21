@@ -1,4 +1,4 @@
-<?php namespace IA\CmsBundle\Repository;
+<?php namespace VS\CmsBundle\Repository;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 

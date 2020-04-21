@@ -1,9 +1,22 @@
-<?php
-
-namespace IA\CmsBundle\DependencyInjection;
+<?php namespace VS\CmsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Factory\Factory;
+
+use VS\CmsBundle\Model\Page;
+use VS\CmsBundle\Controller\PagesController;
+use VS\CmsBundle\Entity\Repository\PagesRepository;
+use VS\CmsBundle\Form\PageForm;
+
+use VS\CmsBundle\Model\PageCategory;
+use VS\CmsBundle\Controller\PagesCategoryController;
+use VS\CmsBundle\Entity\Repository\PageCategoryRepository;
+use VS\CmsBundle\Form\PageCategoryForm;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -17,14 +30,64 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder( 'ia_cms' );
+        $treeBuilder    = new TreeBuilder( 'vs_cms' );
+        $rootNode       = $treeBuilder->getRootNode();
         
-        $treeBuilder->getRootNode()
+        $rootNode
             ->children()
-                ->variableNode( 'menu' )->end()
+                ->scalarNode( 'driver' )->defaultValue( SyliusResourceBundle::DRIVER_DOCTRINE_ORM )->cannotBeEmpty()->end()
             ->end()
         ;
         
+        $this->addResourcesSection( $rootNode );
+            
         return $treeBuilder;
+    }
+
+    private function addResourcesSection( ArrayNodeDefinition $node ): void
+    {
+        $node
+            ->children()
+                ->arrayNode( 'resources' )
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode( 'pages' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( Page::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'controller' )->defaultValue( PagesController::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'form' )->defaultValue( PageForm::class )->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode( 'page_categories' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( PageCategory::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'controller' )->defaultValue( PagesCategoryController::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'form' )->defaultValue( PageCategoryForm::class )->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     }
 }

@@ -1,4 +1,4 @@
-<?php namespace IA\CmsBundle\DependencyInjection;
+<?php namespace VS\CmsBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 

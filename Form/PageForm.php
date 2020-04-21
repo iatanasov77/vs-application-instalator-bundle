@@ -1,4 +1,4 @@
-<?php namespace IA\CmsBundle\Form;
+<?php namespace VS\CmsBundle\Form;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -17,8 +17,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class PageForm extends AbstractResourceType
 {
-    /** @var EventSubscriberInterface */
-    private $categoryClass;
+    protected $categoryClass;
     
     public function __construct( string $dataClass, string $categoryClass )
     {

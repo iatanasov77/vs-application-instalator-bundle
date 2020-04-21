@@ -5,14 +5,14 @@ sylius_resource:
             classes:
                 model:      App\Entity\Cms\Page
                 interface:  Sylius\Component\Resource\Model\ResourceInterface
-                controller: IA\CmsBundle\Controller\PagesController
-                repository: IA\CmsBundle\Entity\Repository\PagesRepository
-                form:       IA\CmsBundle\Form\PageForm
+                controller: VS\CmsBundle\Controller\PagesController
+                repository: VS\CmsBundle\Entity\Repository\PagesRepository
+                form:       VS\CmsBundle\Form\PageForm
         vs_cms.page_categories:
             driver: doctrine/orm
             classes:
                 model:      App\Entity\Cms\PageCategory
                 interface:  Sylius\Component\Resource\Model\ResourceInterface
-                controller: IA\CmsBundle\Controller\PagesController
-                repository: IA\CmsBundle\Entity\Repository\PageCategoryRepository
+                controller: VS\CmsBundle\Controller\PagesCategoryController
+                repository: VS\CmsBundle\Entity\Repository\PageCategoryRepository
                 

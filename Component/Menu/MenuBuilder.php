@@ -1,4 +1,4 @@
-<?php namespace IA\CmsBundle\Component\Menu;
+<?php namespace VS\CmsBundle\Component\Menu;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
