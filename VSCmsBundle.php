@@ -8,7 +8,7 @@ class VSCmsBundle extends Bundle
 {
     public function getContainerExtension()
     {
-        return new \VS\CmsBundle\DependencyInjection\IACmsExtension();
+        return new \VS\CmsBundle\DependencyInjection\VSCmsExtension();
     }
     
     public function build( ContainerBuilder $container )

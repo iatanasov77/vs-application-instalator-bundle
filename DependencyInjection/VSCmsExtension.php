@@ -14,7 +14,7 @@ use Symfony\Component\Config\Definition\Processor;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class IACmsExtension extends AbstractResourceExtension
+class VSCmsExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritDoc}

@@ -45,7 +45,7 @@ class PagesCategoryController extends ResourceController
             $em->persist( $form->getData() );
             $em->flush();
             
-            return $this->redirect( $this->generateUrl( 'ia_cms_page_categories_index' ) );
+            return $this->redirect( $this->generateUrl( 'vs_cms_page_categories_index' ) );
         }
         
         return $this->render( '@IACms/Pages/category_edit.html.twig', [
@@ -71,7 +71,7 @@ class PagesCategoryController extends ResourceController
             $em->persist( $category );
             $em->flush();
             
-            return $this->redirect( $this->generateUrl( 'ia_cms_page_categories_index' ) );
+            return $this->redirect( $this->generateUrl( 'vs_cms_page_categories_index' ) );
         }
         
         return $this->render( '@IACms/Pages/category_edit.html.twig', [

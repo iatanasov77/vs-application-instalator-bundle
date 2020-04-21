@@ -2,7 +2,7 @@ imports:
     - { resource: services/form.yaml }
 
 parameters:
-#    ia_cms.example.class: IACmsBundle\Example
+#    vs_cms.example.class: VSCmsBundle\Example
 
 services:
     _defaults:

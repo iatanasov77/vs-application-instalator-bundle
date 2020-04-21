@@ -4,7 +4,7 @@
 {% block content %}
 	<div class="row">   
         <div class="col-lg-12">
-        	<a class="btn btn-primary" href="{{ path('ia_cms_pages_create') }}">Create New Page</a>
+        	<a class="btn btn-primary" href="{{ path('vs_cms_pages_create') }}">Create New Page</a>
        	</div>
     </div>
     <div class="row">   
@@ -24,12 +24,12 @@
                                 {{ item.id }}
                             </td>
                             <td>
-                                <a href="{{ path('ia_cms_pages_update', {'id': item.id}) }}">
+                                <a href="{{ path('vs_cms_pages_update', {'id': item.id}) }}">
                                     {{ item.slug }}
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ path('ia_cms_pages_update', {'id': item.id}) }}">
+                                <a href="{{ path('vs_cms_pages_update', {'id': item.id}) }}">
                                     {{ item.title }}
                                 </a>
                             </td>
@@ -37,10 +37,10 @@
                             <td>
                                 <div class="btn-group">
                                     <div class="btn-group">
-                                        <a class="btn btn-primary" href="{{ path('ia_cms_pages_update', {'id': item.id}) }}">
+                                        <a class="btn btn-primary" href="{{ path('vs_cms_pages_update', {'id': item.id}) }}">
                                             <i class="glyphicon glyphicon-pencil"></i>
                                         </a>
-                                        <a class="btn btn-danger btnDelete" href="{{ path('ia_cms_pages_delete', {'id': item.id}) }}">
+                                        <a class="btn btn-danger btnDelete" href="{{ path('vs_cms_pages_delete', {'id': item.id}) }}">
                                             <i class="icon_close_alt2"></i>
                                         </a>
                                     </div>

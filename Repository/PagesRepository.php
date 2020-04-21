@@ -12,7 +12,7 @@ class PagesRepository extends EntityRepository
 {
     public function countTotal() 
     {
-        $query = $this->getEntityManager()->createQuery('SELECT COUNT(p) FROM IACmsBundle:Page p');
+        $query = $this->getEntityManager()->createQuery('SELECT COUNT(p) FROM VSCmsBundle:Page p');
 
         return $query->getSingleScalarResult();
     }
