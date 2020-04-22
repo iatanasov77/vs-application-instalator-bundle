@@ -28,7 +28,7 @@ class PagesCategoryController extends ResourceController
         $categories = $er->childrenHierarchy();
         //var_dump( $categories ); die;
         
-        return $this->render( '@IACms/Pages/category_index.html.twig', [
+        return $this->render( '@VSCms/Pages/category_index.html.twig', [
             'items'         => $categories,
             //'countProjects' => $er->countTotal()
         ]);
@@ -48,7 +48,7 @@ class PagesCategoryController extends ResourceController
             return $this->redirect( $this->generateUrl( 'vs_cms_page_categories_index' ) );
         }
         
-        return $this->render( '@IACms/Pages/category_edit.html.twig', [
+        return $this->render( '@VSCms/Pages/category_edit.html.twig', [
             'form'          => $form->createView(),
             'item'          => $oCategory,
         ]);
@@ -74,7 +74,7 @@ class PagesCategoryController extends ResourceController
             return $this->redirect( $this->generateUrl( 'vs_cms_page_categories_index' ) );
         }
         
-        return $this->render( '@IACms/Pages/category_edit.html.twig', [
+        return $this->render( '@VSCms/Pages/category_edit.html.twig', [
             'form'          => $form->createView(),
             'item'          => $oCategory,
         ]);

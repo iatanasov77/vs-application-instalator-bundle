@@ -10,7 +10,7 @@ class PagesController extends ResourceController
 {
     public function indexAction( Request $request ) : Response
     {   
-        return $this->render( '@IACms/Pages/index.html.twig', [
+        return $this->render( '@VSCms/Pages/index.html.twig', [
             'items' => $this->getPagesRepository()->findAll(),
         ]);
     }
@@ -48,7 +48,7 @@ class PagesController extends ResourceController
             }
         }
 
-        return $this->render( '@IACms/Pages/update.html.twig', [
+        return $this->render( '@VSCms/Pages/update.html.twig', [
             'form' => $form->createView(),
             'item' => $oPage
         ]);

@@ -10,12 +10,12 @@ use Sylius\Component\Resource\Factory\Factory;
 
 use VS\CmsBundle\Model\Page;
 use VS\CmsBundle\Controller\PagesController;
-use VS\CmsBundle\Entity\Repository\PagesRepository;
+use VS\CmsBundle\Repository\PagesRepository;
 use VS\CmsBundle\Form\PageForm;
 
 use VS\CmsBundle\Model\PageCategory;
 use VS\CmsBundle\Controller\PagesCategoryController;
-use VS\CmsBundle\Entity\Repository\PageCategoryRepository;
+use VS\CmsBundle\Repository\PageCategoryRepository;
 use VS\CmsBundle\Form\PageCategoryForm;
 
 /**
@@ -61,7 +61,8 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode( 'model' )->defaultValue( Page::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->defaultValue( PagesController::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'repository' )->cannotBeEmpty()->end()
+                                        //->scalarNode( 'repository' )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( PagesRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'form' )->defaultValue( PageForm::class )->cannotBeEmpty()->end()
                                     ->end()
@@ -78,7 +79,8 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode( 'model' )->defaultValue( PageCategory::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->defaultValue( PagesCategoryController::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'repository' )->cannotBeEmpty()->end()
+                                        //->scalarNode( 'repository' )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( PageCategoryRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'form' )->defaultValue( PageCategoryForm::class )->cannotBeEmpty()->end()
                                     ->end()
