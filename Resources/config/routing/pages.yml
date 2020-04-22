@@ -5,15 +5,12 @@ vs_cms_pages:
         templates: "@IACms/Pages"
     type: sylius.resource
 
-vs_cms_page_categories_index:
-    path: /page_categories
-    controller: VS\CmsBundle\Controller\PagesCategoryController::index
-vs_cms_page_categories_create:
-    path: /page_categories/new
-    controller: VS\CmsBundle\Controller\PagesCategoryController::create
-vs_cms_page_categories_update:
-    path: /page_categories/{id}/edit
-    controller: VS\CmsBundle\Controller\PagesCategoryController::update
+vs_cms_page_categories:
+    resource: |
+        alias: vs_cms.page_categories
+        path: /page_categories
+        templates: "@IACms/Page_Categories"
+    type: sylius.resource
 
 vs_cms_pages_tree:
     path: /json/pages-tree
