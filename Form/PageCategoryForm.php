@@ -32,7 +32,7 @@ class PageCategoryForm extends AbstractResourceType implements ContainerAwareInt
         $builder
             ->add( 'locale', ChoiceType::class, [
                 'label'     => 'Locale',
-                'choices'  => \array_flip( \IA\ApplicationCoreBundle\Component\I18N::LanguagesAvailable() ),
+                'choices'  => \array_flip( \VS\ApplicationBundle\Component\I18N::LanguagesAvailable() ),
                 'mapped'    => false,
             ])
         
