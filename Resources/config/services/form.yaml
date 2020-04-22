@@ -1,7 +1,7 @@
 services:
-    vs_cms.form.type.pages:
+    vs_cms.resources.pages.form:
         class: VS\CmsBundle\Form\PageForm
         tags:
             - { name: form.type }
-        arguments: ['%vs_cms.model.pages.class%', $categoryClass: '%vs_cms.model.page_categories.class%']   # '%vs_cms.pages.form.type.validation_groups%'
+        arguments: ['%vs_cms.model.pages.class%', '%vs_cms.model.page_categories.class%']   # '%vs_cms.pages.form.type.validation_groups%'
         

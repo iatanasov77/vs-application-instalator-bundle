@@ -27,12 +27,13 @@ class PagesController extends ResourceController
     
     public function editAction( $id, Request $request )
     {
-        $er     = $this->getPagesRepository();
-        $oPage  = $id ? $er->findOneBy( ['id' => $id] ) : $er->createNew();
-        $form   = $this->createForm( PageForm::class, $oPage );
+        $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );
         
-        $form->handleRequest( $request );
-        if( $form->isSubmitted() ) { // && $form->isValid()
+        $er             = $this->getPagesRepository();
+        $oPage          = $id ? $er->findOneBy( ['id' => $id] ) : $er->createNew();
+        $form           = $this->resourceFormFactory->create( $configuration, $oPage );
+        
+        if ( in_array( $request->getMethod(), ['POST', 'PUT', 'PATCH'], true ) && $form->handleRequest( $request)->isValid() ) {
             $em     = $this->getDoctrine()->getManager();
             $entity = $form->getData();
             
@@ -41,7 +42,7 @@ class PagesController extends ResourceController
             $em->persist( $entity );
             $em->flush();
             
-            if ($form->getClickedButton() && 'btnApply' === $form->getClickedButton()->getName()) {
+            if ( $form->getClickedButton() && 'btnApply' === $form->getClickedButton()->getName() ) {
                 return $this->redirect( $this->generateUrl( 'vs_cms_page_categories_update', ['id' => $entity->getId()] ) );
             } else {
                 return $this->redirect( $this->generateUrl( 'vs_cms_pages_index' ) );
