@@ -1,13 +1,8 @@
 <?php  namespace VS\CmsBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
-
-use VS\CmsBundle\Entity\PageCategory;
-use VS\CmsBundle\Form\PageCategoryForm;
 
 /**
  * Documentation
@@ -21,12 +16,11 @@ use VS\CmsBundle\Form\PageCategoryForm;
  */
 class PagesCategoryController extends ResourceController
 {
-    public function index( Request $request ): Response
+    public function indexAction( Request $request ): Response
     {
-        $er = $this->getDoctrine()->getRepository( 'VS\CmsBundle\Entity\PageCategory' );
+        $er = $this->getPageCategoryRepository();
         
         $categories = $er->childrenHierarchy();
-        //var_dump( $categories ); die;
         
         return $this->render( '@VSCms/Pages/category_index.html.twig', [
             'items'         => $categories,
@@ -34,13 +28,13 @@ class PagesCategoryController extends ResourceController
         ]);
     }
     
-    public function create( Request $request ): Response
+    public function createAction( Request $request ): Response
     {
-        $oCategory  = new PageCategory();
-        $form       = $this->createForm( PageCategoryForm::class, $oCategory, ['data' => $oCategory, 'method' => 'POST'] );
+        $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );
+        $oCategory      = $this->getPageCategoryRepository()->createNew();
+        $form           = $this->resourceFormFactory->create( $configuration, $oCategory );
         
-        $form->handleRequest( $request );
-        if( $form->isSubmitted() && $form->isValid() ) {
+        if ( in_array( $request->getMethod(), ['POST', 'PUT', 'PATCH'], true ) && $form->handleRequest( $request)->isValid() ) {
             $em = $this->getDoctrine()->getManager();
             $em->persist( $form->getData() );
             $em->flush();
@@ -54,19 +48,16 @@ class PagesCategoryController extends ResourceController
         ]);
     }
     
-    public function update( Request $request ) : Response
+    public function updateAction( Request $request ) : Response
     {
-        $er         = $this->getDoctrine()->getRepository( 'VS\CmsBundle\Entity\PageCategory' );
-        $oCategory = $er->find( $request->attributes->get( 'id' ) );
-        //var_dump( $oBlogPost->getChildren() ); die;
-        $form       = $this->createForm( PageCategoryForm::class, $oCategory, ['data' => $oCategory, 'method' => 'PUT'] );
+        $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );
+        $oCategory      = $this->getPageCategoryRepository()->find( $request->attributes->get( 'id' ) );
+        $form           = $this->resourceFormFactory->create( $configuration, $oCategory );
         
-        $form->handleRequest( $request );
-        if( $form->isSubmitted() && $form->isValid() ) {
+        if ( in_array( $request->getMethod(), ['POST', 'PUT', 'PATCH'], true ) && $form->handleRequest( $request)->isValid() ) {
             $em         = $this->getDoctrine()->getManager();
             $category   = $form->getData();
             $category->setTranslatableLocale( $form['locale']->getData() );
-            //$category->addTranslation( new \VS\CmsBundle\Entity\PageCategoryTranslation($form['locale']->getData(), 'name', $category->getName()));
             
             $em->persist( $category );
             $em->flush();
@@ -78,5 +69,10 @@ class PagesCategoryController extends ResourceController
             'form'          => $form->createView(),
             'item'          => $oCategory,
         ]);
+    }
+    
+    protected function getPageCategoryRepository()
+    {
+        return $this->get( 'vs_cms.repository.page_categories' );
     }
 }

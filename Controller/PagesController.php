@@ -4,8 +4,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
-use VS\CmsBundle\Form\PageForm;
-
 class PagesController extends ResourceController
 {
     public function indexAction( Request $request ) : Response
@@ -43,7 +41,7 @@ class PagesController extends ResourceController
             $em->flush();
             
             if ( $form->getClickedButton() && 'btnApply' === $form->getClickedButton()->getName() ) {
-                return $this->redirect( $this->generateUrl( 'vs_cms_page_categories_update', ['id' => $entity->getId()] ) );
+                return $this->redirect( $this->generateUrl( 'vs_cms_pages_update', ['id' => $entity->getId()] ) );
             } else {
                 return $this->redirect( $this->generateUrl( 'vs_cms_pages_index' ) );
             }
