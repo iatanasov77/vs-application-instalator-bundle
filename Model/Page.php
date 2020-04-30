@@ -1,6 +1,5 @@
 <?php namespace VS\CmsBundle\Model;
 
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
@@ -14,52 +13,24 @@ use VS\ApplicationBundle\Model\Interfaces\PageInterface;
  */
 class Page implements PageInterface, SlugAwareInterface
 {
-    use ToggleableTrait;
+    use ToggleableTrait;    // About enabled field - $enabled
     
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", precision=0, scale=0, nullable=false, unique=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
+    /** @var integer */
     protected $id;
 
-    /**
-     * @var string
-     *
-     * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(name="slug", type="string", length=255, nullable=false, unique=true)
-     */
+    /** @var string */
     protected $slug;
 
-    /**
-     * @var string
-     *
-     * @Gedmo\Translatable
-     * @ORM\Column(name="title", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
-     */
+    /** @var string */
     protected $title;
 
-    /**
-     * @var string
-     *
-     * @Gedmo\Translatable
-     * @ORM\Column(name="text", type="text", precision=0, scale=0, nullable=false, unique=false)
-     */
+    /** @var string */
     protected $text;
     
-    /**
-     * @ORM\ManyToOne(targetEntity="PageCategory", inversedBy="pages")
-     */
+    /** @var PageCategory */
     protected $category;
     
-    /**
-     * @Gedmo\Locale
-     * Used locale to override Translation listener`s locale
-     * this is not a mapped field of entity metadata, just a simple property
-     * and it is not necessary because globally locale can be set in listener
-     */
+    /** @var string */
     protected $locale;
     
     public function setTranslatableLocale($locale)

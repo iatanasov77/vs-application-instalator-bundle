@@ -2,7 +2,7 @@ vs_cms_pages:
     resource: |
         alias: vs_cms.pages
         path: /pages
-        templates: "@IACms/Pages"
+        templates: "@VSCms/Pages"
     type: sylius.resource
 
 vs_cms_page_categories:

@@ -7,7 +7,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 class PagesController extends ResourceController
 {
     public function indexAction( Request $request ) : Response
-    {   
+    {
         return $this->render( '@VSCms/Pages/index.html.twig', [
             'items' => $this->getPagesRepository()->findAll(),
         ]);
