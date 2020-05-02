@@ -25,7 +25,7 @@
             <gedmo:translatable />
         </field>
         
-        <many-to-one field="category" target-entity="PageCategory" inversed-by="pages" />
+        <many-to-one field="category" target-entity="VS\CmsBundle\Model\PageCategoryInterface"  /><!-- inversed-by="pages" -->
         
         <!--
             Used locale to override Translation listener`s locale

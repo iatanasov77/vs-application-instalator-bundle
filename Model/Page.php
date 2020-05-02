@@ -4,6 +4,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 
+use VS\ApplicationBundle\Model\Interfaces\TaxonInterface;
 use VS\ApplicationBundle\Model\Interfaces\PageInterface;
 
 /**
@@ -84,12 +85,14 @@ class Page implements PageInterface, SlugAwareInterface
         return $this;
     }
 
-    public function getCategory(): ?PageCategory
+    public function getCategory(): ?TaxonInterface
     {
-        return $this->category;
+        //var_dump( (array)$this->category ); die;
+        //return null;
+        return $this->category ? $this->category->getTaxon() : null;
     }
     
-    public function setCategory(?PageCategory $category): self
+    public function setCategory(?TaxonInterface $category): self
     {
         $this->category = $category;
         

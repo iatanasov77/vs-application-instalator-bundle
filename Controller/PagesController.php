@@ -3,6 +3,7 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use VS\CmsBundle\Model\PageCategory;
 
 class PagesController extends ResourceController
 {
@@ -28,13 +29,13 @@ class PagesController extends ResourceController
         $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );
         
         $er             = $this->getPagesRepository();
-        $oPage          = $id ? $er->findOneBy( ['id' => $id] ) : $er->createNew();
+        $oPage          = $id ? $er->findOneBy( ['id' => $id] ) : $this->getPagesFactory()->createNew();
         $form           = $this->resourceFormFactory->create( $configuration, $oPage );
         
-        if ( in_array( $request->getMethod(), ['POST', 'PUT', 'PATCH'], true ) && $form->handleRequest( $request)->isValid() ) {
+        if ( in_array( $request->getMethod(), ['POST', 'PUT', 'PATCH'], true ) && $form->handleRequest( $request) ) { // ->isValid()
             $em     = $this->getDoctrine()->getManager();
             $entity = $form->getData();
-            
+            var_dump( $entity->getCategory() ); die;
             $entity->setTranslatableLocale( $form['locale']->getData() );
             
             $em->persist( $entity );
@@ -46,16 +47,22 @@ class PagesController extends ResourceController
                 return $this->redirect( $this->generateUrl( 'vs_cms_pages_index' ) );
             }
         }
-
+        
         return $this->render( '@VSCms/Pages/update.html.twig', [
-            'form' => $form->createView(),
-            'item' => $oPage
+            'form'          => $form->createView(),
+            'item'          => $oPage,
+            'taxonomyId'    => \App\Entity\Cms\PageCategory::TAXONOMY_ID
         ]);
     }
     
     protected function getPagesRepository()
     {
         return $this->get( 'vs_cms.repository.pages' );
+    }
+    
+    protected function getPagesFactory()
+    {
+        return $this->get( 'vs_cms.factory.pages' );
     }
 }
     

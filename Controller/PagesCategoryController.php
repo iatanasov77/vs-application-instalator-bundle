@@ -20,7 +20,8 @@ class PagesCategoryController extends ResourceController
     {
         $er = $this->getPageCategoryRepository();
         
-        $categories = $er->childrenHierarchy();
+        //$categories = $er->childrenHierarchy();
+        $categories = $er->findAll();
         
         return $this->render( '@VSCms/Page_Categories/index.html.twig', [
             'items'         => $categories,
@@ -31,7 +32,7 @@ class PagesCategoryController extends ResourceController
     public function createAction( Request $request ): Response
     {
         $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );
-        $oCategory      = $this->getPageCategoryRepository()->createNew();
+        $oCategory      = $this->getPageCategoryFactory()->createNew();
         $form           = $this->resourceFormFactory->create( $configuration, $oCategory );
         
         if ( in_array( $request->getMethod(), ['POST', 'PUT', 'PATCH'], true ) && $form->handleRequest( $request)->isValid() ) {
@@ -74,5 +75,10 @@ class PagesCategoryController extends ResourceController
     protected function getPageCategoryRepository()
     {
         return $this->get( 'vs_cms.repository.page_categories' );
+    }
+    
+    protected function getPageCategoryFactory()
+    {
+        return $this->get( 'vs_cms.factory.page_categories' );
     }
 }
