@@ -75,4 +75,9 @@ class PageCategory implements PageCategoryInterface
 //     {
 //         $this->position = $position;
 //     }
+
+    public function __toString()
+    {
+        return $this->taxon ? $this->taxon->getName() : '';
+    }
 }

@@ -41,16 +41,10 @@ class PageForm extends AbstractResourceType
             
             ->add( 'enabled', CheckboxType::class, ['label' => 'Enabled'] )
 
-
-            ->add( 'category', ChoiceType::class, ['label' => 'Category'] )
-//             ->add( 'category', EntityType::class, [
-//                 'label'         => 'Category',
-//                 'class'         => $this->categoryClass,
-//                 'choice_label'  => 'name',
-//                 'placeholder'   => '--- Choose a Category ---',
-//                 'required'      => true
-//             ])
-
+            ->add( 'category_taxon', ChoiceType::class, [
+                'label' => 'Category',
+                'mapped'    => false,
+            ])
             
             ->add( 'title', TextType::class, ['label' => 'Title'] )
             ->add( 'slug', TextType::class, ['label' => 'Slug'] )

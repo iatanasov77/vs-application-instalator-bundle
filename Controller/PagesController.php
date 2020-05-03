@@ -35,7 +35,9 @@ class PagesController extends ResourceController
         if ( in_array( $request->getMethod(), ['POST', 'PUT', 'PATCH'], true ) && $form->handleRequest( $request) ) { // ->isValid()
             $em     = $this->getDoctrine()->getManager();
             $entity = $form->getData();
-            var_dump( $entity->getCategory() ); die;
+            $post   = $request->request->get( 'page_form' );
+            
+            $entity->getCategory()->setTaxon( $this->getTaxon( $post['category_taxon'] ) );
             $entity->setTranslatableLocale( $form['locale']->getData() );
             
             $em->persist( $entity );
@@ -63,6 +65,11 @@ class PagesController extends ResourceController
     protected function getPagesFactory()
     {
         return $this->get( 'vs_cms.factory.pages' );
+    }
+    
+    protected function getTaxon( $taxonId )
+    {
+        return $this->get( 'vs_application.repository.taxon' )->find( $taxonId );
     }
 }
     

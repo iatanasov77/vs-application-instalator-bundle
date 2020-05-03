@@ -85,14 +85,12 @@ class Page implements PageInterface, SlugAwareInterface
         return $this;
     }
 
-    public function getCategory(): ?TaxonInterface
+    public function getCategory(): ?PageCategoryInterface
     {
-        //var_dump( (array)$this->category ); die;
-        //return null;
-        return $this->category ? $this->category->getTaxon() : null;
+        return $this->category;
     }
     
-    public function setCategory(?TaxonInterface $category): self
+    public function setCategory(?PageCategoryInterface $category): self
     {
         $this->category = $category;
         
