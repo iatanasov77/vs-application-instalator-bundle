@@ -14,7 +14,7 @@ use VS\ApplicationBundle\Model\Interfaces\PageInterface;
  */
 class Page implements PageInterface, SlugAwareInterface
 {
-    use ToggleableTrait;    // About enabled field - $enabled
+    use ToggleableTrait;    // About enabled field - $enabled (published)
     
     /** @var integer */
     protected $id;
@@ -28,7 +28,7 @@ class Page implements PageInterface, SlugAwareInterface
     /** @var string */
     protected $text;
     
-    /** @var PageCategory */
+    /** @var PageCategoryInterface */
     protected $category;
     
     /** @var string */
