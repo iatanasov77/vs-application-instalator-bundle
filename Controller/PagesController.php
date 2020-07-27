@@ -5,13 +5,38 @@ use Symfony\Component\HttpFoundation\Response;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use VS\CmsBundle\Model\PageCategory;
 
+use FOS\RestBundle\View\View;
+use Sylius\Component\Resource\ResourceActions;
+
 class PagesController extends ResourceController
 {
     public function indexAction( Request $request ) : Response
     {
-        return $this->render( '@VSCms/Pages/index.html.twig', [
-            'items' => $this->getPagesRepository()->findAll(),
-        ]);
+        $configuration = $this->requestConfigurationFactory->create( $this->metadata, $request );
+        
+        $this->isGrantedOr403( $configuration, ResourceActions::INDEX );
+        $resource = $this->findOr404( $configuration );
+        
+        $view = View::create( $resource );
+        //var_dump( $view ); die;
+        if ($configuration->isHtmlRequest()) {
+            $view
+                ->setTemplate( $configuration->getTemplate( ResourceActions::INDEX . '.html' ) )
+                ->setTemplateVar( $this->metadata->getName() )
+                ->setData([
+                    'configuration'             => $configuration,
+                    'metadata'                  => $this->metadata,
+                    'resource'                  => $resource,
+                    $this->metadata->getName()  => $resource,
+                ])
+            ;
+        }
+        
+        return $this->viewHandler->handle( $configuration, $view );
+        
+//         return $this->render( '@VSCms/Pages/index.html.twig', [
+//             'items' => $this->getPagesRepository()->findAll(),
+//         ]);
     }
     
     public function createAction( Request $request ) : Response
