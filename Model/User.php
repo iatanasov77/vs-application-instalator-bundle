@@ -25,6 +25,13 @@ class User implements UserInterface
     protected $email;
 
     /**
+     * The salt to use for hashing.
+     *
+     * @var string
+     */
+    protected $salt;
+    
+    /**
      * Encrypted password. Must be persisted.
      *
      * @var string
@@ -112,6 +119,18 @@ class User implements UserInterface
     public function setEmail( $email ) : self
     {
         $this->email = $email;
+        
+        return $this;
+    }
+    
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+    
+    public function setSalt( $salt ) : self
+    {
+        $this->salt = $salt;
         
         return $this;
     }
@@ -215,5 +234,25 @@ class User implements UserInterface
     public function getFullName()
     {
         return $this->firstName . ' ' . $this->lastName;
+    }
+    
+    public function getRoles()
+    {
+        $roles = $this->roles;
+        
+        // we need to make sure to have at least one role
+        $roles[] = static::ROLE_DEFAULT;
+        
+        return array_unique( $roles );
+    }
+    
+    public function hasRole( $role )
+    {
+        return in_array( strtoupper( $role ), $this->getRoles(), true );
+    }
+    
+    public function eraseCredentials()
+    {
+        //$this->plainPassword = null;
     }
 }
