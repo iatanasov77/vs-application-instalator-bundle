@@ -2,7 +2,7 @@
 
 use Doctrine\ORM\Mapping as ORM;
 
-class UserInfo
+class UserInfo implements UserInfoInterface
 {
     /**
      * @var mixed
