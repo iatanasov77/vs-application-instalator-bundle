@@ -1,6 +1,4 @@
-<?php
-
-namespace VS\UsersBundle\DependencyInjection;
+<?php namespace VS\UsersBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -9,12 +7,14 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\Yaml\Yaml;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+
 /**
  * This is the class that loads and manages your bundle configuration
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class VSUsersExtension extends Extension implements PrependExtensionInterface
+class VSUsersExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /**
      * {@inheritDoc}
