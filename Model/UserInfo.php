@@ -46,6 +46,11 @@ class UserInfo implements UserInfoInterface
      */
     protected $occupation;
     
+    public function getId()
+    {
+        return $this->id;
+    }
+    
     public function getApiToken()
     {
         return $this->apiToken;
