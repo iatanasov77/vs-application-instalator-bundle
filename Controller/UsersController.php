@@ -12,7 +12,7 @@ use VS\UsersBundle\Entity\UserInfo;
 use VS\UsersBundle\Form\UserFormType;
 use VS\UsersBundle\Form\Type\UserInfoFormType;
 
-class UsersCrudController extends ResourceController
+class UsersController extends ResourceController
 {
     public function indexAction( Request $request ): Response
     {
