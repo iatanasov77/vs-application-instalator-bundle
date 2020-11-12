@@ -2,6 +2,8 @@
 
 class User implements UserInterface
 {
+    const ROLE_DEFAULT = "ROLE_DEFAULT";
+    
     /**
      * @var mixed
      */
