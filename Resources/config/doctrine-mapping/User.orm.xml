@@ -15,6 +15,7 @@
         
         <field name="username" column="username" type="string" nullable="false" />
         <field name="email" column="email" type="string" nullable="false" />
+        <field name="salt" column="salt" type="string" nullable="false" />
         <field name="password" column="password" type="string" nullable="false" />
         
         <field name="roles" column="roles" type="array" nullable="false" />
