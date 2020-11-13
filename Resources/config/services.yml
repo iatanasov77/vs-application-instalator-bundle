@@ -24,6 +24,11 @@ services:
             - { name: kernel.event_subscriber }
             
 
+    vs_users.command.create_user:
+        class: VS\UsersBundle\Command\CreateUserCommand
+        tags:
+            - { name: console.command }
+            
     vs_users.manager.user:
         class: VS\UsersBundle\Component\Manager\UserManager
         arguments:
