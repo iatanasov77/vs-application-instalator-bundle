@@ -30,7 +30,8 @@ class UserManager
     
     public function createUser( $username, $password ) : UserInterface
     {
-        if ( Assert::notNull( $this->userRepository->findOneByEmail( $username ) ) ) {
+        //if ( Assert::notNull( $this->userRepository->findOneByEmail( $username ) ) ) {
+        if ( is_object( $this->userRepository->findOneByEmail( $username ) ) ) {
             throw new \Exception( 'User exists !!!' );
         }
         
