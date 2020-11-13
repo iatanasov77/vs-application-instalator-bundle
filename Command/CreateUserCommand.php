@@ -36,7 +36,7 @@ class CreateUserCommand extends Command
         ;
     }
     
-    protected function execute( InputInterface $input, OutputInterface $output )
+    protected function execute( InputInterface $input, OutputInterface $output ) : int
     {
         $output->writeln([
             'User Creator',
@@ -55,9 +55,15 @@ class CreateUserCommand extends Command
             '',
         ]);
         
+        
+        
+        /*
+         * The Command::SUCCESS and Command::FAILURE constants were introduced in Symfony 5.1
+         */
+        
         // return this if there was no problem running the command
         // (it's equivalent to returning int(0))
-        return Command::SUCCESS;
+        return 0;
         
         // or return this if some error happened during the execution
         // (it's equivalent to returning int(1))

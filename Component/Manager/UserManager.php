@@ -44,6 +44,7 @@ class UserManager
         $user->setEmail( $email );
         $user->setUsername( $username );
         $user->setPassword( $pass );
+        $user->setSalt( $salt );
         
         return $user;
     }
