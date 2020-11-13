@@ -75,7 +75,7 @@ class CreateUserCommand extends Command
         $user   = $this->userManager->createUser( $username, $username, $password );
         
         $user->setEnabled( true );
-        //$user->setLocaleCode( $localeCode );
+        $user->setPreferedLocale( 'en_US' );
         
         return $user;
     }
