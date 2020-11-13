@@ -72,7 +72,7 @@ class CreateUserCommand extends Command
         $output->writeln( 'Username: ' . $username );
         $output->writeln( 'Password: ' . $password );
         
-        $user   = $this->userManager->createUser( $username, $password );
+        $user   = $this->userManager->createUser( $username, $username, $password );
         
         $user->setEnabled( true );
         //$user->setLocaleCode( $localeCode );

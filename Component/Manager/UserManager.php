@@ -28,7 +28,7 @@ class UserManager
         $this->encoderFactory   = $encoderFactory;
     }
     
-    public function createUser( $username, $password ) : UserInterface
+    public function createUser( $username, $email, $password ) : UserInterface
     {
         //if ( Assert::notNull( $this->userRepository->findOneByEmail( $username ) ) ) {
         if ( is_object( $this->userRepository->findOneByEmail( $username ) ) ) {
