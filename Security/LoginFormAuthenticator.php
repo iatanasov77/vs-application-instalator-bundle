@@ -31,7 +31,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     private $csrfTokenManager;
     
     private $userRepository;
-    private $passwordEncoder;
+    private $encoderFactory;
 
     public function __construct (
         UrlGeneratorInterface $urlGenerator,
@@ -39,9 +39,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         EncoderFactoryInterface $encoderFactory,
         UsersRepository $userRepository
     ) {
-        $this->urlGenerator = $urlGenerator;
+        $this->urlGenerator     = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
-        $this->passwordEncoder  = $encoderFactory->getEncoder( $user );
+        $this->encoderFactory   = $encoderFactory;
         
         $this->userRepository   = $userRepository;
     }
@@ -87,7 +87,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function checkCredentials( $credentials, UserInterface $user )
     {
-        return $this->passwordEncoder->isPasswordValid( $user, $credentials['password'] );
+        $passwordEncoder    = $encoderFactory->getEncoder( $user );
+        
+        return $passwordEncoder->isPasswordValid( $user, $credentials['password'] );
     }
 
     /**
