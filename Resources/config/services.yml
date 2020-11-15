@@ -40,6 +40,7 @@ services:
             - '@security.encoder_factory'
     
     vs_users.security.login_form_authenticator:
+        autowire: true
         class: VS\UsersBundle\Security\LoginFormAuthenticator
         arguments:
             - '@router'
