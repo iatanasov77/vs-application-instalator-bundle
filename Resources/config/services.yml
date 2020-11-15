@@ -40,11 +40,10 @@ services:
             - '@security.encoder_factory'
     
     vs_users.security.login_form_authenticator:
-        autowire: true
         class: VS\UsersBundle\Security\LoginFormAuthenticator
         arguments:
             - '@router'
-            - 'security.csrf.token_manager'
+            - '@security.csrf.token_manager'
             - '@vs_users.repository.users'
             - '@security.encoder_factory'
             

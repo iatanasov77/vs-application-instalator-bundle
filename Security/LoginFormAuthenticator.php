@@ -18,7 +18,7 @@ use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
-use Doctrine\ORM\EntityRepository;
+use VS\UsersBundle\Repository\UsersRepository;
 
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
@@ -36,7 +36,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     public function __construct (
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
-        EntityRepository $userRepository,
+        UsersRepository $userRepository,
         EncoderFactory $encoderFactory
     ) {
         $this->urlGenerator = $urlGenerator;
