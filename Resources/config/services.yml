@@ -46,7 +46,6 @@ services:
         arguments:
             - '@router'
             - '@security.csrf.token_manager'
-            - '@vs_users.repository.users'
             - '@security.encoder_factory'
-    
+            - '@vs_users.repository.users'
 

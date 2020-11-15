@@ -16,7 +16,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use Symfony\Component\Security\Core\Encoder\EncoderFactory;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 use VS\UsersBundle\Repository\UsersRepository;
 
@@ -36,14 +36,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     public function __construct (
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
-        UsersRepository $userRepository,
-        EncoderFactory $encoderFactory
+        EncoderFactoryInterface $encoderFactory,
+        UsersRepository $userRepository
     ) {
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
+        $this->passwordEncoder  = $encoderFactory->getEncoder( $user );
         
         $this->userRepository   = $userRepository;
-        $this->passwordEncoder  = $encoderFactory->getEncoder( $user );
     }
 
     public function supports( Request $request )
