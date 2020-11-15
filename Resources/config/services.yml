@@ -38,4 +38,12 @@ services:
             - '@vs_users.repository.users'
             - '@doctrine.orm.entity_manager'
             - '@security.encoder_factory'
+    
+    vs_users.security.login_form_authenticator:
+        class: VS\UsersBundle\Security\LoginFormAuthenticator
+        arguments:
+            - '@router'
+            - 'security.csrf.token_manager'
+            - '@vs_users.repository.users'
+            - '@security.encoder_factory'
             
