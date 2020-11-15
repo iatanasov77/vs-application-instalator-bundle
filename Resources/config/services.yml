@@ -2,6 +2,8 @@ parameters:
 #    ia_users.example.class: VS\UsersBundle\Example
 
 services:
+    vs_users.repository.users: '@VS\UsersBundle\Repository\UsersRepository'
+    
     ia_users.form.type.users:
         class: VS\UsersBundle\Form\UserCrudFormType
         tags:
@@ -46,4 +48,5 @@ services:
             - '@security.csrf.token_manager'
             - '@vs_users.repository.users'
             - '@security.encoder_factory'
-            
+    
+
