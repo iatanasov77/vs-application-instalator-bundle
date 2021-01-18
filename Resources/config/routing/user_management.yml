@@ -1,12 +1,12 @@
 ia_users_profile_show:
     path:     /profile
-    defaults: { _controller: IAUsersBundle:Profile:show }
+    defaults: { _controller: VSUsersBundle:Profile:show }
 
 ia_users_users_crud:
     resource: |
-        alias: ia_users.users
+        alias: vs_users.users
         path: /users
-        templates: "IAUsersBundle:UsersCrud"
+        templates: "VSUsersBundle:UsersCrud"
     type: sylius.resource
 
 fos_user_profile:
