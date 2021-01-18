@@ -23,7 +23,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"VS\\CmsBundle\\" : ""
+			"VS\\CmsBundle\\" : "lib/"
 		}
 	},
 	"minimum-stability" : "dev"
