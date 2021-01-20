@@ -1,6 +1,4 @@
-<?php
-
-namespace VS\UsersBundle\Form;
+<?php namespace VS\UsersBundle\Form;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,8 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
 use VS\UsersBundle\Form\Type\UserInfoFormType;
-use VS\UsersBundle\Entity\User;
-use VS\UsersBundle\Entity\UserInfo;
+use VS\UsersBundle\Model\UserInterface;
 
 class UserFormType extends AbstractResourceType  implements ContainerAwareInterface
 {
@@ -40,17 +37,17 @@ class UserFormType extends AbstractResourceType  implements ContainerAwareInterf
             //->add('apiKey', HiddenType::class)
             //->add('enabled', CheckboxType::class, array('label' => 'Enabled'))
   
-            ->add('email', TextType::class, array('label' => 'registration.еmail', 'translation_domain' => 'IAUsersBundle'))
+            ->add('email', TextType::class, array('label' => 'registration.email', 'translation_domain' => 'VSUsersBundle'))
             
-            ->add('username', TextType::class, array('label' => 'registration.userName', 'translation_domain' => 'IAUsersBundle'))
+            ->add('username', TextType::class, array('label' => 'registration.userName', 'translation_domain' => 'VSUsersBundle'))
             
             
-            ->add('password', PasswordType::class, array('label' => 'registration.password', 'translation_domain' => 'IAUsersBundle'))
+            ->add('password', PasswordType::class, array('label' => 'registration.password', 'translation_domain' => 'VSUsersBundle'))
                
-            ->add('userInfo', UserInfoFormType::class, [
-                'data_class' => UserInfo::class,
-                'by_reference' => true
-            ])
+//             ->add('userInfo', UserInfoFormType::class, [
+//                 'data_class' => UserInfo::class,
+//                 'by_reference' => true
+//             ])
             
             ->add('btnSave', SubmitType::class, array('label' => 'Save'))
             ->add('btnCancel', ButtonType::class, array('label' => 'Cancel'))
@@ -59,9 +56,14 @@ class UserFormType extends AbstractResourceType  implements ContainerAwareInterf
 
     public function configureOptions( OptionsResolver $resolver ): void
     {
-        $resolver->setDefaults(array(
-            'data_class' => User::class
-        ));
+        parent::configureOptions( $resolver );
+        
+        $resolver
+            ->setDefined([
+                'user',
+            ])
+            ->setAllowedTypes( 'user', UserInterface::class )
+        ;
     }
 
 }

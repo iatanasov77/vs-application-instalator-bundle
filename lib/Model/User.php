@@ -1,6 +1,6 @@
 <?php namespace VS\UsersBundle\Model;
 
-class User implements UserInterface
+class User implements UserInterface, \ArrayAccess
 {
     const ROLE_DEFAULT = "ROLE_DEFAULT";
     
@@ -256,5 +256,25 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         //$this->plainPassword = null;
+    }
+    
+    public function offsetSet( $offset, $value )
+    {
+        
+    }
+    
+    public function offsetUnset( $offset )
+    {
+        
+    }
+    
+    public function offsetExists( $offset )
+    {
+        return isset( $this->$offset );
+    }
+    
+    public function offsetGet($offset)
+    {
+        return isset( $this->$offset ) ? $this->$offset : null;
     }
 }
