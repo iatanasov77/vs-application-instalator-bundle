@@ -28,15 +28,12 @@ class PagesController extends ResourceController
                     'metadata'                  => $this->metadata,
                     'resource'                  => $resource,
                     $this->metadata->getName()  => $resource,
+                    'items'                     => $this->getPagesRepository()->findAll(),
                 ])
             ;
         }
         
         return $this->viewHandler->handle( $configuration, $view );
-        
-//         return $this->render( '@VSCms/Pages/index.html.twig', [
-//             'items' => $this->getPagesRepository()->findAll(),
-//         ]);
     }
     
     public function createAction( Request $request ) : Response
