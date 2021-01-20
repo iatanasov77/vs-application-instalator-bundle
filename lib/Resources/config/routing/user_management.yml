@@ -1,8 +1,8 @@
-ia_users_profile_show:
+vs_users_profile_show:
     path:     /profile
     defaults: { _controller: VSUsersBundle:Profile:show }
 
-ia_users_users_crud:
+vs_users_crud:
     resource: |
         alias: vs_users.users
         path: /users
