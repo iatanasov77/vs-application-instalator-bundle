@@ -33,12 +33,9 @@ class PageCategoryForm extends AbstractResourceType
         
             ->add( 'name', TextType::class, ['label' => 'Title'] )
             
-            ->add( 'parent', EntityType::class, [
-                'label'         => 'Parent Category',
-                'class'         => $this->categoryClass,
-                'placeholder'   => '-- Set As Root --',
-                'choice_label'  => 'name',
-                'required'      => false
+            ->add( 'parent', ChoiceType::class, [
+                'label' => 'Category',
+                'mapped'    => false,
             ])
 
             ->add( 'btnSave', SubmitType::class, ['label' => 'Save'] )
