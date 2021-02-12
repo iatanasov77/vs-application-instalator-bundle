@@ -2,12 +2,13 @@ parameters:
 #    vs_users.example.class: VS\UsersBundle\Example
 
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
+#     _defaults:
+#         autowire: true
+#         autoconfigure: true
 
     vs_users.registration_controller:
         class: VS\UsersBundle\Controller\RegisterController
+        arguments: ['@symfonycasts.verify_email.helper', '@mailer']
         
     VS\UsersBundle\Repository\UsersRepository: '@vs_users.repository.users'
     
