@@ -1,4 +1,4 @@
-<?php namespace App\Controller\Admin;
+<?php namespace VS\UsersBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,9 +19,6 @@ class RegisterController extends AbstractController
         $this->mailer = $mailer;
     }
     
-    /**
-     * @Route("/register", name="app_page_register")
-     */
     public function index()
     {
         $em         = $this->getDoctrine()->getManager();
