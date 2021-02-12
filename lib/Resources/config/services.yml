@@ -2,6 +2,10 @@ parameters:
 #    ia_users.example.class: VS\UsersBundle\Example
 
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
     VS\UsersBundle\Repository\UsersRepository: '@vs_users.repository.users'
     
     ia_users.form.type.users:

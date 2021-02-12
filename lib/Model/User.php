@@ -42,6 +42,8 @@ class User implements UserInterface, \ArrayAccess
 
     /**
      * @var array
+     * 
+     * https://symfony.com/doc/current/security.html#hierarchical-roles
      */
     protected $roles;
     
