@@ -84,6 +84,11 @@ class User implements UserInterface, \ArrayAccess
     /**
      * @var bool
      */
+    protected $verified;
+    
+    /**
+     * @var bool
+     */
     protected $enabled;
     
     public function getId()
@@ -223,6 +228,18 @@ class User implements UserInterface, \ArrayAccess
         return $this;
     }
     
+    public function setVerified( $verified ) : self
+    {
+        $this->verified = (bool) $verified;
+        
+        return $this;
+    }
+    
+    public function isVerified()
+    {
+        return $this->verified;
+    }
+    
     public function setEnabled( $boolean ) : self
     {
         $this->enabled = (bool) $boolean;
@@ -248,6 +265,13 @@ class User implements UserInterface, \ArrayAccess
         $roles[] = static::ROLE_DEFAULT;
         
         return array_unique( $roles );
+    }
+    
+    public function setRoles( $roles ) : self
+    {
+        $this->roles    = $roles;
+        
+        return $this;
     }
     
     public function hasRole( $role )

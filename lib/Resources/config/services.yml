@@ -8,6 +8,7 @@ services:
 
     vs_users.registration_controller:
         class: VS\UsersBundle\Controller\RegisterController
+        tags: ['controller.service_arguments']
         arguments: ['@symfonycasts.verify_email.helper', '@mailer']
         
     VS\UsersBundle\Repository\UsersRepository: '@vs_users.repository.users'

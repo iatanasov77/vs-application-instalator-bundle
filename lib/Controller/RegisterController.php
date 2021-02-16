@@ -1,6 +1,7 @@
 <?php namespace VS\UsersBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -8,47 +9,105 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
+use VS\UsersBundle\Form\RegistrationFormType;
+
 class RegisterController extends AbstractController
 {
     private $verifyEmailHelper;
     private $mailer;
     
-    public function __construct( VerifyEmailHelperInterface $helper, MailerInterface $mailer )
-    {
+    public function __construct( VerifyEmailHelperInterface $helper, \Swift_Mailer $mailer ) // MailerInterface $mailer
+    {        
         $this->verifyEmailHelper = $helper;
         $this->mailer = $mailer;
     }
     
-    public function index()
+    public function index( Request $request ) : Response
     {
         $em         = $this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()->getRepository( Project::class );
-        $project    = $id ? $repository->find( $id ) : new Project();
-        $form       = $this->_projectForm( $project );
+        $factory    = $this->getFactory();
+        $oUser      = $factory->createNew();
+        $form       = $this->createForm( RegistrationFormType::class, $oUser, [
+            'data'      => $oUser,
+            'action'    => $this->generateUrl( 'vs_users_register_form' ),
+            'method'    => 'POST',
+        ]);
         
         $form->handleRequest( $request );
         if ( $form->isSubmitted() ) {
-            $user   = $form->getData();
+            $oUser   = $form->getData();
             
-            $em->persist( $user );
+            $oUser->setRoles( ['ROLE_USER'] );
+            $em->persist( $oUser );
             $em->flush();
             
             $signatureComponents = $this->verifyEmailHelper->generateSignature(
                 'registration_confirmation_route',
-                $user->getId(),
-                $user->getEmail()
+                $oUser->getId(),
+                $oUser->getEmail(),
+                ['id' => $oUser->getId()]
             );
             
             $email = new TemplatedEmail();
-            $email->to( $user->getEmail() );
-            $email->htmlTemplate( 'registration/confirmation_email.html.twig' );
+            $email->to( $oUser->getEmail() );
+            $email->htmlTemplate( '@VSUsers/Register/confirmation_email.html.twig' );
             $email->context( ['signedUrl' => $signatureComponents->getSignedUrl()] );
             
-            $this->mailer->send($email);
+            $this->mailer->send( $email );
         }
         
         return $this->render( '@VSUsers/Register/register.html.twig', [
             'error' => $form->getErrors( true, false ),
+            'form'  => $form->createView(),
         ]);
+    }
+    
+    /**
+     * @Route("/verify", name="registration_confirmation_route")
+     */
+    public function verifyUserEmail( Request $request ): Response
+    {
+//         $this->denyAccessUnlessGranted( 'IS_AUTHENTICATED_FULLY' );
+//         $user = $this->getUser();
+        $id = $request->get( 'id' ); // retrieve the user id from the url
+        // Verify the user id exists and is not null
+        if( null === $id ) {
+            return $this->redirectToRoute( 'app_home' );
+        }
+
+        $user = $this->get( 'vs_users.repository.users' )->find( $id );
+
+        // Ensure the user exists in persistence
+        if ( null === $user ) {
+            return $this->redirectToRoute( 'app_home' );
+        }
+                
+        try {
+            $this->helper->validateEmailConfirmation( $request->getUri(), $user->getId(), $user->getEmail() );
+        } catch ( VerifyEmailExceptionInterface $e ) {
+            $this->addFlash( 'verify_email_error', $e->getReason() );
+            
+            return $this->redirectToRoute( 'app_register' );
+        }
+        
+        // Mark your user as verified.
+        $user->setVerified( true );
+        $user->setEnabled( true );
+        $this->getDoctrine()->getManager()->persist( $user );
+        $this->getDoctrine()->getManager()->flush();
+        
+        $this->addFlash( 'success', 'Your e-mail address has been verified.' );
+        
+        return $this->redirectToRoute( 'app_home' );
+    }
+    
+    protected function getRepository()
+    {
+        return $this->get( 'vs_users.repository.users' );
+    }
+    
+    protected function getFactory()
+    {
+        return $this->get( 'vs_users.factory.users' );
     }
 }
