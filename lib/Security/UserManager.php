@@ -60,5 +60,12 @@ class UserManager
         $user->setPassword( $pass );
         $user->setSalt( $salt );
     }
+    
+    public function isPasswordValid( UserInterface $user, $plainPassword )
+    {
+        $encoder    = $this->encoderFactory->getEncoder( $user );
+        
+        return $encoder->isPasswordValid( $user->getPassword(), $plainPassword, $user->getSalt() );
+    }
 }
 

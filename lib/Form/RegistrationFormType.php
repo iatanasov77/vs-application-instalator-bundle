@@ -31,9 +31,6 @@ class RegistrationFormType extends UserFormType
                 'label' => 'vs_users.registration.register',
                 'translation_domain' => 'VSUsersBundle'
             ])
-//             ->add( 'profile', new ProfileFormType(), array(
-//                 'label' => false,
-//             ))
         ;
     }
     

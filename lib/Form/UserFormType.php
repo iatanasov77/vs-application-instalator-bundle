@@ -31,7 +31,7 @@ class UserFormType extends AbstractResourceType  implements ContainerAwareInterf
     public function buildForm(FormBuilderInterface $builder, array $options)
     {        
         $builder
-            ->setMethod('PUT')
+            ->setMethod( 'PUT' )
             //->add('apiKey', HiddenType::class)
             //->add('enabled', CheckboxType::class, array('label' => 'Enabled'))
   
@@ -44,7 +44,6 @@ class UserFormType extends AbstractResourceType  implements ContainerAwareInterf
                 'translation_domain' => 'VSUsersBundle'
             ])
             
-            //->add( 'password', PasswordType::class, [
             ->add( 'password', RepeatedType::class, [
                 'type'                  => PasswordType::class,
                 'label'                 => 'vs_users.user.password',
