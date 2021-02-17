@@ -3,6 +3,7 @@
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use VS\UsersBundle\Model\UserInterface;
 
@@ -17,12 +18,18 @@ class RegistrationFormType extends UserFormType
         parent::buildForm( $builder, $options );
         
         $builder->remove( 'roles_options' );
+        $builder->remove( 'btnSave' );
+        
         $builder
             ->setMethod( 'POST' )
             ->add( 'agreeTerms', CheckboxType::class, [
                 'label'                 => 'vs_users.registration.agree_terms',
                 'translation_domain'    => 'VSUsersBundle',
                 "mapped"                => false,
+            ])
+            ->add( 'btnRgister', SubmitType::class, [
+                'label' => 'vs_users.registration.register',
+                'translation_domain' => 'VSUsersBundle'
             ])
 //             ->add( 'profile', new ProfileFormType(), array(
 //                 'label' => false,

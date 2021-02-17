@@ -5,24 +5,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 use VS\UsersBundle\Form\RegistrationFormType;
+use VS\UsersBundle\Model\UserInterface;
 
 class RegisterController extends AbstractController
 {
     private $verifyEmailHelper;
-    private $mailer;
-    
-    public function __construct( VerifyEmailHelperInterface $helper, \Swift_Mailer $mailer ) // MailerInterface $mailer
+
+    public function __construct( VerifyEmailHelperInterface $helper )
     {        
         $this->verifyEmailHelper = $helper;
-        $this->mailer = $mailer;
     }
     
-    public function index( Request $request ) : Response
+    public function index( Request $request, MailerInterface $mailer ) : Response
     {
         $em         = $this->getDoctrine()->getManager();
         $factory    = $this->getFactory();
@@ -35,59 +34,53 @@ class RegisterController extends AbstractController
         
         $form->handleRequest( $request );
         if ( $form->isSubmitted() ) {
-            $oUser   = $form->getData();
+            $userManager    = $this->container->get( 'vs_users.manager.user' );
+            $oUser          = $form->getData();
             
+            $userManager->encodePassword( $oUser, $oUser->getPassword() );
+            
+            $oUser->setPreferedLocale( $request->getLocale() );
             $oUser->setRoles( ['ROLE_USER'] );
+            $oUser->setVerified( false );
+            $oUser->setEnabled( false );
+            
             $em->persist( $oUser );
             $em->flush();
             
-            $signatureComponents = $this->verifyEmailHelper->generateSignature(
-                'registration_confirmation_route',
-                $oUser->getId(),
-                $oUser->getEmail(),
-                ['id' => $oUser->getId()]
-            );
+            $this->sendConfirmationMail( $oUser, $mailer );
             
-            $email = new TemplatedEmail();
-            $email->to( $oUser->getEmail() );
-            $email->htmlTemplate( '@VSUsers/Register/confirmation_email.html.twig' );
-            $email->context( ['signedUrl' => $signatureComponents->getSignedUrl()] );
-            
-            $this->mailer->send( $email );
+            return $this->redirectToRoute( $this->container->getParameter( 'vs_users.default_redirect' ) );
         }
         
         return $this->render( '@VSUsers/Register/register.html.twig', [
-            'error' => $form->getErrors( true, false ),
+            'errors' => $form->getErrors( true, false ),
             'form'  => $form->createView(),
         ]);
     }
     
-    /**
-     * @Route("/verify", name="registration_confirmation_route")
-     */
-    public function verifyUserEmail( Request $request ): Response
+    public function verify( Request $request ): Response
     {
 //         $this->denyAccessUnlessGranted( 'IS_AUTHENTICATED_FULLY' );
 //         $user = $this->getUser();
         $id = $request->get( 'id' ); // retrieve the user id from the url
         // Verify the user id exists and is not null
         if( null === $id ) {
-            return $this->redirectToRoute( 'app_home' );
+            return $this->redirectToRoute( $this->container->getParameter( 'vs_users.default_redirect' ) );
         }
 
         $user = $this->get( 'vs_users.repository.users' )->find( $id );
 
         // Ensure the user exists in persistence
         if ( null === $user ) {
-            return $this->redirectToRoute( 'app_home' );
+            return $this->redirectToRoute( $this->container->getParameter( 'vs_users.default_redirect' ) );
         }
                 
         try {
-            $this->helper->validateEmailConfirmation( $request->getUri(), $user->getId(), $user->getEmail() );
+            $this->verifyEmailHelper->validateEmailConfirmation( $request->getUri(), $user->getId(), $user->getEmail() );
         } catch ( VerifyEmailExceptionInterface $e ) {
             $this->addFlash( 'verify_email_error', $e->getReason() );
             
-            return $this->redirectToRoute( 'app_register' );
+            return $this->redirectToRoute( 'vs_users_register_form' );
         }
         
         // Mark your user as verified.
@@ -98,7 +91,7 @@ class RegisterController extends AbstractController
         
         $this->addFlash( 'success', 'Your e-mail address has been verified.' );
         
-        return $this->redirectToRoute( 'app_home' );
+        return $this->redirectToRoute( $this->container->getParameter( 'vs_users.default_redirect' ) );
     }
     
     protected function getRepository()
@@ -109,5 +102,27 @@ class RegisterController extends AbstractController
     protected function getFactory()
     {
         return $this->get( 'vs_users.factory.users' );
+    }
+    
+    private function sendConfirmationMail( UserInterface $oUser, MailerInterface $mailer )
+    {
+        $signatureComponents = $this->verifyEmailHelper->generateSignature(
+                                    'vs_users_register_confirmation',
+                                    $oUser->getId(),
+                                    $oUser->getEmail(),
+                                    ['id' => $oUser->getId()]
+                                );
+        
+        $email = ( new TemplatedEmail() )
+                ->from( $this->container->getParameter( 'mailer_user' ) )
+                ->to( $oUser->getEmail() )
+                ->htmlTemplate( '@VSUsers/Register/confirmation_email.html.twig' )
+                ->context([
+                    'signedUrl'             => $signatureComponents->getSignedUrl(),
+                    'expiresAtMessageKey'   => $signatureComponents->getExpirationMessageKey(),
+                    'expiresAtMessageData'  => $signatureComponents->getExpirationMessageData(),
+                ]);
+        
+        $mailer->send( $email );
     }
 }

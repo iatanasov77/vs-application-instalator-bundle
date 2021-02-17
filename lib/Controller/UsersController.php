@@ -7,6 +7,17 @@ class UsersController extends AbstractCrudController //ResourceController
 {
     protected function prepareEntity( &$entity, &$form, Request $request )
     {
-        var_dump( $form->get( "roles_options" )->getData() ); die;
+        $userManager    = $this->container->get( 'vs_users.manager.user' );
+        $userManager->encodePassword( $entity, $entity->getPassword() );
+        
+        $roles  = $form->get( "roles_options" )->getData();
+        $entity->setRoles( $roles );
+        //var_dump( $roles ); die;
+        
+        $entity->setVerified( true );
+        
+        // I dont know yet if these fields should be in the form
+        $entity->setPreferedLocale( $request->getLocale() );
+        $entity->setEnabled( true );
     }
 }

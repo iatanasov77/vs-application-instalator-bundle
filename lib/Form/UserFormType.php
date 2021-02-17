@@ -40,7 +40,7 @@ class UserFormType extends AbstractResourceType  implements ContainerAwareInterf
                 'translation_domain' => 'VSUsersBundle'
             ])
             ->add( 'username', TextType::class, [
-                'label' => 'vs_users.user.userName',
+                'label' => 'vs_users.user.username',
                 'translation_domain' => 'VSUsersBundle'
             ])
             
@@ -51,6 +51,15 @@ class UserFormType extends AbstractResourceType  implements ContainerAwareInterf
                 'translation_domain'    => 'VSUsersBundle',
                 'first_options'         => ['label' => 'vs_users.user.password'],
                 'second_options'        => ['label' => 'vs_users.user.password_repeat'],
+            ])
+            
+            ->add( 'firstName', TextType::class, [
+                'label'                 => 'vs_users.user.firstName',
+                'translation_domain'    => 'VSUsersBundle'
+            ])
+            ->add( 'lastName', TextType::class, [
+                'label'                 => 'vs_users.user.lastName',
+                'translation_domain'    => 'VSUsersBundle'
             ])
             
             // https://symfony.com/doc/current/security.html#hierarchical-roles

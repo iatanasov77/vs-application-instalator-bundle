@@ -1,16 +1,13 @@
+imports:
+    - { resource: services/registration.yml }
+    - { resource: services/reset_password.yml }
+
 parameters:
-#    vs_users.example.class: VS\UsersBundle\Example
+    vs_users.login_route: 'app_login'
+    vs_users.login_by: 'email'
+    vs_users.default_redirect: 'app_home'
 
 services:
-#     _defaults:
-#         autowire: true
-#         autoconfigure: true
-
-    vs_users.registration_controller:
-        class: VS\UsersBundle\Controller\RegisterController
-        tags: ['controller.service_arguments']
-        arguments: ['@symfonycasts.verify_email.helper', '@mailer']
-        
     VS\UsersBundle\Repository\UsersRepository: '@vs_users.repository.users'
     
     vs_users.form.type.users:
@@ -18,23 +15,6 @@ services:
         tags:
             - { name: form.type, alias: 'vs_users_users' }
         arguments: ['@doctrine']
-        
-    vs_users.form.type.registration:
-        class: VS\UsersBundle\Form\RegistrationFormType
-        tags:
-            - { name: form.type, alias: ia_user_registration }
-    
-#     ia_user.registration_listener:
-#         class: VS\UsersBundle\EventListener\RegistrationListener
-#         arguments: []
-#         tags:
-#             - { name: kernel.event_subscriber }
-#     ia_user.password_resetting:
-#         class: VS\UsersBundle\EventListener\PasswordResettingListener
-#         arguments: ['@router']
-#         tags:
-#             - { name: kernel.event_subscriber }
-            
 
     vs_users.command.create_user:
         class: VS\UsersBundle\Command\CreateUserCommand
@@ -44,7 +24,8 @@ services:
             - { name: console.command }
             
     vs_users.manager.user:
-        class: VS\UsersBundle\Component\Manager\UserManager
+        class: VS\UsersBundle\Security\UserManager
+        public: true
         arguments:
             - '@vs_users.factory.users'
             - '@vs_users.repository.users'
@@ -58,4 +39,5 @@ services:
             - '@security.csrf.token_manager'
             - '@security.encoder_factory'
             - '@vs_users.repository.users'
+            - { loginRoute: '%vs_users.login_route%', loginBy: '%vs_users.login_by%', defaultRedirect: '%vs_users.default_redirect%' }
 

@@ -21,14 +21,6 @@ class ProfileFormType extends AbstractType
     {
         $builder
             ->add( 'apiToken', HiddenType::class )
-            ->add( 'firstName', TextType::class, [
-                'label'                 => 'registration.firstName',
-                'translation_domain'    => 'VSUsersBundle'
-            ])
-            ->add( 'lastName', TextType::class, [
-                'label'                 => 'registration.lastName',
-                'translation_domain'    => 'VSUsersBundle'
-            ])
             ->add( 'country', CountryType::class, [
                 'label'                 => 'registration.yourCountry',
                 'translation_domain'    => 'VSUsersBundle'   

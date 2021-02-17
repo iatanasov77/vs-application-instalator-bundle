@@ -63,7 +63,7 @@ class Configuration implements ConfigurationInterface
                                         //->scalarNode( 'repository' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( UsersRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
-                                        //->scalarNode( 'form' )->defaultValue( UserFormType::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'form' )->defaultValue( UserFormType::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

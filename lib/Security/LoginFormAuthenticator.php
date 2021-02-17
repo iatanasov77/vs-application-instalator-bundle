@@ -24,64 +24,70 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'app_login';
-
     private $entityManager;
     private $urlGenerator;
     private $csrfTokenManager;
     
     private $userRepository;
     private $encoderFactory;
+    
+    private $params;
 
     public function __construct (
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
         EncoderFactoryInterface $encoderFactory,
-        UsersRepository $userRepository
+        UsersRepository $userRepository,
+        array $params
     ) {
         $this->urlGenerator     = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->encoderFactory   = $encoderFactory;
-        
         $this->userRepository   = $userRepository;
+        $this->params           = $params;
     }
 
     public function supports( Request $request )
     {
-        return self::LOGIN_ROUTE === $request->attributes->get( '_route' )
+        return $this->params['loginRoute'] === $request->attributes->get( '_route' )
                 && $request->isMethod( 'POST' );
     }
 
-    public function getCredentials(Request $request)
+    public function getCredentials( Request $request )
     {
         $credentials = [
-            'email'         => $request->request->get('email'),
-            'password'      => $request->request->get('password'),
-            'csrf_token'    => $request->request->get('_csrf_token'),
+            $this->params['loginBy']  => $request->request->get( '_' . $this->params['loginBy'] ),
+            'password'      => $request->request->get( '_password' ),
+            'csrf_token'    => $request->request->get( '_csrf_token' ),
         ];
         /* */
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $credentials['email']
+            $credentials[$this->params['loginBy']]
         );
         
         return $credentials;
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function getUser( $credentials, UserProviderInterface $userProvider )
     {
         $token = new CsrfToken( 'authenticate', $credentials['csrf_token'] );
         if ( ! $this->csrfTokenManager->isTokenValid( $token ) ) {
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->userRepository->findOneBy( ['email' => $credentials['email']] );
+        $user = $this->userRepository->findOneBy( [$this->params['loginBy'] => $credentials[$this->params['loginBy']]] );
 
         if ( ! $user ) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException( 'Email could not be found.' );
+            throw new CustomUserMessageAuthenticationException( ucfirst( $this->params['loginBy'] ) . ' could not be found.' );
         }
 
+        if ( ! $user->isEnabled() ) {
+            // fail authentication with a custom error
+            throw new CustomUserMessageAuthenticationException( 'User not enabled !' );
+        }
+        
         return $user;
     }
 
@@ -89,7 +95,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     {
         $passwordEncoder    = $this->encoderFactory->getEncoder( $user );
         
-        return $passwordEncoder->isPasswordValid( $user, $credentials['password'] );
+        //return $passwordEncoder->isPasswordValid( $user, $credentials['password'] );
+        return $passwordEncoder->isPasswordValid( $user->getPassword(), $credentials['password'], $user->getSalt() );
     }
 
     /**
@@ -107,11 +114,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         }
 
         // redirect to some "app_homepage" route - of wherever you want
-        return new RedirectResponse( $this->urlGenerator->generate( 'app_homepage' ) );
+        return new RedirectResponse( $this->urlGenerator->generate( $this->params['defaultRedirect'] ) );
     }
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate( self::LOGIN_ROUTE );
+        return $this->urlGenerator->generate( $this->params['loginRoute'] );
     }
 }
