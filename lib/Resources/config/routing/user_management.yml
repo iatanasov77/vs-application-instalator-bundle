@@ -11,7 +11,7 @@ vs_users_forgot_password_form:
     defaults: { _controller: VSUsersBundle:ForgotPassword:index }
 
 vs_users_forgot_password_reset:
-    path:     /forgot-password/reset
+    path:     /forgot-password/reset/{token}
     defaults: { _controller: VSUsersBundle:ForgotPassword:reset }
 
 vs_users_profile_show:

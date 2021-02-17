@@ -14,6 +14,8 @@ use VS\UsersBundle\Repository\UsersRepository;
 use VS\UsersBundle\Form\UserFormType;
 
 use VS\UsersBundle\Model\UserInfo;
+use VS\UsersBundle\Model\ResetPasswordRequest;
+use VS\UsersBundle\Repository\ResetPasswordRequestRepository;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -90,6 +92,24 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         // End UserInfo
+                        
+                        // Begin ResetPasswordRequest
+                        ->arrayNode('reset_password_request')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( ResetPasswordRequest::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( ResetPasswordRequestRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        // End ResetPasswordRequest
                         
                     ->end()
                 ->end()

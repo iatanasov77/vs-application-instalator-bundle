@@ -14,6 +14,9 @@ use VS\UsersBundle\Model\UserInterface;
 
 class RegisterController extends AbstractController
 {
+    /**
+     * @var VerifyEmailHelperInterface
+     */
     private $verifyEmailHelper;
 
     public function __construct( VerifyEmailHelperInterface $helper )
