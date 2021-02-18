@@ -51,17 +51,19 @@ class ProfileController extends Controller
             $userManager    = $this->container->get( 'vs_users.manager.user' );
             $data           = $request->request->all();
 
-            if ( ! $userManager->isPasswordValid( $oUser, $data['change_password_form']['oldPassword'] ) ) {
+            $oldPassword        = $data['change_password_form']['oldPassword'];
+            $newPassword        = $data['change_password_form']['password']['first'];
+            $newPasswordConfirm = $data['change_password_form']['password']['second'];
+            
+            if ( ! $userManager->isPasswordValid( $oUser, $oldPassword ) ) {
                 throw new \Exception( 'Invalid Old Password !!!' );
             }
             
-            $newPassword        = $data['change_password_form']['password']['first'];
-            $newPasswordConfirm = $data['change_password_form']['password']['second'];
             if ( $newPassword !== $newPasswordConfirm ) {
                 throw new \Exception( 'Passwords Not Equals !!!' );
             }
             
-            $userManager->encodePassword( $oUser, $password );
+            $userManager->encodePassword( $oUser, $newPassword );
             $em->persist( $oUser );
             $em->flush();
         }
@@ -82,4 +84,3 @@ class ProfileController extends Controller
         ];
     }
 }
-
