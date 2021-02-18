@@ -3,9 +3,9 @@ imports:
     - { resource: services/reset_password.yml }
 
 parameters:
-    vs_users.login_route: 'app_login'
+    vs_users.login_route: 'vs_application_login'
     vs_users.login_by: 'email'
-    vs_users.default_redirect: 'app_home'
+    vs_users.default_redirect: 'vs_application_dashboard'
 
 services:
     VS\UsersBundle\Repository\UsersRepository: '@vs_users.repository.users'
