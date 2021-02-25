@@ -1,7 +1,7 @@
 <?php namespace VS\CmsBundle\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use VS\ApplicationBundle\Model\Interfaces\TaxonInterface;
 
 interface PageCategoryInterface extends ResourceInterface
 {

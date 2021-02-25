@@ -10,7 +10,7 @@
         </id>
         
         <many-to-one field="page" name="page_id" target-entity="VS\CmsBundle\Model\PageInterface" inversed-by="category" />
-        <many-to-one field="taxon" name="taxon_id" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface" inversed-by="children" />
+        <many-to-one field="taxon" name="taxon_id" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonInterface" inversed-by="children" />
         
     </mapped-superclass>
 </doctrine-mapping>

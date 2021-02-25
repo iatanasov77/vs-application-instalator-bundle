@@ -1,7 +1,7 @@
 <?php namespace VS\CmsBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use VS\ApplicationBundle\Model\Interfaces\TaxonInterface;
 
 /**
  * Page Category Model
