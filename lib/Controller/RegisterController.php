@@ -18,7 +18,13 @@ class RegisterController extends AbstractController
      */
     private $verifyEmailHelper;
 
-    public function __construct( VerifyEmailHelperInterface $helper )
+    /**
+     * Used from service to set helper because so can to hellper to be optional, how it is explained here: 
+     * https://symfony.com/doc/current/service_container/optional_dependencies.html
+     * 
+     * @param VerifyEmailHelperInterface $helper
+     */
+    public function setVerifyEmailHelper( VerifyEmailHelperInterface $helper ) : void
     {        
         $this->verifyEmailHelper = $helper;
     }

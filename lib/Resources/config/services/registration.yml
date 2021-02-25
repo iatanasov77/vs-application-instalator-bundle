@@ -2,8 +2,10 @@ services:
     vs_users.registration_controller:
         class: VS\UsersBundle\Controller\RegisterController
         tags: ['controller.service_arguments']
-        arguments: ['@symfonycasts.verify_email.helper', '@mailer']
-        
+        arguments: ['@mailer']
+        calls:
+            - setVerifyEmailHelper: ['@?symfonycasts.verify_email.helper']
+
     vs_users.form.type.registration:
         class: VS\UsersBundle\Form\RegistrationFormType
         tags:

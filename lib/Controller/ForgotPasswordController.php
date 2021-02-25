@@ -26,9 +26,19 @@ class ForgotPasswordController extends AbstractController
      */
     private $repository;
     
-    public function __construct( ResetPasswordHelperInterface $helper, ResetPasswordRequestRepository $repository )
+    /**
+     * Used from service to set helper because so can to hellper to be optional, how it is explained here:
+     * https://symfony.com/doc/current/service_container/optional_dependencies.html
+     *
+     * @param ResetPasswordHelperInterface $helper
+     */
+    public function setResetPasswordHelper( ResetPasswordHelperInterface $helper ) : void
     {
         $this->resetPasswordHelper  = $helper;
+    }
+    
+    public function __construct( ResetPasswordRequestRepository $repository )
+    {
         $this->repository           = $repository;
     }
     
