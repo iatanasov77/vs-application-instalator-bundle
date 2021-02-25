@@ -1,6 +1,10 @@
 <?php namespace VS\CmsBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 use VS\ApplicationBundle\Model\Interfaces\TaxonInterface;
 
 /**
@@ -11,14 +15,19 @@ class PageCategory implements PageCategoryInterface
     /** @var mixed */
     protected $id;
     
-    /** @var PageInterface */
-    protected $page;
+    /** @var Collection|Page[] */
+    protected $pages;
     
     /** @var TaxonInterface */
     protected $taxon;
     
     /** @var int */
     //protected $position;
+    
+    public function __construct()
+    {
+        $this->pages = new ArrayCollection();
+    }
     
     /**
      * {@inheritdoc}
@@ -29,19 +38,29 @@ class PageCategory implements PageCategoryInterface
     }
     
     /**
-     * {@inheritdoc}
+     * @return Collection|Page[]
      */
-    public function getPage(): ?PageInterface
+    public function getPages(): Collection
     {
-        return $this->page;
+        return $this->pages;
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function setPage(?PageInterface $page): void
+    public function addPage( Page $page ): self
     {
-        $this->page = $page;
+        if ( ! $this->pages->contains( $page ) ) {
+            $this->pages[] = $page;
+            $page->addCategory( $this );
+        }
+        return $this;
+    }
+    
+    public function removePage( Page $page ): self
+    {
+        if ( $this->pages->contains( $page ) ) {
+            $this->pages->removeElement( $page );
+            $page->removeCategory( $this );
+        }
+        return $this;
     }
     
     /**

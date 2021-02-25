@@ -4,7 +4,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 
-use VS\ApplicationBundle\Model\Interfaces\TaxonInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 use VS\ApplicationBundle\Model\Interfaces\PageInterface;
 
 /**
@@ -28,22 +30,53 @@ class Page implements PageInterface, SlugAwareInterface
     /** @var string */
     protected $text;
     
-    /** @var PageCategoryInterface */
-    protected $category;
+    /** @var Collection|PageCategory[] */
+    protected $categories;
     
     /** @var string */
     protected $locale;
     
-    public function setTranslatableLocale($locale)
+    public function __construct()
     {
-        $this->locale = $locale;
-        
-        return $this;
+        $this->categories = new ArrayCollection();
     }
     
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * @return Collection|PageCategory[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+    
+    public function addCategory( PageCategory $category ) : self
+    {
+        if ( ! $this->categories->contains( $category ) ) {
+            $this->categories[] = $category;
+            $category->addPage( $this );
+        }
+        return $this;
+    }
+    
+    public function removeCategory( PageCategory $category ) : self
+    {
+        if ( ! $this->categories->contains( $category ) ) {
+            $this->categories->removeElement( $category );
+            $category->removePage( $this );
+        }
+        return $this;
+    }
+    
+    public function setTranslatableLocale($locale) : self
+    {
+        $this->locale = $locale;
+        
+        return $this;
     }
 
     public function getSlug() : ?string
@@ -51,20 +84,14 @@ class Page implements PageInterface, SlugAwareInterface
         return $this->slug;
     }
 
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }
 
-    public function getText()
+    public function getText() : string
     {
         return $this->text;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
     }
 
     public function setSlug($slug=null) : void
@@ -82,18 +109,6 @@ class Page implements PageInterface, SlugAwareInterface
     public function setText($text)
     {
         $this->text = $text;
-        return $this;
-    }
-
-    public function getCategory(): ?PageCategoryInterface
-    {
-        return $this->category;
-    }
-    
-    public function setCategory(?PageCategoryInterface $category): self
-    {
-        $this->category = $category;
-        
         return $this;
     }
 }
