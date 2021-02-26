@@ -1,16 +1,17 @@
 <?php namespace VS\CmsBundle\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
-use Sylius\Component\Resource\Model\SlugAwareInterface;
+use Sylius\Component\Resource\Model\TranslatableTrait;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-//use VS\ApplicationBundle\Model\Interfaces\PageInterface;
-
 class Page implements PageInterface, SlugAwareInterface
 {
+    use TimestampableTrait;
     use ToggleableTrait;    // About enabled field - $enabled (published)
+    use TranslatableTrait;
     
     /** @var integer */
     protected $id;
@@ -104,5 +105,15 @@ class Page implements PageInterface, SlugAwareInterface
     {
         $this->text = $text;
         return $this;
+    }
+    
+    public function getPublished(): bool
+    {
+        return $this->enabled;
+    }
+    
+    public function setPublished(?bool $published): void
+    {
+        $this->enabled = (bool) $published;
     }
 }
