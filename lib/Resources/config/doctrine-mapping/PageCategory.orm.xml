@@ -9,7 +9,10 @@
             <generator strategy="AUTO" />
         </id>
         
+        <!--
         <many-to-many field="pages" name="page_id" target-entity="VS\CmsBundle\Model\PageInterface" mapped-by="categories" />
+        -->
+        
         <many-to-one field="taxon" name="taxon_id" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonInterface" inversed-by="children" />
         
     </mapped-superclass>
