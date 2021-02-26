@@ -7,7 +7,7 @@ use Sylius\Component\Resource\Model\TranslatableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class Page implements PageInterface, SlugAwareInterface
+class Page implements PageInterface
 {
     use TimestampableTrait;
     use ToggleableTrait;    // About enabled field - $enabled (published)
