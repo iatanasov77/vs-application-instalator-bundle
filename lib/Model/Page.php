@@ -1,19 +1,13 @@
 <?php namespace VS\CmsBundle\Model;
 
-use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-use VS\ApplicationBundle\Model\Interfaces\PageInterface;
+//use VS\ApplicationBundle\Model\Interfaces\PageInterface;
 
-/**
- * Page Model
- * 
- * @ORM\MappedSuperclass
- */
 class Page implements PageInterface, SlugAwareInterface
 {
     use ToggleableTrait;    // About enabled field - $enabled (published)
