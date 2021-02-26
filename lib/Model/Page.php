@@ -1,5 +1,7 @@
 <?php namespace VS\CmsBundle\Model;
 
+use Sylius\Component\Resource\Model\TranslationInterface;
+
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
@@ -116,5 +118,13 @@ class Page implements PageInterface
     {
         $this->enabled = (bool) $published;
         return $this;
+    }
+    
+    /*
+     * @NOTE: Decalared abstract in TranslatableTrait
+     */
+    protected function createTranslation(): TranslationInterface
+    {
+        
     }
 }
