@@ -39,5 +39,5 @@ interface PageInterface extends
     public function setMetaDescription(?string $metaDescription): void;
     */
     
-    public function getPublished() : int;
+    public function getPublished() : bool;
 }

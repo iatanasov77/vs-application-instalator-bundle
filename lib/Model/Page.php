@@ -107,13 +107,14 @@ class Page implements PageInterface
         return $this;
     }
     
-    public function getPublished(): bool
+    public function getPublished() : bool
     {
         return $this->enabled;
     }
     
-    public function setPublished(?bool $published): void
+    public function setPublished( ?bool $published ) : self
     {
         $this->enabled = (bool) $published;
+        return $this;
     }
 }
