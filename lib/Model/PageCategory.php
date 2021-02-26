@@ -40,6 +40,11 @@ class PageCategory implements PageCategoryInterface
      */
     public function getPages(): Collection
     {
+        // WORKAROUND
+        if ( $this->pages === null ) {
+            $this->pages = new ArrayCollection();
+        }
+        
         return $this->pages;
     }
     
