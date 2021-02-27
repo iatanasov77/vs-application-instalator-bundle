@@ -1,4 +1,4 @@
-<?php namespace Symfony\Component\Security\Http\Logout;
+<?php namespace VS\UsersBundle\Security;
 
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
