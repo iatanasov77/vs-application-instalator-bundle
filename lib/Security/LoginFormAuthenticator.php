@@ -114,24 +114,18 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             $response   = new RedirectResponse( $this->urlGenerator->generate( $this->params['defaultRedirect'] ) );
         }
         
-        // $this->getRequest()->getHost()
-        
         // Before Symfony 5
         $cookieToken = Cookie::create( 'api_token',
             $token->getUser()->getApiToken(),
             time() + (int) $this->params['apiTokenLifetime'],    // new \DateTime( '+1 year' )
-            '/', $this->params['apiTokenDomain'],   // '.example.com'
-            true,
-            true
+            '/', $this->params['apiTokenDomain']   // '.example.com'
         );
         
         // After Symfony 5
 //         $cookieToken = Cookie::create( 'api_token' )
 //                             ->withValue( $token->getUser()->getApiToken() )
 //                             ->withExpires( time() + $this->params['apiTokenLifetime'] )
-//                             ->withDomain( $this->params['apiTokenDomain'] )    // '.example.com'
-//                             ->withSecure( true )
-//                             ->withHttpOnly(true);
+//                             ->withDomain( $this->params['apiTokenDomain'] );    // '.example.com'
         
         $response->headers->setCookie( $cookieToken );
         
