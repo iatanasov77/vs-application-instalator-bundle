@@ -37,7 +37,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
     public function getCredentials( Request $request )
     {
         return [
-            'token' => $request->cookie->get( 'api_token' ),
+            'token' => $request->cookies->get( 'api_token' ),
         ];
     }
     
