@@ -38,32 +38,31 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         EncoderFactoryInterface $encoderFactory,
         UsersRepository $userRepository,
         array $params
-        ) {
-            $this->urlGenerator     = $urlGenerator;
-            $this->csrfTokenManager = $csrfTokenManager;
-            $this->encoderFactory   = $encoderFactory;
-            $this->userRepository   = $userRepository;
-            $this->params           = $params;
+    ) {
+        $this->urlGenerator     = $urlGenerator;
+        $this->csrfTokenManager = $csrfTokenManager;
+        $this->encoderFactory   = $encoderFactory;
+        $this->userRepository   = $userRepository;
+        $this->params           = $params;
     }
     
     public function supports( Request $request )
     {
-        return $this->params['loginRoute'] === $request->attributes->get( '_route' )
-        && $request->isMethod( 'POST' );
+        return $this->params['loginRoute'] === $request->attributes->get( '_route' ) && $request->isMethod( 'POST' );
     }
     
     public function getCredentials( Request $request )
     {
         $credentials = [
-            $this->params['loginBy']  => $request->request->get( '_' . $this->params['loginBy'] ),
-            'password'      => $request->request->get( '_password' ),
-            'csrf_token'    => $request->request->get( '_csrf_token' ),
+            $this->params['loginBy']    => $request->request->get( '_' . $this->params['loginBy'] ),
+            'password'                  => $request->request->get( '_password' ),
+            'csrf_token'                => $request->request->get( '_csrf_token' ),
         ];
         /* */
         $request->getSession()->set(
             Security::LAST_USERNAME,
             $credentials[$this->params['loginBy']]
-            );
+        );
         
         return $credentials;
     }
@@ -115,13 +114,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             $response   = new RedirectResponse( $this->urlGenerator->generate( $this->params['defaultRedirect'] ) );
         }
         
-        //         $cookieToken = Cookie::create( 'api_token' )
-        //                             ->withValue( $token->getUser()->getApiToken() )
-        //                             ->withExpires( strtotime( 'Fri, 20-May-2011 15:25:52 GMT' ) )
-        //                             ->withDomain( '.example.com' )
-        //                             ->withSecure( true );
-        
-        $response->headers->setCookie( Cookie::create( 'api_token', $token->getUser()->getApiToken() ) );
+        // $this->getRequest()->getHost()
+        $cookieToken = Cookie::create( 'api_token' )
+                            ->withValue( $token->getUser()->getApiToken() )
+                            ->withExpires( time() + $this->params['apiTokenExpires'] )
+                            ->withDomain( $this->params['apiTokenDomain'] )    // '.example.com'
+                            ->withSecure( true );
+        $response->headers->setCookie( $cookieToken );
         
         return $response;
     }
