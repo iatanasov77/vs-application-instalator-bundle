@@ -26,34 +26,6 @@ class RegisterController extends AbstractController
      */
     private $tokenGenerator;
 
-    public function setTokenGenerator( VerifyEmailTokenGenerator $tokenGenerator ) : void
-    {
-        $this->tokenGenerator   = $tokenGenerator;
-    }
-    
-    /**
-     * Used from service to set helper because so can to hellper to be optional, how it is explained here:
-     * https://symfony.com/doc/current/service_container/optional_dependencies.html
-     *
-     * @param VerifyEmailHelperInterface $helper
-     */
-    public function setVerifyEmailHelper( VerifyEmailHelperInterface $helper ) : void
-    {
-        $this->verifyEmailHelper    = $helper;
-    }
-    
-    /**
-     * Used from service to set helper because so can to hellper to be optional, how it is explained here: 
-     * https://symfony.com/doc/current/service_container/optional_dependencies.html
-     * 
-     * @param VerifyEmailHelperInterface $helper
-     */
-    public function setVerifyEmailHelper( VerifyEmailHelperInterface $helper, VerifyEmailTokenGenerator $tokenGenerator ) : void
-    {        
-        $this->verifyEmailHelper    = $helper;
-        $this->tokenGenerator       = $tokenGenerator;
-    }
-    
     public function index( Request $request, MailerInterface $mailer ) : Response
     {
         $em         = $this->getDoctrine()->getManager();
@@ -127,6 +99,22 @@ class RegisterController extends AbstractController
         $this->addFlash( 'success', 'Your e-mail address has been verified.' );
         
         return $this->redirectToRoute( $this->container->getParameter( 'vs_users.default_redirect' ) );
+    }
+    
+    public function setTokenGenerator( VerifyEmailTokenGenerator $tokenGenerator ) : void
+    {
+        $this->tokenGenerator   = $tokenGenerator;
+    }
+    
+    /**
+     * Used from service to set helper because so can to hellper to be optional, how it is explained here:
+     * https://symfony.com/doc/current/service_container/optional_dependencies.html
+     *
+     * @param VerifyEmailHelperInterface $helper
+     */
+    public function setVerifyEmailHelper( VerifyEmailHelperInterface $helper ) : void
+    {
+        $this->verifyEmailHelper    = $helper;
     }
     
     protected function getRepository()
