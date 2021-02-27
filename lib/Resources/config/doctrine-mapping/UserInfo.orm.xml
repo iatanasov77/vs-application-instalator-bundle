@@ -11,7 +11,6 @@
         
         <one-to-one field="user" target-entity="VS\UsersBundle\Model\UserInterface"  />
         
-        <field name="apiToken" column="api_token" type="string" nullable="false" />
         <field name="country" column="country" type="string" nullable="false" />
         <field name="birthday" column="birthday" type="datetime" nullable="false" />
         <field name="mobile" column="mobile" type="string" nullable="false" />
