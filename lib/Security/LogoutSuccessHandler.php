@@ -24,7 +24,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     public function onLogoutSuccess( Request $request )
     {
         $response   = $this->httpUtils->createRedirectResponse( $request, $this->targetUrl );
-        $response->headers->clearCookie( 'api_token', '/', null );
+        $response->headers->clearCookie( 'api_token' );
         
         return $response;
     }
