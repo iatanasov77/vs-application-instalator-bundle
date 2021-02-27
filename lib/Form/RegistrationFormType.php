@@ -2,6 +2,7 @@
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -22,10 +23,11 @@ class RegistrationFormType extends UserFormType
         
         $builder
             ->setMethod( 'POST' )
+            ->add( 'registerRole', HiddenType::class, ['data' => 'ROLE_USER', 'mapped' => false] )
             ->add( 'agreeTerms', CheckboxType::class, [
                 'label'                 => 'vs_users.registration.agree_terms',
                 'translation_domain'    => 'VSUsersBundle',
-                "mapped"                => false,
+                'mapped'                => false,
             ])
             ->add( 'btnRgister', SubmitType::class, [
                 'label' => 'vs_users.registration.register',

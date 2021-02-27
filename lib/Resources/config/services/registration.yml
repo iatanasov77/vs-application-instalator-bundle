@@ -4,6 +4,7 @@ services:
         tags: ['controller.service_arguments']
         arguments: ['@mailer']
         calls:
+            - setTokenGenerator: ['@?symfonycasts.verify_email.token_generator']
             - setVerifyEmailHelper: ['@?symfonycasts.verify_email.helper']
 
     vs_users.form.type.registration:

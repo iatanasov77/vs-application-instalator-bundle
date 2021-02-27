@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
+use SymfonyCasts\Bundle\VerifyEmail\Generator\VerifyEmailTokenGenerator;
 
 use VS\UsersBundle\Form\RegistrationFormType;
 use VS\UsersBundle\Model\UserInterface;
@@ -17,16 +18,40 @@ class RegisterController extends AbstractController
      * @var VerifyEmailHelperInterface
      */
     private $verifyEmailHelper;
+    
+    /**
+     * Needed to generate Api Token
+     * 
+     * @var VerifyEmailHelperInterface
+     */
+    private $tokenGenerator;
 
+    public function setTokenGenerator( VerifyEmailTokenGenerator $tokenGenerator ) : void
+    {
+        $this->tokenGenerator   = $tokenGenerator;
+    }
+    
+    /**
+     * Used from service to set helper because so can to hellper to be optional, how it is explained here:
+     * https://symfony.com/doc/current/service_container/optional_dependencies.html
+     *
+     * @param VerifyEmailHelperInterface $helper
+     */
+    public function setVerifyEmailHelper( VerifyEmailHelperInterface $helper ) : void
+    {
+        $this->verifyEmailHelper    = $helper;
+    }
+    
     /**
      * Used from service to set helper because so can to hellper to be optional, how it is explained here: 
      * https://symfony.com/doc/current/service_container/optional_dependencies.html
      * 
      * @param VerifyEmailHelperInterface $helper
      */
-    public function setVerifyEmailHelper( VerifyEmailHelperInterface $helper ) : void
+    public function setVerifyEmailHelper( VerifyEmailHelperInterface $helper, VerifyEmailTokenGenerator $tokenGenerator ) : void
     {        
-        $this->verifyEmailHelper = $helper;
+        $this->verifyEmailHelper    = $helper;
+        $this->tokenGenerator       = $tokenGenerator;
     }
     
     public function index( Request $request, MailerInterface $mailer ) : Response
@@ -46,9 +71,11 @@ class RegisterController extends AbstractController
             $oUser          = $form->getData();
             
             $userManager->encodePassword( $oUser, $oUser->getPassword() );
+            $oUser->setApiToken( $this->tokenGenerator->createToken( strval( time() ), $oUser->getEmail() ) );
+            
+            $oUser->setRoles( [$request->request->get( 'registerRole' )] );
             
             $oUser->setPreferedLocale( $request->getLocale() );
-            $oUser->setRoles( ['ROLE_USER'] );
             $oUser->setVerified( false );
             $oUser->setEnabled( false );
             
