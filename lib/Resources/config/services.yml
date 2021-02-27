@@ -41,3 +41,7 @@ services:
             - '@vs_users.repository.users'
             - { loginRoute: '%vs_users.login_route%', loginBy: '%vs_users.login_by%', defaultRedirect: '%vs_users.default_redirect%' }
 
+    vs_users.security.token_authenticator:
+        class: VS\UsersBundle\Security\TokenAuthenticator
+        arguments:
+            - '@vs_users.repository.users'
