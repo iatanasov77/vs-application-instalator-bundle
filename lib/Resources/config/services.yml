@@ -46,7 +46,7 @@ services:
                 loginBy: '%vs_users.login_by%',
                 defaultRedirect: '%vs_users.default_redirect%',
                 apiTokenDomain: '%vs_users.api_token.domain%',
-                apiTokenExpires: '%vs_users.api_token.expires%'
+                apiTokenLifetime: '%vs_users.api_token.lifetime%'
             }
             
 

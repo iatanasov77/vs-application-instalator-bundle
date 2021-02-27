@@ -119,7 +119,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         // Before Symfony 5
         $cookieToken = Cookie::create( 'api_token',
             $token->getUser()->getApiToken(),
-            time() + $this->params['apiTokenExpires'],
+            time() + (int) $this->params['apiTokenLifetime'],    // new \DateTime( '+1 year' )
             '/', $this->params['apiTokenDomain'],   // '.example.com'
             true,
             true
@@ -128,7 +128,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         // After Symfony 5
 //         $cookieToken = Cookie::create( 'api_token' )
 //                             ->withValue( $token->getUser()->getApiToken() )
-//                             ->withExpires( time() + $this->params['apiTokenExpires'] )
+//                             ->withExpires( time() + $this->params['apiTokenLifetime'] )
 //                             ->withDomain( $this->params['apiTokenDomain'] )    // '.example.com'
 //                             ->withSecure( true )
 //                             ->withHttpOnly(true);
