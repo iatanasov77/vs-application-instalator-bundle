@@ -25,9 +25,9 @@ interface PageInterface extends
     
     public function getSlug() : ?string;
     
-    public function getTitle() : string;
+    public function getTitle() : ?string;
     
-    public function getText() : string;
+    public function getText() : ?string;
     
     /*
     public function getMetaKeywords(): ?string;
@@ -39,5 +39,5 @@ interface PageInterface extends
     public function setMetaDescription(?string $metaDescription): void;
     */
     
-    public function getPublished() : bool;
+    public function getPublished() : ?bool;
 }

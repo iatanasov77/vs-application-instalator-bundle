@@ -81,12 +81,12 @@ class Page implements PageInterface
         return $this->slug;
     }
 
-    public function getTitle() : string
+    public function getTitle() : ?string
     {
         return $this->title;
     }
 
-    public function getText() : string
+    public function getText() : ?string
     {
         return $this->text;
     }
@@ -109,7 +109,7 @@ class Page implements PageInterface
         return $this;
     }
     
-    public function getPublished() : bool
+    public function getPublished() : ?bool
     {
         return $this->enabled;
     }
@@ -123,7 +123,7 @@ class Page implements PageInterface
     /*
      * @NOTE: Decalared abstract in TranslatableTrait
      */
-    protected function createTranslation(): TranslationInterface
+    protected function createTranslation() : TranslationInterface
     {
         
     }
