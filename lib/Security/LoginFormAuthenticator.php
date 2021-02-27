@@ -117,9 +117,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         // $this->getRequest()->getHost()
         
         // Before Symfony 5
-        Cookie::create(
-            'foo',
-            'bar',
+        $cookieToken = Cookie::create( 'api_token',
+            $token->getUser()->getApiToken(),
             time() + $this->params['apiTokenExpires'],
             '/', $this->params['apiTokenDomain'],   // '.example.com'
             true,
