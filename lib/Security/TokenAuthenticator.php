@@ -37,7 +37,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
     public function getCredentials( Request $request )
     {
         return [
-            'token' => 'VANKATA TOKEN', // recover token from cookies
+            'token' => $request->cookie->get( 'api_token' ),
         ];
     }
     
@@ -50,7 +50,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         }
         
         // if a User object, checkCredentials() is called
-        return $this->userRepository->findOneBy( ['api_token' => $token] );
+        return $this->userRepository->findOneBy( ['apiToken' => $token] );
     }
     
     public function checkCredentials( $credentials, UserInterface $user )
