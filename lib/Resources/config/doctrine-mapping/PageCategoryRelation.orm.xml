@@ -11,20 +11,6 @@
             <generator strategy="AUTO" />
         </id>
         
-        <many-to-many field="categories" target-entity="VS\CmsBundle\Model\PageCategoryInterface" inversed-by="pages">
-        	<cascade>
-                <cascade-all/>
-            </cascade>
-            <join-table name="VSCMS_Pages_Categories">
-                <join-columns>
-                    <join-column name="page_id" referenced-column-name="id" on-delete="CASCADE" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="category_id" referenced-column-name="id" />
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
-        
         <many-to-one field="page" target-entity="VS\CmsBundle\Model\PageInterface" inversed-by="relations">
         	<join-column name="page_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
@@ -32,7 +18,6 @@
         <many-to-one field="category" target-entity="VS\CmsBundle\Model\PageCategoryInterface" inversed-by="relations">
         	<join-column name="category_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
-        
     </mapped-superclass>
 
 </doctrine-mapping>
