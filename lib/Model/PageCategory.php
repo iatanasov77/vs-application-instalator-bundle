@@ -14,7 +14,10 @@ class PageCategory implements PageCategoryInterface
     protected $id;
     
     /** @var Collection|Page[] */
-    protected $pages;
+    //protected $pages;
+    
+    /** @var Collection|PageCategoryRelation[] */
+    protected $relations;
     
     /** @var TaxonInterface */
     protected $taxon;
@@ -24,7 +27,8 @@ class PageCategory implements PageCategoryInterface
     
     public function __construct()
     {
-        $this->pages = new ArrayCollection();
+        //$this->pages = new ArrayCollection();
+        $this->relations    = new ArrayCollection();
     }
     
     /**
@@ -36,35 +40,58 @@ class PageCategory implements PageCategoryInterface
     }
     
     /**
-     * @return Collection|Page[]
+     * @return Collection|PageCategoryRelation[]
      */
-    public function getPages(): Collection
+    public function getRelations(): Collection
     {
-        // WORKAROUND
-        if ( $this->pages === null ) {
-            $this->pages = new ArrayCollection();
+        return $this->relations;
+    }
+    
+    /**
+     * @return Collection|PageCategory[]
+     */
+    public function getPages()
+    {
+        //return $this->categories;
+        
+        $pages = [];
+        foreach( $this->getRelations() as $relation ){
+            if( ! isset( $pages[$relation->getPage()->getId()] ) ) {
+                $pages[$relation->getPage()->getId()]    = $relation->getPage(); //Ensure uniqueness
+            }
         }
         
-        return $this->pages;
+        return $pages;
     }
     
-    public function addPage( Page $page ): self
-    {
-        if ( ! $this->pages->contains( $page ) ) {
-            $this->pages[] = $page;
-            $page->addCategory( $this );
-        }
-        return $this;
-    }
     
-    public function removePage( Page $page ): self
-    {
-        if ( $this->pages->contains( $page ) ) {
-            $this->pages->removeElement( $page );
-            $page->removeCategory( $this );
-        }
-        return $this;
-    }
+//     public function getPages(): Collection
+//     {
+//         // WORKAROUND
+//         if ( $this->pages === null ) {
+//             $this->pages = new ArrayCollection();
+//         }
+        
+//         return $this->pages;
+//     }
+    
+//     public function addPage( Page $page ): self
+//     {
+//         if ( ! $this->pages->contains( $page ) ) {
+//             $this->pages[] = $page;
+//             $page->addCategory( $this );
+//         }
+//         return $this;
+//     }
+    
+//     public function removePage( Page $page ): self
+//     {
+//         if ( $this->pages->contains( $page ) ) {
+//             $this->pages->removeElement( $page );
+//             $page->removeCategory( $this );
+//         }
+//         return $this;
+//     }
     
     /**
      * {@inheritdoc}
