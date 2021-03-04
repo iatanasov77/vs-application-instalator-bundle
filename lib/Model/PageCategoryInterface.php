@@ -6,11 +6,11 @@ use VS\ApplicationBundle\Model\Interfaces\TaxonInterface;
 
 interface PageCategoryInterface extends ResourceInterface
 {
-    public function getPages() : Collection;
+    public function getPages();
     
-    public function addPage( Page $page ) : self;
+    //public function addPage( Page $page ) : self;
     
-    public function removePage( Page $page ) : self;
+    //public function removePage( Page $page ) : self;
     
     public function getTaxon(): ?TaxonInterface;
     

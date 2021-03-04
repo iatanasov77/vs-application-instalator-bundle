@@ -17,7 +17,7 @@ interface PageInterface extends
 {
     public function setTranslatableLocale( $locale ) : self;
     
-    public function getCategories(): Collection;
+    public function getCategories();
     
     public function addCategory( PageCategory $category ) : self;
     
