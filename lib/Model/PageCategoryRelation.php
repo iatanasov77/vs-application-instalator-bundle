@@ -1,8 +1,6 @@
 <?php namespace VS\CmsBundle\Model;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
-
-class PageCategoryRelation extends PageCategoryRelationInterface
+class PageCategoryRelation implements PageCategoryRelationInterface
 {
     protected $page;
     
