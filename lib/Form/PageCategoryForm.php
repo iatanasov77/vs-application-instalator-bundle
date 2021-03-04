@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-use VS\CmsBundle\Entity\PageCategory;
+use VS\ApplicationBundle\Component\I18N;
 
 class PageCategoryForm extends AbstractResourceType
 {
@@ -27,15 +27,18 @@ class PageCategoryForm extends AbstractResourceType
         $builder
             ->add( 'locale', ChoiceType::class, [
                 'label'     => 'Locale',
-                'choices'  => \array_flip( \VS\ApplicationBundle\Component\I18N::LanguagesAvailable() ),
+                'choices'  => \array_flip( I18N::LanguagesAvailable() ),
                 'mapped'    => false,
             ])
         
             ->add( 'name', TextType::class, ['label' => 'Title'] )
             
-            ->add( 'parent', ChoiceType::class, [
-                'label' => 'Category',
-                'mapped'    => false,
+            ->add( 'parent', EntityType::class, [
+                'mapped'        => false,
+                'label'         => 'Parent Category',
+                
+                'class'         => $this->categoryClass,
+                'choice_label'  => 'name',
             ])
 
             ->add( 'btnSave', SubmitType::class, ['label' => 'Save'] )
