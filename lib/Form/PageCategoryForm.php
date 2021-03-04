@@ -42,14 +42,13 @@ class PageCategoryForm extends AbstractResourceType
             ->add( 'name', TextType::class, ['label' => 'Title'] )
             
             ->add( 'parent', EntityType::class, [
-                'mapped'        => false,
                 'label'         => 'Parent Category',
                 
                 'class'         => $this->categoryClass,
                 'query_builder' => function ( EntityRepository $er ) use ( $category )
                 {
                     $qb = $er->createQueryBuilder( 'pc' );
-                    if  ( $category ) {
+                    if  ( $category && $category->getId() ) {
                         $qb->where( 'pc.id != :id' )->setParameter( 'id', $category->getId() );
                     }
                     
