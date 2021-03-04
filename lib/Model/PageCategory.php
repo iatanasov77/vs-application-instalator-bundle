@@ -87,8 +87,10 @@ class PageCategory implements PageCategoryInterface
     public function setName( string $name ) : self
     {
         if ( ! $this->taxon ) {
-            $this->taxon    = new Taxon();
-            $this->taxon->setCurrentLocale( $this->currentLocale );
+//             $this->taxon    = new Taxon();
+//             $this->taxon->setCurrentLocale( $this->currentLocale );
+
+            return $this;
         }
         $this->taxon->setName( $name );
         
