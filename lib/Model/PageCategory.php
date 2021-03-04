@@ -14,6 +14,9 @@ class PageCategory implements PageCategoryInterface
     /** @var mixed */
     protected $id;
     
+    /** @var PageCategoryInterface */
+    protected $parent;
+    
     /** @var Collection|PageCategoryRelation[] */
     protected $relations;
     
@@ -31,6 +34,22 @@ class PageCategory implements PageCategoryInterface
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent(): ?PageCategoryInterface
+    {
+        return $this->parent;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setParent(?PageCategoryInterface $parent) : self
+    {
+        $this->parent = $parent;
     }
     
     /**
