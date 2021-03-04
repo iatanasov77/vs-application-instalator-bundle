@@ -50,6 +50,8 @@ class PageCategory implements PageCategoryInterface
     public function setParent(?PageCategoryInterface $parent) : self
     {
         $this->parent = $parent;
+        
+        return $this;
     }
     
     /**
