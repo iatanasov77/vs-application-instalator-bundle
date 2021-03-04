@@ -14,21 +14,21 @@ class PageCategory implements PageCategoryInterface
     /** @var mixed */
     protected $id;
     
-    /** @var Collection|Page[] */
-    //protected $pages;
-    
     /** @var Collection|PageCategoryRelation[] */
     protected $relations;
     
     /** @var TaxonInterface */
     protected $taxon;
     
-    /** @var int */
-    //protected $position;
+    /**
+     * @var string
+     *          
+     * Non-mapped field used for creation of new taxon
+     */
+    protected $currentLocale;
     
     public function __construct()
     {
-        //$this->pages = new ArrayCollection();
         $this->relations    = new ArrayCollection();
     }
     
@@ -53,8 +53,6 @@ class PageCategory implements PageCategoryInterface
      */
     public function getPages()
     {
-        //return $this->categories;
-        
         $pages = [];
         foreach( $this->getRelations() as $relation ){
             if( ! isset( $pages[$relation->getPage()->getId()] ) ) {
@@ -64,35 +62,6 @@ class PageCategory implements PageCategoryInterface
         
         return $pages;
     }
-    
-    
-//     public function getPages(): Collection
-//     {
-//         // WORKAROUND
-//         if ( $this->pages === null ) {
-//             $this->pages = new ArrayCollection();
-//         }
-        
-//         return $this->pages;
-//     }
-    
-//     public function addPage( Page $page ): self
-//     {
-//         if ( ! $this->pages->contains( $page ) ) {
-//             $this->pages[] = $page;
-//             $page->addCategory( $this );
-//         }
-//         return $this;
-//     }
-    
-//     public function removePage( Page $page ): self
-//     {
-//         if ( $this->pages->contains( $page ) ) {
-//             $this->pages->removeElement( $page );
-//             $page->removeCategory( $this );
-//         }
-//         return $this;
-//     }
     
     /**
      * {@inheritdoc}
@@ -109,22 +78,6 @@ class PageCategory implements PageCategoryInterface
     {
         $this->taxon = $taxon;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-//     public function getPosition(): ?int
-//     {
-//         return $this->position;
-//     }
-    
-    /**
-     * {@inheritdoc}
-     */
-//     public function setPosition(?int $position): void
-//     {
-//         $this->position = $position;
-//     }
 
     public function getName()
     {
@@ -135,10 +88,16 @@ class PageCategory implements PageCategoryInterface
     {
         if ( ! $this->taxon ) {
             $this->taxon    = new Taxon();
+            $this->taxon->setCurrentLocale( $this->currentLocale );
         }
         $this->taxon->setName( $name );
         
         return $this;
+    }
+    
+    public function setCurrentLocale( string $currentLocale ) : void
+    {
+        $this->currentLocale = $currentLocale;
     }
     
     public function __toString()
