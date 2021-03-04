@@ -4,6 +4,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 use VS\ApplicationBundle\Model\Interfaces\TaxonInterface;
+use VS\ApplicationBundle\Model\Taxon;
 
 /**
  * Page Category Model
@@ -128,6 +129,16 @@ class PageCategory implements PageCategoryInterface
     public function getName()
     {
         return $this->taxon ? $this->taxon->getName() : '';
+    }
+    
+    public function setName( string $name ) : self
+    {
+        if ( ! $this->taxon ) {
+            $this->taxon    = new Taxon();
+        }
+        $this->taxon->setName( $name );
+        
+        return $this;
     }
     
     public function __toString()
