@@ -95,9 +95,17 @@ class PageCategory implements PageCategoryInterface
         return $this;
     }
     
-    public function setCurrentLocale( string $currentLocale ) : void
+    public function getCurrentLocale()
+    {
+        // This is not right
+        return $this->currentLocale;
+    }
+    
+    public function setCurrentLocale( string $currentLocale ) : self
     {
         $this->currentLocale = $currentLocale;
+        
+        return $this;
     }
     
     public function __toString()

@@ -33,10 +33,9 @@ class PageCategoryForm extends AbstractResourceType
         $builder
             ->setMethod( $category && $category->getId() ? 'PUT' : 'POST' )
             
-            ->add( 'locale', ChoiceType::class, [
+            ->add( 'currentLocale', ChoiceType::class, [
                 'label'     => 'Locale',
-                'choices'  => \array_flip( I18N::LanguagesAvailable() ),
-                'mapped'    => false,
+                'choices'  => \array_flip( I18N::LanguagesAvailable() )
             ])
         
             ->add( 'name', TextType::class, ['label' => 'Title'] )
