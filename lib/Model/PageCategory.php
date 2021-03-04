@@ -20,13 +20,6 @@ class PageCategory implements PageCategoryInterface
     /** @var TaxonInterface */
     protected $taxon;
     
-    /**
-     * @var string
-     *          
-     * Non-mapped field used for creation of new taxon
-     */
-    protected $currentLocale;
-    
     public function __construct()
     {
         $this->relations    = new ArrayCollection();
@@ -87,25 +80,10 @@ class PageCategory implements PageCategoryInterface
     public function setName( string $name ) : self
     {
         if ( ! $this->taxon ) {
-//             $this->taxon    = new Taxon();
-//             $this->taxon->setCurrentLocale( $this->currentLocale );
-
+            // Create new taxon into the controller and set the properties passed from form
             return $this;
         }
         $this->taxon->setName( $name );
-        
-        return $this;
-    }
-    
-    public function getCurrentLocale()
-    {
-        // This is not right
-        return $this->currentLocale;
-    }
-    
-    public function setCurrentLocale( string $currentLocale ) : self
-    {
-        $this->currentLocale = $currentLocale;
         
         return $this;
     }

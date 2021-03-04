@@ -35,7 +35,8 @@ class PageCategoryForm extends AbstractResourceType
             
             ->add( 'currentLocale', ChoiceType::class, [
                 'label'     => 'Locale',
-                'choices'  => \array_flip( I18N::LanguagesAvailable() )
+                'choices'  => \array_flip( I18N::LanguagesAvailable() ),
+                'mapped'        => false,
             ])
         
             ->add( 'name', TextType::class, ['label' => 'Title'] )
@@ -47,12 +48,12 @@ class PageCategoryForm extends AbstractResourceType
                 'class'         => $this->categoryClass,
                 'query_builder' => function ( EntityRepository $er ) use ( $category )
                 {
-                    $categoryId = $category ? $category->getId() : null;
+                    $qb = $er->createQueryBuilder( 'pc' );
+                    if  ( $category ) {
+                        $qb->where( 'pc.id != :id' )->setParameter( 'id', $category->getId() );
+                    }
                     
-                    return $er->createQueryBuilder( 'pc' )
-                            ->where( 'pc.id != :id' )
-                            ->setParameter( 'id', $categoryId )
-                        ;
+                    return $qb; 
                 },
                 'choice_label'  => 'name',
                 

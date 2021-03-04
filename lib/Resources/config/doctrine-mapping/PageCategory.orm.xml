@@ -9,6 +9,12 @@
             <generator strategy="AUTO" />
         </id>
       	
+      	<many-to-one field="parent" name="parent_id" target-entity="VS\CmsBundle\Model\PageCategoryInterface">
+        	<cascade>
+                <cascade-all/>
+            </cascade>
+        </many-to-one>
+        
       	<one-to-many field="relations" target-entity="VS\CmsBundle\Model\PageCategoryRelationInterface" mapped-by="category" orphan-removal="true">
             <cascade>
                 <cascade-all/>
