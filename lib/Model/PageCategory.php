@@ -93,6 +93,11 @@ class PageCategory implements PageCategoryInterface
         $this->taxon = $taxon;
     }
 
+    public function getChildren() : array
+    {
+        return $this->taxon ? $this->taxon->getChildren() : [];
+    }
+    
     public function getName()
     {
         return $this->taxon ? $this->taxon->getName() : '';
