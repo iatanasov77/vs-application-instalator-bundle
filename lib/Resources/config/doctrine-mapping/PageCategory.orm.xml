@@ -15,6 +15,12 @@
             </cascade>
         </many-to-one>
         
+        <one-to-many field="children" target-entity="VS\CmsBundle\Model\PageCategoryInterface" mapped-by="parent">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+        
       	<one-to-many field="relations" target-entity="VS\CmsBundle\Model\PageCategoryRelationInterface" mapped-by="category" orphan-removal="true">
             <cascade>
                 <cascade-all/>

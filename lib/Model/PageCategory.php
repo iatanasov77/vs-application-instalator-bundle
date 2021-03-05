@@ -17,6 +17,9 @@ class PageCategory implements PageCategoryInterface
     /** @var PageCategoryInterface */
     protected $parent;
     
+    /** @var Collection|PageCategory[] */
+    protected $children;
+    
     /** @var Collection|PageCategoryRelation[] */
     protected $relations;
     
@@ -25,6 +28,7 @@ class PageCategory implements PageCategoryInterface
     
     public function __construct()
     {
+        $this->children     = new ArrayCollection();
         $this->relations    = new ArrayCollection();
     }
     
@@ -52,6 +56,11 @@ class PageCategory implements PageCategoryInterface
         $this->parent = $parent;
         
         return $this;
+    }
+    
+    public function getChildren() : Collection
+    {
+        return $this->children;
     }
     
     /**
@@ -93,11 +102,6 @@ class PageCategory implements PageCategoryInterface
         $this->taxon = $taxon;
     }
 
-    public function getChildren()
-    {
-        return $this->taxon ? $this->taxon->getChildren() : [];
-    }
-    
     public function getName()
     {
         return $this->taxon ? $this->taxon->getName() : '';
