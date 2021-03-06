@@ -1,28 +1,21 @@
 <?php namespace VS\UsersBundle\Model;
 
-class UserNotification
+class UserNotification implements UserNotificationInterface
 {
-
-    /**
-     * @var mixed
-     */
+    /** @var integer */
     protected $id;
 
     /**
      * Relation to the User entity
      *
-     * @var mixed
+     * @var UserInterface
      */
     protected $user;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $notification;
 
-    /**
-     * @var \DateTime|null
-     */
+    /** @var \DateTimeInterface */
     protected $date;
 
     function getId()

@@ -1,27 +1,21 @@
 <?php namespace VS\UsersBundle\Model;
 
-class UserActivity
+class UserActivity implements UserActivityInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var integer */
     protected $id;
 
     /**
      * Relation to the User entity
      *
-     * @var mixed
+     * @var UserInterface
      */
     protected $user;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $activity;
 
-    /**
-     * @var \DateTime|null
-     */
+    /** @var \DateTimeInterface */
     protected $date;
 
     function getId()

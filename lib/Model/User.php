@@ -1,5 +1,8 @@
 <?php namespace VS\UsersBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 class User implements UserInterface, \ArrayAccess
 {
     const ROLE_DEFAULT = "ROLE_DEFAULT";
@@ -95,6 +98,18 @@ class User implements UserInterface, \ArrayAccess
      * @var bool
      */
     protected $enabled;
+    
+    /** @var Collection|UserActivity[] */
+    protected $activities;
+    
+    /** @var Collection|UserNotification[] */
+    protected $notifications;
+    
+    public function __construct()
+    {
+        $this->activities       = new ArrayCollection();
+        $this->notifications    = new ArrayCollection();
+    }
     
     public function getId()
     {
@@ -300,6 +315,18 @@ class User implements UserInterface, \ArrayAccess
     {
         //$this->plainPassword = null;
     }
+    
+    public function getActivities() : Collection
+    {
+        return $this->activities;
+    }
+    
+    public function getNotifications() : Collection
+    {
+        return $this->notifications;
+    }
+    
+    
     
     public function offsetSet( $offset, $value )
     {
