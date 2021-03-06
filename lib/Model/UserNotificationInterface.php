@@ -1,6 +1,8 @@
 <?php namespace VS\UsersBundle\Model;
 
-interface UserNotificationInterface
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+interface UserNotificationInterface extends ResourceInterface
 {
     /** @return integer */
     public function getId();

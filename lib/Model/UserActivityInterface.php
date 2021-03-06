@@ -1,6 +1,8 @@
 <?php namespace VS\UsersBundle\Model;
 
-interface UserActivityInterface
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+interface UserActivityInterface extends ResourceInterface
 {
     /** @return integer */
     public function getId();
