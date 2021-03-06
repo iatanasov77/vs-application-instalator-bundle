@@ -25,8 +25,8 @@
         <field name="firstName" column="first_name" type="string" nullable="false" />
         <field name="lastName" column="last_name" type="string" nullable="false" />
         
-        <field name="lastLogin" column="last_login" type="datetime" />
-        <field name="confirmationToken" column="confirmation_token" type="string" nullable="false" />
+        <field name="lastLogin" column="last_login" type="datetime" nullable="true" />
+        <field name="confirmationToken" column="confirmation_token" type="string" nullable="true" />
         <field name="passwordRequestedAt" column="password_requested_at" type="datetime" nullable="true" />
         
         <field name="verified" column="verified" type="boolean" nullable="true" />

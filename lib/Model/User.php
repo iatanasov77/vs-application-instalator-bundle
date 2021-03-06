@@ -62,12 +62,12 @@ class User implements UserInterface, \ArrayAccess
     /**
      * @var string
      */
-    protected $firstName;
+    protected $firstName    = 'NOT_EDITED_YET';
     
     /**
      * @var string
      */
-    protected $lastName;
+    protected $lastName     = 'NOT_EDITED_YET';
     
     /**
      * @var \DateTime|null
