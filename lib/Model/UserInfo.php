@@ -51,6 +51,18 @@ class UserInfo implements UserInfoInterface
         return $this->id;
     }
     
+    public function getUser()
+    {
+        return $this->user;
+    }
+    
+    public function setUser( User $user ) : self
+    {
+        $this->user = $user;
+        
+        return $this;
+    }
+    
     public function getProfilePictureFilename()
     {
         return $this->profilePictureFilename;

@@ -31,6 +31,7 @@ class ProfileController extends Controller
                 $oUserInfo   = $oUser->getInfo();
                 
                 $oUserInfo->setProfilePictureFilename( $this->handleProfilePicture( $profilePictureFile ) );
+                $oUserInfo->setUser( $oUser );
                 $em->persist( $oUserInfo );
             }
             
