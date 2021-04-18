@@ -7,7 +7,8 @@ class PagesController extends AbstractCrudController
     protected function customData(): array
     {
         return [
-            'categories'    => $this->get( 'vs_cms.repository.page_categories' )->findAll()
+            'categories'    => $this->get( 'vs_cms.repository.page_categories' )->findAll(),
+            'taxonomyId'    => $this->getParameter( 'vs_cms.page_categories.taxonomy_id' )
         ];
     }
 }
