@@ -64,6 +64,32 @@ class PagesExtController extends Controller
         ]);
     }
     
+    public function moveCategory_ByTaxonId( $sourceTaxonId, $destinationTaxonId, $position, Request $request )
+    {
+        $repo               = $this->getTaxonRepository();
+        $sourceTaxon        = $repo->find( $sourceTaxonId );
+        $destinationTaxon   = $repo->find( $destinationTaxonId );
+        
+        //$repo->persistAsFirstChildOf( $sourceTaxon, $sourceTaxon->getRoot() );
+        switch ( $position ) {
+            case 'before':
+                $repo->persistAsPrevSiblingOf( $sourceTaxon, $destinationTaxon );
+                break;
+            case 'after':
+                $repo->persistAsNextSiblingOf( $sourceTaxon, $destinationTaxon );
+                break;
+            case 'lastChild':
+                $repo->persistAsLastChildOf( $sourceTaxon, $destinationTaxon );
+                break;
+            default:
+                
+        }
+        
+        $this->getDoctrine()->getManager()->flush();
+        
+        return new JsonResponse(['status' => 'SUCCESS']);
+    }
+    
     protected function getPageRepository()
     {
         return $this->get( 'vs_cms.repository.pages' );
