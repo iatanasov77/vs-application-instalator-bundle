@@ -12,6 +12,11 @@ vs_cms_page_categories:
         templates: "@VSCms/Page_Categories"
     type: sylius.resource
 
+# Page Action Routes
+vs_cms_pages_clone:
+    path: /page-actions/clone/{pageId}
+    controller: VS\CmsBundle\Controller\PagesExtController::clonePage
+
 # Page Categories Callbacks
 vs_cms_pages_tree_combo:
     path: /json/pages-categories-{taxonomyId}/easyui-combotree
