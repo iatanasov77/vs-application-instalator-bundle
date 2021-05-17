@@ -18,8 +18,12 @@ class PagesController extends AbstractCrudController
     {
         $categories = new ArrayCollection();
         $pcr        = $this->get( 'vs_cms.repository.page_categories' );
+        $formPost   = $request->request->get( 'page_form' );
         
-        $formPost = $request->request->get( 'page_form' );
+        if ( isset( $formPost['locale'] ) ) {
+            $entity->setTranslatableLocale( $formPost['locale'] );
+        }
+        
         if ( isset( $formPost['category_taxon'] ) ) {
             foreach ( $formPost['category_taxon'] as $taxonId ) {
                 $category       = $pcr->findOneBy( ['taxon' => $taxonId] );
