@@ -84,6 +84,15 @@
                                 
                                 {{ form_widget(form.prefered_locale, {'attr': {'class': 'form-control'}}) }}
                             </div>
+                            
+                            <div class="form-group">
+                                {{ form_label(form.roles_options, null, {
+                                    'label_attr': {'class': 'col-form-label'}
+                                    }) 
+                                }}
+                                
+                                {{ form_widget(form.roles_options, {'attr': {'class': 'form-control'}}) }}
+                            </div>
 
                             <div class="form-group">
                                 {{ form_label(form.email, null, {
