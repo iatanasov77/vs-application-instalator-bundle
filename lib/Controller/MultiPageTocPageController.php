@@ -5,13 +5,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+use VS\ApplicationBundle\Component\Slug;
+
 //use Sylius\Component\Resource\Repository\RepositoryInterface;
 use VS\CmsBundle\Repository\TocPagesRepository;
+use VS\CmsBundle\Form\TocPageForm;
 
-use VS\ApplicationBundle\Component\Slug;
-use VS\ApplicationBundle\Form\TaxonForm;
-use VS\ApplicationBundle\Repository\TaxonomyRepository;
-use VS\ApplicationBundle\Repository\TaxonRepository;
 
 class MultiPageTocPageController extends AbstractController
 {
@@ -20,10 +19,10 @@ class MultiPageTocPageController extends AbstractController
         $locale         = $request->getLocale();
         $tocRootPage    = $multipageTocRepository->find( $tocId )->getTocRootPage();
         
-        $oTocPage       = $this->get( 'vs_cms.factory.taxon' )->createNew();
-        $oTocPage->setTranslatableLocale( $locale );
+        $oTocPage       = $this->get( 'vs_cms.factory.multipage_toc_page' )->createNew();
+        //$oTocPage->setTranslatableLocale( $locale );
         
-        $form           = $this->createForm( TaxonForm::class, $oTocPage, [
+        $form           = $this->createForm( TocPageForm::class, $oTocPage, [
             'data'          => $oTocPage,
             'method'        => 'POST',
             'tocRootPage'   => $tocRootPage
@@ -34,25 +33,25 @@ class MultiPageTocPageController extends AbstractController
         ]);
     }
     
-    public function handleTocPage( RepositoryInterface $multipageTocRepository, TaxonRepository $taxonRepository, Request $request ): Response
+    public function handleTocPage( TocPagesRepository $multipageTocRepository, Request $request ): Response
     {
-        $form   = $this->createForm( TaxonForm::class );
+        $form   = $this->createForm( TocPageForm::class );
         
         if ( $request->isMethod( 'POST' ) ) {
-            $parentTaxon    = $multipageTocRepository->find( $_POST['taxon_form']['parentTaxon'] );
+            //$parentTocPage    = $multipageTocRepository->find( $_POST['taxon_form']['parentTaxon'] );
             
             //$form->submit( $request->request->get( $form->getName() ) );
             
             if ( $form->isSubmitted()  ) { // && $form->isValid()
                 $em         = $this->getDoctrine()->getManager();
                 $oTocPage   = $form->getData();
-                $oTocPage->setParent( $parentTaxon );
+                //$oTocPage->setParent( $parentTocPage );
                 
                 $em->persist( $oTocPage );
                 $em->flush();
                 
                 $tocId = $request->attributes->get( '$tocId' );
-                return $this->redirect( $this->generateUrl( 'vs_application_taxonomy_update', ['id' => $tocId] ) );
+                return $this->redirect( $this->generateUrl( 'vs_cms_multipage_toc_update', ['id' => $tocId] ) );
             }
         }
         
