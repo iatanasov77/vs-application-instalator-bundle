@@ -5,7 +5,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+//use Sylius\Component\Resource\Repository\RepositoryInterface;
+use VS\CmsBundle\Repository\TocPagesRepository;
 
 use VS\ApplicationBundle\Component\Slug;
 use VS\ApplicationBundle\Form\TaxonForm;
@@ -14,12 +15,12 @@ use VS\ApplicationBundle\Repository\TaxonRepository;
 
 class MultiPageTocPageController extends AbstractController
 {
-    public function editTocPage( RepositoryInterface $multipageTocRepository, $tocId, Request $request ): Response
+    public function editTocPage( TocPagesRepository $multipageTocRepository, $tocId, Request $request ): Response
     {
         $locale         = $request->getLocale();
         $tocRootPage    = $multipageTocRepository->find( $tocId )->getTocRootPage();
         
-        $oTocPage       = $this->get( 'vs_application.factory.taxon' )->createNew();
+        $oTocPage       = $this->get( 'vs_cms.factory.taxon' )->createNew();
         $oTocPage->setTranslatableLocale( $locale );
         
         $form           = $this->createForm( TaxonForm::class, $oTocPage, [
