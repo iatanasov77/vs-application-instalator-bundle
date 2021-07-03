@@ -45,11 +45,12 @@ class MultiPageTocPageController extends AbstractController
         ]);
         
         return $this->render( '@VSCms/Pages/MultipageToc/form/toc_page.html.twig', [
-            'form'          => $form->createView(),
+            'form'  => $form->createView(),
+            'tocId' => $tocId,
         ]);
     }
     
-    public function handleTocPage( Request $request ): Response
+    public function handleTocPage( $tocId, Request $request ): Response
     {
         $form   = $this->createForm( TocPageForm::class );
         
