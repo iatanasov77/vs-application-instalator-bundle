@@ -12,22 +12,33 @@ use VS\ApplicationBundle\Component\Slug;
 //use Sylius\Component\Resource\Repository\RepositoryInterface;
 use VS\CmsBundle\Repository\MultiPageTocRepository;
 use VS\CmsBundle\Repository\TocPagesRepository;
+use VS\CmsBundle\Repository\PagesRepository;
 use VS\CmsBundle\Form\TocPageForm;
 
 class MultiPageTocPageController extends AbstractController
 {
+    /** @var MultiPageTocRepository */
     private $tocRepository;
+    
+    /** @var TocPagesRepository */
     private $tocPageRepository;
+    
+    /** @var FactoryInterface */
     private $tocPageFactory;
+    
+    /** @var PagesRepository */
+    private $pagesRepository;
     
     public function __construct(
         MultiPageTocRepository $tocRepository,
         TocPagesRepository $tocPageRepository,
-        FactoryInterface $tocPageFactory
+        FactoryInterface $tocPageFactory,
+        PagesRepository $pagesRepository
     ) {
         $this->tocRepository        = $tocRepository;
         $this->tocPageRepository    = $tocPageRepository;
         $this->tocPageFactory       = $tocPageFactory;
+        $this->pagesRepository      = $pagesRepository;
     }
     
     public function editTocPage( $tocId, Request $request ): Response
@@ -61,6 +72,9 @@ class MultiPageTocPageController extends AbstractController
             
             $parentTocPage  = $this->tocPageRepository->find( $_POST['toc_page_form']['parent'] );
             $oTocPage->setParent( $parentTocPage );
+            
+            $linkedPage  = $this->pagesRepository->find( $_POST['toc_page_form']['page'] );
+            $oTocPage->setPage( $linkedPage );
             
             $em->persist( $oTocPage );
             $em->flush();
