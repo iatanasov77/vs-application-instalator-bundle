@@ -118,6 +118,12 @@
     {% include '@VSCms/Pages/MultipageToc/modal/multipage_toc_page_edit.html.twig' %}
 {% endblock %}
 
+{% block head_styles %}
+	{{ parent() }}
+	
+	{{ encore_entry_link_tags( 'js/multipage-toc-update' ) }}
+{% endblock %}
+
 {% block body_scripts %}
     {{ parent() }}
    
