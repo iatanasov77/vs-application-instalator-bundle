@@ -19,12 +19,12 @@ class UploadFileForm extends AbstractType
         
         $builder
             ->add( 'directory', TextType::class, [
-                'label'                 => 'vs_users.form.filemanager.file_directory_lable',
+                'label'                 => 'vs_cms.form.filemanager.file_directory_lable',
                 'translation_domain'    => 'VSCmsBundle',
                 'mapped'                => false,
             ])
             ->add( 'file', FileType::class, [
-                'label'                 => 'vs_users.form.filemanager.file_lable',
+                'label'                 => 'vs_cms.form.filemanager.file_lable',
                 'translation_domain'    => 'VSCmsBundle',
                 'mapped'                => false,
                 
