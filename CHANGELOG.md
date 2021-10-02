@@ -1,3 +1,9 @@
+1.0.2	|	Release date: **03.10.2021**
+============================================
+* Bug-Fixes:
+  - Fix Namespace for ContainerAwareCommand.
+
+
 1.0.1	|	Release date: **02.10.2021**
 ============================================
 * Commits:
