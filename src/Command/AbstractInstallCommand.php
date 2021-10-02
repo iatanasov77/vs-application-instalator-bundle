@@ -7,7 +7,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use VS\ApplicationBundle\Installer\Executor\CommandExecutor;
+use VS\ApplicationBundle\Command\ContainerAwareCommand;
+use VS\ApplicationInstalatorBundle\Installer\Executor\CommandExecutor;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
