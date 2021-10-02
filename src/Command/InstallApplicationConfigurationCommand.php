@@ -25,18 +25,17 @@ EOT
 
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        return $this->installSingleSiteApplicationConfiguration( $input, $output );
-        //return $this->installMultiSiteApplicationConfiguration( $input, $output );
+        return $this->installApplicationConfiguration( $input, $output );
     }
     
-    private function installSingleSiteApplicationConfiguration( InputInterface $input, OutputInterface $output ): int
+    private function installApplicationConfiguration( InputInterface $input, OutputInterface $output ): int
     {
         $suite          = $input->getOption( 'fixture-suite' );
         
         $outputStyle    = new SymfonyStyle( $input, $output );
         $outputStyle->newLine();
         $outputStyle->writeln( sprintf(
-            'Loading singlesite application configuration data for environment <info>%s</info> from suite <info>%s</info>.',
+            'Loading application configuration data for environment <info>%s</info> from suite <info>%s</info>.',
             $this->getEnvironment(),
             $suite ?? 'vankosoft_application_suite'
         ) );
@@ -44,34 +43,6 @@ EOT
         
         $parameters = [
             'suite' => $suite ?: 'vankosoft_application_suite',
-            '--no-interaction' => true,
-        ];
-        
-        $commands = [
-            'sylius:fixtures:load' => $parameters,
-        ];
-        
-        $this->runCommands( $commands, $output );
-        $outputStyle->newLine( 2 );
-        
-        return 0;
-    }
-    
-    private function installMultiSiteApplicationConfiguration( InputInterface $input, OutputInterface $output ): int
-    {
-        $suite          = $input->getOption( 'fixture-suite' );
-        
-        $outputStyle    = new SymfonyStyle( $input, $output );
-        $outputStyle->newLine();
-        $outputStyle->writeln( sprintf(
-            'Loading multisite application configuration data for environment <info>%s</info> from suite <info>%s</info>.',
-            $this->getEnvironment(),
-            $suite ?? 'vankosoft_multisite_application_suite'
-        ) );
-        //$outputStyle->writeln( '<error>Warning! This action will erase your database.</error>' );
-        
-        $parameters = [
-            'suite' => $suite ?: 'vankosoft_multisite_application_suite',
             '--no-interaction' => true,
         ];
         
