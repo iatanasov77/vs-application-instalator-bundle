@@ -1,3 +1,9 @@
+1.0.3	|	Release date: **03.10.2021**
+============================================
+* Bug-Fixes:
+  - Fix Namespace for SetupApplication service.
+
+
 1.0.2	|	Release date: **03.10.2021**
 ============================================
 * Bug-Fixes:
