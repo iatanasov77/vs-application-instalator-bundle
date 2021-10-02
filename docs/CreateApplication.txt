@@ -1,0 +1,4 @@
+
+cd /vagrant
+sudo bin/console vs:mkvhost -s vsapp.lh -d /projects/VS_SymfonyApplication/public
+
