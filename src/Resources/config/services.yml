@@ -17,6 +17,6 @@ services:
         public: true
         
     vs_application_instalator.setup_application:
-        class: VS\ApplicationBundle\Component\SetupApplication
+        class: VS\ApplicationInstalatorBundle\Component\SetupApplication
         arguments: 
             - '@service_container'
