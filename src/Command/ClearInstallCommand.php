@@ -6,6 +6,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\ArrayInput;
 
+use VS\ApplicationBundle\Command\ContainerAwareCommand;
+
 final class ClearInstallCommand extends ContainerAwareCommand
 {
     protected static $defaultName = 'vankosoft:clear-install';
