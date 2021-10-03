@@ -1,3 +1,9 @@
+1.1.0	|	Release date: **03.10.2021**
+============================================
+* New Features:
+  - Update Application Install Packages.
+
+
 1.0.5	|	Release date: **03.10.2021**
 ============================================
 * Bug-Fixes:
