@@ -1,3 +1,10 @@
+1.0.4	|	Release date: **03.10.2021**
+============================================
+* Bug-Fixes:
+  - Remove original Kernel from Setup.
+  - Fix SetupApplication
+
+
 1.0.3	|	Release date: **03.10.2021**
 ============================================
 * Bug-Fixes:
