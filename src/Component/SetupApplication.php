@@ -125,9 +125,9 @@ class SetupApplication
         // Write Application Home Page
         $applicationHomePage    = str_replace(
                                         "__application_slug__", $this->applicationSlug,
-                                        file_get_contents( $projectRootDir . '/templates/' . $this->applicationSlug . '/pages/Dashboard/home.html.twig' )
+                                        file_get_contents( $projectRootDir . '/templates/' . $this->applicationSlug . '/pages/Dashboard/index.html.twig' )
                                     );
-        $filesystem->dumpFile( $projectRootDir . '/templates/' . $this->applicationSlug . '/pages/home.html.twig', $applicationHomePage );
+        $filesystem->dumpFile( $projectRootDir . '/templates/' . $this->applicationSlug . '/pages/Dashboard/index.html.twig', $applicationHomePage );
         
         // Write Application Home Controller
         $applicationHomeController  = str_replace(
