@@ -111,6 +111,10 @@ class SetupApplication
             'kernelClass'       => $kernelClass,
         ]);
         $filesystem->dumpFile( $projectRootDir . '/public/' . $this->applicationSlug . '/index.php', $applicationIndex );
+        
+        // Remove original Kernel
+        $filesystem->remove( $projectRootDir . '/src/Kernel.php' );
+        $filesystem->remove( $projectRootDir . '/public/index.php' );
     }
     
     private function setupApplicationHomePage()
