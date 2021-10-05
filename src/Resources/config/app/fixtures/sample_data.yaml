@@ -7,7 +7,7 @@ sylius_fixtures:
                     options:
                         exclude:
                             - 'VSAPP_Settings'
-                            - 'VSAPP_Sites'
+                            - 'VSAPP_Applications'
                             - 'VSAPP_Taxonomy'
                             - 'VSAPP_Taxons'
                             - 'VSAPP_TaxonTranslations'

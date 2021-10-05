@@ -4,33 +4,33 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
 
-use VS\ApplicationBundle\Model\Interfaces\SiteInterface;
+use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use VS\CmsBundle\Model\PageInterface;
 
-class ApplicationSiteExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class ApplicationsExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /** @var FactoryInterface */
-    private $sitesFactory;
+    private $applicationsFactory;
     
     /** @var OptionsResolver */
     private $optionsResolver;
     
-    public function __construct( FactoryInterface $sitesFactory )
+    public function __construct( FactoryInterface $applicationsFactory )
     {
-        $this->sitesFactory     = $sitesFactory;
-        $this->optionsResolver  = new OptionsResolver();
+        $this->applicationsFactory  = $applicationsFactory;
+        $this->optionsResolver      = new OptionsResolver();
         
         $this->configureOptions( $this->optionsResolver );
     }
     
-    public function create( array $options = [] ): SiteInterface
+    public function create( array $options = [] ): ApplicationInterface
     {
-        $options    = $this->optionsResolver->resolve( $options );
-        $siteEntity = $this->sitesFactory->createNew();
+        $options            = $this->optionsResolver->resolve( $options );
+        $applicationEntity  = $this->applicationsFactory->createNew();
         
-        $siteEntity->setTitle( $options['title'] );
+        $applicationEntity->setTitle( $options['title'] );
         
-        return $siteEntity;
+        return $applicationEntity;
     }
     
     protected function configureOptions( OptionsResolver $resolver ): void

@@ -38,7 +38,6 @@ EOT
         $this->setupAdministratorUser( $input, $output, $locale->getCode() );
         $this->setupApplication( $input, $output );
         
-        //$parameters = ['--multisite' => $input->getOption( 'multisite' )];
         $parameters = [];
         $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', $parameters, $output );
         
@@ -87,10 +86,10 @@ EOT
         
         // Add Database Records
         $outputStyle->writeln( 'Create Application Database Records.' );
-        // bin/console doctrine:query:sql "INSERT INTO VSAPP_Sites(title) VALUES('Test Site')"
+        // bin/console doctrine:query:sql "INSERT INTO VSAPP_Applications(title) VALUES('Test Application')"
         $command    = $this->getApplication()->find( 'doctrine:query:sql' );
         $returnCode = $command->run( 
-            new ArrayInput( ['sql' =>"INSERT INTO VSAPP_Sites(title) VALUES('{$applicationName}')"] ),
+            new ArrayInput( ['sql' =>"INSERT INTO VSAPP_Applications(title) VALUES('{$applicationName}')"] ),
             $output 
         );
         $outputStyle->writeln( '<info>Application Database Records successfully created.</info>' );

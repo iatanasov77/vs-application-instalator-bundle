@@ -1,3 +1,9 @@
+1.2.0	|	Release date: **05.10.2021**
+============================================
+* Bug-Fixes and Refactoring:
+  - Big Refactoring of using Application instead Site.
+
+
 1.1.1	|	Release date: **03.10.2021**
 ============================================
 * New Features:

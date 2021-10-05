@@ -13,14 +13,6 @@ services:
         tags:
             - 'sylius_fixtures.fixture'
 
-    vs_application.fixture.multisite_settings:
-        class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\MultiSiteSettingsFixture
-        arguments:
-            - '@doctrine.orm.default_entity_manager'
-            - '@vs_application.fixture.example_factory.general_settings'
-        tags:
-            - 'sylius_fixtures.fixture'
-
     vs_application.fixture.taxonomy:
         class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\TaxonomyFixture
         arguments:
@@ -37,11 +29,11 @@ services:
         tags:
             - 'sylius_fixtures.fixture'
 
-    vs_application.fixture.application_site:
-        class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\ApplicationSiteFixture
+    vs_application.fixture.applications:
+        class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\ApplicationsFixture
         arguments:
             - '@doctrine.orm.default_entity_manager'
-            - '@vs_application.fixture.example_factory.application_site'
+            - '@vs_application.fixture.example_factory.applications'
         tags:
             - 'sylius_fixtures.fixture'
             
