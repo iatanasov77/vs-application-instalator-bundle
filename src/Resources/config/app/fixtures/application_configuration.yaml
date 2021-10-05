@@ -23,7 +23,7 @@ sylius_fixtures:
                     options:
                         custom:
                             -   maintenanceMode: false
-#                                 siteTitle: 'Application FrontOffice'
+#                                 applicationTitle: 'Application FrontOffice'
 #                                 theme: 'TestTheme'
 #                                 maintenancePage: 0
 

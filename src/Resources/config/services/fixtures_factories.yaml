@@ -8,12 +8,12 @@ services:
         class: VS\ApplicationInstalatorBundle\DataFixtures\Factory\GeneralSettingsExampleFactory
         arguments:
             - '@vs_application.factory.settings'
-            - '@vs_application.factory.site'
+            - '@vs_application.factory.application'
             
-    vs_application.fixture.example_factory.application_site:
-        class: VS\ApplicationInstalatorBundle\DataFixtures\Factory\ApplicationSiteExampleFactory
+    vs_application.fixture.example_factory.applications:
+        class: VS\ApplicationInstalatorBundle\DataFixtures\Factory\ApplicationsExampleFactory
         arguments:
-            - '@vs_application.factory.site'
+            - '@vs_application.factory.application'
     
     vs_application.fixture.example_factory.taxonomy:
         class: VS\ApplicationInstalatorBundle\DataFixtures\Factory\TaxonomyExampleFactory

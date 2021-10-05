@@ -4,7 +4,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
 
-use VS\ApplicationBundle\Model\Interfaces\SiteInterface;
+use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use VS\CmsBundle\Model\PageInterface;
 
 class GeneralSettingsExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
@@ -13,16 +13,16 @@ class GeneralSettingsExampleFactory extends AbstractExampleFactory implements Ex
     private $settingsFactory;
     
     /** @var FactoryInterface */
-    private $siteFactory;
+    private $applicationsFactory;
     
     /** @var OptionsResolver */
     private $optionsResolver;
     
-    public function __construct( FactoryInterface $settingsFactory,  FactoryInterface $siteFactory )
+    public function __construct( FactoryInterface $settingsFactory,  FactoryInterface $applicationsFactory )
     {
-        $this->settingsFactory  = $settingsFactory;
-        $this->siteFactory      = $siteFactory;
-        $this->optionsResolver  = new OptionsResolver();
+        $this->settingsFactory      = $settingsFactory;
+        $this->applicationsFactory  = $applicationsFactory;
+        $this->optionsResolver      = new OptionsResolver();
         
         $this->configureOptions( $this->optionsResolver );
     }
@@ -33,13 +33,13 @@ class GeneralSettingsExampleFactory extends AbstractExampleFactory implements Ex
         
         $settingsEntity = $this->settingsFactory->createNew();
         
-        // Set Site If Passed
-        if ( isset( $options['siteTitle'] ) && $options['siteTitle'] ) {
-            $site   = $this->siteFactory->createNew();
-            $site->setTitle( $options['siteTitle'] );
-            $settingsEntity->setSite( $site );
+        // Set Application If Passed
+        if ( isset( $options['applicationTitle'] ) && $options['applicationTitle'] ) {
+            $application    = $this->applicationsFactory->createNew();
+            $application->setTitle( $options['applicationTitle'] );
+            $settingsEntity->setApplication( $application );
         } else {
-            $settingsEntity->setSite( null );
+            $settingsEntity->setApplication( null );
         }
         
         $settingsEntity->setMaintenanceMode( $options['maintenanceMode'] );
@@ -52,8 +52,8 @@ class GeneralSettingsExampleFactory extends AbstractExampleFactory implements Ex
     protected function configureOptions( OptionsResolver $resolver ): void
     {
         $resolver
-            ->setDefault( 'siteTitle', null )
-            ->setAllowedTypes( 'siteTitle', ['null', 'string'] )
+            ->setDefault( 'applicationTitle', null )
+            ->setAllowedTypes( 'applicationTitle', ['null', 'string'] )
             
             ->setDefault( 'maintenanceMode', false )
             ->setAllowedTypes( 'maintenanceMode', 'bool' )

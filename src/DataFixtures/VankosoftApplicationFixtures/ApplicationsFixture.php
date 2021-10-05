@@ -3,11 +3,11 @@
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use VS\ApplicationInstalatorBundle\DataFixtures\AbstractResourceFixture;
 
-final class ApplicationSiteFixture extends AbstractResourceFixture
+final class ApplicationsFixture extends AbstractResourceFixture
 {
     public function getName(): string
     {
-        return 'application_site';
+        return 'applications';
     }
     
     protected function configureResourceNode( ArrayNodeDefinition $resourceNode ): void
