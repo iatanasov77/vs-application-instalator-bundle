@@ -112,6 +112,12 @@ class SetupApplication
         ]);
         $filesystem->dumpFile( $projectRootDir . '/public/' . $this->applicationSlug . '/index.php', $applicationIndex );
         
+        // Write Application Console
+        $applicationConsole = $twig->render( '@VSApplicationInstalator/Application/console.php.twig', [
+            'kernelClass'       => $kernelClass,
+        ]);
+        $filesystem->dumpFile( $projectRootDir . '/bin/' . $this->applicationSlug, $applicationConsole );
+        
         // Remove original Kernel
         $filesystem->remove( $projectRootDir . '/src/Kernel.php' );
         $filesystem->remove( $projectRootDir . '/public/index.php' );
