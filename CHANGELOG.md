@@ -1,3 +1,9 @@
+1.2.1	|	Release date: **06.10.2021**
+============================================
+* New Features:
+  - Update Instalator Packages
+
+
 1.2.0	|	Release date: **05.10.2021**
 ============================================
 * Bug-Fixes and Refactoring:
