@@ -1,3 +1,11 @@
+1.3.0	|	Release date: **10.10.2021**
+============================================
+* New Features:
+  - Separate CreateApplicationCommand from SetupCommand.
+  - Update Setup Application Command.
+  - Update Application Packackages.
+
+
 1.2.1	|	Release date: **06.10.2021**
 ============================================
 * New Features:
