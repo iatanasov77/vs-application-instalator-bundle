@@ -1,3 +1,9 @@
+1.3.1	|	Release date: **10.10.2021**
+============================================
+* Bug-Fixes:
+  - Add Service for CreateApplicationCommand.
+
+
 1.3.0	|	Release date: **10.10.2021**
 ============================================
 * New Features:
