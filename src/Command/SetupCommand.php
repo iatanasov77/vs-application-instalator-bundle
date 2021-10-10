@@ -36,9 +36,9 @@ EOT
         $locale = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
         //$this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
         $this->setupAdministratorUser( $input, $output, $locale->getCode() );
-        $this->setupApplication( $input, $output );
         
-        $parameters = [];
+        $parameters = [];        
+        $this->commandExecutor->runCommand( 'vankosoft:application:create', $parameters, $output );
         $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', $parameters, $output );
         
         return 0;
@@ -66,39 +66,6 @@ EOT
         $userManager->saveUser( $user );
         
         $outputStyle->writeln( '<info>Administrator account successfully registered.</info>' );
-        $outputStyle->newLine();
-    }
-    
-    protected function setupApplication( InputInterface $input, OutputInterface $output ) : void
-    {
-        /** @var QuestionHelper $questionHelper */
-        $questionHelper     = $this->getHelper( 'question' );
-        
-        $questionName       = $this->createApplicationNameQuestion();
-        $applicationName    = $questionHelper->ask( $input, $output, $questionName );
-        $questionUrl        = $this->createApplicationUrlQuestion();
-        $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
-        $applicationSlug    = Slug::generate( $applicationName );
-        $applicationCreated = date( 'Y-m-d H:i:s' );
-        
-        $appSetup           = $this->getContainer()->get( 'vs_application_instalator.setup_application' );
-        $outputStyle        = new SymfonyStyle( $input, $output );
-        
-        // Create Directories
-        $outputStyle->writeln( 'Create Application Directories.' );
-        $appSetup->setupApplication( $applicationName );
-        $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
-        
-        // Add Database Records
-        $outputStyle->writeln( 'Create Application Database Records.' );
-        // bin/console doctrine:query:sql "INSERT INTO VSAPP_Applications(title) VALUES('Test Application')"
-        $command    = $this->getApplication()->find( 'doctrine:query:sql' );
-        $returnCode = $command->run( 
-            new ArrayInput( ['sql' =>"INSERT INTO VSAPP_Applications(enabled, code, title, hostname, created_at) VALUES(1, '{$applicationSlug}', '{$applicationName}', '{$applicationUrl}', '{$applicationCreated}')"] ),
-            $output 
-        );
-        $outputStyle->writeln( '<info>Application Database Records successfully created.</info>' );
-        
         $outputStyle->newLine();
     }
     
@@ -236,51 +203,5 @@ EOT
     private function getUserRepository() : UsersRepositoryInterface
     {
         return $this->getContainer()->get( 'vs_users.repository.users' );
-    }
-    
-    private function createApplicationNameQuestion() : Question
-    {
-        return ( new Question( 'Application Name: ' ) )
-            ->setValidator(
-                function ( $value ): string {
-                    /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->getContainer()->get( 'validator' )->validate( (string) $value, [new Length([
-                        'min' => 3,
-                        'max' => 50,
-                        'minMessage' => 'Your application name must be at least {{ limit }} characters long',
-                        'maxMessage' => 'Your application name cannot be longer than {{ limit }} characters',
-                    ])]);
-                    foreach ( $errors as $error ) {
-                        throw new \DomainException( $error->getMessage() );
-                    }
-                    
-                    return $value;
-                }
-            )
-            ->setMaxAttempts( 3 )
-        ;
-    }
-    
-    private function createApplicationUrlQuestion() : Question
-    {
-        return ( new Question( 'Application Url: ' ) )
-            ->setValidator(
-                function ( $value ): string {
-                    /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->getContainer()->get( 'validator' )->validate( (string) $value, [new Length([
-                        'min' => 6,
-                        'max' => 256,
-                        'minMessage' => 'Your application url must be at least {{ limit }} characters long',
-                        'maxMessage' => 'Your application url cannot be longer than {{ limit }} characters',
-                    ])]);
-                    foreach ( $errors as $error ) {
-                        throw new \DomainException( $error->getMessage() );
-                    }
-                    
-                    return $value;
-                }
-            )
-            ->setMaxAttempts( 3 )
-        ;
     }
 }
