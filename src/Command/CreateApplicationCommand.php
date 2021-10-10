@@ -15,6 +15,7 @@ use Webmozart\Assert\Assert;
 
 use VS\UsersBundle\Model\UserInterface;
 use VS\UsersBundle\Repository\UsersRepositoryInterface;
+use VS\ApplicationBundle\Component\Slug;
 
 final class CreateApplicationCommand extends AbstractInstallCommand
 {
