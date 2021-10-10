@@ -4,6 +4,11 @@ services:
         autoconfigure: true
         public: true
     
+    vs_app.command.create_application:
+        class: VS\ApplicationInstalatorBundle\Command\CreateApplicationCommand
+        tags:
+            - 'console.command'
+
     vs_app.command.clear_install:
         class: VS\ApplicationInstalatorBundle\Command\ClearInstallCommand
         tags:
