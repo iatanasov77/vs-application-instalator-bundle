@@ -63,7 +63,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
             new UserBadge( $username ),
             new PasswordCredentials( $password ),
             [new CsrfTokenBadge( 'login', $csrfToken )]
-            );
+        );
     }
     
     //     public function onAuthenticationSuccess( Request $request, TokenInterface $token, $providerKey )
