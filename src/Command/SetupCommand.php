@@ -20,7 +20,7 @@ final class SetupCommand extends AbstractInstallCommand
 {
     protected static $defaultName = 'vankosoft:install:setup';
     
-    protected function configure(): void
+    protected function configure() : void
     {
         $this
             ->setDescription( 'VankoSoft Application configuration setup.' )
@@ -31,20 +31,20 @@ EOT
         ;
     }
     
-    protected function execute( InputInterface $input, OutputInterface $output ): int
+    protected function execute( InputInterface $input, OutputInterface $output ) : int
     {
         $locale = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
         //$this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
         $this->setupAdministratorUser( $input, $output, $locale->getCode() );
-        $this->setupApplication( $input, $output );
         
-        $parameters = [];
+        $parameters = [];        
+        $this->commandExecutor->runCommand( 'vankosoft:application:create', $parameters, $output );
         $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', $parameters, $output );
         
         return 0;
     }
     
-    protected function setupAdministratorUser( InputInterface $input, OutputInterface $output, string $localeCode ): void
+    protected function setupAdministratorUser( InputInterface $input, OutputInterface $output, string $localeCode ) : void
     {
         $outputStyle    = new SymfonyStyle( $input, $output );
         $outputStyle->writeln( 'Create your administrator account.' );
@@ -69,39 +69,11 @@ EOT
         $outputStyle->newLine();
     }
     
-    protected function setupApplication( InputInterface $input, OutputInterface $output ): void
-    {
-        /** @var QuestionHelper $questionHelper */
-        $questionHelper     = $this->getHelper( 'question' );
-        
-        $question           = $this->createApplicationNameQuestion();
-        $applicationName    = $questionHelper->ask( $input, $output, $question );
-        $appSetup           = $this->getContainer()->get( 'vs_application_instalator.setup_application' );
-        $outputStyle        = new SymfonyStyle( $input, $output );
-        
-        // Create Directories
-        $outputStyle->writeln( 'Create Application Directories.' );
-        $appSetup->setupApplication( $applicationName );
-        $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
-        
-        // Add Database Records
-        $outputStyle->writeln( 'Create Application Database Records.' );
-        // bin/console doctrine:query:sql "INSERT INTO VSAPP_Applications(title) VALUES('Test Application')"
-        $command    = $this->getApplication()->find( 'doctrine:query:sql' );
-        $returnCode = $command->run( 
-            new ArrayInput( ['sql' =>"INSERT INTO VSAPP_Applications(title) VALUES('{$applicationName}')"] ),
-            $output 
-        );
-        $outputStyle->writeln( '<info>Application Database Records successfully created.</info>' );
-        
-        $outputStyle->newLine();
-    }
-    
     private function configureNewUser(
         $userManager,
         InputInterface $input,
         OutputInterface $output
-    ): UserInterface {
+    ) : UserInterface {
         /** @var UsersRepositoryInterface $userRepository */
         $userRepository = $this->getUserRepository();
         
@@ -120,7 +92,7 @@ EOT
         return $user;
     }
     
-    private function createEmailQuestion(): Question
+    private function createEmailQuestion() : Question
     {
         return ( new Question( 'E-mail: ' ) )
             ->setValidator(
@@ -141,7 +113,7 @@ EOT
         ;
     }
     
-    private function getAdministratorEmail( InputInterface $input, OutputInterface $output ): string
+    private function getAdministratorEmail( InputInterface $input, OutputInterface $output ) : string
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper( 'question' );
@@ -161,7 +133,7 @@ EOT
         return $email;
     }
     
-    private function getAdministratorUsername( InputInterface $input, OutputInterface $output, string $email ): string
+    private function getAdministratorUsername( InputInterface $input, OutputInterface $output, string $email ) : string
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper( 'question' );
@@ -181,7 +153,7 @@ EOT
         return $username;
     }
     
-    private function getAdministratorPassword( InputInterface $input, OutputInterface $output ): string
+    private function getAdministratorPassword( InputInterface $input, OutputInterface $output ) : string
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper( 'question' );
@@ -202,7 +174,7 @@ EOT
         return $password;
     }
     
-    private function getPasswordQuestionValidator(): \Closure
+    private function getPasswordQuestionValidator() : \Closure
     {
         return
             /** @param mixed $value */
@@ -218,7 +190,7 @@ EOT
         ;
     }
     
-    private function createPasswordQuestion( string $message, \Closure $validator ): Question
+    private function createPasswordQuestion( string $message, \Closure $validator ) : Question
     {
         return ( new Question( $message ) )
             ->setValidator( $validator )
@@ -228,31 +200,8 @@ EOT
         ;
     }
     
-    private function getUserRepository(): UsersRepositoryInterface
+    private function getUserRepository() : UsersRepositoryInterface
     {
         return $this->getContainer()->get( 'vs_users.repository.users' );
-    }
-    
-    private function createApplicationNameQuestion(): Question
-    {
-        return ( new Question( 'Application Name: ' ) )
-            ->setValidator(
-                function ( $value ): string {
-                    /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->getContainer()->get( 'validator' )->validate( (string) $value, [new Length([
-                        'min' => 3,
-                        'max' => 50,
-                        'minMessage' => 'Your application name must be at least {{ limit }} characters long',
-                        'maxMessage' => 'Your application name cannot be longer than {{ limit }} characters',
-                    ])]);
-                    foreach ( $errors as $error ) {
-                        throw new \DomainException( $error->getMessage() );
-                    }
-                    
-                    return $value;
-                }
-            )
-            ->setMaxAttempts( 3 )
-        ;
     }
 }
