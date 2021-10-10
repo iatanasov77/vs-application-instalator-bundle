@@ -30,8 +30,8 @@ services:
                 apiTokenLifetime: '%vs_users.api_token.lifetime%'
             }
 
-    vs_users.security.token_authenticator:
-        class: VS\UsersBundle\Security\TokenAuthenticator
+    vs_users.security.api_key_authenticator:
+        class: VS\UsersBundle\Security\ApiKeyAuthenticator
         arguments:
             - '@vs_users.repository.users'
 
