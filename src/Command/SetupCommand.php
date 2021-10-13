@@ -15,6 +15,7 @@ use Webmozart\Assert\Assert;
 
 use VS\UsersBundle\Model\UserInterface;
 use VS\UsersBundle\Repository\UsersRepositoryInterface;
+use VS\ApplicationBundle\Component\Slug;
 
 final class SetupCommand extends AbstractInstallCommand
 {
@@ -35,6 +36,7 @@ EOT
     {
         $locale = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
         //$this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
+        $this->setupAdminPanelApplication( $input, $output, $locale->getCode() );
         $this->setupAdministratorUser( $input, $output, $locale->getCode() );
         
         $parameters = [];        
@@ -42,6 +44,28 @@ EOT
         $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', $parameters, $output );
         
         return 0;
+    }
+    
+    protected function setupAdminPanelApplication( InputInterface $input, OutputInterface $output, string $localeCode ) : void
+    {
+        $applicationName    = 'Admin Panel';
+        $applicationSlug    = Slug::generate( $applicationName );
+        
+        $outputStyle    = new SymfonyStyle( $input, $output );
+        $outputStyle->writeln( 'Create AdminPanel Application.' );
+        
+        $questionUrl        = $this->createAdminPanelUrlQuestion();
+        $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
+        $applicationCreated = date( 'Y-m-d H:i:s' );
+        
+        $command    = $this->getApplication()->find( 'doctrine:query:sql' );
+        $returnCode = $command->run(
+            new ArrayInput( ['sql' =>"INSERT INTO VSAPP_Applications(enabled, code, title, hostname, created_at) VALUES(1, '{$applicationSlug}', '{$applicationName}', '{$applicationUrl}', '{$applicationCreated}')"] ),
+            $output
+        );
+        
+        $outputStyle->writeln( '<info>AdminPanel Application created successfully.</info>' );
+        $outputStyle->newLine();
     }
     
     protected function setupAdministratorUser( InputInterface $input, OutputInterface $output, string $localeCode ) : void
@@ -203,5 +227,28 @@ EOT
     private function getUserRepository() : UsersRepositoryInterface
     {
         return $this->getContainer()->get( 'vs_users.repository.users' );
+    }
+    
+    private function createAdminPanelUrlQuestion() : Question
+    {
+        return ( new Question( 'AdminPanel Url: ' ) )
+            ->setValidator(
+                function ( $value ): string {
+                    /** @var ConstraintViolationListInterface $errors */
+                    $errors = $this->getContainer()->get( 'validator' )->validate( (string) $value, [new Length([
+                        'min' => 6,
+                        'max' => 256,
+                        'minMessage' => 'Your application url must be at least {{ limit }} characters long',
+                        'maxMessage' => 'Your application url cannot be longer than {{ limit }} characters',
+                    ])]);
+                    foreach ( $errors as $error ) {
+                        throw new \DomainException( $error->getMessage() );
+                    }
+                    
+                    return $value;
+                }
+            )
+            ->setMaxAttempts( 3 )
+        ;
     }
 }
