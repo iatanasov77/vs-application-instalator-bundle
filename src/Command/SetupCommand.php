@@ -54,6 +54,8 @@ EOT
         $outputStyle    = new SymfonyStyle( $input, $output );
         $outputStyle->writeln( 'Create AdminPanel Application.' );
         
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper     = $this->getHelper( 'question' );
         $questionUrl        = $this->createAdminPanelUrlQuestion();
         $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
         $applicationCreated = date( 'Y-m-d H:i:s' );
