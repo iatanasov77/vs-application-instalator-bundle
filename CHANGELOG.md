@@ -1,3 +1,9 @@
+1.3.3	|	Release date: **14.10.2021**
+============================================
+* New Features:
+  - Create AdminPanel Application on Setup.
+
+
 1.3.2	|	Release date: **10.10.2021**
 ============================================
 * Bug-Fixes:
