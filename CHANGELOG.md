@@ -1,3 +1,9 @@
+1.3.5	|	Release date: **15.10.2021**
+============================================
+* New Features:
+  - Add Shared Session Between Applications.
+
+
 1.3.4	|	Release date: **14.10.2021**
 ============================================
 * Bug-Fixes:
