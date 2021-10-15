@@ -32,9 +32,9 @@ class {{ kernelClass }} extends BaseKernel
     
     public function getVarDir()
     {
-    	$dirVar = $this->getProjectDir() . '/var/' . self::APP_ID;
+        $dirVar = $this->getProjectDir() . '/var';
         if ( isset( $_ENV['DIR_VAR'] ) ) {
-            $dirVar = $_ENV['DIR_VAR'] . '/' . self::APP_ID;
+            $dirVar = $_ENV['DIR_VAR'];
         }
         
         return $dirVar;
@@ -42,18 +42,20 @@ class {{ kernelClass }} extends BaseKernel
     
     public function getCacheDir()
     {
-        return $this->getVarDir() . '/cache/' . $this->environment;
+        return $this->getVarDir() . '/' . self::APP_ID . '/cache/' . $this->environment;
         //return parent::getCacheDir();
     }
     
     public function getLogDir()
     {
-        return $this->getVarDir() . '/log';
+        return $this->getVarDir() . '/' . self::APP_ID . '/log';
         //return parent::getLogDir();
     }
     
     protected function configureContainer( ContainerBuilder $container, LoaderInterface $loader ): void
     {
+    	$container->setParameter( 'vs_application.session_save_path', $this->getVarDir() . '/sessions/' );
+    	
         $container->addResource(new FileResource($this->getProjectDir().'/config/applications/{{ applicationSlug }}/bundles.php'));
         $container->setParameter('container.dumper.inline_class_loader', true);
         $confDir = $this->getProjectDir().'/config/applications/{{ applicationSlug }}';
