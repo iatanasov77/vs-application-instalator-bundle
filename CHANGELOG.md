@@ -1,3 +1,10 @@
+1.3.7	|	Release date: **17.10.2021**
+============================================
+* New Features:
+  - Update Application configs package.
+  - Update application Kernel Template to sextend VS\ApplicationBundle\Component\Application\Kernel.
+
+
 1.3.6	|	Release date: **17.10.2021**
 ============================================
 * New Features:
