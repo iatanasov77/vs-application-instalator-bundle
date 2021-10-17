@@ -1,3 +1,9 @@
+1.3.6	|	Release date: **17.10.2021**
+============================================
+* New Features:
+  - Update configs application package for setting up a Coockie LifeTime from Parameter.
+
+
 1.3.5	|	Release date: **15.10.2021**
 ============================================
 * New Features:
