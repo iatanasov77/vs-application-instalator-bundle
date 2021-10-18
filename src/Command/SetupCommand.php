@@ -39,9 +39,11 @@ EOT
         $this->setupAdminPanelApplication( $input, $output, $locale->getCode() );
         $this->setupAdministratorUser( $input, $output, $locale->getCode() );
         
-        $parameters = [];        
+        $parameters = [
+            '--setup-kernel' => true,
+        ];
         $this->commandExecutor->runCommand( 'vankosoft:application:create', $parameters, $output );
-        $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', $parameters, $output );
+        $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', [], $output );
         
         return 0;
     }
