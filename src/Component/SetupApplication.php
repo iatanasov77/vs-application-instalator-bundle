@@ -45,6 +45,7 @@ class SetupApplication
     
     public function getApplicationDirectories( $applicationName )
     {
+        $filesystem                 = new Filesystem();
         $this->applicationName      = $applicationName;
         $this->applicationNamespace = preg_replace( '/\s+/', '', $applicationName );
         $this->applicationSlug      = Slug::generate( $applicationName ); // For Directory Names
