@@ -1,3 +1,9 @@
+1.3.9	|	Release date: **18.10.2021**
+============================================
+* Bug-Fixes:
+  - Fix stuped bug. Undefined Variable.
+
+
 1.3.8	|	Release date: **18.10.2021**
 ============================================
 * New Features:
