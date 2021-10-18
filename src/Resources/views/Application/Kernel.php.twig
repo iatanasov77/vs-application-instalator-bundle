@@ -9,9 +9,9 @@ use VS\ApplicationBundle\Component\Application\Kernel as BaseKernel;
 
 class {{ kernelClass }} extends BaseKernel
 {
-    //const VERSION       = '1.3.3';
+    const VERSION       = '{{ applicationVersion }}';
     
-    private const APP_ID = '{{ applicationSlug }}';
+    const APP_ID = '{{ applicationSlug }}';
     
     protected function configureContainer( ContainerBuilder $container, LoaderInterface $loader ): void
     {

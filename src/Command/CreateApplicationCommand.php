@@ -29,17 +29,27 @@ final class CreateApplicationCommand extends AbstractInstallCommand
 The <info>%command.name%</info> command allows user to create a VankoSoft Application.
 EOT
             )
+            ->addOption(
+                'setup-kernel',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'Whether to setup the AdminPanelKernel class.',
+                false
+            )
         ;
     }
     
     protected function execute( InputInterface $input, OutputInterface $output ) : int
     {
-        $this->setupApplication( $input, $output );
+        $setupKernelOption  = $input->getOption( 'setup-kernel' );
+        $setupKernel        = ( $setupKernelOption !== false );
+        
+        $this->setupApplication( $input, $output, $setupKernel );
         
         return 0;
     }
     
-    protected function setupApplication( InputInterface $input, OutputInterface $output ) : void
+    protected function setupApplication( InputInterface $input, OutputInterface $output, $setupKernel = false ) : void
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
@@ -56,7 +66,7 @@ EOT
         
         // Create Directories
         $outputStyle->writeln( 'Create Application Directories.' );
-        $appSetup->setupApplication( $applicationName );
+        $appSetup->setupApplication( $applicationName, $setupKernel );
         $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
         
         // Add Database Records

@@ -28,6 +28,16 @@ class SetupApplication
      */
     private $applicationNamespace;
     
+    /**
+     * @var string $applicationVersion
+     */
+    private $applicationVersion;
+    
+    /**
+     * @var boolean $setupKernel
+     */
+    private $setupKernel;
+    
     public function __construct( ContainerInterface $container )
     {
         $this->container    = $container;
@@ -40,6 +50,12 @@ class SetupApplication
         $this->applicationSlug      = Slug::generate( $applicationName ); // For Directory Names
         
         $projectRootDir             = $this->container->get( 'kernel' )->getProjectDir();
+        
+        if ( $this->setupKernel && $filesystem->exists( $projectRootDir . '/VERSION' ) ) {
+            $this->applicationVersion   = file_get_contents( $projectRootDir . '/VERSION' );
+            $filesystem->remove( $projectRootDir . '/VERSION' );
+        }
+        
         $applicationDirs            = [
             'configs'       => $projectRootDir . '/config/applications/' . $this->applicationSlug,
             'public'        => $projectRootDir . '/public/' . $this->applicationSlug,
@@ -51,13 +67,25 @@ class SetupApplication
         return $applicationDirs;
     }
     
-    public function setupApplication( $applicationName )
+    /**
+     * This is the Entry Point of this class
+     * 
+     * @param string $applicationName
+     * @param boolean $setupKernel
+     */
+    public function setupApplication( $applicationName, $setupKernel = false )
     {
+        $this->setupKernel  = $setupKernel;
         $applicationDirs    = $this->getApplicationDirectories( $applicationName );
         
         // Setup The Application
         $this->setupApplicationDirectories( $applicationDirs  );
-        $this->setupApplicationKernel();
+        $this->setupAdminPanelKernel();
+        
+        if ( $setupKernel ) {
+            $this->setupApplicationKernel();
+        }
+        
         $this->setupApplicationHomePage();
         $this->setupApplicationLoginPage();
         $this->setupApplicationConfigs();
@@ -92,6 +120,20 @@ class SetupApplication
         }
     }
     
+    private function setupAdminPanelKernel()
+    {
+        $filesystem         = new Filesystem();
+        $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
+        $reflectionClass    = new \ReflectionClass( \App\AdminPanelKernel::class );
+        $constants          = $reflectionClass->getConstants();
+        
+        $filesystem->dumpFile( $projectRootDir . '/src/AdminPanelKernel.php', str_replace(
+            $constants['VERSION'], 
+            $this->applicationVersion,
+            file_get_contents( $projectRootDir . '/src/AdminPanelKernel.php' )
+        ));
+    }
+    
     private function setupApplicationKernel()
     {
         $filesystem         = new Filesystem();
@@ -101,8 +143,9 @@ class SetupApplication
         
         // Write Application Kernel
         $applicationKernel  = $twig->render( '@VSApplicationInstalator/Application/Kernel.php.twig', [
-            'kernelClass'       => $kernelClass,
-            'applicationSlug'   => $this->applicationSlug,
+            'kernelClass'           => $kernelClass,
+            'applicationSlug'       => $this->applicationSlug,
+            'applicationVersion'    => $this->applicationVersion,
         ]);
         $filesystem->dumpFile( $projectRootDir . '/src/' . $kernelClass . '.php', $applicationKernel );
         
@@ -159,8 +202,8 @@ class SetupApplication
         
         // Setup Services and Parameters
         $configServices = str_replace(
-                            ["__application_name__", "__application_slug__"],
-                            [$this->applicationName, $this->applicationSlug],
+                            ["__application_name__", "__application_slug__", "__kernel_class__"],
+                            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel'],
                             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml', $configServices );
@@ -233,7 +276,6 @@ class SetupApplication
         $filesystem         = new Filesystem();
         $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
         
-        // Rename VERSION file to can use only in DataCollector
-        $filesystem->rename( $projectRootDir . '/VERSION', $projectRootDir . '/VSAPP_VERSION' );
+        
     }
 }
