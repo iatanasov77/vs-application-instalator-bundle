@@ -1,3 +1,9 @@
+1.4.4	|	Release date: **20.10.2021**
+============================================
+* Bug-Fixes:
+  - Add Missing Composer Dependencies
+
+
 1.4.3	|	Release date: **20.10.2021**
 ============================================
 * Bug-Fixes:
