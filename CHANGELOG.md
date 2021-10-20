@@ -1,3 +1,9 @@
+1.4.2	|	Release date: **20.10.2021**
+============================================
+* Bug-Fixes:
+  - Update version in composer.json
+
+
 1.4.1	|	Release date: **20.10.2021**
 ============================================
 * Add Subtrees:
