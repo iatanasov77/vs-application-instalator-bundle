@@ -68,7 +68,10 @@
     },
     "autoload": {
         "psr-4": {
-            "VS\\ApplicationBundle\\": "lib/"
+            "VS\\ApplicationBundle\\": "lib/",
+            "Sylius\\Behat\\": "src/Sylius/Behat/",
+            "Sylius\\Bundle\\": "src/Sylius/Bundle/",
+            "Sylius\\Component\\": "src/Sylius/Component/"
         }
     }
 }
