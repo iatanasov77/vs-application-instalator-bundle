@@ -68,10 +68,10 @@
     },
     "autoload": {
         "psr-4": {
-            "VS\\ApplicationBundle\\": "lib/",
-            "Sylius\\Behat\\": "src/Sylius/Behat/",
-            "Sylius\\Bundle\\": "src/Sylius/Bundle/",
-            "Sylius\\Component\\": "src/Sylius/Component/"
+        	"VS\\ApplicationInstalatorBundle\\": "src/Vankosoft/ApplicationInstalatorBundle/src/",
+            "VS\\ApplicationBundle\\": "src/Vankosoft/ApplicationBundle/lib/",
+            "VS\\UsersBundle\\": "src/Vankosoft/UsersBundle/lib/",
+            "VS\\CmsBundle\\": "src/Vankosoft/CmsBundle/lib/"
         }
     }
 }
