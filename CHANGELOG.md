@@ -1,3 +1,10 @@
+1.4.5	|	Release date: **20.10.2021**
+============================================
+* Refactorings:
+  - Add docs and tests directories.
+  - Refactoring Subtree.
+
+
 1.4.4	|	Release date: **20.10.2021**
 ============================================
 * Bug-Fixes:
