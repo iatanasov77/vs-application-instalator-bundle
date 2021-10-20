@@ -3,6 +3,13 @@
 * New Features:
 * Bug-Fixes:
 * Commits:
+
+
+1.4.1	|	Release date: **20.10.2021**
+============================================
+* New Features:
+* Bug-Fixes:
+* Commits:
 	[2021-10-20 06:49:55 +0000][Commit: 364514d6f1944d55c302e27e407f576fff072997]
 	  Merge branch 'release/1.4.0' into develop
 	[2021-10-20 09:16:03 +0000][Commit: 3aaa7f90d38b34c15d65ad7359482847067c58b5]
