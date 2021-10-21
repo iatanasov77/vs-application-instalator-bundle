@@ -1,3 +1,9 @@
+1.4.10	|	Release date: **21.10.2021**
+============================================
+* Bug-Fixes:
+  - Update Version of composer.json
+
+
 1.4.9	|	Release date: **21.10.2021**
 ============================================
 * New Features:
