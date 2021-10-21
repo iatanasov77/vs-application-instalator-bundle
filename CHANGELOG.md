@@ -1,3 +1,9 @@
+1.4.9	|	Release date: **21.10.2021**
+============================================
+* New Features:
+  - Add a Service Parameter into the UsersBundle
+
+
 1.4.8	|	Release date: **21.10.2021**
 ============================================
 * Bug-Fixes:
