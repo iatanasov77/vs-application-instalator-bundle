@@ -1,46 +1,125 @@
-1.4.5	|	Release date: **20.10.2021**
-============================================
-* Refactorings:
-  - Add docs and tests directories.
-  - Refactoring Subtree.
-
-
-1.4.4	|	Release date: **20.10.2021**
+1.3.9	|	Release date: **18.10.2021**
 ============================================
 * Bug-Fixes:
-  - Add Missing Composer Dependencies
+  - Fix stuped bug. Undefined Variable.
 
 
-1.4.3	|	Release date: **20.10.2021**
-============================================
-* Bug-Fixes:
-  - Add Composer Dependencies
-
-
-1.4.2	|	Release date: **20.10.2021**
-============================================
-* Bug-Fixes:
-  - Update version in composer.json
-
-
-1.4.1	|	Release date: **20.10.2021**
-============================================
-* Add Subtrees:
-  - Squashed 'src/Vankosoft/ApplicationBundle/' content from commit 1e3215f
-  - Merge commit 'd4c7ea7dd21291e211f936fe84474a3f1acd8167' as 'src/Vankosoft/ApplicationBundle'
-  - Add Subtree Autoload Configuration
-  - Squashed 'src/Vankosoft/ApplicationInstalatorBundle/' content from commit 4fa6bc6
-  - Merge commit 'd082a2da3d787a8ab973f05c35fb04c8281f362b' as 'src/Vankosoft/ApplicationInstalatorBundle'
-  - Squashed 'src/Vankosoft/UsersBundle/' content from commit 3c4b16e
-  - Merge commit '772061e5def55298fd6797f84ea4c2d4760d9925' as 'src/Vankosoft/UsersBundle'
-  - Squashed 'src/Vankosoft/CmsBundle/' content from commit a197dd4
-  - Merge commit '74593721f6a192e8168dff6f522c3f228fa9d34d' as 'src/Vankosoft/CmsBundle'
-
-
-1.4.0	|	Release date: **20.10.2021**
+1.3.8	|	Release date: **18.10.2021**
 ============================================
 * New Features:
+  - Setup Application Version in the Kernel Classes.
+
+
+1.3.7	|	Release date: **17.10.2021**
+============================================
+* New Features:
+  - Update Application configs package.
+  - Update application Kernel Template to sextend VS\ApplicationBundle\Component\Application\Kernel.
+
+
+1.3.6	|	Release date: **17.10.2021**
+============================================
+* New Features:
+  - Update configs application package for setting up a Coockie LifeTime from Parameter.
+
+
+1.3.5	|	Release date: **15.10.2021**
+============================================
+* New Features:
+  - Add Shared Session Between Applications.
+
+
+1.3.4	|	Release date: **14.10.2021**
+============================================
+* Bug-Fixes:
+  - Fix Setup Command.
+
+
+1.3.3	|	Release date: **14.10.2021**
+============================================
+* New Features:
+  - Create AdminPanel Application on Setup.
+
+
+1.3.2	|	Release date: **10.10.2021**
+============================================
+* Bug-Fixes:
+  - Fix CreateApplicationCommand.
+
+
+1.3.1	|	Release date: **10.10.2021**
+============================================
+* Bug-Fixes:
+  - Add Service for CreateApplicationCommand.
+
+
+1.3.0	|	Release date: **10.10.2021**
+============================================
+* New Features:
+  - Separate CreateApplicationCommand from SetupCommand.
+  - Update Setup Application Command.
+  - Update Application Packackages.
+
+
+1.2.1	|	Release date: **06.10.2021**
+============================================
+* New Features:
+  - Update Instalator Packages
+
+
+1.2.0	|	Release date: **05.10.2021**
+============================================
+* Bug-Fixes and Refactoring:
+  - Big Refactoring of using Application instead Site.
+
+
+1.1.1	|	Release date: **03.10.2021**
+============================================
+* New Features:
+  - Update configs Application Package.
+
+
+1.1.0	|	Release date: **03.10.2021**
+============================================
+* New Features:
+  - Update Application Install Packages.
+
+
+1.0.5	|	Release date: **03.10.2021**
+============================================
+* Bug-Fixes:
+  - Fix SetupApplication
+
+
+1.0.4	|	Release date: **03.10.2021**
+============================================
+* Bug-Fixes:
+  - Remove original Kernel from Setup.
+  - Fix SetupApplication
+
+
+1.0.3	|	Release date: **03.10.2021**
+============================================
+* Bug-Fixes:
+  - Fix Namespace for SetupApplication service.
+
+
+1.0.2	|	Release date: **03.10.2021**
+============================================
+* Bug-Fixes:
+  - Fix Namespace for ContainerAwareCommand.
+
+
+1.0.1	|	Release date: **02.10.2021**
+============================================
+* Commits:
+  - Refactoring
+
+
+1.0.0	|	Release date: **02.10.2021**
+============================================
+* Commits:
+  - Move VSApplication Instalator Components to this  Bundle.
   - Initial commit
-  - Add composer.json
 
 
