@@ -1,3 +1,9 @@
+1.4.8	|	Release date: **21.10.2021**
+============================================
+* Bug-Fixes:
+  - Update Package Version In Composer File.
+
+
 1.4.7	|	Release date: **21.10.2021**
 ============================================
 * New Features:
