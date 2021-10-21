@@ -6,7 +6,7 @@ Add component to main repository
 -------------------------------------
     #execute in main repository
     $ git remote add -f Component1 git@github.com:Acme/Component1.git
-    $ git subtree add --prefix src/Vankosoft/Component1 --squash Component1/<branch>
+    $ git subtree add --prefix src/Vankosoft/Component1 --squash Component1 <branch>
     $ git subtree push --prefix=src/Vankosoft/Component1 Component1 <branch>
     
     
@@ -19,9 +19,9 @@ Push after changes in main repository
     
 Subtree Change Branch
 --------------------------
-	$ git rm src/Vankosoft/Component1
+	$ git rm -r src/Vankosoft/Component1
 	$ git commit
-	$ git subtree add --prefix src/Vankosoft/Component1 --squash Component1/<branch>
+	$ git subtree add --prefix src/Vankosoft/Component1 --squash Component1 <branch>
 
 
 ============================
