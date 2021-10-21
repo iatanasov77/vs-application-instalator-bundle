@@ -16,7 +16,10 @@ Push after changes in main repository
     $ git remote add -f Component1 git@github.com:Acme/Component1.git #only if you haven't add it before
     $ git subtree push --prefix=src/Vankosoft/Component1 Component1 <branch>
     
-    
+Pull after rebasing subtree branch
+---------------------------------------
+	$ git subtree pull --prefix src/Vankosoft/Component1 Component1 <branch> --squash
+   
 Subtree Change Branch
 --------------------------
 	$ git rm -r src/Vankosoft/Component1
