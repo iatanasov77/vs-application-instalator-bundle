@@ -44,7 +44,7 @@ class AbstractCrudController extends ResourceController
                         $this->metadata->getPluralName()    => $resources,
                         'items'                             => $this->getRepository()->findAll(),
                     ],
-                    $this->customData()
+                    $this->customData( $request )
                 )
             );
         }
@@ -93,7 +93,7 @@ class AbstractCrudController extends ResourceController
             return $this->render( $configuration->getTemplate( ResourceActions::UPDATE . '.html' ), array_merge( [
                 'item' => $entity,
                 'form' => $form->createView(),
-            ], $this->customData() ) );
+            ], $this->customData( $request ) ) );
         }
         
         return $this->createRestView( $configuration, $entity );
@@ -144,7 +144,7 @@ class AbstractCrudController extends ResourceController
         
     }
     
-    protected function customData(): array
+    protected function customData( Request $request ): array
     {
         return [];
     }
