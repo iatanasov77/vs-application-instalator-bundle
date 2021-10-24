@@ -1,3 +1,9 @@
+1.4.11	|	Release date: **24.10.2021**
+============================================
+* New Features:
+  - Improve AbstractCrudController.
+
+
 1.4.10	|	Release date: **21.10.2021**
 ============================================
 * Bug-Fixes:
