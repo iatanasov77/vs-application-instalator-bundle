@@ -1,3 +1,9 @@
+1.4.14	|	Release date: **05.11.2021**
+============================================
+* New Features:
+  - Set Library Version in the composer.json file.
+
+
 1.4.13	|	Release date: **05.11.2021**
 ============================================
 * New Features:
