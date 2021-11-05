@@ -1,3 +1,9 @@
+1.4.13	|	Release date: **05.11.2021**
+============================================
+* New Features:
+  - Create UserRole Model and Create Relation User and UserRole Models.
+
+
 1.4.12	|	Release date: **24.10.2021**
 ============================================
 * Bug-Fixes:
