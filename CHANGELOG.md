@@ -1,3 +1,10 @@
+1.4.15	|	Release date: **06.11.2021**
+============================================
+* New Features:
+  - Create Resource for Users Roles.
+  - Set Library Version in composer.json
+
+
 1.4.14	|	Release date: **05.11.2021**
 ============================================
 * New Features:
