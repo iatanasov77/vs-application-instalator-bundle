@@ -1,3 +1,9 @@
+1.4.17	|	Release date: **06.11.2021**
+============================================
+* Bug-Fixes:
+  - Fix User Model Method getRoles to return an Array.
+
+
 1.4.16	|	Release date: **06.11.2021**
 ============================================
 * Bug-Fixes:
