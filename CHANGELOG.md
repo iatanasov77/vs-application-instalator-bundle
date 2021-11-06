@@ -1,3 +1,9 @@
+1.4.16	|	Release date: **06.11.2021**
+============================================
+* Bug-Fixes:
+  - Fix UserRole Model to Implement ResourceInterface.
+
+
 1.4.15	|	Release date: **06.11.2021**
 ============================================
 * New Features:
