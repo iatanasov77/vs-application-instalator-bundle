@@ -1,7 +1,7 @@
 {
 	"name": "vankosoft/application",
     "type": "library",
-    "version": "v1.4.23",
+    "version": "v1.4.24",
     "description": "VankoSoft Symfony Application",
     "keywords": [
     	"symfony",
