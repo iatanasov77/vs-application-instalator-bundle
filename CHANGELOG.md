@@ -1,3 +1,9 @@
+1.4.21	|	Release date: **07.11.2021**
+============================================
+* New Features:
+  - Update Application Kernel for new configs layot.
+
+
 1.4.20	|	Release date: **07.11.2021**
 ============================================
 * New Features, FIxes and Refactoring:
