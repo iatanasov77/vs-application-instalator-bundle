@@ -1,3 +1,11 @@
+1.4.20	|	Release date: **07.11.2021**
+============================================
+* New Features, FIxes and Refactoring:
+  - Improve Templates for UsersRoles Resource.
+  - Many Fixes and Refactoring.
+  - Set Package Version in Composer.Json
+
+
 1.4.19	|	Release date: **06.11.2021**
 ============================================
 * Bug-Fixes:
