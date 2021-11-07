@@ -1,6 +1,6 @@
 parameters:
     vankosoft_host: '%env(HOST)%'
-    vs_application.menu.config_file: "%kernel.project_dir%/config/packages/vs_application.yaml"
+    vs_application.menu.config_file: "%kernel.project_dir%/config/admin-panel/packages/vs_application.yaml"
     vs_application.main_menus: ['mainMenu']
 
 services:
