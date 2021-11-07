@@ -14,7 +14,7 @@ abstract class Kernel extends HttpKernel
 {
     use MicroKernelTrait;
     
-    const VERSION       = '1.3.3';
+    const VERSION       = '1.4.20';
     
     const APP_ID        = 'admin-panel';
 
