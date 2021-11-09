@@ -1,3 +1,9 @@
+1.4.25	|	Release date: **09.11.2021**
+============================================
+* New Features:
+  - Add User Avatars and Taxon Images.
+
+
 1.4.24	|	Release date: **07.11.2021**
 ============================================
 * New Features:
