@@ -3,21 +3,23 @@
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use VS\ApplicationInstalatorBundle\DataFixtures\AbstractResourceFixture;
 
-final class TaxonomyFixture extends AbstractResourceFixture
+final class UserRolesFixture extends AbstractResourceFixture
 {
     public function getName(): string
     {
-        return 'taxonomy';
+        return 'user_roles';
     }
     
     protected function configureResourceNode( ArrayNodeDefinition $resourceNode ): void
     {
         $resourceNode
             ->children()
-                ->scalarNode( 'code' )->end()
+                ->scalarNode( 'locale' )->end()
                 ->scalarNode( 'title' )->end()
                 ->scalarNode( 'description' )->end()
-                ->scalarNode( 'locale' )->end()
+                ->scalarNode( 'taxonomy_code' )->end()
+                ->scalarNode( 'role' )->end()
+                ->scalarNode( 'parent' )->end()
         ;
     }
 }

@@ -1,14 +1,31 @@
 <?php namespace VS\ApplicationBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Comparable;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 use VS\ApplicationBundle\Model\Interfaces\TaxonInterface as VsTaxonInterface;
 
-class Taxon extends BaseTaxon implements VsTaxonInterface
+class Taxon extends BaseTaxon implements VsTaxonInterface, Comparable
 {
     protected $taxonomy;
+    
+    /**
+     * @var Collection|ImageInterface[]
+     *
+     * @psalm-var Collection<array-key, ImageInterface>
+     */
+    protected $images;
+    
+    public function __construct()
+    {
+        parent::__construct();
+        
+        /** @var ArrayCollection<array-key, ImageInterface> $this->images */
+        $this->images   = new ArrayCollection();
+    }
     
     public function hasChild( TaxonInterface $taxon ): bool
     {
@@ -26,5 +43,46 @@ class Taxon extends BaseTaxon implements VsTaxonInterface
     public function getTaxonomy()
     {
         return $this->taxonomy;
+    }
+    
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+    
+    public function getImagesByType(string $type): Collection
+    {
+        return $this->images->filter(function (ImageInterface $image) use ($type): bool {
+            return $type === $image->getType();
+        });
+    }
+    
+    public function hasImages(): bool
+    {
+        return !$this->images->isEmpty();
+    }
+    
+    public function hasImage(ImageInterface $image): bool
+    {
+        return $this->images->contains($image);
+    }
+    
+    public function addImage(ImageInterface $image): void
+    {
+        $image->setOwner($this);
+        $this->images->add($image);
+    }
+    
+    public function removeImage(ImageInterface $image): void
+    {
+        if ($this->hasImage($image)) {
+            $image->setOwner(null);
+            $this->images->removeElement($image);
+        }
+    }
+    
+    public function compareTo($other): int
+    {
+        return $this->code === $other->getCode() ? 0 : 1;
     }
 }
