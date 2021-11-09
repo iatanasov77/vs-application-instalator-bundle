@@ -52,3 +52,19 @@ services:
             - '@vs_application.fixture.example_factory.locales'
         tags:
             - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.user_roles:
+        class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\UserRolesFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.user_roles'
+        tags:
+            - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.users:
+        class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\UsersFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.users'
+        tags:
+            - 'sylius_fixtures.fixture'
