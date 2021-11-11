@@ -1,3 +1,9 @@
+1.4.26	|	Release date: **11.11.2021**
+============================================
+* Bug-Fixes and Improvements:
+  - Many Fixes And New Doctrine Migration.
+
+
 1.4.25	|	Release date: **09.11.2021**
 ============================================
 * New Features:
