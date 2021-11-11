@@ -7,6 +7,7 @@ use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 use VS\ApplicationBundle\Model\Interfaces\TaxonInterface as VsTaxonInterface;
+use VS\CmsBundle\Model\ImageInterface;
 
 class Taxon extends BaseTaxon implements VsTaxonInterface, Comparable
 {
