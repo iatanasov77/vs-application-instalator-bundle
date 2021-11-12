@@ -63,8 +63,10 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $userEntity->setEnabled( true );
         $userEntity->setPreferedLocale( $this->localeCode );
         
-        $userRole   = $this->userRolesRepository->findByTaxonCode( $options['category_code'] );
-        $userEntity->addRole( $userRole );
+        $userRole   = $this->userRolesRepository->findByTaxonCode( $options['role_code'] );
+        if ( $userRole ) {
+            $userEntity->addRole( $userRole );
+        }
         
         $this->createUserInfo( $userEntity, $options );
         
@@ -74,6 +76,9 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
     protected function configureOptions( OptionsResolver $resolver ): void
     {
         $resolver
+            ->setDefault( 'role_code', null )
+            ->setAllowedTypes( 'role_code', ['string', 'null'] )
+        
             ->setDefault( 'email', null )
             ->setAllowedTypes( 'email', 'string' )
             
