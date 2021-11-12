@@ -133,6 +133,8 @@ class SetupApplication
             $this->applicationVersion,
             file_get_contents( $projectRootDir . '/src/AdminPanelKernel.php' )
         ));
+        
+        $this->removeOriginalKernelConfigs();
     }
     
     private function setupApplicationKernel()
@@ -270,6 +272,24 @@ class SetupApplication
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_users.yaml' )
             );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_users.yaml', $configRoutes );
+    }
+    
+    private function removeOriginalKernelConfigs()
+    {
+        $projectRootDir         = $this->container->get( 'kernel' )->getProjectDir();
+        $filesystem             = new Filesystem();
+        $originalKernelConfigs  = [
+            $projectRootDir . 'config/packages',
+            $projectRootDir . 'config/routes',
+            $projectRootDir . 'config/bundles.php',
+            $projectRootDir . 'config/preload.php',
+            $projectRootDir . 'config/routes.yaml',
+            $projectRootDir . 'config/services.yaml',
+        ];
+        
+        foreach( $originalKernelConfigs as $confFile ) {
+            $filesystem->remove( $confFile );
+        }
     }
     
     private function setupInstalationInfo()
