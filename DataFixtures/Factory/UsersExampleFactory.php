@@ -20,6 +20,9 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
     /** @var FactoryInterface */
     private $userInfoFactory;
     
+    /** @var FactoryInterface */
+    private $avatarImageFactory;
+    
     /** @var RepositoryInterface */
     private $userRolesRepository;
     
@@ -36,6 +39,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
         UserManager $userManager,
         RepositoryInterface $userRolesRepository,
         FactoryInterface $userInfoFactory,
+        FactoryInterface $avatarImageFactory,
         
         string $localeCode,
         ?FileLocatorInterface $fileLocator = null,
@@ -45,6 +49,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $this->userRolesRepository  = $userRolesRepository;
         
         $this->userInfoFactory      = $userInfoFactory;
+        $this->avatarImageFactory   = $avatarImageFactory;
         $this->localeCode           = $localeCode;
         
         $this->fileLocator          = $fileLocator;
@@ -120,7 +125,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $imagePath      = $this->fileLocator->locate( $options['avatar'] );
         $uploadedImage  = new UploadedFile( $imagePath, basename( $imagePath ) );
         
-        $avatarImage    = new AvatarImage();
+        $avatarImage    = $this->avatarImageFactory->createNew();
         $avatarImage->setFile( $uploadedImage );
         
         $this->imageUploader->upload( $avatarImage );
