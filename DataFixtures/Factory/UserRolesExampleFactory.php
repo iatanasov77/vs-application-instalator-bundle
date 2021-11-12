@@ -4,9 +4,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-use VS\CmsBundle\Model\PageCategoryInterface;
 use VS\ApplicationBundle\Component\Slug;
 use VS\ApplicationBundle\Repository\TaxonRepository;
+use VS\UsersBundle\Model\UserRoleInterface;
 
 class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
@@ -40,7 +40,7 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
         $this->configureOptions( $this->optionsResolver );
     }
     
-    public function create( array $options = [] ): PageCategoryInterface
+    public function create( array $options = [] ): UserRoleInterface
     {
         $options                    = $this->optionsResolver->resolve( $options );
         
@@ -85,7 +85,7 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
             ->setAllowedTypes( 'role', ['string'] )
             
             ->setDefault( 'parent', null )
-            ->setAllowedTypes( 'parent', ['string'] )
+            ->setAllowedTypes( 'parent', ['string', 'null'] )
         ;
     }
     
