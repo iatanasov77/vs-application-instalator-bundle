@@ -108,7 +108,8 @@ sylius_fixtures:
                               locale_code: '%locale%'
                               first_name: 'App'
                               last_name: 'Admin'
-                              avatar: '@ApplicationInstalatorBundle/Resources/fixtures/adminAvatars/john.jpg'
+                              #avatar: '@ApplicationInstalatorBundle/Resources/fixtures/adminAvatars/john.jpg'
+                              avatar: null
                               
                             - email: 'appauthor@example.com'
                               username: 'appauthor'
@@ -118,7 +119,8 @@ sylius_fixtures:
                               locale_code: '%locale%'
                               first_name: 'App'
                               last_name: 'Author'
-                              avatar: '@ApplicationInstalatorBundle/Resources/fixtures/adminAvatars/john.jpg'
+                              #avatar: '@ApplicationInstalatorBundle/Resources/fixtures/adminAvatars/john.jpg'
+                              avatar: null
                               
                             - email: 'appuser@example.com'
                               username: 'appuser'
@@ -128,5 +130,6 @@ sylius_fixtures:
                               locale_code: '%locale%'
                               first_name: 'App'
                               last_name: 'User'
-                              avatar: '@ApplicationInstalatorBundle/Resources/fixtures/adminAvatars/luke.jpg'
+                              #avatar: '@ApplicationInstalatorBundle/Resources/fixtures/adminAvatars/john.jpg'
+                              avatar: null
 
