@@ -14,6 +14,7 @@ final class UsersFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
+                ->scalarNode('role_code')->end()
                 ->scalarNode('email')->cannotBeEmpty()->end()
                 ->scalarNode('username')->cannotBeEmpty()->end()
                 ->booleanNode('enabled')->end()
