@@ -54,7 +54,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $this->configureOptions( $this->optionsResolver );
     }
     
-    public function create( array $options = [] ): PageInterface
+    public function create( array $options = [] ): UserInterface
     {
         $options    = $this->optionsResolver->resolve( $options );
 
@@ -96,7 +96,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setDefined('last_name')
             
             ->setDefault('avatar', '')
-            ->setAllowedTypes('avatar', 'string')
+            ->setAllowedTypes('avatar', ['string', 'null'])
         ;
     }
     
@@ -104,7 +104,9 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
     {
         $userInfo   = $this->userInfoFactory->createNew();
         
-        $this->createAvatar( $userInfo, $options );
+        if ( $options['avatar'] && ! empty( $options['avatar'] ) ) {
+            $this->createAvatar( $userInfo, $options );
+        }
         
         $user->setInfo( $userInfo );
     }
