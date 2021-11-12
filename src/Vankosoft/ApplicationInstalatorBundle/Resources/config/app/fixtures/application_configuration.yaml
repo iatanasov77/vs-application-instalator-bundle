@@ -103,7 +103,7 @@ sylius_fixtures:
                             - email: 'appadmin@example.com'
                               username: 'appadmin'
                               password: 'appadmin'
-                              role_code: 'role-super-admin'
+                              role_code: 'role-admin'
                               enabled: true
                               locale_code: '%locale%'
                               first_name: 'App'
@@ -114,7 +114,7 @@ sylius_fixtures:
                             - email: 'appauthor@example.com'
                               username: 'appauthor'
                               password: 'appauthor'
-                              role_code: 'role-super-admin'
+                              role_code: 'role-author'
                               enabled: true
                               locale_code: '%locale%'
                               first_name: 'App'
@@ -125,7 +125,7 @@ sylius_fixtures:
                             - email: 'appuser@example.com'
                               username: 'appuser'
                               password: 'appuser'
-                              role_code: 'role-super-admin'
+                              role_code: 'role-user'
                               enabled: true
                               locale_code: '%locale%'
                               first_name: 'App'
