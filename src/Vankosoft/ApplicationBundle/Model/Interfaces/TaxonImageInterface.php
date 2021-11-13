@@ -1,7 +1,7 @@
 <?php namespace VS\ApplicationBundle\Model\Interfaces;
 
-use VS\CmsBundle\Model\ImageInterface;
+use VS\CmsBundle\Model\FileInterface;
 
-interface TaxonImageInterface extends ImageInterface
+interface TaxonImageInterface extends FileInterface
 {
 }

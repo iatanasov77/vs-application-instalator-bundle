@@ -7,14 +7,14 @@ use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 use VS\ApplicationBundle\Model\Interfaces\TaxonInterface as VsTaxonInterface;
-use VS\CmsBundle\Model\ImageInterface;
+use VS\CmsBundle\Model\FileInterface;
 
 class Taxon extends BaseTaxon implements VsTaxonInterface, Comparable
 {
     protected $taxonomy;
     
     /**
-     * @var Collection|ImageInterface[]
+     * @var Collection|FileInterface[]
      *
      * @psalm-var Collection<array-key, ImageInterface>
      */
@@ -53,7 +53,7 @@ class Taxon extends BaseTaxon implements VsTaxonInterface, Comparable
     
     public function getImagesByType(string $type): Collection
     {
-        return $this->images->filter(function (ImageInterface $image) use ($type): bool {
+        return $this->images->filter(function (FileInterface $image) use ($type): bool {
             return $type === $image->getType();
         });
     }
@@ -63,18 +63,18 @@ class Taxon extends BaseTaxon implements VsTaxonInterface, Comparable
         return !$this->images->isEmpty();
     }
     
-    public function hasImage(ImageInterface $image): bool
+    public function hasImage(FileInterface $image): bool
     {
         return $this->images->contains($image);
     }
     
-    public function addImage(ImageInterface $image): void
+    public function addImage(FileInterface $image): void
     {
         $image->setOwner($this);
         $this->images->add($image);
     }
     
-    public function removeImage(ImageInterface $image): void
+    public function removeImage(FileInterface $image): void
     {
         if ($this->hasImage($image)) {
             $image->setOwner(null);
