@@ -1,3 +1,15 @@
+1.4.28	|	Release date: **14.11.2021**
+============================================
+* New Features:
+  - Add Removing of Unneeded Assets,Configs,Etc. in Instalator.
+  - Add FileManager Models.
+* Bug-Fixes:
+  - Allow UsersFixture to recieve null avatar option.
+  - Setting up the right roles of custom application users.
+  - Fix Avatar Paths in Fixtures.
+  - Pass AvatarImage Factory into the Users Fixture Factory and use it to create an avatar for users.
+
+
 1.4.27	|	Release date: **12.11.2021**
 ============================================
 * Bug-Fixes:
