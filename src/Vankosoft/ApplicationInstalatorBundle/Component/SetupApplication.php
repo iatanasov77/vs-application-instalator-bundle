@@ -281,6 +281,10 @@ class SetupApplication
         $originalKernelConfigs  = [
             $projectRootDir . '/CHANGELOG.md',
             
+            // Directories Added by Flex
+            $projectRootDir . '/migrations',
+            $projectRootDir . '/tests',
+            
             // Assets Added by Flex
             $projectRootDir . '/assets/controllers',
             $projectRootDir . '/assets/styles',
