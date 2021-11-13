@@ -8,7 +8,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 use VS\UsersBundle\Security\UserManager;
 
-use VS\CmsBundle\Component\Uploader\ImageUploaderInterface;
+use VS\CmsBundle\Component\Uploader\FileUploaderInterface;
 use VS\UsersBundle\Model\UserInterface;
 use VS\UsersBundle\Model\UserInfoInterface;
 
@@ -33,7 +33,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
     
     private ?FileLocatorInterface $fileLocator;
     
-    private ?ImageUploaderInterface $imageUploader;
+    private ?FileUploaderInterface $imageUploader;
     
     public function __construct(
         UserManager $userManager,
@@ -43,7 +43,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
         
         string $localeCode,
         ?FileLocatorInterface $fileLocator = null,
-        ?ImageUploaderInterface $imageUploader = null
+        ?FileUploaderInterface $imageUploader = null
     ) {
         $this->userManager          = $userManager;
         $this->userRolesRepository  = $userRolesRepository;
