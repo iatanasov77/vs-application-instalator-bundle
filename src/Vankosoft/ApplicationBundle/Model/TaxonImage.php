@@ -1,7 +1,7 @@
 <?php namespace VS\ApplicationBundle\Model;
 
-use VS\CmsBundle\Model\Image;
+use VS\CmsBundle\Model\File;
 
-class TaxonImage extends Image
+class TaxonImage extends File
 {
 }

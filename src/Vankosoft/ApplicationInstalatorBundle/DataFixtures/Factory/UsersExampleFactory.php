@@ -20,6 +20,9 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
     /** @var FactoryInterface */
     private $userInfoFactory;
     
+    /** @var FactoryInterface */
+    private $avatarImageFactory;
+    
     /** @var RepositoryInterface */
     private $userRolesRepository;
     
@@ -36,6 +39,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
         UserManager $userManager,
         RepositoryInterface $userRolesRepository,
         FactoryInterface $userInfoFactory,
+        FactoryInterface $avatarImageFactory,
         
         string $localeCode,
         ?FileLocatorInterface $fileLocator = null,
@@ -45,6 +49,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $this->userRolesRepository  = $userRolesRepository;
         
         $this->userInfoFactory      = $userInfoFactory;
+        $this->avatarImageFactory   = $avatarImageFactory;
         $this->localeCode           = $localeCode;
         
         $this->fileLocator          = $fileLocator;
@@ -54,7 +59,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $this->configureOptions( $this->optionsResolver );
     }
     
-    public function create( array $options = [] ): PageInterface
+    public function create( array $options = [] ): UserInterface
     {
         $options    = $this->optionsResolver->resolve( $options );
 
@@ -96,7 +101,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setDefined('last_name')
             
             ->setDefault('avatar', '')
-            ->setAllowedTypes('avatar', 'string')
+            ->setAllowedTypes('avatar', ['string', 'null'])
         ;
     }
     
@@ -104,7 +109,9 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
     {
         $userInfo   = $this->userInfoFactory->createNew();
         
-        $this->createAvatar( $userInfo, $options );
+        if ( $options['avatar'] && ! empty( $options['avatar'] ) ) {
+            $this->createAvatar( $userInfo, $options );
+        }
         
         $user->setInfo( $userInfo );
     }
@@ -118,7 +125,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $imagePath      = $this->fileLocator->locate( $options['avatar'] );
         $uploadedImage  = new UploadedFile( $imagePath, basename( $imagePath ) );
         
-        $avatarImage    = new AvatarImage();
+        $avatarImage    = $this->avatarImageFactory->createNew();
         $avatarImage->setFile( $uploadedImage );
         
         $this->imageUploader->upload( $avatarImage );
