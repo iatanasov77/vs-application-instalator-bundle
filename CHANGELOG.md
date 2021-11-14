@@ -1,3 +1,9 @@
+1.4.32	|	Release date: **14.11.2021**
+============================================
+* New Features:
+  - Add Subtree Sync Scripts
+
+
 1.4.31	|	Release date: **14.11.2021**
 ============================================
 * Bug-Fixes and Imrovements:
