@@ -39,3 +39,22 @@ services:
         arguments:
             - '@vs_application.factory.locale'
             - '@vs_application.repository.locale'
+
+    vs_application.fixture.example_factory.user_roles:
+        class: VS\ApplicationInstalatorBundle\DataFixtures\Factory\UserRolesExampleFactory
+        arguments:
+            - '@vs_application.repository.taxonomy'
+            - '@vs_application.factory.taxon'
+            - '@vs_application.repository.taxon'
+            - '@vs_users.factory.user_roles'
+
+    vs_application.fixture.example_factory.users:
+        class: VS\ApplicationInstalatorBundle\DataFixtures\Factory\UsersExampleFactory
+        arguments:
+            - '@vs_users.manager.user'
+            - '@vs_users.repository.user_roles'
+            - '@vs_users.factory.user_info'
+            - '@vs_users.factory.avatar_image'
+            - '%locale%'
+            - '@file_locator'
+            - '@vs_cms.image_uploader'

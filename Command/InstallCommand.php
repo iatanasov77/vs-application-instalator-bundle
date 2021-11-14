@@ -89,7 +89,7 @@ EOT
         
         $outputStyle->newLine( 2 );
         $outputStyle->success( $this->getProperFinalMessage( $errored ) );
-        $outputStyle->writeln( 'Configure your application document root at public/{application-name} and admin panel at public/admin_panel .' );
+        $outputStyle->writeln( 'Configure your application document root at public/{application-name} and admin panel at public/admin-panel .' );
         
         return $errored ? 1 : 0;
     }
