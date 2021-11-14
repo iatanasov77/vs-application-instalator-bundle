@@ -133,6 +133,8 @@ class SetupApplication
             $this->applicationVersion,
             file_get_contents( $projectRootDir . '/src/AdminPanelKernel.php' )
         ));
+        
+        $this->removeOriginalKernelConfigs();
     }
     
     private function setupApplicationKernel()
@@ -268,8 +270,40 @@ class SetupApplication
             ["__application_name__"],
             [$this->applicationNamespace],
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_users.yaml' )
-            );
+        );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_users.yaml', $configRoutes );
+    }
+    
+    private function removeOriginalKernelConfigs()
+    {
+        $projectRootDir         = $this->container->get( 'kernel' )->getProjectDir();
+        $filesystem             = new Filesystem();
+        $originalKernelConfigs  = [
+            $projectRootDir . '/CHANGELOG.md',
+            
+            // Directories Added by Flex
+            $projectRootDir . '/migrations',
+            $projectRootDir . '/tests',
+            
+            // Assets Added by Flex
+            $projectRootDir . '/assets/controllers',
+            $projectRootDir . '/assets/styles',
+            $projectRootDir . '/assets/app.js',
+            $projectRootDir . '/assets/bootstrap.js',
+            $projectRootDir . '/assets/controllers.json',
+            
+            // Configs Added by Flex
+            $projectRootDir . '/config/packages',
+            $projectRootDir . '/config/routes',
+            $projectRootDir . '/config/bundles.php',
+            $projectRootDir . '/config/preload.php',
+            $projectRootDir . '/config/routes.yaml',
+            $projectRootDir . '/config/services.yaml',
+        ];
+        
+        foreach( $originalKernelConfigs as $confFile ) {
+            $filesystem->remove( $confFile );
+        }
     }
     
     private function setupInstalationInfo()

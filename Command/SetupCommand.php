@@ -85,7 +85,7 @@ EOT
             return;
         }
         
-        $user->setRoles( ['ROLE_SUPER_ADMIN'] );
+        $user->setRolesArray( ['ROLE_SUPER_ADMIN'] );
         $user->setEnabled( true );
         $user->setVerified( true );
         //$user->setLocaleCode( $localeCode );

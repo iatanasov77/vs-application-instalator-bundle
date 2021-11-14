@@ -55,27 +55,81 @@ sylius_fixtures:
                               category_code: 'maintenance-pages'
                               locale:  '%locale%'
 
+                taxonomy_user_roles:
+                    name: taxonomy
+                    options:
+                        custom:
+                            - code: 'user-roles'
+                              title: 'User Roles'
+                              description: 'User Roles Taxonomy'
+                              locale:  '%locale%'
+                              
+                user_roles:
+                    name: user_roles
+                    options:
+                        custom:
+                            - title: 'Role Super Admin'
+                              description: 'Role Super Admin Description'
+                              taxonomy_code: 'user-roles'
+                              locale:  '%locale%'
+                              role: 'ROLE_SUPER_ADMIN'
+                              parent: null
+                              
+                            - title: 'Role Admin'
+                              description: 'Role Admin Description'
+                              taxonomy_code: 'user-roles'
+                              locale:  '%locale%'
+                              role: 'ROLE_ADMIN'
+                              parent: role-super-admin
+                              
+                            - title: 'Role Author'
+                              description: 'Role Author Description'
+                              taxonomy_code: 'user-roles'
+                              locale:  '%locale%'
+                              role: 'ROLE_AUTHOR'
+                              parent: null
+                              
+                            - title: 'Role User'
+                              description: 'Role User Description'
+                              taxonomy_code: 'user-roles'
+                              locale:  '%locale%'
+                              role: 'ROLE_USER'
+                              parent: null
+                              
+                users:
+                    name: users
+                    options:
+                        custom:
+                            - email: 'appadmin@example.com'
+                              username: 'appadmin'
+                              password: 'appadmin'
+                              role_code: 'role-admin'
+                              enabled: true
+                              locale_code: '%locale%'
+                              first_name: 'App'
+                              last_name: 'Admin'
+                              avatar: '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/john.jpg'
+                              #avatar: null
+                              
+                            - email: 'appauthor@example.com'
+                              username: 'appauthor'
+                              password: 'appauthor'
+                              role_code: 'role-author'
+                              enabled: true
+                              locale_code: '%locale%'
+                              first_name: 'App'
+                              last_name: 'Author'
+                              avatar: '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/john.jpg'
+                              #avatar: null
+                              
+                            - email: 'appuser@example.com'
+                              username: 'appuser'
+                              password: 'appuser'
+                              role_code: 'role-user'
+                              enabled: true
+                              locale_code: '%locale%'
+                              first_name: 'App'
+                              last_name: 'User'
+                              avatar: '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/luke.jpg'
+                              #avatar: null
 
-#                 admin_user:
-#                     name: 'admin_user'
-#                     options:
-#                         custom:
-#                             -   email: 'sylius@example.com'
-#                                 username: 'sylius'
-#                                 password: 'sylius'
-#                                 enabled: true
-#                                 locale_code: '%locale%'
-#                                 first_name: 'John'
-#                                 last_name: 'Doe'
-#                                 avatar: '@SyliusCoreBundle/Resources/fixtures/adminAvatars/john.jpg'
-# 
-#                             -   email: 'api@example.com'
-#                                 username: 'api'
-#                                 password: 'sylius-api'
-#                                 enabled: true
-#                                 locale_code: '%locale%'
-#                                 first_name: 'Luke'
-#                                 last_name: 'Brushwood'
-#                                 api: true
-#                                avatar: '@SyliusCoreBundle/Resources/fixtures/adminAvatars/luke.jpg'
-#
