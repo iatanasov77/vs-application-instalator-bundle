@@ -1,3 +1,23 @@
+1.5.0	|	Release date: **14.11.2021**
+============================================
+* New Features:
+  - Start 1.5
+
+
+1.4.2	|	Release date: **14.11.2021**
+============================================
+* New Features:
+  - Improve AbstractCrudController.
+  - Create Resource for Users Roles.
+  - Improve Templates for UsersRoles Resource.
+  - Update Application Kernel for new configs layot.
+  - Add New Migrations.
+  - Add User Avatars and Taxon Images.
+  - Add FileManager Models.
+* Bug-Fixes:
+  - Many Fixes and Refactoring.
+
+
 1.4.1	|	Release date: **21.10.2021**
 ============================================
 * New Features:

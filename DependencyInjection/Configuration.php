@@ -28,6 +28,9 @@ use VS\ApplicationBundle\Model\Taxonomy;
 use VS\ApplicationBundle\Controller\TaxonomyController;
 use VS\ApplicationBundle\Form\TaxonomyForm;
 
+use VS\ApplicationBundle\Model\TaxonImage;
+use VS\ApplicationBundle\Model\Interfaces\TaxonImageInterface;
+
 use VS\ApplicationBundle\Repository\TaxonRepository;
 use VS\ApplicationBundle\Model\Taxon;
 use VS\ApplicationBundle\Model\Interfaces\TaxonInterface;
@@ -143,6 +146,24 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
+                        
+                        ->arrayNode( 'taxon_image' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( TaxonImage::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( TaxonImageInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'controller' )->defaultValue( ResourceController::class )->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        
                         ->arrayNode( 'taxon' )
                             ->addDefaultsIfNotSet()
                             ->children()
