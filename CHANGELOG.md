@@ -1,3 +1,11 @@
+1.4.30	|	Release date: **14.11.2021**
+============================================
+* New Features and Improvements:
+  - Add Some Instalator Configurations.
+* Bug-Fixes:
+  - Stupid Fix
+
+
 1.4.29	|	Release date: **14.11.2021**
 ============================================
 * New Features and Improvements:
