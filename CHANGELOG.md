@@ -1,3 +1,9 @@
+1.4.31	|	Release date: **14.11.2021**
+============================================
+* Bug-Fixes and Imrovements:
+  - Fix and Improve Configs.
+
+
 1.4.30	|	Release date: **14.11.2021**
 ============================================
 * New Features and Improvements:
