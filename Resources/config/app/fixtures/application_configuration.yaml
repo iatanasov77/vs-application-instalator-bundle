@@ -27,13 +27,23 @@ sylius_fixtures:
 #                                 theme: 'TestTheme'
 #                                 maintenancePage: 0
 
-                taxonomy_page_categories:
+                taxonomies:
                     name: taxonomy
                     options:
                         custom:
                             - code: 'page-categories'
                               title: 'Page Categories'
                               description: 'Page Categories'
+                              locale:  '%locale%'
+                              
+                            - code: 'user-roles'
+                              title: 'User Roles'
+                              description: 'User Roles Taxonomy'
+                              locale:  '%locale%'
+                              
+                            - code: 'file-managers'
+                              title: 'File Managers'
+                              description: 'FileManagers Taxonomy'
                               locale:  '%locale%'
 
                 pages_categories:
@@ -53,15 +63,6 @@ sylius_fixtures:
                               text: '<h1>Under Construction</h1>'
                               published: true
                               category_code: 'maintenance-pages'
-                              locale:  '%locale%'
-
-                taxonomy_user_roles:
-                    name: taxonomy
-                    options:
-                        custom:
-                            - code: 'user-roles'
-                              title: 'User Roles'
-                              description: 'User Roles Taxonomy'
                               locale:  '%locale%'
                               
                 user_roles:
