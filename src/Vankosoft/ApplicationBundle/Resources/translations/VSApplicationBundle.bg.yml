@@ -34,6 +34,10 @@ vs_application:
         taxonomy_create_title: 'Създаване на Нова Таксономия'
         taxonomy_update_list_taxons_title: 'Таксони на Таксономия'
         button_create_taxon: 'Добави Нов Таксон'
+        items_index_row_slug: Слуг
+        items_index_row_code: Код
+        items_index_row_title: Име
+        items_index_row_action: Действие
     modal:
         application_delete:
             title: 'Изтриване на Приложение'

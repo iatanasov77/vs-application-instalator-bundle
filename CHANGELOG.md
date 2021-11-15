@@ -1,3 +1,13 @@
+1.5.2	|	Release date: **15.11.2021**
+============================================
+* New Features:
+  - Make FileManager Model a Taxonomy.
+  - Add Translations for Taxonomy Taxon Items.
+  - Set FileManager Index Template Head Titles.
+* Bug-Fixes:
+  - Fix Loading Cms FileManager Forms.
+
+
 1.5.1	|	Release date: **14.11.2021**
 ============================================
 * Bug-Fixes:
