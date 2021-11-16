@@ -1,3 +1,16 @@
+1.5.3	|	Release date: **16.11.2021**
+============================================
+* New Features:
+  - Add New Migration.
+  - Improve Instalator Taxonomy Features.
+* Bug-Fixes:
+  - Fix VankosoftFileManagerController
+  - Fix VankosoftFileManagerController.
+  - Fix FileManager Index Template.
+  - Fix and Improve AdminPanel Menu Services.
+  - Fix Cms FileManager Templates.
+
+
 1.5.2	|	Release date: **15.11.2021**
 ============================================
 * New Features:
