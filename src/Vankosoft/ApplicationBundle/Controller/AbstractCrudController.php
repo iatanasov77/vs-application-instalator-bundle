@@ -93,7 +93,7 @@ class AbstractCrudController extends ResourceController
             return $this->render( $configuration->getTemplate( ResourceActions::UPDATE . '.html' ), array_merge( [
                 'item' => $entity,
                 'form' => $form->createView(),
-            ], $this->customData( $request ) ) );
+            ], $this->customData( $request, $entity ) ) );
         }
         
         return $this->createRestView( $configuration, $entity );
@@ -144,7 +144,7 @@ class AbstractCrudController extends ResourceController
         
     }
     
-    protected function customData( Request $request ): array
+    protected function customData( Request $request, $entity = null ): array
     {
         return [];
     }
