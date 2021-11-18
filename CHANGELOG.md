@@ -1,3 +1,27 @@
+1.5.4	|	Release date: **18.11.2021**
+============================================
+* New Features:
+  - Connect Controllers that upload files to  FileManager.
+  - Add AdminPanel Template into Docs.
+  - Improve Templates.
+  - Styling File Input.
+  - Improve File Inputs to Display Selected Files.
+  - Handling FileManagerFile Form Submit.
+  - List Files For a VankosoftFileManager.
+  - Pass Entity into AbstractCrudController::customData method.
+  - Test to Get SplFileInfo object.
+  - Test to Get Gaufrette\File object.
+  - Some Improvements of getting FileSize from FileManagerFile.
+  - Improve FileManager Files.
+  - Add New Migration.
+* Bug-Fixes:
+  - Fix FileManager File Form.
+  - Fix FileManager Upload File Modal Dialog.
+  - Fix Filemanager Upload Modal Dialog.
+  - Fix All Controllers that Inherit AbstractCrudController for new declaration of  customData method.
+  - Many Other Fixes.
+
+
 1.5.3	|	Release date: **16.11.2021**
 ============================================
 * New Features:
