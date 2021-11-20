@@ -84,15 +84,11 @@
         
             <li class="nav-item dropdown nav-user">
                 <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                	{% if app.user.info and app.user.info.profilePictureFilename and installedBundles.LiipImagineBundle is defined %}
-                		<img src="{{ path( 'vs_cms_images_get_file', { 'file': '/var/uploads/profile_pictures/' ~ app.user.info.profilePictureFilename } ) }}?filter=profile_form_thumb" class="user-avatar-md rounded-circle" />
-                	{% else %}
-            			<img src="{{ asset( '/build/images/avatar-1.jpg' ) }}" alt="" class="user-avatar-md rounded-circle" />
-            		{% endif %}
+                	<img src="{{ asset( '/build/images/avatar-1.jpg' ) }}" alt="" class="user-avatar-md rounded-circle" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                     <div class="nav-user-info">
-                        <h5 class="mb-0 text-white nav-user-name">{{ app.user.fullName }}</h5>
+                        <h5 class="mb-0 text-white nav-user-name">{{ app.user.info.fullName }}</h5>
                         <span class="status"></span><span class="ml-2">Available</span>
                     </div>
                     

@@ -81,6 +81,9 @@ EOT
         
         try {
             $user = $this->configureNewUser( $userManager, $input, $output );
+            
+            $user->getInfo()->setFirstName( 'Admin' );
+            $user->getInfo()->setLastName( 'Admin' );
         } catch ( \InvalidArgumentException $exception ) {
             return;
         }
