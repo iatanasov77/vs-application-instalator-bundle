@@ -112,6 +112,8 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
         if ( $options['avatar'] && ! empty( $options['avatar'] ) ) {
             $this->createAvatar( $userInfo, $options );
         }
+        $userInfo->setFirstName( $options['first_name'] );
+        $userInfo->setLastName( $options['first_name'] );
         
         $user->setInfo( $userInfo );
     }
