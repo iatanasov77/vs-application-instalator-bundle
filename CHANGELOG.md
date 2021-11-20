@@ -1,3 +1,15 @@
+1.5.5	|	Release date: **20.11.2021**
+============================================
+* New Features:
+  - Get Dimensions if the file is image.
+  - Refactoring UsersBundle to use Avatar instead of Profile Picture Field.
+  - Add New Migration.
+* Bug-Fixes:
+  - Fix Installer DatabaseSetupCommandsProvider.
+  - FileManager Set Original Name Not a Tmp Name.
+  - Fix Handling ALl Images.
+
+
 1.5.4	|	Release date: **18.11.2021**
 ============================================
 * New Features:
