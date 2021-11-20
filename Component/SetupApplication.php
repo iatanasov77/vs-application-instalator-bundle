@@ -205,11 +205,19 @@ class SetupApplication
         
         // Setup Services and Parameters
         $configServices = str_replace(
-                            ["__application_name__", "__application_slug__", "__kernel_class__"],
-                            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel'],
-                            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml' )
+            ["__application_name__", "__application_slug__", "__kernel_class__"],
+            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel'],
+            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml', $configServices );
+        
+        // Setup Liip Imagine
+        $configLiipImagine  = str_replace(
+            ["__application_slug__"],
+            [$this->applicationSlug],
+            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml' )
+        );
+        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml', $configLiipImagine );
     }
     
     private function setupApplicationAssets()
