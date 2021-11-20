@@ -57,4 +57,4 @@ services:
             - '@vs_users.factory.avatar_image'
             - '%locale%'
             - '@file_locator'
-            - '@vs_cms.image_uploader'
+            - '@vs_cms.profile_uploader'
