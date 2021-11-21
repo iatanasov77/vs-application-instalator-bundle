@@ -1,3 +1,9 @@
+1.5.9	|	Release date: **21.11.2021**
+============================================
+* Bug-Fixes:
+  - Instalator Clear Liip Imagine Cache.
+
+
 1.5.8	|	Release date: **21.11.2021**
 ============================================
 * Bug-Fixes:
