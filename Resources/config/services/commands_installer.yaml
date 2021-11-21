@@ -26,6 +26,10 @@ services:
             
     vs_app.command.install.setup:
         class: VS\ApplicationInstalatorBundle\Command\SetupCommand
+        arguments:
+            - '@service_container'
+            - '@file_locator'
+            - '@vs_cms.profile_uploader'
         tags:
             - 'console.command'
             
