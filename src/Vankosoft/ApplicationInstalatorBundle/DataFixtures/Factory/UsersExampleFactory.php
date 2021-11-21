@@ -113,7 +113,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
             $this->createAvatar( $userInfo, $options );
         }
         $userInfo->setFirstName( $options['first_name'] );
-        $userInfo->setLastName( $options['first_name'] );
+        $userInfo->setLastName( $options['last_name'] );
         
         $user->setInfo( $userInfo );
     }

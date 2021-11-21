@@ -1,3 +1,9 @@
+1.5.8	|	Release date: **21.11.2021**
+============================================
+* Bug-Fixes:
+  - Fix Instalator to Setup Users First and Last Name and to Setup Super Admin Avatar..
+
+
 1.5.7	|	Release date: **21.11.2021**
 ============================================
 * Refactoring:
