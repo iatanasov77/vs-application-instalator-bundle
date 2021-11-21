@@ -82,7 +82,6 @@ EOT
         
         try {
             $user = $this->configureNewUser( $userManager, $input, $output );
-            $this->setupAdministratorsAvatar( $user );
             
             $user->getInfo()->setFirstName( 'Super' );
             $user->getInfo()->setLastName( 'Admin' );
@@ -97,6 +96,8 @@ EOT
         $user->setPreferedLocale( $localeCode );
         
         $userManager->saveUser( $user );
+        $this->setupAdministratorsAvatar( $user );
+        $userManager->saveUser( $user ); // More One Save But Needed For Now
         
         $outputStyle->writeln( '<info>Administrator account successfully registered.</info>' );
         $outputStyle->newLine();
