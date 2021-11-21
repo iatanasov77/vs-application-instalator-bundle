@@ -12,8 +12,11 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Config\FileLocatorInterface;
 use Webmozart\Assert\Assert;
 
+use VS\CmsBundle\Component\Uploader\FileUploaderInterface;
 use VS\UsersBundle\Model\UserInterface;
 use VS\UsersBundle\Repository\UsersRepositoryInterface;
 use VS\ApplicationBundle\Component\Slug;
@@ -21,6 +24,20 @@ use VS\ApplicationBundle\Component\Slug;
 final class SetupCommand extends AbstractInstallCommand
 {
     protected static $defaultName = 'vankosoft:install:setup';
+    
+    private ?FileLocatorInterface $fileLocator;
+    private ?FileUploaderInterface $imageUploader;
+    
+    public function __construct(
+        ContainerInterface $container,
+        ?FileLocatorInterface $fileLocator = null,
+        ?FileUploaderInterface $imageUploader = null
+    ) {
+            parent::__construct( $container );
+            
+            $this->fileLocator      = $fileLocator;
+            $this->imageUploader    = $imageUploader;
+    }
     
     protected function configure() : void
     {
@@ -88,6 +105,7 @@ EOT
         } catch ( \InvalidArgumentException $exception ) {
             return;
         }
+        $this->setupAdministratorsAvatar( $user );
         
         $user->setRolesArray( ['ROLE_SUPER_ADMIN'] );
         $user->setEnabled( true );
@@ -96,8 +114,6 @@ EOT
         $user->setPreferedLocale( $localeCode );
         
         $userManager->saveUser( $user );
-        $this->setupAdministratorsAvatar( $user );
-        $userManager->saveUser( $user ); // More One Save But Needed For Now
         
         $outputStyle->writeln( '<info>Administrator account successfully registered.</info>' );
         $outputStyle->newLine();
@@ -262,20 +278,17 @@ EOT
     
     private function setupAdministratorsAvatar( &$user )
     {
-        $fileLocator    = $this->getContainer()->get( 'file_locator' );
-        $imageUploader  = $this->getContainer()->get( 'vs_cms.profile_uploader' );
-        
-        if ( $fileLocator === null || $imageUploader === null ) {
+        if ( $this->fileLocator === null || $this->imageUploader === null ) {
             throw new \RuntimeException( 'You must configure a $fileLocator or/and $imageUploader' );
         }
         
-        $imagePath      = $fileLocator->locate( '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/vankosoft.png' );
+        $imagePath      = $this->fileLocator->locate( '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/vankosoft.png' );
         $uploadedImage  = new UploadedFile( $imagePath, basename( $imagePath ) );
         
         $avatarImage    = $this->getContainer()->get( 'vs_users.factory.avatar_image' )->createNew();
         $avatarImage->setFile( $uploadedImage );
         
-        $imageUploader->upload( $avatarImage );
+        $this->imageUploader->upload( $avatarImage );
         
         $user->getInfo()->setAvatar( $avatarImage );
     }
