@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Webmozart\Assert\Assert;
 
 use VS\UsersBundle\Model\UserInterface;
@@ -111,14 +112,12 @@ EOT
         if ( $input->getOption( 'no-interaction' ) ) {
             Assert::null( $userRepository->findOneByEmail( 'vankosoft@example.com' ) );
             $user   = $userManager->createUser( 'admin', 'vankosoft@example.com', 'admin' );
-            
-            return $user;
+        } else {
+            $email          = $this->getAdministratorEmail( $input, $output );
+            $username       = $this->getAdministratorUsername( $input, $output, $email );
+            $plainPassword  = $this->getAdministratorPassword( $input, $output );
+            $user   = $userManager->createUser( $username, $email, $plainPassword );
         }
-        
-        $email          = $this->getAdministratorEmail( $input, $output );
-        $username       = $this->getAdministratorUsername( $input, $output, $email );
-        $plainPassword  = $this->getAdministratorPassword( $input, $output );
-        $user   = $userManager->createUser( $username, $email, $plainPassword );
         
         return $user;
     }
@@ -257,5 +256,25 @@ EOT
             )
             ->setMaxAttempts( 3 )
         ;
+    }
+    
+    private function setupAdministratorsAvatar( &$user )
+    {
+        $fileLocator    = $this->getContainer()->get( 'file_locator' );
+        $imageUploader  = $this->getContainer()->get( 'vs_cms.profile_uploader' );
+        
+        if ( $fileLocator === null || $imageUploader === null ) {
+            throw new \RuntimeException( 'You must configure a $fileLocator or/and $imageUploader' );
+        }
+        
+        $imagePath      = $fileLocator->locate( '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/vankosoft.png' );
+        $uploadedImage  = new UploadedFile( $imagePath, basename( $imagePath ) );
+        
+        $avatarImage    = $this->getContainer()->get( 'vs_users.factory.avatar_image' )->createNew();
+        $avatarImage->setFile( $uploadedImage );
+        
+        $imageUploader->upload( $avatarImage );
+        
+        $user->info()->setAvatar( $avatarImage );
     }
 }
