@@ -1,3 +1,9 @@
+1.5.7	|	Release date: **21.11.2021**
+============================================
+* Refactoring:
+  - Refactoring of UsersBundle/Model/User
+
+
 1.5.6	|	Release date: **21.11.2021**
 ============================================
 * New Features and Improvements:
