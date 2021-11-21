@@ -1,3 +1,19 @@
+1.5.6	|	Release date: **21.11.2021**
+============================================
+* New Features and Improvements:
+  - Remove Swiftmailer.
+  - Add Gaufrette Filesystems Parameters in Application Installator.
+  - Set Profile Form and Controller to Use Profile Image Uploader Service.
+  - Add to Display User Avatar at Layout Top.
+  - Display UserInfo in UsersCrud.
+* Bug-Fixes:
+  - Services and Parameters Fixes.
+  - Fix Profile Picture Form Submit. Fix Installator about Creating Users.
+  - Remove firstName, lastName from UsersCrud::update but need to be added anywere.
+  - Fix UsersExtController::displayUserInfo
+  - Fix UsersExtController::handleUserInfo
+
+
 1.5.5	|	Release date: **20.11.2021**
 ============================================
 * New Features:
