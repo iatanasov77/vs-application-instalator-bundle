@@ -82,8 +82,9 @@ EOT
         
         try {
             $user = $this->configureNewUser( $userManager, $input, $output );
+            $this->setupAdministratorsAvatar( $user );
             
-            $user->getInfo()->setFirstName( 'Admin' );
+            $user->getInfo()->setFirstName( 'Super' );
             $user->getInfo()->setLastName( 'Admin' );
         } catch ( \InvalidArgumentException $exception ) {
             return;
@@ -275,6 +276,6 @@ EOT
         
         $imageUploader->upload( $avatarImage );
         
-        $user->info()->setAvatar( $avatarImage );
+        $user->getInfo()->setAvatar( $avatarImage );
     }
 }
