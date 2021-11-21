@@ -86,6 +86,7 @@ EOT
                 $errored = true;
             }
         }
+        $this->commandExecutor->runCommand( 'liip:imagine:cache:remove', [], $output ); // Clear Liip Imagine Cache
         
         $outputStyle->newLine( 2 );
         $outputStyle->success( $this->getProperFinalMessage( $errored ) );
