@@ -47,6 +47,7 @@ services:
             - '@vs_application.factory.taxon'
             - '@vs_application.repository.taxon'
             - '@vs_users.factory.user_roles'
+            - '@vs_users.repository.user_roles'
 
     vs_application.fixture.example_factory.users:
         class: VS\ApplicationInstalatorBundle\DataFixtures\Factory\UsersExampleFactory
