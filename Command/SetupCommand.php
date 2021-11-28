@@ -54,14 +54,16 @@ EOT
     {
         $locale = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
         //$this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
-        $this->setupAdminPanelApplication( $input, $output, $locale->getCode() );
-        $this->setupAdministratorUser( $input, $output, $locale->getCode() );
         
-        $parameters = [
-            '--setup-kernel' => true,
-        ];
-        $this->commandExecutor->runCommand( 'vankosoft:application:create', $parameters, $output );
+        // Setup Super Admin Panel
+        $this->setupAdminPanelApplication( $input, $output, $locale->getCode() );
+        
+        // Setup an Application
+        $this->commandExecutor->runCommand( 'vankosoft:application:create', ['--setup-kernel' => true], $output );
         $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', [], $output );
+        
+        // Setup Super Admin User
+        $this->setupAdministratorUser( $input, $output, $locale->getCode() );
         
         return 0;
     }
@@ -97,6 +99,7 @@ EOT
         
         $userManager    = $this->getContainer()->get( 'vs_users.manager.user' );
         
+        // Setup UserInfo Object
         try {
             $user = $this->configureNewUser( $userManager, $input, $output );
             
@@ -107,12 +110,19 @@ EOT
         }
         $this->setupAdministratorsAvatar( $user );
         
-        $user->setRolesArray( ['ROLE_SUPER_ADMIN'] );
+        // Setup User Properties
+        $user->setRolesArray( ['ROLE_SUPER_ADMIN'] ); // For Backward Compatibility
+        $userRole   = $this->get( 'vs_users.repository.user_roles' )->findByTaxonCode( 'role-super-admin' );
+        if ( $userRole ) {
+            $user->addRole( $userRole );
+        }
+        
         $user->setEnabled( true );
         $user->setVerified( true );
         //$user->setLocaleCode( $localeCode );
         $user->setPreferedLocale( $localeCode );
         
+        // Save User
         $userManager->saveUser( $user );
         
         $outputStyle->writeln( '<info>Administrator account successfully registered.</info>' );
