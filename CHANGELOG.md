@@ -1,3 +1,24 @@
+1.5.12	|	Release date: **28.11.2021**
+============================================
+* New Features:
+  - Add Twig Macros for Form Tree Types.
+  - Build Roles Tree From Role Collection.
+  - Use UsersRolesExtController to RolesTree into UsersCrud Update Action.
+  - Using Macros for EasyUi Combo EveryWhere.
+* Bug-Fixes and Refactoring:
+  - Refactoring of Doctring Mapping Between User and UserInfo Models.
+  - Fix Application Configs.
+  - Fix UsersRolesExtController
+  - Fix UsersCrud Template.
+  - Fix Users Model.
+  - Refactoting User Entity and Make UsersCrud to Save User with Roles Collection.
+  - Fix UserRoleInteface Namespace.
+  - Use Not Mapped Plain Password Field in UserFormType.
+  - Fix Edit User Templait to use plain_password field.
+  - Refactoring of User Model.
+  - Refactoring of Installator SetupoCommand.
+
+
 1.5.11	|	Release date: **21.11.2021**
 ============================================
 * Bug-Fixes:
