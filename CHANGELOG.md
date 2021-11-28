@@ -1,3 +1,11 @@
+1.5.13	|	Release date: **28.11.2021**
+============================================
+* Bug-Fixes:
+  - Fix Initializing Roles Collection in User Model.
+  - Create Security Voters (ONLY CLASSES).
+  - Fix Instalator Roles Tree.
+
+
 1.5.12	|	Release date: **28.11.2021**
 ============================================
 * New Features:

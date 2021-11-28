@@ -88,7 +88,14 @@ sylius_fixtures:
                               taxonomy_code: 'user-roles'
                               locale:  '%locale%'
                               role: 'ROLE_AUTHOR'
-                              parent: null
+                              parent: role-admin
+                              
+                            - title: 'Role Editor'
+                              description: 'Role Editor Description'
+                              taxonomy_code: 'user-roles'
+                              locale:  '%locale%'
+                              role: 'ROLE_EDITOR'
+                              parent: role-admin
                               
                             - title: 'Role User'
                               description: 'Role User Description'
