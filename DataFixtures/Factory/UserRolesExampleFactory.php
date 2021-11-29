@@ -50,11 +50,7 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
     {
         $options                    = $this->optionsResolver->resolve( $options );
         
-        $taxonomyRootTaxonEntity    = $this->taxonomyRepository->findByCode( $options['taxonomy_code'] )->getRootTaxon();
-        $taxonParent                = $this->taxonRepository->findOneBy( ['code' => $options['parent']] );
-        
         $userRoleEntity             = $this->userRolesFactory->createNew();
-        
         $taxonEntity                = $this->taxonFactory->createNew();
         $slug                       = Slug::generate( $options['title'] );
         
@@ -64,6 +60,11 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
         $taxonEntity->getTranslation()->setDescription( $options['description'] );
         $taxonEntity->getTranslation()->setSlug( $slug );
         $taxonEntity->getTranslation()->setTranslatable( $taxonEntity );
+        
+        $taxonomyRootTaxonEntity    = $this->taxonomyRepository->findByCode( $options['taxonomy_code'] )->getRootTaxon();
+        $taxonParent                = $this->taxonRepository->findOneBy( ['code' => $options['parent']] );
+        //echo "\n\nParent Code: " . $options['parent'] . "\nParent ID: " . ( $taxonParent ? $taxonParent->getId() : "NULL" );
+        //echo "\nCount Taxons: " . $this->taxonRepository->count(['root' => 2]) . "\n\n";
         
         $taxonEntity->setParent( $taxonParent ?: $taxonomyRootTaxonEntity );
         $userRoleEntity->setParent( $this->userRolesRepository->findByTaxonCode( $options['parent'] ) );
