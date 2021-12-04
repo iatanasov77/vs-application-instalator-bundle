@@ -56,11 +56,10 @@ EOT
         //$this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
         
         // Setup Super Admin Panel
-        $this->setupAdminPanelApplication( $input, $output, $locale->getCode() );
+        $this->setupSuperAdminPanelApplication( $input, $output, $locale->getCode() );
         
         // Setup an Application
-        $this->commandExecutor->runCommand( 'vankosoft:application:create', ['--setup-kernel' => true], $output );
-        $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', [], $output );
+        $this->setupApplication( $input, $output );
         
         // Setup Super Admin User
         $this->setupAdministratorUser( $input, $output, $locale->getCode() );
@@ -68,13 +67,13 @@ EOT
         return 0;
     }
     
-    protected function setupAdminPanelApplication( InputInterface $input, OutputInterface $output, string $localeCode ) : void
+    protected function setupSuperAdminPanelApplication( InputInterface $input, OutputInterface $output, string $localeCode ) : void
     {
         $applicationName    = 'Admin Panel';
         $applicationSlug    = Slug::generate( $applicationName );
         
         $outputStyle    = new SymfonyStyle( $input, $output );
-        $outputStyle->writeln( 'Create AdminPanel Application.' );
+        $outputStyle->writeln( 'Create SuperAdminPanel Application.' );
         
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
@@ -88,7 +87,19 @@ EOT
             $output
         );
         
-        $outputStyle->writeln( '<info>AdminPanel Application created successfully.</info>' );
+        $outputStyle->writeln( '<info>SuperAdminPanel Application created successfully.</info>' );
+        $outputStyle->newLine();
+    }
+    
+    protected function setupApplication( InputInterface $input, OutputInterface $output )
+    {
+        $outputStyle    = new SymfonyStyle( $input, $output );
+        
+        $this->commandExecutor->runCommand( 'vankosoft:application:create', ['--setup-kernel' => true], $output );
+        $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', [], $output );
+        
+        $outputStyle->newLine();
+        $outputStyle->writeln( '<info>Default Application created successfully.</info>' );
         $outputStyle->newLine();
     }
     
