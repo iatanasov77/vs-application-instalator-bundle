@@ -1,3 +1,15 @@
+1.5.14	|	Release date: **04.12.2021**
+============================================
+* New Features:
+  - Refactoring Installator Setup Command.
+  - UsersRoles Update Parent Combo.
+  - Add Translator into the UsersRolesExtController.
+  - Improve Security Configuration.
+* Bug-Fixes:
+  - Fix Installator UserRoles Tree.
+  - Fix Using of vs_tree.easyuiCombobox
+
+
 1.5.13	|	Release date: **28.11.2021**
 ============================================
 * Bug-Fixes:
