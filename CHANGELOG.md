@@ -1,3 +1,10 @@
+1.5.15	|	Release date: **04.12.2021**
+============================================
+* New Features:
+  - Improve Security Configuration.
+  - Update Instalator Configs.
+
+
 1.5.14	|	Release date: **04.12.2021**
 ============================================
 * New Features:
