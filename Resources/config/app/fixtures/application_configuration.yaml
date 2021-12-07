@@ -87,65 +87,9 @@ sylius_fixtures:
                     name: user_roles
                     options:
                         custom:
-                            - title: 'Role Admin'
-                              description: 'Role Admin Description'
+                            - title: 'Role Application Admin'
+                              description: 'Role Application Admin Description'
                               taxonomy_code: 'user-roles'
                               locale:  '%locale%'
-                              role: 'ROLE_ADMIN'
+                              role: 'ROLE_APPLICATION_ADMIN'
                               parent: role-super-admin
-                        
-                user_roles__third_level:
-                    name: user_roles
-                    options:
-                        custom:
-                            - title: 'Role Author'
-                              description: 'Role Author Description'
-                              taxonomy_code: 'user-roles'
-                              locale:  '%locale%'
-                              role: 'ROLE_AUTHOR'
-                              parent: role-admin
-                              
-                            - title: 'Role Editor'
-                              description: 'Role Editor Description'
-                              taxonomy_code: 'user-roles'
-                              locale:  '%locale%'
-                              role: 'ROLE_EDITOR'
-                              parent: role-admin
-                              
-                users:
-                    name: users
-                    options:
-                        custom:
-                            - email: 'appadmin@example.com'
-                              username: 'appadmin'
-                              password: 'appadmin'
-                              role_code: 'role-admin'
-                              enabled: true
-                              locale_code: '%locale%'
-                              first_name: 'App'
-                              last_name: 'Admin'
-                              avatar: '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/john.jpg'
-                              #avatar: null
-                              
-                            - email: 'appauthor@example.com'
-                              username: 'appauthor'
-                              password: 'appauthor'
-                              role_code: 'role-author'
-                              enabled: true
-                              locale_code: '%locale%'
-                              first_name: 'App'
-                              last_name: 'Author'
-                              avatar: '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/john.jpg'
-                              #avatar: null
-                              
-                            - email: 'appuser@example.com'
-                              username: 'appuser'
-                              password: 'appuser'
-                              role_code: 'role-user'
-                              enabled: true
-                              locale_code: '%locale%'
-                              first_name: 'App'
-                              last_name: 'User'
-                              avatar: '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/luke.jpg'
-                              #avatar: null
-
