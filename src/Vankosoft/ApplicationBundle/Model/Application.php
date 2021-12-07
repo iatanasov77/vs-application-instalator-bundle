@@ -25,9 +25,13 @@ class Application implements ApplicationInterface
     /** @var string */
     protected $code;
     
+    /** @var Collection|User[] */
+    protected $users;
+    
     public function __construct()
     {
         $this->settings = new ArrayCollection();
+        $this->users    = new ArrayCollection();
     }
     
     public function getId()
@@ -75,5 +79,10 @@ class Application implements ApplicationInterface
         $this->code = $code;
         
         return $this;
+    }
+    
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

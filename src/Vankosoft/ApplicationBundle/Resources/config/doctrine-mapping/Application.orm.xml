@@ -27,5 +27,7 @@
         <indexes>
             <index columns="hostname"/>
         </indexes>
+        
+        <many-to-many field="users" target-entity="VS\UsersBundle\Model\UserInterface" inversed-by="applications" />
     </mapped-superclass>
 </doctrine-mapping>
