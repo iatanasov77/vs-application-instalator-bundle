@@ -83,7 +83,7 @@ EOT
             $user->getInfo()->setFirstName( $userNames[0] );
             $user->getInfo()->setLastName( end( $userNames ) );
         } catch ( \InvalidArgumentException $exception ) {
-            return;
+            return Command::FAILURE;
         }
         $this->setupAdministratorsAvatar( $user );
         $this->setupUserRoles( $user, $roles );
