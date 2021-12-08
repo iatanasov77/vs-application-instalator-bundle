@@ -128,6 +128,9 @@ EOT
     
     private function createApplication( InputInterface $input, OutputInterface $output, $applicationName ): ApplicationInterface
     {
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper     = $this->getHelper( 'question' );
+        
         $questionUrl        = $this->createApplicationUrlQuestion();
         $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
         $applicationSlug    = Slug::generate( $applicationName );
