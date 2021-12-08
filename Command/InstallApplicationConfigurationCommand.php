@@ -9,7 +9,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InstallApplicationConfigurationCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'vankosoft:install:application-configuration';
+    protected static $defaultName = 'vankosoft:application:setup';
 
     protected function configure(): void
     {

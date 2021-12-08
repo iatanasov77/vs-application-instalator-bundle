@@ -37,6 +37,15 @@ services:
         class: VS\ApplicationInstalatorBundle\Command\InstallApplicationConfigurationCommand
         tags:
             - 'console.command'
+    
+    vs_app.command.install.application_user:
+        class: VS\ApplicationInstalatorBundle\Command\CreateApplicationUserCommand
+        arguments:
+            - '@service_container'
+            - '@file_locator'
+            - '@vs_cms.profile_uploader'
+        tags:
+            - 'console.command'
             
     vs_app.command.install.assets:
         class: VS\ApplicationInstalatorBundle\Command\InstallAssetsCommand
