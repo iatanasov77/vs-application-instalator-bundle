@@ -75,13 +75,6 @@ sylius_fixtures:
                               locale:  '%locale%'
                               role: 'ROLE_SUPER_ADMIN'
                               parent: null
-                              
-                            - title: 'Role User'
-                              description: 'Role User Description'
-                              taxonomy_code: 'user-roles'
-                              locale:  '%locale%'
-                              role: 'ROLE_USER'
-                              parent: null
                 
                 user_roles__second_level:
                     name: user_roles
