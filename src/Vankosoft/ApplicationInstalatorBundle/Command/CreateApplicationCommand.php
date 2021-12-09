@@ -134,7 +134,7 @@ EOT
         $questionUrl        = $this->createApplicationUrlQuestion();
         $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
         $applicationSlug    = Slug::generate( $applicationName );
-        $applicationCreated = date( 'Y-m-d H:i:s' );
+        $applicationCreated = new \DateTime;
         
         $application        = $this->getContainer()->get( 'vs_application.factory.application' )->createNew();
         $application->setCode( $applicationSlug );
