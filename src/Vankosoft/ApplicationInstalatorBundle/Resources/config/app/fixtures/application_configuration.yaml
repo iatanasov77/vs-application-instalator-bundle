@@ -85,4 +85,5 @@ sylius_fixtures:
                               taxonomy_code: 'user-roles'
                               locale:  '%locale%'
                               role: 'ROLE_APPLICATION_ADMIN'
-                              parent: role-super-admin
+                              #parent: role-super-admin
+                              parent: null
