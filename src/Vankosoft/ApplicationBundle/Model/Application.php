@@ -90,7 +90,7 @@ class Application implements ApplicationInterface
     public function addUser( UserInterface $user ): self
     {
         if ( ! $this->users->contains( $user ) ) {
-            $this->user[] = $user;
+            $this->users[] = $user;
             $user->addApplication( $this );
         }
         
