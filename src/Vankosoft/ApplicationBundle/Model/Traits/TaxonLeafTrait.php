@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Model\Traits;
+<?php namespace Vankosoft\ApplicationBundle\Model\Traits;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;

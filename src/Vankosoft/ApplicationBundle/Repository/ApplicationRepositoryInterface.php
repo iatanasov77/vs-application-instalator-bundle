@@ -1,6 +1,6 @@
-<?php namespace VS\ApplicationBundle\Repository;
+<?php namespace Vankosoft\ApplicationBundle\Repository;
 
-use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface ApplicationRepositoryInterface extends RepositoryInterface

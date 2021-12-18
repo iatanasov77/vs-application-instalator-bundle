@@ -5,7 +5,7 @@ services:
         public: true
 
     vs_app.settings_manager:
-        class: VS\ApplicationBundle\Component\Settings\Settings
+        class: Vankosoft\ApplicationBundle\Component\Settings\Settings
         arguments: 
             - '@service_container'
 

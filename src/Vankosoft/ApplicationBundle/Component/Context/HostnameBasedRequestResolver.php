@@ -1,8 +1,8 @@
-<?php namespace VS\ApplicationBundle\Component\Context;
+<?php namespace Vankosoft\ApplicationBundle\Component\Context;
 
 use Symfony\Component\HttpFoundation\Request;
-use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
-use VS\ApplicationBundle\Repository\ApplicationRepositoryInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use Vankosoft\ApplicationBundle\Repository\ApplicationRepositoryInterface;
 
 final class HostnameBasedRequestResolver implements RequestResolverInterface
 {

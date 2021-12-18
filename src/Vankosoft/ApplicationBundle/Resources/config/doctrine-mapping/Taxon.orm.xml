@@ -6,8 +6,8 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
 >
 
-    <mapped-superclass name="VS\ApplicationBundle\Model\Taxon">
-        <one-to-one field="taxonomy" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonomyInterface" mapped-by="rootTaxon">
+    <mapped-superclass name="Vankosoft\ApplicationBundle\Model\Taxon">
+        <one-to-one field="taxonomy" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface" mapped-by="rootTaxon">
         	<cascade>
                 <cascade-all/>
             </cascade>
@@ -17,14 +17,14 @@
             <generator strategy="AUTO" />
         </id>
 
-        <many-to-one field="root" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonInterface">
+        <many-to-one field="root" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface">
             <join-column name="tree_root" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <gedmo:tree-root />
             <cascade>
                 <cascade-all/>
             </cascade>
         </many-to-one>
-        <many-to-one field="parent" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonInterface" inversed-by="children">
+        <many-to-one field="parent" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface" inversed-by="children">
             <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <gedmo:tree-parent />
             <gedmo:sortable-group />
@@ -33,7 +33,7 @@
             </cascade>
         </many-to-one>
 
-        <one-to-many field="children" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonInterface" mapped-by="parent">
+        <one-to-many field="children" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface" mapped-by="parent">
             <cascade>
                 <cascade-persist />
             </cascade>
@@ -60,7 +60,7 @@
 
         <field name="enabled" column="enabled" type="boolean" />
         
-        <one-to-many field="images" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonImageInterface" mapped-by="owner" orphan-removal="true">
+        <one-to-many field="images" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\TaxonImageInterface" mapped-by="owner" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>

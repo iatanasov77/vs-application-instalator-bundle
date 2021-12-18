@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Form;
+<?php namespace Vankosoft\ApplicationBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -7,7 +7,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 
-use VS\ApplicationBundle\Model\GeneralSettings;
+use Vankosoft\ApplicationBundle\Model\GeneralSettings;
 
 class SettingsForm extends AbstractForm
 {

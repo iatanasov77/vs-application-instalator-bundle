@@ -1,6 +1,6 @@
-<?php namespace VS\ApplicationBundle\Component\Context;
+<?php namespace Vankosoft\ApplicationBundle\Component\Context;
 
-use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
 interface ApplicationContextInterface
 {

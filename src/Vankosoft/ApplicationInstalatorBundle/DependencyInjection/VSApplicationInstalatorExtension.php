@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\DependencyInjection;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

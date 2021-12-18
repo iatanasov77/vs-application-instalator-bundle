@@ -5,29 +5,29 @@ services:
         public: true
     
     vs_app.command.create_application:
-        class: VS\ApplicationInstalatorBundle\Command\CreateApplicationCommand
+        class: Vankosoft\ApplicationInstalatorBundle\Command\CreateApplicationCommand
         tags:
             - 'console.command'
 
     vs_app.command.clear_install:
-        class: VS\ApplicationInstalatorBundle\Command\ClearInstallCommand
+        class: Vankosoft\ApplicationInstalatorBundle\Command\ClearInstallCommand
         tags:
             - 'console.command'
             
     vs_app.command.bumpversion:
-        class: VS\ApplicationInstalatorBundle\Command\BumpVersionCommand
+        class: Vankosoft\ApplicationInstalatorBundle\Command\BumpVersionCommand
         tags:
             - 'console.command'
 
     vs_app.command.assets.sources:
-        class: VS\ApplicationInstalatorBundle\Command\AssetsSourcesCommand
+        class: Vankosoft\ApplicationInstalatorBundle\Command\AssetsSourcesCommand
         arguments:
             - '@filesystem'
         tags:
             - 'console.command'
 
     vs_app.command.assets.dependencies:
-        class: VS\ApplicationInstalatorBundle\Command\CheckAssetDependenciesCommand
+        class: Vankosoft\ApplicationInstalatorBundle\Command\CheckAssetDependenciesCommand
         arguments:
             - '@filesystem'
         tags:

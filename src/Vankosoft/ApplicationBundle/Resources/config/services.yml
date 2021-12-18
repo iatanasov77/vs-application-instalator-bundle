@@ -12,7 +12,7 @@ imports:
     - { resource: services/web_profiler.yaml }
 
 parameters:
-    vs_application.version: !php/const VS\ApplicationBundle\Component\Application\Kernel::VERSION
+    vs_application.version: !php/const Vankosoft\ApplicationBundle\Component\Application\Kernel::VERSION
     vs_application.public_dir: "%kernel.project_dir%/public/admin-panel"
     vs_application.settings.application_id: null
     vs_application.settings.application_layout: null

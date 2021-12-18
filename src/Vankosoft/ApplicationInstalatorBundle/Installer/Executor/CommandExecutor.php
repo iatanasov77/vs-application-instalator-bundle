@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Installer\Executor;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Installer\Executor;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;

@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Form;
+<?php namespace Vankosoft\ApplicationBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -6,7 +6,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-use VS\ApplicationBundle\Component\I18N;
+use Vankosoft\ApplicationBundle\Component\I18N;
 
 class TaxonomyForm extends AbstractForm
 {

@@ -1,10 +1,10 @@
-<?php namespace VS\ApplicationBundle\Repository;
+<?php namespace Vankosoft\ApplicationBundle\Repository;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\SettingsInterface;
 
 class SettingsRepository extends EntityRepository implements SettingsRepositoryInterface, ContainerAwareInterface
 {

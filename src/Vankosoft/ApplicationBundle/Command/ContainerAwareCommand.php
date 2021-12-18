@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Command;
+<?php namespace Vankosoft\ApplicationBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;

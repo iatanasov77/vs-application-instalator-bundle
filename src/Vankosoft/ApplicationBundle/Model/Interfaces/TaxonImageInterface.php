@@ -1,6 +1,6 @@
-<?php namespace VS\ApplicationBundle\Model\Interfaces;
+<?php namespace Vankosoft\ApplicationBundle\Model\Interfaces;
 
-use VS\CmsBundle\Model\FileInterface;
+use Vankosoft\CmsBundle\Model\FileInterface;
 
 interface TaxonImageInterface extends FileInterface
 {

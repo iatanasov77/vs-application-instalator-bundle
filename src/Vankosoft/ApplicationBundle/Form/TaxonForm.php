@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Form;
+<?php namespace Vankosoft\ApplicationBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

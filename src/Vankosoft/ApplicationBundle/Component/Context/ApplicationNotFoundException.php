@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Component\Context;
+<?php namespace Vankosoft\ApplicationBundle\Component\Context;
 
 class ApplicationNotFoundException extends \RuntimeException
 {

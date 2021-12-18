@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
-    <mapped-superclass name="VS\ApplicationBundle\Model\LogEntry">
+    <mapped-superclass name="Vankosoft\ApplicationBundle\Model\LogEntry">
     
     	<field name="locale" column="locale" type="string" length="8" nullable="false" />
     	

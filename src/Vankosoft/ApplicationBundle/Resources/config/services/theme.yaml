@@ -5,7 +5,7 @@ services:
         public: true
 
     vs_app.listener.theme_change:
-        class: VS\ApplicationBundle\EventListener\ThemeChangeListener
+        class: Vankosoft\ApplicationBundle\EventListener\ThemeChangeListener
         arguments:
             - '@sylius.theme.context.settable'
             - '@sylius.repository.theme'

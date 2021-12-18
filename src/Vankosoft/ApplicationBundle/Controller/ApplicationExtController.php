@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Controller;
+<?php namespace Vankosoft\ApplicationBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
 
-use VS\ApplicationBundle\Form\ApplicationForm;
-use VS\ApplicationBundle\Component\Status;
+use Vankosoft\ApplicationBundle\Form\ApplicationForm;
+use Vankosoft\ApplicationBundle\Component\Status;
 
 class ApplicationExtController extends AbstractController
 {

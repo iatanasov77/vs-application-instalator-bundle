@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Component;
+<?php namespace Vankosoft\ApplicationBundle\Component;
 
 class I18N
 {

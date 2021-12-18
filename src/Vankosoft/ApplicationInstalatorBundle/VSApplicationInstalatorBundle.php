@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle;
+<?php namespace Vankosoft\ApplicationInstalatorBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -18,7 +18,7 @@ class VSApplicationInstalatorBundle extends AbstractResourceBundle
     
     public function getContainerExtension()
     {
-        return new \VS\ApplicationInstalatorBundle\DependencyInjection\VSApplicationInstalatorExtension();
+        return new \Vankosoft\ApplicationInstalatorBundle\DependencyInjection\VSApplicationInstalatorExtension();
     }
     
     public function boot(): void
@@ -31,7 +31,7 @@ class VSApplicationInstalatorBundle extends AbstractResourceBundle
         parent::build( $container );
         
         $mappings = [
-            realpath( __DIR__.'/Resources/config/doctrine-mapping' ) => 'VS\ApplicationInstalatorBundle\Model',
+            realpath( __DIR__.'/Resources/config/doctrine-mapping' ) => 'Vankosoft\ApplicationInstalatorBundle\Model',
         ];
         
         if ( class_exists( 'Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass' ) ) {
@@ -43,6 +43,6 @@ class VSApplicationInstalatorBundle extends AbstractResourceBundle
     
     protected function getModelNamespace(): string
     {
-        return 'VS\ApplicationInstalatorBundle\Model';
+        return 'Vankosoft\ApplicationInstalatorBundle\Model';
     }
 }

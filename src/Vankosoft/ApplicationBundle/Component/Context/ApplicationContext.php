@@ -1,8 +1,8 @@
-<?php namespace VS\ApplicationBundle\Component\Context;
+<?php namespace Vankosoft\ApplicationBundle\Component\Context;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
 final class ApplicationContext implements ApplicationContextInterface
 {

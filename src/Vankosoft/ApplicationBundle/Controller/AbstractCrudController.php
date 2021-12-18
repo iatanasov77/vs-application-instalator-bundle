@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Controller;
+<?php namespace Vankosoft\ApplicationBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +25,7 @@ class AbstractCrudController extends ResourceController
         $this->isGrantedOr403( $configuration, ResourceActions::INDEX );
         $resources = $this->resourcesCollectionProvider->get( $configuration, $this->repository );
         if (
-            $this->metadata->getParameters()['classes']['interface'] == 'VS\ApplicationBundle\Model\Interfaces\TaxonRelationInterface'
+            $this->metadata->getParameters()['classes']['interface'] == 'Vankosoft\ApplicationBundle\Model\Interfaces\TaxonRelationInterface'
         ) {
             foreach ( $resources as $r ) {
                 $r->setCurrentLocale( $request->getLocale() );
@@ -105,19 +105,19 @@ class AbstractCrudController extends ResourceController
             $response = parent::deleteAction( $request );
         } catch ( DBALException $e ) {
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
-                throw new \VS\ApplicationBundle\Component\Exception\PDOException( 'VS Application DBAL Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
+                throw new \Vankosoft\ApplicationBundle\Component\Exception\PDOException( 'VS Application DBAL Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
             }
         } catch ( \PDOException $e ) {
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
-                throw new \VS\ApplicationBundle\Component\Exception\PDOException( 'VS Application PDO Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
+                throw new \Vankosoft\ApplicationBundle\Component\Exception\PDOException( 'VS Application PDO Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
             }
         } catch ( ORMException $e ) {
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
-                throw new \VS\ApplicationBundle\Component\Exception\PDOException( 'VS Application ORM Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
+                throw new \Vankosoft\ApplicationBundle\Component\Exception\PDOException( 'VS Application ORM Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
             }
         } catch ( \Exception $e ) {
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
-                throw new \VS\ApplicationBundle\Component\Exception\PDOException( 'VS Application PHP Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
+                throw new \Vankosoft\ApplicationBundle\Component\Exception\PDOException( 'VS Application PHP Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
             }
         }
         

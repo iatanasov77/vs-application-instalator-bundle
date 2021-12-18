@@ -1,8 +1,8 @@
-<?php namespace VS\ApplicationBundle\Controller;
+<?php namespace Vankosoft\ApplicationBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use VS\ApplicationBundle\Controller\AbstractCrudController;
-use VS\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Controller\AbstractCrudController;
+use Vankosoft\ApplicationBundle\Component\Slug;
 
 class TaxonomyController extends AbstractCrudController
 { 

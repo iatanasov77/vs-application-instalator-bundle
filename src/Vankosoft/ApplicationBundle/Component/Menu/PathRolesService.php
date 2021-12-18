@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Component\Menu;
+<?php namespace Vankosoft\ApplicationBundle\Component\Menu;
 
 use Symfony\Component\HttpFoundation\Request;
 class PathRolesService

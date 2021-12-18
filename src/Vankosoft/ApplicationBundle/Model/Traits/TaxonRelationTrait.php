@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Model\Traits;
+<?php namespace Vankosoft\ApplicationBundle\Model\Traits;
 
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;

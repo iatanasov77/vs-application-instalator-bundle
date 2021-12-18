@@ -1,10 +1,10 @@
-<?php namespace VS\ApplicationBundle\DataCollector;
+<?php namespace Vankosoft\ApplicationBundle\DataCollector;
 
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use VS\ApplicationBundle\Component\Application\Kernel;
+use Vankosoft\ApplicationBundle\Component\Application\Kernel;
 
 /**
  * Tutorial: https://symfony.com/doc/current/profiler/data_collector.html

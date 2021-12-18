@@ -1,6 +1,6 @@
-<?php namespace VS\ApplicationBundle\Controller;
+<?php namespace Vankosoft\ApplicationBundle\Controller;
 
-use VS\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Component\Slug;
 
 trait TaxonomyHelperTrait
 {

@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Component\Menu\Item;
+<?php namespace Vankosoft\ApplicationBundle\Component\Menu\Item;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\MenuItem;

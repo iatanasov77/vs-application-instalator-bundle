@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\DependencyInjection;
+<?php namespace Vankosoft\ApplicationBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -11,40 +11,40 @@ use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Locale\Model\LocaleInterface;
 
-use VS\ApplicationBundle\Model\Locale;
+use Vankosoft\ApplicationBundle\Model\Locale;
 
-use VS\ApplicationBundle\Repository\ApplicationRepository;
-use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
-use VS\ApplicationBundle\Model\Application;
-use VS\ApplicationBundle\Form\ApplicationForm;
+use Vankosoft\ApplicationBundle\Repository\ApplicationRepository;
+use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use Vankosoft\ApplicationBundle\Model\Application;
+use Vankosoft\ApplicationBundle\Form\ApplicationForm;
 
-use VS\ApplicationBundle\Repository\SettingsRepository;
-use VS\ApplicationBundle\Model\Settings;
-use VS\ApplicationBundle\Controller\SettingsController;
-use VS\ApplicationBundle\Form\SettingsForm;
+use Vankosoft\ApplicationBundle\Repository\SettingsRepository;
+use Vankosoft\ApplicationBundle\Model\Settings;
+use Vankosoft\ApplicationBundle\Controller\SettingsController;
+use Vankosoft\ApplicationBundle\Form\SettingsForm;
 
-use VS\ApplicationBundle\Repository\TaxonomyRepository;
-use VS\ApplicationBundle\Model\Taxonomy;
-use VS\ApplicationBundle\Controller\TaxonomyController;
-use VS\ApplicationBundle\Form\TaxonomyForm;
+use Vankosoft\ApplicationBundle\Repository\TaxonomyRepository;
+use Vankosoft\ApplicationBundle\Model\Taxonomy;
+use Vankosoft\ApplicationBundle\Controller\TaxonomyController;
+use Vankosoft\ApplicationBundle\Form\TaxonomyForm;
 
-use VS\ApplicationBundle\Model\TaxonImage;
-use VS\ApplicationBundle\Model\Interfaces\TaxonImageInterface;
+use Vankosoft\ApplicationBundle\Model\TaxonImage;
+use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonImageInterface;
 
-use VS\ApplicationBundle\Repository\TaxonRepository;
-use VS\ApplicationBundle\Model\Taxon;
-use VS\ApplicationBundle\Model\Interfaces\TaxonInterface;
-use VS\ApplicationBundle\Form\TaxonForm;
+use Vankosoft\ApplicationBundle\Repository\TaxonRepository;
+use Vankosoft\ApplicationBundle\Model\Taxon;
+use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface;
+use Vankosoft\ApplicationBundle\Form\TaxonForm;
 //use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
-use VS\ApplicationBundle\Model\TaxonTranslation;
+use Vankosoft\ApplicationBundle\Model\TaxonTranslation;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 //use Sylius\Component\Taxonomy\Factory\TaxonFactory;
 
-use VS\ApplicationBundle\Model\Translation;
+use Vankosoft\ApplicationBundle\Model\Translation;
 use Gedmo\Translatable\Entity\Repository\TranslationRepository;
 
-use VS\ApplicationBundle\Model\LogEntry;
-use VS\ApplicationBundle\Repository\LogEntryRepository;
+use Vankosoft\ApplicationBundle\Model\LogEntry;
+use Vankosoft\ApplicationBundle\Repository\LogEntryRepository;
 
 /**
  * This is the class that validates and merges configuration from your app/config files

@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\EventSubscriber;
+<?php namespace Vankosoft\ApplicationBundle\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;

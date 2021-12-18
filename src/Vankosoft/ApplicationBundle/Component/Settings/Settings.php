@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Component\Settings;
+<?php namespace Vankosoft\ApplicationBundle\Component\Settings;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -7,7 +7,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\PhpArrayAdapter;
 
-use VS\ApplicationBundle\Component\Exception\SettingsException;
+use Vankosoft\ApplicationBundle\Component\Exception\SettingsException;
 
 class Settings
 {

@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Component\Application;
+<?php namespace Vankosoft\ApplicationBundle\Component\Application;
 
 use Symfony\Component\HttpKernel\Kernel as HttpKernel;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;

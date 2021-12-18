@@ -10,11 +10,11 @@ services:
         public: true
     
     vs_application.path_roles_service:
-        class: VS\ApplicationBundle\Component\Menu\PathRolesService
+        class: Vankosoft\ApplicationBundle\Component\Menu\PathRolesService
         arguments: ['@security.access_map']
 
     vs_app.menu_builder:
-        class: VS\ApplicationBundle\Component\Menu\MenuBuilder
+        class: Vankosoft\ApplicationBundle\Component\Menu\MenuBuilder
         arguments:
             - "%vs_application.menu.config_file%"
             - "@security.authorization_checker"

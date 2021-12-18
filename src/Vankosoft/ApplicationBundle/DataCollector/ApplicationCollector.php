@@ -1,13 +1,13 @@
-<?php namespace VS\ApplicationBundle\DataCollector;
+<?php namespace Vankosoft\ApplicationBundle\DataCollector;
 
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use VS\ApplicationBundle\Component\Context\ApplicationContextInterface;
-use VS\ApplicationBundle\Component\Context\ApplicationNotFoundException;
-use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
-use VS\ApplicationBundle\Repository\ApplicationRepositoryInterface;
+use Vankosoft\ApplicationBundle\Component\Context\ApplicationContextInterface;
+use Vankosoft\ApplicationBundle\Component\Context\ApplicationNotFoundException;
+use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use Vankosoft\ApplicationBundle\Repository\ApplicationRepositoryInterface;
 
 /**
  * Tutorial: https://symfony.com/doc/current/profiler/data_collector.html

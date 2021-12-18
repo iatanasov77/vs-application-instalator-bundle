@@ -6,7 +6,7 @@
                   					  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
 
-    <mapped-superclass name="VS\ApplicationBundle\Model\Application">
+    <mapped-superclass name="Vankosoft\ApplicationBundle\Model\Application">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -28,7 +28,7 @@
             <index columns="hostname"/>
         </indexes>
         
-        <many-to-many field="users" target-entity="VS\UsersBundle\Model\UserInterface" inversed-by="applications" >
+        <many-to-many field="users" target-entity="Vankosoft\UsersBundle\Model\UserInterface" inversed-by="applications" >
             <cascade>
                 <cascade-all/>
             </cascade>

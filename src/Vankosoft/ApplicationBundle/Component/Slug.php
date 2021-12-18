@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Component;
+<?php namespace Vankosoft\ApplicationBundle\Component;
 
 use Gedmo\Sluggable\Util as Sluggable;
 

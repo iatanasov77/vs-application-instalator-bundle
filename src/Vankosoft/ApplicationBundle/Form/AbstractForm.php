@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Form;
+<?php namespace Vankosoft\ApplicationBundle\Form;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -7,7 +7,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
-use VS\ApplicationBundle\Component\I18N;
+use Vankosoft\ApplicationBundle\Component\I18N;
 
 class AbstractForm extends AbstractResourceType
 {

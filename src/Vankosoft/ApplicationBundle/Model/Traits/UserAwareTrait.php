@@ -1,19 +1,19 @@
-<?php namespace VS\ApplicationBundle\Model\Traits;
+<?php namespace Vankosoft\ApplicationBundle\Model\Traits;
 
-use VS\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\UserInterface;
 
 /**
- * @see \VS\ApplicationBundle\Model\Interfaces\UserAwareInterface
+ * @see \Vankosoft\ApplicationBundle\Model\Interfaces\UserAwareInterface
  */
 trait UserAwareTrait
 {
-    /** @var \VS\UsersBundle\Model\UserInterface */
+    /** @var \Vankosoft\UsersBundle\Model\UserInterface */
     protected $createdBy;
     
-    /** @var \VS\UsersBundle\Model\UserInterface */
+    /** @var \Vankosoft\UsersBundle\Model\UserInterface */
     protected $updatedBy;
     
-    /** @var \VS\UsersBundle\Model\UserInterface */
+    /** @var \Vankosoft\UsersBundle\Model\UserInterface */
     protected $deletedBy;
     
     public function getCreatedBy() : ?UserInterface

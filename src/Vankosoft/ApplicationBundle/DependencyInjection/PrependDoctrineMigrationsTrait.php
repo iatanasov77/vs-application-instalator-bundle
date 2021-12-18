@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\DependencyInjection;
+<?php namespace Vankosoft\ApplicationBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 

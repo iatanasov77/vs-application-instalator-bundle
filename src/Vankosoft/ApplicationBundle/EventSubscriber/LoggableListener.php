@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\EventSubscriber;
+<?php namespace Vankosoft\ApplicationBundle\EventSubscriber;
 
 use Gedmo\Loggable\LoggableListener as BaseLoggableListener;
 use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
@@ -7,7 +7,7 @@ use Gedmo\Translatable\Mapping\Event\Adapter\ORM as TranslatableOrmAdapter;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\EventArgs;
 
-use VS\ApplicationBundle\EventSubscriber\Mapping\Event\Adapter\ORM as LoggableOrmAdapter;
+use Vankosoft\ApplicationBundle\EventSubscriber\Mapping\Event\Adapter\ORM as LoggableOrmAdapter;
 
 class LoggableListener extends BaseLoggableListener
 {
@@ -165,7 +165,7 @@ class LoggableListener extends BaseLoggableListener
         if ( $translation ) {
             $translation->setContent( $content );
         } else {
-            /** @var \VS\ApplicationBundle\Model\Translation $translation */
+            /** @var \Vankosoft\ApplicationBundle\Model\Translation $translation */
             $translation    = $translationMeta->newInstance();
             
             $translation->setLocale( $locale );

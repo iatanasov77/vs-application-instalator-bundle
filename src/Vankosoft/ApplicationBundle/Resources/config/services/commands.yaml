@@ -5,6 +5,6 @@ services:
         public: true
     
     vs_app.command.maintenance:
-        class: VS\ApplicationBundle\Command\MaintenanceModeCommand
+        class: Vankosoft\ApplicationBundle\Command\MaintenanceModeCommand
         tags:
             - 'console.command'

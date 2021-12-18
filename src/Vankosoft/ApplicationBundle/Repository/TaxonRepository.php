@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Repository;
+<?php namespace Vankosoft\ApplicationBundle\Repository;
 
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;

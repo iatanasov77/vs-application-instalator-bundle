@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Component\Menu;
+<?php namespace Vankosoft\ApplicationBundle\Component\Menu;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -12,8 +12,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\Matcher\Voter\RouteVoter;
 
-use VS\ApplicationBundle\Component\Menu\PathRolesService;
-use VS\ApplicationBundle\Component\Menu\Item\DividerMenuItem;
+use Vankosoft\ApplicationBundle\Component\Menu\PathRolesService;
+use Vankosoft\ApplicationBundle\Component\Menu\Item\DividerMenuItem;
 
 class MenuBuilder implements ContainerAwareInterface
 {
