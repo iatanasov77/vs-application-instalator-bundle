@@ -1,10 +1,10 @@
-<?php namespace VS\ApplicationInstalatorBundle\Component;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Component;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
-use VS\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Component\Slug;
 
 class SetupApplication
 {

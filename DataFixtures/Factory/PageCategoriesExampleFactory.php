@@ -1,11 +1,11 @@
-<?php namespace VS\ApplicationInstalatorBundle\DataFixtures\Factory;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-use VS\CmsBundle\Model\PageCategoryInterface;
-use VS\ApplicationBundle\Component\Slug;
+use Vankosoft\CmsBundle\Model\PageCategoryInterface;
+use Vankosoft\ApplicationBundle\Component\Slug;
 
 class PageCategoriesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {

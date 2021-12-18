@@ -1,11 +1,11 @@
-<?php namespace VS\ApplicationInstalatorBundle\DataFixtures\Factory;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\SettingsInterface;
 
-use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
-use VS\CmsBundle\Model\PageInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use Vankosoft\CmsBundle\Model\PageInterface;
 
 class ApplicationsExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
