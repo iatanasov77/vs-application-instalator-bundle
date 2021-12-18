@@ -5,6 +5,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use VS\UsersBundle\Model\UserInterface;
 
 class Application implements ApplicationInterface
 {
@@ -25,9 +26,13 @@ class Application implements ApplicationInterface
     /** @var string */
     protected $code;
     
+    /** @var Collection|User[] */
+    protected $users;
+    
     public function __construct()
     {
         $this->settings = new ArrayCollection();
+        $this->users    = new ArrayCollection();
     }
     
     public function getId()
@@ -73,6 +78,31 @@ class Application implements ApplicationInterface
     public function setCode( $code ) : self
     {
         $this->code = $code;
+        
+        return $this;
+    }
+    
+    public function getUsers()
+    {
+        return $this->users;
+    }
+    
+    public function addUser( UserInterface $user ): self
+    {
+        if ( ! $this->users->contains( $user ) ) {
+            $this->users[] = $user;
+            $user->addApplication( $this );
+        }
+        
+        return $this;
+    }
+    
+    public function removeUser( UserInterface $user ): self
+    {
+        if ( $this->users->contains( $user ) ) {
+            $this->users->removeElement( $user );
+            $user->removeApplication( $this );
+        }
         
         return $this;
     }
