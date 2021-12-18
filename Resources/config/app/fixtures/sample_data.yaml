@@ -19,29 +19,68 @@ sylius_fixtures:
                 logger: ~
                 
             fixtures:
-                product_review:
+                application_user_roles:
+                    name: user_roles
                     options:
-                        random: 40
-
-                similar_product_association:
+                        custom:
+                            - title: 'Role Author'
+                              description: 'Role Author Description'
+                              taxonomy_code: 'user-roles'
+                              locale:  '%locale%'
+                              role: 'ROLE_AUTHOR'
+                              parent: role-application-admin
+                              
+                            - title: 'Role Editor'
+                              description: 'Role Editor Description'
+                              taxonomy_code: 'user-roles'
+                              locale:  '%locale%'
+                              role: 'ROLE_EDITOR'
+                              parent: role-application-admin
+                              
+                users:
+                    name: users
                     options:
-                        amount: 3
-
-                fulfilled_order:
-                    name: order
-                    options:
-                        amount: 12
-                        channel: 'FASHION_WEB'
-                        fulfilled: true
-
-                new_order:
-                    name: order
-                    options:
-                        amount: 8
-                        channel: 'FASHION_WEB'
-
-                address:
-                    options:
-                        random: 10
-                        prototype:
-                            country_code: US
+                        custom:
+                            - email: 'appadmin@example.com'
+                              username: 'appadmin'
+                              password: 'appadmin'
+                              role_code: 'role-application-admin'
+                              enabled: true
+                              locale_code: '%locale%'
+                              first_name: 'App'
+                              last_name: 'Admin'
+                              avatar: '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/john.jpg'
+                              #avatar: null
+                              
+                            - email: 'appauthor@example.com'
+                              username: 'appauthor'
+                              password: 'appauthor'
+                              role_code: 'role-author'
+                              enabled: true
+                              locale_code: '%locale%'
+                              first_name: 'App'
+                              last_name: 'Author'
+                              avatar: '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/john.jpg'
+                              #avatar: null
+                              
+                            - email: 'appeditor@example.com'
+                              username: 'appeditor'
+                              password: 'appeditor'
+                              role_code: 'role-editor'
+                              enabled: true
+                              locale_code: '%locale%'
+                              first_name: 'App'
+                              last_name: 'Editor'
+                              avatar: '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/luke.jpg'
+                              #avatar: null
+                              
+                            - email: 'appuser@example.com'
+                              username: 'appuser'
+                              password: 'appuser'
+                              role_code: 'role-user'
+                              enabled: true
+                              locale_code: '%locale%'
+                              first_name: 'App'
+                              last_name: 'User'
+                              avatar: '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/luke.jpg'
+                              #avatar: null

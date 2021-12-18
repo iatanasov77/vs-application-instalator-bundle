@@ -1,5 +1,6 @@
 <?php namespace VS\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -38,10 +39,10 @@ EOT
         ) );
         $outputStyle->writeln( '<error>Warning! This action will erase your database.</error>' );
 
-        if ( ! $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Continue? (y/N) ', null !== $suite) ) ) {
+        if ( ! $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Continue? (y/N) ', null !== $suite ) ) ) {
             $outputStyle->writeln( 'Cancelled loading sample data.' );
 
-            return 0;
+            return Command::SUCCESS;
         }
 
         try {
@@ -52,7 +53,7 @@ EOT
         } catch ( \RuntimeException $exception ) {
             $outputStyle->writeln( $exception->getMessage() );
 
-            return 1;
+            return Command::FAILURE;
         }
         
         $parameters = [
@@ -67,6 +68,6 @@ EOT
         $this->runCommands( $commands, $output );
         $outputStyle->newLine( 2 );
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
