@@ -99,7 +99,7 @@ class Application implements ApplicationInterface
     
     public function removeUser( UserInterface $user ): self
     {
-        if ( ! $this->users->contains( $user ) ) {
+        if ( $this->users->contains( $user ) ) {
             $this->users->removeElement( $user );
             $user->removeApplication( $this );
         }
