@@ -1,3 +1,35 @@
+1.5.17	|	Release date: **18.12.2021**
+============================================
+* New Features and Improvrments:
+  - Add User Property for Allowed Applications.
+  - Add Users Relation into Application Entity.
+  - Add New Migrations.
+  - Add an AccessDiniedListener.
+  - Improve Security Voters Configuration.
+  - Create Security Crud Voters.
+
+* Bug-Fixes, Refactoring  and Improvements:
+  - Fix Voter Services.
+  - Fix Mapping Between Application and Users.
+  - Fix UserFormType.
+  - Refactoring Instalator.
+  - Fix CreateApplicationUserCommand
+  - Fix CreateApplicationUserCommand
+  - Fix Installator Command.
+  - Fix Length of Database Column.
+  - Fix Application Voter.
+  - Fix AccessDiniedListener.
+  - Add User Applications Mapping Cascade Actions.
+  - Fix Application Model For Users Association.
+  - Repair Relation Between User and UserInfo Models.
+  - Repair Relation Between UserRole and Taxon  Models.
+  - Improve Users CRUD form element for Roles.
+  - Fix Users CRUD form element for Roles.
+  - Installator make Role Application Admin with parent NULL.
+  - Fix Application Model.
+  - Fix Users CRUD Controller to remove Applications.
+
+
 1.5.16	|	Release date: **04.12.2021**
 ============================================
 * New Features:
