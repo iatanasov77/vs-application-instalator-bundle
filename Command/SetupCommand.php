@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Command;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 
-use VS\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Component\Slug;
 
 final class SetupCommand extends AbstractInstallCommand
 {

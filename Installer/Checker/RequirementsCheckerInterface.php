@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Installer\Checker;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Installer\Checker;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

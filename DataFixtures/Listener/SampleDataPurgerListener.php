@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\DataFixtures\Listener;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\DataFixtures\Listener;
 
 use Sylius\Bundle\FixturesBundle\Listener\AbstractListener;
 use Sylius\Bundle\FixturesBundle\Listener\BeforeSuiteListenerInterface;

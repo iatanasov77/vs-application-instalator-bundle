@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Command;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;

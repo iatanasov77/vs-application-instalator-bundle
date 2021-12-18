@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Command;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -7,8 +7,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use VS\ApplicationBundle\Command\ContainerAwareCommand;
-use VS\ApplicationInstalatorBundle\Installer\Executor\CommandExecutor;
+use Vankosoft\ApplicationBundle\Command\ContainerAwareCommand;
+use Vankosoft\ApplicationInstalatorBundle\Installer\Executor\CommandExecutor;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {

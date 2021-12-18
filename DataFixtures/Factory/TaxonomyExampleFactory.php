@@ -1,10 +1,10 @@
-<?php namespace VS\ApplicationInstalatorBundle\DataFixtures\Factory;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-use VS\ApplicationBundle\Component\Slug;
-use VS\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
+use Vankosoft\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
 
 class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {

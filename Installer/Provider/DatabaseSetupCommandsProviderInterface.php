@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Installer\Provider;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Installer\Provider;
 
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;

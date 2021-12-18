@@ -5,7 +5,7 @@ services:
         public: true
 
     vs_application.fixture.general_settings:
-        class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\GeneralSettingsFixture
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\GeneralSettingsFixture
         arguments:
             # - '@sylius.manager.product'
             - '@doctrine.orm.default_entity_manager'
@@ -14,7 +14,7 @@ services:
             - 'sylius_fixtures.fixture'
 
     vs_application.fixture.taxonomy:
-        class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\TaxonomyFixture
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\TaxonomyFixture
         arguments:
             - '@doctrine.orm.default_entity_manager'
             - '@vs_application.fixture.example_factory.taxonomy'
@@ -22,7 +22,7 @@ services:
             - 'sylius_fixtures.fixture'
 
     vs_application.fixture.page_categories:
-        class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\PageCategoriesFixture
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\PageCategoriesFixture
         arguments:
             - '@doctrine.orm.default_entity_manager'
             - '@vs_application.fixture.example_factory.page_categories'
@@ -30,7 +30,7 @@ services:
             - 'sylius_fixtures.fixture'
 
     vs_application.fixture.applications:
-        class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\ApplicationsFixture
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\ApplicationsFixture
         arguments:
             - '@doctrine.orm.default_entity_manager'
             - '@vs_application.fixture.example_factory.applications'
@@ -38,7 +38,7 @@ services:
             - 'sylius_fixtures.fixture'
             
     vs_application.fixture.pages:
-        class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\PagesFixture
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\PagesFixture
         arguments:
             - '@doctrine.orm.default_entity_manager'
             - '@vs_application.fixture.example_factory.pages'
@@ -46,7 +46,7 @@ services:
             - 'sylius_fixtures.fixture'
 
     vs_application.fixture.locales:
-        class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\LocalesFixture
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\LocalesFixture
         arguments:
             - '@doctrine.orm.default_entity_manager'
             - '@vs_application.fixture.example_factory.locales'
@@ -54,7 +54,7 @@ services:
             - 'sylius_fixtures.fixture'
             
     vs_application.fixture.user_roles:
-        class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\UserRolesFixture
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\UserRolesFixture
         arguments:
             - '@doctrine.orm.default_entity_manager'
             - '@vs_application.fixture.example_factory.user_roles'
@@ -62,7 +62,7 @@ services:
             - 'sylius_fixtures.fixture'
             
     vs_application.fixture.users:
-        class: VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\UsersFixture
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\UsersFixture
         arguments:
             - '@doctrine.orm.default_entity_manager'
             - '@vs_application.fixture.example_factory.users'
