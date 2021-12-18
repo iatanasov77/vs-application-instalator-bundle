@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Installer\Setup;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Installer\Setup;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
 

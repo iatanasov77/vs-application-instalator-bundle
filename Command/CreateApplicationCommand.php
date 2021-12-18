@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Command;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -16,9 +16,9 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Webmozart\Assert\Assert;
 use Gedmo\Sluggable\Util\Urlizer;
 
-use VS\ApplicationBundle\Component\Slug;
-use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
-use VS\UsersBundle\Model\UserRoleInterface;
+use Vankosoft\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use Vankosoft\UsersBundle\Model\UserRoleInterface;
 
 final class CreateApplicationCommand extends AbstractInstallCommand
 {

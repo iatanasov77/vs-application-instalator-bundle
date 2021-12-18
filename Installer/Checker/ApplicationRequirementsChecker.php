@@ -1,12 +1,12 @@
-<?php namespace VS\ApplicationInstalatorBundle\Installer\Checker;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Installer\Checker;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use VS\ApplicationInstalatorBundle\Installer\Renderer\TableRenderer;
-use VS\ApplicationInstalatorBundle\Installer\Requirement\Requirement;
-use VS\ApplicationInstalatorBundle\Installer\Requirement\RequirementCollection;
-use VS\ApplicationInstalatorBundle\Installer\Requirement\ApplicationRequirements;
+use Vankosoft\ApplicationInstalatorBundle\Installer\Renderer\TableRenderer;
+use Vankosoft\ApplicationInstalatorBundle\Installer\Requirement\Requirement;
+use Vankosoft\ApplicationInstalatorBundle\Installer\Requirement\RequirementCollection;
+use Vankosoft\ApplicationInstalatorBundle\Installer\Requirement\ApplicationRequirements;
 
 final class ApplicationRequirementsChecker implements RequirementsCheckerInterface
 {

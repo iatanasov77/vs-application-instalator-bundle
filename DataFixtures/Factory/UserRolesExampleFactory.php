@@ -1,13 +1,13 @@
-<?php namespace VS\ApplicationInstalatorBundle\DataFixtures\Factory;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-use VS\ApplicationBundle\Component\Slug;
-use VS\ApplicationBundle\Repository\TaxonRepository;
-use VS\UsersBundle\Model\UserRoleInterface;
-use VS\UsersBundle\Repository\UserRolesRepository;
+use Vankosoft\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Repository\TaxonRepository;
+use Vankosoft\UsersBundle\Model\UserRoleInterface;
+use Vankosoft\UsersBundle\Repository\UserRolesRepository;
 
 class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {

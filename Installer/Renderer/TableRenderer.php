@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Installer\Renderer;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Installer\Renderer;
 
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Output\OutputInterface;

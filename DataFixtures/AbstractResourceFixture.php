@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\DataFixtures;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\DataFixtures;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 
-use VS\ApplicationInstalatorBundle\DataFixtures\Factory\ExampleFactoryInterface;
+use Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\ExampleFactoryInterface;
 
 abstract class AbstractResourceFixture implements FixtureInterface
 {

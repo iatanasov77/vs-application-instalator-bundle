@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Command;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -14,9 +14,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Webmozart\Assert\Assert;
 
-use VS\CmsBundle\Component\Uploader\FileUploaderInterface;
-use VS\UsersBundle\Model\UserInterface;
-use VS\UsersBundle\Repository\UsersRepositoryInterface;
+use Vankosoft\CmsBundle\Component\Uploader\FileUploaderInterface;
+use Vankosoft\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Repository\UsersRepositoryInterface;
 
 final class CreateApplicationUserCommand extends AbstractInstallCommand
 {
