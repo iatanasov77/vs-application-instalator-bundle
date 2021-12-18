@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Model;
+<?php namespace Vankosoft\ApplicationBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Taxonomy\Model\TaxonTranslation as BaseTaxonTranslation;

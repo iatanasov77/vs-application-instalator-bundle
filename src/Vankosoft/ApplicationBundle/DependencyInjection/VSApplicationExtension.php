@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\DependencyInjection;
+<?php namespace Vankosoft\ApplicationBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -43,7 +43,7 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
     
     protected function getMigrationsNamespace(): string
     {
-        return 'VS\ApplicationBundle\DoctrineMigrations';
+        return 'Vankosoft\ApplicationBundle\DoctrineMigrations';
     }
     
     protected function getMigrationsDirectory(): string

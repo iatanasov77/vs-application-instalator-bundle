@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Model;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;

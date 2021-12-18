@@ -47,7 +47,7 @@
     },
     "autoload": {
         "psr-4": {
-            "VS\\ApplicationBundle\\": "lib/"
+            "Vankosoft\\ApplicationBundle\\": "lib/"
         }
     },
     "minimum-stability" : "dev"

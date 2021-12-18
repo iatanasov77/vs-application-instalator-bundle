@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\EventSubscriber\Mapping\Event\Adapter;
+<?php namespace Vankosoft\ApplicationBundle\EventSubscriber\Mapping\Event\Adapter;
 
 use Gedmo\Mapping\Event\Adapter\ORM as BaseAdapterORM;
 use Gedmo\Loggable\Mapping\Event\LoggableAdapter;

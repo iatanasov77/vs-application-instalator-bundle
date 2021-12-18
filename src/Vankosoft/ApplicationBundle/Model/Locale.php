@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Model;
+<?php namespace Vankosoft\ApplicationBundle\Model;
 
 use Sylius\Component\Locale\Model\Locale as BaseLocale;
 

@@ -1,6 +1,6 @@
-<?php namespace VS\ApplicationBundle\Model;
+<?php namespace Vankosoft\ApplicationBundle\Model;
 
-use VS\CmsBundle\Model\File;
+use Vankosoft\CmsBundle\Model\File;
 
 class TaxonImage extends File
 {

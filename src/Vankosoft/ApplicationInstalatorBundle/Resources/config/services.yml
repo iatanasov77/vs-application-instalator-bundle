@@ -17,6 +17,6 @@ services:
         public: true
         
     vs_application_instalator.setup_application:
-        class: VS\ApplicationInstalatorBundle\Component\SetupApplication
+        class: Vankosoft\ApplicationInstalatorBundle\Component\SetupApplication
         arguments: 
             - '@service_container'

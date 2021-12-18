@@ -1,3 +1,10 @@
+1.6.0	|	Release date: **18.12.2021**
+============================================
+* New Features:
+  - Change Vankosoft Namespace.
+  - Create a Subtree Bin Script.
+
+
 1.5.17	|	Release date: **18.12.2021**
 ============================================
 * New Features and Improvrments:

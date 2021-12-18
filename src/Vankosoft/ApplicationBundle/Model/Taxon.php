@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Model;
+<?php namespace Vankosoft\ApplicationBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -6,8 +6,8 @@ use Doctrine\Common\Comparable;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-use VS\ApplicationBundle\Model\Interfaces\TaxonInterface as VsTaxonInterface;
-use VS\CmsBundle\Model\FileInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface as VsTaxonInterface;
+use Vankosoft\CmsBundle\Model\FileInterface;
 
 class Taxon extends BaseTaxon implements VsTaxonInterface, Comparable
 {

@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Command;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -6,7 +6,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\ArrayInput;
 
-use VS\ApplicationBundle\Command\ContainerAwareCommand;
+use Vankosoft\ApplicationBundle\Command\ContainerAwareCommand;
 
 final class ClearInstallCommand extends ContainerAwareCommand
 {

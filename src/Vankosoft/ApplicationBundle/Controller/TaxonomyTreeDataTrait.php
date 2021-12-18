@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Controller;
+<?php namespace Vankosoft\ApplicationBundle\Controller;
 
 trait TaxonomyTreeDataTrait
 {

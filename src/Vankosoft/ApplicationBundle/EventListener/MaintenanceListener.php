@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\EventListener;
+<?php namespace Vankosoft\ApplicationBundle\EventListener;
 
 //use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-use VS\ApplicationBundle\Twig\Alerts;
+use Vankosoft\ApplicationBundle\Twig\Alerts;
 
 class MaintenanceListener
 {

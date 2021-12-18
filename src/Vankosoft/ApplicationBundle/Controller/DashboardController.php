@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Controller;
+<?php namespace Vankosoft\ApplicationBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

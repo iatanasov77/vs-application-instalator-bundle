@@ -6,13 +6,13 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
 >
 
-    <mapped-superclass name="VS\ApplicationBundle\Model\Taxonomy">
+    <mapped-superclass name="Vankosoft\ApplicationBundle\Model\Taxonomy">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
         <field name="code" column="code" type="string" unique="true" />
         
-        <one-to-one field="rootTaxon" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonInterface" inversed-by="taxonomy" >
+        <one-to-one field="rootTaxon" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface" inversed-by="taxonomy" >
             <join-column name="root_taxon_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <cascade>
                 <cascade-all/>
@@ -32,7 +32,7 @@
             this is not a mapped field of entity metadata, just a simple property
             and it is not necessary because globally locale can be set in listener
         -->
-        <gedmo:translation entity="VS\ApplicationBundle\Model\Interfaces\TranslationInterface" locale="locale" />
+        <gedmo:translation entity="Vankosoft\ApplicationBundle\Model\Interfaces\TranslationInterface" locale="locale" />
     </mapped-superclass>
 
 </doctrine-mapping>

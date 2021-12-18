@@ -5,14 +5,14 @@ services:
         public: true
         
     vs_application.context.application.hostname_based_request_resolver:
-        class: VS\ApplicationBundle\Component\Context\HostnameBasedRequestResolver
+        class: Vankosoft\ApplicationBundle\Component\Context\HostnameBasedRequestResolver
         arguments:
             - '@vs_application.repository.application'
         tags:
             - { name: 'vs_application.context.application.request_based_resolver' }
 
     vs_application.context.application:
-        class: VS\ApplicationBundle\Component\Context\ApplicationContext
+        class: Vankosoft\ApplicationBundle\Component\Context\ApplicationContext
         arguments:
             - '@vs_application.context.application.hostname_based_request_resolver'
             - '@request_stack'

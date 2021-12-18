@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Command;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
 use RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;

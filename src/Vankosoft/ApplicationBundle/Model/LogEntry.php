@@ -1,7 +1,7 @@
-<?php namespace VS\ApplicationBundle\Model;
+<?php namespace Vankosoft\ApplicationBundle\Model;
 
 use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
-use VS\ApplicationBundle\Model\Interfaces\LogEntryInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\LogEntryInterface;
 
 class LogEntry extends AbstractLogEntry implements LogEntryInterface
 {

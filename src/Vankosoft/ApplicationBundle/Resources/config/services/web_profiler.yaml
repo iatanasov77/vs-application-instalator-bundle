@@ -5,7 +5,7 @@ services:
         public: true
 
     vs_application.data_collector.core:
-        class: VS\ApplicationBundle\DataCollector\VsApplicationCollector
+        class: Vankosoft\ApplicationBundle\DataCollector\VsApplicationCollector
         arguments:
             - '%vs_application.version%'
             - '%kernel.project_dir%'
@@ -22,7 +22,7 @@ services:
                 # priority: 300
     
     vs_application.data_collector.application:
-        class: VS\ApplicationBundle\DataCollector\ApplicationCollector
+        class: Vankosoft\ApplicationBundle\DataCollector\ApplicationCollector
         arguments:
             - '@vs_application.repository.application'
             - '@vs_application.context.application'

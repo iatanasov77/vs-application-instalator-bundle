@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.5.17",
+    "version": "v1.6.0",
     "description": "VankoSoft Symfony Application",
     "keywords": [
         "symfony",
@@ -75,10 +75,10 @@
     },
     "autoload": {
         "psr-4": {
-            "VS\\ApplicationInstalatorBundle\\": "src\/Vankosoft\/ApplicationInstalatorBundle\/",
-            "VS\\ApplicationBundle\\": "src\/Vankosoft\/ApplicationBundle\/",
-            "VS\\UsersBundle\\": "src\/Vankosoft\/UsersBundle\/",
-            "VS\\CmsBundle\\": "src\/Vankosoft\/CmsBundle\/"
+            "Vankosoft\\ApplicationInstalatorBundle\\": "src\/Vankosoft\/ApplicationInstalatorBundle\/",
+            "Vankosoft\\ApplicationBundle\\": "src\/Vankosoft\/ApplicationBundle\/",
+            "Vankosoft\\UsersBundle\\": "src\/Vankosoft\/UsersBundle\/",
+            "Vankosoft\\CmsBundle\\": "src\/Vankosoft\/CmsBundle\/"
         }
     }
 }

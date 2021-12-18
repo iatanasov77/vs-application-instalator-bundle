@@ -1,12 +1,12 @@
-<?php namespace VS\ApplicationBundle\Controller;
+<?php namespace Vankosoft\ApplicationBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use VS\ApplicationBundle\Form\SettingsForm;
-use VS\ApplicationBundle\Repository\TaxonomyRepository;
-use VS\ApplicationBundle\Component\Settings\Settings as SettingsManager;
+use Vankosoft\ApplicationBundle\Form\SettingsForm;
+use Vankosoft\ApplicationBundle\Repository\TaxonomyRepository;
+use Vankosoft\ApplicationBundle\Component\Settings\Settings as SettingsManager;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
 

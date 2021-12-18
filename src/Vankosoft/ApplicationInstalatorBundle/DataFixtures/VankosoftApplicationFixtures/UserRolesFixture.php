@@ -1,7 +1,7 @@
-<?php namespace VS\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use VS\ApplicationInstalatorBundle\DataFixtures\AbstractResourceFixture;
+use Vankosoft\ApplicationInstalatorBundle\DataFixtures\AbstractResourceFixture;
 
 final class UserRolesFixture extends AbstractResourceFixture
 {

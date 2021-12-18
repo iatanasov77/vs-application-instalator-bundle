@@ -5,12 +5,12 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
 
-    <mapped-superclass name="VS\ApplicationBundle\Model\TaxonTranslation">
+    <mapped-superclass name="Vankosoft\ApplicationBundle\Model\TaxonTranslation">
     	<id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
         <field name="locale" column="locale" type="string" />
-        <many-to-one field="translatable" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonInterface" inversed-by="translations" />
+        <many-to-one field="translatable" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface" inversed-by="translations" />
         
         <field name="name" column="name" type="string" />
         <field name="slug" column="slug" type="string" unique="false" />

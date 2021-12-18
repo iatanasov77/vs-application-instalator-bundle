@@ -1,8 +1,8 @@
-<?php namespace VS\ApplicationBundle\Model;
+<?php namespace Vankosoft\ApplicationBundle\Model;
 
-use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
-use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
-use VS\CmsBundle\Model\PageInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\SettingsInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use Vankosoft\CmsBundle\Model\PageInterface;
 
 class Settings implements SettingsInterface
 {   
@@ -12,7 +12,7 @@ class Settings implements SettingsInterface
     /** @var boolean */
     protected $maintenanceMode;
     
-    /** @var VS\CmsBundle\Model\PageInterface */
+    /** @var Vankosoft\CmsBundle\Model\PageInterface */
     protected $maintenancePage;
     
     /** @var string */

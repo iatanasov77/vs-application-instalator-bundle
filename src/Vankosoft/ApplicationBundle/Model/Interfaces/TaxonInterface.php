@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Model\Interfaces;
+<?php namespace Vankosoft\ApplicationBundle\Model\Interfaces;
 
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 

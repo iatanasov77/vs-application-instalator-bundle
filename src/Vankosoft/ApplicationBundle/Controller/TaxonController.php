@@ -1,6 +1,6 @@
-<?php namespace VS\ApplicationBundle\Controller;
+<?php namespace Vankosoft\ApplicationBundle\Controller;
 
-use VS\ApplicationBundle\Controller\AbstractCrudController;
+use Vankosoft\ApplicationBundle\Controller\AbstractCrudController;
 
 class TaxonController extends AbstractCrudController
 {

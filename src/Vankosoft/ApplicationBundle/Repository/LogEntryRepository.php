@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Repository;
+<?php namespace Vankosoft\ApplicationBundle\Repository;
 
 use Gedmo\Loggable\Entity\Repository\LogEntryRepository as BaseRepository;
 use Gedmo\Tool\Wrapper\EntityWrapper;

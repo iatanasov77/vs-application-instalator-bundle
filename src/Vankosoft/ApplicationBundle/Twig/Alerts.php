@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\Twig;
+<?php namespace Vankosoft\ApplicationBundle\Twig;
 
 class Alerts
 {

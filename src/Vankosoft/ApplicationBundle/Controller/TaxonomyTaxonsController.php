@@ -1,14 +1,14 @@
-<?php namespace VS\ApplicationBundle\Controller;
+<?php namespace Vankosoft\ApplicationBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use VS\ApplicationBundle\Component\Slug;
-use VS\ApplicationBundle\Form\TaxonForm;
-use VS\ApplicationBundle\Repository\TaxonomyRepository;
-use VS\ApplicationBundle\Repository\TaxonRepository;
+use Vankosoft\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Form\TaxonForm;
+use Vankosoft\ApplicationBundle\Repository\TaxonomyRepository;
+use Vankosoft\ApplicationBundle\Repository\TaxonRepository;
 
 class TaxonomyTaxonsController extends AbstractController
 {

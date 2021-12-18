@@ -1,7 +1,7 @@
-<?php namespace VS\ApplicationBundle\Model\Interfaces;
+<?php namespace Vankosoft\ApplicationBundle\Model\Interfaces;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
-use VS\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\UserInterface;
 
 interface UserAwareInterface extends ResourceInterface
 {

@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\DependencyInjection;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -8,8 +8,8 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
 
-use VS\ApplicationInstalatorBundle\Model\InstalationInfoInterface;
-use VS\ApplicationInstalatorBundle\Model\InstalationInfo;
+use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfoInterface;
+use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfo;
 
 /**
  * This is the class that validates and merges configuration from your app/config files

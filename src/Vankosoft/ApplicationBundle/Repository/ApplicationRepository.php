@@ -1,7 +1,7 @@
-<?php namespace VS\ApplicationBundle\Repository;
+<?php namespace Vankosoft\ApplicationBundle\Repository;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
 class ApplicationRepository extends EntityRepository implements ApplicationRepositoryInterface
 {

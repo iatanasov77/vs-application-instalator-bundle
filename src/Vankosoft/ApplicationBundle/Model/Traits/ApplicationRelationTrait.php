@@ -1,13 +1,13 @@
-<?php namespace VS\ApplicationBundle\Model\Traits;
+<?php namespace Vankosoft\ApplicationBundle\Model\Traits;
 
-use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
 /**
- * @see \VS\ApplicationBundle\Model\Interfaces\ApplicationRelationInterface
+ * @see \Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationRelationInterface
  */
 trait ApplicationRelationTrait
 {
-    /** @var \VS\ApplicationBundle\Model\Interfaces\ApplicationInterface */
+    /** @var \Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface */
     protected $application;
     
     public function getApplication() : ?ApplicationInterface

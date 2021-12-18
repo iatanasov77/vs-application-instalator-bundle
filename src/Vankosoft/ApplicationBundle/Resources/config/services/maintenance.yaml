@@ -2,10 +2,10 @@ parameters:
     vs_application.in_maintenance: false
 services:
     vs_app.twig.alerts:
-        class: VS\ApplicationBundle\Twig\Alerts
+        class: Vankosoft\ApplicationBundle\Twig\Alerts
     
     vs_app.listener.maintenance:
-        class: VS\ApplicationBundle\EventListener\MaintenanceListener
+        class: Vankosoft\ApplicationBundle\EventListener\MaintenanceListener
         arguments: 
             - '@service_container'
             - '%vs_application.settings.application_id%'

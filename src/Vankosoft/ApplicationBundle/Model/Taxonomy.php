@@ -1,6 +1,6 @@
-<?php namespace VS\ApplicationBundle\Model;
+<?php namespace Vankosoft\ApplicationBundle\Model;
 
-use VS\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
 
 class Taxonomy implements TaxonomyInterface
 {

@@ -1,10 +1,10 @@
-<?php namespace VS\ApplicationBundle\Controller;
+<?php namespace Vankosoft\ApplicationBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use VS\ApplicationBundle\Form\SettingsForm;
+use Vankosoft\ApplicationBundle\Form\SettingsForm;
 
 class SettingsController extends ResourceController
 {

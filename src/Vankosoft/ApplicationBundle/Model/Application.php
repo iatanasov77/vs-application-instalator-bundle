@@ -1,11 +1,11 @@
-<?php namespace VS\ApplicationBundle\Model;
+<?php namespace Vankosoft\ApplicationBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
-use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
-use VS\UsersBundle\Model\UserInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use Vankosoft\UsersBundle\Model\UserInterface;
 
 class Application implements ApplicationInterface
 {

@@ -1,10 +1,10 @@
-<?php namespace VS\ApplicationBundle\EventListener;
+<?php namespace Vankosoft\ApplicationBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
-use VS\ApplicationBundle\Repository\SettingsRepositoryInterface;
+use Vankosoft\ApplicationBundle\Repository\SettingsRepositoryInterface;
 
 class ThemeChangeListener
 {
