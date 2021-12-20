@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Installer\Requirement;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Installer\Requirement;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 

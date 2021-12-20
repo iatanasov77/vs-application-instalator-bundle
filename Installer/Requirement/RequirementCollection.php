@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Installer\Requirement;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Installer\Requirement;
 
 abstract class RequirementCollection implements \IteratorAggregate
 {

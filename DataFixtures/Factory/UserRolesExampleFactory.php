@@ -1,12 +1,13 @@
-<?php namespace VS\ApplicationInstalatorBundle\DataFixtures\Factory;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-use VS\ApplicationBundle\Component\Slug;
-use VS\ApplicationBundle\Repository\TaxonRepository;
-use VS\UsersBundle\Model\UserRoleInterface;
+use Vankosoft\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Repository\TaxonRepository;
+use Vankosoft\UsersBundle\Model\UserRoleInterface;
+use Vankosoft\UsersBundle\Repository\UserRolesRepository;
 
 class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
@@ -22,6 +23,9 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
     /** @var FactoryInterface */
     private $userRolesFactory;
     
+    /** @var UserRolesRepository */
+    private $userRolesRepository;
+    
     /** @var OptionsResolver */
     private $optionsResolver;
     
@@ -29,12 +33,14 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
         RepositoryInterface $taxonomyRepository,
         FactoryInterface $taxonFactory,
         TaxonRepository $taxonRepository,
-        FactoryInterface $userRolesFactory
+        FactoryInterface $userRolesFactory,
+        UserRolesRepository $userRolesRepository
     ) {
         $this->taxonomyRepository   = $taxonomyRepository;
         $this->taxonFactory         = $taxonFactory;
         $this->taxonRepository      = $taxonRepository;
         $this->userRolesFactory     = $userRolesFactory;
+        $this->userRolesRepository  = $userRolesRepository;
         
         $this->optionsResolver      = new OptionsResolver();
         $this->configureOptions( $this->optionsResolver );
@@ -44,11 +50,7 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
     {
         $options                    = $this->optionsResolver->resolve( $options );
         
-        $taxonomyRootTaxonEntity    = $this->taxonomyRepository->findByCode( $options['taxonomy_code'] )->getRootTaxon();
-        $taxonParent                = $this->taxonRepository->findOneBy( ['code' => $options['parent']] );
-        
         $userRoleEntity             = $this->userRolesFactory->createNew();
-        
         $taxonEntity                = $this->taxonFactory->createNew();
         $slug                       = Slug::generate( $options['title'] );
         
@@ -59,7 +61,13 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
         $taxonEntity->getTranslation()->setSlug( $slug );
         $taxonEntity->getTranslation()->setTranslatable( $taxonEntity );
         
+        $taxonomyRootTaxonEntity    = $this->taxonomyRepository->findByCode( $options['taxonomy_code'] )->getRootTaxon();
+        $taxonParent                = $this->taxonRepository->findOneBy( ['code' => $options['parent']] );
+        //echo "\n\nParent Code: " . $options['parent'] . "\nParent ID: " . ( $taxonParent ? $taxonParent->getId() : "NULL" );
+        //echo "\nCount Taxons: " . $this->taxonRepository->count(['root' => 2]) . "\n\n";
+        
         $taxonEntity->setParent( $taxonParent ?: $taxonomyRootTaxonEntity );
+        $userRoleEntity->setParent( $this->userRolesRepository->findByTaxonCode( $options['parent'] ) );
         $userRoleEntity->setTaxon( $taxonEntity );
         $userRoleEntity->setRole( $options['role'] );
         

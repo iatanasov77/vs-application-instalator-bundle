@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Command;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -9,7 +9,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InstallApplicationConfigurationCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'vankosoft:install:application-configuration';
+    protected static $defaultName = 'vankosoft:application:setup';
 
     protected function configure(): void
     {

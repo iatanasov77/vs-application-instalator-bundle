@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Command;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -31,6 +31,11 @@ final class InstallCommand extends AbstractInstallCommand
             'command' => 'setup',
             'message' => 'Application configuration.',
         ],
+//         For Now Sample Data is In Construction and is Not Available
+//         [
+//             'command' => 'sample-data',
+//             'message' => 'Install Application Simple Data.',
+//         ],
         [
             'command' => 'assets',
             'message' => 'Installing assets.',
@@ -74,18 +79,25 @@ EOT
                 ));
                 
                 $parameters = [];
-                if ( 'database' === $command['command'] && null !== $suite ) {
-                    $parameters['--fixture-suite']  = $suite;
-                }
-                if ( 'database' === $command['command'] && null !== $debug ) {
-                    $parameters['--debug-commands']  = $debug;
+                switch ( $command['command'] ) {
+                    case 'database':
+                        if ( $suite )
+                            $parameters['--fixture-suite']  = $suite;
+                        if ( $debug )
+                            $parameters['--debug-commands'] = $debug;
+                        break;
+                    case 'sample-data':
+                        $parameters['--fixture-suite']  = 'vankosoft_sampledata_suite';
+                        break;
                 }
                 
                 $this->commandExecutor->runCommand( 'vankosoft:install:' . $command['command'], $parameters, $output );
+                
             } catch ( RuntimeException $exception ) {
                 $errored = true;
             }
         }
+        $this->commandExecutor->runCommand( 'liip:imagine:cache:remove', [], $output ); // Clear Liip Imagine Cache
         
         $outputStyle->newLine( 2 );
         $outputStyle->success( $this->getProperFinalMessage( $errored ) );

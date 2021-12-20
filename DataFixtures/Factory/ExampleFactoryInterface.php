@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\DataFixtures\Factory;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory;
 
 interface ExampleFactoryInterface
 {

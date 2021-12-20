@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Command;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -51,11 +51,6 @@ EOT
             
             $this->runCommands( $commands, $output );
             $outputStyle->newLine();
-            
-            $parameters = [
-                '--fixture-suite'   => $suite ?: 'vankosoft_sampledata_suite'
-            ];
-            $this->commandExecutor->runCommand( 'vankosoft:install:sample-data', $parameters, $output );
         }
         
         return 0;

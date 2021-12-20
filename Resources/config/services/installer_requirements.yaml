@@ -5,24 +5,24 @@ services:
         public: true
         
     vs_app.requirements.settings_requirements:
-        class: VS\ApplicationInstalatorBundle\Installer\Requirement\SettingsRequirements
+        class: Vankosoft\ApplicationInstalatorBundle\Installer\Requirement\SettingsRequirements
         arguments:
             - '@translator'
     
     vs_app.requirements.extensions_requirements:
-        class: VS\ApplicationInstalatorBundle\Installer\Requirement\ExtensionsRequirements
+        class: Vankosoft\ApplicationInstalatorBundle\Installer\Requirement\ExtensionsRequirements
         arguments:
             - '@translator'
     
     vs_app.requirements.filesystem_requirements:
-        class: VS\ApplicationInstalatorBundle\Installer\Requirement\FilesystemRequirements
+        class: Vankosoft\ApplicationInstalatorBundle\Installer\Requirement\FilesystemRequirements
         arguments:
             - '@translator'
             - '%kernel.cache_dir%'
             - '%kernel.logs_dir%'
 
     vs_app.requirements:
-        class: VS\ApplicationInstalatorBundle\Installer\Requirement\ApplicationRequirements
+        class: Vankosoft\ApplicationInstalatorBundle\Installer\Requirement\ApplicationRequirements
         arguments:
             $requirementCollections:
                 - '@vs_app.requirements.settings_requirements'

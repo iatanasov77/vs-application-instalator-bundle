@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\DataFixtures\Factory;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory;
 
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -6,11 +6,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-use VS\UsersBundle\Security\UserManager;
+use Vankosoft\UsersBundle\Security\UserManager;
 
-use VS\CmsBundle\Component\Uploader\FileUploaderInterface;
-use VS\UsersBundle\Model\UserInterface;
-use VS\UsersBundle\Model\UserInfoInterface;
+use Vankosoft\CmsBundle\Component\Uploader\FileUploaderInterface;
+use Vankosoft\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\UserInfoInterface;
 
 class UsersExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
@@ -112,6 +112,8 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
         if ( $options['avatar'] && ! empty( $options['avatar'] ) ) {
             $this->createAvatar( $userInfo, $options );
         }
+        $userInfo->setFirstName( $options['first_name'] );
+        $userInfo->setLastName( $options['last_name'] );
         
         $user->setInfo( $userInfo );
     }

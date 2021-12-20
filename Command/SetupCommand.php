@@ -1,27 +1,23 @@
-<?php namespace VS\ApplicationInstalatorBundle\Command;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Console\Input\ArrayInput;
-use Webmozart\Assert\Assert;
 
-use VS\UsersBundle\Model\UserInterface;
-use VS\UsersBundle\Repository\UsersRepositoryInterface;
-use VS\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Component\Slug;
 
 final class SetupCommand extends AbstractInstallCommand
 {
     protected static $defaultName = 'vankosoft:install:setup';
     
-    protected function configure() : void
+    protected function configure(): void
     {
         $this
             ->setDescription( 'VankoSoft Application configuration setup.' )
@@ -32,29 +28,33 @@ EOT
         ;
     }
     
-    protected function execute( InputInterface $input, OutputInterface $output ) : int
+    protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $locale = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
-        //$this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
-        $this->setupAdminPanelApplication( $input, $output, $locale->getCode() );
-        $this->setupAdministratorUser( $input, $output, $locale->getCode() );
+        $this->commandExecutor->runCommand( 'vankosoft:application:setup', [], $output );
         
-        $parameters = [
-            '--setup-kernel' => true,
-        ];
-        $this->commandExecutor->runCommand( 'vankosoft:application:create', $parameters, $output );
-        $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', [], $output );
+        // Setup Super Admin Panel
+        $this->setupSuperAdminPanelApplication( $input, $output, $locale->getCode() );
         
-        return 0;
+        // Setup an Application
+        $this->setupApplication( $input, $output, $locale->getCode() );
+        
+        // Setup Super Admin User
+        $this->setupSuperAdminUser( $input, $output, $locale->getCode() );
+        
+        // Setup Applications Admin User
+        $this->setupApplicationsAdminUser( $input, $output, $locale->getCode() );
+        
+        return Command::SUCCESS;
     }
     
-    protected function setupAdminPanelApplication( InputInterface $input, OutputInterface $output, string $localeCode ) : void
+    private function setupSuperAdminPanelApplication( InputInterface $input, OutputInterface $output, string $localeCode ): void
     {
         $applicationName    = 'Admin Panel';
         $applicationSlug    = Slug::generate( $applicationName );
         
         $outputStyle    = new SymfonyStyle( $input, $output );
-        $outputStyle->writeln( 'Create AdminPanel Application.' );
+        $outputStyle->writeln( 'Create SuperAdminPanel Application.' );
         
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
@@ -68,172 +68,54 @@ EOT
             $output
         );
         
-        $outputStyle->writeln( '<info>AdminPanel Application created successfully.</info>' );
+        $outputStyle->writeln( '<info>SuperAdminPanel Application created successfully.</info>' );
         $outputStyle->newLine();
     }
     
-    protected function setupAdministratorUser( InputInterface $input, OutputInterface $output, string $localeCode ) : void
+    private function setupApplication( InputInterface $input, OutputInterface $output, string $localeCode )
     {
         $outputStyle    = new SymfonyStyle( $input, $output );
-        $outputStyle->writeln( 'Create your administrator account.' );
         
-        $userManager    = $this->getContainer()->get( 'vs_users.manager.user' );
+        $this->commandExecutor->runCommand( 'vankosoft:application:create', ['--setup-kernel' => true, '--locale' => $localeCode], $output );
         
-        try {
-            $user = $this->configureNewUser( $userManager, $input, $output );
-        } catch ( \InvalidArgumentException $exception ) {
-            return;
-        }
-        
-        $user->setRolesArray( ['ROLE_SUPER_ADMIN'] );
-        $user->setEnabled( true );
-        $user->setVerified( true );
-        //$user->setLocaleCode( $localeCode );
-        $user->setPreferedLocale( $localeCode );
-        
-        $userManager->saveUser( $user );
-        
-        $outputStyle->writeln( '<info>Administrator account successfully registered.</info>' );
+        $outputStyle->newLine();
+        $outputStyle->writeln( '<info>Default Application created successfully.</info>' );
         $outputStyle->newLine();
     }
     
-    private function configureNewUser(
-        $userManager,
-        InputInterface $input,
-        OutputInterface $output
-    ) : UserInterface {
-        /** @var UsersRepositoryInterface $userRepository */
-        $userRepository = $this->getUserRepository();
-        
-        if ( $input->getOption( 'no-interaction' ) ) {
-            Assert::null( $userRepository->findOneByEmail( 'vankosoft@example.com' ) );
-            $user   = $userManager->createUser( 'admin', 'vankosoft@example.com', 'admin' );
-            
-            return $user;
-        }
-        
-        $email          = $this->getAdministratorEmail( $input, $output );
-        $username       = $this->getAdministratorUsername( $input, $output, $email );
-        $plainPassword  = $this->getAdministratorPassword( $input, $output );
-        $user   = $userManager->createUser( $username, $email, $plainPassword );
-        
-        return $user;
-    }
-    
-    private function createEmailQuestion() : Question
+    private function setupSuperAdminUser( InputInterface $input, OutputInterface $output, string $localeCode ) : void
     {
-        return ( new Question( 'E-mail: ' ) )
-            ->setValidator(
-                /**
-                 * @param mixed $value
-                 */
-                function ( $value ): string {
-                    /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->getContainer()->get( 'validator' )->validate( (string) $value, [new Email(), new NotBlank()] );
-                    foreach ( $errors as $error ) {
-                        throw new \DomainException( $error->getMessage() );
-                    }
-                    
-                    return $value;
-                }
-            )
-            ->setMaxAttempts( 3 )
-        ;
-    }
-    
-    private function getAdministratorEmail( InputInterface $input, OutputInterface $output ) : string
-    {
-        /** @var QuestionHelper $questionHelper */
-        $questionHelper = $this->getHelper( 'question' );
-        /** @var UsersRepositoryInterface $userRepository */
-        $userRepository = $this->getUserRepository();
+        $outputStyle    = new SymfonyStyle( $input, $output );
+        $outputStyle->writeln( 'Create SuperAdmin account.' );
         
-        do {
-            $question   = $this->createEmailQuestion();
-            $email      = $questionHelper->ask( $input, $output, $question );
-            $exists     = null !== $userRepository->findOneByEmail( $email );
-            
-            if ( $exists ) {
-                $output->writeln( '<error>E-Mail is already in use!</error>' );
-            }
-        } while ( $exists );
+        $parameters     = [
+            '--application' => 'Super Admin',
+            '--roles'       => ['ROLE_SUPER_ADMIN'],
+            '--locale'      => $localeCode
+        ];
+        $this->commandExecutor->runCommand( 'vankosoft:application:create-user', $parameters, $output );
         
-        return $email;
+        $outputStyle->writeln( '<info>SuperAdmin account successfully created.</info>' );
+        $outputStyle->newLine();
     }
     
-    private function getAdministratorUsername( InputInterface $input, OutputInterface $output, string $email ) : string
+    private function setupApplicationsAdminUser( InputInterface $input, OutputInterface $output, string $localeCode ) : void
     {
-        /** @var QuestionHelper $questionHelper */
-        $questionHelper = $this->getHelper( 'question' );
-        /** @var UsersRepositoryInterface $userRepository */
-        $userRepository = $this->getUserRepository();
+        $outputStyle    = new SymfonyStyle( $input, $output );
+        $outputStyle->writeln( 'Create Admin account for All Applications.' );
         
-        do {
-            $question   = new Question( 'Username (press enter to use email): ', $email );
-            $username   = $questionHelper->ask( $input, $output, $question );
-            $exists     = null !== $userRepository->findOneBy( ['username' => $username] );
-            
-            if ($exists) {
-                $output->writeln( '<error>Username is already in use!</error>' );
-            }
-        } while ( $exists );
+        $parameters     = [
+            '--application' => 'Applications Admin',
+            '--roles'       => ['ROLE_APPLICATION_ADMIN'],
+            '--locale'      => $localeCode
+        ];
+        $this->commandExecutor->runCommand( 'vankosoft:application:create-user', $parameters, $output );
         
-        return $username;
+        $outputStyle->writeln( '<info>Admin account for All Applications successfully created.</info>' );
+        $outputStyle->newLine();
     }
     
-    private function getAdministratorPassword( InputInterface $input, OutputInterface $output ) : string
-    {
-        /** @var QuestionHelper $questionHelper */
-        $questionHelper = $this->getHelper( 'question' );
-        $validator      = $this->getPasswordQuestionValidator();
-        
-        do {
-            $passwordQuestion           = $this->createPasswordQuestion( 'Choose password:', $validator );
-            $confirmPasswordQuestion    = $this->createPasswordQuestion( 'Confirm password:', $validator );
-            
-            $password                   = $questionHelper->ask( $input, $output, $passwordQuestion );
-            $repeatedPassword           = $questionHelper->ask( $input, $output, $confirmPasswordQuestion );
-            
-            if ( $repeatedPassword !== $password ) {
-                $output->writeln( '<error>Passwords do not match!</error>' );
-            }
-        } while ( $repeatedPassword !== $password );
-        
-        return $password;
-    }
-    
-    private function getPasswordQuestionValidator() : \Closure
-    {
-        return
-            /** @param mixed $value */
-            function ( $value ): string {
-                /** @var ConstraintViolationListInterface $errors */
-                $errors     = $this->getContainer()->get( 'validator' )->validate( $value, [new NotBlank()] );
-                foreach ( $errors as $error ) {
-                    throw new \DomainException( $error->getMessage() );
-                }
-                
-                return $value;
-            }
-        ;
-    }
-    
-    private function createPasswordQuestion( string $message, \Closure $validator ) : Question
-    {
-        return ( new Question( $message ) )
-            ->setValidator( $validator )
-            ->setMaxAttempts( 3 )
-            ->setHidden( true )
-            ->setHiddenFallback( false )
-        ;
-    }
-    
-    private function getUserRepository() : UsersRepositoryInterface
-    {
-        return $this->getContainer()->get( 'vs_users.repository.users' );
-    }
-    
-    private function createAdminPanelUrlQuestion() : Question
+    private function createAdminPanelUrlQuestion(): Question
     {
         return ( new Question( 'AdminPanel Url: ' ) )
             ->setValidator(

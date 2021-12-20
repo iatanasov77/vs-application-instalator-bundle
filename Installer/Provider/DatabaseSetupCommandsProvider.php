@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationInstalatorBundle\Installer\Provider;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Installer\Provider;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
@@ -101,7 +101,12 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 
     private function getDatabaseName(): string
     {
-        return $this->getEntityManager()->getConnection()->getDatabase();
+        // Doctrine\DBAL 3
+        $connectionParams   = $this->getEntityManager()->getConnection()->getParams();
+        return $connectionParams['dbname'];
+        
+        // Doctrine\DBAL 2
+        //return $this->getEntityManager()->getConnection()->getDatabase();
     }
 
     private function getSchemaManager(): AbstractSchemaManager
