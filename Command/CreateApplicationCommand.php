@@ -184,7 +184,7 @@ EOT
     private function createApplicationUsers( InputInterface $input, OutputInterface $output, $applicationName, $baseRole, $localeCode )
     {
         $outputStyle    = new SymfonyStyle( $input, $output );
-        $outputStyle->writeln( 'Create Application Admin account.' );
+        $outputStyle->writeln( 'Create Admin account for this Application Only.' );
         
         $parameters     = [
             '--application' => $applicationName,
@@ -193,7 +193,7 @@ EOT
         ];
         $this->commandExecutor->runCommand( 'vankosoft:application:create-user', $parameters, $output );
         
-        $outputStyle->writeln( '<info>Application Admin account successfully created.</info>' );
+        $outputStyle->writeln( '<info>Admin account for this Application successfully created.</info>' );
         $outputStyle->newLine();
     }
     

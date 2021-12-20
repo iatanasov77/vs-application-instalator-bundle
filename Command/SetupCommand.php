@@ -102,7 +102,7 @@ EOT
     private function setupApplicationsAdminUser( InputInterface $input, OutputInterface $output, string $localeCode ) : void
     {
         $outputStyle    = new SymfonyStyle( $input, $output );
-        $outputStyle->writeln( 'Create Applications Admin account.' );
+        $outputStyle->writeln( 'Create Admin account for All Applications.' );
         
         $parameters     = [
             '--application' => 'Applications Admin',
@@ -111,7 +111,7 @@ EOT
         ];
         $this->commandExecutor->runCommand( 'vankosoft:application:create-user', $parameters, $output );
         
-        $outputStyle->writeln( '<info>Applications Admin account successfully created.</info>' );
+        $outputStyle->writeln( '<info>Admin account for All Applications successfully created.</info>' );
         $outputStyle->newLine();
     }
     
