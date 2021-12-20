@@ -4,7 +4,7 @@
 /**
  * GLOBAL CONFIGURATION
  */
-$opt        = getopt( 'av' );
+$opt        = getopt( 'a:v:' );
 $command    = '/usr/bin/git subtree';
 $prefixes   = [
                 'src/Vankosoft/ApplicationInstalatorBundle',
@@ -12,6 +12,8 @@ $prefixes   = [
                 'src/Vankosoft/CmsBundle',
                 'src/Vankosoft/UsersBundle'
             ];
+
+//var_dump( $opt ); echo "\n"; die;
 
 /**
  * MAIN SCRIPT
@@ -41,6 +43,8 @@ function Usage()
 = \n
 = -v version    Select Branch Version. \n
 = \n
+= \n
+= EXAMPLE: bin/subtree -apush -v1.4 \n
 ============================================================================================================================================ \n
 ";
 

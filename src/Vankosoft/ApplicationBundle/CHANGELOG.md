@@ -1,3 +1,30 @@
+1.6.0	|	Release date: **20.12.2021**
+============================================
+* New Features:
+  - Switch Develop Branch.
+
+
+1.5.1	|	Release date: **20.12.2021**
+============================================
+* Commits:
+  - Add Translations for Taxonomy Taxon Items.
+  - Fix and Improve AdminPanel Menu Services. Fix Cms FileManager Services.
+  - Pass Entity into AbstractCrudController::customData method.
+  - Refactoring UsersBundle to use Avatar instead of Profile Picture Field.
+  - Add to Display User Avatar at Layout Top.
+  - Add Twig Macros for Form Tree Types.
+  - Using Macros for EasyUi Combo EveryWhere.
+  - Fix Using of vs_tree.easyuiCombobox
+  - Add Translator into the UsersRolesExtController.
+  - Improve Security Configuration.
+  - Add Users Relation into Application Entity.
+  - Fix Mapping Between Application and Users.
+  - Add New Migrations.
+  - Fix Application Model For Users Association..
+  - Change Vankosoft Namespace.
+  - Imrove Application AuthController to not open login page when user is logged in.
+
+
 1.5.0	|	Release date: **14.11.2021**
 ============================================
 * New Features:
