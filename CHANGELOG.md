@@ -1,3 +1,15 @@
+1.6.1	|	Release date: **20.12.2021**
+============================================
+* New Features:
+  - Update Application Configs.
+  - Update Subtree Script.
+  - Update Subtree Manual.
+  - Switch Components Branches
+* Bug-Fixes:
+  - Some Fixes and Improvements.
+  - Imrove Application AuthController to not open login page when user is logged in.
+
+
 1.6.0	|	Release date: **18.12.2021**
 ============================================
 * New Features:
