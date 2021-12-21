@@ -52,11 +52,6 @@ class ApplicationSetup
         
         $projectRootDir             = $this->container->get( 'kernel' )->getProjectDir();
         
-        if ( $this->newProjectInstall && $filesystem->exists( $projectRootDir . '/VERSION' ) ) {
-            $this->applicationVersion   = file_get_contents( $projectRootDir . '/VERSION' );
-            $filesystem->remove( $projectRootDir . '/VERSION' );
-        }
-        
         $applicationDirs            = [
             'configs'       => $projectRootDir . '/config/applications/' . $this->applicationSlug,
             'public'        => $projectRootDir . '/public/' . $this->applicationSlug,
@@ -77,6 +72,8 @@ class ApplicationSetup
     public function setupApplication( $applicationName, $newProjectInstall = false )
     {
         $this->newProjectInstall    = $newProjectInstall;
+        $this->_initialoze();
+        
         $applicationDirs            = $this->getApplicationDirectories( $applicationName );
         
         // Setup The Application
@@ -93,6 +90,9 @@ class ApplicationSetup
     
     public function setupAdminPanelKernel()
     {
+        $this->newProjectInstall    = true;
+        $this->_initialoze();
+        
         $filesystem         = new Filesystem();
         $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
         $reflectionClass    = new \ReflectionClass( \App\AdminPanelKernel::class );
@@ -108,6 +108,17 @@ class ApplicationSetup
     public function finalizeSetup()
     {
         $this->removeOriginalKernelConfigs();
+    }
+    
+    private function _initialoze()
+    {
+        $filesystem     = new Filesystem();
+        $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
+        
+        if ( $this->newProjectInstall && $filesystem->exists( $projectRootDir . '/VERSION' ) ) {
+            $this->applicationVersion   = file_get_contents( $projectRootDir . '/VERSION' );
+            $filesystem->remove( $projectRootDir . '/VERSION' );
+        }
     }
     
     private function setupApplicationDirectories( $applicationDirs ): void
