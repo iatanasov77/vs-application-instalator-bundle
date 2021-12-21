@@ -27,7 +27,7 @@ EOT
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $applicationName    = $input->getArgument( 'application' );
-        $appSetup           = $this->getContainer()->get( 'vs_application_instalator.setup_application' );
+        $appSetup           = $this->getContainer()->get( 'vs_application.installer.setup_application' );
         
         $outputStyle        = new SymfonyStyle( $input, $output );
         

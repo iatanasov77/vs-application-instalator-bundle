@@ -52,3 +52,8 @@ services:
         class: Vankosoft\ApplicationInstalatorBundle\Command\InstallSampleDataCommand
         tags:
             - 'console.command'
+            
+    vs_app.command.install.finalize_setup:
+        class: Vankosoft\ApplicationInstalatorBundle\Command\SetupFinalizeCommand
+        tags:
+            - 'console.command'
