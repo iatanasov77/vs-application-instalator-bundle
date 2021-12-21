@@ -6,6 +6,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -31,13 +32,18 @@ EOT
     
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        $locale = $input->getOption( 'default-locale' );
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper     = $this->getHelper( 'question' );
+        
+        $locale             = $input->getOption( 'default-locale' );
+        
+        // Setup Admin account for All Applications.
+        $this->setupApplicationsAdminUser( $input, $output, $locale );
         
         // Setup an Application
-        $this->setupApplication( $input, $output, $locale );
-        
-        // Setup Applications Admin User
-        $this->setupApplicationsAdminUser( $input, $output, $locale );
+        if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to create a default application? (y/N) ', false ) ) ) {
+            $this->setupApplication( $input, $output, $locale );
+        }
         
         return Command::SUCCESS;
     }
@@ -46,7 +52,7 @@ EOT
     {
         $outputStyle    = new SymfonyStyle( $input, $output );
         
-        $this->commandExecutor->runCommand( 'vankosoft:application:create', ['--setup-kernel' => true, '--locale' => $localeCode], $output );
+        $this->commandExecutor->runCommand( 'vankosoft:application:create', ['--new-project' => true, '--locale' => $localeCode], $output );
         
         $outputStyle->newLine();
         $outputStyle->writeln( '<info>Default Application created successfully.</info>' );

@@ -85,7 +85,7 @@ EOT
         } catch ( \InvalidArgumentException $exception ) {
             return Command::FAILURE;
         }
-        $this->setupAdministratorsAvatar( $user );
+        $this->setupAdministratorsAvatar( $user, $roles );
         $this->setupUserRoles( $user, $roles );
         
         // Setup User Properties
@@ -191,13 +191,14 @@ EOT
         return $password;
     }
     
-    private function setupAdministratorsAvatar( &$user )
+    private function setupAdministratorsAvatar( &$user, $roles )
     {
         if ( $this->fileLocator === null || $this->imageUploader === null ) {
             throw new \RuntimeException( 'You must configure a $fileLocator or/and $imageUploader' );
         }
         
-        $imagePath      = $this->fileLocator->locate( '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/vankosoft.png' );
+        $avatarFile     = in_array( 'ROLE_SUPER_ADMIN', $roles ) ? 'symfony.png' : 'vankosoft.png';
+        $imagePath      = $this->fileLocator->locate( '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/' . $avatarFile );
         $uploadedImage  = new UploadedFile( $imagePath, basename( $imagePath ) );
         
         $avatarImage    = $this->getContainer()->get( 'vs_users.factory.avatar_image' )->createNew();

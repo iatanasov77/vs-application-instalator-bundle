@@ -49,6 +49,11 @@ final class InstallCommand extends AbstractInstallCommand
         //             'command' => 'sample-data',
         //             'message' => 'Install Application Simple Data.',
         //         ],
+        
+        [
+            'command' => 'finalize-setup',
+            'message' => 'Finalize VankoSoft Application Setup.',
+        ],
     ];
     
     protected function configure(): void
