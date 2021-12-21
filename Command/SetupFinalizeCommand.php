@@ -30,9 +30,6 @@ EOT
         
         $appSetup->finalizeSetup();
         
-        $outputStyle->newLine();
-        $outputStyle->newLine();
-        
         return 0;
     }
 }
