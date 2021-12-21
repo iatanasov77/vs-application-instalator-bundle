@@ -25,4 +25,9 @@ services:
             - '@vs_application.repository.locale'
             - '@vs_application.factory.locale'
             - '%locale%'
+            
+    vs_application.installer.setup_application:
+        class: Vankosoft\ApplicationInstalatorBundle\Installer\Setup\ApplicationSetup
+        arguments: 
+            - '@service_container'
 

@@ -17,7 +17,7 @@
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
         <form class="login-form" method="post">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('login') }}" />
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
             
             <div class="form-group">
                 <input type="text" class="form-control form-control-lg" placeholder="Username" autofocus id="username" name="_username" value="{{ last_username }}" />

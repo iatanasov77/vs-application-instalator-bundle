@@ -1,4 +1,4 @@
-<?php namespace Vankosoft\ApplicationInstalatorBundle\Component;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Installer\Setup;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -6,7 +6,7 @@ use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 use Vankosoft\ApplicationBundle\Component\Slug;
 
-class SetupApplication
+class ApplicationSetup
 {
     /**
      * @var ContainerInterface $container
@@ -34,9 +34,9 @@ class SetupApplication
     private $applicationVersion;
     
     /**
-     * @var boolean $setupKernel
+     * @var boolean $newProjectInstall
      */
-    private $setupKernel;
+    private $newProjectInstall;
     
     public function __construct( ContainerInterface $container )
     {
@@ -52,7 +52,7 @@ class SetupApplication
         
         $projectRootDir             = $this->container->get( 'kernel' )->getProjectDir();
         
-        if ( $this->setupKernel && $filesystem->exists( $projectRootDir . '/VERSION' ) ) {
+        if ( $this->newProjectInstall && $filesystem->exists( $projectRootDir . '/VERSION' ) ) {
             $this->applicationVersion   = file_get_contents( $projectRootDir . '/VERSION' );
             $filesystem->remove( $projectRootDir . '/VERSION' );
         }
@@ -72,27 +72,42 @@ class SetupApplication
      * This is the Entry Point of this class
      * 
      * @param string $applicationName
-     * @param boolean $setupKernel
+     * @param boolean $newProjectInstall
      */
-    public function setupApplication( $applicationName, $setupKernel = false )
+    public function setupApplication( $applicationName, $newProjectInstall = false )
     {
-        $this->setupKernel  = $setupKernel;
-        $applicationDirs    = $this->getApplicationDirectories( $applicationName );
+        $this->newProjectInstall    = $newProjectInstall;
+        $applicationDirs            = $this->getApplicationDirectories( $applicationName );
         
         // Setup The Application
         $this->setupApplicationDirectories( $applicationDirs  );
-        $this->setupAdminPanelKernel();
         
-        if ( $setupKernel ) {
-            $this->setupApplicationKernel();
-        }
-        
+        $this->setupApplicationKernel();
         $this->setupApplicationHomePage();
         $this->setupApplicationLoginPage();
         $this->setupApplicationConfigs();
         $this->setupApplicationRoutes();
         $this->setupApplicationAssets();
         $this->setupInstalationInfo();
+    }
+    
+    public function setupAdminPanelKernel()
+    {
+        $filesystem         = new Filesystem();
+        $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
+        $reflectionClass    = new \ReflectionClass( \App\AdminPanelKernel::class );
+        $constants          = $reflectionClass->getConstants();
+        
+        $filesystem->dumpFile( $projectRootDir . '/src/AdminPanelKernel.php', str_replace(
+            $constants['VERSION'],
+            $this->applicationVersion,
+            file_get_contents( $projectRootDir . '/src/AdminPanelKernel.php' )
+        ));
+    }
+    
+    public function finalizeSetup()
+    {
+        $this->removeOriginalKernelConfigs();
     }
     
     private function setupApplicationDirectories( $applicationDirs ): void
@@ -119,22 +134,6 @@ class SetupApplication
         } catch ( IOExceptionInterface $exception ) {
             echo "An error occurred while creating your directory at " . $exception->getPath();
         }
-    }
-    
-    private function setupAdminPanelKernel()
-    {
-        $filesystem         = new Filesystem();
-        $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
-        $reflectionClass    = new \ReflectionClass( \App\AdminPanelKernel::class );
-        $constants          = $reflectionClass->getConstants();
-        
-        $filesystem->dumpFile( $projectRootDir . '/src/AdminPanelKernel.php', str_replace(
-            $constants['VERSION'], 
-            $this->applicationVersion,
-            file_get_contents( $projectRootDir . '/src/AdminPanelKernel.php' )
-        ));
-        
-        $this->removeOriginalKernelConfigs();
     }
     
     private function setupApplicationKernel()
