@@ -13,9 +13,9 @@ use Symfony\Component\Console\Input\ArrayInput;
 
 use Vankosoft\ApplicationBundle\Component\Slug;
 
-final class SetupCommand extends AbstractInstallCommand
+final class SetupSuperAdminApplicationCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'vankosoft:install:setup';
+    protected static $defaultName = 'vankosoft:install:setup-super-admin-application';
     
     protected function configure(): void
     {
@@ -25,32 +25,48 @@ final class SetupCommand extends AbstractInstallCommand
 The <info>%command.name%</info> command allows user to configure basic VankoSoft Application data.
 EOT
             )
+            ->addOption( 'default-locale', 'l', InputOption::VALUE_REQUIRED, 'Prefered User Locale.', 'en_US' )
         ;
     }
     
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        $locale = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
-        $this->commandExecutor->runCommand( 'vankosoft:application:setup', [], $output );
+        $locale = $input->getOption( 'default-locale' );
         
         // Setup Super Admin Panel
-        $this->setupSuperAdminPanelApplication( $input, $output, $locale->getCode() );
-        
-        // Setup an Application
-        $this->setupApplication( $input, $output, $locale->getCode() );
+        $this->setupSuperAdminPanelApplication( $input, $output, $locale );
         
         // Setup Super Admin User
-        $this->setupSuperAdminUser( $input, $output, $locale->getCode() );
-        
-        // Setup Applications Admin User
-        $this->setupApplicationsAdminUser( $input, $output, $locale->getCode() );
+        $this->setupSuperAdminUser( $input, $output, $locale );
         
         return Command::SUCCESS;
     }
     
     private function setupSuperAdminPanelApplication( InputInterface $input, OutputInterface $output, string $localeCode ): void
     {
-        $applicationName    = 'Admin Panel';
+        $outputStyle    = new SymfonyStyle( $input, $output );
+        
+        // Add Database Records
+        $outputStyle->writeln( 'Create SuperAdmin Application Database Records.' );
+        $this->createApplicationDatabaseRecords( $input, $output, 'Admin Panel', $localeCode );
+        $outputStyle->writeln( '<info>SuperAdmin Application Database Records successfully created.</info>' );
+        $outputStyle->newLine();
+        
+        // Setup SuperAdmin Kernel
+        $appSetup           = $this->getContainer()->get( 'vs_application.installer.setup_application' );
+        $outputStyle->writeln( 'Create SuperAdmin Application Kernel.' );
+        $appSetup->setupAdminPanelKernel();
+        $outputStyle->writeln( '<info>SuperAdmin Application Kernel successfully created.</info>' );
+        $outputStyle->newLine();
+        
+        $outputStyle->newLine();
+        $outputStyle->writeln( '<info>SuperAdminPanel Application created successfully.</info>' );
+        $outputStyle->newLine();
+    }
+    
+    private function createApplicationDatabaseRecords( InputInterface $input, OutputInterface $output, $applicationName, $localeCode )
+    {
+        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
         $applicationSlug    = Slug::generate( $applicationName );
         
         $outputStyle    = new SymfonyStyle( $input, $output );
@@ -60,27 +76,16 @@ EOT
         $questionHelper     = $this->getHelper( 'question' );
         $questionUrl        = $this->createAdminPanelUrlQuestion();
         $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
-        $applicationCreated = date( 'Y-m-d H:i:s' );
+        $applicationCreated = new \DateTime;
         
-        $command    = $this->getApplication()->find( 'doctrine:query:sql' );
-        $returnCode = $command->run(
-            new ArrayInput( ['sql' =>"INSERT INTO VSAPP_Applications(enabled, code, title, hostname, created_at) VALUES(1, '{$applicationSlug}', '{$applicationName}', '{$applicationUrl}', '{$applicationCreated}')"] ),
-            $output
-        );
+        $application        = $this->getContainer()->get( 'vs_application.factory.application' )->createNew();
+        $application->setCode( $applicationSlug );
+        $application->setTitle( $applicationName );
+        $application->setHostname( $applicationUrl );
+        $application->setCreatedAt( $applicationCreated );
         
-        $outputStyle->writeln( '<info>SuperAdminPanel Application created successfully.</info>' );
-        $outputStyle->newLine();
-    }
-    
-    private function setupApplication( InputInterface $input, OutputInterface $output, string $localeCode )
-    {
-        $outputStyle    = new SymfonyStyle( $input, $output );
-        
-        $this->commandExecutor->runCommand( 'vankosoft:application:create', ['--setup-kernel' => true, '--locale' => $localeCode], $output );
-        
-        $outputStyle->newLine();
-        $outputStyle->writeln( '<info>Default Application created successfully.</info>' );
-        $outputStyle->newLine();
+        $entityManager->persist( $application );
+        $entityManager->flush();
     }
     
     private function setupSuperAdminUser( InputInterface $input, OutputInterface $output, string $localeCode ) : void
@@ -96,22 +101,6 @@ EOT
         $this->commandExecutor->runCommand( 'vankosoft:application:create-user', $parameters, $output );
         
         $outputStyle->writeln( '<info>SuperAdmin account successfully created.</info>' );
-        $outputStyle->newLine();
-    }
-    
-    private function setupApplicationsAdminUser( InputInterface $input, OutputInterface $output, string $localeCode ) : void
-    {
-        $outputStyle    = new SymfonyStyle( $input, $output );
-        $outputStyle->writeln( 'Create Admin account for All Applications.' );
-        
-        $parameters     = [
-            '--application' => 'Applications Admin',
-            '--roles'       => ['ROLE_APPLICATION_ADMIN'],
-            '--locale'      => $localeCode
-        ];
-        $this->commandExecutor->runCommand( 'vankosoft:application:create-user', $parameters, $output );
-        
-        $outputStyle->writeln( '<info>Admin account for All Applications successfully created.</info>' );
         $outputStyle->newLine();
     }
     

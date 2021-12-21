@@ -9,14 +9,14 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InstallApplicationConfigurationCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'vankosoft:application:setup';
+    protected static $defaultName = 'vankosoft:install:application-configuration';
 
     protected function configure(): void
     {
         $this
             ->setDescription( 'Install sample data into VankoSoft Application.' )
             ->setHelp(<<<EOT
-The <info>%command.name%</info> command loads the sample data for VankoSoft Application.
+The <info>%command.name%</info> command loads the general configuration for VankoSoft Application.
 EOT
             )
             ->addOption( 'fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
