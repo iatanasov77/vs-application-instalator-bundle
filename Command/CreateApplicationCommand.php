@@ -33,8 +33,8 @@ The <info>%command.name%</info> command allows user to create a VankoSoft Applic
 EOT
             )
             ->addOption(
-                'setup-kernel',
-                null,
+                'new-project',
+                'n',
                 InputOption::VALUE_OPTIONAL,
                 'Whether to setup the AdminPanelKernel class.',
                 false
@@ -52,8 +52,8 @@ EOT
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $localeCode         = $input->getOption( 'locale' );
-        $setupKernelOption  = $input->getOption( 'setup-kernel' );
-        $setupKernel        = ( $setupKernelOption !== false );
+        $newProjectOption   = $input->getOption( 'new-project' );
+        $newProject         = ( $newProjectOption !== false );
         
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
@@ -61,17 +61,19 @@ EOT
         $questionName       = $this->createApplicationNameQuestion();
         $applicationName    = $questionHelper->ask( $input, $output, $questionName );
         
-        $appSetup           = $this->getContainer()->get( 'vs_application_instalator.setup_application' );
+        $appSetup           = $this->getContainer()->get( 'vs_application.installer.setup_application' );
         $outputStyle        = new SymfonyStyle( $input, $output );
+        
+        // Add Database Records
+        $outputStyle->writeln( 'Create Application Database Records.' );
+        $this->createApplicationDatabaseRecords( $input, $output, $applicationName, $localeCode );
+        $outputStyle->writeln( '<info>Application Database Records successfully created.</info>' );
+        $outputStyle->newLine();
         
         // Create Directories
         $outputStyle->writeln( 'Create Application Directories.' );
-        $appSetup->setupApplication( $applicationName, $setupKernel );
+        $appSetup->setupApplication( $applicationName, $newProject );
         $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
-        
-        // Add Database Records
-        $this->createApplicationDatabaseRecords( $input, $output, $applicationName, $localeCode );
-        
         $outputStyle->newLine();
         
         return Command::SUCCESS;
@@ -109,19 +111,6 @@ EOT
         } else {
             $outputStyle->writeln( 'Cancelled creating application users.' );
         }
-        
-        /* OLD WAY
-         * ===========
-         *
-         // bin/console doctrine:query:sql "INSERT INTO VSAPP_Applications(title) VALUES('Test Application')"
-         $command    = $this->getApplication()->find( 'doctrine:query:sql' );
-         
-         // Create Records
-         $returnCode = $command->run(
-         new ArrayInput( ['sql' =>"INSERT INTO VSAPP_Applications(enabled, code, title, hostname, created_at) VALUES(1, '{$applicationSlug}', '{$applicationName}', '{$applicationUrl}', '{$applicationCreated}')"] ),
-         $output
-         );
-         */
         
         $outputStyle->writeln( '<info>Application Database Records successfully created.</info>' );
     }
