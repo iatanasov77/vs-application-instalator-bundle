@@ -1,3 +1,11 @@
+1.6.3	|	Release date: **21.12.2021**
+============================================
+* Bug-Fixes:
+  - Fix CreateApplicationCommand .
+  - Litle Visual Improve.
+  - Fix a Deprecation.
+
+
 1.6.2	|	Release date: **21.12.2021**
 ============================================
 * New Features:
