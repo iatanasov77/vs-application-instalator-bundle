@@ -30,4 +30,5 @@ services:
         class: Vankosoft\ApplicationInstalatorBundle\Installer\Setup\ApplicationSetup
         arguments: 
             - '@service_container'
+            - '@twig'
 
