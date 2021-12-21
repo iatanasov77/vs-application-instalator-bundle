@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InstallAssetsCommand extends AbstractInstallCommand
 {
@@ -20,6 +21,8 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $outputStyle    = new SymfonyStyle( $input, $output );
+        
         $output->writeln( sprintf(
             'Installing VankoSoft Application assets for environment <info>%s</info>.',
             $this->getEnvironment()
@@ -41,7 +44,8 @@ EOT
         ];
 
         $this->runCommands( $commands, $output );
-
+        $outputStyle->newLine( 2 );
+        
         return 0;
     }
 }

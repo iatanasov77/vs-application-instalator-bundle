@@ -34,7 +34,7 @@ EOT
             )
             ->addOption(
                 'new-project',
-                'n',
+                'p',
                 InputOption::VALUE_OPTIONAL,
                 'Whether to setup the AdminPanelKernel class.',
                 false
