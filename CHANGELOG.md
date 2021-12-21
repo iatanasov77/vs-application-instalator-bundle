@@ -1,3 +1,12 @@
+1.6.2	|	Release date: **21.12.2021**
+============================================
+* New Features:
+  - Add SuperAdmin Panel Favicon.
+* Bug-Fixes and Refactoring:
+  - Fix Login Form and LoginFormAuthenticator.
+  - Refactoring, Fix and Improve Project Instalator.
+
+
 1.6.1	|	Release date: **20.12.2021**
 ============================================
 * New Features:
