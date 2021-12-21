@@ -2,7 +2,10 @@
 
 //use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
+
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -11,20 +14,22 @@ use Vankosoft\ApplicationBundle\Twig\Alerts;
 class MaintenanceListener
 {
     protected $container;
+    
     protected $user;
     protected $applicationId;
     protected $applicationLayout;
     
     public function __construct(
         ContainerInterface $container,
+        TokenStorageInterface $tokenStorage,
         int $applicationId = null,
         ?string $applicationLayout
     ) {
-        $this->container            = $container;
         $this->applicationId        = $applicationId;
         $this->applicationLayout    = $applicationLayout;
+        $this->container            = $container;
         
-        $token              = $this->container->get( 'security.token_storage' )->getToken();
+        $token                      = $tokenStorage->getToken();
         if ( $token ) {
             $this->user         = $token->getUser();
         }
