@@ -87,7 +87,6 @@ EOT
         $questionHelper     = $this->getHelper( 'question' );
         
         $outputStyle        = new SymfonyStyle( $input, $output );
-        $outputStyle->writeln( 'Create Application Database Records.' );
         
         /*
          * Create Application
@@ -111,8 +110,6 @@ EOT
         } else {
             $outputStyle->writeln( 'Cancelled creating application users.' );
         }
-        
-        $outputStyle->writeln( '<info>Application Database Records successfully created.</info>' );
     }
     
     private function createApplication( InputInterface $input, OutputInterface $output, $applicationName ): ApplicationInterface
