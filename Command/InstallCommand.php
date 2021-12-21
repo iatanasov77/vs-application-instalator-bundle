@@ -28,18 +28,27 @@ final class InstallCommand extends AbstractInstallCommand
             'message' => 'Setting up the database.',
         ],
         [
-            'command' => 'setup',
-            'message' => 'Application configuration.',
+            'command' => 'application-configuration',
+            'message' => 'Load General Configuration.',
         ],
-//         For Now Sample Data is In Construction and is Not Available
-//         [
-//             'command' => 'sample-data',
-//             'message' => 'Install Application Simple Data.',
-//         ],
+        [
+            'command' => 'setup-super-admin-application',
+            'message' => 'Setup SuperAdmin Panel.',
+        ],
+        [
+            'command' => 'setup-applications',
+            'message' => 'Setup Main Application Layout.',
+        ],
         [
             'command' => 'assets',
             'message' => 'Installing assets.',
         ],
+        
+        //         For Now Sample Data is In Construction and is Not Available
+        //         [
+        //             'command' => 'sample-data',
+        //             'message' => 'Install Application Simple Data.',
+        //         ],
     ];
     
     protected function configure(): void
@@ -68,6 +77,7 @@ EOT
         $this->ensureDirectoryExistsAndIsWritable( (string) $this->getContainer()->getParameter( 'kernel.cache_dir' ), $output );
         
         $errored        = false;
+        $defaultLocale  = null;
         foreach ( $this->commands as $step => $command ) {
             try {
                 $outputStyle->newLine();
@@ -85,6 +95,16 @@ EOT
                             $parameters['--fixture-suite']  = $suite;
                         if ( $debug )
                             $parameters['--debug-commands'] = $debug;
+                        break;
+                    case 'application-configuration':
+                        // Database is already Installed. Setup Default Locale.
+                        $defaultLocale  = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
+                        break;
+                    case 'setup-super-admin-application':
+                        $parameters['--default-locale']  = $defaultLocale ? $defaultLocale->getCode() : null;
+                        break;
+                    case 'setup-applications':
+                        $parameters['--default-locale']  = $defaultLocale ? $defaultLocale->getCode() : null;
                         break;
                     case 'sample-data':
                         $parameters['--fixture-suite']  = 'vankosoft_sampledata_suite';
