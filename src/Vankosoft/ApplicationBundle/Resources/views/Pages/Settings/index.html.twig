@@ -1,10 +1,6 @@
 {% extends "@VSApplication/layout.html.twig" %}
 
 {# Import Macros #}
-{#
-{% from 'SyliusResourceBundle:Macros:actions.html.twig' import create %}
-#}
-{% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
 {% from "@VSApplication/Macros/misc.html.twig" import pagination %}
 
 {% block title %}{{ parent() }} :: {{ 'vs_application.template.preferences_title' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
