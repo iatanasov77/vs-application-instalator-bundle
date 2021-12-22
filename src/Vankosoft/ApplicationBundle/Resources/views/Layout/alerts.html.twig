@@ -1,0 +1,3 @@
+{% for message in app.flashes( 'in-maintenance' ) %}
+    {{ alerts.warning( message ) }}
+{% endfor %}
