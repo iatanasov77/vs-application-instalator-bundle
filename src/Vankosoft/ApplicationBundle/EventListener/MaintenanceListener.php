@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 use Vankosoft\ApplicationBundle\Twig\Alerts;
 
@@ -21,6 +22,11 @@ class MaintenanceListener
      */
     protected $twig;
     
+    /**
+     * @var FlashBagInterface $flash
+     */
+    protected $flash;
+    
     protected $user;
     protected $applicationId;
     protected $applicationLayout;
@@ -28,6 +34,8 @@ class MaintenanceListener
     public function __construct(
         ContainerInterface $container,
         Environment $twig,
+        FlashBagInterface $flash,
+        FlashBagInterface $flash,
         TokenStorageInterface $tokenStorage,
         int $applicationId = null,
         ?string $applicationLayout
@@ -36,6 +44,7 @@ class MaintenanceListener
         $this->applicationLayout    = $applicationLayout;
         $this->container            = $container;
         $this->twig                 = $twig;
+        $this->flash                = $flash;
         
         $token                      = $tokenStorage->getToken();
         if ( $token ) {
@@ -66,7 +75,8 @@ class MaintenanceListener
                     
                     $event->stopPropagation();
                 } else {
-                    Alerts::$WARNINGS[]   = 'The System is in Maintenance Mode !';
+                    // Alerts::WARNINGS[]   = 'The System is in Maintenance Mode !';
+                    $this->flash->add( 'global-notice', 'The System is in Maintenance Mode !' );
                 }
         }
     }

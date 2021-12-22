@@ -2,10 +2,10 @@
 
 class Alerts
 {
-    public static $WARNINGS  = [];
+    const WARNINGS  = [];
     
     public static function warnings()
     {
-        return self::$WARNINGS;
+        return self::WARNINGS;
     }
 }

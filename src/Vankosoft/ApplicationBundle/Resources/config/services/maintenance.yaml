@@ -9,6 +9,7 @@ services:
         arguments: 
             - '@service_container'
             - '@twig'
+            - '@session.flash_bag'
             - '@security.token_storage'
             - '%vs_application.settings.application_id%'
             - '%vs_application.settings.application_layout%'
