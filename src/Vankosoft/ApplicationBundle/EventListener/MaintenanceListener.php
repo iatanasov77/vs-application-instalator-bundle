@@ -62,21 +62,23 @@ class MaintenanceListener
             if (
                 ( ! is_object( $this->user ) || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
                 && ! $debug
-                ) {
-                    $maintenancePage    = $settings['maintenancePage'] ?
-                                            $this->getPagesRepository()->find( $settings['maintenancePage'] ) :
-                                            null;
-                    if ( $maintenancePage ) {
-                        $event->setResponse( new Response( $this->renderMaintenancePage( $maintenancePage ), 503 ) );
-                    } else {
-                        $event->setResponse( new Response( 'The System is in Maintenance Mode !', 503 ) );
-                    }
-                    
-                    $event->stopPropagation();
+            ) {
+                $maintenancePage    = $settings['maintenancePage'] ?
+                                        $this->getPagesRepository()->find( $settings['maintenancePage'] ) :
+                                        null;
+                if ( $maintenancePage ) {
+                    $event->setResponse( new Response( $this->renderMaintenancePage( $maintenancePage ), 503 ) );
                 } else {
-                    // Alerts::WARNINGS[]   = 'The System is in Maintenance Mode !';
-                    $this->flash->add( 'global-notice', 'The System is in Maintenance Mode !' );
+                    $event->setResponse( new Response( 'The System is in Maintenance Mode !', 503 ) );
                 }
+                
+                $event->stopPropagation();
+            } else {
+                // Alerts::WARNINGS[]   = 'The System is in Maintenance Mode !';
+                if ( ! $this->flash->has( 'in-maintenance' ) ) {
+                    $this->flash->add( 'in-maintenance', 'The System is in Maintenance Mode !' );
+                }
+            }
         }
     }
     
