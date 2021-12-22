@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment;
 
 use Vankosoft\ApplicationBundle\Twig\Alerts;
 
@@ -15,12 +16,18 @@ class MaintenanceListener
 {
     protected $container;
     
+    /**
+     * @var Environment $twig
+     */
+    protected $twig;
+    
     protected $user;
     protected $applicationId;
     protected $applicationLayout;
     
     public function __construct(
         ContainerInterface $container,
+        Environment $twig,
         TokenStorageInterface $tokenStorage,
         int $applicationId = null,
         ?string $applicationLayout
@@ -28,6 +35,7 @@ class MaintenanceListener
         $this->applicationId        = $applicationId;
         $this->applicationLayout    = $applicationLayout;
         $this->container            = $container;
+        $this->twig                 = $twig;
         
         $token                      = $tokenStorage->getToken();
         if ( $token ) {
@@ -75,7 +83,7 @@ class MaintenanceListener
     
     private function renderMaintenancePage( $maintenancePage ): string
     {
-        return $this->container->get( 'templating' )->render( '@VSCms/Pages/show.html.twig',
+        return $this->twig->render( '@VSCms/Pages/show.html.twig',
             [
                 'page'              => $maintenancePage,
                 'applicationLayout' => $this->applicationLayout ?: '@VSApplication/layout.html.twig',

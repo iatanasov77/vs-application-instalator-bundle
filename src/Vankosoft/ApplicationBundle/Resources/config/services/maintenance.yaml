@@ -8,6 +8,7 @@ services:
         class: Vankosoft\ApplicationBundle\EventListener\MaintenanceListener
         arguments: 
             - '@service_container'
+            - '@twig'
             - '@security.token_storage'
             - '%vs_application.settings.application_id%'
             - '%vs_application.settings.application_layout%'
