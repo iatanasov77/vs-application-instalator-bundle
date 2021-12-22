@@ -35,7 +35,6 @@ class MaintenanceListener
         ContainerInterface $container,
         Environment $twig,
         FlashBagInterface $flash,
-        FlashBagInterface $flash,
         TokenStorageInterface $tokenStorage,
         int $applicationId = null,
         ?string $applicationLayout
