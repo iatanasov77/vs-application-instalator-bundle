@@ -75,7 +75,7 @@ class MaintenanceListener
                 $event->stopPropagation();
             } else {
                 // Alerts::WARNINGS[]   = 'The System is in Maintenance Mode !';
-                if ( ! $this->flash->has( 'in-maintenance' ) ) {
+                if ( ! $this->flash->has( 'in-maintenance' ) ) { // Check if there is no Flash messages of type "in-maintenance"
                     $this->flash->add( 'in-maintenance', 'The System is in Maintenance Mode !' );
                 }
             }
