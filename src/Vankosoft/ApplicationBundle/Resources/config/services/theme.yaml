@@ -10,6 +10,8 @@ services:
             - '@sylius.theme.context.settable'
             - '@sylius.repository.theme'
             - '@vs_application.repository.settings'
-            - '%vs_application.settings.application_id%'
+            - '@vs_application.context.application'
+            - '%vs_application.settings.application_id%'  # May be uneeded already
+            
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.request', method: 'onKernelRequest' }
