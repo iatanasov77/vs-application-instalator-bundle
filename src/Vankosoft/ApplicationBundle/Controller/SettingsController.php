@@ -8,6 +8,13 @@ use Vankosoft\ApplicationBundle\Form\SettingsForm;
 
 class SettingsController extends ResourceController
 {
+    protected $themeRepository;
+    
+    public function setThemeRepository( ThemeRepositoryInterface $themeRepository )
+    {
+        $this->themeRepository  = $themeRepository;
+    }
+    
     public function indexAction( Request $request ): Response
     {
         $appThemes      = [];
@@ -23,13 +30,13 @@ class SettingsController extends ResourceController
         $oSettings      = $settings ?: $factory->createNew();
         $forms[]        = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
         
-        $themesRepo     = $this->get( 'sylius.repository.theme' );
         foreach( $applications as $app ) {
             $settings                   = $er->getSettings( $app );
             $oSettings                  = $settings ?: $factory->createNew();
             $forms[]                    = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
             $appThemes[$app->getId()]   = ! $app->getSettings()->isEmpty() ?
-                                            $themesRepo->findOneByName(  $app->getSettings()[0]->getTheme() ) : null;
+                                            $this->themeRepository->findOneByName(  $app->getSettings()[0]->getTheme() ) :
+                                            null;
         }
         
 //         $form->handleRequest( $request );

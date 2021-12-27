@@ -4,6 +4,12 @@ services:
         autoconfigure: true
         public: true
 
+    Vankosoft\ApplicationBundle\Controller\SettingsController:
+        tags: ['controller.service_arguments']
+        autowire: true
+        calls:
+            - setThemeRepository: ['@sylius.repository.theme']
+            
 #     Vankosoft\ApplicationBundle\Controller\:
 #         resource: '../../Controller/'
 #         tags: ['controller.service_arguments', 'container.service_locator']
