@@ -40,7 +40,7 @@ class Application implements ApplicationInterface
         return $this->id;
     }
     
-    public function getSettings() : Collection
+    public function getSettings() : ?Collection
     {
         return $this->settings;
     }
