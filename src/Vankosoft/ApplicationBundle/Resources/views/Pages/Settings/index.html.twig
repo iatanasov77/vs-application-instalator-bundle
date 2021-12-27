@@ -68,8 +68,8 @@
                                         {% endif %}
                                         </td>
                                         <td>
-                                        {% if item.settings[0] is defined %}
-                                            {{ item.settings[0].theme }}
+                                        {% if appThemes[item.id] %}
+                                            {{ appThemes[item.id].title }}
                                         {% endif %}
                                         </td>
                                         <td width="30">

@@ -10,6 +10,7 @@ class SettingsController extends ResourceController
 {
     public function indexAction( Request $request ): Response
     {
+        $appThemes      = [];
         $forms          = [];
         $applications    = $this->getApplicationRepository()->findAll();
         
@@ -22,10 +23,13 @@ class SettingsController extends ResourceController
         $oSettings      = $settings ?: $factory->createNew();
         $forms[]        = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
         
+        $themesRepo     = $this->get( 'sylius.repository.theme' );
         foreach( $applications as $app ) {
-            $settings       = $er->getSettings( $app );
-            $oSettings      = $settings ?: $factory->createNew();
-            $forms[]        = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
+            $settings                   = $er->getSettings( $app );
+            $oSettings                  = $settings ?: $factory->createNew();
+            $forms[]                    = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
+            $appThemes[$app->getId()]   = ! $app->getSettings()->isEmpty() ?
+                                            $themesRepo->findOneByName(  $app->getSettings()[0]->getTheme() ) : null;
         }
         
 //         $form->handleRequest( $request );
@@ -41,6 +45,7 @@ class SettingsController extends ResourceController
                                             $this->getParameter( 'vs_application.page_categories.taxonomy_code' )
                                         );
         return $this->render( '@VSApplication/Pages/Settings/index.html.twig', [
+            'appThemes'     => $appThemes,
             'forms'         => $forms,
             'applications'  => $applications,
             'pcTaxonomyId'  => $taxonomyPagesCategories ? $taxonomyPagesCategories->getId() : 0,
