@@ -68,8 +68,10 @@
                                         {% endif %}
                                         </td>
                                         <td>
-                                        {% if appThemes[item.id] %}
+                                        {% if appThemes[item.id].id|default('') is not same as ('') %}
                                             {{ appThemes[item.id].title }}
+                                        {% else %}
+                                            {{ appThemes[item.id] }}
                                         {% endif %}
                                         </td>
                                         <td width="30">
