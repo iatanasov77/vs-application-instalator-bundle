@@ -50,29 +50,49 @@
                             <table class="table table-striped table-advance table-hover">
                                 <tr>
                                     <th width="50">N</th>
-                                    <th>Title</th>
-                                    <th>Actions</th>
+                                    <th>{{ 'vs_application.template.items_index_row_title' | trans( {},'VSApplicationBundle' ) }}</th>
+                                    <th>{{ 'vs_application.template.items_index_row_in_maintenance' | trans( {},'VSApplicationBundle' ) }}</th>
+                                    <th>{{ 'vs_application.template.items_index_row_theme' | trans( {},'VSApplicationBundle' ) }}</th>
+                                    <th>{{ 'vs_application.template.items_index_row_action' | trans( {},'VSApplicationBundle' ) }}</th>
                                 </tr>
                                 {# #}
                                 {% for item in applications %}
                                     <tr>
                                         <td>{{ loop.index }}</td>
                                         <td>{{ item.title }}</td>
+                                        <td>
+                                        {% if item.settings[0] is defined and item.settings[0].maintenanceMode %}
+                                            <i class="fas fa-check" style="color: #82c91e;">
+                                        {% else %}
+                                            <i class="fas fa-times" style="color: #ff1e1e;"></i>
+                                        {% endif %}
+                                        </td>
+                                        <td>
+                                        {% if item.settings[0] is defined %}
+                                            {{ item.settings[0].theme }}
+                                        {% endif %}
+                                        </td>
                                         <td width="30">
                                             <div class="btn-group">
-                                                <a class="btn btn-primary btnSettings" title="Settings" href="javascript:void(0);" 
-                                                	data-url="{{ path('vs_application_settings_form', {'applicationId': item.id}) }}"
-                                                	data-application_title="{{ item.title }}"
+                                                <a class="btn btn-primary btnSettings" 
+                                                    title="{{ 'vs_application.template.items_index_row_action_settings' | trans( {},'VSApplicationBundle' ) }}" 
+                                                    href="javascript:void(0);" 
+                                                    data-url="{{ path('vs_application_settings_form', {'applicationId': item.id}) }}"
+                                                    data-application_title="{{ item.title }}"
                                                 >
                                                     <i class="fas fa-cogs"></i>
                                                 </a>&nbsp;
-                                                <a class="btn btn-primary btnEdit" title="Edit" href="javascript:void(0);"
-                                                	data-url="{{ path('vs_application_application_form', {'applicationId': item.id}) }}"
-                                                	data-application_title="{{ item.title }}"
+                                                <a class="btn btn-primary btnEdit" 
+                                                    title="{{ 'vs_application.template.items_index_row_action_edit' | trans( {},'VSApplicationBundle' ) }}" 
+                                                    href="javascript:void(0);"
+                                                    data-url="{{ path('vs_application_application_form', {'applicationId': item.id}) }}"
+                                                    data-application_title="{{ item.title }}"
                                                 >
                                                     <i class="fas fa-edit"></i>
                                                 </a>&nbsp;
-                                                <a class="btn btn-danger btnDelete" title="Delete" href="javascript:void(0);" 
+                                                <a class="btn btn-danger btnDelete" 
+                                                    title="{{ 'vs_application.template.items_index_row_action_delete' | trans( {},'VSApplicationBundle' ) }}" 
+                                                    href="javascript:void(0);" 
                                                     data-toggle="modal"
                                                     data-target="#application-delete-modal"
                                                     data-title="{{ item.title }}"

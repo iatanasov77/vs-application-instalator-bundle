@@ -39,6 +39,11 @@ vs_application:
         items_index_row_code: Код
         items_index_row_title: Име
         items_index_row_action: Действие
+        items_index_row_in_maintenance: В Поддръжка
+        items_index_row_theme: Тема
+        items_index_row_action_settings: Настройки
+        items_index_row_action_edit: Редактирай
+        items_index_row_action_delete: Изтрий
     modal:
         application_delete:
             title: 'Изтриване на Приложение'

@@ -39,6 +39,11 @@ vs_application:
         items_index_row_code: Code
         items_index_row_title: Title
         items_index_row_action: Action
+        items_index_row_in_maintenance: In Maintenance
+        items_index_row_theme: Theme
+        items_index_row_action_settings: Settings
+        items_index_row_action_edit: Edit
+        items_index_row_action_delete: Delete
         
     modal:
         application_delete:
