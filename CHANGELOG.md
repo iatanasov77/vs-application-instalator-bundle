@@ -1,3 +1,22 @@
+1.6.4	|	Release date: **27.12.2021**
+============================================
+* Bug-Fixes, Refactorings and Improvements:
+  - Fix Installator.
+  - Fix a Deprecation.
+  - Improve Instalator CreateApplicationCommand
+  - Fix Application MaintenanceListener.
+  - Refactoring of AdminPanel Templates.
+  - Improve Maintenance Listener.
+  - Add Maintenance Alerts in Dev Mode.
+  - Add Maintenance Alerts in the Login Page Layout.
+  - Add Doctrine Mapping Relation between Application and Settings Model.
+  - Add Ordering of Doctrine Mapping of Settings Collection of Application Model.
+  - Update Application Preferences Template.
+  - Add Themes Applications Config.
+  - ThemeChangeListener use ApplicationContext.
+  - Update Installator Application Configs.
+
+
 1.6.3	|	Release date: **21.12.2021**
 ============================================
 * Bug-Fixes:
