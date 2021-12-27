@@ -34,9 +34,14 @@ class SettingsController extends ResourceController
             $settings                   = $er->getSettings( $app );
             $oSettings                  = $settings ?: $factory->createNew();
             $forms[]                    = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
-            $appThemes[$app->getId()]   = ! $app->getSettings()->isEmpty() ?
-                                            $this->themeRepository->findOneByName(  $app->getSettings()[0]->getTheme() ) :
-                                            null;
+            
+            if ( $app->getSettings()->isEmpty() ) {
+                $appThemes[$app->getId()]   = null;
+            } else {
+                $appThemes[$app->getId()]   = $this->themeRepository ?
+                                                $this->themeRepository->findOneByName(  $app->getSettings()[0]->getTheme() ) :
+                                                $app->getSettings()[0]->getTheme();
+            }
         }
         
 //         $form->handleRequest( $request );
