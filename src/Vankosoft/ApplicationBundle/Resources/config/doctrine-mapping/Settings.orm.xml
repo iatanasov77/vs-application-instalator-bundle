@@ -10,7 +10,7 @@
             <generator strategy="AUTO" />
         </id>
 
-		<many-to-one field="application" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface">
+		<many-to-one field="application" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface" inversed-by="settings">
             <join-column name="application_id" referenced-column-name="id" nullable="true" />
             <cascade>
                 <cascade-persist />

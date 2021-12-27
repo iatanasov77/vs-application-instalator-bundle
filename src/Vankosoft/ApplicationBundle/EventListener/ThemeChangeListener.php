@@ -4,6 +4,7 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
+use Vankosoft\ApplicationBundle\Component\Context\ApplicationContextInterface;
 use Vankosoft\ApplicationBundle\Repository\SettingsRepositoryInterface;
 
 class ThemeChangeListener
@@ -17,12 +18,18 @@ class ThemeChangeListener
         ThemeContextInterface $themeContext,
         ThemeRepositoryInterface $themeRepository,
         SettingsRepositoryInterface $settingsRepository,
+        ApplicationContextInterface $applicationContext,
         int $applicationId = null
     ) {
         $this->themeContext         = $themeContext;
         $this->themeRepository      = $themeRepository;
         $this->settingsRepository   = $settingsRepository;
-        $this->applicationId        = $applicationId;
+        
+       
+        $this->applicationId        = $applicationContext->getApplication()->getId();
+//         if ( $applicationId ) {
+//             $this->applicationId    = $applicationId;
+//         }
     }
     
     public function onKernelRequest( RequestEvent $event )

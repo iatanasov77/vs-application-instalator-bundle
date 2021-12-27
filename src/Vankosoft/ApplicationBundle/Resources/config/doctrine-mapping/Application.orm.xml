@@ -28,6 +28,15 @@
             <index columns="hostname"/>
         </indexes>
         
+        <one-to-many field="settings" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\SettingsInterface" mapped-by="application">
+            <cascade>
+                <cascade-all />
+            </cascade>
+            <order-by>
+                <order-by-field name="id" direction="DESC" />
+            </order-by>
+        </one-to-many>
+        
         <many-to-many field="users" target-entity="Vankosoft\UsersBundle\Model\UserInterface" inversed-by="applications" >
             <cascade>
                 <cascade-all/>

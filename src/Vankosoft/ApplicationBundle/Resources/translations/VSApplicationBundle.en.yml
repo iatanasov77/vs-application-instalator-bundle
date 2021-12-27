@@ -27,6 +27,7 @@ vs_application:
         dashboard_section_title: 'Dashboard'
         dashboard_section_description: 'Dashboard description.'
         general_settings_title: 'General Settings'
+        preferences_title: 'Preferences'
         global_settings_title: 'Global Settings'
         applications_settings_title: 'Applications'
         taxonomy_index_title: 'List Vocabularies'
@@ -38,6 +39,11 @@ vs_application:
         items_index_row_code: Code
         items_index_row_title: Title
         items_index_row_action: Action
+        items_index_row_in_maintenance: In Maintenance
+        items_index_row_theme: Theme
+        items_index_row_action_settings: Settings
+        items_index_row_action_edit: Edit
+        items_index_row_action_delete: Delete
         
     modal:
         application_delete:

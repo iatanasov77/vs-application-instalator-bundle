@@ -21,7 +21,7 @@
     </head>
     <body>
         <div class="dashboard-main-wrapper">
-           
+            {% include '@VSApplication/Layout/alerts.html.twig' %}
             <div class="dashboard-header">
                 {% include '@VSApplication/Layout/top.html.twig' %}
             </div>
@@ -33,7 +33,28 @@
             </div>
             
             <div class="dashboard-wrapper">
-            	{% block content %}{% endblock %}
+                <div class="container-fluid  dashboard-content">
+                    <!-- ============================================================== -->
+                    <!-- pageheader -->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                {% block pageTitle %}{% endblock %}
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        {{ knp_menu_render('breadcrumbs', {'template': '@VSApplication/Menu/breadcrumb.html.twig'}) }}
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end pageheader -->
+                    <!-- ============================================================== -->
+                    
+                    {% block content %}{% endblock %}
+                </div>
             </div>
             
             {% include '@VSApplication/Layout/footer.html.twig' %}

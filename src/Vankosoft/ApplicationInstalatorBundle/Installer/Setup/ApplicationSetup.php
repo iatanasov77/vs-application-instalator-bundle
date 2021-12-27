@@ -3,6 +3,7 @@
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Twig\Environment;
 
 use Vankosoft\ApplicationBundle\Component\Slug;
 
@@ -12,6 +13,11 @@ class ApplicationSetup
      * @var ContainerInterface $container
      */
     private $container;
+    
+    /**
+     * @var Environment $twig
+     */
+    private $twig;
     
     /**
      * @var string $applicationSlug
@@ -38,9 +44,10 @@ class ApplicationSetup
      */
     private $newProjectInstall;
     
-    public function __construct( ContainerInterface $container )
+    public function __construct( ContainerInterface $container, Environment $twig )
     {
         $this->container    = $container;
+        $this->twig         = $twig;
     }
     
     public function getApplicationDirectories( $applicationName )
@@ -51,11 +58,6 @@ class ApplicationSetup
         $this->applicationSlug      = Slug::generate( $applicationName ); // For Directory Names
         
         $projectRootDir             = $this->container->get( 'kernel' )->getProjectDir();
-        
-        if ( $this->newProjectInstall && $filesystem->exists( $projectRootDir . '/VERSION' ) ) {
-            $this->applicationVersion   = file_get_contents( $projectRootDir . '/VERSION' );
-            $filesystem->remove( $projectRootDir . '/VERSION' );
-        }
         
         $applicationDirs            = [
             'configs'       => $projectRootDir . '/config/applications/' . $this->applicationSlug,
@@ -77,6 +79,8 @@ class ApplicationSetup
     public function setupApplication( $applicationName, $newProjectInstall = false )
     {
         $this->newProjectInstall    = $newProjectInstall;
+        $this->_initialoze();
+        
         $applicationDirs            = $this->getApplicationDirectories( $applicationName );
         
         // Setup The Application
@@ -93,6 +97,9 @@ class ApplicationSetup
     
     public function setupAdminPanelKernel()
     {
+        $this->newProjectInstall    = true;
+        $this->_initialoze();
+        
         $filesystem         = new Filesystem();
         $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
         $reflectionClass    = new \ReflectionClass( \App\AdminPanelKernel::class );
@@ -108,6 +115,17 @@ class ApplicationSetup
     public function finalizeSetup()
     {
         $this->removeOriginalKernelConfigs();
+    }
+    
+    private function _initialoze()
+    {
+        $filesystem     = new Filesystem();
+        $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
+        
+        if ( $this->newProjectInstall && $filesystem->exists( $projectRootDir . '/VERSION' ) ) {
+            $this->applicationVersion   = file_get_contents( $projectRootDir . '/VERSION' );
+            $filesystem->remove( $projectRootDir . '/VERSION' );
+        }
     }
     
     private function setupApplicationDirectories( $applicationDirs ): void
@@ -140,11 +158,10 @@ class ApplicationSetup
     {
         $filesystem         = new Filesystem();
         $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
-        $twig               = $this->container->get( 'twig' );
         $kernelClass        = $this->applicationNamespace . 'Kernel';
         
         // Write Application Kernel
-        $applicationKernel  = $twig->render( '@VSApplicationInstalator/Application/Kernel.php.twig', [
+        $applicationKernel  = $this->twig->render( '@VSApplicationInstalator/Application/Kernel.php.twig', [
             'kernelClass'           => $kernelClass,
             'applicationSlug'       => $this->applicationSlug,
             'applicationVersion'    => $this->applicationVersion,
@@ -152,13 +169,13 @@ class ApplicationSetup
         $filesystem->dumpFile( $projectRootDir . '/src/' . $kernelClass . '.php', $applicationKernel );
         
         // Write Application Entry Point
-        $applicationIndex  = $twig->render( '@VSApplicationInstalator/Application/index.php.twig', [
+        $applicationIndex  = $this->twig->render( '@VSApplicationInstalator/Application/index.php.twig', [
             'kernelClass'       => $kernelClass,
         ]);
         $filesystem->dumpFile( $projectRootDir . '/public/' . $this->applicationSlug . '/index.php', $applicationIndex );
         
         // Write Application Console
-        $applicationConsole = $twig->render( '@VSApplicationInstalator/Application/console.php.twig', [
+        $applicationConsole = $this->twig->render( '@VSApplicationInstalator/Application/console.php.twig', [
             'kernelClass'       => $kernelClass,
         ]);
         $filesystem->dumpFile( $projectRootDir . '/bin/' . $this->applicationSlug, $applicationConsole );
