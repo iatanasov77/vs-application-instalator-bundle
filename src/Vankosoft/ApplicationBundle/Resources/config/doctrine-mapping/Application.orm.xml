@@ -32,6 +32,9 @@
             <cascade>
                 <cascade-all />
             </cascade>
+            <order-by>
+                <order-by-field name="id" direction="DESC" />
+            </order-by>
         </one-to-many>
         
         <many-to-many field="users" target-entity="Vankosoft\UsersBundle\Model\UserInterface" inversed-by="applications" >
