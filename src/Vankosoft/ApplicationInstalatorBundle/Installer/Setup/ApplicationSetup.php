@@ -246,7 +246,8 @@ class ApplicationSetup
         try {
             $yamlArray  = Yaml::parseFile( $configFile );
             $yamlArray['services']['App\\']['exclude'][]   =  '../../../src/Controller/' . $this->applicationNamespace . '/';
-            \file_put_contents( $configFile, Yaml::dump( $yamlArray ) );
+            // https://stackoverflow.com/questions/58547953/symfony-yaml-formatting-the-output
+            \file_put_contents( $configFile, Yaml::dump( $yamlArray, 6 ) );
         } catch ( ParseException $exception ) {
             printf( 'Unable to parse the YAML string: %s', $exception->getMessage() );
         }
