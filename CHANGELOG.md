@@ -1,3 +1,9 @@
+1.6.6	|	Release date: **28.12.2021**
+============================================
+* New Features:
+  - Improve Applications Installer.
+
+
 1.6.5	|	Release date: **28.12.2021**
 ============================================
 * New Features:
