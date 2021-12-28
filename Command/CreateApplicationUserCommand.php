@@ -142,7 +142,9 @@ EOT
         $appRepo        = $this->getContainer()->get( 'vs_application.repository.application' );
         $application    = $appRepo->findOneBy( ['code' => Slug::generate( $applicationName )] );
         
-        $user->addApplication( $application );
+        if ( $application ) {
+            $user->addApplication( $application );
+        }
     }
     
     private function getAdministratorEmail( InputInterface $input, OutputInterface $output ): string
