@@ -24,3 +24,9 @@ Clear Installation Example
 ```
 $ php bin/console vankosoft:clear-install "Vankosoft Application"
 ```
+
+Add New Application in Project
+-------------------------------
+```
+$ php bin/console vankosoft:application:create --locale en_US
+```
