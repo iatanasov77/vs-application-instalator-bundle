@@ -81,8 +81,6 @@ EOT
     
     private function createApplicationDatabaseRecords( InputInterface $input, OutputInterface $output, $applicationName, $localeCode )
     {
-        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
-        
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
         
@@ -92,15 +90,11 @@ EOT
          * Create Application
          */
         $application        = $this->createApplication( $input, $output, $applicationName );
-        $entityManager->persist( $application );
         
         /*
          * Create Application Base Role
          */
-        $baseRole   = $this->createApplicationBaseRole( $input, $output, $applicationName );
-        $entityManager->persist( $baseRole );
-        
-        $entityManager->flush();
+        $baseRole           = $this->createApplicationBaseRole( $input, $output, $applicationName );
         
         /*
          * Create Application Users
@@ -114,6 +108,8 @@ EOT
     
     private function createApplication( InputInterface $input, OutputInterface $output, $applicationName ): ApplicationInterface
     {
+        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
+        
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
         
@@ -128,11 +124,16 @@ EOT
         $application->setHostname( $applicationUrl );
         $application->setCreatedAt( $applicationCreated );
         
+        $entityManager->persist( $application );
+        $entityManager->flush();
+        
         return $application;
     }
     
     private function createApplicationBaseRole( InputInterface $input, OutputInterface $output, $applicationName ): UserRoleInterface
     {
+        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
+        
         /*
          * Create Application Base Role Taxon
          */
@@ -151,7 +152,7 @@ EOT
         $roleTaxon->getTranslation()->setDescription( $applicationName );
         $roleTaxon->getTranslation()->setSlug( $taxonSlug );
         $roleTaxon->getTranslation()->setTranslatable( $roleTaxon );
-        
+
         /*
          * Create Application Base Role
          */
@@ -163,6 +164,10 @@ EOT
         
         $adminRole          = 'ROLE_' . \strtoupper( Urlizer::urlize( $applicationName, '_' ) ) . '_ADMIN';
         $role->setRole( $adminRole );
+        
+        $entityManager->persist( $roleTaxon );
+        $entityManager->persist( $role );
+        $entityManager->flush();
         
         return $role;
     }
