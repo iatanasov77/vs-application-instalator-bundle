@@ -1,3 +1,9 @@
+1.6.7	|	Release date: **28.12.2021**
+============================================
+* Bug-Fixes:
+  - Fix Create Application Command.
+
+
 1.6.6	|	Release date: **28.12.2021**
 ============================================
 * New Features:
