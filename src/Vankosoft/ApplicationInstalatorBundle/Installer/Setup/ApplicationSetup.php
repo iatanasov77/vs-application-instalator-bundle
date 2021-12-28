@@ -3,6 +3,8 @@
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Yaml\Exception\ParseException;
 use Twig\Environment;
 
 use Vankosoft\ApplicationBundle\Component\Slug;
@@ -90,6 +92,7 @@ class ApplicationSetup
         $this->setupApplicationHomePage();
         $this->setupApplicationLoginPage();
         $this->setupApplicationConfigs();
+        $this->ignoreApplicationControllersInAdminPanelServices();
         $this->setupApplicationRoutes();
         $this->setupApplicationAssets();
         $this->setupInstalationInfo();
@@ -221,8 +224,8 @@ class ApplicationSetup
         
         // Setup Services and Parameters
         $configServices = str_replace(
-            ["__application_name__", "__application_slug__", "__kernel_class__"],
-            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel'],
+            ["__application_name__", "__application_slug__", "__kernel_class__", "__application_namespace__"],
+            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel', $this->applicationNamespace],
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml', $configServices );
@@ -234,6 +237,19 @@ class ApplicationSetup
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml', $configLiipImagine );
+    }
+    
+    private function ignoreApplicationControllersInAdminPanelServices()
+    {
+        $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
+        $configFile     = $projectRootDir . '/config/admin-panel/services/services.yaml';
+        try {
+            $yamlArray  = Yaml::parseFile( $configFile );
+            $yamlArray['services']['App\\']['exclude'][]   =  '../../../src/Controller/' . $this->applicationNamespace . '/';
+            \file_put_contents( $configFile, Yaml::dump( $yamlArray ) );
+        } catch ( ParseException $exception ) {
+            printf( 'Unable to parse the YAML string: %s', $exception->getMessage() );
+        }
     }
     
     private function setupApplicationAssets()
