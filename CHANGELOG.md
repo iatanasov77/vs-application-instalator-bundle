@@ -1,3 +1,10 @@
+1.6.5	|	Release date: **28.12.2021**
+============================================
+* New Features:
+  - Dispaly Theme Name in Applications Settings (Not Work).
+  - Improve Installator Application Resources.
+
+
 1.6.4	|	Release date: **27.12.2021**
 ============================================
 * Bug-Fixes, Refactorings and Improvements:

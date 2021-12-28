@@ -8,8 +8,16 @@ use Vankosoft\ApplicationBundle\Form\SettingsForm;
 
 class SettingsController extends ResourceController
 {
+    protected $themeRepository;
+    
+    public function setThemeRepository( ThemeRepositoryInterface $themeRepository )
+    {
+        $this->themeRepository  = $themeRepository;
+    }
+    
     public function indexAction( Request $request ): Response
     {
+        $appThemes      = [];
         $forms          = [];
         $applications    = $this->getApplicationRepository()->findAll();
         
@@ -23,9 +31,17 @@ class SettingsController extends ResourceController
         $forms[]        = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
         
         foreach( $applications as $app ) {
-            $settings       = $er->getSettings( $app );
-            $oSettings      = $settings ?: $factory->createNew();
-            $forms[]        = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
+            $settings                   = $er->getSettings( $app );
+            $oSettings                  = $settings ?: $factory->createNew();
+            $forms[]                    = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
+            
+            if ( $app->getSettings()->isEmpty() ) {
+                $appThemes[$app->getId()]   = null;
+            } else {
+                $appThemes[$app->getId()]   = $this->themeRepository ?
+                                                $this->themeRepository->findOneByName(  $app->getSettings()[0]->getTheme() ) :
+                                                $app->getSettings()[0]->getTheme();
+            }
         }
         
 //         $form->handleRequest( $request );
@@ -41,6 +57,7 @@ class SettingsController extends ResourceController
                                             $this->getParameter( 'vs_application.page_categories.taxonomy_code' )
                                         );
         return $this->render( '@VSApplication/Pages/Settings/index.html.twig', [
+            'appThemes'     => $appThemes,
             'forms'         => $forms,
             'applications'  => $applications,
             'pcTaxonomyId'  => $taxonomyPagesCategories ? $taxonomyPagesCategories->getId() : 0,
