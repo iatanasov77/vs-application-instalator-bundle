@@ -76,6 +76,23 @@ EOT
         $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
         $outputStyle->newLine();
         
+        /*
+         * Create Application Base Role
+         */
+        $entityManager  = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
+        $baseRole       = $this->createApplicationBaseRole( $input, $output, $applicationName );
+        $entityManager->persist( $baseRole );
+        $entityManager->flush();
+        
+        /*
+         * Create Application Users
+         */
+        if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to create application users? (y/N) ', false ) ) ) {
+            $this->createApplicationUsers( $input, $output, $applicationName, $baseRole->getRole(), $localeCode );
+        } else {
+            $outputStyle->writeln( 'Cancelled creating application users.' );
+        }
+        
         return Command::SUCCESS;
     }
     
@@ -94,22 +111,7 @@ EOT
         $application        = $this->createApplication( $input, $output, $applicationName );
         $entityManager->persist( $application );
         
-        /*
-         * Create Application Base Role
-         */
-        $baseRole   = $this->createApplicationBaseRole( $input, $output, $applicationName );
-        $entityManager->persist( $baseRole );
-        
         $entityManager->flush();
-        
-        /*
-         * Create Application Users
-         */
-        if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to create application users? (y/N) ', false ) ) ) {
-            $this->createApplicationUsers( $input, $output, $applicationName, $baseRole->getRole(), $localeCode );
-        } else {
-            $outputStyle->writeln( 'Cancelled creating application users.' );
-        }
     }
     
     private function createApplication( InputInterface $input, OutputInterface $output, $applicationName ): ApplicationInterface
