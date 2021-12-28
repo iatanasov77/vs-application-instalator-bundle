@@ -14,6 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Webmozart\Assert\Assert;
 
+use Vankosoft\ApplicationBundle\Component\Slug;
 use Vankosoft\CmsBundle\Component\Uploader\FileUploaderInterface;
 use Vankosoft\UsersBundle\Model\UserInterface;
 use Vankosoft\UsersBundle\Repository\UsersRepositoryInterface;
@@ -85,8 +86,10 @@ EOT
         } catch ( \InvalidArgumentException $exception ) {
             return Command::FAILURE;
         }
+        
         $this->setupAdministratorsAvatar( $user, $roles );
         $this->setupUserRoles( $user, $roles );
+        $this->setupAllowedApplications( $user, $roles, $application );
         
         // Setup User Properties
         $user->setEnabled( true );
@@ -128,6 +131,18 @@ EOT
                 $user->addRole( $userRole );
             }
         }
+    }
+    
+    private function setupAllowedApplications( UserInterface &$user, array $roles, string $applicationName )
+    {
+        if ( in_array( 'ROLE_SUPER_ADMIN', $roles ) || in_array( 'ROLE_SUPER_ADMIN', $roles ) ) {
+            return;
+        }
+        
+        $appRepo        = $this->getContainer()->get( 'vs_application.repository.application' );
+        $application    = $appRepo->findOneBy( ['code' => Slug::generate( $applicationName )] );
+        
+        $user->addApplication( $application );
     }
     
     private function getAdministratorEmail( InputInterface $input, OutputInterface $output ): string
