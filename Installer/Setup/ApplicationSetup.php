@@ -356,6 +356,9 @@ class ApplicationSetup
             $projectRootDir . '/config/preload.php',
             $projectRootDir . '/config/routes.yaml',
             $projectRootDir . '/config/services.yaml',
+            
+            // Templates Added by Flex
+            $projectRootDir . '/templates/base.html.twig',
         ];
         
         foreach( $originalKernelConfigs as $confFile ) {
