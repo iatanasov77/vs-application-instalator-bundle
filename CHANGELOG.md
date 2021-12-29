@@ -1,3 +1,10 @@
+1.6.9	|	Release date: **29.12.2021**
+============================================
+* New Features and Improvements:
+  - Improve Security Voters.
+  - Update Templates Images Path.
+
+
 1.6.8	|	Release date: **29.12.2021**
 ============================================
 * Bug-Fixes:
