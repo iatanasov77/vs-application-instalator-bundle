@@ -28,7 +28,7 @@
                             {% for notification in app.user.notifications %}         
                                 <a href="#" class="list-group-item list-group-item-action active">
                                     <div class="notification-info">
-                                        <div class="notification-list-user-img"><img src="{{ asset( '/build/images/avatar-2.jpg' ) }}" alt="" class="user-avatar-md rounded-circle"></div>
+                                        <div class="notification-list-user-img"><img src="{{ asset( '/build/default/images/avatar-2.jpg' ) }}" alt="" class="user-avatar-md rounded-circle"></div>
                                         <div class="notification-list-user-block">
                                         	<span class="notification-list-user-name">Jeremy Rakestraw</span>{{ notification.notification }}
                                             <div class="notification-date">{{ time_diff( notification.date ) }}</div>
@@ -54,24 +54,24 @@
                     <li class="connection-list">
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                <a href="#" class="connection-item"><img src="/assets/build/images/github.png" alt="" > <span>Github</span></a>
+                                <a href="#" class="connection-item"><img src="/assets/build/default/images/github.png" alt="" > <span>Github</span></a>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                <a href="#" class="connection-item"><img src="/assets/build/images/dribbble.png" alt="" > <span>Dribbble</span></a>
+                                <a href="#" class="connection-item"><img src="/assets/build/default/images/dribbble.png" alt="" > <span>Dribbble</span></a>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                <a href="#" class="connection-item"><img src="/assets/build/images/dropbox.png" alt="" > <span>Dropbox</span></a>
+                                <a href="#" class="connection-item"><img src="/assets/build/default/images/dropbox.png" alt="" > <span>Dropbox</span></a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                <a href="#" class="connection-item"><img src="/assets/build/images/bitbucket.png" alt=""> <span>Bitbucket</span></a>
+                                <a href="#" class="connection-item"><img src="/assets/build/default/images/bitbucket.png" alt=""> <span>Bitbucket</span></a>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                <a href="#" class="connection-item"><img src="/assets/build/images/mail_chimp.png" alt="" ><span>Mail chimp</span></a>
+                                <a href="#" class="connection-item"><img src="/assets/build/default/images/mail_chimp.png" alt="" ><span>Mail chimp</span></a>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                <a href="#" class="connection-item"><img src="/assets/build/images/slack.png" alt="" > <span>Slack</span></a>
+                                <a href="#" class="connection-item"><img src="/assets/build/default/images/slack.png" alt="" > <span>Slack</span></a>
                             </div>
                         </div>
                     </li>
@@ -87,7 +87,7 @@
                 {% if app.user.info and app.user.info.avatar %}
                    <img src="{{ app.user.info.avatar.path|imagine_filter('users_crud_index_thumb') }}" alt="" class="user-avatar-md rounded-circle" />
                 {% else %}
-                    <img src="{{ asset( '/build/images/avatar-1.jpg' ) }}" alt="" class="user-avatar-md rounded-circle" />
+                    <img src="{{ asset( '/build/default/images/avatar-1.jpg' ) }}" alt="" class="user-avatar-md rounded-circle" />
                 {% endif %}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
