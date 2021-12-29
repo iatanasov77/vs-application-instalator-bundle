@@ -1,3 +1,11 @@
+1.6.8	|	Release date: **29.12.2021**
+============================================
+* Bug-Fixes:
+  - Fix Installator Configs.
+  - Typo Fix.
+  - Fix Security Voters.
+
+
 1.6.7	|	Release date: **28.12.2021**
 ============================================
 * Bug-Fixes:

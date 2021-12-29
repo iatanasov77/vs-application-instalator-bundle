@@ -41,7 +41,7 @@ class MenuBuilder implements ContainerAwareInterface
         PathRolesService $pathRolesService,
         RouterInterface $router,
         ParameterBagInterface $parameterBag
-        ) {
+    ) {
             $config                 = Yaml::parse( file_get_contents( $config_file ) );
             $this->menuConfig       = $config['vs_application']['menu'];
             
