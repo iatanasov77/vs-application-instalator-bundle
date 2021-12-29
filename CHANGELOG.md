@@ -1,3 +1,9 @@
+1.6.10	|	Release date: **29.12.2021**
+============================================
+* Bug-Fixes and Improvements:
+  - Update Installator Configs.
+
+
 1.6.9	|	Release date: **29.12.2021**
 ============================================
 * New Features and Improvements:
