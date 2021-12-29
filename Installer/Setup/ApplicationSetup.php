@@ -230,6 +230,22 @@ class ApplicationSetup
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml', $configServices );
         
+        // Setup Services and Parameters
+        $configServices = str_replace(
+            ["__application_name__", "__application_slug__", "__kernel_class__", "__application_namespace__"],
+            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel', $this->applicationNamespace],
+            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/controller.yaml' )
+            );
+        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/controller.yaml', $configServices );
+        
+        // Setup Services and Parameters
+        $configServices = str_replace(
+            ["__application_name__", "__application_slug__", "__kernel_class__", "__application_namespace__"],
+            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel', $this->applicationNamespace],
+            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/menu.yaml' )
+            );
+        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/menu.yaml', $configServices );
+        
         // Setup Liip Imagine
         $configLiipImagine  = str_replace(
             ["__application_slug__"],
