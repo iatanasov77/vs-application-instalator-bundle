@@ -86,4 +86,4 @@ sylius_fixtures:
                               locale:  '%locale%'
                               role: 'ROLE_APPLICATION_ADMIN'
                               #parent: role-super-admin
-                              parent: null
+                              parent: role-super-admin
