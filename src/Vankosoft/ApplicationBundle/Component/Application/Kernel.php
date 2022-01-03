@@ -7,6 +7,9 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+
 /**
  * @see \Sylius\Bundle\CoreBundle\Application\Kernel
  */
@@ -15,16 +18,13 @@ abstract class Kernel extends HttpKernel
     use MicroKernelTrait;
     
     const VERSION       = '1.4.20';
-    
     const APP_ID        = 'admin-panel';
-
-    const CONFIG_EXTS   = '.{php,xml,yaml,yml}';
     
     public function getVarDir()
     {
         $dirVar = $this->getProjectDir() . '/var';
-        if ( isset( $_ENV['DIR_VAR'] ) ) {
-            $dirVar = $_ENV['DIR_VAR'];
+        if ( $this->isVagrantEnvironment() ) {
+            return '/dev/shm/' . $_ENV['HOST'];
         }
         
         return $dirVar;
@@ -33,21 +33,25 @@ abstract class Kernel extends HttpKernel
     public function getCacheDir()
     {
         return $this->getVarDir() . '/' . static::APP_ID . '/cache/' . $this->environment;
-        //return parent::getCacheDir();
     }
     
     public function getLogDir()
     {
         return $this->getVarDir() . '/' . static::APP_ID . '/log';
-        //return parent::getLogDir();
     }
     
     protected function isVagrantEnvironment(): bool
     {
-        return (getenv('HOME') === '/home/vagrant' || getenv('VAGRANT') === 'VAGRANT') && is_dir('/dev/shm');
+        return ( getenv( 'HOME' ) === '/home/vagrant' || getenv( 'VAGRANT' ) === 'VAGRANT' ) && is_dir( '/dev/shm' );
     }
     
-    abstract protected function configureContainer( ContainerBuilder $container, LoaderInterface $loader ): void;
+    /**
+     * {@inheritdoc}
+     */
+    abstract protected function configureContainer( ContainerConfigurator $container, LoaderInterface $loader, ContainerBuilder $builder ): void;
     
-    abstract protected function configureRoutes( RouteCollectionBuilder $routes ): void;
+    /**
+     * {@inheritdoc}
+     */
+    abstract protected function configureRoutes( RoutingConfigurator $routes ): void;
 }
