@@ -16,11 +16,6 @@ class VSApplicationBundle extends AbstractResourceBundle
         ];
     }
     
-    public function getContainerExtension()
-    {
-        return new \Vankosoft\ApplicationBundle\DependencyInjection\VSApplicationExtension();
-    }
-    
     public function boot(): void
     {
         parent::boot();
@@ -39,6 +34,14 @@ class VSApplicationBundle extends AbstractResourceBundle
             //$container->addCompilerPass( DoctrineOrmMappingsPass::createYamlMappingDriver( $mappings ) );
             //$container->addCompilerPass( DoctrineOrmMappingsPass::createAnnotationMappingDriver( \array_values( $mappings ), \array_keys( $mappings ) ) );
         }
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getContainerExtension()
+    {
+        return new \Vankosoft\ApplicationBundle\DependencyInjection\VSApplicationExtension();
     }
     
     protected function getModelNamespace(): string
