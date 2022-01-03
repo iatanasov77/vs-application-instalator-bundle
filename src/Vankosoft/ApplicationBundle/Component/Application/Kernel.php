@@ -20,7 +20,7 @@ abstract class Kernel extends HttpKernel
     const VERSION       = '1.4.20';
     const APP_ID        = 'admin-panel';
     
-    public function getVarDir()
+    public function getVarDir(): string
     {
         $dirVar = $this->getProjectDir() . '/var';
         if ( $this->isVagrantEnvironment() ) {
@@ -30,12 +30,18 @@ abstract class Kernel extends HttpKernel
         return $dirVar;
     }
     
-    public function getCacheDir()
+    /**
+     * {@inheritdoc}
+     */
+    public function getCacheDir(): string
     {
         return $this->getVarDir() . '/' . static::APP_ID . '/cache/' . $this->environment;
     }
     
-    public function getLogDir()
+    /**
+     * {@inheritdoc}
+     */
+    public function getLogDir(): string
     {
         return $this->getVarDir() . '/' . static::APP_ID . '/log';
     }
