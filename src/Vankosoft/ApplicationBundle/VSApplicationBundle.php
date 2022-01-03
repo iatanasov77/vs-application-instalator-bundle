@@ -1,10 +1,11 @@
 <?php namespace Vankosoft\ApplicationBundle;
 
-use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 class VSApplicationBundle extends AbstractResourceBundle
 {
@@ -39,7 +40,7 @@ class VSApplicationBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public function getContainerExtension()
+    public function getContainerExtension(): ?ExtensionInterface
     {
         return new \Vankosoft\ApplicationBundle\DependencyInjection\VSApplicationExtension();
     }
