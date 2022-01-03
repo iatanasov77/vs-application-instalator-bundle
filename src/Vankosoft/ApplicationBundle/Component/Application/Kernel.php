@@ -5,8 +5,6 @@ use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Routing\RouteCollectionBuilder;
-
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
@@ -17,8 +15,8 @@ abstract class Kernel extends HttpKernel
 {
     use MicroKernelTrait;
     
-    const VERSION       = '1.4.20';
-    const APP_ID        = 'admin-panel';
+    const VERSION   = '1.4.20';
+    const APP_ID    = 'admin-panel';
     
     public function getVarDir(): string
     {
@@ -78,7 +76,6 @@ abstract class Kernel extends HttpKernel
             $container->import( $configDir . '/{services}.php' );
         }
     }
-    
     
     protected function configureRoutes( RoutingConfigurator $routes ): void
     {
