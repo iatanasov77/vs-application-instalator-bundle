@@ -1,3 +1,19 @@
+1.7.0	|	Release date: **04.01.2022**
+============================================
+* New Features and Improvements:
+  - Improve Installer.
+  - Set User LastLogin in LoginFormAuthenticator.
+  - Get Roles Ancestors From User.
+  - UsersExampleFactory CreateAvatar with UserManager.
+  - Separate UserInfo Form Builder As Trait.
+  - UserInfoFormTrait Set Fields mapping option from Options.
+* Bug-Fixes and Improvements:
+  - Fix Create New Role Template.
+  - Users CRUD Controller Create UserInfo Object when Create a New User.
+  - Upgrade Applications Kernels and Remove Deprecations.
+  - Improve and Optimize Applications Kernel Template.
+
+
 1.6.10	|	Release date: **29.12.2021**
 ============================================
 * Bug-Fixes and Improvements:
