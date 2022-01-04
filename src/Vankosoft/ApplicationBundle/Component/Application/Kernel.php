@@ -5,7 +5,8 @@ use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 /**
  * @see \Sylius\Bundle\CoreBundle\Application\Kernel
@@ -14,40 +15,86 @@ abstract class Kernel extends HttpKernel
 {
     use MicroKernelTrait;
     
-    const VERSION       = '1.4.20';
+    const VERSION   = '1.4.20';
+    const APP_ID    = 'admin-panel';
     
-    const APP_ID        = 'admin-panel';
-
-    const CONFIG_EXTS   = '.{php,xml,yaml,yml}';
-    
-    public function getVarDir()
+    public function getVarDir(): string
     {
         $dirVar = $this->getProjectDir() . '/var';
-        if ( isset( $_ENV['DIR_VAR'] ) ) {
-            $dirVar = $_ENV['DIR_VAR'];
+        if ( $this->isVagrantEnvironment() ) {
+            return '/dev/shm/' . $_ENV['HOST'];
         }
         
         return $dirVar;
     }
     
-    public function getCacheDir()
+    /**
+     * {@inheritdoc}
+     */
+    public function getCacheDir(): string
     {
         return $this->getVarDir() . '/' . static::APP_ID . '/cache/' . $this->environment;
-        //return parent::getCacheDir();
     }
     
-    public function getLogDir()
+    /**
+     * {@inheritdoc}
+     */
+    public function getLogDir(): string
     {
         return $this->getVarDir() . '/' . static::APP_ID . '/log';
-        //return parent::getLogDir();
+    }
+    
+    /**
+     * Override MicroKernelTrait::registerBundles()
+     *
+     * {@inheritdoc}
+     */
+    public function registerBundles(): iterable
+    {
+        $contents = require $this->__getConfigDir() . '/bundles.php';
+        foreach ( $contents as $class => $envs ) {
+            if ( $envs[$this->environment] ?? $envs['all'] ?? false ) {
+                yield new $class();
+            }
+        }
+    }
+    
+    protected function configureContainer( ContainerConfigurator $container, LoaderInterface $loader, ContainerBuilder $builder ): void
+    {
+        // Set Shared Sessions Path
+        $builder->setParameter( 'vs_application.session_save_path', $this->getVarDir() . '/sessions/' );
+        
+        $configDir  = $this->__getConfigDir();
+        
+        $container->import( $configDir . '/{packages}/*.yaml' );
+        $container->import( $configDir . '/{packages}/'. $this->environment . '/*.yaml' );
+        
+        if ( is_file( $configDir . '/services.yaml' ) ) {
+            $container->import( $configDir . '/services.yaml' );
+            $container->import( $configDir . '/{services}_' . $this->environment.'.yaml' );
+        } else {
+            $container->import( $configDir . '/{services}.php' );
+        }
+    }
+    
+    protected function configureRoutes( RoutingConfigurator $routes ): void
+    {
+        $configDir = $this->__getConfigDir();
+        
+        $routes->import( $configDir . '/{routes}/' . $this->environment . '/*.yaml' );
+        $routes->import( $configDir . '/{routes}/*.yaml' );
+        
+        if ( is_file( $configDir . '/routes.yaml' ) ) {
+            $routes->import( $configDir . '/routes.yaml' );
+        } else {
+            $routes->import( $configDir . '/{routes}.php' );
+        }
     }
     
     protected function isVagrantEnvironment(): bool
     {
-        return (getenv('HOME') === '/home/vagrant' || getenv('VAGRANT') === 'VAGRANT') && is_dir('/dev/shm');
+        return ( getenv( 'HOME' ) === '/home/vagrant' || getenv( 'VAGRANT' ) === 'VAGRANT' ) && is_dir( '/dev/shm' );
     }
     
-    abstract protected function configureContainer( ContainerBuilder $container, LoaderInterface $loader ): void;
-    
-    abstract protected function configureRoutes( RouteCollectionBuilder $routes ): void;
+    abstract protected function __getConfigDir(): string;
 }
