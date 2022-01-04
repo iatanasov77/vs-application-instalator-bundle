@@ -1,3 +1,10 @@
+1.7.1	|	Release date: **04.01.2022**
+============================================
+* Bug-Fixes:
+  - Create a Service Aliases.
+  - Fixing Application Templates.
+
+
 1.7.0	|	Release date: **04.01.2022**
 ============================================
 * New Features and Improvements:
