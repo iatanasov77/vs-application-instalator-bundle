@@ -18,4 +18,8 @@ services:
             - '@request_stack'
         tags:
             - { name: 'vs_application.context.application' }
+    
+    # Create Aliases for Autowiring
+    Vankosoft\ApplicationBundle\Component\Context\ApplicationContext: '@vs_application.context.application'
+    Vankosoft\ApplicationBundle\Component\Context\ApplicationContextInterface: '@Vankosoft\ApplicationBundle\Component\Context\ApplicationContext'
 
