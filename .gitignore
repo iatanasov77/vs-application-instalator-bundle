@@ -1,0 +1,10 @@
+### Eclipse project files ###
+/.buildpath
+/.project
+/.settings
+
+### Symfony files ###
+/.env
+/.env.local
+/.env.local.php
+/.env.*.local
