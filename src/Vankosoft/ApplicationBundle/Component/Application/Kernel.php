@@ -93,6 +93,7 @@ abstract class Kernel extends HttpKernel
     
     protected function isVagrantEnvironment(): bool
     {
+        //return ( getenv( 'HOME' ) === '/home/vagrant' || getenv( 'VAGRANT' ) === 'VAGRANT' ) && is_dir( '/dev/shm' );
         return is_dir( '/home/vagrant' ) && is_dir( '/dev/shm' );
     }
     
