@@ -1,3 +1,10 @@
+1.7.4	|	Release date: **07.01.2022**
+============================================
+* Bug-Fixes:
+  - Fix LoginFormAuhenticator  After Components Branch Switch.
+  - Fix Security User Manager After Components Branch Switch.
+
+
 1.7.3	|	Release date: **07.01.2022**
 ============================================
 * Bug-Fixes:
