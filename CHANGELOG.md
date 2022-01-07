@@ -1,3 +1,9 @@
+1.7.3	|	Release date: **07.01.2022**
+============================================
+* Bug-Fixes:
+  - Fix Loosed Trait After Components Branch Switch.
+
+
 1.7.2	|	Release date: **07.01.2022**
 ============================================
 * New Features:
