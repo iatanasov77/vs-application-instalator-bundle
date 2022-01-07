@@ -14,7 +14,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Webmozart\Assert\Assert;
 
-use Vankosoft\ApplicationBundle\Component\Slug;
 use Vankosoft\CmsBundle\Component\Uploader\FileUploaderInterface;
 use Vankosoft\UsersBundle\Model\UserInterface;
 use Vankosoft\UsersBundle\Repository\UsersRepositoryInterface;
@@ -86,10 +85,8 @@ EOT
         } catch ( \InvalidArgumentException $exception ) {
             return Command::FAILURE;
         }
-        
-        $this->setupAdministratorsAvatar( $user, $roles );
+        $this->setupAdministratorsAvatar( $user );
         $this->setupUserRoles( $user, $roles );
-        $this->setupAllowedApplications( $user, $roles, $application );
         
         // Setup User Properties
         $user->setEnabled( true );
@@ -130,20 +127,6 @@ EOT
             if ( $userRole ) {
                 $user->addRole( $userRole );
             }
-        }
-    }
-    
-    private function setupAllowedApplications( UserInterface &$user, array $roles, string $applicationName )
-    {
-        if ( in_array( 'ROLE_SUPER_ADMIN', $roles ) || in_array( 'ROLE_SUPER_ADMIN', $roles ) ) {
-            return;
-        }
-        
-        $appRepo        = $this->getContainer()->get( 'vs_application.repository.application' );
-        $application    = $appRepo->findOneBy( ['code' => Slug::generate( $applicationName )] );
-        
-        if ( $application ) {
-            $user->addApplication( $application );
         }
     }
     
@@ -208,14 +191,13 @@ EOT
         return $password;
     }
     
-    private function setupAdministratorsAvatar( &$user, $roles )
+    private function setupAdministratorsAvatar( &$user )
     {
         if ( $this->fileLocator === null || $this->imageUploader === null ) {
             throw new \RuntimeException( 'You must configure a $fileLocator or/and $imageUploader' );
         }
         
-        $avatarFile     = in_array( 'ROLE_SUPER_ADMIN', $roles ) ? 'symfony.png' : 'vankosoft.png';
-        $imagePath      = $this->fileLocator->locate( '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/' . $avatarFile );
+        $imagePath      = $this->fileLocator->locate( '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/vankosoft.png' );
         $uploadedImage  = new UploadedFile( $imagePath, basename( $imagePath ) );
         
         $avatarImage    = $this->getContainer()->get( 'vs_users.factory.avatar_image' )->createNew();

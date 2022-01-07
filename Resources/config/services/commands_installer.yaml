@@ -18,19 +18,23 @@ services:
         class: Vankosoft\ApplicationInstalatorBundle\Command\InstallDatabaseCommand
         tags:
             - 'console.command'
-    
-    vs_app.command.install.application_configuration:
-        class: Vankosoft\ApplicationInstalatorBundle\Command\InstallApplicationConfigurationCommand
+            
+    vs_app.command.install.sample_data:
+        class: Vankosoft\ApplicationInstalatorBundle\Command\InstallSampleDataCommand
         tags:
             - 'console.command'
             
-    vs_app.command.install.setup_super_admin:
-        class: Vankosoft\ApplicationInstalatorBundle\Command\SetupSuperAdminApplicationCommand
+    vs_app.command.install.setup:
+        class: Vankosoft\ApplicationInstalatorBundle\Command\SetupCommand
+        arguments:
+            - '@service_container'
+            - '@file_locator'
+            - '@vs_cms.profile_uploader'
         tags:
             - 'console.command'
-    
-    vs_app.command.install.setup_applications:
-        class: Vankosoft\ApplicationInstalatorBundle\Command\SetupApplicationsCommand
+            
+    vs_app.command.install.application_configuration:
+        class: Vankosoft\ApplicationInstalatorBundle\Command\InstallApplicationConfigurationCommand
         tags:
             - 'console.command'
     
@@ -47,13 +51,5 @@ services:
         class: Vankosoft\ApplicationInstalatorBundle\Command\InstallAssetsCommand
         tags:
             - 'console.command'
-            
-    vs_app.command.install.sample_data:
-        class: Vankosoft\ApplicationInstalatorBundle\Command\InstallSampleDataCommand
-        tags:
-            - 'console.command'
-            
-    vs_app.command.install.finalize_setup:
-        class: Vankosoft\ApplicationInstalatorBundle\Command\SetupFinalizeCommand
-        tags:
-            - 'console.command'
+
+    

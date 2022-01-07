@@ -68,14 +68,14 @@ final class LocaleSetup implements LocaleSetupInterface
             $name   = $this->getLanguageName( $code );
         }
 
-        $output->writeln( sprintf( 'Adding <info>%s</info> as Default Language.', $name ) );
+        $output->writeln( sprintf( 'Adding <info>%s</info> Language.', $name ) );
 
         return $code;
     }
 
     private function getNewLanguageCode( InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper ): string
     {
-        $question   = new Question( 'Default Language (press enter to use ' . $this->locale . '): ', $this->locale );
+        $question   = new Question( 'Language (press enter to use ' . $this->locale . '): ', $this->locale );
 
         return trim( $questionHelper->ask( $input, $output, $question ) );
     }

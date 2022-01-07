@@ -8,6 +8,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 use Vankosoft\UsersBundle\Security\UserManager;
 
+use Vankosoft\CmsBundle\Component\Uploader\FileUploaderInterface;
 use Vankosoft\UsersBundle\Model\UserInterface;
 use Vankosoft\UsersBundle\Model\UserInfoInterface;
 
@@ -19,6 +20,9 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
     /** @var FactoryInterface */
     private $userInfoFactory;
     
+    /** @var FactoryInterface */
+    private $avatarImageFactory;
+    
     /** @var RepositoryInterface */
     private $userRolesRepository;
     
@@ -29,21 +33,27 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
     
     private ?FileLocatorInterface $fileLocator;
     
+    private ?FileUploaderInterface $imageUploader;
+    
     public function __construct(
         UserManager $userManager,
         RepositoryInterface $userRolesRepository,
         FactoryInterface $userInfoFactory,
+        FactoryInterface $avatarImageFactory,
         
         string $localeCode,
-        ?FileLocatorInterface $fileLocator = null
+        ?FileLocatorInterface $fileLocator = null,
+        ?FileUploaderInterface $imageUploader = null
     ) {
         $this->userManager          = $userManager;
         $this->userRolesRepository  = $userRolesRepository;
         
         $this->userInfoFactory      = $userInfoFactory;
+        $this->avatarImageFactory   = $avatarImageFactory;
         $this->localeCode           = $localeCode;
         
         $this->fileLocator          = $fileLocator;
+        $this->imageUploader        = $imageUploader;
         
         $this->optionsResolver      = new OptionsResolver();
         $this->configureOptions( $this->optionsResolver );
@@ -100,18 +110,28 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $userInfo   = $this->userInfoFactory->createNew();
         
         if ( $options['avatar'] && ! empty( $options['avatar'] ) ) {
-            if ( $this->fileLocator === null ) {
-                throw new \RuntimeException( 'You must configure a $fileLocator' );
-            }
-            
-            $imagePath      = $this->fileLocator->locate( $options['avatar'] );
-            $uploadedImage  = new UploadedFile( $imagePath, basename( $imagePath ) );
-            
-            $this->userManager->createAvatar( $userInfo, $uploadedImage );
+            $this->createAvatar( $userInfo, $options );
         }
         $userInfo->setFirstName( $options['first_name'] );
         $userInfo->setLastName( $options['last_name'] );
         
         $user->setInfo( $userInfo );
+    }
+    
+    private function createAvatar( UserInfoInterface &$userInfo, array $options ): void
+    {
+        if ( $this->fileLocator === null || $this->imageUploader === null ) {
+            throw new \RuntimeException( 'You must configure a $fileLocator or/and $imageUploader' );
+        }
+        
+        $imagePath      = $this->fileLocator->locate( $options['avatar'] );
+        $uploadedImage  = new UploadedFile( $imagePath, basename( $imagePath ) );
+        
+        $avatarImage    = $this->avatarImageFactory->createNew();
+        $avatarImage->setFile( $uploadedImage );
+        
+        $this->imageUploader->upload( $avatarImage );
+        
+        $userInfo->setAvatar( $avatarImage );
     }
 }
