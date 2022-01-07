@@ -1,3 +1,11 @@
+1.7.2	|	Release date: **07.01.2022**
+============================================
+* New Features:
+  - Switch Components Branches to 1.7
+* Bug-Fixes:
+  - Fix BaseKernel isVagrantEnvironment() method.
+
+
 1.7.1	|	Release date: **04.01.2022**
 ============================================
 * Bug-Fixes:

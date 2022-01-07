@@ -33,8 +33,8 @@ The <info>%command.name%</info> command allows user to create a VankoSoft Applic
 EOT
             )
             ->addOption(
-                'new-project',
-                'p',
+                'setup-kernel',
+                null,
                 InputOption::VALUE_OPTIONAL,
                 'Whether to setup the AdminPanelKernel class.',
                 false
@@ -52,8 +52,8 @@ EOT
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $localeCode         = $input->getOption( 'locale' );
-        $newProjectOption   = $input->getOption( 'new-project' );
-        $newProject         = ( $newProjectOption !== false );
+        $setupKernelOption  = $input->getOption( 'setup-kernel' );
+        $setupKernel        = ( $setupKernelOption !== false );
         
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
@@ -61,19 +61,17 @@ EOT
         $questionName       = $this->createApplicationNameQuestion();
         $applicationName    = $questionHelper->ask( $input, $output, $questionName );
         
-        $appSetup           = $this->getContainer()->get( 'vs_application.installer.setup_application' );
+        $appSetup           = $this->getContainer()->get( 'vs_application_instalator.setup_application' );
         $outputStyle        = new SymfonyStyle( $input, $output );
-        
-        // Add Database Records
-        $outputStyle->writeln( 'Create Application Database Records.' );
-        $this->createApplicationDatabaseRecords( $input, $output, $applicationName, $localeCode );
-        $outputStyle->writeln( '<info>Application Database Records successfully created.</info>' );
-        $outputStyle->newLine();
         
         // Create Directories
         $outputStyle->writeln( 'Create Application Directories.' );
-        $appSetup->setupApplication( $applicationName, $newProject );
+        $appSetup->setupApplication( $applicationName, $setupKernel );
         $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
+        
+        // Add Database Records
+        $this->createApplicationDatabaseRecords( $input, $output, $applicationName, $localeCode );
+        
         $outputStyle->newLine();
         
         return Command::SUCCESS;
@@ -81,20 +79,27 @@ EOT
     
     private function createApplicationDatabaseRecords( InputInterface $input, OutputInterface $output, $applicationName, $localeCode )
     {
+        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
+        
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
         
         $outputStyle        = new SymfonyStyle( $input, $output );
+        $outputStyle->writeln( 'Create Application Database Records.' );
         
         /*
          * Create Application
          */
         $application        = $this->createApplication( $input, $output, $applicationName );
+        $entityManager->persist( $application );
         
         /*
          * Create Application Base Role
          */
-        $baseRole           = $this->createApplicationBaseRole( $input, $output, $applicationName );
+        $baseRole   = $this->createApplicationBaseRole( $input, $output, $applicationName );
+        $entityManager->persist( $baseRole );
+        
+        $entityManager->flush();
         
         /*
          * Create Application Users
@@ -104,12 +109,25 @@ EOT
         } else {
             $outputStyle->writeln( 'Cancelled creating application users.' );
         }
+        
+        /* OLD WAY
+         * ===========
+         *
+         // bin/console doctrine:query:sql "INSERT INTO VSAPP_Applications(title) VALUES('Test Application')"
+         $command    = $this->getApplication()->find( 'doctrine:query:sql' );
+         
+         // Create Records
+         $returnCode = $command->run(
+         new ArrayInput( ['sql' =>"INSERT INTO VSAPP_Applications(enabled, code, title, hostname, created_at) VALUES(1, '{$applicationSlug}', '{$applicationName}', '{$applicationUrl}', '{$applicationCreated}')"] ),
+         $output
+         );
+         */
+        
+        $outputStyle->writeln( '<info>Application Database Records successfully created.</info>' );
     }
     
     private function createApplication( InputInterface $input, OutputInterface $output, $applicationName ): ApplicationInterface
     {
-        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
-        
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
         
@@ -124,16 +142,11 @@ EOT
         $application->setHostname( $applicationUrl );
         $application->setCreatedAt( $applicationCreated );
         
-        $entityManager->persist( $application );
-        $entityManager->flush();
-        
         return $application;
     }
     
     private function createApplicationBaseRole( InputInterface $input, OutputInterface $output, $applicationName ): UserRoleInterface
     {
-        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
-        
         /*
          * Create Application Base Role Taxon
          */
@@ -152,7 +165,7 @@ EOT
         $roleTaxon->getTranslation()->setDescription( $applicationName );
         $roleTaxon->getTranslation()->setSlug( $taxonSlug );
         $roleTaxon->getTranslation()->setTranslatable( $roleTaxon );
-
+        
         /*
          * Create Application Base Role
          */
@@ -164,10 +177,6 @@ EOT
         
         $adminRole          = 'ROLE_' . \strtoupper( Urlizer::urlize( $applicationName, '_' ) ) . '_ADMIN';
         $role->setRole( $adminRole );
-        
-        $entityManager->persist( $roleTaxon );
-        $entityManager->persist( $role );
-        $entityManager->flush();
         
         return $role;
     }

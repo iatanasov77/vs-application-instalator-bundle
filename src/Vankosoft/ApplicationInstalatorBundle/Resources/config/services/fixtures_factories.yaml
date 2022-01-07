@@ -55,5 +55,7 @@ services:
             - '@vs_users.manager.user'
             - '@vs_users.repository.user_roles'
             - '@vs_users.factory.user_info'
+            - '@vs_users.factory.avatar_image'
             - '%locale%'
             - '@file_locator'
+            - '@vs_cms.profile_uploader'

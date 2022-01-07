@@ -1,25 +1,17 @@
-<?php namespace Vankosoft\ApplicationInstalatorBundle\Installer\Setup;
+<?php namespace Vankosoft\ApplicationInstalatorBundle\Component;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
-use Symfony\Component\Yaml\Yaml;
-use Symfony\Component\Yaml\Exception\ParseException;
-use Twig\Environment;
 
 use Vankosoft\ApplicationBundle\Component\Slug;
 
-class ApplicationSetup
+class SetupApplication
 {
     /**
      * @var ContainerInterface $container
      */
     private $container;
-    
-    /**
-     * @var Environment $twig
-     */
-    private $twig;
     
     /**
      * @var string $applicationSlug
@@ -42,14 +34,13 @@ class ApplicationSetup
     private $applicationVersion;
     
     /**
-     * @var boolean $newProjectInstall
+     * @var boolean $setupKernel
      */
-    private $newProjectInstall;
+    private $setupKernel;
     
-    public function __construct( ContainerInterface $container, Environment $twig )
+    public function __construct( ContainerInterface $container )
     {
         $this->container    = $container;
-        $this->twig         = $twig;
     }
     
     public function getApplicationDirectories( $applicationName )
@@ -60,6 +51,11 @@ class ApplicationSetup
         $this->applicationSlug      = Slug::generate( $applicationName ); // For Directory Names
         
         $projectRootDir             = $this->container->get( 'kernel' )->getProjectDir();
+        
+        if ( $this->setupKernel && $filesystem->exists( $projectRootDir . '/VERSION' ) ) {
+            $this->applicationVersion   = file_get_contents( $projectRootDir . '/VERSION' );
+            $filesystem->remove( $projectRootDir . '/VERSION' );
+        }
         
         $applicationDirs            = [
             'configs'       => $projectRootDir . '/config/applications/' . $this->applicationSlug,
@@ -76,59 +72,27 @@ class ApplicationSetup
      * This is the Entry Point of this class
      * 
      * @param string $applicationName
-     * @param boolean $newProjectInstall
+     * @param boolean $setupKernel
      */
-    public function setupApplication( $applicationName, $newProjectInstall = false )
+    public function setupApplication( $applicationName, $setupKernel = false )
     {
-        $this->newProjectInstall    = $newProjectInstall;
-        $this->_initialoze();
-        
-        $applicationDirs            = $this->getApplicationDirectories( $applicationName );
+        $this->setupKernel  = $setupKernel;
+        $applicationDirs    = $this->getApplicationDirectories( $applicationName );
         
         // Setup The Application
         $this->setupApplicationDirectories( $applicationDirs  );
+        $this->setupAdminPanelKernel();
         
-        $this->setupApplicationKernel();
+        if ( $setupKernel ) {
+            $this->setupApplicationKernel();
+        }
+        
         $this->setupApplicationHomePage();
         $this->setupApplicationLoginPage();
         $this->setupApplicationConfigs();
-        $this->ignoreApplicationControllersInAdminPanelServices();
         $this->setupApplicationRoutes();
         $this->setupApplicationAssets();
         $this->setupInstalationInfo();
-    }
-    
-    public function setupAdminPanelKernel()
-    {
-        $this->newProjectInstall    = true;
-        $this->_initialoze();
-        
-        $filesystem         = new Filesystem();
-        $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
-        $reflectionClass    = new \ReflectionClass( \App\AdminPanelKernel::class );
-        $constants          = $reflectionClass->getConstants();
-        
-        $filesystem->dumpFile( $projectRootDir . '/src/AdminPanelKernel.php', str_replace(
-            $constants['VERSION'],
-            $this->applicationVersion,
-            file_get_contents( $projectRootDir . '/src/AdminPanelKernel.php' )
-        ));
-    }
-    
-    public function finalizeSetup()
-    {
-        $this->removeOriginalKernelConfigs();
-    }
-    
-    private function _initialoze()
-    {
-        $filesystem     = new Filesystem();
-        $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
-        
-        if ( $this->newProjectInstall && $filesystem->exists( $projectRootDir . '/VERSION' ) ) {
-            $this->applicationVersion   = file_get_contents( $projectRootDir . '/VERSION' );
-            $filesystem->remove( $projectRootDir . '/VERSION' );
-        }
     }
     
     private function setupApplicationDirectories( $applicationDirs ): void
@@ -157,14 +121,31 @@ class ApplicationSetup
         }
     }
     
+    private function setupAdminPanelKernel()
+    {
+        $filesystem         = new Filesystem();
+        $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
+        $reflectionClass    = new \ReflectionClass( \App\AdminPanelKernel::class );
+        $constants          = $reflectionClass->getConstants();
+        
+        $filesystem->dumpFile( $projectRootDir . '/src/AdminPanelKernel.php', str_replace(
+            $constants['VERSION'], 
+            $this->applicationVersion,
+            file_get_contents( $projectRootDir . '/src/AdminPanelKernel.php' )
+        ));
+        
+        $this->removeOriginalKernelConfigs();
+    }
+    
     private function setupApplicationKernel()
     {
         $filesystem         = new Filesystem();
         $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
+        $twig               = $this->container->get( 'twig' );
         $kernelClass        = $this->applicationNamespace . 'Kernel';
         
         // Write Application Kernel
-        $applicationKernel  = $this->twig->render( '@VSApplicationInstalator/Application/Kernel.php.twig', [
+        $applicationKernel  = $twig->render( '@VSApplicationInstalator/Application/Kernel.php.twig', [
             'kernelClass'           => $kernelClass,
             'applicationSlug'       => $this->applicationSlug,
             'applicationVersion'    => $this->applicationVersion,
@@ -172,13 +153,13 @@ class ApplicationSetup
         $filesystem->dumpFile( $projectRootDir . '/src/' . $kernelClass . '.php', $applicationKernel );
         
         // Write Application Entry Point
-        $applicationIndex  = $this->twig->render( '@VSApplicationInstalator/Application/index.php.twig', [
+        $applicationIndex  = $twig->render( '@VSApplicationInstalator/Application/index.php.twig', [
             'kernelClass'       => $kernelClass,
         ]);
         $filesystem->dumpFile( $projectRootDir . '/public/' . $this->applicationSlug . '/index.php', $applicationIndex );
         
         // Write Application Console
-        $applicationConsole = $this->twig->render( '@VSApplicationInstalator/Application/console.php.twig', [
+        $applicationConsole = $twig->render( '@VSApplicationInstalator/Application/console.php.twig', [
             'kernelClass'       => $kernelClass,
         ]);
         $filesystem->dumpFile( $projectRootDir . '/bin/' . $this->applicationSlug, $applicationConsole );
@@ -224,27 +205,11 @@ class ApplicationSetup
         
         // Setup Services and Parameters
         $configServices = str_replace(
-            ["__application_name__", "__application_slug__", "__kernel_class__", "__application_namespace__"],
-            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel', $this->applicationNamespace],
+            ["__application_name__", "__application_slug__", "__kernel_class__"],
+            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel'],
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml', $configServices );
-        
-        // Setup Services and Parameters
-        $configServices = str_replace(
-            ["__application_name__", "__application_slug__", "__kernel_class__", "__application_namespace__"],
-            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel', $this->applicationNamespace],
-            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/controller.yaml' )
-            );
-        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/controller.yaml', $configServices );
-        
-        // Setup Services and Parameters
-        $configServices = str_replace(
-            ["__application_name__", "__application_slug__", "__kernel_class__", "__application_namespace__"],
-            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel', $this->applicationNamespace],
-            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/menu.yaml' )
-            );
-        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/menu.yaml', $configServices );
         
         // Setup Liip Imagine
         $configLiipImagine  = str_replace(
@@ -253,20 +218,6 @@ class ApplicationSetup
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml', $configLiipImagine );
-    }
-    
-    private function ignoreApplicationControllersInAdminPanelServices()
-    {
-        $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
-        $configFile     = $projectRootDir . '/config/admin-panel/services/services.yaml';
-        try {
-            $yamlArray  = Yaml::parseFile( $configFile );
-            $yamlArray['services']['App\\']['exclude'][]   =  '../../../src/Controller/' . $this->applicationNamespace . '/';
-            // https://stackoverflow.com/questions/58547953/symfony-yaml-formatting-the-output
-            \file_put_contents( $configFile, Yaml::dump( $yamlArray, 6 ) );
-        } catch ( ParseException $exception ) {
-            printf( 'Unable to parse the YAML string: %s', $exception->getMessage() );
-        }
     }
     
     private function setupApplicationAssets()
@@ -356,9 +307,6 @@ class ApplicationSetup
             $projectRootDir . '/config/preload.php',
             $projectRootDir . '/config/routes.yaml',
             $projectRootDir . '/config/services.yaml',
-            
-            // Templates Added by Flex
-            $projectRootDir . '/templates/base.html.twig',
         ];
         
         foreach( $originalKernelConfigs as $confFile ) {
