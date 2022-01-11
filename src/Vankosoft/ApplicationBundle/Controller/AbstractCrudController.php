@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
+use Pagerfanta\Pagerfanta;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\ORMException;
@@ -15,6 +16,9 @@ class AbstractCrudController extends ResourceController
     
     protected $currentRequest;
     
+    /** @var Pagerfanta $resources */
+    protected $resources;
+    
     public function indexAction( Request $request ) : Response
     {
         $this->currentRequest = $request;
@@ -23,16 +27,16 @@ class AbstractCrudController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create( $this->metadata, $request );
         
         $this->isGrantedOr403( $configuration, ResourceActions::INDEX );
-        $resources = $this->resourcesCollectionProvider->get( $configuration, $this->repository );
+        $this->resources    = $this->resourcesCollectionProvider->get( $configuration, $this->repository );
         if (
             $this->metadata->getParameters()['classes']['interface'] == 'Vankosoft\ApplicationBundle\Model\Interfaces\TaxonRelationInterface'
         ) {
-            foreach ( $resources as $r ) {
+            foreach ( $this->resources as $r ) {
                 $r->setCurrentLocale( $request->getLocale() );
             }
         }
         
-        $this->eventDispatcher->dispatchMultiple( ResourceActions::INDEX, $configuration, $resources );
+        $this->eventDispatcher->dispatchMultiple( ResourceActions::INDEX, $configuration, $this->resources );
         
         if ( $configuration->isHtmlRequest() ) {
             return $this->render( $configuration->getTemplate( ResourceActions::INDEX . '.html' ), 
@@ -40,8 +44,10 @@ class AbstractCrudController extends ResourceController
                     [
                         'configuration'                     => $configuration,
                         'metadata'                          => $this->metadata,
-                        'resources'                         => $resources,
-                        $this->metadata->getPluralName()    => $resources,
+                        'resources'                         => $this->resources,
+                        $this->metadata->getPluralName()    => $this->resources,
+                        
+                        /** @TODO Make Admin Panel To Use Paginated Rsources and Remove This */
                         'items'                             => $this->getRepository()->findAll(),
                     ],
                     $this->customData( $request )
@@ -49,7 +55,7 @@ class AbstractCrudController extends ResourceController
             );
         }
         
-        return $this->createRestView( $configuration, $resources );
+        return $this->createRestView( $configuration, $this->resources );
     }
     
     public function createAction( Request $request ) : Response
