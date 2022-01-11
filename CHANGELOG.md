@@ -1,3 +1,10 @@
+1.7.6	|	Release date: **11.01.2022**
+============================================
+* New Features:
+  - Add Paginator For Applications.
+  - Improve AbstractCrudController.
+
+
 1.7.5	|	Release date: **07.01.2022**
 ============================================
 * Bug-Fixes:
