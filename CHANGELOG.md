@@ -1,3 +1,9 @@
+1.7.7	|	Release date: **11.01.2022**
+============================================
+* Bug-Fixes:
+  - Fix Loosed Method From User Model..
+
+
 1.7.6	|	Release date: **11.01.2022**
 ============================================
 * New Features:
