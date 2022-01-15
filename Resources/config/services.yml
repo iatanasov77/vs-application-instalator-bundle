@@ -15,8 +15,4 @@ services:
         autowire: true
         autoconfigure: true
         public: true
-        
-    vs_application_instalator.setup_application:
-        class: Vankosoft\ApplicationInstalatorBundle\Component\SetupApplication
-        arguments: 
-            - '@service_container'
+
