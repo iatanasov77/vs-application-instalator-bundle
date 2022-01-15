@@ -61,7 +61,7 @@ EOT
         $questionName       = $this->createApplicationNameQuestion();
         $applicationName    = $questionHelper->ask( $input, $output, $questionName );
         
-        $appSetup           = $this->getContainer()->get( 'vs_application_instalator.setup_application' );
+        $appSetup           = $this->getContainer()->get( 'vs_application.installer.setup_application' );
         $outputStyle        = new SymfonyStyle( $input, $output );
         
         // Create Directories
