@@ -221,7 +221,7 @@ EOT
     
     private function createApplicationUrlQuestion(): Question
     {
-        return ( new Question( 'Application Url: ' ) )
+        return ( new Question( 'Application Domain: ' ) )
             ->setValidator(
                 function ( $value ): string {
                     /** @var ConstraintViolationListInterface $errors */
