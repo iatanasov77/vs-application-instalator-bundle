@@ -106,7 +106,7 @@ EOT
     
     private function createAdminPanelUrlQuestion(): Question
     {
-        return ( new Question( 'AdminPanel Url: ' ) )
+        return ( new Question( 'AdminPanel Domain: ' ) )
             ->setValidator(
                 function ( $value ): string {
                     /** @var ConstraintViolationListInterface $errors */
