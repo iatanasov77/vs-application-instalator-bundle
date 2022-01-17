@@ -64,8 +64,6 @@ class ApplicationSetup
         $applicationDirs            = [
             'configs'       => $projectRootDir . '/config/applications/' . $this->applicationSlug,
             'public'        => $projectRootDir . '/public/' . $this->applicationSlug,
-            'templates'     => $projectRootDir . '/templates/' . $this->applicationSlug,
-            'assets'        => $projectRootDir . '/assets/' . $this->applicationSlug,
             'controller'    => $projectRootDir . '/src/Controller/' . $this->applicationNamespace,
         ];
         
@@ -193,13 +191,6 @@ class ApplicationSetup
         $filesystem             = new Filesystem();
         $projectRootDir         = $this->container->get( 'kernel' )->getProjectDir();
         
-        // Write Application Home Page
-        $applicationHomePage    = str_replace(
-            "__application_slug__", $this->applicationSlug,
-            file_get_contents( $projectRootDir . '/templates/' . $this->applicationSlug . '/pages/Dashboard/index.html.twig' )
-        );
-        $filesystem->dumpFile( $projectRootDir . '/templates/' . $this->applicationSlug . '/pages/Dashboard/index.html.twig', $applicationHomePage );
-        
         // Write Application Home Controller
         $applicationHomeController  = str_replace(
             ["__application_name__", "__application_slug__"],
@@ -294,13 +285,6 @@ class ApplicationSetup
     {
         $filesystem             = new Filesystem();
         $projectRootDir         = $this->container->get( 'kernel' )->getProjectDir();
-        
-        // Write Application Login Page
-        $applicationLoginPage    = str_replace(
-            "__application_slug__", $this->applicationSlug,
-            file_get_contents( $projectRootDir . '/templates/' . $this->applicationSlug . '/pages/login.html.twig' )
-        );
-        $filesystem->dumpFile( $projectRootDir . '/templates/' . $this->applicationSlug . '/pages/login.html.twig', $applicationLoginPage );
         
         // Write Application Home Controller
         $applicationAuthController  = str_replace(
