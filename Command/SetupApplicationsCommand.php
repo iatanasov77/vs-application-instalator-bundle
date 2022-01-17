@@ -103,7 +103,7 @@ EOT
         
         $settings->setTheme( $themeName );
         $settings->setApplication( $application );
-        $settings->setMaintenanceMode( false );
+        $settings->setMaintenanceMode( 0 );
         
         $entityManager->persist( $settings );
         $entityManager->flush();
