@@ -40,8 +40,8 @@ The <info>%command.name%</info> command allows user to create a VankoSoft Applic
 EOT
             )
             ->addOption(
-                'setup-kernel',
-                null,
+                'new-project',
+                'p',
                 InputOption::VALUE_OPTIONAL,
                 'Whether to setup the AdminPanelKernel class.',
                 false
@@ -59,8 +59,8 @@ EOT
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $localeCode         = $input->getOption( 'locale' );
-        $setupKernelOption  = $input->getOption( 'setup-kernel' );
-        $setupKernel        = ( $setupKernelOption !== false );
+        $newProjectOption   = $input->getOption( 'new-project' );
+        $newProject         = ( $newProjectOption !== false );
         
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
@@ -79,7 +79,7 @@ EOT
         
         // Create Directories
         $outputStyle->writeln( 'Create Application Directories.' );
-        $appSetup->setupApplication( $applicationName, $setupKernel );
+        $appSetup->setupApplication( $applicationName, $newProject );
         $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
         $outputStyle->newLine();
         
