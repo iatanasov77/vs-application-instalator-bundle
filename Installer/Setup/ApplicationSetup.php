@@ -265,14 +265,6 @@ class ApplicationSetup
         $filesystem     = new Filesystem();
         $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
         
-        // Setup Webpack Encore
-        $configWebpackEncore    = str_replace(
-            ["__application_slug__"],
-            [$this->applicationSlug],
-            file_get_contents( $projectRootDir . '/webpack.config.js' )
-        );
-        $filesystem->dumpFile( $projectRootDir . '/webpack.config.js', $configWebpackEncore );
-        
         $configWebpackEncore    = str_replace(
             ["__application_slug__"],
             [$this->applicationSlug],
