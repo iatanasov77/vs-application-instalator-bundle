@@ -79,7 +79,7 @@ class ApplicationSetup
     public function setupApplication( $applicationName, $newProjectInstall = false )
     {
         $this->newProjectInstall    = $newProjectInstall;
-        $this->_initialoze();
+        $this->_initialize();
         
         $applicationDirs            = $this->getApplicationDirectories( $applicationName );
         
@@ -99,7 +99,7 @@ class ApplicationSetup
     public function setupAdminPanelKernel()
     {
         $this->newProjectInstall    = true;
-        $this->_initialoze();
+        $this->_initialize();
         
         $filesystem         = new Filesystem();
         $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
@@ -118,7 +118,7 @@ class ApplicationSetup
         $this->removeOriginalKernelConfigs();
     }
     
-    private function _initialoze()
+    private function _initialize()
     {
         $filesystem     = new Filesystem();
         $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
