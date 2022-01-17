@@ -1,3 +1,13 @@
+1.7,9	|	Release date: **17.01.2022**
+============================================
+* New Features:
+  - Update Application Configs.
+  - Update AdminPanel images path.
+  - Remove public assets from UsersBundle.
+* Bug-Fixes:
+  - Fix Loosed Refactoring of Installator.
+
+
 1.7.8	|	Release date: **15.01.2022**
 ============================================
 * Bug-Fixes:
