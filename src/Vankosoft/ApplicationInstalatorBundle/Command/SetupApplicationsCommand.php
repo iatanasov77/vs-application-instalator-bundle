@@ -45,16 +45,18 @@ EOT
             $this->setupApplication( $input, $output, $locale );
             
             // Setup Application Theme
+            $outputStyle                = new SymfonyStyle( $input, $output );
+            $outputStyle->newLine();
             $outputStyle->writeln( 'Setup Application Theme.' );
             
             $defaultApplicationTheme    = 'vankosoft/application-theme-2';
-            //$question   = new Question( 'Application Theme (press enter to not setup a Theme): ' );
-            $question   = new Question( 'Application Theme (press enter to use "' . $defaultApplicationTheme . '"): ', $defaultApplicationTheme );
-            $themeName  = trim( $questionHelper->ask( $input, $output, $question ) );
+            $question                   = new Question( 'Application Theme (press enter to use "' . $defaultApplicationTheme . '"): ', $defaultApplicationTheme );
+            $themeName                  = trim( $questionHelper->ask( $input, $output, $question ) );
  
-            $applicationSlug    = $this->commandExecutor->getCommand( 'vankosoft:application:create' )->getApplicationSlug();
+            $applicationSlug            = $this->commandExecutor->getCommand( 'vankosoft:application:create' )->getApplicationSlug();
             //$theme   = $this->get( 'vs_app.theme_repository' )->findOneByName( $themeName );
             $this->setupApplicationTheme( $applicationSlug, $themeName );
+            $outputStyle->newLine();
         }
         
         return Command::SUCCESS;
