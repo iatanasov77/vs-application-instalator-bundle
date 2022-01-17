@@ -15,16 +15,16 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+                    <a class="nav-item nav-link active" id="nav-global-tab" data-toggle="tab" href="#nav-global" role="tab" aria-controls="nav-global" aria-selected="true">
                     	{{ 'vs_application.template.global_settings_title' | trans( {},'VSApplicationBundle' ) }}
                     </a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+                    <a class="nav-item nav-link" id="nav-applications-tab" data-toggle="tab" href="#nav-applications" role="tab" aria-controls="nav-applications" aria-selected="false">
                     	{{ 'vs_application.template.applications_settings_title' | trans( {},'VSApplicationBundle' ) }}
                     </a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-pane fade show active" id="nav-global" role="tabpanel" aria-labelledby="nav-global-tab">
                     <div class="card">
                         <div class="card-body">
                            {% include '@VSApplication/Pages/Settings/forms/settings.html.twig' with { 'applicationId': 0, 'form': forms.0} %}
@@ -37,15 +37,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="tab-pane fade" id="nav-applications" role="tabpanel" aria-labelledby="nav-applications-tab">
                     <div class="card">
-                        <div>
-                        	{#}
-                            <a class="btn btn-info btn-circle btn-sm btnEdit cardHeaderButton" data-url="{{ path('app_settings_sites_edit', {'id': 0}) }}" href="javascript:void(0);" title="Add New Site">
-                                New Application
-                            </a>
-                            #}
-                        </div>
                         <div class="card-body">
                             <table class="table table-striped table-advance table-hover">
                                 <tr>
@@ -70,8 +63,6 @@
                                         <td>
                                         {% if appThemes[item.id].id|default('') is not same as ('') %}
                                             {{ appThemes[item.id].title }}
-                                        {% else %}
-                                            {{ appThemes[item.id] }}
                                         {% endif %}
                                         </td>
                                         <td width="30">
