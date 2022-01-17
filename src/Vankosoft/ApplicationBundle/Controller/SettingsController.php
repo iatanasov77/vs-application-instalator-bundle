@@ -7,14 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Vankosoft\ApplicationBundle\Form\SettingsForm;
 
 class SettingsController extends ResourceController
-{
-    protected $themeRepository;
-    
-    public function setThemeRepository( ThemeRepositoryInterface $themeRepository )
-    {
-        $this->themeRepository  = $themeRepository;
-    }
-    
+{    
     public function indexAction( Request $request ): Response
     {
         $appThemes      = [];
@@ -38,9 +31,8 @@ class SettingsController extends ResourceController
             if ( $app->getSettings()->isEmpty() ) {
                 $appThemes[$app->getId()]   = null;
             } else {
-                $appThemes[$app->getId()]   = $this->themeRepository ?
-                                                $this->themeRepository->findOneByName(  $app->getSettings()[0]->getTheme() ) :
-                                                $app->getSettings()[0]->getTheme();
+                $appThemes[$app->getId()]   = $this->get( 'vs_app.theme_repository' )
+                                                    ->findOneByName(  $app->getSettings()[0]->getTheme() );
             }
         }
         

@@ -4,6 +4,11 @@ services:
         autoconfigure: true
         public: true
 
+    # Make Themes Repository public to can get it from Container
+    vs_app.theme_repository:
+        alias: sylius.repository.theme
+        public: true
+        
     vs_app.listener.theme_change:
         class: Vankosoft\ApplicationBundle\EventListener\ThemeChangeListener
         arguments:
@@ -11,7 +16,5 @@ services:
             - '@sylius.repository.theme'
             - '@vs_application.repository.settings'
             - '@vs_application.context.application'
-            - '%vs_application.settings.application_id%'  # May be uneeded already
-            
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.request', method: 'onKernelRequest' }
