@@ -14,7 +14,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Webmozart\Assert\Assert;
 
-use Vankosoft\ApplicationBundle\Component\Slug;
 use Vankosoft\CmsBundle\Component\Uploader\FileUploaderInterface;
 use Vankosoft\UsersBundle\Model\UserInterface;
 use Vankosoft\UsersBundle\Repository\UsersRepositoryInterface;
@@ -140,7 +139,7 @@ EOT
         }
         
         $appRepo        = $this->getContainer()->get( 'vs_application.repository.application' );
-        $application    = $appRepo->findOneBy( ['code' => Slug::generate( $applicationName )] );
+        $application    = $appRepo->findOneBy( ['code' => $this->getContainer()->get( 'vs_application.slug_generator' )->generate( $applicationName )] );
         
         if ( $application ) {
             $user->addApplication( $application );

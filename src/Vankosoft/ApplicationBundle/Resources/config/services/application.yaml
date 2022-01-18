@@ -23,3 +23,7 @@ services:
     Vankosoft\ApplicationBundle\Component\Context\ApplicationContext: '@vs_application.context.application'
     Vankosoft\ApplicationBundle\Component\Context\ApplicationContextInterface: '@Vankosoft\ApplicationBundle\Component\Context\ApplicationContext'
 
+    vs_application.slug_generator:
+        class: Vankosoft\ApplicationBundle\Component\SlugGenerator
+        arguments:
+            - '@request_stack'

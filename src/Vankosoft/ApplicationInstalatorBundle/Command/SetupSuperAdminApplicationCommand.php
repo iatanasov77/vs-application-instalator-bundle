@@ -11,8 +11,6 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 
-use Vankosoft\ApplicationBundle\Component\Slug;
-
 final class SetupSuperAdminApplicationCommand extends AbstractInstallCommand
 {
     protected static $defaultName = 'vankosoft:install:setup-super-admin-application';
@@ -67,7 +65,7 @@ EOT
     private function createApplicationDatabaseRecords( InputInterface $input, OutputInterface $output, $applicationName, $localeCode )
     {
         $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
-        $applicationSlug    = Slug::generate( $applicationName );
+        $applicationSlug    = $this->getContainer()->get( 'vs_application.slug_generator' )->generate( $applicationName );
         
         $outputStyle    = new SymfonyStyle( $input, $output );
         $outputStyle->writeln( 'Create SuperAdminPanel Application.' );

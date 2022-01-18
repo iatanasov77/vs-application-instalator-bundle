@@ -10,7 +10,7 @@ class TaxonomyController extends AbstractCrudController
     {
         $formData   = $request->request->get( 'taxonomy_form' );
         
-        $entity->setCode( Slug::generate( $formData['name'] ) );
+        $entity->setCode( $this->get( 'vs_application.slug_generator' )->generate( $formData['name'] ) );
         
         if ( ! $entity->getRootTaxon() ) {
             $entity->setRootTaxon( $this->createRootTaxon( $entity, $request->getLocale() ) );
@@ -27,7 +27,7 @@ class TaxonomyController extends AbstractCrudController
         $rootTaxon->getTranslation()->setName( $taxonomy->getName() );
         $rootTaxon->getTranslation()->setDescription( 'Root taxon of Taxonomy: "' . $taxonomy->getName() . '"' );
         
-        $slug   = Slug::generate( $taxonomy->getName() );
+        $slug   = $this->get( 'vs_application.slug_generator' )->generate( $taxonomy->getName() );
         $rootTaxon->setCode( $slug );
         $rootTaxon->getTranslation()->setSlug( $slug );
         

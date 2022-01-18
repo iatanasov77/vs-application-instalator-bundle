@@ -7,10 +7,6 @@ services:
     Vankosoft\ApplicationBundle\Controller\SettingsController:
         tags: ['controller.service_arguments']
         autowire: true
-            
-#     Vankosoft\ApplicationBundle\Controller\:
-#         resource: '../../Controller/'
-#         tags: ['controller.service_arguments', 'container.service_locator']
         
     Vankosoft\ApplicationBundle\Controller\AuthController:
         tags: ['controller.service_arguments']
@@ -43,4 +39,5 @@ services:
         arguments:
             - '@vs_application.repository.taxonomy'
             - '@vs_application.repository.taxon'
+            - '@vs_application.slug_generator'
 
