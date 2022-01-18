@@ -7,7 +7,7 @@ use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Twig\Environment;
 
-use Vankosoft\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 
 class ApplicationSetup
 {
@@ -46,10 +46,16 @@ class ApplicationSetup
      */
     private $newProjectInstall;
     
-    public function __construct( ContainerInterface $container, Environment $twig )
+    /** 
+     * @var SlugGenerator
+     */
+    private $slugGenerator;
+    
+    public function __construct( ContainerInterface $container, Environment $twig, SlugGenerator $slugGenerator )
     {
-        $this->container    = $container;
-        $this->twig         = $twig;
+        $this->container        = $container;
+        $this->twig             = $twig;
+        $this->slugGenerator    = $slugGenerator;
     }
     
     public function getApplicationDirectories( $applicationName )
@@ -57,7 +63,7 @@ class ApplicationSetup
         $filesystem                 = new Filesystem();
         $this->applicationName      = $applicationName;
         $this->applicationNamespace = preg_replace( '/\s+/', '', $applicationName );
-        $this->applicationSlug      = Slug::generate( $applicationName ); // For Directory Names
+        $this->applicationSlug      = $this->slugGenerator->generate( $applicationName ); // For Directory Names
         
         $projectRootDir             = $this->container->get( 'kernel' )->getProjectDir();
         
