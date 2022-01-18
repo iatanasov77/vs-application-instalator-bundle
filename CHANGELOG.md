@@ -1,3 +1,16 @@
+1.7.11	|	Release date: **18.01.2022**
+============================================
+* Bug-Fixes:
+  - Fix Deprecations of Budles Classes.
+  - Fix CreateApplicationCommand.
+  - Fix SetupApplicationsCommand.
+  - Fix Command Questions.
+  - Fix Application Settings Doctrine Mapping.
+  - Fix Application Settings Doctrine Mapping.
+  - Fix Installator Setup Application.
+  - Update Application Configs.
+
+
 1.7.10	|	Release date: **17.01.2022**
 ============================================
 * New Features:
