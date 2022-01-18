@@ -5,7 +5,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 use Vankosoft\CmsBundle\Model\PageInterface;
-use Vankosoft\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 
 class PagesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
@@ -18,12 +18,17 @@ class PagesExampleFactory extends AbstractExampleFactory implements ExampleFacto
     /** @var OptionsResolver */
     private $optionsResolver;
     
+    /** @var SlugGenerator */
+    private $slugGenerator;
+    
     public function __construct(
         RepositoryInterface $pageCategoryRepository,
-        FactoryInterface $pagesFactory
+        FactoryInterface $pagesFactory,
+        SlugGenerator $slugGenerator
     ) {
             $this->pageCategoryRepository   = $pageCategoryRepository;
             $this->pagesFactory             = $pagesFactory;
+            $this->slugGenerator            = $slugGenerator;
             
             $this->optionsResolver          = new OptionsResolver();
             $this->configureOptions( $this->optionsResolver );
@@ -34,7 +39,7 @@ class PagesExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $options    = $this->optionsResolver->resolve( $options );
 
         $pageEntity = $this->pagesFactory->createNew();
-        $slug       = Slug::generate( $options['title'] );
+        $slug       = $this->slugGenerator->generate( $options['title'] );
         
         $pageEntity->setSlug( $slug );
         $pageEntity->setTranslatableLocale( $options['locale'] );

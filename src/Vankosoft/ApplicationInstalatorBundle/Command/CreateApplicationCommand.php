@@ -16,7 +16,6 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Webmozart\Assert\Assert;
 use Gedmo\Sluggable\Util\Urlizer;
 
-use Vankosoft\ApplicationBundle\Component\Slug;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use Vankosoft\UsersBundle\Model\UserRoleInterface;
 
@@ -123,7 +122,7 @@ EOT
         
         $questionUrl        = $this->createApplicationUrlQuestion();
         $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
-        $applicationSlug    = Slug::generate( $applicationName );
+        $applicationSlug    = $this->getContainer()->get( 'vs_application.slug_generator' )->generate( $applicationName );
         $applicationCreated = new \DateTime;
         
         $application        = $this->getContainer()->get( 'vs_application.factory.application' )->createNew();
@@ -145,7 +144,7 @@ EOT
         /*
          * Create Application Base Role Taxon
          */
-        $taxonSlug          = Slug::generate( 'Role ' . $applicationName );
+        $taxonSlug          = $this->getContainer()->get( 'vs_application.slug_generator' )->generate( 'Role ' . $applicationName );
         $roleTaxon          = $this->getContainer()->get( 'vs_application.factory.taxon' )->createNew();
         $taxonomyRootTaxon  = $this->getContainer()->get( 'vs_application.repository.taxonomy' )
                                                     ->findByCode( 'user-roles' )
