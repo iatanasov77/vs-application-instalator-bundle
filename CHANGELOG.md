@@ -1,3 +1,11 @@
+1.7.12	|	Release date: **18.01.2022**
+============================================
+* New Features:
+  - Add Lang Attribute In Admin Layout Base Templates.
+  - Create Transliterator for the Slug Generator.
+  - Use Slug Generator Service in Installator.
+
+
 1.7.11	|	Release date: **18.01.2022**
 ============================================
 * Bug-Fixes:
