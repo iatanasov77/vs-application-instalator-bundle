@@ -1,7 +1,5 @@
 <?php namespace Vankosoft\ApplicationBundle\Controller;
 
-use Vankosoft\ApplicationBundle\Component\Slug;
-
 trait TaxonomyHelperTrait
 {
     protected function createTaxon( $name, $locale, $parent, $taxonomyId )
@@ -11,7 +9,7 @@ trait TaxonomyHelperTrait
         $taxon->setCurrentLocale( $locale );
         $taxon->setName( $name );
         
-        $slug   = Slug::generate( $name );
+        $slug   = $this->get( 'vs_application.slug_generator' )->generate( $name );
         $taxon->setCode( $slug );
         $taxon->setSlug( $slug );
         
