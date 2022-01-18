@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ app.request.locale|slice(0, 2) }}">
 	<head>
         <title>{% block title %}.:: {{ applicationTitle }} ( Admin Panel ){% endblock %}</title>
 
