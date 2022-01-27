@@ -28,6 +28,17 @@ class Taxon extends BaseTaxon implements VsTaxonInterface, Comparable
         $this->images   = new ArrayCollection();
     }
     
+    /**
+     * Overide Base Taxon Method
+     * 
+     * @param string $code
+     */
+    public function setCode( ?string $code ): void
+    {
+        $this->code = $code;
+        $this->setSlug( $code );
+    }
+    
     public function hasChild( TaxonInterface $taxon ): bool
     {
         if ( ! $this->children ) {
