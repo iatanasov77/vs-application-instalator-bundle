@@ -1,3 +1,12 @@
+1.7.13	|	Release date: **27.01.2022**
+============================================
+* Bug-Fixes and Improvements:
+  - Set Orhan-Removal for Taxon Translations.
+  - Improve Application Taxon Model.
+  - Add New Doctrine Migration.
+  - Indexing Taxon Translations Collection.
+
+
 1.7.12	|	Release date: **18.01.2022**
 ============================================
 * New Features:
