@@ -66,6 +66,11 @@
             </cascade>
         </one-to-many>
         
+        <one-to-many field="translations" target-entity="Sylius\Component\Taxonomy\Model\TaxonTranslationInterface" mapped-by="translatable" index-by="locale" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
     </mapped-superclass>
 
 </doctrine-mapping>
