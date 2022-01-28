@@ -57,7 +57,7 @@ EOT
     
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        $localeCode         = $this->getApplicationDefaultLocale( $input, $output )->getCode();
+        $localeCode         = $this->getApplicationDefaultLocale( $input, $output );
         
         $newProjectOption   = $input->getOption( 'new-project' );
         $newProject         = ( $newProjectOption !== false );
@@ -90,7 +90,7 @@ EOT
     {
         $defaultLocale  = $input->getOption( 'locale' );
         if ( ! $defaultLocale ) {
-            $defaultLocale  = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
+            $defaultLocale  = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) )->getCode();
         }
         
         return $defaultLocale;
