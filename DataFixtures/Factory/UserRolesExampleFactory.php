@@ -54,7 +54,7 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
     public function create( array $options = [] ): UserRoleInterface
     {
         $options                    = $this->optionsResolver->resolve( $options );
-        var_dump( $options['locale'] ); die;
+        
         $userRoleEntity             = $this->userRolesFactory->createNew();
         $taxonEntity                = $this->taxonFactory->createNew();
         $slug                       = $this->slugGenerator->generate( $options['title'] );

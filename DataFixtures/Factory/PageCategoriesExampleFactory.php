@@ -42,7 +42,7 @@ class PageCategoriesExampleFactory extends AbstractExampleFactory implements Exa
     public function create( array $options = [] ): PageCategoryInterface
     {
         $options                    = $this->optionsResolver->resolve( $options );
-        
+        var_dump( $options['locale'] ); die;
         $taxonomyRootTaxonEntity    = $this->taxonomyRepository->findByCode( $options['taxonomy_code'] )->getRootTaxon();
         $pageCategoryEntity         = $this->pageCategoriesFactory->createNew();
         
