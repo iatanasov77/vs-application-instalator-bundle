@@ -42,6 +42,11 @@ class ApplicationSetup
     private $applicationVersion;
     
     /**
+     * @var string $applicationDefaultLocale
+     */
+    private $applicationDefaultLocale;
+    
+    /**
      * @var boolean $newProjectInstall
      */
     private $newProjectInstall;
@@ -82,12 +87,13 @@ class ApplicationSetup
      * @param string $applicationName
      * @param boolean $newProjectInstall
      */
-    public function setupApplication( $applicationName, $newProjectInstall = false )
+    public function setupApplication( $applicationName, $localeCode, $newProjectInstall = false )
     {
-        $this->newProjectInstall    = $newProjectInstall;
+        $this->applicationDefaultLocale = $localeCode;
+        $this->newProjectInstall        = $newProjectInstall;
         $this->_initialize();
         
-        $applicationDirs            = $this->getApplicationDirectories( $applicationName );
+        $applicationDirs                = $this->getApplicationDirectories( $applicationName );
         
         // Setup The Application
         $this->setupApplicationDirectories( $applicationDirs  );
@@ -221,8 +227,22 @@ class ApplicationSetup
         
         // Setup Services and Parameters
         $configServices = str_replace(
-            ["__application_name__", "__application_slug__", "__kernel_class__", "__application_namespace__"],
-            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel', $this->applicationNamespace],
+            [
+                "__application_name__",
+                "__application_slug__",
+                "__kernel_class__",
+                "__application_namespace__",
+                "__application_locale__",
+                "__application_language__"
+            ],
+            [
+                $this->applicationName,
+                $this->applicationSlug,
+                $this->applicationNamespace . 'Kernel',
+                $this->applicationNamespace,
+                $this->applicationDefaultLocale,
+                explode( '_', $this->applicationDefaultLocale )[0]
+            ],
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml', $configServices );
