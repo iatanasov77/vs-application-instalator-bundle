@@ -59,8 +59,8 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
         $taxonEntity                = $this->taxonFactory->createNew();
         $slug                       = $this->slugGenerator->generate( $options['title'] );
         
-        $taxonEntity->setCode( $slug );
         $taxonEntity->setCurrentLocale( $options['locale'] );
+        $taxonEntity->setCode( $slug );
         $taxonEntity->getTranslation()->setName( $options['title'] );
         $taxonEntity->getTranslation()->setDescription( $options['description'] );
         $taxonEntity->getTranslation()->setSlug( $slug );
