@@ -1,3 +1,14 @@
+1.7.14	|	Release date: **28.01.2022**
+============================================
+* New Features:
+  - Make Application Create Command to Ask for Locale.
+  - Adding FosJsRouting and BazingaJSTranslation Bundles.
+* Bug-Fixes:
+  - Fix a Migration.
+  - Make Slug Generator to use a Default Locale If There Not a Request.(For ExampleWhen It Is Used in a Command)
+  - Fix CreateApplicationCommand.
+
+
 1.7.13	|	Release date: **27.01.2022**
 ============================================
 * Bug-Fixes and Improvements:

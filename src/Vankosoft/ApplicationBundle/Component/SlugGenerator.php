@@ -9,16 +9,21 @@ use Gedmo\Sluggable\Util as Sluggable;
  */
 final class SlugGenerator
 {
-    private RequestStack $requestStack;
+    /** @var string */
+    private $localeCode;
     
     public function __construct( RequestStack $requestStack )
     {
-        $this->requestStack = $requestStack;
+        $this->localeCode = 'en_US';
+        // If There is a request and it have different locale
+        if ( $requestStack->getMasterRequest() ) {
+            $this->localeCode = $requestStack->getMasterRequest()->getLocale();
+        }
     }
     
     public function generate( $string ): string
     {
-        switch ( $this->getMasterRequest()->getLocale() ) {
+        switch ( $this->localeCode ) {
             case 'bg_BG':
             case 'ru_RU':
                 $slug   = SlugTransliterator\Cyrilic::transliterate( $string, '-' );
@@ -31,15 +36,5 @@ final class SlugGenerator
             return 'error, empty slug!!!';
         
         return $slug;
-    }
-    
-    private function getMasterRequest(): Request
-    {
-        $masterRequest = $this->requestStack->getMasterRequest();
-        if ( null === $masterRequest ) {
-            throw new \UnexpectedValueException( 'There are not any requests on request stack' );
-        }
-        
-        return $masterRequest;
     }
 }

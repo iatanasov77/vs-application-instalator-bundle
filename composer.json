@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.7.13",
+    "version": "v1.7.14",
     "description": "VankoSoft Symfony Application",
     "keywords": [
         "symfony",
@@ -45,7 +45,9 @@
         "sylius\/locale": "^1.9",
         "sylius\/theme-bundle": "^2.2",
         "sylius-labs\/doctrine-migrations-extra-bundle": "^0.1.4",
-        "sylius\/fixtures-bundle": "^1.7"
+        "sylius\/fixtures-bundle": "^1.7",
+        "friendsofsymfony\/jsrouting-bundle": "^2.8",
+        "willdurand\/js-translation-bundle": "^5.0"
     },
     "replace": {
         "vankosoft\/application-bundle": "self.version",
