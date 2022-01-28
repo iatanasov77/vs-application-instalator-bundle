@@ -39,7 +39,7 @@ class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFa
         
         $taxonomyEntity             = $this->taxonomyFactory->createNew();
         $taxonomyRootTaxonEntity    = $this->taxonFactory->createNew();
-        
+        var_dump( $options['locale'] ); die;
         $slug                       = $this->slugGenerator->generate( $options['title'] );
         $taxonomyRootTaxonEntity->setCode( $slug );
         $taxonomyRootTaxonEntity->setCurrentLocale( $options['locale'] );
