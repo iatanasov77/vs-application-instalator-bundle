@@ -163,9 +163,9 @@ EOT
         $taxonParent        = $this->getContainer()->get( 'vs_application.repository.taxon' )
                                                     ->findOneBy( ['code' => 'role-application-admin'] );
         
+        $roleTaxon->setCurrentLocale( 'en_US' );
         $roleTaxon->setParent( $taxonParent ?: $taxonomyRootTaxon );
         $roleTaxon->setCode( $taxonSlug );
-        $roleTaxon->setCurrentLocale( 'en_US' );
         $roleTaxon->getTranslation()->setName( 'Role ' . $applicationName );
         $roleTaxon->getTranslation()->setDescription( $applicationName );
         $roleTaxon->getTranslation()->setSlug( $taxonSlug );
