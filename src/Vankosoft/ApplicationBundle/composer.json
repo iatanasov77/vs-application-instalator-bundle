@@ -34,6 +34,9 @@
         "sylius/locale": "^1.9",
        	"sylius/theme-bundle": "^2.2",
        	
+       	"friendsofsymfony/jsrouting-bundle": "^2.8",
+        "willdurand/js-translation-bundle": "^5.0",
+        
        	"vankosoft/application-instalator-bundle": "^1.6"
     },
     "suggest": {
