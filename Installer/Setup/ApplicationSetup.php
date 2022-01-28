@@ -275,7 +275,7 @@ class ApplicationSetup
     private function ignoreApplicationControllersInAdminPanelServices()
     {
         $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
-        $configFile     = $projectRootDir . '/config/admin-panel/services/services.yaml';
+        $configFile     = $projectRootDir . '/config/admin-panel/services.yaml';
         try {
             $yamlArray  = Yaml::parseFile( $configFile );
             $yamlArray['services']['App\\']['exclude'][]   =  '../../../src/Controller/' . $this->applicationNamespace . '/';
