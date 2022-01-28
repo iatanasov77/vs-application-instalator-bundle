@@ -48,16 +48,17 @@ EOT
             ->addOption(
                 'locale',
                 'l',
-                InputOption::VALUE_REQUIRED,
+                InputOption::VALUE_OPTIONAL,
                 'Prefered User Locale.',
-                'en_US'
+                null
             )
         ;
     }
     
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        $localeCode         = $input->getOption( 'locale' );
+        $localeCode         = $this->getApplicationDefaultLocale( $input, $output );
+        
         $newProjectOption   = $input->getOption( 'new-project' );
         $newProject         = ( $newProjectOption !== false );
         
@@ -78,11 +79,21 @@ EOT
         
         // Create Directories
         $outputStyle->writeln( 'Create Application Directories.' );
-        $appSetup->setupApplication( $applicationName, $newProject );
+        $appSetup->setupApplication( $applicationName, $localeCode, $newProject );
         $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
         $outputStyle->newLine();
         
         return Command::SUCCESS;
+    }
+    
+    private function getApplicationDefaultLocale( InputInterface $input, OutputInterface $output )
+    {
+        $defaultLocale  = $input->getOption( 'locale' );
+        if ( ! $defaultLocale ) {
+            $defaultLocale  = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) )->getCode();
+        }
+        
+        return $defaultLocale;
     }
     
     private function createApplicationDatabaseRecords( InputInterface $input, OutputInterface $output, $applicationName, $localeCode )
@@ -152,9 +163,9 @@ EOT
         $taxonParent        = $this->getContainer()->get( 'vs_application.repository.taxon' )
                                                     ->findOneBy( ['code' => 'role-application-admin'] );
         
+        $roleTaxon->setCurrentLocale( 'en_US' );
         $roleTaxon->setParent( $taxonParent ?: $taxonomyRootTaxon );
         $roleTaxon->setCode( $taxonSlug );
-        $roleTaxon->setCurrentLocale( 'en_US' );
         $roleTaxon->getTranslation()->setName( 'Role ' . $applicationName );
         $roleTaxon->getTranslation()->setDescription( $applicationName );
         $roleTaxon->getTranslation()->setSlug( $taxonSlug );
