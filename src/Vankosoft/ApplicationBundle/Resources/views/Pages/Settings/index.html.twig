@@ -61,9 +61,7 @@
                                         {% endif %}
                                         </td>
                                         <td>
-                                        {% if appThemes[item.id].id|default('') is not same as ('') %}
-                                            {{ appThemes[item.id].title }}
-                                        {% endif %}
+                                            {% if appThemes[item.id] %}{{ appThemes[item.id].title }}{% endif %}
                                         </td>
                                         <td width="30">
                                             <div class="btn-group">
