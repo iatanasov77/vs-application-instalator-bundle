@@ -1,3 +1,14 @@
+1.7.15	|	Release date: **29.01.2022**
+============================================
+* New Features:
+  - On Installer Move SetupApplicationTheme into CreateApplicationCommand.
+* Bug-Fixes:
+  - Fix ApplicationSetup Class.
+  - Remove CSRF Tokens From All Forms Templates (Fix Required After Symfony 5.4.3).
+  - Fix Display Application Theme in Preferences Index Template.
+  - On CreateApplicationCommand Set Application Version After New Project is Installed.
+
+
 1.7.14	|	Release date: **28.01.2022**
 ============================================
 * New Features:
