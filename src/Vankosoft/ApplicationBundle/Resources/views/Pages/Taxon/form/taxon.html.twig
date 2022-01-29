@@ -1,8 +1,6 @@
 {% import "@VSApplication/Macros/tree.html.twig" as vs_tree %}
 
 {{ form_start(form, { 'action': path('vs_application_taxonomy_taxon_handle', {'taxonomyId': taxonomyId}) }) }}
-    {{ form_widget(form._token) }}
-    
     {% if form_errors(form) is not empty %}
         <div class="alert alert-block alert-danger fade in">
             <button type="button" class="close close-sm" data-dismiss="alert">

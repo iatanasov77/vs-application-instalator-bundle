@@ -1,7 +1,5 @@
 <div>
     {{ form_start(form, { 'action': path('vs_application_application_handle', {'applicationId': applicationId}), 'attr': {'id': 'formApplicationEdit', 'class': 'form-horizontal '} }) }}
-        {{ form_widget(form._token) }}
-        
         <div class="formFields">
         	<label class="custom-control custom-checkbox">  
                 <input type="checkbox" id="page_form_enabled" name="application_form[enabled]" 

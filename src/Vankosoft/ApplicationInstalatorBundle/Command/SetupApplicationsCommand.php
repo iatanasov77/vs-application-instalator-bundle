@@ -43,20 +43,6 @@ EOT
         // Setup an Application
         if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to create a default application? (y/N) ', false ) ) ) {
             $this->setupApplication( $input, $output, $locale );
-            
-            // Setup Application Theme
-            $outputStyle                = new SymfonyStyle( $input, $output );
-            $outputStyle->newLine();
-            $outputStyle->writeln( 'Setup Application Theme.' );
-            
-            $defaultApplicationTheme    = 'vankosoft/application-theme-2';
-            $question                   = new Question( 'Application Theme (press enter to use "' . $defaultApplicationTheme . '"): ', $defaultApplicationTheme );
-            $themeName                  = trim( $questionHelper->ask( $input, $output, $question ) );
- 
-            $applicationSlug            = $this->commandExecutor->getCommand( 'vankosoft:application:create' )->getApplicationSlug();
-            //$theme   = $this->get( 'vs_app.theme_repository' )->findOneByName( $themeName );
-            $this->setupApplicationTheme( $applicationSlug, $themeName );
-            $outputStyle->newLine();
         }
         
         return Command::SUCCESS;
@@ -66,7 +52,8 @@ EOT
     {
         $outputStyle        = new SymfonyStyle( $input, $output );
         
-        $this->commandExecutor->runCommand( 'vankosoft:application:create', ['--new-project' => true, '--locale' => $localeCode], $output );
+        $parameters         = ['--new-project' => true, '--locale' => $localeCode, '--theme' => 'vankosoft/application-theme-2'];
+        $this->commandExecutor->runCommand( 'vankosoft:application:create', $parameters, $output );
         
         $outputStyle->newLine();
         $outputStyle->writeln( '<info>Default Application created successfully.</info>' );
@@ -87,25 +74,5 @@ EOT
         
         $outputStyle->writeln( '<info>Admin account for All Applications successfully created.</info>' );
         $outputStyle->newLine();
-    }
-    
-    private function setupApplicationTheme( $applicationSlug, $themeName )
-    {
-        $entityManager          = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
-        $applicationRepository  = $this->getContainer()->get( 'vs_application.repository.application' );
-        $settingsRepository     = $this->getContainer()->get( 'vs_application.repository.settings' );
-        
-        $application            = $applicationRepository->findOneByCode( $applicationSlug );
-        $settings               = $settingsRepository->getSettings( $application );
-        if ( ! $settings ) {
-            $settings   = $this->getContainer()->get( 'vs_application.factory.settings' )->createNew();
-        }
-        
-        $settings->setTheme( $themeName );
-        $settings->setApplication( $application );
-        $settings->setMaintenanceMode( 0 );
-        
-        $entityManager->persist( $settings );
-        $entityManager->flush();
     }
 }

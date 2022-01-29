@@ -37,4 +37,14 @@ final class SlugGenerator
         
         return $slug;
     }
+    
+    public function generateCamelCase( $string ): string
+    {
+        $slug = str_replace( '-', ' ', $string );
+        $slug = str_replace( '_', ' ', $slug );
+        $slug = ucwords( strtolower( $slug ) );
+        $slug = str_replace( ' ', '', $slug );
+        
+        return $slug;
+    }
 }
