@@ -1,3 +1,9 @@
+1.7.16	|	Release date: **29.01.2022**
+============================================
+* Bug-Fixes:
+  - More Fixes for Removing CSRF Tokens From All Forms Templates (Fix Required After Symfony 5.4.3).
+
+
 1.7.15	|	Release date: **29.01.2022**
 ============================================
 * New Features:
