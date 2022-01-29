@@ -37,13 +37,13 @@ class CheckAssetDependenciesCommand extends Command
     protected function configure()
     {
         $this
-        ->setDescription( 'check whether npm packages required from bundles are there' )
-        ->setHelp(<<<'EOT'
+            ->setDescription( 'check whether npm packages required from bundles are there' )
+            ->setHelp(<<<'EOT'
 The <info>%command.name%</info> searches all installed bundles for package.json files
 and checks whether the dependencies are met in the project's package.json file.
 EOT
             )
-            ;
+        ;
     }
     
     /**

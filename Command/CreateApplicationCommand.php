@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -16,19 +17,15 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Webmozart\Assert\Assert;
 use Gedmo\Sluggable\Util\Urlizer;
 
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use Vankosoft\UsersBundle\Model\UserRoleInterface;
 
 final class CreateApplicationCommand extends AbstractInstallCommand
 {
-    private $appSlug;
-    
     protected static $defaultName = 'vankosoft:application:create';
     
-    public function getApplicationSlug()
-    {
-        return $this->appSlug;
-    }
+    private $application;
     
     protected function configure(): void
     {
@@ -50,6 +47,13 @@ EOT
                 'l',
                 InputOption::VALUE_OPTIONAL,
                 'Prefered User Locale.',
+                null
+            )
+            ->addOption(
+                'theme',
+                't',
+                InputOption::VALUE_OPTIONAL,
+                'Default Application Theme.',
                 null
             )
         ;
@@ -83,6 +87,17 @@ EOT
         $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
         $outputStyle->newLine();
         
+        // Setup Application Theme
+        $outputStyle->newLine();
+        $outputStyle->writeln( 'Setup Application Theme.' );
+        $theme  = $this->setupApplicationTheme( $input, $output );
+        if ( $theme ) {
+            $appSetup->configureApplicationTheme( $theme->getTitle() );
+            $outputStyle->writeln( '<info>Application Theme is setted up.</info>' );
+        }
+        
+        $outputStyle->newLine();
+        
         return Command::SUCCESS;
     }
     
@@ -106,8 +121,7 @@ EOT
         /*
          * Create Application
          */
-        $application        = $this->createApplication( $input, $output, $applicationName );
-        $this->appSlug      = $application->getCode();
+        $this->application  = $this->createApplication( $input, $output, $applicationName );
         
         /*
          * Create Application Base Role
@@ -206,6 +220,35 @@ EOT
         $outputStyle->newLine();
     }
     
+    private function setupApplicationTheme( InputInterface $input, OutputInterface $output ): ?ThemeInterface
+    {
+        $entityManager          = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
+        $settingsRepository     = $this->getContainer()->get( 'vs_application.repository.settings' );
+        
+        $applicationThemeName   = $this->getHelper( 'question' )->ask(
+                                        $input,
+                                        $output,
+                                        $this->createApplicationThemeQuestion( $input->getOption( 'theme' ) )
+                                    );
+        
+        $theme                  = $this->getContainer()->get( 'vs_app.theme_repository' )->findOneByName( $applicationThemeName );
+        if ( $theme ) {
+            $settings   = $settingsRepository->getSettings( $this->application );
+            if ( ! $settings ) {
+                $settings   = $this->getContainer()->get( 'vs_application.factory.settings' )->createNew();
+            }
+            
+            $settings->setTheme( $applicationThemeName );
+            $settings->setApplication( $this->application );
+            $settings->setMaintenanceMode( 0 );
+            
+            $entityManager->persist( $settings );
+            $entityManager->flush();
+        }
+        
+        return $theme;
+    }
+    
     private function createApplicationNameQuestion(): Question
     {
         return ( new Question( 'Application Name: ' ) )
@@ -249,6 +292,26 @@ EOT
                 }
             )
             ->setMaxAttempts( 3 )
+        ;
+    }
+    
+    private function createApplicationThemeQuestion( $defaultTheme ): ChoiceQuestion
+    {
+        $availableThemes    = array_keys( $this->getContainer()->get( 'vs_app.theme_repository' )->findAll() );
+        if ( $defaultTheme ) {
+            $questionMessage    = sprintf( 'Please select an appliocation theme to use (defaults to %s): ', $defaultTheme );
+        } elseif ( ! empty( $availableThemes ) ) {
+            $questionMessage    = sprintf( 'Please select an appliocation theme to use (defaults to %s): ', $availableThemes[0] );
+        } else {
+            $questionMessage    = 'Please select an appliocation theme to use: ';
+        }
+        
+        return ( new ChoiceQuestion(
+                    $questionMessage,
+                    // choices can also be PHP objects that implement __toString() method
+                    $availableThemes,
+                )
+            )->setErrorMessage( 'Theme %s is invalid.' )
         ;
     }
 }
