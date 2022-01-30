@@ -1,3 +1,11 @@
+1.7.17	|	Release date: **30.01.2022**
+============================================
+* Bug-Fixes:
+  - Fix ApplicationSetup Service Class.
+  - Add Translations For JQueryUi Dialog Used For Delete Resource Confirmation.
+  - Load JQueryUi CSS in Resource Index Templates.
+
+
 1.7.16	|	Release date: **29.01.2022**
 ============================================
 * Bug-Fixes:
