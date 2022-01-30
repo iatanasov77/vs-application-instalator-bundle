@@ -1,3 +1,9 @@
+1.7.19	|	Release date: **30.01.2022**
+============================================
+* Bug-Fixes:
+  - Fix ApplicationSetup.
+
+
 1.7.18	|	Release date: **30.01.2022**
 ============================================
 * Bug-Fixes and Improvements:
