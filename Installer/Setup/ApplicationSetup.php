@@ -161,7 +161,7 @@ class ApplicationSetup
             $this->applicationVersion   = file_get_contents( $projectRootDir . '/VERSION' );
             $filesystem->remove( $projectRootDir . '/VERSION' );
         } else {
-            $this->applicationVersion   = App\AdminPanelKernel::VERSION;
+            $this->applicationVersion   = \App\AdminPanelKernel::VERSION;
         }
     }
     
