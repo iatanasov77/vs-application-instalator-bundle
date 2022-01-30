@@ -304,11 +304,8 @@ class ApplicationSetup
         $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
         $configFile     = $projectRootDir . '/config/admin-panel/services.yaml';
         try {
-            $yamlArray  = Yaml::parseFile( $configFile );
-            
-            // Setting This Value Because Yaml !php/const is Not Parsed
-            $yamlArray['parameters']['vs_application.version']  = \App\AdminPanelKernel::VERSION;
-            
+            // Pass Yaml::PARSE_CONSTANT option Because Yaml !php/const is null
+            $yamlArray  = Yaml::parseFile( $configFile, Yaml::PARSE_CONSTANT );
             $yamlArray['services']['App\\']['exclude'][]   =  '../../src/Controller/' . $this->applicationNamespace . '/';
             // https://stackoverflow.com/questions/58547953/symfony-yaml-formatting-the-output
             \file_put_contents( $configFile, Yaml::dump( $yamlArray, 6 ) );
