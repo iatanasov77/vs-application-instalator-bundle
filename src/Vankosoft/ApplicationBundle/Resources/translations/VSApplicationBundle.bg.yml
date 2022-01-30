@@ -21,6 +21,11 @@ vs_application:
             button_login: 'Влез'
             button_register: 'Създай Акаунт'
             button_forgot_password: 'Забравена Парола'
+        vs_form_delete:
+            title: ИЗТРИЙ ОБЕКТ
+            message: Наистина ли искате да изтриете обекта?
+            btn_ok: Да
+            btn_cancel: Отказ
     template:
         button_view_all_notifications: 'Виж всички известия'
         dashboard_header_title: 'Табло на Приложението'
