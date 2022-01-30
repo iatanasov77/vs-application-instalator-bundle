@@ -53,6 +53,11 @@
     {% include '@VSApplication/Partial/resource-delete.html.twig' %}
 {% endblock %}
 
+{% block head_styles %}
+    {{ parent() }}
+    {{ encore_entry_link_tags( 'js/taxonomy-vocabolaries' ) }}
+{% endblock %}
+
 {% block body_scripts %}
     {{ parent() }}
     
