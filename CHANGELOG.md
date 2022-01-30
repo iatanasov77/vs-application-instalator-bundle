@@ -1,3 +1,11 @@
+1.7.18	|	Release date: **30.01.2022**
+============================================
+* Bug-Fixes and Improvements:
+  - Dont Use Install Assets Command.
+  - Improve CreateApplicationCommand.
+  - Fix Installator.
+
+
 1.7.17	|	Release date: **30.01.2022**
 ============================================
 * Bug-Fixes:
