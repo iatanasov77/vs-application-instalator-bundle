@@ -42,16 +42,20 @@ final class InstallCommand extends AbstractInstallCommand
             'command' => 'setup-applications',
             'message' => 'Setup Main Application Layout.',
         ],
-        [
-            'command' => 'assets',
-            'message' => 'Installing assets.',
-        ],
         
-        //         For Now Sample Data is In Construction and is Not Available
-        //         [
-        //             'command' => 'sample-data',
-        //             'message' => 'Install Application Simple Data.',
-        //         ],
+        // I think this Command Is Not Needed Anymore
+        //
+        // [
+        //     'command' => 'assets',
+        //     'message' => 'Installing assets.',
+        // ],
+        
+        // For Now Sample Data is In Construction and is Not Available
+        //
+        // [
+        //     'command' => 'sample-data',
+        //     'message' => 'Install Application Simple Data.',
+        // ],
         
         [
             'command' => 'finalize-setup',

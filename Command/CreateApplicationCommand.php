@@ -298,10 +298,13 @@ EOT
     private function createApplicationThemeQuestion( $defaultTheme ): ChoiceQuestion
     {
         $availableThemes    = array_keys( $this->getContainer()->get( 'vs_app.theme_repository' )->findAll() );
+        $default            = null;
         if ( $defaultTheme ) {
             $questionMessage    = sprintf( 'Please select an appliocation theme to use (defaults to %s): ', $defaultTheme );
+            $default            = $defaultTheme;
         } elseif ( ! empty( $availableThemes ) ) {
             $questionMessage    = sprintf( 'Please select an appliocation theme to use (defaults to %s): ', $availableThemes[0] );
+            $default            = $availableThemes[0];
         } else {
             $questionMessage    = 'Please select an appliocation theme to use: ';
         }
@@ -310,6 +313,7 @@ EOT
                     $questionMessage,
                     // choices can also be PHP objects that implement __toString() method
                     $availableThemes,
+                    $default
                 )
             )->setErrorMessage( 'Theme %s is invalid.' )
         ;
