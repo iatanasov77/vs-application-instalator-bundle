@@ -103,8 +103,8 @@ class ApplicationSetup
         $this->setupApplicationLoginPage();
         $this->setupApplicationConfigs();
         
-        // This Remove Application Version from AdminPanel Parameters But I Set a WorkAround For This Issue
-        $this->ignoreApplicationControllersInAdminPanelServices();
+        // This Not Work Properly but MayBe is Not Needed
+        //$this->ignoreApplicationControllersInAdminPanelServices();
         
         $this->setupApplicationRoutes();
         $this->setupApplicationAssets();
