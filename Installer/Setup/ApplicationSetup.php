@@ -103,7 +103,10 @@ class ApplicationSetup
         $this->setupApplicationLoginPage();
         $this->setupApplicationConfigs();
         
-        // This Not Work Properly but MayBe is Not Needed
+        /*
+         * This Not Work Properly but MayBe is Not Needed
+         * BUT AFTER FIXING _initialize() MAY BE IT SHOULD WORK
+         */ 
         //$this->ignoreApplicationControllersInAdminPanelServices();
         
         $this->setupApplicationRoutes();
