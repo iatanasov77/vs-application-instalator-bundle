@@ -1,3 +1,10 @@
+1.7.22	|	Release date: **02.02.2022**
+============================================
+* New Features and Improvements:
+  - Some Improvement.
+  - Update Installator Application Kernel Template.
+
+
 1.7.21	|	Release date: **30.01.2022**
 ===========================================
 * Bug-Fixes:
