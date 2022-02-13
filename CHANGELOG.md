@@ -1,3 +1,9 @@
+1.7.23	|	Release date: **13.02.2022**
+============================================
+* New Features:
+  - UserForm Applications Field Filter When User Role is Different From Super Admin.
+
+
 1.7.22	|	Release date: **02.02.2022**
 ============================================
 * New Features and Improvements:
