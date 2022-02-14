@@ -1,3 +1,9 @@
+1.7.24	|	Release date: **14.02.2022**
+============================================
+* Bug-Fixes and Improvements:
+  - Improve CreateApplicationCommand.
+
+
 1.7.23	|	Release date: **13.02.2022**
 ============================================
 * New Features:
