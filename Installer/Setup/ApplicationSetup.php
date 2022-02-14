@@ -111,29 +111,8 @@ class ApplicationSetup
         
         $this->setupApplicationRoutes();
         $this->setupApplicationAssets();
+        $this->setupApplicationThemes();
         $this->setupInstalationInfo();
-    }
-    
-    public function configureApplicationTheme( $themeTitle )
-    {
-        $themeSlug      = $this->slugGenerator->generate( $themeTitle );
-        $themeBuildKey  = $this->slugGenerator->generateCamelCase( $themeSlug );
-        
-        $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
-        $configFile     = $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/webpack_encore.yaml';
-        try {
-            $yamlArray  = Yaml::parseFile( $configFile );
-            
-            $yamlArray['framework']['assets']['packages'][$themeSlug]['json_manifest_path']
-                    = '%kernel.project_dir%/public/shared_assets/build/' . $themeSlug . '/manifest.json';
-            $yamlArray['webpack_encore']['builds'][$themeBuildKey]
-                    = '%kernel.project_dir%/public/shared_assets/build/' . $themeSlug;
-            
-            // https://stackoverflow.com/questions/58547953/symfony-yaml-formatting-the-output
-            \file_put_contents( $configFile, Yaml::dump( $yamlArray, 6 ) );
-        } catch ( ParseException $exception ) {
-            printf( 'Unable to parse the YAML string: %s', $exception->getMessage() );
-        }
     }
     
     public function setupAdminPanelKernel()
@@ -328,6 +307,36 @@ class ApplicationSetup
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/webpack_encore.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/webpack_encore.yaml', $configWebpackEncore );
+    }
+    
+    private function setupApplicationThemes()
+    {
+        $themesRepository   = $this->container->get( 'vs_app.theme_repository' );
+        foreach( $themesRepository->findAll() as $theme ) {
+            $this->configureApplicationTheme( $theme->getTitle() );
+        }
+    }
+    
+    private function configureApplicationTheme( $themeTitle )
+    {
+        $themeSlug      = $this->slugGenerator->generate( $themeTitle );
+        $themeBuildKey  = $this->slugGenerator->generateCamelCase( $themeSlug );
+        
+        $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
+        $configFile     = $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/webpack_encore.yaml';
+        try {
+            $yamlArray  = Yaml::parseFile( $configFile );
+            
+            $yamlArray['framework']['assets']['packages'][$themeSlug]['json_manifest_path']
+                = '%kernel.project_dir%/public/shared_assets/build/' . $themeSlug . '/manifest.json';
+            $yamlArray['webpack_encore']['builds'][$themeBuildKey]
+                = '%kernel.project_dir%/public/shared_assets/build/' . $themeSlug;
+            
+            // https://stackoverflow.com/questions/58547953/symfony-yaml-formatting-the-output
+            \file_put_contents( $configFile, Yaml::dump( $yamlArray, 6 ) );
+        } catch ( ParseException $exception ) {
+            printf( 'Unable to parse the YAML string: %s', $exception->getMessage() );
+        }
     }
     
     private function setupApplicationLoginPage()
