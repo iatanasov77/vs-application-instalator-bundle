@@ -92,7 +92,6 @@ EOT
         $outputStyle->writeln( 'Setup Application Theme.' );
         $theme  = $this->setupApplicationTheme( $input, $output );
         if ( $theme ) {
-            $appSetup->configureApplicationTheme( $theme->getTitle() );
             $outputStyle->writeln( '<info>Application Theme is setted up.</info>' );
         }
         
