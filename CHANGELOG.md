@@ -1,3 +1,13 @@
+1.7.25	|	Release date: **17.02.2022**
+============================================
+* New Features and Improvements:
+  - Move Useer Subscription Relation Classes to UsersSubscriptions Bundle.
+  - Add Form Errors when submit Application Settings Form.
+  - Disable CSRF Protection in All Forms.
+* Bug-Fixes:
+  - Fix All ORM Mappings for Taxon Relations.
+
+
 1.7.24	|	Release date: **14.02.2022**
 ============================================
 * Bug-Fixes and Improvements:
