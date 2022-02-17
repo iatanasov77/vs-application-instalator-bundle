@@ -49,6 +49,7 @@ class TaxonForm extends AbstractForm
         parent::configureOptions( $resolver );
         
         $resolver->setDefaults([
+            'csrf_protection' => false,
             'rootTaxon' => null,
         ]);
     }

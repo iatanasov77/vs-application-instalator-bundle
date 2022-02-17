@@ -74,6 +74,6 @@ class SettingsExtController extends AbstractController
             return $this->redirect( $this->generateUrl( 'vs_application_settings_index' ) );
         }
         
-        throw new \Exception( 'Settings Form Not Submited properly!' );
+        throw new \Exception( 'Settings Form Not Submited properly!<br /><br />' . (string) $form->getErrors( true, false ), 500 );
     }
 }
