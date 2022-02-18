@@ -40,4 +40,8 @@ services:
             - '@vs_application.repository.taxonomy'
             - '@vs_application.repository.taxon'
             - '@vs_application.slug_generator'
+    Vankosoft\ApplicationBundle\Controller\PasswordGeneratorController:
+      tags: ['controller.service_arguments']
+      arguments:
+        - '@hackzilla.password_generator.computer'
 
