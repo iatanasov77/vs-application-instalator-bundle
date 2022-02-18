@@ -16,6 +16,7 @@ vs_application:
         apply: 'Въведи'
         save: 'Запази'
         cancel: 'Отказ'
+        close: 'Затвори'
         login:
             remember_me: 'Запомни ме'
             button_login: 'Влез'
@@ -26,6 +27,11 @@ vs_application:
             message: Наистина ли искате да изтриете обекта?
             btn_ok: Да
             btn_cancel: Отказ
+        vs_form_display_password:
+            title: Генерирана Парола
+            message: Паролата Ще Бъде Показана Само Този Път !!!
+            password: Парола
+            btn_close: Затвори
     template:
         button_view_all_notifications: 'Виж всички известия'
         dashboard_header_title: 'Табло на Приложението'
