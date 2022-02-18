@@ -54,5 +54,11 @@
             "Vankosoft\\ApplicationBundle\\": "/"
         }
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../*"
+        }
+    ],
     "minimum-stability" : "dev"
 }
