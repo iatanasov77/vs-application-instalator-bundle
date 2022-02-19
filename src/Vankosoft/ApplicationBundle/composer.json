@@ -36,6 +36,7 @@
        	
        	"friendsofsymfony/jsrouting-bundle": "^2.8",
         "willdurand/js-translation-bundle": "^5.0",
+        "hackzilla/password-generator-bundle": "^4.1",
         
        	"vankosoft/application-instalator-bundle": "^1.6"
     },
@@ -53,5 +54,11 @@
             "Vankosoft\\ApplicationBundle\\": "/"
         }
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../*"
+        }
+    ],
     "minimum-stability" : "dev"
 }
