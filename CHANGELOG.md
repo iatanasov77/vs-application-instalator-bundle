@@ -1,3 +1,22 @@
+1.7.26	|	Release date: **19.02.2022**
+============================================
+* New Features and Improvements:
+  - Add Generate Password Button to UsersCrud Form.
+  - Add Composer Requirements Of Password Generator Bundle.
+  - Add Composer Repositories Of Subtree Composer Files.
+  - Add a PasswordGeneratorController.
+  - Add Translations For VsDisplayPassword Form.
+  - Add Button 'Generate Password' in  Profile Change Passvord Form Template.
+  - Improve Users Profile Form.
+* Bug-Fixes:
+  - Fix User Form Services.
+  - Fix User Profile Template.
+  - Fix UsersCrud Controller to Create UserInfo When Create a New User.
+  - Fix Profile Form.
+  - Fix Profile Routing.
+  - Fix ProfileController::changePasswordAction
+
+
 1.7.25	|	Release date: **17.02.2022**
 ============================================
 * New Features and Improvements:
