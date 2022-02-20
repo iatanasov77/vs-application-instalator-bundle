@@ -213,7 +213,7 @@ EOT
             throw new \RuntimeException( 'You must configure a $fileLocator or/and $imageUploader' );
         }
         
-        $avatarFile     = in_array( 'ROLE_SUPER_ADMIN', $roles ) ? 'symfony.png' : 'vankosoft.png';
+        $avatarFile     = in_array( 'ROLE_SUPER_ADMIN', $roles ) ? 'superman.png' : 'vankosoft.png';
         $imagePath      = $this->fileLocator->locate( '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/' . $avatarFile );
         $uploadedImage  = new UploadedFile( $imagePath, basename( $imagePath ) );
         
