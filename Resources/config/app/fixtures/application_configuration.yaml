@@ -41,6 +41,11 @@ sylius_fixtures:
                               description: 'Categories for TOC Documents'
                               locale:  '%locale%'
                               
+                            - code: 'document-pages'
+                              title: 'Document Pages'
+                              description: 'Document Pages for Building a TOC'
+                              locale:  '%locale%'
+                              
                             - code: 'user-roles'
                               title: 'User Roles'
                               description: 'User Roles Taxonomy'
