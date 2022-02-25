@@ -18,6 +18,7 @@ parameters:
     vs_application.settings.application_layout: null
     vs_application.supress_pdo_exception: false
     vs_application.page_categories.taxonomy_code: 'page-categories'
+    vs_application.document_categories.taxonomy_code: 'document-categories'
     vs_application.user_roles.taxonomy_code: 'user-roles'
 
 services:

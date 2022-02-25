@@ -4,6 +4,7 @@
 /.settings
 ###< Eclipse project files ###
 
-###> VankosoftApplication Files ###
-
-###< VankosoftApplication Files ###
+###> VisualParadigm Meta Files ###
+/docs/technical/VisualParadigm/.CmsBundle.vpp.lck
+/docs/technical/VisualParadigm/CmsBundle.vpp.bak_*
+###< VisualParadigm Meta Files ###

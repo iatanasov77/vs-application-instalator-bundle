@@ -1,3 +1,24 @@
+1.7.27	|	Release date: **25.02.2022**
+============================================
+* New Features and Improvements:
+  - Improve Application Installator
+  - Add VisualParadigm Project.
+  - Gitignore.
+  - Refactoring and Improvement of CMS TOCs.
+  - Refactoring and Improving Document and TOC Page Models.
+  - Create TOC Document Categories Resource.
+  - Add New Migrations and Update Application Installator Configs.
+* Bug-Fixes and Improvements:
+  - Fix Application Menu Builder.
+  - Fix CMS DocumentInterface.
+  - Fix MultiPageTocPageController Service.
+  - Fix TOC Form Services.
+  - Fix CMS TOC Services.
+  - Fix TocPagesRepository.
+  - Fix TOC Templates.
+  - Fix Document Form Labels.
+
+
 1.7.26	|	Release date: **19.02.2022**
 ============================================
 * New Features and Improvements:

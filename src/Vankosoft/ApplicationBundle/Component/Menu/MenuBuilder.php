@@ -177,7 +177,7 @@ class MenuBuilder implements ContainerAwareInterface
             }
         }
         
-        return $hasGrantedChild;
+        return isset( $hasGrantedChild ) ? $hasGrantedChild : false;
     }
     
     protected function routeAllowed( $route, $routeParams )
