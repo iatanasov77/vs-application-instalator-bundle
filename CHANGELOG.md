@@ -1,3 +1,26 @@
+1.7.28	|	Release date: **26.02.2022**
+============================================
+* New Features:
+  - Add Routes and Templates For Document Categories Resource.
+  - Building Documents with TOC.
+  - Add Document Pages Taxonomy at Installation.
+  - Add a LoggableObjectInterface to Use in Loggable Models.
+  - Display  Cms Document Root TocPage Content If Is Set.
+  - Refactoring and Improve AdminPanel Templates.
+  - Add Translations for Document Templates.
+  - Add New Doctrine Migrations.
+* Bug-Fixes:
+  - Fix DocumentCategoryController and DocumentCategoryForm.
+  - Fix DocumentCategory DependenciesInjection Configuration.
+  - Fix DocumentCategory Index Template.
+  - Fix TocPage Model.
+  - Fix Doctrine Mapping Between Document and Root TocPage.
+  - Fix Cms Document Index Template.
+  - Fix and Improve Cms DocumentController.
+  - Fix TOC Page Model and Form.
+  - Fix TocPage Doctrine Mapping.
+
+
 1.7.27	|	Release date: **25.02.2022**
 ============================================
 * New Features and Improvements:
