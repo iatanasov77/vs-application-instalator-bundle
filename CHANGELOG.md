@@ -1,3 +1,20 @@
+1.7.29	|	Release date: **27.02.2022**
+============================================
+* New Features and Improvrements:
+  - Improve AbstractCrudController.
+  - Display TOC of Document.
+  - Make CMS TocPage Translatable.
+* Bug-Fixes:
+  - Fixes For TocPage Form and Modal Dialog.
+  - Fix and Improve Creating TOC Pages.
+  - Fix TocPage Form Template.
+  - Fix Twig Macros
+  - Fix TocPageController.
+  - Fix Edit  TOC Page.
+  - Fix TocPage Form Template.
+  - Fix TocPage Model.
+
+
 1.7.28	|	Release date: **26.02.2022**
 ============================================
 * New Features:
