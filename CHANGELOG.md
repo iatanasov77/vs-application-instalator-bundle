@@ -1,3 +1,9 @@
+1.7.31	|	Release date: **28.02.2022**
+============================================
+* Bug-Fixes:
+  - Fix DocumentController.
+
+
 1.7.30	|	Release date: **28.02.2022**
 ============================================
 * Bug-Fixes and Improvements:
