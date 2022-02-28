@@ -1,3 +1,11 @@
+1.7.30	|	Release date: **28.02.2022**
+============================================
+* Bug-Fixes and Improvements:
+  - Remove Relation Between TocPage and Taxonomy.
+  - Add New Migration
+  - Fix Document TOC Template.
+
+
 1.7.29	|	Release date: **27.02.2022**
 ============================================
 * New Features and Improvrements:
