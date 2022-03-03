@@ -1,3 +1,10 @@
+1.8.0	|	Release date: **03.03.2022**
+============================================
+* New Features:
+  - Switch Components Branches
+  - Update Docs
+
+
 1.7.33	|	Release date: **03.03.2022**
 ============================================
 * New Features and Improvements:
