@@ -5,7 +5,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 use Vankosoft\CmsBundle\Model\PageCategoryInterface;
-use Vankosoft\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 
 class PageCategoriesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
@@ -21,14 +21,19 @@ class PageCategoriesExampleFactory extends AbstractExampleFactory implements Exa
     /** @var OptionsResolver */
     private $optionsResolver;
     
+    /** @var SlugGenerator */
+    private $slugGenerator;
+    
     public function __construct(
         RepositoryInterface $taxonomyRepository,
         FactoryInterface $taxonFactory,
-        FactoryInterface $pageCategoriesFactory
+        FactoryInterface $pageCategoriesFactory,
+        SlugGenerator $slugGenerator
     ) {
         $this->taxonomyRepository       = $taxonomyRepository;
         $this->taxonFactory             = $taxonFactory;
         $this->pageCategoriesFactory    = $pageCategoriesFactory;
+        $this->slugGenerator            = $slugGenerator;
         
         $this->optionsResolver          = new OptionsResolver();
         $this->configureOptions( $this->optionsResolver );
@@ -42,10 +47,10 @@ class PageCategoriesExampleFactory extends AbstractExampleFactory implements Exa
         $pageCategoryEntity         = $this->pageCategoriesFactory->createNew();
         
         $taxonEntity                = $this->taxonFactory->createNew();
-        $slug                       = Slug::generate( $options['title'] );
+        $slug                       = $this->slugGenerator->generate( $options['title'] );
         
-        $taxonEntity->setCode( $slug );
         $taxonEntity->setCurrentLocale( $options['locale'] );
+        $taxonEntity->setCode( $slug );
         $taxonEntity->getTranslation()->setName( $options['title'] );
         $taxonEntity->getTranslation()->setDescription( $options['description'] );
         $taxonEntity->getTranslation()->setSlug( $slug );

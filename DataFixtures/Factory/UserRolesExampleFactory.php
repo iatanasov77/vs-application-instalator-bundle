@@ -4,7 +4,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-use Vankosoft\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 use Vankosoft\ApplicationBundle\Repository\TaxonRepository;
 use Vankosoft\UsersBundle\Model\UserRoleInterface;
 use Vankosoft\UsersBundle\Repository\UserRolesRepository;
@@ -29,18 +29,23 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
     /** @var OptionsResolver */
     private $optionsResolver;
     
+    /** @var SlugGenerator */
+    private $slugGenerator;
+    
     public function __construct(
         RepositoryInterface $taxonomyRepository,
         FactoryInterface $taxonFactory,
         TaxonRepository $taxonRepository,
         FactoryInterface $userRolesFactory,
-        UserRolesRepository $userRolesRepository
+        UserRolesRepository $userRolesRepository,
+        SlugGenerator $slugGenerator
     ) {
         $this->taxonomyRepository   = $taxonomyRepository;
         $this->taxonFactory         = $taxonFactory;
         $this->taxonRepository      = $taxonRepository;
         $this->userRolesFactory     = $userRolesFactory;
         $this->userRolesRepository  = $userRolesRepository;
+        $this->slugGenerator        = $slugGenerator;
         
         $this->optionsResolver      = new OptionsResolver();
         $this->configureOptions( $this->optionsResolver );
@@ -52,10 +57,10 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
         
         $userRoleEntity             = $this->userRolesFactory->createNew();
         $taxonEntity                = $this->taxonFactory->createNew();
-        $slug                       = Slug::generate( $options['title'] );
+        $slug                       = $this->slugGenerator->generate( $options['title'] );
         
-        $taxonEntity->setCode( $slug );
         $taxonEntity->setCurrentLocale( $options['locale'] );
+        $taxonEntity->setCode( $slug );
         $taxonEntity->getTranslation()->setName( $options['title'] );
         $taxonEntity->getTranslation()->setDescription( $options['description'] );
         $taxonEntity->getTranslation()->setSlug( $slug );

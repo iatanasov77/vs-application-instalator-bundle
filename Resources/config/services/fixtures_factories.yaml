@@ -20,6 +20,7 @@ services:
         arguments:
             - '@vs_application.factory.taxonomy'
             - '@vs_application.factory.taxon'
+            - '@vs_application.slug_generator'
     
     vs_application.fixture.example_factory.page_categories:
         class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\PageCategoriesExampleFactory
@@ -27,12 +28,14 @@ services:
             - '@vs_application.repository.taxonomy'
             - '@vs_application.factory.taxon'
             - '@vs_cms.factory.page_categories'
+            - '@vs_application.slug_generator'
 
     vs_application.fixture.example_factory.pages:
         class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\PagesExampleFactory
         arguments:
             - '@vs_cms.repository.page_categories'
             - '@vs_cms.factory.pages'
+            - '@vs_application.slug_generator'
             
     vs_application.fixture.example_factory.locales:
         class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\LocalesExampleFactory
@@ -48,6 +51,7 @@ services:
             - '@vs_application.repository.taxon'
             - '@vs_users.factory.user_roles'
             - '@vs_users.repository.user_roles'
+            - '@vs_application.slug_generator'
 
     vs_application.fixture.example_factory.users:
         class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\UsersExampleFactory
@@ -55,7 +59,5 @@ services:
             - '@vs_users.manager.user'
             - '@vs_users.repository.user_roles'
             - '@vs_users.factory.user_info'
-            - '@vs_users.factory.avatar_image'
             - '%locale%'
             - '@file_locator'
-            - '@vs_cms.profile_uploader'

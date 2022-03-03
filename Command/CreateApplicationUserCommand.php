@@ -85,8 +85,10 @@ EOT
         } catch ( \InvalidArgumentException $exception ) {
             return Command::FAILURE;
         }
-        $this->setupAdministratorsAvatar( $user );
+        
+        $this->setupAdministratorsAvatar( $user, $roles );
         $this->setupUserRoles( $user, $roles );
+        $this->setupAllowedApplications( $user, $roles, $application );
         
         // Setup User Properties
         $user->setEnabled( true );
@@ -127,6 +129,20 @@ EOT
             if ( $userRole ) {
                 $user->addRole( $userRole );
             }
+        }
+    }
+    
+    private function setupAllowedApplications( UserInterface &$user, array $roles, string $applicationName )
+    {
+        if ( in_array( 'ROLE_SUPER_ADMIN', $roles ) || in_array( 'ROLE_SUPER_ADMIN', $roles ) ) {
+            return;
+        }
+        
+        $appRepo        = $this->getContainer()->get( 'vs_application.repository.application' );
+        $application    = $appRepo->findOneBy( ['code' => $this->getContainer()->get( 'vs_application.slug_generator' )->generate( $applicationName )] );
+        
+        if ( $application ) {
+            $user->addApplication( $application );
         }
     }
     
@@ -191,13 +207,14 @@ EOT
         return $password;
     }
     
-    private function setupAdministratorsAvatar( &$user )
+    private function setupAdministratorsAvatar( &$user, $roles )
     {
         if ( $this->fileLocator === null || $this->imageUploader === null ) {
             throw new \RuntimeException( 'You must configure a $fileLocator or/and $imageUploader' );
         }
         
-        $imagePath      = $this->fileLocator->locate( '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/vankosoft.png' );
+        $avatarFile     = in_array( 'ROLE_SUPER_ADMIN', $roles ) ? 'superman.png' : 'vankosoft.png';
+        $imagePath      = $this->fileLocator->locate( '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/' . $avatarFile );
         $uploadedImage  = new UploadedFile( $imagePath, basename( $imagePath ) );
         
         $avatarImage    = $this->getContainer()->get( 'vs_users.factory.avatar_image' )->createNew();

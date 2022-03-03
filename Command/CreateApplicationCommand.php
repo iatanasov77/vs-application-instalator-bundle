@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -16,13 +17,15 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Webmozart\Assert\Assert;
 use Gedmo\Sluggable\Util\Urlizer;
 
-use Vankosoft\ApplicationBundle\Component\Slug;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use Vankosoft\UsersBundle\Model\UserRoleInterface;
 
 final class CreateApplicationCommand extends AbstractInstallCommand
 {
     protected static $defaultName = 'vankosoft:application:create';
+    
+    private $application;
     
     protected function configure(): void
     {
@@ -33,8 +36,8 @@ The <info>%command.name%</info> command allows user to create a VankoSoft Applic
 EOT
             )
             ->addOption(
-                'setup-kernel',
-                null,
+                'new-project',
+                'p',
                 InputOption::VALUE_OPTIONAL,
                 'Whether to setup the AdminPanelKernel class.',
                 false
@@ -42,18 +45,26 @@ EOT
             ->addOption(
                 'locale',
                 'l',
-                InputOption::VALUE_REQUIRED,
+                InputOption::VALUE_OPTIONAL,
                 'Prefered User Locale.',
-                'en_US'
+                null
+            )
+            ->addOption(
+                'theme',
+                't',
+                InputOption::VALUE_OPTIONAL,
+                'Default Application Theme.',
+                null
             )
         ;
     }
     
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        $localeCode         = $input->getOption( 'locale' );
-        $setupKernelOption  = $input->getOption( 'setup-kernel' );
-        $setupKernel        = ( $setupKernelOption !== false );
+        $localeCode         = $this->getApplicationDefaultLocale( $input, $output );
+        
+        $newProjectOption   = $input->getOption( 'new-project' );
+        $newProject         = ( $newProjectOption !== false );
         
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
@@ -61,45 +72,60 @@ EOT
         $questionName       = $this->createApplicationNameQuestion();
         $applicationName    = $questionHelper->ask( $input, $output, $questionName );
         
-        $appSetup           = $this->getContainer()->get( 'vs_application_instalator.setup_application' );
+        $appSetup           = $this->getContainer()->get( 'vs_application.installer.setup_application' );
         $outputStyle        = new SymfonyStyle( $input, $output );
+        
+        // Add Database Records
+        $outputStyle->writeln( 'Create Application Database Records.' );
+        $this->createApplicationDatabaseRecords( $input, $output, $applicationName, $localeCode );
+        $outputStyle->writeln( '<info>Application Database Records successfully created.</info>' );
+        $outputStyle->newLine();
         
         // Create Directories
         $outputStyle->writeln( 'Create Application Directories.' );
-        $appSetup->setupApplication( $applicationName, $setupKernel );
+        $appSetup->setupApplication( $applicationName, $localeCode, $newProject );
         $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
+        $outputStyle->newLine();
         
-        // Add Database Records
-        $this->createApplicationDatabaseRecords( $input, $output, $applicationName, $localeCode );
+        // Setup Application Theme
+        $outputStyle->newLine();
+        $outputStyle->writeln( 'Setup Application Theme.' );
+        $theme  = $this->setupApplicationTheme( $input, $output );
+        if ( $theme ) {
+            $outputStyle->writeln( '<info>Application Theme is setted up.</info>' );
+        }
         
         $outputStyle->newLine();
         
         return Command::SUCCESS;
     }
     
+    private function getApplicationDefaultLocale( InputInterface $input, OutputInterface $output )
+    {
+        $defaultLocale  = $input->getOption( 'locale' );
+        if ( ! $defaultLocale ) {
+            $defaultLocale  = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) )->getCode();
+        }
+        
+        return $defaultLocale;
+    }
+    
     private function createApplicationDatabaseRecords( InputInterface $input, OutputInterface $output, $applicationName, $localeCode )
     {
-        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
-        
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
         
         $outputStyle        = new SymfonyStyle( $input, $output );
-        $outputStyle->writeln( 'Create Application Database Records.' );
         
         /*
          * Create Application
          */
-        $application        = $this->createApplication( $input, $output, $applicationName );
-        $entityManager->persist( $application );
+        $this->application  = $this->createApplication( $input, $output, $applicationName );
         
         /*
          * Create Application Base Role
          */
-        $baseRole   = $this->createApplicationBaseRole( $input, $output, $applicationName );
-        $entityManager->persist( $baseRole );
-        
-        $entityManager->flush();
+        $baseRole           = $this->createApplicationBaseRole( $input, $output, $applicationName );
         
         /*
          * Create Application Users
@@ -109,31 +135,18 @@ EOT
         } else {
             $outputStyle->writeln( 'Cancelled creating application users.' );
         }
-        
-        /* OLD WAY
-         * ===========
-         *
-         // bin/console doctrine:query:sql "INSERT INTO VSAPP_Applications(title) VALUES('Test Application')"
-         $command    = $this->getApplication()->find( 'doctrine:query:sql' );
-         
-         // Create Records
-         $returnCode = $command->run(
-         new ArrayInput( ['sql' =>"INSERT INTO VSAPP_Applications(enabled, code, title, hostname, created_at) VALUES(1, '{$applicationSlug}', '{$applicationName}', '{$applicationUrl}', '{$applicationCreated}')"] ),
-         $output
-         );
-         */
-        
-        $outputStyle->writeln( '<info>Application Database Records successfully created.</info>' );
     }
     
     private function createApplication( InputInterface $input, OutputInterface $output, $applicationName ): ApplicationInterface
     {
+        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
+        
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
         
         $questionUrl        = $this->createApplicationUrlQuestion();
         $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
-        $applicationSlug    = Slug::generate( $applicationName );
+        $applicationSlug    = $this->getContainer()->get( 'vs_application.slug_generator' )->generate( $applicationName );
         $applicationCreated = new \DateTime;
         
         $application        = $this->getContainer()->get( 'vs_application.factory.application' )->createNew();
@@ -142,15 +155,20 @@ EOT
         $application->setHostname( $applicationUrl );
         $application->setCreatedAt( $applicationCreated );
         
+        $entityManager->persist( $application );
+        $entityManager->flush();
+        
         return $application;
     }
     
     private function createApplicationBaseRole( InputInterface $input, OutputInterface $output, $applicationName ): UserRoleInterface
     {
+        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
+        
         /*
          * Create Application Base Role Taxon
          */
-        $taxonSlug          = Slug::generate( 'Role ' . $applicationName );
+        $taxonSlug          = $this->getContainer()->get( 'vs_application.slug_generator' )->generate( 'Role ' . $applicationName );
         $roleTaxon          = $this->getContainer()->get( 'vs_application.factory.taxon' )->createNew();
         $taxonomyRootTaxon  = $this->getContainer()->get( 'vs_application.repository.taxonomy' )
                                                     ->findByCode( 'user-roles' )
@@ -158,9 +176,9 @@ EOT
         $taxonParent        = $this->getContainer()->get( 'vs_application.repository.taxon' )
                                                     ->findOneBy( ['code' => 'role-application-admin'] );
         
+        $roleTaxon->setCurrentLocale( 'en_US' );
         $roleTaxon->setParent( $taxonParent ?: $taxonomyRootTaxon );
         $roleTaxon->setCode( $taxonSlug );
-        $roleTaxon->setCurrentLocale( 'en_US' );
         $roleTaxon->getTranslation()->setName( 'Role ' . $applicationName );
         $roleTaxon->getTranslation()->setDescription( $applicationName );
         $roleTaxon->getTranslation()->setSlug( $taxonSlug );
@@ -177,6 +195,10 @@ EOT
         
         $adminRole          = 'ROLE_' . \strtoupper( Urlizer::urlize( $applicationName, '_' ) ) . '_ADMIN';
         $role->setRole( $adminRole );
+        
+        $entityManager->persist( $roleTaxon );
+        $entityManager->persist( $role );
+        $entityManager->flush();
         
         return $role;
     }
@@ -195,6 +217,35 @@ EOT
         
         $outputStyle->writeln( '<info>Admin account for this Application successfully created.</info>' );
         $outputStyle->newLine();
+    }
+    
+    private function setupApplicationTheme( InputInterface $input, OutputInterface $output ): ?ThemeInterface
+    {
+        $entityManager          = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
+        $settingsRepository     = $this->getContainer()->get( 'vs_application.repository.settings' );
+        
+        $applicationThemeName   = $this->getHelper( 'question' )->ask(
+                                        $input,
+                                        $output,
+                                        $this->createApplicationThemeQuestion( $input->getOption( 'theme' ) )
+                                    );
+        
+        $theme                  = $this->getContainer()->get( 'vs_app.theme_repository' )->findOneByName( $applicationThemeName );
+        if ( $theme ) {
+            $settings   = $settingsRepository->getSettings( $this->application );
+            if ( ! $settings ) {
+                $settings   = $this->getContainer()->get( 'vs_application.factory.settings' )->createNew();
+            }
+            
+            $settings->setTheme( $applicationThemeName );
+            $settings->setApplication( $this->application );
+            $settings->setMaintenanceMode( 0 );
+            
+            $entityManager->persist( $settings );
+            $entityManager->flush();
+        }
+        
+        return $theme;
     }
     
     private function createApplicationNameQuestion(): Question
@@ -222,7 +273,7 @@ EOT
     
     private function createApplicationUrlQuestion(): Question
     {
-        return ( new Question( 'Application Url: ' ) )
+        return ( new Question( 'Application Domain: ' ) )
             ->setValidator(
                 function ( $value ): string {
                     /** @var ConstraintViolationListInterface $errors */
@@ -240,6 +291,30 @@ EOT
                 }
             )
             ->setMaxAttempts( 3 )
+        ;
+    }
+    
+    private function createApplicationThemeQuestion( $defaultTheme ): ChoiceQuestion
+    {
+        $availableThemes    = array_keys( $this->getContainer()->get( 'vs_app.theme_repository' )->findAll() );
+        $default            = null;
+        if ( $defaultTheme ) {
+            $questionMessage    = sprintf( 'Please select an appliocation theme to use (defaults to %s): ', $defaultTheme );
+            $default            = $defaultTheme;
+        } elseif ( ! empty( $availableThemes ) ) {
+            $questionMessage    = sprintf( 'Please select an appliocation theme to use (defaults to %s): ', $availableThemes[0] );
+            $default            = $availableThemes[0];
+        } else {
+            $questionMessage    = 'Please select an appliocation theme to use: ';
+        }
+        
+        return ( new ChoiceQuestion(
+                    $questionMessage,
+                    // choices can also be PHP objects that implement __toString() method
+                    $availableThemes,
+                    $default
+                )
+            )->setErrorMessage( 'Theme %s is invalid.' )
         ;
     }
 }
