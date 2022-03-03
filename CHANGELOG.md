@@ -1,3 +1,10 @@
+1.7.33	|	Release date: **03.03.2022**
+============================================
+* New Features and Improvements:
+  - Clear Page Form Template Comments.
+  - Use CkEditor Form Fields Configuration Parameters in TocPage Modal Form.
+
+
 1.7.32	|	Release date: **03.03.2022**
 ============================================
 * New Features:
