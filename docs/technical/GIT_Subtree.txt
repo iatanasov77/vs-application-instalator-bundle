@@ -23,16 +23,15 @@ Pull after rebasing subtree branch
 Subtree Change Branch
 --------------------------
 	$ git rm -r src/Vankosoft/Component1
-	$ git commit
+	$ git commit -am"Remove Component: Component1"
 	$ git subtree add --prefix src/Vankosoft/Component1 --squash Component1 <branch>
 
-Subtree Components Change Branch
-------------------------------------
-git checkout -b <branch-name>
-git branch -d <local-branch>
-
-Edit .git/config to set the new branch as a develop branch.
-
+    Components
+    ----------
+    ApplicationBundle
+    ApplicationInstalatorBundle
+    CmsBundle
+    UsersBundle
 
 ============================
 = REFERENCES
