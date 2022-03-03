@@ -1,3 +1,9 @@
+1.7.32	|	Release date: **03.03.2022**
+============================================
+* New Features:
+  - Make CkEditor Form Fields Configurable with Service Conrainer Parameters.
+
+
 1.7.31	|	Release date: **28.02.2022**
 ============================================
 * Bug-Fixes:
