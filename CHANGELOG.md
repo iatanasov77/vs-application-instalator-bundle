@@ -1,3 +1,9 @@
+1.8.1	|	Release date: **06.03.2022**
+============================================
+* New Features:
+  - Update Installator Configs.
+
+
 1.8.0	|	Release date: **03.03.2022**
 ============================================
 * New Features:
