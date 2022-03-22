@@ -1,3 +1,11 @@
+1.8.2	|	Release date: **22.03.2022**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix UsersBundle RegisterController.
+  - Update Instalator Configs.
+  - Improve TaxonomyHelperTrait.
+
+
 1.8.1	|	Release date: **06.03.2022**
 ============================================
 * New Features:
