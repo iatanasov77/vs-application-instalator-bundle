@@ -5,6 +5,11 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 class TaxonRepository extends NestedTreeRepository
 {
+    public function findByCode( $code )
+    {
+        return $this->findOneBy( ['code' => $code] );
+    }
+    
     public function getTaxonsAsArray( $rootTaxonId, $parentId )
     {
         $em     = $this->getEntityManager();
