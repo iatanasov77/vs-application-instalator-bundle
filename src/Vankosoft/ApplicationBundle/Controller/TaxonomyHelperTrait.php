@@ -21,4 +21,18 @@ trait TaxonomyHelperTrait
         
         return $taxon;
     }
+    
+    protected function createTaxonCode( $taxonName )
+    {
+        $code           = $this->get( 'vs_application.slug_generator' )->generate( $taxonName );
+        $useThisCode    = $code;
+        $i              = 0;
+        
+        while( $this->get( 'vs_application.repository.taxon' )->findByCode( $useThisCode ) ) {
+            $i++;
+            $useThisCode    = $code . '-' . $i;
+        }
+        
+        return $useThisCode;
+    }
 }
