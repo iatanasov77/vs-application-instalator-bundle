@@ -9,7 +9,8 @@ trait TaxonomyHelperTrait
         $taxon->setCurrentLocale( $locale );
         $taxon->setName( $name );
         
-        $slug   = $this->get( 'vs_application.slug_generator' )->generate( $name );
+        $slug   = $this->createTaxonCode( $name );
+        
         $taxon->setCode( $slug );
         $taxon->setSlug( $slug );
         
