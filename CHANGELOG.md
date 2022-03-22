@@ -1,3 +1,9 @@
+1.8.3	|	Release date: **22.03.2022**
+============================================
+* Bug-Fixes:
+  - Fix TaxonomyHelperTrait.
+
+
 1.8.2	|	Release date: **22.03.2022**
 ============================================
 * Bug-Fixes and Improvements:
