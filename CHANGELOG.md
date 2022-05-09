@@ -1,3 +1,9 @@
+1.8.5	|	Release date: **09.05.2022**
+============================================
+* Bug-Fixes:
+  - Fix ResetPasswordRequestRepository.
+
+
 1.8.4	|	Release date: **09.05.2022**
 ============================================
 * New Features:
