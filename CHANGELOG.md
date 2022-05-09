@@ -1,3 +1,10 @@
+1.8.16	|	Release date: **09.05.2022**
+============================================
+* Bug-Fixes:
+  - Fix RegisterController.
+  - Fix ForgotPasswordController.
+
+
 1.8.15	|	Release date: **09.05.2022**
 ============================================
 * Bug-Fixes and Improvements:
