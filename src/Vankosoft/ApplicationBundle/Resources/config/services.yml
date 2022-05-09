@@ -20,6 +20,7 @@ parameters:
     vs_application.page_categories.taxonomy_code: 'page-categories'
     vs_application.document_categories.taxonomy_code: 'document-categories'
     vs_application.user_roles.taxonomy_code: 'user-roles'
+    vs_application.mailer_user: 'webmaster@vankosoft.org'
 
 services:
     _defaults:
