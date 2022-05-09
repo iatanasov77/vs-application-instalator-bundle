@@ -1,3 +1,9 @@
+1.8.4	|	Release date: **09.05.2022**
+============================================
+* New Features:
+  - Add ResetPasswordRequestRepository to use ServiceLocator.
+
+
 1.8.3	|	Release date: **22.03.2022**
 ============================================
 * Bug-Fixes:
