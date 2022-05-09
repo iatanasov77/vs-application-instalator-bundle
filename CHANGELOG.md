@@ -1,3 +1,9 @@
+1.8.15	|	Release date: **09.05.2022**
+============================================
+* Bug-Fixes and Improvements:
+  - Improve RegisterController.
+
+
 1.8.14	|	Release date: **09.05.2022**
 ============================================
 * New Features:
