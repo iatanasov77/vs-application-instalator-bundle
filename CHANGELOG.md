@@ -1,3 +1,9 @@
+1.8.14	|	Release date: **09.05.2022**
+============================================
+* New Features:
+  - Get RegistrationForm Type Class From Parameter.
+
+
 1.8.13	|	Release date: **09.05.2022**
 ============================================
 * New Features:
