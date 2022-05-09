@@ -1,3 +1,12 @@
+1.8.11	|	Release date: **09.05.2022**
+============================================
+* New Features:
+  - Register Form Redirect When User is Logged.
+* Bug-Fixes:
+  - Fix ForgotPasswordController.
+  - Fix Register Controller.
+
+
 1.8.10	|	Release date: **09.05.2022**
 ============================================
 * Bug-Fixes:
