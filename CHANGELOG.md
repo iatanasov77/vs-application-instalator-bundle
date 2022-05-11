@@ -1,3 +1,9 @@
+1.8.17	|	Release date: **11.05.2022**
+============================================
+* New Features:
+  - Add Twig Extra Bundle to Applications.
+
+
 1.8.16	|	Release date: **09.05.2022**
 ============================================
 * Bug-Fixes:
