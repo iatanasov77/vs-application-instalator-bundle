@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.8.16",
+    "version": "v1.8.17",
     "description": "VankoSoft Symfony Application",
     "keywords": [
         "symfony",
@@ -25,6 +25,7 @@
         "symfony\/security-bundle": "^4.4 || ^5.2",
         "symfony\/mailer": "^4.4 || ^5.2",
         "twig\/extra-bundle": "^3.3",
+        "twig\/string-extra": "^3.3",
         "sensio\/framework-extra-bundle": "^6.1",
         "symfonycasts\/verify-email-bundle": "^1.5",
         "symfonycasts\/reset-password-bundle": "^1.8",
