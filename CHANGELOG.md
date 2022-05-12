@@ -1,3 +1,9 @@
+1.8.18	|	Release date: **12.05.2022**
+============================================
+* New Features:
+  - Add Extensions Menus to AdminPanel SideBar.
+
+
 1.8.17	|	Release date: **11.05.2022**
 ============================================
 * New Features:
