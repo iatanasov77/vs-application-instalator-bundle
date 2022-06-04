@@ -1,3 +1,9 @@
+1.8.19	|	Release date: **04.06.2022**
+============================================
+* New Features:
+  - Overide Constructor of TaxonRepository to Manage When to Throw Exceptions.
+
+
 1.8.18	|	Release date: **12.05.2022**
 ============================================
 * New Features:

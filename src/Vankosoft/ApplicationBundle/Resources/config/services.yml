@@ -10,6 +10,7 @@ imports:
     - { resource: services/doctrine_extensions.yaml }
     - { resource: services/commands.yaml }
     - { resource: services/web_profiler.yaml }
+    - { resource: services/repository.yaml }
 
 parameters:
     vs_application.version: !php/const Vankosoft\ApplicationBundle\Component\Application\Kernel::VERSION
