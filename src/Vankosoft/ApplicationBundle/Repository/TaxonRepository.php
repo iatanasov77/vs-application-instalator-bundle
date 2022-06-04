@@ -3,8 +3,31 @@
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Gedmo\Exception\UnexpectedValueException;
+
 class TaxonRepository extends NestedTreeRepository
 {
+    protected ?\Exception $exception;
+    
+    public function __construct( EntityManagerInterface $em, ClassMetadata $class )
+    {
+        $this->exception    = null;
+        try {
+            parent::__construct( $em, $class );
+        } catch ( UnexpectedValueException $e ) {
+            $this->exception    = $e;
+        }
+    }
+    
+    public function throwException( bool $throwException )
+    {
+        if ( $throwException && $this->exception ) {
+            throw $this->exception;
+        }
+    }
+    
     public function findByCode( $code )
     {
         return $this->findOneBy( ['code' => $code] );
