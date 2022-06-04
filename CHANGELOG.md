@@ -1,3 +1,9 @@
+1.8.20	|	Release date: **04.06.2022**
+============================================
+* New Features:
+  - Update ApplicationInstallator Configs.
+
+
 1.8.19	|	Release date: **04.06.2022**
 ============================================
 * New Features:
