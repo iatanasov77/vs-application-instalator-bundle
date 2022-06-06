@@ -1,3 +1,10 @@
+1.8.21	|	Release date: **06.06.2022**
+============================================
+* Bug-Fixes:
+  - Fix a route in Application Installator Configs.
+  - Switch On i18n service events.
+
+
 1.8.20	|	Release date: **04.06.2022**
 ============================================
 * New Features:
