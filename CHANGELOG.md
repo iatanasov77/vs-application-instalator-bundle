@@ -1,3 +1,9 @@
+1.8.22	|	Release date: **12.06.2022**
+============================================
+* Bug-Fixes:
+  - Add Exception Dump of TaxonRepository.
+
+
 1.8.21	|	Release date: **06.06.2022**
 ============================================
 * Bug-Fixes:
