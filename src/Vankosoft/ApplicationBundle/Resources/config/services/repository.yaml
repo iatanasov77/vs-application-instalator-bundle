@@ -13,5 +13,6 @@ services:
         arguments:
             - '%vs_application.model.taxon.class%'
         calls:
+            - [ setRootDir, [ '%kernel.project_dir%' ] ]
             - [ throwException, [ '%vs_application.taxon_repository_throw_exception%' ] ]
 
