@@ -9,6 +9,7 @@ use Gedmo\Exception\UnexpectedValueException;
 
 class TaxonRepository extends NestedTreeRepository
 {
+    protected string $rootDir;
     protected ?\Exception $exception;
     
     public function __construct( EntityManagerInterface $em, ClassMetadata $class )
@@ -21,10 +22,18 @@ class TaxonRepository extends NestedTreeRepository
         }
     }
     
+    public function setRootDir( string $rootDir )
+    {
+        $this->rootDir	= $rootDir;
+    }
+    
     public function throwException( bool $throwException )
     {
-        if ( $throwException && $this->exception ) {
-            throw $this->exception;
+        if( $this->exception ) {
+            file_put_contents( $this->rootDir . '/var/dumpTaxonRepositoryException', $this->exception->getTraceAsString() );
+            if ( $throwException ) {
+                throw $this->exception;
+            }
         }
     }
     
