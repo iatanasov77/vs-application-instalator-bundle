@@ -19,12 +19,13 @@ final class ApplicationContext implements ApplicationContextInterface
         $this->requestStack     = $requestStack;
     }
     
-    public function getApplication() : ApplicationInterface
+    public function getApplication(): ApplicationInterface
     {
         try {
             return $this->getApplicationForRequest( $this->getMasterRequest() );
         } catch ( RequestNotFoundException $exception ) {
             // Do Nothing ( May be The Service is triggered by Command Line )
+            return new NullApplication();
         } catch ( ApplicationNotFoundException $exception ) {
             throw new ApplicationNotFoundException( null, $exception );
         }
