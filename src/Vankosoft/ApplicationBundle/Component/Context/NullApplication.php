@@ -4,6 +4,11 @@ use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
 class NullApplication implements ApplicationInterface
 {
+    public function getId()
+    {
+        return 0;
+    }
+    
     public function getCode()
     {
         return 'null-application';
