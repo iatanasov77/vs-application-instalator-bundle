@@ -1,3 +1,10 @@
+1.8.23	|	Release date: **13.06.2022**
+============================================
+* New Features:
+  - Improve Exception Dump of TaxonRepository.
+  - Light update version of Sylius Resource Bundle.
+
+
 1.8.22	|	Release date: **12.06.2022**
 ============================================
 * Bug-Fixes:

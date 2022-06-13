@@ -30,7 +30,7 @@ class TaxonRepository extends NestedTreeRepository
     public function throwException( bool $throwException )
     {
         if( $this->exception ) {
-            file_put_contents( $this->rootDir . '/var/dumpTaxonRepositoryException', $this->exception->getTraceAsString() );
+            file_put_contents( $this->rootDir . '/var/dumpTaxonRepositoryException', $this->exception->getMessage() . "\n\n" . $this->exception->getTraceAsString() );
             if ( $throwException ) {
                 throw $this->exception;
             }
