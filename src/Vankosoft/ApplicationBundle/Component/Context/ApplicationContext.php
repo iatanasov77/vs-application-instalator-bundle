@@ -4,6 +4,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
+use Vankosoft\ApplicationBundle\Component\Exception\RequestNotFoundException;
+use Vankosoft\ApplicationBundle\Component\Exception\ApplicationNotFoundException;
+
 final class ApplicationContext implements ApplicationContextInterface
 {
     private RequestResolverInterface $requestResolver;
@@ -20,7 +23,9 @@ final class ApplicationContext implements ApplicationContextInterface
     {
         try {
             return $this->getApplicationForRequest( $this->getMasterRequest() );
-        } catch ( \UnexpectedValueException $exception ) {
+        } catch ( RequestNotFoundException $exception ) {
+            // Do Nothing ( May be The Service is triggered by Command Line )
+        } catch ( ApplicationNotFoundException $exception ) {
             throw new ApplicationNotFoundException( null, $exception );
         }
     }
@@ -38,7 +43,7 @@ final class ApplicationContext implements ApplicationContextInterface
     {
         $masterRequest = $this->requestStack->getMasterRequest();
         if ( null === $masterRequest ) {
-            throw new \UnexpectedValueException( 'There are not any requests on request stack' );
+            throw new RequestNotFoundException( 'There are not any requests on request stack' );
         }
         
         return $masterRequest;
@@ -47,7 +52,7 @@ final class ApplicationContext implements ApplicationContextInterface
     private function assertApplicationWasFound( ?ApplicationInterface $application ): void
     {
         if ( null === $application ) {
-            throw new \UnexpectedValueException( 'Application was not found for given request' );
+            throw new ApplicationNotFoundException( 'Application was not found for given request' );
         }
     }
 }
