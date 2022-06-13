@@ -1,3 +1,12 @@
+1.8.24	|	Release date: **13.06.2022**
+============================================
+* New Features and Improvements:
+  - Improve Application Context Service Class.
+  - sylius/resource-bundle[v1.9.0, ..., v1.9.1] require php ^8.0
+  - RequestStack::getMasterRequest() is deprecated, use getMainRequest() .
+  - Return NullApplication on RequestNotFoundException .
+
+
 1.8.23	|	Release date: **13.06.2022**
 ============================================
 * New Features:
