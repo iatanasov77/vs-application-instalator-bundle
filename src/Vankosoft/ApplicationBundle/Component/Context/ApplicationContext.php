@@ -41,7 +41,7 @@ final class ApplicationContext implements ApplicationContextInterface
     
     private function getMasterRequest(): Request
     {
-        $masterRequest = $this->requestStack->getMasterRequest();
+        $masterRequest = $this->requestStack->getMainRequest();
         if ( null === $masterRequest ) {
             throw new RequestNotFoundException( 'There are not any requests on request stack' );
         }
