@@ -74,7 +74,7 @@ class LoggableListener extends BaseLoggableListener
         
         // Filter embedded documents
         if ( isset( $meta->isEmbeddedDocument ) && $meta->isEmbeddedDocument ) {
-            return;
+            return null;
         }
         
         if ( $config = $this->getConfiguration( $om, $meta->name ) ) {
