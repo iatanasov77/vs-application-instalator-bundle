@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.8.24",
+    "version": "v1.8.25",
     "description": "VankoSoft Symfony Application",
     "keywords": [
         "symfony",
@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.2|^8.0",
         "symfony\/monolog-bundle": "^3.7",
         "symfony\/webpack-encore-bundle": "^1.11",
         "symfony\/templating": "^5.2",

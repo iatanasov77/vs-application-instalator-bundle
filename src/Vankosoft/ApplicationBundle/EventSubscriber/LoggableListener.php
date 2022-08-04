@@ -2,6 +2,7 @@
 
 use Gedmo\Loggable\LoggableListener as BaseLoggableListener;
 use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
+use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
 use Gedmo\Tool\Wrapper\AbstractWrapper;
 use Gedmo\Translatable\Mapping\Event\Adapter\ORM as TranslatableOrmAdapter;
 use Doctrine\Persistence\ObjectManager;
@@ -35,7 +36,7 @@ class LoggableListener extends BaseLoggableListener
      * {@inheritDoc}
      * @see \Gedmo\Loggable\LoggableListener::onFlush(EventArgs $eventArgs)
      */
-    public function onFlush( EventArgs $eventArgs )
+    public function onFlush( EventArgs $eventArgs ): void
     {
         $this->transEa  = new TranslatableOrmAdapter();
         $this->transEa->setEventArgs( $eventArgs );
@@ -62,7 +63,7 @@ class LoggableListener extends BaseLoggableListener
      * {@inheritDoc}
      * @see \Gedmo\Loggable\LoggableListener::createLogEntry()
      */
-    protected function createLogEntry( $action, $object, LoggableAdapter $ea )
+    protected function createLogEntry( $action, $object, LoggableAdapter $ea ): ?AbstractLogEntry
     {
         // Default Adapter not used. Using custom adapter $this->logEa;
         $ea = $this->logEa;
@@ -73,7 +74,7 @@ class LoggableListener extends BaseLoggableListener
         
         // Filter embedded documents
         if ( isset( $meta->isEmbeddedDocument ) && $meta->isEmbeddedDocument ) {
-            return;
+            return null;
         }
         
         if ( $config = $this->getConfiguration( $om, $meta->name ) ) {
