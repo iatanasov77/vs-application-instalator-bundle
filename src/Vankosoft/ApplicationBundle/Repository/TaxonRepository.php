@@ -59,9 +59,11 @@ class TaxonRepository extends NestedTreeRepository
         }
         
         $statement = $em->getConnection()->prepare( $sql );
-        $statement->execute( $params); 
+        foreach ( $params as $key => $val ) {
+            $statement->bindParam( $key, $val );
+        }
         
-        return $statement->fetchAll();
+        return $statement->executeQuery()->fetchAllAssociative();
     }
     
     /*
