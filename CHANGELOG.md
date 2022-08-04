@@ -1,3 +1,9 @@
+1.8.27	|	Release date: **04.08.2022**
+============================================
+* Bug-Fixes:
+  - Prepare User Register Controller for Extending.
+
+
 1.8.26	|	Release date: **04.08.2022**
 ============================================
 * New Features:
