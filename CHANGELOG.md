@@ -1,3 +1,15 @@
+1.8.25	|	Release date: **04.08.2022**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix Some Deprecatiosns.
+  - Add Php 8 Requirement in the Composer Config.
+  - Fix LoggableListener .
+  - Update Installator Configs
+  - Add Php 8 Requirement in the Bundles Composer Configs.
+  - Fix Taxon Repository.
+  - Fix Taxon Model Mappings.
+
+
 1.8.24	|	Release date: **13.06.2022**
 ============================================
 * New Features and Improvements:
