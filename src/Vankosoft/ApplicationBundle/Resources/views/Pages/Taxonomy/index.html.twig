@@ -44,6 +44,12 @@
                         </tr>
                     {% endfor %}
                 </table>
+                
+                {# #}
+                {% if resources.haveToPaginate() %}
+                    {{ pagerfanta( resources, null, { 'proximity': 10 } ) }}
+                {% endif %}
+                
             {% else %}
             {# {{ alerts.info('sylius.ui.there_are_no_mappers_to_display'|trans) }} #}
             {% endif %}
