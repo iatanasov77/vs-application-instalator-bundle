@@ -4,7 +4,7 @@ vs_application_taxonomy_index:
     defaults:
         _controller: vs_application.controller.taxonomy:indexAction
         _sylius:
-            paginate: 5
+            paginate: 2
             sortable: true
             sorting:
                 id: asc
