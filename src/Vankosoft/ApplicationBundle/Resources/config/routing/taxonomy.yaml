@@ -1,5 +1,5 @@
 vs_application_taxonomy_index:
-    path: /taxonomy_index
+    pattern: /taxonomy/
     methods: [GET]
     defaults:
         _controller: vs_application.controller.taxonomy:indexAction
