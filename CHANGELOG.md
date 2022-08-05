@@ -1,3 +1,13 @@
+1.8.28	|	Release date: **05.08.2022**
+============================================
+* New Features and Improvements:
+  - Improve Vagrant Environement Detection.
+  - Improve AdminPanel Login Page Display Errors.
+  - Add Admin PAnel Pagination Template.
+  - Add Pagination for Taxonomy Listing.
+  - Add Pagination for Users Listing.
+
+
 1.8.27	|	Release date: **04.08.2022**
 ============================================
 * Bug-Fixes:
