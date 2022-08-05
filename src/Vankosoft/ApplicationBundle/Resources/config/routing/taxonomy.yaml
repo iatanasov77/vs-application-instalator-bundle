@@ -1,10 +1,10 @@
-vs_application_taxonomy_index:
-    path: /taxonomy
+vs_application_taxonomy_index_paginated:
+    path: /taxonomy/
     methods: [GET]
     defaults:
         _controller: vs_application.controller.taxonomy:indexAction
         _sylius:
-            paginate: 2
+            paginate: 10
             sortable: true
             sorting:
                 id: asc
