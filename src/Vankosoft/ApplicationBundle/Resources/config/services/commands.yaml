@@ -8,3 +8,8 @@ services:
         class: Vankosoft\ApplicationBundle\Command\MaintenanceModeCommand
         tags:
             - 'console.command'
+
+    vs_app.command.regenerate_slugs:
+        class: Vankosoft\ApplicationBundle\Command\RegenerateSlugsCommand
+        tags:
+            - 'console.command'
