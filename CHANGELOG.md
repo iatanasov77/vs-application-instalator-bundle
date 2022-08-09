@@ -1,3 +1,10 @@
+1.8.29	|	Release date: **09.08.2022**
+============================================
+* New Features:
+  - Create a Command for Regeneration Slugs for an Entity.
+  - CmsBundle Using Artgris File Manager in FosCK Editor.
+
+
 1.8.28	|	Release date: **05.08.2022**
 ============================================
 * New Features and Improvements:
