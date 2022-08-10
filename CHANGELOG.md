@@ -1,3 +1,12 @@
+1.8.30	|	Release date: **10.08.2022**
+============================================
+* New Features:
+  - Update VisualParadigm ERD Models.
+  - Add Login After Verify User After Registration.
+* Bug-Fixes:
+  - Fix Create New User Role.
+
+
 1.8.29	|	Release date: **09.08.2022**
 ============================================
 * New Features:
