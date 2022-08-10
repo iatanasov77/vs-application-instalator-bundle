@@ -1,3 +1,10 @@
+1.8.31	|	Release date: **10.08.2022**
+============================================
+* New Features:
+  - Create AnotherLoginFormAuthenticator for Using in RegistrationCnytoller.
+  - Separate Profile Routes in Another configuration yml.
+
+
 1.8.30	|	Release date: **10.08.2022**
 ============================================
 * New Features:
