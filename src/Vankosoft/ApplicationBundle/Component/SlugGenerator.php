@@ -21,7 +21,7 @@ final class SlugGenerator
         }
     }
     
-    public function generate( $string ): string
+    public function generate( $string, $separator = '-', $uppercase = false ): string
     {
         switch ( $this->localeCode ) {
             case 'bg_BG':
@@ -34,6 +34,10 @@ final class SlugGenerator
         
         if( empty( $slug ) ) // if $string is like '=))' or 'トライアングル・サービス' an empty slug will be returned, that causes troubles and throws no exception
             return 'error, empty slug!!!';
+        
+        if ( $uppercase ) {
+            $slug   = \strtoupper( $slug );
+        }
         
         return $slug;
     }
