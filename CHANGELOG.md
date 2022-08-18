@@ -1,3 +1,9 @@
+1.8.32	|	Release date: **18.08.2022**
+============================================
+* New Features and Improvements:
+  - Imrpove SlugGenerator
+
+
 1.8.31	|	Release date: **10.08.2022**
 ============================================
 * New Features:
