@@ -1,3 +1,10 @@
+1.8.33	|	Release date: **19.08.2022**
+============================================
+* New Features:
+  - Create a ConsoleCommandTrait to use in Controllers.
+  - Create a Form JsonType .
+
+
 1.8.32	|	Release date: **18.08.2022**
 ============================================
 * New Features and Improvements:
