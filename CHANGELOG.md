@@ -1,3 +1,10 @@
+1.8.34	|	Release date: **20.08.2022**
+============================================
+* New Features and Improvements:
+  - JsonTransformer With Pretty Print.
+  - Improve EasyUi ComboTree Macros.
+
+
 1.8.33	|	Release date: **19.08.2022**
 ============================================
 * New Features:
