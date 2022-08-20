@@ -12,9 +12,14 @@
             }
     " %}
     
+    {% if options.class is defined %}
+        {% set additionalClass = options.class  %}
+    {% else %}
+        {% set additionalClass = ''  %}
+    {% endif %}
     {{ form_widget( twigWidget, {
         'attr': {
-            'class': 'easyui-combotree form-control',
+            'class': 'easyui-combotree form-control ' ~ additionalClass,
             'data-options': comboDataOptions,
             'data-value': dataValue
         }

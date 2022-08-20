@@ -33,9 +33,9 @@ class JsonTransformer implements DataTransformerInterface
     public function transform( $value ): string
     {
         if ( empty( $value ) ) {
-            return \json_encode( [] );
+            return \json_encode( [], JSON_PRETTY_PRINT );
         }
         
-        return \json_encode( $value );
+        return \json_encode( $value, JSON_PRETTY_PRINT );
     }
 }
