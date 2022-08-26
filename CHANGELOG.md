@@ -1,3 +1,10 @@
+1.8.35	|	Release date: **26.08.2022**
+============================================
+* New Features:
+  - Add Tranlator into MenuBuilder Service.
+  - Add Tranlations into MenuBuilder.
+
+
 1.8.34	|	Release date: **20.08.2022**
 ============================================
 * New Features and Improvements:
