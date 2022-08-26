@@ -1,4 +1,10 @@
 vs_application:
+    menu:
+        home: Home
+        contact: Contact
+        login: Login
+        logout: Logout
+
     form:
         errors_title: 'Error!'
         enabled: 'Enabled'

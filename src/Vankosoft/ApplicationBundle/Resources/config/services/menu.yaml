@@ -21,6 +21,7 @@ services:
             - "@vs_application.path_roles_service"
             - "@router"
             - "@parameter_bag"
+            - "@translator"
         calls:
           - [ setContainer ]
             

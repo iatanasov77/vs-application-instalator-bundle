@@ -8,6 +8,7 @@ use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\Matcher\Voter\RouteVoter;
@@ -33,6 +34,9 @@ class MenuBuilder implements ContainerAwareInterface
     // PathRolesService
     protected $pathRolesService;
     
+    // TranslatorInterface
+    protected $translator;
+    
     protected FactoryInterface $factory;
     
     public function __construct(
@@ -40,7 +44,8 @@ class MenuBuilder implements ContainerAwareInterface
         AuthorizationChecker $security,
         PathRolesService $pathRolesService,
         RouterInterface $router,
-        ParameterBagInterface $parameterBag
+        ParameterBagInterface $parameterBag,
+        TranslatorInterface $translator
     ) {
             $config                 = Yaml::parse( file_get_contents( $config_file ) );
             $this->menuConfig       = $config['vs_application']['menu'];
@@ -51,6 +56,8 @@ class MenuBuilder implements ContainerAwareInterface
             $this->cb               = new ContainerBuilder( $parameterBag );
             
             $this->pathRolesService = $pathRolesService;
+            
+            $this->translator       = $translator;
     }
     
     public function mainMenu( FactoryInterface $factory, string $menuName = 'mainMenu' )
@@ -166,13 +173,14 @@ class MenuBuilder implements ContainerAwareInterface
                 }
             }
             
-            $child  = $menu->addChild( $mg['name'], $params );
+            $menuName   = $this->translator->trans( $mg['name'], [], 'VSApplicationBundle' );
+            $child      = $menu->addChild( $menuName, $params );
             if ( isset( $mg['display'] ) && $mg['display'] == false ) {
                 $child->setDisplay( false );
             }
             
             if ( isset( $mg['childs'] ) && is_array( $mg['childs'] ) ) {
-                $isGranted  = $this->build( $menu[$mg['name']], $mg['childs'] );
+                $isGranted  = $this->build( $menu[$menuName], $mg['childs'] );
                 $child->setDisplay( $isGranted );
             }
         }
