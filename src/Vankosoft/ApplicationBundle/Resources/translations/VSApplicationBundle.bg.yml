@@ -1,4 +1,10 @@
 vs_application:
+    menu:
+        home: Начало
+        contact: За Контакт
+        login: Вход
+        logout: Изход
+
     form:
         errors_title: 'Грешка!'
         enabled: 'Разрешен'

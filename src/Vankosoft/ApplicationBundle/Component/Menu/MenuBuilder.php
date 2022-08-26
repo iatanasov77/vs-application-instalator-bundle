@@ -173,13 +173,14 @@ class MenuBuilder implements ContainerAwareInterface
                 }
             }
             
-            $child  = $menu->addChild( $mg['name'], $params );
+            $menuName   = $this->translator->trans( $mg['name'], [], 'VSApplicationBundle' );
+            $child      = $menu->addChild( $menuName, $params );
             if ( isset( $mg['display'] ) && $mg['display'] == false ) {
                 $child->setDisplay( false );
             }
             
             if ( isset( $mg['childs'] ) && is_array( $mg['childs'] ) ) {
-                $isGranted  = $this->build( $menu[$mg['name']], $mg['childs'] );
+                $isGranted  = $this->build( $menu[$menuName], $mg['childs'] );
                 $child->setDisplay( $isGranted );
             }
         }
