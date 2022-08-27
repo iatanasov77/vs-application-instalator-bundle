@@ -97,4 +97,9 @@ class Taxon extends BaseTaxon implements VsTaxonInterface, Comparable
     {
         return $this->code === $other->getCode() ? 0 : 1;
     }
+    
+    public function getExistingTranslations()
+    {
+        return array_keys( $this->translationsCache );
+    }
 }
