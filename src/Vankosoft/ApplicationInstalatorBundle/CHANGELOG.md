@@ -1,3 +1,9 @@
+1.9.0	|	Release date: **27.08.2022**
+============================================
+* New Features:
+  - Starting 1.9 Branch
+
+
 1.8.0	|	Release date: **03.03.2022**
 ============================================
 * Sync With Subtree Library
