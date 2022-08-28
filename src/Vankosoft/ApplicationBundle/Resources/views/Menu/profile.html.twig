@@ -2,8 +2,12 @@
 
 {% block root %}
     {% for parentItem in item.children %}
-        <a class="dropdown-item" href="{{ parentItem.uri }}">
-        	<i class="{{ parentItem.attributes.iconClass }}"></i>{{ parentItem.name }}
-        </a>
+        {% if parentItem.extra( 'divider' ) %}
+            <hr class="mt-1 mb-1"/>
+        {% else %}
+            <a class="dropdown-item" href="{{ parentItem.uri }}">
+            	<i class="{{ parentItem.attributes.iconClass }}"></i>{{ parentItem.name }}
+            </a>
+        {% endif %}
     {% endfor %}
 {% endblock %}

@@ -10,6 +10,7 @@
     </button>
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto navbar-right-top">
+            
             <li class="nav-item">
                 <div id="custom-search" class="top-search-bar">
                     <input class="form-control" type="text" placeholder="Search..">
@@ -102,6 +103,15 @@
         {% else %}
         	<a href="{{ path( 'vs_application_login' ) }}" class="btn btn-primary btn-lg btn-block">Log In</a>
         {% endif %}
+        
+            <li class="nav-item pt-5 ml-2">
+                {% for lang, country in languageFlags %}
+                    {% set locale = lang ~ '_' ~ ( country | upper ) %}
+                    <a href="{{ path('app_set_locale', {'locale': locale}) }}" title="Switch to {{ locale }}">  
+                        <i class="flag flag-{{ country }}"></i>
+                    </a>
+                {% endfor %}
+            </li>
         </ul>
     </div>
 </nav>
