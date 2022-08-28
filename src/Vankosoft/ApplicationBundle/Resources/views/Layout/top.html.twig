@@ -10,6 +10,7 @@
     </button>
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto navbar-right-top">
+            
             <li class="nav-item">
                 <div id="custom-search" class="top-search-bar">
                     <input class="form-control" type="text" placeholder="Search..">
@@ -30,7 +31,7 @@
                                     <div class="notification-info">
                                         <div class="notification-list-user-img"><img src="{{ asset( '/build/default/images/avatar-2.jpg' ) }}" alt="" class="user-avatar-md rounded-circle"></div>
                                         <div class="notification-list-user-block">
-                                        	<span class="notification-list-user-name">Jeremy Rakestraw</span>{{ notification.notification }}
+                                        	<span class="notification-list-user-name">{{ notification.notificationFrom }}</span>{{ notification.notification }}
                                             <div class="notification-date">{{ time_diff( notification.date ) }}</div>
                                         </div>
                                     </div>
@@ -41,7 +42,7 @@
                     </li>
                     <li>
                         <div class="list-footer">
-                        	<a href="#">{{ 'vs_application.template.button_view_all_notifications' | trans( {},'VSCmsBundle' ) }}</a>
+                        	<a href="#">{{ 'vs_application.template.button_view_all_notifications' | trans( {},'VSApplicationBundle' ) }}</a>
                         </div>
                     </li>
                 </ul>
@@ -102,6 +103,15 @@
         {% else %}
         	<a href="{{ path( 'vs_application_login' ) }}" class="btn btn-primary btn-lg btn-block">Log In</a>
         {% endif %}
+        
+            <li class="nav-item pt-5 ml-2">
+                {% for lang, country in languageFlags %}
+                    {% set locale = lang ~ '_' ~ ( country | upper ) %}
+                    <a href="{{ path('app_set_locale', {'locale': locale}) }}" title="Switch to {{ locale }}">  
+                        <i class="flag flag-{{ country }}"></i>
+                    </a>
+                {% endfor %}
+            </li>
         </ul>
     </div>
 </nav>

@@ -1,3 +1,15 @@
+1.9.1	|	Release date: **28.08.2022**
+============================================
+* New Features and Improvements:
+  - Add some Helper Functions into Application Model Taxon.
+  - Update Application Configs.
+  - Add Language Switcher to the Admin Panel.
+  - Create an UserNotifications Service.
+  - Add to UserNotifications Model a Field notificationsFrom.
+  - Add New Doctrine Migration.
+  - Display NotificationFrom in UserNotifications in Admin Panel.
+
+
 1.9.0	|	Release date: **27.08.2022**
 ============================================
 * New Features:
