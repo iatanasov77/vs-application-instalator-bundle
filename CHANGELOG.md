@@ -1,3 +1,10 @@
+1.9.2	|	Release date: **29.08.2022**
+============================================
+* New Features:
+  - Some Litle Change into AdminPanel Footer.
+  - Add AdminPanel Menu Translations.
+
+
 1.9.1	|	Release date: **28.08.2022**
 ============================================
 * New Features and Improvements:
