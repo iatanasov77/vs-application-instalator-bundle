@@ -4,6 +4,41 @@ vs_application:
         contact: За Контакт
         login: Вход
         logout: Изход
+        
+        settings: Настройки
+        preferences: Предпочитания
+        taxonomy: Таксономия
+        list_taxonomies: Списък Таксономии
+        create_new_taxonomy: Създаване Нова Таксономия
+        edit_taxonomy: Редакция на Таксономия
+        user_management: Управление на Потребители
+        users_list: Списък Потребители
+        create_user: Създаване на Потребител
+        update_user: Редакция на Потребител
+        user_roles: Потребителски Роли
+        create_role: Създай Роля
+        update_role: Редакция на Роля
+        static_pages: Статични Страници
+        list_pages: Списък Страници
+        create_new_page: Създаване на Нова Страница
+        edit_page: Редакция на Страница
+        page_categories: Категории Страници
+        create_new_page_category: Създаване на Нова Категория за Страници
+        edit_page_category: Редакция на Категория за Страници
+        table_of_contents: Свързани Документи
+        document_lists: Списък Документи
+        create_new_document: Създаване на Нов Документ
+        edit_document: Редакция на Документ
+        document_categories: Категории Документи
+        create_new_document_category: Създаване на Нова Категория Документи
+        edit_document_category: Редакция на Категория Документи
+        vankoSoft_file_manager: VankoSoft Файлов Мениджър
+        list_filemanagers: Списък Файлови Мениджъри
+        create_new_filemanager: Създай Нов Файлов Мениджър
+        edit_filemanager: Редакция на Файлов Мениджър
+        artgris_file_manager: Artgris Файлов Мениджър
+        browse_files: Преглед на Файлове
+        upload_a_file: Добави Файл
 
     form:
         errors_title: 'Грешка!'

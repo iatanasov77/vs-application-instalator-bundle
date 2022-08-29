@@ -4,6 +4,41 @@ vs_application:
         contact: Contact
         login: Login
         logout: Logout
+        
+        settings: Settings
+        preferences: Preferences
+        taxonomy: Taxonomy
+        list_taxonomies: List Taxonomies
+        create_new_taxonomy: Create New Taxonomy
+        edit_taxonomy: Edit Taxonomy
+        user_management: User Management
+        users_list: Users List
+        create_user: Create User
+        update_user: Update User
+        user_roles: User Roles
+        create_role: Create Role
+        update_role: Update Role
+        static_pages: Static Pages
+        list_pages: List Pages
+        create_new_page: Create New Page
+        edit_page: Edit Page
+        page_categories: Page Categories
+        create_new_page_category: Create New Page Category
+        edit_page_category: Edit Page Category
+        table_of_contents: Table Of Contents
+        document_lists: Document Lists
+        create_new_document: Create New Document
+        edit_document: Edit Document
+        document_categories: Document Categories
+        create_new_document_category: Create New Document Category
+        edit_document_category: Edit Document Category
+        vankoSoft_file_manager: VankoSoft File Manager
+        list_filemanagers: List Filemanagers
+        create_new_filemanager: Create New Filemanager
+        edit_filemanager: Edit Filemanager
+        artgris_file_manager: Artgris File Manager
+        browse_files: Browse Files
+        upload_a_file: Upload a File
 
     form:
         errors_title: 'Error!'
