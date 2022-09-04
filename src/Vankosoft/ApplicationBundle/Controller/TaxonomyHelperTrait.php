@@ -36,4 +36,31 @@ trait TaxonomyHelperTrait
         
         return $useThisCode;
     }
+    
+    protected function createTranslation( $taxon, $locale, $name )
+    {
+        $translation    = $taxon->createNewTranslation();
+        
+        $translation->setLocale( $locale );
+        $translation->setName( $name );
+        $translation->setSlug( $this->get( 'vs_application.slug_generator' )->generate( $name ) );
+        
+        return $translation;
+    }
+    
+    protected function getTranslations()
+    {
+        $locales        = $this->get( 'vs_application.repository.locale' )->findAll();
+        
+        $translations   = [];
+        foreach ( $this->resources->getCurrentPageResults() as $category ) {
+            foreach( $locales as $locale ) {
+                $category->getTaxon()->getTranslation( $locale->getCode() );
+            }
+            
+            $translations[$category->getId()] = $category->getTaxon()->getExistingTranslations();
+        }
+        //echo "<pre>"; var_dump($translations); die;
+        return $translations;
+    }
 }
