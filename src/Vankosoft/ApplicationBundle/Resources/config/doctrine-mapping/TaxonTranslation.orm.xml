@@ -11,10 +11,7 @@
         </id>
         <field name="locale" column="locale" type="string" />
         <many-to-one field="translatable" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface" inversed-by="translations">
-            <join-column name="translatable_id" referenced-column-name="id" />
-            <cascade>
-                <cascade-all/>
-            </cascade>
+            <join-column on-delete="CASCADE" />
         </many-to-one>
         
         <field name="name" column="name" type="string" />
