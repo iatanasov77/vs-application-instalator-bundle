@@ -1,9 +1,15 @@
 vs_application:
     menu:
+        dashboard: Dashboard
+        system: System
+        cms: CMS
+        
         home: Home
         contact: Contact
         login: Login
         logout: Logout
+        my_profile: My Profile
+        documentation: Documentation
         
         settings: Settings
         preferences: Preferences

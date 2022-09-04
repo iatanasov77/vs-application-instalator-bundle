@@ -1,3 +1,18 @@
+1.9.3	|	Release date: **04.09.2022**
+============================================
+* New Features and Improvements:
+  - Improve AdminPanel Menu Tranlsations.
+  - Translation Functionality for Page Categories.
+  - Display Available Locales in Page Categories Index Page.
+  - Add setLocaleCode Method to Slug Generator Service.
+
+* Bug-Fixes and Improvements:
+  - Fix Taxon When edited to change only edited locale.
+  - Fix Taxon Translation Action.
+  - Page Category Form - Set Current Locale by Current Request Locale.
+  - Page Category Set Taxon Current Locale By Request Locale.
+
+
 1.9.2	|	Release date: **29.08.2022**
 ============================================
 * New Features:

@@ -21,6 +21,11 @@ final class SlugGenerator
         }
     }
     
+    public function setLocaleCode( string $localeCode ): void
+    {
+        $this->localeCode   = $localeCode;    
+    }
+    
     public function generate( $string, $separator = '-', $uppercase = false ): string
     {
         switch ( $this->localeCode ) {
