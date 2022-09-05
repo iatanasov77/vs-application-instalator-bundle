@@ -1,3 +1,12 @@
+1.9.4	|	Release date: **05.09.2022**
+============================================
+* New Features and Improvements:
+  - Improve Application Menu.
+  - Add RequestStack Argument to the MenuBuilder Service.
+  - Set Current Item to the MenuBuilder Service.
+  - Set Current Main Menu Element in Twig Templates.
+
+
 1.9.3	|	Release date: **04.09.2022**
 ============================================
 * New Features and Improvements:
