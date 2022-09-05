@@ -63,7 +63,7 @@ class MenuBuilder implements ContainerAwareInterface
         
         $this->translator       = $translator;
         
-        $this->currentUri       = $requestStack->getMasterRequest()->getUri();
+        $this->currentPath      = $requestStack->getMasterRequest()->getRequestUri();
     }
     
     public function mainMenu( FactoryInterface $factory, string $menuName = 'mainMenu' )
@@ -126,6 +126,8 @@ class MenuBuilder implements ContainerAwareInterface
     
     protected function build( &$menu, $config )
     {
+        $path   = null;
+        
         foreach ( $config as $id => $mg ) {
             $hasGrantedChild    = false;
             
@@ -188,6 +190,10 @@ class MenuBuilder implements ContainerAwareInterface
             if ( isset( $mg['childs'] ) && is_array( $mg['childs'] ) ) {
                 $isGranted  = $this->build( $menu[$menuName], $mg['childs'] );
                 $child->setDisplay( $isGranted );
+            }
+            
+            if ( $path == $this->currentPath ) {
+                $child->setCurrent( true );
             }
         }
         
