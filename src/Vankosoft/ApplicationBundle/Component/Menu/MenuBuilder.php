@@ -9,6 +9,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\Matcher\Voter\RouteVoter;
@@ -39,25 +40,30 @@ class MenuBuilder implements ContainerAwareInterface
     
     protected FactoryInterface $factory;
     
+    protected $currentUri;
+    
     public function __construct(
         string $config_file,
         AuthorizationChecker $security,
         PathRolesService $pathRolesService,
         RouterInterface $router,
         ParameterBagInterface $parameterBag,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        RequestStack $requestStack
     ) {
-            $config                 = Yaml::parse( file_get_contents( $config_file ) );
-            $this->menuConfig       = $config['vs_application']['menu'];
-            
-            $this->security         = $security;
-            $this->router           = $router;
-            
-            $this->cb               = new ContainerBuilder( $parameterBag );
-            
-            $this->pathRolesService = $pathRolesService;
-            
-            $this->translator       = $translator;
+        $config                 = Yaml::parse( file_get_contents( $config_file ) );
+        $this->menuConfig       = $config['vs_application']['menu'];
+        
+        $this->security         = $security;
+        $this->router           = $router;
+        
+        $this->cb               = new ContainerBuilder( $parameterBag );
+        
+        $this->pathRolesService = $pathRolesService;
+        
+        $this->translator       = $translator;
+        
+        $this->currentPath      = $requestStack->getMasterRequest()->getRequestUri();
     }
     
     public function mainMenu( FactoryInterface $factory, string $menuName = 'mainMenu' )
@@ -120,6 +126,8 @@ class MenuBuilder implements ContainerAwareInterface
     
     protected function build( &$menu, $config )
     {
+        $path   = null;
+        
         foreach ( $config as $id => $mg ) {
             $hasGrantedChild    = false;
             
@@ -182,6 +190,10 @@ class MenuBuilder implements ContainerAwareInterface
             if ( isset( $mg['childs'] ) && is_array( $mg['childs'] ) ) {
                 $isGranted  = $this->build( $menu[$menuName], $mg['childs'] );
                 $child->setDisplay( $isGranted );
+            }
+            
+            if ( $path == $this->currentPath ) {
+                $child->setCurrent( true );
             }
         }
         
