@@ -1,3 +1,9 @@
+1.9.6	|	Release date: **11.09.2022**
+============================================
+* Bug-Fixes and Improvements:
+  - Get bootstrapTreeviewData Translated in Current Locale.
+
+
 1.9.5	|	Release date: **11.09.2022**
 ============================================
 * Bug-Fixes and Improvements:
