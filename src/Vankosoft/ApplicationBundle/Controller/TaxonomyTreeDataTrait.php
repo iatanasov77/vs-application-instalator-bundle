@@ -96,9 +96,10 @@ trait TaxonomyTreeDataTrait
     protected function bootstrapTreeviewData( $tree, &$data, $useTarget = true, $taxonId = null )
     {
         foreach( $tree as $k => $node ) {
+            $node->setCurrentLocale(  $node->getParent()->getCurrentLocale() );
             
             $data[$k]   = [
-                'text'  => $node->getName(),
+                'text'  => $node->getTranslation()->getName(),
                 'tags'  => ['0'],
                 'nodes' => []
             ];
