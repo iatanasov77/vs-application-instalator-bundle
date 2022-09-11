@@ -17,7 +17,7 @@
         </indexes>
 
         <unique-constraints>
-            <unique-constraint name="versions_lookup_unique_idx" columns="object_class,object_id,version" />
+            <unique-constraint name="versions_lookup_unique_idx" columns="object_class,object_id,version,locale" />
         </unique-constraints>
     </mapped-superclass>
 </doctrine-mapping>
