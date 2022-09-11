@@ -1,3 +1,10 @@
+1.9.5	|	Release date: **11.09.2022**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix LogEntry Unique Constraints.
+  - Add Doctrine Migration.
+
+
 1.9.4	|	Release date: **05.09.2022**
 ============================================
 * New Features and Improvements:
