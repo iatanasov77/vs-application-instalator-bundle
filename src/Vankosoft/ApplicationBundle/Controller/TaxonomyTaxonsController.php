@@ -4,6 +4,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\Persistence\ManagerRegistry;
 
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 use Vankosoft\ApplicationBundle\Form\TaxonForm;
@@ -14,13 +15,18 @@ class TaxonomyTaxonsController extends AbstractController
 {
     use TaxonomyTreeDataTrait;
     
+    /** @var ManagerRegistry */
+    protected ManagerRegistry $doctrine;
+    
     protected $slugGenerator;
     
     public function __construct(
+        ManagerRegistry $doctrine,
         TaxonomyRepository $taxonomyRepository,
         TaxonRepository $taxonRepository,
         SlugGenerator $slugGenerator
     ) {
+        $this->doctrine             = $doctrine;
         $this->taxonomyRepository   = $taxonomyRepository;
         $this->taxonRepository      = $taxonRepository;
         $this->slugGenerator        = $slugGenerator;
@@ -62,7 +68,7 @@ class TaxonomyTaxonsController extends AbstractController
             $form->submit( $request->request->get( $form->getName() ) );
             
             if ( $form->isSubmitted()  ) { // && $form->isValid()
-                $em         = $this->getDoctrine()->getManager();
+                $em         = $this->doctrine->getManager();
                 $oTaxon     = $form->getData();
                 $oTaxon->setParent( $parentTaxon );
                 

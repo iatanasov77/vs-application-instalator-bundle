@@ -20,6 +20,7 @@ services:
         tags: ['controller.service_arguments']
         autowire: true
         arguments:
+            - '@doctrine'
             - '@vs_application.repository.application'
             - '@vs_application.factory.application'
             
@@ -27,6 +28,7 @@ services:
         tags: ['controller.service_arguments']
         autowire: true
         arguments:
+            - '@doctrine'
             - '@vs_app.settings_manager'
             - '@vs_application.repository.application'
             - '@vs_application.repository.settings'
@@ -37,6 +39,7 @@ services:
         tags: ['controller.service_arguments']
         autowire: true
         arguments:
+            - '@doctrine'
             - '@vs_application.repository.taxonomy'
             - '@vs_application.repository.taxon'
             - '@vs_application.slug_generator'
