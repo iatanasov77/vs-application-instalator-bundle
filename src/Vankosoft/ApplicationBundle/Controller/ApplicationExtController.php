@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
 
@@ -13,6 +14,9 @@ use Vankosoft\ApplicationBundle\Component\Status;
 
 class ApplicationExtController extends AbstractController
 {
+    /** @var ManagerRegistry */
+    protected ManagerRegistry $doctrine;
+    
     /** @var EntityRepository */
     protected $applicationRepository;
     
@@ -20,9 +24,11 @@ class ApplicationExtController extends AbstractController
     protected $applicationFactory;
     
     public function __construct(
+        ManagerRegistry $doctrine,
         EntityRepository $applicationRepository,
         Factory $applicationFactory
     ) {
+        $this->doctrine                 = $doctrine;
         $this->applicationRepository    = $applicationRepository;
         $this->applicationFactory       = $applicationFactory;
     }
@@ -46,7 +52,7 @@ class ApplicationExtController extends AbstractController
         if( $form->isSubmitted() && $form->isValid() ) {
             $entity = $form->getData();
             
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->doctrine->getManager();
             $em->persist( $entity );
             $em->flush();
             
@@ -59,7 +65,7 @@ class ApplicationExtController extends AbstractController
     public function remove( int $applicationId, Request $request ): Response
     {
         $application    = $this->applicationRepository->find( $applicationId );
-        $em             = $this->getDoctrine()->getManager();
+        $em             = $this->doctrine->getManager();
         
         $em->remove( $application );
         $em->flush();

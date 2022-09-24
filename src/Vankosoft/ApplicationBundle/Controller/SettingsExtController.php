@@ -3,6 +3,7 @@
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\Persistence\ManagerRegistry;
 
 use Vankosoft\ApplicationBundle\Form\SettingsForm;
 use Vankosoft\ApplicationBundle\Repository\TaxonomyRepository;
@@ -12,6 +13,9 @@ use Sylius\Component\Resource\Factory\Factory;
 
 class SettingsExtController extends AbstractController
 {
+    /** @var ManagerRegistry */
+    protected ManagerRegistry $doctrine;
+    
     protected $settingsManager;
     
     protected $applicationRepository;
@@ -24,12 +28,14 @@ class SettingsExtController extends AbstractController
     protected $taxonomyRepository;
     
     public function __construct(
+        ManagerRegistry $doctrine,
         SettingsManager $settingsManager,
         EntityRepository $applicationRepository,
         EntityRepository $settingsRepository,
         Factory $settingsFactory,
         TaxonomyRepository $taxonomyRepository
     ) {
+        $this->doctrine                 = $doctrine;
         $this->settingsManager          = $settingsManager;
         $this->applicationRepository    = $applicationRepository;
         $this->settingsRepository       = $settingsRepository;
@@ -64,7 +70,7 @@ class SettingsExtController extends AbstractController
                 $entity->setApplication( $this->applicationRepository->find( $applicationId ) );
             }
             
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->doctrine->getManager();
             $em->persist( $entity );
             $em->flush();
             
