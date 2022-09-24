@@ -1,3 +1,13 @@
+1.9.7	|	Release date: **24.09.2022**
+============================================
+* New Features and Improvements:
+  - Add Symfony Logging in Application Configs.
+  - Update Application Configs.
+  - Remove getDoctrine() method from Controllers.
+  - Improve Users ProfileController to be Easy Extendible.
+  - Add User Subscriptions into Profile Page if Needed Bundles are Installed.
+
+
 1.9.6	|	Release date: **11.09.2022**
 ============================================
 * Bug-Fixes and Improvements:
