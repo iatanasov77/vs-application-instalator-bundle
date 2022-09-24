@@ -1,3 +1,10 @@
+1.9.8	|	Release date: **24.09.2022**
+============================================
+* New Features and Improvements:
+  - Made ForgotPasswordController Easy Extendable.
+  - Increse column lengths for ResetPasswordRequest Model.
+
+
 1.9.7	|	Release date: **24.09.2022**
 ============================================
 * New Features and Improvements:
