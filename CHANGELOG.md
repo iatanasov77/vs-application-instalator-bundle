@@ -1,3 +1,13 @@
+1.9.9	|	Release date: **25.09.2022**
+============================================
+* New Features:
+  - Add Some Translations.
+  - Add Register/Profile Routes into Application Configs.
+  - Add Terms and Conditions Page into the Application Installator.
+* Bug-Fixes:
+  - Some Typo* Fixes.
+
+
 1.9.8	|	Release date: **24.09.2022**
 ============================================
 * New Features and Improvements:
