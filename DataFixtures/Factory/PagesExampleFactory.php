@@ -44,6 +44,7 @@ class PagesExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $pageEntity->setSlug( $slug );
         $pageEntity->setTranslatableLocale( $options['locale'] );
         $pageEntity->setTitle( $options['title'] );
+        $pageEntity->setDescription( $options['description'] );
         $pageEntity->setText( $options['text'] );
         $pageEntity->setPublished( $options['published'] );
 
@@ -58,6 +59,9 @@ class PagesExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $resolver
             ->setDefault( 'title', null )
             ->setAllowedTypes( 'title', ['string'] )
+            
+            ->setDefault( 'description', null )
+            ->setAllowedTypes( 'description', ['string'] )
             
             ->setDefault( 'text', null )
             ->setAllowedTypes( 'text', ['string'] )
