@@ -16,6 +16,7 @@ final class PagesFixture extends AbstractResourceFixture
             ->children()
                 ->scalarNode( 'locale' )->end()
                 ->scalarNode( 'title' )->end()
+                ->scalarNode( 'description' )->end()
                 ->scalarNode( 'text' )->end()
                 ->booleanNode( 'published' )->defaultTrue()->end()
                 
