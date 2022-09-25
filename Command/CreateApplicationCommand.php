@@ -299,10 +299,10 @@ EOT
         $availableThemes    = array_keys( $this->getContainer()->get( 'vs_app.theme_repository' )->findAll() );
         $default            = null;
         if ( $defaultTheme ) {
-            $questionMessage    = sprintf( 'Please select an appliocation theme to use (defaults to %s): ', $defaultTheme );
+            $questionMessage    = sprintf( 'Please select an application theme to use (defaults to %s): ', $defaultTheme );
             $default            = $defaultTheme;
         } elseif ( ! empty( $availableThemes ) ) {
-            $questionMessage    = sprintf( 'Please select an appliocation theme to use (defaults to %s): ', $availableThemes[0] );
+            $questionMessage    = sprintf( 'Please select an application theme to use (defaults to %s): ', $availableThemes[0] );
             $default            = $availableThemes[0];
         } else {
             $questionMessage    = 'Please select an appliocation theme to use: ';
