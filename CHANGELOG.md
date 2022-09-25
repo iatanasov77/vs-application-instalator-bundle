@@ -1,3 +1,9 @@
+1.9.10	|	Release date: **25.09.2022**
+============================================
+* Bug-Fixes:
+  - Fix Application Installator Security Config.
+
+
 1.9.9	|	Release date: **25.09.2022**
 ============================================
 * New Features:
