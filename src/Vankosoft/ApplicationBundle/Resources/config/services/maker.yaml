@@ -1,0 +1,22 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+       
+    vs_application.maker.renderer.form_type_renderer:
+        class: Vankosoft\ApplicationBundle\Maker\Renderer\FormTypeRenderer
+        arguments:
+            - '@kernel'
+            - '@maker.generator'
+            
+    vs_application.maker.make_resource:
+        class: Vankosoft\ApplicationBundle\Maker\MakeResourceCrud
+        arguments:
+            - '@kernel'
+            - '@maker.doctrine_helper'
+            - '@vs_application.maker.renderer.form_type_renderer'
+            - '@vs_application.repository.application'
+            - '@vs_application.repository.settings'
+        tags: ['maker.command']
+
+
