@@ -25,7 +25,7 @@ use Doctrine\Inflector\InflectorFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
-use App\Maker\Renderer\FormTypeRenderer;
+use Vankosoft\ApplicationBundle\Maker\Renderer\FormTypeRenderer;
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use Vankosoft\ApplicationBundle\Repository\ApplicationRepositoryInterface;
