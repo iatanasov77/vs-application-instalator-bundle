@@ -78,8 +78,8 @@ final class MakeResourceCrud extends AbstractResourceMaker
         );
         
         $useStatements = new UseStatementGenerator([
-            \VankosoftVankosoftVankosoftVankosoftVankosoft\ApplicationBundle\licationBundle\licationBundle\licationBundle\licationBundle\Controller\AbstractCrudController::class,
-            Request::class,
+            \Vankosoft\ApplicationBundle\Controller\AbstractCrudController::class,
+            \Symfony\Component\HttpFoundation\Request::class,
         ]);
         
         $generator->generateController(
