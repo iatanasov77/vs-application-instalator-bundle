@@ -24,7 +24,10 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
         $this->prepend( $container );
         
         $loader = new Loader\YamlFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
-        $loader->load( 'services.yml' );
+        $loader->load( 'services.yaml' );
+        if ( $container->getParameter( 'kernel.environment' ) == 'dev' ) {
+            $loader->load( 'services_dev.yaml' );
+        }
         
         // Register resources
         $this->registerResources( 'vs_application', $config['orm_driver'], $config['resources'], $container );
