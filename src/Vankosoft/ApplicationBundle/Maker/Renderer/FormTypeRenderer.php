@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use VankosoftVankosoftVankosoftVankosoftVankosoft\ApplicationBundle\licationBundle\licationBundle\licationBundle\licationBundle\Form\AbstractForm;
+use Vankosoft\ApplicationBundle\Form\AbstractForm;
 
 final class FormTypeRenderer
 {

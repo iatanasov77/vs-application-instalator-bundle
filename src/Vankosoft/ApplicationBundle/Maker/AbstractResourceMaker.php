@@ -27,9 +27,9 @@ use Doctrine\ORM\EntityRepository;
 
 use App\Maker\Renderer\FormTypeRenderer;
 
-use VankosoftVankosoftVankosoftVankosoftVankosoft\ApplicationBundle\licationBundle\licationBundle\licationBundle\licationBundle\Model\InterfacesVankosoftVankosoftVankosoftVankosoft\ApplicationBundle\licationBundle\licationBundle\licationBundle\licationInterface;
-use VankosoftVankosoftVankosoftVankosoftVankosoft\ApplicationBundle\licationBundle\licationBundle\licationBundle\licationBundle\RepositoryVankosoftVankosoftVankosoftVankosoft\ApplicationBundle\licationBundle\licationBundle\licationBundle\licationRepositoryInterface;
-use VankosoftVankosoftVankosoftVankosoftVankosoft\ApplicationBundle\licationBundle\licationBundle\licationBundle\licationBundle\Repository\SettingsRepositoryInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
+use Vankosoft\ApplicationBundle\Repository\ApplicationRepositoryInterface;
+use Vankosoft\ApplicationBundle\Repository\SettingsRepositoryInterface;
 
 /*
  * Good Tutorials:
