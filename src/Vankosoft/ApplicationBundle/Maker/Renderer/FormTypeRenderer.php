@@ -69,7 +69,7 @@ final class FormTypeRenderer
         
         $this->generator->generateClass(
             $formClassDetails->getFullName(),
-            $this->makerTemplatesPath . '/form/Type.tpl.php',
+            $this->makerTemplatesPath . '/resource/form/Type.tpl.php',
             [
                 'use_statements'        => $useStatements,
                 'bounded_class_name'    => $boundClassDetails ? $boundClassDetails->getShortName() : null,
