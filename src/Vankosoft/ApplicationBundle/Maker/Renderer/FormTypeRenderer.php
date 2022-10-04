@@ -20,9 +20,8 @@ final class FormTypeRenderer
         KernelInterface $kernel,
         Generator $generator
     ) {
-        //$this->makerTemplatesPath   = $kernel->locateResource( '@VSApplicationInstalatorBundle/Resources/application' );
+        $this->makerTemplatesPath   = $kernel->locateResource( '@VSApplicationBundle/Resources/maker' );
         $this->generator            = $generator;
-        $this->makerTemplatesPath   = $this->generator->getRootDirectory() . '/src/Maker/templates/resource';
     }
     
     public function render(
