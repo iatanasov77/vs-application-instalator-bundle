@@ -61,7 +61,7 @@
         </div>
     </div>
 
-	{{ include('<?= $templates_path ?>/_delete_form.html.twig') }}
+	{% include '<?= $templates_path ?>/_delete_form.html.twig' %}
 {% endblock %}
 
 {% block head_styles %}
