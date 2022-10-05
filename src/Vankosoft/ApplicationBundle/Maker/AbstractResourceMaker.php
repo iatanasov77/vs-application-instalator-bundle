@@ -231,7 +231,7 @@ abstract class AbstractResourceMaker extends AbstractMaker
                     
                     break;
                 case 'route_resource':
-                    $configString   .= \file_get_contents( $variables['target_file'] ) . PHP_EOL . PHP_EOL .
+                    $configString   = \file_get_contents( $variables['target_file'] ) . PHP_EOL . PHP_EOL .
                     $this->parseTemplate( $templatePath . $template . '.tpl.php' , $variables );
                     
                     break;
