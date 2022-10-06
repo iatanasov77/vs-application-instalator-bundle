@@ -6,7 +6,6 @@ use Doctrine\DBAL\Types\Type;
 use Symfony\Bundle\MakerBundle\ConsoleStyle;
 use Symfony\Bundle\MakerBundle\DependencyBuilder;
 use Symfony\Bundle\MakerBundle\Doctrine\DoctrineHelper;
-use Symfony\Bundle\MakerBundle\Doctrine\EntityClassGenerator;
 use Symfony\Bundle\MakerBundle\Doctrine\EntityRegenerator;
 use Symfony\Bundle\MakerBundle\Doctrine\EntityRelation;
 use Symfony\Bundle\MakerBundle\Doctrine\ORMDependencyBuilder;
@@ -27,6 +26,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\UX\Turbo\Attribute\Broadcast;
+
+use Vankosoft\ApplicationBundle\Maker\Doctrine\EntityClassGenerator;
 
 final class MakeResourceEntity extends AbstractMaker implements InputAwareMakerInterface
 {
@@ -91,7 +92,7 @@ final class MakeResourceEntity extends AbstractMaker implements InputAwareMakerI
             ->addOption('broadcast', 'b', InputOption::VALUE_NONE, 'Add the ability to broadcast entity updates using Symfony UX Turbo?')
             ->addOption('regenerate', null, InputOption::VALUE_NONE, 'Instead of adding new fields, simply generate the methods (e.g. getter/setter) for existing fields')
             ->addOption('overwrite', null, InputOption::VALUE_NONE, 'Overwrite any existing getter/setter methods')
-            ->setHelp(file_get_contents(__DIR__.'/../Resources/help/MakeEntity.txt'))
+            ->setHelp(file_get_contents(__DIR__.'/../Resources/maker-help/MakeEntity.txt'))
         ;
 
         $inputConfig->setArgumentAsNonInteractive('name');
@@ -174,7 +175,7 @@ final class MakeResourceEntity extends AbstractMaker implements InputAwareMakerI
                 $entityClassDetails,
                 $input->getOption('api-resource'),
                 false,
-                true,
+                false,
                 $broadcast
             );
 
