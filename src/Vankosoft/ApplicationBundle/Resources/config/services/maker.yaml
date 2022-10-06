@@ -46,4 +46,10 @@ services:
             - '@maker.php_compat_util'
         tags: ['maker.command']
 
+    vs_application.maker.make_theme:
+        class: Vankosoft\ApplicationBundle\Maker\MakeTheme
+        arguments:
+            - '@kernel'
+            - '@vs_application.slug_generator'
+        tags: ['maker.command']
 
