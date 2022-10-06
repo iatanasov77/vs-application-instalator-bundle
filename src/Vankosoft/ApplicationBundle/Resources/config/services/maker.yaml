@@ -3,6 +3,13 @@ services:
         autowire: true
         autoconfigure: true
        
+    vs_application.maker.doctrine.entity_class_generator:
+        class: Vankosoft\ApplicationBundle\Maker\Doctrine\EntityClassGenerator
+        arguments:
+            - '@kernel'
+            - '@maker.generator'
+            - '@maker.doctrine_helper'
+            
     vs_application.maker.renderer.form_type_renderer:
         class: Vankosoft\ApplicationBundle\Maker\Renderer\FormTypeRenderer
         arguments:
@@ -35,7 +42,7 @@ services:
             - '@maker.file_manager'
             - '@maker.doctrine_helper'
             - '@maker.generator'
-            - '@maker.entity_class_generator'
+            - '@vs_application.maker.doctrine.entity_class_generator'
             - '@maker.php_compat_util'
         tags: ['maker.command']
 

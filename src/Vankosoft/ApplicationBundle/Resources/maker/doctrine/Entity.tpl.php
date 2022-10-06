@@ -26,7 +26,7 @@ namespace <?= $namespace ?>;
 <?php if ($broadcast && $use_attributes): ?>
 #[Broadcast]
 <?php endif ?>
-class <?= $class_name."\n" ?>
+class <?= $class_name . " implements ResourceInterface\n" ?>
 {
     <?php if (!$doctrine_use_attributes): ?>/**
      * @ORM\Id
