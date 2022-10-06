@@ -1,3 +1,19 @@
+1.9.11	|	Release date: **06.10.2022**
+============================================
+* New Features:
+  - Update Application Configs.
+  - Create Console Maker for CRUD Resources.
+  - Create MakeTaxonomyResourceCrud Maker.
+  - Create MakeResourceEntity Maker.
+  - Create MakeTheme Maker.
+  - Add TocPages Sorting Script.
+  - Add Position Property Into TocPage Model.
+  - Add Icon For TocPage Edit Button.
+  - Add  TocPage Delete Button.
+  - Display Document TocPages Ordered By position Field.
+  - Show Available Translations Document TocPages Tree.
+
+
 1.9.10	|	Release date: **25.09.2022**
 ============================================
 * Bug-Fixes:
