@@ -28,7 +28,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\UX\Turbo\Attribute\Broadcast;
 
-final class MakeEntity extends AbstractMaker implements InputAwareMakerInterface
+final class MakeResourceEntity extends AbstractMaker implements InputAwareMakerInterface
 {
     private $fileManager;
     private $doctrineHelper;
@@ -39,10 +39,10 @@ final class MakeEntity extends AbstractMaker implements InputAwareMakerInterface
     public function __construct(
         FileManager $fileManager,
         DoctrineHelper $doctrineHelper,
-        string $projectDirectory = null,
         Generator $generator = null,
         EntityClassGenerator $entityClassGenerator = null,
-        PhpCompatUtil $phpCompatUtil = null
+        PhpCompatUtil $phpCompatUtil = null,
+        string $projectDirectory = null
     ) {
         $this->fileManager = $fileManager;
         $this->doctrineHelper = $doctrineHelper;
