@@ -5,6 +5,7 @@ use Symfony\Bundle\MakerBundle\Str;
 use Symfony\Bundle\MakerBundle\InputConfiguration;
 use Symfony\Bundle\MakerBundle\ConsoleStyle;
 use Symfony\Bundle\MakerBundle\Generator;
+use Symfony\Bundle\MakerBundle\DependencyBuilder;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -46,6 +47,15 @@ final class MakeTheme extends AbstractMaker
         ;
         
         $inputConfig->setArgumentAsNonInteractive('name');
+    }
+    
+    /**
+     * Configure any library dependencies that your maker requires.
+     * @param DependencyBuilder $dependencies
+     */
+    public function configureDependencies( DependencyBuilder $dependencies )
+    {
+        // TODO: Implement configureDependencies() method.
     }
     
     public function interact( InputInterface $input, ConsoleStyle $io, Command $command ): void
