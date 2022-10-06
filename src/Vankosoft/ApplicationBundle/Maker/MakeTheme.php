@@ -25,7 +25,7 @@ final class MakeTheme extends AbstractMaker
     public function __construct( KernelInterface $kernel, SlugGenerator $slugGenerator )
     {
         $this->makerTemplatesPath   = $kernel->locateResource( '@VSApplicationBundle/Resources/maker' );
-        $this->slugGenerator        = slugGenerator;
+        $this->slugGenerator        = $slugGenerator;
     }
     
     public static function getCommandName(): string
