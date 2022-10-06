@@ -43,11 +43,14 @@ final class EntityClassGenerator
         $tableName = $this->doctrineHelper->getPotentialTableName($entityClassDetails->getFullName());
 
         $useStatements = new UseStatementGenerator([
-            $repoClassDetails->getFullName(),
             [Mapping::class => 'ORM'],
             \Sylius\Component\Resource\Model\ResourceInterface::class,
         ]);
 
+        if ($generateRepositoryClass) {
+            $useStatements->addUseStatement($repoClassDetails->getFullName());
+        }
+        
         if ($broadcast) {
             $useStatements->addUseStatement(Broadcast::class);
         }

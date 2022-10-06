@@ -1,6 +1,4 @@
-<?= "<?php\n" ?>
-
-namespace <?= $namespace ?>;
+<?= "<?php" ?> namespace <?= $namespace ?>;<?= "\n" ?>
 
 <?= $use_statements; ?>
 
