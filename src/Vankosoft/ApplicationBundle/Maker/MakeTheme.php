@@ -88,7 +88,7 @@ final class MakeTheme extends AbstractMaker
         $filesystem->mirror( $cloneThemePath, $themePath );
         
         $themeJson  = \json_decode( \file_get_contents( $themePath . '/composer.json' ), true );
-        $themeJson['name']  = $this->slugGenerator->generate( $input->getArgument( 'name' ) );
+        $themeJson['name']  = 'vankosoft/' . $this->slugGenerator->generate( $input->getArgument( 'name' ) );
         $themeJson['extra']['sylius-theme']['title']    = $input->getArgument( 'name' );
         \file_put_contents( $themePath . '/composer.json', \json_encode( $themeJson, JSON_PRETTY_PRINT ) );
     }
