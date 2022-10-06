@@ -3,6 +3,8 @@
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Bundle\MakerBundle\InputConfiguration;
 use Symfony\Bundle\MakerBundle\ConsoleStyle;
 use Symfony\Bundle\MakerBundle\Generator;
@@ -41,10 +43,24 @@ final class MakeTaxonomyResourceCrud extends AbstractResourceMaker
         $command->setDescription( 'Creates Resource CRUD' )
             ->addArgument( 'name', InputArgument::REQUIRED, 'Class name of the entity from which to create the Resource ' )
             ->addOption( 'application', 'a', InputOption::VALUE_REQUIRED, 'For Which Application to Create Resources ', 'admin-panel' )
+            ->addOption( 'taxonomy-code-parameter', null, InputOption::VALUE_REQUIRED, 'Taxonomy Code Parameter For This Taxonomy Resource ' )
         ;
     }
     
-    protected function generateForm( ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails, EntityDetails $entityDoctrineDetails )
+    public function interact( InputInterface $input, ConsoleStyle $io, Command $command )
+    {
+        parent::interact( $input, $io, $command );
+        
+        if ( ! $input->getOption( 'taxonomy-code-parameter' ) ) {
+            $description    = $command->getDefinition()->getOption( 'taxonomy-code-parameter' )->getDescription();
+            $question       = new Question( $description, false );
+            $isApiResource  = $io->askQuestion( $question );
+            
+            $input->setOption( 'taxonomy-code-parameter', $isApiResource );
+        }
+    }
+    
+    protected function generateForm( InputInterface $input, ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails, EntityDetails $entityDoctrineDetails )
     {
         $io->success( "Now generating Form Type." );
         
@@ -54,20 +70,22 @@ final class MakeTaxonomyResourceCrud extends AbstractResourceMaker
             'Form'
         );
         
-        $this->formTypeRenderer->render(
-            $formClassDetails,
-            $entityDoctrineDetails->getFormFields(),
-            $entityClassDetails,
-            [],
-            [],
-            'vs_project.' . strtolower( $entityClassDetails->getShortName() )
-        );
-        $generator->writeChanges();
+        if ( $this->application->getCode() == 'admin-panel' ) {
+            $this->formTypeRenderer->render(
+                $formClassDetails,
+                $entityDoctrineDetails->getFormFields(),
+                $entityClassDetails,
+                [],
+                [],
+                'vs_project.' . strtolower( $entityClassDetails->getShortName() )
+            );
+            $generator->writeChanges();
+        }
         
         return $formClassDetails;
     }
     
-    protected function generateController( ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails )
+    protected function generateController( InputInterface $input, ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails )
     {
         $io->success( "Now generating Controller." );
         
@@ -80,14 +98,18 @@ final class MakeTaxonomyResourceCrud extends AbstractResourceMaker
         $useStatements = new UseStatementGenerator([
             \Vankosoft\ApplicationBundle\Controller\AbstractCrudController::class,
             \Symfony\Component\HttpFoundation\Request::class,
+            \Vankosoft\ApplicationBundle\Controller\TaxonomyHelperTrait::class,
         ]);
         
         $generator->generateController(
             $controllerClassDetails->getFullName(),
-            $this->makerTemplatesPath . '/resource/controller/Controller.tpl.php',
+            $this->makerTemplatesPath . '/taxonomy-resource/controller/Controller.tpl.php',
             [
                 'use_statements'    => $useStatements,
-                'form_name'         => strtolower( $entityClassDetails->getShortName() ) . '_form'
+                'form_name'         => strtolower( $entityClassDetails->getShortName() ) . '_form',
+                
+                'taxonomy_code_parameter'   => $input->getOption( 'taxonomy-code-parameter' ),
+                'entity_class'              => $entityClassDetails->getFullName(),
             ]
         );
         $generator->writeChanges();
@@ -95,12 +117,12 @@ final class MakeTaxonomyResourceCrud extends AbstractResourceMaker
         return $controllerClassDetails;
     }
     
-    protected function generateAssets( ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails )
+    protected function generateAssets( InputInterface $input, ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails )
     {
         
     }
     
-    protected function generateTemplates( ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails, EntityDetails $entityDoctrineDetails )
+    protected function generateTemplates( InputInterface $input, ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails, EntityDetails $entityDoctrineDetails )
     {
         $io->success( "Now generating Templates." );
         
@@ -117,6 +139,17 @@ final class MakeTaxonomyResourceCrud extends AbstractResourceMaker
                 'entity_identifier' => $entityDoctrineDetails->getIdentifier(),
             ],
             '_form' => [],
+            
+            '_simpleTreeTable' => [
+                'entity_fields' => $entityDoctrineDetails->getDisplayFields(),
+                'templates_path' => $this->templatesPath,
+            ],
+            '_simpleTreeTableRows' => [
+                'entity_fields' => $entityDoctrineDetails->getDisplayFields(),
+                'route_name' => $this->resourceRoute,
+                'templates_path' => $this->templatesPath,
+            ],
+            
             'index' => [
                 'entity_class_name' => $entityClassDetails->getShortName(),
                 'entity_twig_var_plural' => $entityTwigVarPlural,
@@ -146,7 +179,7 @@ final class MakeTaxonomyResourceCrud extends AbstractResourceMaker
             ],
         ];
         
-        $makerTemplatesPath = $this->makerTemplatesPath . '/resource/templates/' . ( $this->applicationHasTheme ? 'theme/' : 'default/' );
+        $makerTemplatesPath = $this->makerTemplatesPath . '/taxonomy-resource/templates/' . ( $this->applicationHasTheme ? 'theme/' : 'default/' );
         foreach ( $templates as $template => $variables ) {
             $generator->generateFile(
                 $this->templatesPath . '/'. $template . '.html.twig',
