@@ -16,16 +16,16 @@
             <table class="table">
                 <thead>
                     <tr>
-<?php foreach ($entity_fields as $field): ?>
-                		<th><?= ucfirst($field['fieldName']) ?></th>
+<?php foreach ( $entity_fields as $field ): ?>
+                		<th><?= ucfirst( $field['fieldName'] ) ?></th>
 <?php endforeach; ?>
-                        <th>actions</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
         {% for item in resources %}
                     <tr>
-<?php foreach ($entity_fields as $field): ?>
+<?php foreach ( $entity_fields as $field ): ?>
                         <td>{{ <?= $helper->getEntityFieldPrintCode( 'item', $field ) ?> }}</td>
 <?php endforeach; ?>
                         <td>

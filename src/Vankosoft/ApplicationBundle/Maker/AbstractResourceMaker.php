@@ -15,6 +15,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Yaml\Yaml;
@@ -84,6 +85,20 @@ abstract class AbstractResourceMaker extends AbstractMaker
         // TODO: Implement configureDependencies() method.
     }
     
+    public function interact( InputInterface $input, ConsoleStyle $io, Command $command )
+    {
+        $io->title( 'Create the CRUD Resource classes...' );
+        
+        $entity  = '';
+        if ( null === $input->getArgument( 'name' ) ) {
+            $argument   = $command->getDefinition()->getArgument( 'name' );
+            $question   = new Question( $argument->getDescription() );
+            $entity = $io->askQuestion( $question );
+            $input->setArgument( 'name', $entity );
+            
+        }
+    }
+    
     /**
      * Called after normal code generation: allows you to do anything.
      *
@@ -93,6 +108,9 @@ abstract class AbstractResourceMaker extends AbstractMaker
      */
     public function generate( InputInterface $input, ConsoleStyle $io, Generator $generator )
     {
+        $entity  = $input->getArgument( 'name' );
+        $io->info( "Resource CRUD classes will be made for entity: " . $entity );
+        
         $this->resourceName         = $input->getArgument( 'name' );
         $this->resourceId           = 'vsapp.' . strtolower( $this->inflector->pluralize( $this->resourceName ) );
         $this->resourceRoute        = 'vsapp_' . strtolower( $this->inflector->pluralize( $this->resourceName ) );
@@ -138,36 +156,20 @@ abstract class AbstractResourceMaker extends AbstractMaker
         /*
          * Generate Resources
          */
-        $formClassDetails       = $this->generateForm( $io, $generator, $entityClassDetails, $entityDoctrineDetails );
-        $controllerClassDetails = $this->generateController( $io, $generator, $entityClassDetails );
-        $this->generateAssets( $io, $generator, $entityClassDetails );
-        $this->generateTemplates( $io, $generator, $entityClassDetails, $entityDoctrineDetails );
-        $this->generateConfigs( $io, $generator, $entityClassDetails, $controllerClassDetails, $formClassDetails );
+        $formClassDetails       = $this->generateForm( $input, $io, $generator, $entityClassDetails, $entityDoctrineDetails );
+        $controllerClassDetails = $this->generateController( $input, $io, $generator, $entityClassDetails );
+        $this->generateAssets( $input, $io, $generator, $entityClassDetails );
+        $this->generateTemplates( $input, $io, $generator, $entityClassDetails, $entityDoctrineDetails );
+        $this->generateConfigs( $input, $io, $generator, $entityClassDetails, $controllerClassDetails, $formClassDetails );
     }
     
-    public function interact( InputInterface $input, ConsoleStyle $io, Command $command )
-    {
-        $io->title( 'Create the CRUD Resource classes...' );
-        
-        $entity  = '';
-        if ( null === $input->getArgument( 'name' ) ) {
-            $argument   = $command->getDefinition()->getArgument( 'name' );
-            $question   = new Question( $argument->getDescription() );
-            $entity = $io->askQuestion( $question );
-            $input->setArgument( 'name', $entity );
-            
-        }
-        
-        $entity  = $input->getArgument( 'name' );
-        $io->info( "Resource CRUD classes will be made for entity: " . $entity );
-    }
-    
-    abstract protected function generateForm( ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails, EntityDetails $entityDoctrineDetails );
-    abstract protected function generateController( ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails );
-    abstract protected function generateAssets( ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails );
-    abstract protected function generateTemplates( ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails, EntityDetails $entityDoctrineDetails );
+    abstract protected function generateForm( InputInterface $input, ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails, EntityDetails $entityDoctrineDetails );
+    abstract protected function generateController( InputInterface $input, ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails );
+    abstract protected function generateAssets( InputInterface $input, ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails );
+    abstract protected function generateTemplates( InputInterface $input, ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails, EntityDetails $entityDoctrineDetails );
     
     protected function generateConfigs(
+        InputInterface $input,
         ConsoleStyle $io,
         Generator $generator,
         ClassNameDetails $entityClassDetails,

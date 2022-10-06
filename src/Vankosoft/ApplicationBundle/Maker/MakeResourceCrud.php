@@ -3,6 +3,7 @@
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Bundle\MakerBundle\InputConfiguration;
 use Symfony\Bundle\MakerBundle\ConsoleStyle;
 use Symfony\Bundle\MakerBundle\Generator;
@@ -44,7 +45,7 @@ final class MakeResourceCrud extends AbstractResourceMaker
         ;
     }
     
-    protected function generateForm( ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails, EntityDetails $entityDoctrineDetails )
+    protected function generateForm( InputInterface $input, ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails, EntityDetails $entityDoctrineDetails )
     {
         $io->success( "Now generating Form Type." );
         
@@ -54,20 +55,22 @@ final class MakeResourceCrud extends AbstractResourceMaker
             'Form'
         );
         
-        $this->formTypeRenderer->render(
-            $formClassDetails,
-            $entityDoctrineDetails->getFormFields(),
-            $entityClassDetails,
-            [],
-            [],
-            'vs_project.' . strtolower( $entityClassDetails->getShortName() )
-        );
-        $generator->writeChanges();
+        if ( $this->application->getCode() == 'admin-panel' ) {
+            $this->formTypeRenderer->render(
+                $formClassDetails,
+                $entityDoctrineDetails->getFormFields(),
+                $entityClassDetails,
+                [],
+                [],
+                'vs_project.' . strtolower( $entityClassDetails->getShortName() )
+            );
+            $generator->writeChanges();
+        }
         
         return $formClassDetails;
     }
     
-    protected function generateController( ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails )
+    protected function generateController( InputInterface $input, ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails )
     {
         $io->success( "Now generating Controller." );
         
@@ -95,12 +98,12 @@ final class MakeResourceCrud extends AbstractResourceMaker
         return $controllerClassDetails;
     }
     
-    protected function generateAssets( ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails )
+    protected function generateAssets( InputInterface $input, ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails )
     {
         
     }
     
-    protected function generateTemplates( ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails, EntityDetails $entityDoctrineDetails )
+    protected function generateTemplates( InputInterface $input, ConsoleStyle $io, Generator $generator, ClassNameDetails $entityClassDetails, EntityDetails $entityDoctrineDetails )
     {
         $io->success( "Now generating Templates." );
         

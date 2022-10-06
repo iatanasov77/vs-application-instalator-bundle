@@ -27,11 +27,16 @@
 
 {% block head_styles %}	
 	{{ parent() }}
+	
+	{#
 	{{ encore_entry_link_tags( 'js/projects-categories' ) }}
+	#}
 {% endblock %}
 
 {% block body_scripts %}
     {{ parent() }}
     
+    {#
     {{ encore_entry_script_tags( 'js/projects-categories' ) }}
+    #}
 {% endblock %}

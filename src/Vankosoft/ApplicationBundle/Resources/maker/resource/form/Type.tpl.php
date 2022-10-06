@@ -12,7 +12,7 @@ class <?= $class_name ?> extends AbstractForm
     ) {
         parent::__construct( $dataClass );
         
-        $this->requestStack             = $requestStack;
+        $this->requestStack	= $requestStack;
     }
     
     public function buildForm(FormBuilderInterface $builder, array $options): void
