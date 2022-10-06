@@ -64,7 +64,7 @@ services:
             - '@maker.file_manager'
             - '@maker.doctrine_helper'
             - '@maker.generator'
-            - '@maker.entity_class_generator'
+            - '@vs_application.maker.doctrine.entity_class_generator'
             - '@maker.php_compat_util'
         tags: ['maker.command']
 
