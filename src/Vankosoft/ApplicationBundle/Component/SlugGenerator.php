@@ -56,4 +56,12 @@ final class SlugGenerator
         
         return $slug;
     }
+    
+    public function generateSlugByClassName( $className, $separator = '-', $uppercase = false ): string
+    {
+        // https://stackoverflow.com/questions/1089613/php-put-a-space-in-front-of-capitals-in-a-string-regex
+        $string = \preg_replace( '/(?<!\ )[A-Z]/', ' $0', $className );
+        
+        return $this->generate( $string, $separator, $uppercase );
+    }
 }
