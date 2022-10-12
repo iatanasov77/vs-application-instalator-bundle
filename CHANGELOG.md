@@ -1,3 +1,15 @@
+1.9.12	|	Release date: **13.10.2022**
+============================================
+* New Features:
+  - Add Slug Generation From Class Name.
+* Bug-Fixes and Improvements:
+  - Add Default Value Of Document TocPage.position
+  - Fix Application Resource Makers.
+  - Improve Application Resource Makers.
+  - Fix SlugGenerator
+  - Fix Resource Makers.
+
+
 1.9.11	|	Release date: **06.10.2022**
 ============================================
 * New Features:
