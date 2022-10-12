@@ -31,10 +31,10 @@ final class SlugGenerator
         switch ( $this->localeCode ) {
             case 'bg_BG':
             case 'ru_RU':
-                $slug   = SlugTransliterator\Cyrilic::transliterate( $string, '-' );
+                $slug   = SlugTransliterator\Cyrilic::transliterate( $string, $separator );
                 break;
             default:
-                $slug   = Sluggable\Urlizer::urlize( $string, '-' );
+                $slug   = Sluggable\Urlizer::urlize( $string, $separator );
         }
         
         if( empty( $slug ) ) // if $string is like '=))' or 'トライアングル・サービス' an empty slug will be returned, that causes troubles and throws no exception
