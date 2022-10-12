@@ -24,6 +24,7 @@ services:
             - '@vs_application.maker.renderer.form_type_renderer'
             - '@vs_application.repository.application'
             - '@vs_application.repository.settings'
+            - '@vs_application.slug_generator'
         tags: ['maker.command']
         
     vs_application.maker.make_taxonomy_resource:
@@ -34,6 +35,7 @@ services:
             - '@vs_application.maker.renderer.form_type_renderer'
             - '@vs_application.repository.application'
             - '@vs_application.repository.settings'
+            - '@vs_application.slug_generator'
         tags: ['maker.command']
         
     vs_application.maker.make_resource_entity:

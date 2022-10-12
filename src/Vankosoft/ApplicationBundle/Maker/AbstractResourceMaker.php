@@ -31,6 +31,7 @@ use Vankosoft\ApplicationBundle\Maker\Renderer\FormTypeRenderer;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use Vankosoft\ApplicationBundle\Repository\ApplicationRepositoryInterface;
 use Vankosoft\ApplicationBundle\Repository\SettingsRepositoryInterface;
+use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 
 /*
  * Good Tutorials:
@@ -58,13 +59,15 @@ abstract class AbstractResourceMaker extends AbstractMaker
     
     protected ApplicationRepositoryInterface $applicationRepository;
     protected SettingsRepositoryInterface $settingsRepository;
+    protected SlugGenerator $slugGenerator;
     
     public function __construct(
         KernelInterface $kernel,
         DoctrineHelper $doctrineHelper,
         FormTypeRenderer $formTypeRenderer,
         ApplicationRepositoryInterface $applicationRepository,
-        SettingsRepositoryInterface $settingsRepository
+        SettingsRepositoryInterface $settingsRepository,
+        SlugGenerator $slugGenerator
     ) {
         $this->makerTemplatesPath       = $kernel->locateResource( '@VSApplicationBundle/Resources/maker' );
         
@@ -74,6 +77,7 @@ abstract class AbstractResourceMaker extends AbstractMaker
         
         $this->applicationRepository    = $applicationRepository;
         $this->settingsRepository       = $settingsRepository;
+        $this->slugGenerator            = $slugGenerator;
     }
     
     /**
@@ -112,8 +116,8 @@ abstract class AbstractResourceMaker extends AbstractMaker
         $io->info( "Resource CRUD classes will be made for entity: " . $entity );
         
         $this->resourceName         = $input->getArgument( 'name' );
-        $this->resourceId           = 'vsapp.' . strtolower( $this->inflector->pluralize( $this->resourceName ) );
-        $this->resourceRoute        = 'vsapp_' . strtolower( $this->inflector->pluralize( $this->resourceName ) );
+        $this->resourceId           = 'vsapp.' . $this->slugGenerator->generateSlugByClassName( $this->inflector->pluralize( $this->resourceName ), '_' );
+        $this->resourceRoute        = 'vsapp_' . $this->slugGenerator->generateSlugByClassName( $this->inflector->pluralize( $this->resourceName ), '_' );
         
         $this->application  = $this->applicationRepository->findOneByCode( $input->getOption( 'application' ) );
         if ( ! $this->application ) {
@@ -192,7 +196,7 @@ abstract class AbstractResourceMaker extends AbstractMaker
                 'target_file'           => $this->applicationConfigPath . '/routes/sylius_resource.yaml',
                 'route_id'              => $this->resourceRoute,
                 'route_alias'           => $this->resourceId,
-                'route_path'            => '/' . strtolower( $this->inflector->pluralize( $this->resourceName ) ),
+                'route_path'            => '/' . $this->slugGenerator->generateSlugByClassName( $this->inflector->pluralize( $this->resourceName ) ),
                 'route_templates_path'  => explode( '/templates/', $this->templatesPath )[1],
             ],
             //             'service_controller'    => [
@@ -201,8 +205,8 @@ abstract class AbstractResourceMaker extends AbstractMaker
                 //             ],
             'service_form'          => [
                 'target_file'   => $this->applicationConfigPath . '/services/form.yaml',
-                'service_id'    => 'vsapp.form.' . strtolower( $this->inflector->pluralize( $this->resourceName ) ),
-                'resource_name' => strtolower( $this->inflector->pluralize( $this->resourceName ) ),
+                'service_id'    => 'vsapp.form.' . $this->slugGenerator->generateSlugByClassName( $this->inflector->pluralize( $this->resourceName ), '_' ),
+                'resource_name' => $this->slugGenerator->generateSlugByClassName( $this->inflector->pluralize( $this->resourceName ), '_' ),
                 'form_class'    => $formClassDetails->getFullName(),
             ],
         ];
