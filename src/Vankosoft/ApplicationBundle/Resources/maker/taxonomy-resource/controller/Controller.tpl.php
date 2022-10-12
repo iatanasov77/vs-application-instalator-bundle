@@ -20,7 +20,7 @@ class <?= $class_name ?> extends AbstractCrudController
     	return [
     	    'taxonomyId'    => $taxonomy->getId(),
             'translations'  => $translations,
-            'items'         => $this->getDoctrine()->getRepository( <?= $entity_class ?> )->findBy( ['parent' => null] ),
+            'items'         => $this->getDoctrine()->getRepository( \<?= $entity_class ?>::class )->findBy( ['parent' => null] ),
     	];
     }
     

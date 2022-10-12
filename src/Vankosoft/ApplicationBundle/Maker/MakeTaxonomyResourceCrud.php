@@ -132,6 +132,8 @@ final class MakeTaxonomyResourceCrud extends AbstractResourceMaker
         $entityTwigVarPlural    = Str::asTwigVariable( $entityVarPlural );
         $entityTwigVarSingular  = Str::asTwigVariable( $entityVarSingular );
         
+        $relativeTemplatesPath  = \str_replace( $generator->getRootDirectory() . "/templates/", "", $this->templatesPath );
+        
         $templates      = [
             '_delete_form' => [
                 'route_name' => $this->resourceRoute,
@@ -142,12 +144,12 @@ final class MakeTaxonomyResourceCrud extends AbstractResourceMaker
             
             '_simpleTreeTable' => [
                 'entity_fields' => $entityDoctrineDetails->getDisplayFields(),
-                'templates_path' => $this->templatesPath,
+                'templates_path' => $relativeTemplatesPath,
             ],
             '_simpleTreeTableRows' => [
                 'entity_fields' => $entityDoctrineDetails->getDisplayFields(),
                 'route_name' => $this->resourceRoute,
-                'templates_path' => $this->templatesPath,
+                'templates_path' => $relativeTemplatesPath,
             ],
             
             'index' => [
@@ -157,17 +159,17 @@ final class MakeTaxonomyResourceCrud extends AbstractResourceMaker
                 'entity_identifier' => $entityDoctrineDetails->getIdentifier(),
                 'entity_fields' => $entityDoctrineDetails->getDisplayFields(),
                 'route_name' => $this->resourceRoute,
-                'templates_path' => $this->templatesPath,
+                'templates_path' => $relativeTemplatesPath,
             ],
             'create' => [
-                'templates_path' => $this->templatesPath,
+                'templates_path' => $relativeTemplatesPath,
             ],
             'update' => [
                 'entity_class_name' => $entityClassDetails->getShortName(),
                 'entity_twig_var_singular' => $entityTwigVarSingular,
                 'entity_identifier' => $entityDoctrineDetails->getIdentifier(),
                 'route_name' => $this->resourceRoute,
-                'templates_path' => $this->templatesPath,
+                'templates_path' => $relativeTemplatesPath,
             ],
             'show' => [
                 'entity_class_name' => $entityClassDetails->getShortName(),
@@ -175,7 +177,7 @@ final class MakeTaxonomyResourceCrud extends AbstractResourceMaker
                 'entity_identifier' => $entityDoctrineDetails->getIdentifier(),
                 'entity_fields' => $entityDoctrineDetails->getDisplayFields(),
                 'route_name' => $this->resourceRoute,
-                'templates_path' => $this->templatesPath,
+                'templates_path' => $relativeTemplatesPath,
             ],
         ];
         
