@@ -205,8 +205,8 @@ abstract class AbstractResourceMaker extends AbstractMaker
                 //             ],
             'service_form'          => [
                 'target_file'   => $this->applicationConfigPath . '/services/form.yaml',
-                'service_id'    => 'vsapp.form.' . $this->resourceId,
-                'resource_name' => $this->resourceId,
+                'service_id'    => 'vsapp.form.' . $this->slugGenerator->generateSlugByClassName( $this->inflector->pluralize( $this->resourceName ), '_' ),
+                'resource_name' => $this->slugGenerator->generateSlugByClassName( $this->inflector->pluralize( $this->resourceName ), '_' ),
                 'form_class'    => $formClassDetails->getFullName(),
             ],
         ];
