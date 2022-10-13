@@ -1,3 +1,9 @@
+1.9.13	|	Release date: **13.10.2022**
+============================================
+* New Features:
+  - Improve AdminPanel Profile Menu.
+
+
 1.9.12	|	Release date: **13.10.2022**
 ============================================
 * New Features:
