@@ -5,7 +5,10 @@
         {% if parentItem.extra( 'divider' ) %}
             <hr class="mt-1 mb-1"/>
         {% else %}
-            <a class="dropdown-item" href="{{ parentItem.uri }}">
+            <a class="dropdown-item"
+                href="{{ parentItem.uri }}"
+                {% if parentItem.attributes.target %}target="{{ parentItem.attributes.target }}"{% endif %}
+            >
             	<i class="{{ parentItem.attributes.iconClass }}"></i>{{ parentItem.name }}
             </a>
         {% endif %}
