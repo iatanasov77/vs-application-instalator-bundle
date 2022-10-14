@@ -14,32 +14,16 @@
                         <i class="{{ parentItem.attributes.iconClass }}"></i>{{ parentItem.name }}
                     </a>
                     
-                    {# {% if parentItem.hasChildren %} #}
                     {% if parentItem.attributes.id is defined and parentItem.attributes.id == 'language' %}
                         <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
                             {% for oLocale in localesRepo.findAll() %}
                                 <li>
-                                    <a class="dropdown-item " href="">
+                                    <a class="dropdown-item " href="{{ path( 'app_set_locale', {'locale': oLocale.code} ) }}">
                                         <i class="flag flag-{{ ( oLocale.code | split( '_' ) )[1] | lower }}"></i>
                                         {{ oLocale.title }}
                                     </a>
                                </li>
                             {% endfor %}
-                            
-                            {#
-                            {% for childItem in parentItem.children %}
-                                {% if( childItem.displayed ) %}
-                                    <li>
-                                        <a class="dropdown-item {% if childItem.isCurrent %}main-menu-current-item{% endif %}"
-                                            href="{{ childItem.uri }}"
-                                        >
-                                            <i class="flag flag-{{ ( childItem.attributes.locale | split( '_' ) )[1] | lower }}"></i>
-                                            {{ childItem.name }}
-                                        </a>
-                                   </li>
-                                {% endif %}
-                            {% endfor %}
-                            #}
                         </ul>
                     {% endif %}
                 {% endif %}

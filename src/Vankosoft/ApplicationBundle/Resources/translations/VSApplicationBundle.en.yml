@@ -10,6 +10,7 @@ vs_application:
         logout: Logout
         my_profile: My Profile
         documentation: Documentation
+        language: Language
         
         available_locales: Available Locales
         settings: Settings
