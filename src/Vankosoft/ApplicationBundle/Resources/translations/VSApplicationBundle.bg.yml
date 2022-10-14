@@ -83,6 +83,7 @@ vs_application:
             password: Парола
             btn_close: Затвори
     template:
+        default: Основен
         button_view_all_notifications: 'Виж всички известия'
         dashboard_header_title: 'Табло на Приложението'
         dashboard_section_title: 'Табло'

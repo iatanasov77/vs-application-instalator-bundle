@@ -83,6 +83,7 @@ vs_application:
             password: Password
             btn_close: Close
     template:
+        default: Default
         button_view_all_notifications: 'View all notifications'
         dashboard_header_title: 'Application Dashboard'
         dashboard_section_title: 'Dashboard'
