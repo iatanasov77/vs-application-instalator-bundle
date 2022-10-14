@@ -1,3 +1,15 @@
+1.9.14	|	Release date: **14.10.2022**
+============================================
+* New Features and Improvements:
+  - Add Languages SubMenu at Profile Menu.
+  - Extend Locale Model with addititional fields.
+  - Update Installator Fixtures for Extended Locale Model.
+  - Create Locales Resource.
+  - Remove Delete Button From AdminPanel Application.
+  - Render Profile Menu Languages From Available in Entity Repository.
+  - Update Application Installator Configs.
+
+
 1.9.13	|	Release date: **13.10.2022**
 ============================================
 * New Features:

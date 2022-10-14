@@ -26,3 +26,10 @@ services:
         tags:
             - { name: form.type }
         arguments: ['%vs_application.model.taxon.class%']
+        
+    vs_application.resources.locale.form:
+        public: true
+        class: Vankosoft\ApplicationBundle\Form\LocaleForm
+        tags:
+            - { name: form.type }
+        arguments: ['%vs_application.model.locale.class%']

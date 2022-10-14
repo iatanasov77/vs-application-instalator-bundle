@@ -10,7 +10,9 @@ vs_application:
         logout: Изход
         my_profile: Моят Профил
         documentation: Документация
+        language: Език
         
+        available_locales: Налични Локали
         settings: Настройки
         preferences: Предпочитания
         taxonomy: Таксономия
@@ -50,6 +52,8 @@ vs_application:
         errors_title: 'Грешка!'
         enabled: 'Разрешен'
         locale: 'Език'
+        translatable_locale: 'Език за Превод'
+        locale_code: 'Локал Код'
         title: 'Име'
         name: 'Име'
         hostname: 'Име на Хост'
@@ -80,6 +84,7 @@ vs_application:
             password: Парола
             btn_close: Затвори
     template:
+        default: Основен
         button_view_all_notifications: 'Виж всички известия'
         dashboard_header_title: 'Табло на Приложението'
         dashboard_section_title: 'Табло'
@@ -91,17 +96,23 @@ vs_application:
         taxonomy_index_title: 'Списък на Речниците'
         taxonomy_update_title: 'Редакция на Таксономия'
         taxonomy_create_title: 'Създаване на Нова Таксономия'
+        taxonomy_title: 'Таксономия'
         taxonomy_update_list_taxons_title: 'Таксони на Таксономия'
         button_create_taxon: 'Добави Нов Таксон'
         items_index_row_slug: Слуг
         items_index_row_code: Код
-        items_index_row_title: Име
+        items_index_row_title: Заглавие
+        items_index_row_name: Име
+        items_index_row_translations: Преводи
         items_index_row_action: Действие
         items_index_row_in_maintenance: В Поддръжка
         items_index_row_theme: Тема
         items_index_row_action_settings: Настройки
         items_index_row_action_edit: Редактирай
         items_index_row_action_delete: Изтрий
+        locales_index_title: 'Списък Локали'
+        locales_update_title: 'Редакция на Локал'
+        locales_create_title: 'Създаване Нов Локал'
     modal:
         application_delete:
             title: 'Изтриване на Приложение'
