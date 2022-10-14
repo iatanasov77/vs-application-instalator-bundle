@@ -11,6 +11,7 @@ vs_application:
         my_profile: My Profile
         documentation: Documentation
         
+        available_locales: Available Locales
         settings: Settings
         preferences: Preferences
         taxonomy: Taxonomy

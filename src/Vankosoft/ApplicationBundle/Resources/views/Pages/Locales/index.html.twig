@@ -25,7 +25,7 @@
                     </tr>
                     {% for item in resources %}
                         <tr>
-                            <td>{{ item.locale }}</td>
+                            <td>{{ item.code }}</td>
                             <td>{{ item.title }}</td>
                             <td>
                                 {% for locale in translations[item.id] %}

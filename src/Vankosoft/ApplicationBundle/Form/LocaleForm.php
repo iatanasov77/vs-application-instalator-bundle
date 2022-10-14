@@ -23,7 +23,7 @@ class LocaleForm extends AbstractForm
                 'mapped'                => false,
             ])
         
-            ->add( 'locale', TextType::class, [
+            ->add( 'code', TextType::class, [
                 'label' => 'vs_application.form.locale_code',
                 'translation_domain' => 'VSApplicationBundle',
             ])

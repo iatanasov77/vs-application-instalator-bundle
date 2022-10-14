@@ -11,6 +11,7 @@ vs_application:
         my_profile: Моят Профил
         documentation: Документация
         
+        available_locales: Налични Локали
         settings: Настройки
         preferences: Предпочитания
         taxonomy: Таксономия
