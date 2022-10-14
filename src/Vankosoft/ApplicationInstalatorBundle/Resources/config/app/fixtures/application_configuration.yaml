@@ -15,8 +15,12 @@ sylius_fixtures:
                     name: locales
                     options:
                         custom:
-                            - code: 'en_US'
-                            - code: 'bg_BG'
+                            - title: 'English (US)'
+                              code: 'en_US'
+                              translatableLocale:  '%locale%'
+                            - title: 'Bulgarian'
+                              code: 'bg_BG'
+                              translatableLocale:  '%locale%'
                 
                 general_settings:
                     name: general_settings
