@@ -4,10 +4,10 @@
 {% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
 {% from "@VSApplication/Macros/pagination.html.twig" import pagination %}
 
-{% block title %}{{ parent() }} :: {{ 'vs_application.template.taxonomy_index_title' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
+{% block title %}{{ parent() }} :: {{ 'vs_application.template.locales_index_title' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
 
 {% block pageTitle %}
-    <h2 class="pageheader-title"><i class="icon_genius"></i> {{ 'vs_application.template.taxonomy_index_title' | trans( {},'VSApplicationBundle' ) }}</h2>
+    <h2 class="pageheader-title"><i class="icon_genius"></i> {{ 'vs_application.template.locales_index_title' | trans( {},'VSApplicationBundle' ) }}</h2>
     <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
 {% endblock %}
 
@@ -18,24 +18,33 @@
             {% if resources|length > 0 %}
                 <table class="table table-striped table-advance table-hover">
                     <tr>
-                        <th>{{ 'vs_application.template.items_index_row_name' | trans( {},'VSApplicationBundle' ) }}</th>
+                        <th>{{ 'vs_application.form.locale_code' | trans( {},'VSApplicationBundle' ) }}</th>
+                        <th>{{ 'vs_application.template.items_index_row_title' | trans( {},'VSApplicationBundle' ) }}</th>
+                        <th>{{ 'vs_application.template.items_index_row_translations' | trans( {},'VSApplicationBundle' ) }}</th>
                         <th width="150">{{ 'vs_application.template.items_index_row_action' | trans( {},'VSApplicationBundle' ) }}</th>
                     </tr>
                     {% for item in resources %}
                         <tr>
-                            <td><a href="{{ path('vs_application_taxonomy_update', {'id': item.id}) }}">{{ item.name }}</a></td>
+                            <td>{{ item.locale }}</td>
+                            <td>{{ item.title }}</td>
+                            <td>
+                                {% for locale in translations[item.id] %}
+                                    <i class="flag flag-{{ locale | split( '_' )[1] | lower }}"></i>
+                                    {% if not loop.last %}&nbsp;{% endif %}
+                                {% endfor %}
+                            </td>
 
                             <td>
                                 <div class="btn-group">
                                     <div class="btn-group">
                                         <a class="btn btn-primary"
-                                            href="{{ path('vs_application_taxonomy_update', {'id': item.id}) }}"
+                                            href="{{ path('vs_application_locale_update', {'id': item.id}) }}"
                                             title="{{ 'vs_application.template.items_index_row_action_edit' | trans( {},'VSApplicationBundle' ) }}"
                                         >
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a class="btn btn-danger btnDelete"
-                                        	href="{{ path('vs_application_taxonomy_delete', {'id': item.id}) }}" 
+                                        	href="{{ path('vs_application_locale_delete', {'id': item.id}) }}" 
                                         	data-csrfToken="{{ csrf_token( item.id ) }}" 
                                         	title="{{ 'vs_application.template.items_index_row_action_delete' | trans( {},'VSApplicationBundle' ) }}"
                                         >

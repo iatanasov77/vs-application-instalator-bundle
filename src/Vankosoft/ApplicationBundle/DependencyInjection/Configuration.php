@@ -9,9 +9,11 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Locale\Model\LocaleInterface;
 
 use Vankosoft\ApplicationBundle\Model\Locale;
+use Vankosoft\ApplicationBundle\Model\Interfaces\LocaleInterface;
+use Vankosoft\ApplicationBundle\Controller\LocalesController;
+use Vankosoft\ApplicationBundle\Form\LocaleForm;
 
 use Vankosoft\ApplicationBundle\Repository\ApplicationRepository;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
@@ -242,10 +244,10 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( Locale::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'interface' )->defaultValue( LocaleInterface::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'controller' )->defaultValue( ResourceController::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'controller' )->defaultValue( LocalesController::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
-                                        //->scalarNode( 'form' )->defaultValue( LocaleType::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'form' )->defaultValue( LocaleForm::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()
