@@ -13,6 +13,7 @@ vs_application:
         language: Език
         
         available_locales: Налични Локали
+        create_locale: Добави Локал
         settings: Настройки
         preferences: Предпочитания
         taxonomy: Таксономия

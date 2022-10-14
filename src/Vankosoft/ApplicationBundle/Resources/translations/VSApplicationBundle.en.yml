@@ -13,6 +13,7 @@ vs_application:
         language: Language
         
         available_locales: Available Locales
+        create_locale: Add Locale
         settings: Settings
         preferences: Preferences
         taxonomy: Taxonomy

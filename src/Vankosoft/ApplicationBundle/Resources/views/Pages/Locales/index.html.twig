@@ -13,6 +13,23 @@
 
 {% block content %}
     <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div>
+                <div style="float: left;"></div>
+                <div style="float: right; margin-right: 30px; margin-bottom: 20px;">
+                    <a class="btn btn-info btn-circle btn-sm"
+                        href="{{ path( 'vs_application_locale_create' ) }}"
+                        title="{{ 'vs_application.menu.create_locale' | trans( {},'VSApplicationBundle' ) }}"
+                    >
+                        {{ 'vs_application.menu.create_locale' | trans( {},'VSApplicationBundle' ) }}
+                    </a>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
             
             {% if resources|length > 0 %}
