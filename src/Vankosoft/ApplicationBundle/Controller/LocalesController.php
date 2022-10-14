@@ -9,6 +9,7 @@ class LocalesController extends AbstractCrudController
     {
         return [
             'translations'  => $this->classInfo['action'] == 'indexAction' ? $this->getTranslations() : [],
+            'defaultLocale' => $this->getParameter( 'locale' ),
         ];
     }
     
