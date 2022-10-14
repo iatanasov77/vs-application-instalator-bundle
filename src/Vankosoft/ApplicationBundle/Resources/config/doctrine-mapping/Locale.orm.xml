@@ -11,6 +11,10 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="title" column="title" type="string" length="64" nullable="true">
+            <gedmo:translatable />
+        </field>
+        
         <field name="code" column="code" type="string" length="12" unique="true"/>
 
         <field name="createdAt" column="created_at" type="datetime">
@@ -19,6 +23,13 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
+        
+        <!--
+            Used locale to override Translation listener`s locale
+           this is not a mapped field of entity metadata, just a simple property
+           and it is not necessary because globally locale can be set in listener
+        -->
+        <gedmo:translation entity="Vankosoft\ApplicationBundle\Model\Interfaces\TranslationInterface" locale="translatableLocale"/>
     </mapped-superclass>
 
 </doctrine-mapping>
