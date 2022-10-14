@@ -36,6 +36,8 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
         if ( ! $localeEntity ) {
             $localeEntity = $this->localesFactory->createNew();
             
+            $localeEntity->setTranslatableLocale( $options['translatableLocale'] );
+            $localeEntity->setTitle( $options['title'] );
             $localeEntity->setCode( $options['code'] );
         }
         
@@ -44,7 +46,13 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
     
     protected function configureOptions( OptionsResolver $resolver ): void
     {
-        $resolver            
+        $resolver
+            ->setDefault( 'translatableLocale', 'en_US' )
+            ->setAllowedTypes( 'translatableLocale', ['string'] )
+            
+            ->setDefault( 'title', null )
+            ->setAllowedTypes( 'title', ['string'] )
+            
             ->setDefault( 'code', null )
             ->setAllowedTypes( 'code', ['string'] )
         ;
