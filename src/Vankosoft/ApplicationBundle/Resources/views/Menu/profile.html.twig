@@ -1,16 +1,38 @@
 {% extends 'knp_menu.html.twig' %}
 
 {% block root %}
-    {% for parentItem in item.children %}
-        {% if parentItem.extra( 'divider' ) %}
-            <hr class="mt-1 mb-1"/>
-        {% else %}
-            <a class="dropdown-item"
-                href="{{ parentItem.uri }}"
-                {% if parentItem.attributes.target %}target="{{ parentItem.attributes.target }}"{% endif %}
-            >
-            	<i class="{{ parentItem.attributes.iconClass }}"></i>{{ parentItem.name }}
-            </a>
-        {% endif %}
-    {% endfor %}
+    <ul class="navbar-nav flex-column">
+        {% for id, parentItem in item.children %}
+            <li class="nav-item profile-submenu">
+                {% if parentItem.extra( 'divider' ) %}
+                    <hr class="mt-1 mb-1"/>
+                {% else %}
+                    <a class="dropdown-item" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        href="{{ parentItem.uri }}"
+                        {% if parentItem.attributes.target %}target="{{ parentItem.attributes.target }}"{% endif %}
+                    >
+                        <i class="{{ parentItem.attributes.iconClass }}"></i>{{ parentItem.name }}
+                    </a>
+                    
+                    {# {% if parentItem.hasChildren %} #}
+                    {% if parentItem.attributes.id is defined and parentItem.attributes.id == 'language' %}
+                        <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
+                            {% for childItem in parentItem.children %}
+                                {% if( childItem.displayed ) %}
+                                    <li>
+                                        <a class="dropdown-item {% if childItem.isCurrent %}main-menu-current-item{% endif %}"
+                                            href="{{ childItem.uri }}"
+                                        >
+                                            <i class="flag flag-{{ ( childItem.attributes.locale | split( '_' ) )[1] | lower }}"></i>
+                                            {{ childItem.name }}
+                                        </a>
+                                   </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
