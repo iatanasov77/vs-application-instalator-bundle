@@ -25,3 +25,11 @@ vs_application_settings_handle:
     path: /settings-edit/handle-{applicationId}
     controller: Vankosoft\ApplicationBundle\Controller\SettingsExtController::handle
 
+
+vs_application_locales:
+    resource: |
+        alias: vs_application.locale
+        except: ['show']
+        path: /locales
+        templates: "@VSApplication/Pages/Locales"
+    type: sylius.resource

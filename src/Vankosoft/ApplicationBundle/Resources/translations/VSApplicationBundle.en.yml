@@ -50,6 +50,8 @@ vs_application:
         errors_title: 'Error!'
         enabled: 'Enabled'
         locale: 'Locale'
+        translatable_locale: 'Translatable Locale'
+        locale_code: 'Locale Code'
         title: 'Title'
         name: 'Name'
         hostname: 'Hostname'
@@ -91,17 +93,23 @@ vs_application:
         taxonomy_index_title: 'List Vocabularies'
         taxonomy_update_title: 'Edit Taxonomy'
         taxonomy_create_title: 'Create New Taxonomy'
+        taxonomy_title: 'Taxonomy'
         taxonomy_update_list_taxons_title: 'Taxonomy Taxons'
         button_create_taxon: 'Create New Taxon'
         items_index_row_slug: Slug
         items_index_row_code: Code
         items_index_row_title: Title
+        items_index_row_name: Name
+        items_index_row_translations: Translations
         items_index_row_action: Action
         items_index_row_in_maintenance: In Maintenance
         items_index_row_theme: Theme
         items_index_row_action_settings: Settings
         items_index_row_action_edit: Edit
         items_index_row_action_delete: Delete
+        locales_index_title: 'List Available Locales'
+        locales_update_title: 'Edit Locale'
+        locales_create_title: 'Create New Locale'
         
     modal:
         application_delete:
