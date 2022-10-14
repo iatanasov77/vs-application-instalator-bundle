@@ -17,7 +17,7 @@
                     {# {% if parentItem.hasChildren %} #}
                     {% if parentItem.attributes.id is defined and parentItem.attributes.id == 'language' %}
                         <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
-                            {% for oLocale in localesRepo.findAll()) %}
+                            {% for oLocale in localesRepo.findAll() %}
                                 <li>
                                     <a class="dropdown-item " href="">
                                         <i class="flag flag-{{ ( oLocale.code | split( '_' ) )[1] | lower }}"></i>
