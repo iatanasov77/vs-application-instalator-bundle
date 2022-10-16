@@ -13,6 +13,7 @@ vs_application:
         language: Език
         
         available_locales: Налични Локали
+        create_locale: Добави Локал
         settings: Настройки
         preferences: Предпочитания
         taxonomy: Таксономия
@@ -59,6 +60,10 @@ vs_application:
         hostname: 'Име на Хост'
         description: 'Описание'
         parent: 'Родител'
+        parent_category: 'Родителска Категория'
+        parent_category_placeholder: '-- Избери Родителска Категория --'
+        category: 'Категория'
+        category_placeholder: '-- Избери Категория --'
         maintenance_mode: 'В режим на поддръжка'
         maintenance_page: 'Страница в режим поддръжка'
         maintenance_page_placeholder: '-- Избери Страница --'
@@ -68,6 +73,11 @@ vs_application:
         save: 'Запази'
         cancel: 'Отказ'
         close: 'Затвори'
+        
+        picture: Картинка
+        picture_placeholder: Избери Картинка
+        picture_invalid: 'Невалиден Формат на Картинка !!!'
+        
         login:
             remember_me: 'Запомни ме'
             button_login: 'Влез'
@@ -99,6 +109,7 @@ vs_application:
         taxonomy_title: 'Таксономия'
         taxonomy_update_list_taxons_title: 'Таксони на Таксономия'
         button_create_taxon: 'Добави Нов Таксон'
+        items_index_row_number: Номер
         items_index_row_slug: Слуг
         items_index_row_code: Код
         items_index_row_title: Заглавие
@@ -113,6 +124,12 @@ vs_application:
         locales_index_title: 'Списък Локали'
         locales_update_title: 'Редакция на Локал'
         locales_create_title: 'Създаване Нов Локал'
+        index_title: 'Списък'
+        update_title: 'Редакция на'
+        create_title: 'Създаване Нов'
+        item_name_single: 'Обект'
+        item_name_plurel: 'Обекти'
+        
     modal:
         application_delete:
             title: 'Изтриване на Приложение'

@@ -13,6 +13,7 @@ vs_application:
         language: Language
         
         available_locales: Available Locales
+        create_locale: Add Locale
         settings: Settings
         preferences: Preferences
         taxonomy: Taxonomy
@@ -59,6 +60,10 @@ vs_application:
         hostname: 'Hostname'
         description: 'Description'
         parent: 'Parent'
+        parent_category: 'Parent Category'
+        parent_category_placeholder: '-- Choose a Parent Category --'
+        category: 'Category'
+        category_placeholder: '-- Choose a Category --'
         maintenance_mode: 'Maintenance Mode'
         maintenance_page: 'Page in Maintenance Mode'
         maintenance_page_placeholder: '-- Choose a Page --'
@@ -68,6 +73,11 @@ vs_application:
         save: 'Save'
         cancel: 'Cancel'
         close: 'Close'
+        
+        picture: Picture
+        picture_placeholder: Choose a Picture
+        picture_invalid: 'Invalid Picture Format !!!'
+        
         login:
             remember_me: 'Remember Me'
             button_login: 'Login'
@@ -99,6 +109,7 @@ vs_application:
         taxonomy_title: 'Taxonomy'
         taxonomy_update_list_taxons_title: 'Taxonomy Taxons'
         button_create_taxon: 'Create New Taxon'
+        items_index_row_number: Number
         items_index_row_slug: Slug
         items_index_row_code: Code
         items_index_row_title: Title
@@ -113,6 +124,11 @@ vs_application:
         locales_index_title: 'List Available Locales'
         locales_update_title: 'Edit Locale'
         locales_create_title: 'Create New Locale'
+        index_title: 'List'
+        update_title: 'Edit'
+        create_title: 'Create New'
+        item_name_single: 'Item'
+        item_name_plurel: 'Items'
         
     modal:
         application_delete:
