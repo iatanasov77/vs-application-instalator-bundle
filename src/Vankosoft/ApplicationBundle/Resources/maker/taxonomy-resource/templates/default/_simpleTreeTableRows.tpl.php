@@ -1,7 +1,10 @@
 <tr data-node-id="{{ item.id }}" {% if parentId %}data-node-pid="{{ item.parent.id }}"{% endif %}>
+	<td>{{ loop.index }}</td>
+	
 <?php foreach ( $entity_fields as $field ): ?>
     <td>{{ <?= $helper->getEntityFieldPrintCode( 'item', $field ) ?> }}</td>
 <?php endforeach; ?>
+
     <td>
         {% for locale in translations[item.id] %}
             <i class="flag flag-{{ locale | split( '_' )[1] | lower }}"></i>
