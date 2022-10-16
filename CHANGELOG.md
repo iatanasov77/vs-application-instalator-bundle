@@ -1,3 +1,12 @@
+1.9.15	|	Release date: **16.10.2022**
+============================================
+* New Features and Improvements:
+  - Add Create Locale Button at Locales Index Page.
+  - Add Some Base Translations.
+  - Improve Resource Maker Templates.
+  - Improve FilemanagerUploader and Prapare for Extending.
+
+
 1.9.14	|	Release date: **14.10.2022**
 ============================================
 * New Features and Improvements:
