@@ -17,6 +17,4 @@
     <a href="{{ path('<?= $route_name ?>_index') }}">back to list</a>
 
     <a href="{{ path('<?= $route_name ?>_edit', {'<?= $entity_identifier ?>': <?= $entity_twig_var_singular ?>.<?= $entity_identifier ?>}) }}">edit</a>
-
-    {{ include('<?= $templates_path ?>/_delete_form.html.twig') }}
 {% endblock %}
