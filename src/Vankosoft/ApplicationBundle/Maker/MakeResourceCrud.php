@@ -116,11 +116,6 @@ final class MakeResourceCrud extends AbstractResourceMaker
         $relativeTemplatesPath  = \str_replace( $generator->getRootDirectory() . "/templates/", "", $this->templatesPath );
         
         $templates      = [
-            '_delete_form' => [
-                'route_name' => $this->resourceRoute,
-                'entity_twig_var_singular' => $entityTwigVarSingular,
-                'entity_identifier' => $entityDoctrineDetails->getIdentifier(),
-            ],
             '_form' => [],
             'index' => [
                 'entity_class_name' => $entityClassDetails->getShortName(),
