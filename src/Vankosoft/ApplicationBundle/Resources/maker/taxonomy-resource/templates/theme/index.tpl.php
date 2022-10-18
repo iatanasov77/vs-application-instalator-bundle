@@ -10,7 +10,13 @@
                 {{ alerts.info('sylius.ui.there_are_no_mappers_to_display'|trans) }}
             {% endif %}
         
-            {{ pagination(items) }}
+            {% if resources.haveToPaginate() %}
+                {{ pagerfanta( resources, null, { 'proximity': 10 } ) }}
+                
+                {# This Macros Not Needed 
+                {{ pagination(resources) }}
+                #}
+            {% endif %}
         </div>
     </div>
     
