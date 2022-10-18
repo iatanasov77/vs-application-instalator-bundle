@@ -41,6 +41,7 @@ final class MakeResourceCrud extends AbstractResourceMaker
     {
         $command->setDescription( 'Creates Resource CRUD' )
             ->addArgument( 'name', InputArgument::REQUIRED, 'Class name of the entity from which to create the Resource ' )
+            ->addOption( 'exceptRoute', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which Routes to except in Route Configuration', ['show'] )
             ->addOption( 'application', 'a', InputOption::VALUE_REQUIRED, 'For Which Application to Create Resources ', 'admin-panel' )
         ;
     }
