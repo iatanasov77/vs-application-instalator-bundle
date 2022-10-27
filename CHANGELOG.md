@@ -1,3 +1,15 @@
+1.9.16	|	Release date: **27.10.2022**
+============================================
+* New Features and Improvements:
+  - Update Cms Translations.
+  - Replace delete form in Resource Makers with ApplicationBundle DeleteForm.
+  - Resource Makers Add Input Option for Route Except.
+  - Improve Resource Maker Templates.
+  - Fix Deprecation in MaintenanceListener .
+  - Add a Test API Controller.
+  - Add Controller and Service to Get API Logged User.
+
+
 1.9.15	|	Release date: **16.10.2022**
 ============================================
 * New Features and Improvements:
