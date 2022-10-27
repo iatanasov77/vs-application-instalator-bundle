@@ -13,7 +13,7 @@ class ApiTestController extends AbstractController
     protected $applicationRepository;
     
     public function __construct(
-        EntityRepository $applicationRepository,
+        EntityRepository $applicationRepository
     ) {
         $this->applicationRepository    = $applicationRepository;
     }
