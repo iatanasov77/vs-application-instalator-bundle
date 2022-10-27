@@ -1,3 +1,11 @@
+1.9.17	|	Release date: **27.10.2022**
+============================================
+* New Features and Improvements:
+  - Clear unneded comments from LoginFormAuthenticator
+  - Add API JWT Authentication Sucess Listener.
+  - Update Application Installator Configs.
+
+
 1.9.16	|	Release date: **27.10.2022**
 ============================================
 * New Features and Improvements:
