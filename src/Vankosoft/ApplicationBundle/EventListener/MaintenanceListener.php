@@ -10,6 +10,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 use Vankosoft\ApplicationBundle\Twig\Alerts;
 
@@ -34,7 +35,7 @@ class MaintenanceListener
     public function __construct(
         ContainerInterface $container,
         Environment $twig,
-        FlashBagInterface $flash,
+        Session $session,
         TokenStorageInterface $tokenStorage,
         int $applicationId = null,
         ?string $applicationLayout
@@ -43,7 +44,7 @@ class MaintenanceListener
         $this->applicationLayout    = $applicationLayout;
         $this->container            = $container;
         $this->twig                 = $twig;
-        $this->flash                = $flash;
+        $this->flash                = $session->getFlashBag();
         
         $token                      = $tokenStorage->getToken();
         if ( $token ) {
