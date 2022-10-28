@@ -28,7 +28,7 @@
         "twig\/string-extra": "^3.3",
         "sensio\/framework-extra-bundle": "^6.1",
         "symfonycasts\/verify-email-bundle": "^1.12",
-        "symfonycasts\/reset-password-bundle": "^1.14",
+        "symfonycasts\/reset-password-bundle": "1.14.*",
         "lexik\/jwt-authentication-bundle": "^2.16",
         "doctrine\/doctrine-migrations-bundle": "^3.2",
         "stof\/doctrine-extensions-bundle": "^1.7",
