@@ -45,7 +45,7 @@
         "sylius\/taxonomy": "^1.11",
         "sylius\/locale": "^1.11",
         "sylius\/theme-bundle": "^2.2",
-        "sylius-labs\/doctrine-migrations-extra-bundle": "^0.1.4",
+        "sylius-labs\/doctrine-migrations-extra-bundle": "^0.2",
         "sylius\/fixtures-bundle": "^1.7",
         "friendsofsymfony\/jsrouting-bundle": "^2.8",
         "willdurand\/js-translation-bundle": "^5.0",
