@@ -63,7 +63,7 @@ class MenuBuilder implements ContainerAwareInterface
         
         $this->translator       = $translator;
         
-        $this->currentPath      = $requestStack->getMasterRequest()->getRequestUri();
+        $this->currentPath      = $requestStack->getMainRequest()->getRequestUri();
     }
     
     public function mainMenu( FactoryInterface $factory, string $menuName = 'mainMenu' )
