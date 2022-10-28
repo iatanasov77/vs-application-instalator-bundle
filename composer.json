@@ -51,7 +51,6 @@
         "willdurand\/js-translation-bundle": "^5.0",
         "hackzilla\/password-generator-bundle": "dev-master"
     },
-    "minimum-stability": "dev",
     
     "replace": {
         "vankosoft\/application-bundle": "self.version",
