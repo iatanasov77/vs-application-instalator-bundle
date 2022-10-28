@@ -49,7 +49,7 @@
         "sylius\/fixtures-bundle": "^1.8",
         "friendsofsymfony\/jsrouting-bundle": "^3.2",
         "willdurand\/js-translation-bundle": "^5.0",
-        "hackzilla\/password-generator-bundle": "^4.1"
+        "hackzilla\/password-generator-bundle": "dev-master/5.x-dev"
     },
     "replace": {
         "vankosoft\/application-bundle": "self.version",
