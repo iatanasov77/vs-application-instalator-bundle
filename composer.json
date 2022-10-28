@@ -46,8 +46,8 @@
         "sylius\/locale": "^1.11",
         "sylius\/theme-bundle": "^2.2",
         "sylius-labs\/doctrine-migrations-extra-bundle": "^0.2",
-        "sylius\/fixtures-bundle": "^1.7",
-        "friendsofsymfony\/jsrouting-bundle": "^2.8",
+        "sylius\/fixtures-bundle": "^1.8",
+        "friendsofsymfony\/jsrouting-bundle": "^3.2",
         "willdurand\/js-translation-bundle": "^5.0",
         "hackzilla\/password-generator-bundle": "^4.1"
     },
