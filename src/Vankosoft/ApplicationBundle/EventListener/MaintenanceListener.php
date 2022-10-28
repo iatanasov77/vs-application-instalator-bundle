@@ -47,7 +47,14 @@ class MaintenanceListener
         $this->container            = $container;
         $this->twig                 = $twig;
         
-        $this->flash                = $requestStack->getSession()->getFlashBag();
+        if ( $requestStack->getMainRequest()->hasSession() ) {
+            $this->flash                = $requestStack->getMainRequest()->getSession()->getFlashBag();
+        } else {
+            $session    = new Session();
+            $session->start();
+            
+            $requestStack->getMainRequest()->setSession( $session );
+        }
         
         $token                      = $tokenStorage->getToken();
         if ( $token ) {
