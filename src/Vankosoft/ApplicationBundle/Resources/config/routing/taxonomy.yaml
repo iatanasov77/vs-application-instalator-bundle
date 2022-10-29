@@ -1,3 +1,10 @@
+vs_application_taxonomy:
+    resource: |
+        alias: vs_application.taxonomy
+        path: /taxonomy
+        templates: "@VSApplication/Pages/Taxonomy"
+    type: sylius.resource
+
 vs_application_taxonomy_index_paginated:
     path: /taxonomy/
     methods: [GET]
@@ -12,13 +19,6 @@ vs_application_taxonomy_index_paginated:
             template: "@VSApplication/Pages/Taxonomy/index.html.twig"
     options:
         expose: true
-
-vs_application_taxonomy:
-    resource: |
-        alias: vs_application.taxonomy
-        path: /taxonomy
-        templates: "@VSApplication/Pages/Taxonomy"
-    type: sylius.resource
 
 vs_application_taxon:
     path: /taxonomy/taxons
