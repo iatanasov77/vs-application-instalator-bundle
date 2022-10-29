@@ -22,7 +22,7 @@ class AbstractCrudController extends ResourceController
     /** @var Pagerfanta $resources */
     protected $resources;
     
-    public function indexAction( Request $request ) : Response
+    public function indexAction( Request $request ): Response
     {
         $this->currentRequest = $request;
         
@@ -61,17 +61,17 @@ class AbstractCrudController extends ResourceController
         return $this->createRestView( $configuration, $this->resources );
     }
     
-    public function createAction( Request $request ) : Response
+    public function createAction( Request $request ): Response
     {
         return $this->editAction( 0, $request );
     }
     
-    public function updateAction( Request $request ) : Response
+    public function updateAction( Request $request ): Response
     {
         return $this->editAction( $request->attributes->get( 'id' ), $request );
     }
     
-    public function editAction( $id, Request $request )
+    public function editAction( $id, Request $request ): Response
     {
         $this->classInfo( $request );   // call this for every controller action
         $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );
