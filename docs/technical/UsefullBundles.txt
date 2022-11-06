@@ -12,6 +12,7 @@ API Platform
 https://github.com/Sylius/SyliusAdminApiBundle
 https://github.com/Sylius/SyliusApiBundle
 https://github.com/api-platform/core
+https://api-platform.com/docs/core/operations/
 
 https://symfonycasts.com/screencast/rest
 https://symfonycasts.com/screencast/rest/intro
