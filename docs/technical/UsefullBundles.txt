@@ -3,8 +3,13 @@ A Symfony bundle containing console commands useful for including web assets fro
 https://github.com/wasinger/bundle-asset-provider-bundle
 
 
+API Platform
+==========================
+https://github.com/Sylius/SyliusAdminApiBundle
+https://github.com/Sylius/SyliusApiBundle
+https://github.com/api-platform/core
 
-
-
+https://symfonycasts.com/screencast/rest/project-routing
+https://github.com/knpuniversity/rest.git
 
 
