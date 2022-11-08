@@ -1,3 +1,11 @@
+1.9.18	|	Release date: **08.11.2022**
+============================================
+* New Features:
+  - Add CORS Usefull Bundles in the Documentation.
+  - Add API Platform Usefull Bundles in the Documentation.
+  - Move All API Functionality in Separate Bundle.
+
+
 1.9.17	|	Release date: **27.10.2022**
 ============================================
 * New Features and Improvements:
