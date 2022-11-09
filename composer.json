@@ -51,8 +51,8 @@
         "willdurand\/js-translation-bundle": "^5.0",
         
         "hackzilla\/password-generator-bundle": "dev-master",
-        "pagerfanta/doctrine-orm-adapter": "3.x-dev",
-        "pagerfanta/twig": "3.x-dev"
+        "pagerfanta/doctrine-orm-adapter": "^3.6",
+        "pagerfanta/twig": "^3.6"
     },
     
     "replace": {
