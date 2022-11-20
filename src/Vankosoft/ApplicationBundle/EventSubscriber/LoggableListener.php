@@ -101,7 +101,7 @@ class LoggableListener extends BaseLoggableListener
             // check for the availability of the primary key
             $uow = $om->getUnitOfWork();
             if ( $action === self::ACTION_CREATE && $this->logEa->isPostInsertGenerator( $meta ) ) {
-                $this->pendingLogEntryInserts[spl_object_hash( $object )] = $logEntry;
+                $this->pendingLogEntryInserts[spl_object_id( $object )] = $logEntry;
             } else {
                 $logEntry->setObjectId( $wrapped->getIdentifier() );
             }
