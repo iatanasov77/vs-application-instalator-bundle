@@ -1,3 +1,18 @@
+1.9.19	|	Release date: **22.11.2022**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix Application Configs.
+  - Update VankoSoft Data Collector in WebProfiler.
+  - Fix PagesExtController .
+  - Fix JS Error on TocPage Modal.
+  - Remove Root Document Page From Parent Combobox.
+  - Fix TocPage Delete Functionality.
+  - Fix TocPage Model and Doctrine Mapping for this Model.
+  - Add DoctrineMigration for the Changed TocPage Model.
+  - Fix TocPage Modal Form.
+  - Fix AdminPanel Profile Menu.
+
+
 1.9.18	|	Release date: **08.11.2022**
 ============================================
 * New Features:

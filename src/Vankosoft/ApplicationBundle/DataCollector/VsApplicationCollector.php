@@ -3,6 +3,7 @@
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 use Vankosoft\ApplicationBundle\Component\Application\Kernel;
 
@@ -13,18 +14,19 @@ use Vankosoft\ApplicationBundle\Component\Application\Kernel;
 final class VsApplicationCollector extends DataCollector
 {
     public function __construct(
+        RequestStack $requestStack,
         string $version,
-        string $projectDir,
         array $bundles,
         string $defaultLocaleCode
     ) {
         $this->data = [
             'version'               => $version,
             'default_locale_code'   => $defaultLocaleCode,
-            'locale_code'           => null,
+            'locale_code'           => $requestStack->getMainRequest()->getLocale(),
             'extensions'            => [
                 'VSUsersSubscriptionsBundle'    => ['name' => 'Subscription', 'enabled' => false],
                 'VSPaymentBundle'               => ['name' => 'Payment', 'enabled' => false],
+                'VSApiBundle'                   => ['name' => 'API', 'enabled' => false],
             ],
         ];
         
