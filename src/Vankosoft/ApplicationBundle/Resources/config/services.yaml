@@ -11,6 +11,7 @@ imports:
     - { resource: services/commands.yaml }
     - { resource: services/web_profiler.yaml }
     - { resource: services/repository.yaml }
+    - { resource: services/api.yaml }
 
 parameters:
     vs_application.version: !php/const Vankosoft\ApplicationBundle\Component\Application\Kernel::VERSION
