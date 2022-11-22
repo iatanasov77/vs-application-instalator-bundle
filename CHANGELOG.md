@@ -1,3 +1,9 @@
+1.9.20	|	Release date: **22.11.2022**
+============================================
+* Bug-Fixes:
+  - Fix TocPage Delete.
+
+
 1.9.19	|	Release date: **22.11.2022**
 ============================================
 * Bug-Fixes and Improvements:
