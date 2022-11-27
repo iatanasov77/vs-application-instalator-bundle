@@ -1,3 +1,12 @@
+1.9.21	|	Release date: **27.11.2022**
+============================================
+* New Features and Improvements:
+  - Remove Api Token Field From User Model.
+  - Remove Api Token Database Migration.
+* Bug-Fixes:
+  - Fix Profile Controller.
+
+
 1.9.20	|	Release date: **22.11.2022**
 ============================================
 * Bug-Fixes:
