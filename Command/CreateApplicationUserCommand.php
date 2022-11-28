@@ -219,6 +219,7 @@ EOT
         
         $avatarImage    = $this->getContainer()->get( 'vs_users.factory.avatar_image' )->createNew();
         $avatarImage->setFile( $uploadedImage );
+        $avatarImage->setOriginalName( $avatarFile );
         
         $this->imageUploader->upload( $avatarImage );
         
