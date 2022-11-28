@@ -1,3 +1,9 @@
+1.9.23	|	Release date: **28.11.2022**
+============================================
+* New Features:
+  - Add originalName of Avatar Image on CreateUserCommand.
+
+
 1.9.22	|	Release date: **28.11.2022**
 ============================================
 * New Features:
