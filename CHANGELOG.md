@@ -1,3 +1,12 @@
+1.9.22	|	Release date: **28.11.2022**
+============================================
+* New Features:
+  - Set file name in profile picture file input.
+  - CMS Abstract Model File Add field originalName .
+  - Add a Doctrine Migration.
+  - Set Original Name of Profile Picture File Input.
+
+
 1.9.21	|	Release date: **27.11.2022**
 ============================================
 * New Features and Improvements:
