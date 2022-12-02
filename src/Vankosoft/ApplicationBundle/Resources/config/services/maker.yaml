@@ -47,16 +47,6 @@ services:
             - '@vs_application.maker.doctrine.entity_class_generator'
             - '@maker.php_compat_util'
         tags: ['maker.command']
-        
-    vs_application.maker.make_resource_entity:
-        class: Vankosoft\ApplicationBundle\Maker\MakeResourceEntity
-        arguments:
-            - '@maker.file_manager'
-            - '@maker.doctrine_helper'
-            - '@maker.generator'
-            - '@vs_application.maker.doctrine.entity_class_generator'
-            - '@maker.php_compat_util'
-        tags: ['maker.command']
 
     vs_application.maker.make_theme:
         class: Vankosoft\ApplicationBundle\Maker\MakeTheme
