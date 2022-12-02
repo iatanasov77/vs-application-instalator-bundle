@@ -18,12 +18,12 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^7.4|^8.1",
         "symfony\/monolog-bundle": "^3.8",
         "symfony\/webpack-encore-bundle": "^1.16",
-        "symfony\/templating": "^5.2 || ^6.1",
-        "symfony\/security-bundle": "^4.4 || ^5.2 || ^6.1",
-        "symfony\/mailer": "^4.4 || ^5.2 || ^6.1",
+        "symfony\/templating": "^5.4 || ^6.1",
+        "symfony\/security-bundle": "^5.4 || ^6.1",
+        "symfony\/mailer": "^5.4 || ^6.1",
         "twig\/extra-bundle": "^3.3",
         "twig\/string-extra": "^3.3",
         "symfonycasts\/verify-email-bundle": "^1.12",
