@@ -48,17 +48,6 @@ services:
             - '@maker.php_compat_util'
         tags: ['maker.command']
         
-    vs_application.maker.make_taxonomy_resource:
-        class: Vankosoft\ApplicationBundle\Maker\MakeTaxonomyResourceCrud
-        arguments:
-            - '@kernel'
-            - '@maker.doctrine_helper'
-            - '@vs_application.maker.renderer.form_type_renderer'
-            - '@vs_application.repository.application'
-            - '@vs_application.repository.settings'
-            - '@vs_application.slug_generator'
-        tags: ['maker.command']
-        
     vs_application.maker.make_resource_entity:
         class: Vankosoft\ApplicationBundle\Maker\MakeResourceEntity
         arguments:
