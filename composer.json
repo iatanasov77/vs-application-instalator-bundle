@@ -26,7 +26,6 @@
         "symfony\/mailer": "^4.4 || ^5.2 || ^6.1",
         "twig\/extra-bundle": "^3.3",
         "twig\/string-extra": "^3.3",
-        "sensio\/framework-extra-bundle": "^6.1",
         "symfonycasts\/verify-email-bundle": "^1.12",
         "symfonycasts\/reset-password-bundle": "1.14.*",
         "lexik\/jwt-authentication-bundle": "^2.16",
