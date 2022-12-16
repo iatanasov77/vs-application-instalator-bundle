@@ -1,7 +1,5 @@
 <?php namespace Vankosoft\ApplicationBundle\Component\Menu;
 
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Yaml\Yaml;
@@ -17,10 +15,8 @@ use Knp\Menu\Matcher\Voter\RouteVoter;
 use Vankosoft\ApplicationBundle\Component\Menu\PathRolesService;
 use Vankosoft\ApplicationBundle\Component\Menu\Item\DividerMenuItem;
 
-class MenuBuilder implements ContainerAwareInterface
+class MenuBuilder
 {
-    use ContainerAwareTrait;
-    
     protected $security;
     
     protected $router;
@@ -28,6 +24,8 @@ class MenuBuilder implements ContainerAwareInterface
     protected $menuConfig;
     
     protected $request;
+    
+    protected $requestStack;
     
     // ContainerBuilder
     protected $cb;
@@ -63,13 +61,15 @@ class MenuBuilder implements ContainerAwareInterface
         
         $this->translator       = $translator;
         
-        $this->currentPath      = $requestStack->getMasterRequest()->getRequestUri();
+        $this->currentPath      = $requestStack->getMainRequest()->getRequestUri();
+        
+        $this->requestStack     = $requestStack;
     }
     
     public function mainMenu( FactoryInterface $factory, string $menuName = 'mainMenu' )
     {
         $this->factory  = $factory;
-        $this->request  = $this->container->get( 'request_stack' )->getCurrentRequest();
+        $this->request  = $this->requestStack->getCurrentRequest();
         $menu           = $factory->createItem( 'root' );
         
         if ( ! isset( $this->menuConfig[$menuName] ) ) {
@@ -109,7 +109,7 @@ class MenuBuilder implements ContainerAwareInterface
     
     public function getCurrentMenuItem( $menu )
     {
-        $voter = new RouteVoter( $this->container->get( 'request_stack' ) );
+        $voter = new RouteVoter( $this->requestStack );
         
         foreach ( $menu as $item ) {
             if ( $voter->matchItem( $item ) ) {

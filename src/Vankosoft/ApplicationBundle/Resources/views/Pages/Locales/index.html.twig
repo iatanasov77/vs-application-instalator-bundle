@@ -16,6 +16,9 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div>
                 <div style="float: left; margin-left: 0; margin-bottom: 20px;">
+                <div style="float: left;"></div>
+                <div style="float: right; margin-right: 30px; margin-bottom: 20px;">
+                <div style="float: left; margin-left: 30px; margin-bottom: 20px;">
                     <a class="btn btn-info btn-circle btn-sm"
                         href="{{ path( 'vs_application_locale_create' ) }}"
                         title="{{ 'vs_application.menu.create_locale' | trans( {},'VSApplicationBundle' ) }}"
@@ -48,6 +51,8 @@
                             <td>{{ item.code }}</td>
                             <td>{{ item.title }}</td>
                             <td>{% if item.code == defaultLocale %}<i class="fas fa-check" style="color: #82c91e;">{% endif %}</td>
+                            <td>{{ item.locale }}</td>
+                            <td>{{ item.title }}</td>
                             <td>
                                 {% for locale in translations[item.id] %}
                                     <i class="flag flag-{{ locale | split( '_' )[1] | lower }}"></i>
