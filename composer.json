@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.9.23",
+    "version": "v1.10.0",
     "description": "VankoSoft Symfony Application",
     "keywords": [
         "symfony",
@@ -48,12 +48,10 @@
         "sylius\/fixtures-bundle": "^1.8",
         "friendsofsymfony\/jsrouting-bundle": "^3.2",
         "willdurand\/js-translation-bundle": "^5.0",
-        
         "hackzilla\/password-generator-bundle": "^5.0",
-        "pagerfanta/doctrine-orm-adapter": "^3.6",
-        "pagerfanta/twig": "^3.6"
+        "pagerfanta\/doctrine-orm-adapter": "^3.6",
+        "pagerfanta\/twig": "^3.6"
     },
-    
     "replace": {
         "vankosoft\/application-bundle": "self.version",
         "vankosoft\/application-instalator-bundle": "self.version",

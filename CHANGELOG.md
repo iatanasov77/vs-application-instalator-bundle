@@ -1,3 +1,9 @@
+1.10.0	|	Release date: **16.12.2022**
+============================================
+* New Features:
+  - Update to PHP 8 , Symfony 6 and Sylius Resource Bundle 1.10
+
+
 1.9.23	|	Release date: **28.11.2022**
 ============================================
 * New Features:
