@@ -1,24 +1,11 @@
-vs_application_taxonomy_index_paginated:
-    path: /taxonomy/
-    methods: [GET]
-    defaults:
-        _controller: vs_application.controller.taxonomy:indexAction
-        _sylius:
-            paginate: 10
-            sortable: true
-            sorting:
-                id: asc
-            filterable: true
-            template: "@VSApplication/Pages/Taxonomy/index.html.twig"
-    options:
-        expose: true
-
 vs_application_taxonomy:
     resource: |
         alias: vs_application.taxonomy
         path: /taxonomy
         templates: "@VSApplication/Pages/Taxonomy"
     type: sylius.resource
+    options:
+        expose: true
 
 vs_application_taxon:
     path: /taxonomy/taxons

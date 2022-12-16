@@ -16,8 +16,8 @@ final class SlugGenerator
     {
         $this->localeCode = 'en_US';
         // If There is a request and it have different locale
-        if ( $requestStack->getMasterRequest() ) {
-            $this->localeCode = $requestStack->getMasterRequest()->getLocale();
+        if ( $requestStack->getMainRequest() ) {
+            $this->localeCode = $requestStack->getMainRequest()->getLocale();
         }
     }
     
