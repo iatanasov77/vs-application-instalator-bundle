@@ -24,22 +24,14 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         $this->commandExecutor = new CommandExecutor( $input, $output, $application );
     }
     
-    /**
-     * @return object
-     */
-    protected function get( string $id )
-    {
-        return $this->getContainer()->get( $id );
-    }
-    
     protected function getEnvironment(): string
     {
-        return (string) $this->getContainer()->getParameter( 'kernel.environment' );
+        return (string) $this->getParameter( 'kernel.environment' );
     }
     
     protected function isDebug(): bool
     {
-        return (bool) $this->getContainer()->getParameter( 'kernel.debug' );
+        return (bool) $this->getParameter( 'kernel.debug' );
     }
     
     protected function renderTable( array $headers, array $rows, OutputInterface $output ): void
@@ -83,7 +75,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
             // PDO does not always close the connection after Doctrine commands.
             // See https://github.com/symfony/symfony/issues/11750.
             /** @var EntityManagerInterface $entityManager */
-            $entityManager  = $this->getContainer()->get( 'doctrine' )->getManager();
+            $entityManager  = $this->get( 'doctrine' )->getManager();
             $entityManager->getConnection()->close();
             
             $progress->advance();
@@ -94,7 +86,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     
     protected function ensureDirectoryExistsAndIsWritable( string $directory, OutputInterface $output ): void
     {
-        $checker    = $this->getContainer()->get( 'vs_app.installer.checker.command_directory' );
+        $checker    = $this->get( 'vs_app.installer.checker.command_directory' );
         $checker->setCommandName( $this->getName() );
         
         $checker->ensureDirectoryExists( $directory, $output );

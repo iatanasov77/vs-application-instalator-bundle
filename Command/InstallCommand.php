@@ -83,7 +83,7 @@ EOT
         //$outputStyle->writeln( $this->getSyliusLogo() );
         $outputStyle->writeln( $this->getVankoSoftLogo() );
         
-        $this->ensureDirectoryExistsAndIsWritable( (string) $this->getContainer()->getParameter( 'kernel.cache_dir' ), $output );
+        $this->ensureDirectoryExistsAndIsWritable( (string) $this->getParameter( 'kernel.cache_dir' ), $output );
         
         $errored        = false;
         try {
@@ -127,7 +127,7 @@ EOT
                      break;
                 case 'application-configuration':
                     // Database is already Installed. Setup Default Locale.
-                    $this->defaultLocale  = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
+                    $this->defaultLocale  = $this->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
                     
                     break;
                 case 'setup-super-admin-application':
