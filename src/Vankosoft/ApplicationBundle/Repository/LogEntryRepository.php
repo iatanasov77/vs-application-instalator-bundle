@@ -27,12 +27,13 @@ class LogEntryRepository extends BaseRepository
      *
      * @return void
      */
-    public function revertByLocale($entity, $version = 1, $locale)
+    public function revertByLocale( $entity, $version = 1, $locale = 'en_US' )
     {
-        $wrapped = new EntityWrapper($entity, $this->_em);
-        $objectMeta = $wrapped->getMetadata();
-        $objectClass = $objectMeta->name;
-        $meta = $this->getClassMetadata();
+        $wrapped        = new EntityWrapper($entity, $this->_em);
+        $objectMeta     = $wrapped->getMetadata();
+        $objectClass    = $objectMeta->name;
+        $meta           = $this->getClassMetadata();
+        
         $dql = "SELECT log FROM {$meta->name} log";
         $dql .= " WHERE log.objectId = :objectId";
         $dql .= " AND log.objectClass = :objectClass";
@@ -40,32 +41,32 @@ class LogEntryRepository extends BaseRepository
         $dql .= " AND log.version <= :version";
         $dql .= " ORDER BY log.version ASC";
         
-        $objectId = (string) $wrapped->getIdentifier();
-        $q = $this->_em->createQuery($dql);
-        $q->setParameters(compact('objectId', 'objectClass', 'locale', 'version'));
+        $objectId   = (string) $wrapped->getIdentifier();
+        $q          = $this->_em->createQuery( $dql );
+        $q->setParameters( compact( 'objectId', 'objectClass', 'locale', 'version' ) );
         $logs = $q->getResult();
         
-        if ($logs) {
-            $config = $this->getLoggableListener()->getConfiguration($this->_em, $objectMeta->name);
+        if ( $logs ) {
+            $config = $this->getLoggableListener()->getConfiguration( $this->_em, $objectMeta->name );
             $fields = $config['versioned'];
             $filled = false;
-            while (($log = array_pop($logs)) && !$filled) {
-                if ($data = $log->getData()) {
-                    foreach ($data as $field => $value) {
-                        if (in_array($field, $fields)) {
-                            $this->mapValue($objectMeta, $field, $value);
-                            $wrapped->setPropertyValue($field, $value);
-                            unset($fields[array_search($field, $fields)]);
+            while ( ( $log = array_pop( $logs ) ) && !$filled ) {
+                if ( $data = $log->getData() ) {
+                    foreach ( $data as $field => $value ) {
+                        if ( in_array( $field, $fields ) ) {
+                            $this->mapValue( $objectMeta, $field, $value );
+                            $wrapped->setPropertyValue( $field, $value );
+                            unset( $fields[array_search( $field, $fields )] );
                         }
                     }
                 }
-                $filled = count($fields) === 0;
+                $filled = count( $fields ) === 0;
             }
             /*if (count($fields)) {
              throw new \Gedmo\Exception\UnexpectedValueException('Could not fully revert the entity to version: '.$version);
              }*/
         } else {
-            throw new \Gedmo\Exception\UnexpectedValueException('Could not find any log entries under version: '.$version);
+            throw new \Gedmo\Exception\UnexpectedValueException( 'Could not find any log entries under version: ' . $version );
         }
     }
 }
