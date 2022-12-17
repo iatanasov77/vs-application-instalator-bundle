@@ -12,6 +12,8 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Config\FileLocatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Webmozart\Assert\Assert;
 
 use Vankosoft\CmsBundle\Component\Uploader\FileUploaderInterface;
@@ -27,10 +29,12 @@ final class CreateApplicationUserCommand extends AbstractInstallCommand
     
     public function __construct(
         ContainerInterface $container,
+        ManagerRegistry $doctrine,
+        ValidatorInterface $validator,
         ?FileLocatorInterface $fileLocator = null,
         ?FileUploaderInterface $imageUploader = null
     ) {
-            parent::__construct( $container );
+        parent::__construct( $container, $doctrine, $validator );
             
             $this->fileLocator      = $fileLocator;
             $this->imageUploader    = $imageUploader;
