@@ -51,7 +51,7 @@ EOT
         $outputStyle->newLine();
         
         // Setup SuperAdmin Kernel
-        $appSetup           = $this->getContainer()->get( 'vs_application.installer.setup_application' );
+        $appSetup           = $this->get( 'vs_application.installer.setup_application' );
         $outputStyle->writeln( 'Create SuperAdmin Application Kernel.' );
         $appSetup->setupAdminPanelKernel();
         $outputStyle->writeln( '<info>SuperAdmin Application Kernel successfully created.</info>' );
@@ -64,8 +64,8 @@ EOT
     
     private function createApplicationDatabaseRecords( InputInterface $input, OutputInterface $output, $applicationName, $localeCode )
     {
-        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
-        $applicationSlug    = $this->getContainer()->get( 'vs_application.slug_generator' )->generate( $applicationName );
+        $entityManager      = $this->get( 'doctrine' )->getManager();
+        $applicationSlug    = $this->get( 'vs_application.slug_generator' )->generate( $applicationName );
         
         $outputStyle    = new SymfonyStyle( $input, $output );
         $outputStyle->writeln( 'Create SuperAdminPanel Application.' );
@@ -76,7 +76,7 @@ EOT
         $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
         $applicationCreated = new \DateTime;
         
-        $application        = $this->getContainer()->get( 'vs_application.factory.application' )->createNew();
+        $application        = $this->get( 'vs_application.factory.application' )->createNew();
         $application->setCode( $applicationSlug );
         $application->setTitle( $applicationName );
         $application->setHostname( $applicationUrl );
@@ -108,7 +108,7 @@ EOT
             ->setValidator(
                 function ( $value ): string {
                     /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->getContainer()->get( 'validator' )->validate( (string) $value, [new Length([
+                    $errors = $this->get( 'validator' )->validate( (string) $value, [new Length([
                         'min' => 6,
                         'max' => 256,
                         'minMessage' => 'Your application url must be at least {{ limit }} characters long',

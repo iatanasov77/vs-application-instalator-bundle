@@ -23,20 +23,19 @@ class MaintenanceModeCommand extends ContainerAwareCommand
     
     protected function execute( InputInterface $input, OutputInterface $output )
     {
-        $container  = $this->getContainer();
         $io         = new SymfonyStyle( $input, $output );
         $io->newLine();
         
         if ( $input->getOption( 'set-maintenance' ) ) {
-            $container->get( 'vs_app.settings_manager' )->forceMaintenanceMode( true );
+            $this->get( 'vs_app.settings_manager' )->forceMaintenanceMode( true );
         }
         
         if ( $input->getOption( 'unset-maintenance' ) ) {
-            $container->get( 'vs_app.settings_manager' )->forceMaintenanceMode( false );
+            $this->get( 'vs_app.settings_manager' )->forceMaintenanceMode( false );
         }
         
         if ( $input->getOption( 'dump-settings' ) ) {
-            $allSettings    = $container->get( 'vs_app.settings_manager' )->getAllSettings();
+            $allSettings    = $this->get( 'vs_app.settings_manager' )->getAllSettings();
             print_r( $allSettings );
         }
         
