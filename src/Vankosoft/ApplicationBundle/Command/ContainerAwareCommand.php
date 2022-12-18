@@ -5,6 +5,9 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 //use Symfony\Component\DependencyInjection\ContainerInterface;
 use Psr\Container\ContainerInterface;
 
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Doctrine\Persistence\ManagerRegistry;
+
 /**
  * @link https://github.com/symfony/symfony/blob/v4.4.18/src/Symfony/Bundle/FrameworkBundle/Command/ContainerAwareCommand.php
  */
@@ -12,10 +15,52 @@ abstract class ContainerAwareCommand extends Command implements ContainerAwareIn
 {
     private $container;
     
-    public function __construct( ContainerInterface $container )
-    {
+    private $doctrine;
+    
+    private $validator;
+    
+    public function __construct(
+        ContainerInterface $container,
+        ManagerRegistry $doctrine,
+        ValidatorInterface $validator
+    ) {
         parent::__construct();
+        
         $this->container    = $container;
+        
+        $this->doctrine     = $doctrine;
+        $this->validator    = $validator;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setContainer( ContainerInterface $container = null )
+    {
+        $this->container    = $container;
+    }
+    
+    /**
+     * @return object
+     */
+    protected function get( string $id )
+    {
+        switch ( $id ) {
+            case 'doctrine':
+                return $this->doctrine;
+                break;
+            case 'validator':
+                return $this->validator;
+                break;
+            default:
+                return $this->getContainer()->get( $id );
+                
+        }
+    }
+    
+    protected function getParameter( string $id )
+    {
+        return $this->getContainer()->getParameter( $id );
     }
     
     /**
@@ -23,7 +68,7 @@ abstract class ContainerAwareCommand extends Command implements ContainerAwareIn
      *
      * @throws \LogicException
      */
-    protected function getContainer()
+    private function getContainer()
     {
         if ( null === $this->container ) {
             $application    = $this->getApplication();
@@ -35,14 +80,6 @@ abstract class ContainerAwareCommand extends Command implements ContainerAwareIn
         }
         
         return $this->container;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setContainer( ContainerInterface $container = null )
-    {
-        $this->container    = $container;
     }
 }
     

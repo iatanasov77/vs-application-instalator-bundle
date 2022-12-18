@@ -46,7 +46,7 @@ EOT
         }
 
         try {
-            $publicDir = $this->getContainer()->getParameter( 'vs_application.public_dir' );
+            $publicDir = $this->getParameter( 'vs_application.public_dir' );
 
             $this->ensureDirectoryExistsAndIsWritable( $publicDir . '/media/', $output );
             $this->ensureDirectoryExistsAndIsWritable( $publicDir . '/media/image/', $output );

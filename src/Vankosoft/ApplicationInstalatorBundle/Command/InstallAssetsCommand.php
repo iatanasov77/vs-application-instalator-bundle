@@ -25,7 +25,7 @@ EOT
             $this->getEnvironment()
         ) );
 
-        $publicDir = $this->getContainer()->getParameter( 'vs_application.public_dir' );
+        $publicDir = $this->getParameter( 'vs_application.public_dir' );
         
         try {
             $this->ensureDirectoryExistsAndIsWritable( $publicDir . '/assets/', $output );

@@ -72,7 +72,7 @@ EOT
         $questionName       = $this->createApplicationNameQuestion();
         $applicationName    = $questionHelper->ask( $input, $output, $questionName );
         
-        $appSetup           = $this->getContainer()->get( 'vs_application.installer.setup_application' );
+        $appSetup           = $this->get( 'vs_application.installer.setup_application' );
         $outputStyle        = new SymfonyStyle( $input, $output );
         
         // Add Database Records
@@ -104,7 +104,7 @@ EOT
     {
         $defaultLocale  = $input->getOption( 'locale' );
         if ( ! $defaultLocale ) {
-            $defaultLocale  = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) )->getCode();
+            $defaultLocale  = $this->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) )->getCode();
         }
         
         return $defaultLocale;
@@ -139,17 +139,17 @@ EOT
     
     private function createApplication( InputInterface $input, OutputInterface $output, $applicationName ): ApplicationInterface
     {
-        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
+        $entityManager      = $this->get( 'doctrine' )->getManager();
         
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
         
         $questionUrl        = $this->createApplicationUrlQuestion();
         $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
-        $applicationSlug    = $this->getContainer()->get( 'vs_application.slug_generator' )->generate( $applicationName );
+        $applicationSlug    = $this->get( 'vs_application.slug_generator' )->generate( $applicationName );
         $applicationCreated = new \DateTime;
         
-        $application        = $this->getContainer()->get( 'vs_application.factory.application' )->createNew();
+        $application        = $this->get( 'vs_application.factory.application' )->createNew();
         $application->setCode( $applicationSlug );
         $application->setTitle( $applicationName );
         $application->setHostname( $applicationUrl );
@@ -163,17 +163,17 @@ EOT
     
     private function createApplicationBaseRole( InputInterface $input, OutputInterface $output, $applicationName ): UserRoleInterface
     {
-        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
+        $entityManager      = $this->get( 'doctrine' )->getManager();
         
         /*
          * Create Application Base Role Taxon
          */
-        $taxonSlug          = $this->getContainer()->get( 'vs_application.slug_generator' )->generate( 'Role ' . $applicationName );
-        $roleTaxon          = $this->getContainer()->get( 'vs_application.factory.taxon' )->createNew();
-        $taxonomyRootTaxon  = $this->getContainer()->get( 'vs_application.repository.taxonomy' )
+        $taxonSlug          = $this->get( 'vs_application.slug_generator' )->generate( 'Role ' . $applicationName );
+        $roleTaxon          = $this->get( 'vs_application.factory.taxon' )->createNew();
+        $taxonomyRootTaxon  = $this->get( 'vs_application.repository.taxonomy' )
                                                     ->findByCode( 'user-roles' )
                                                     ->getRootTaxon();
-        $taxonParent        = $this->getContainer()->get( 'vs_application.repository.taxon' )
+        $taxonParent        = $this->get( 'vs_application.repository.taxon' )
                                                     ->findOneBy( ['code' => 'role-application-admin'] );
         
         $roleTaxon->setCurrentLocale( 'en_US' );
@@ -187,8 +187,8 @@ EOT
         /*
          * Create Application Base Role
          */
-        $role               = $this->getContainer()->get( 'vs_users.factory.user_roles' )->createNew();
-        $roleParent         = $this->getContainer()->get( 'vs_users.repository.user_roles' )
+        $role               = $this->get( 'vs_users.factory.user_roles' )->createNew();
+        $roleParent         = $this->get( 'vs_users.repository.user_roles' )
                                                     ->findByTaxonCode( 'role-application-admin' );
         $role->setParent( $roleParent );
         $role->setTaxon( $roleTaxon );
@@ -221,8 +221,8 @@ EOT
     
     private function setupApplicationTheme( InputInterface $input, OutputInterface $output ): ?ThemeInterface
     {
-        $entityManager          = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
-        $settingsRepository     = $this->getContainer()->get( 'vs_application.repository.settings' );
+        $entityManager          = $this->get( 'doctrine' )->getManager();
+        $settingsRepository     = $this->get( 'vs_application.repository.settings' );
         
         $applicationThemeName   = $this->getHelper( 'question' )->ask(
                                         $input,
@@ -230,11 +230,11 @@ EOT
                                         $this->createApplicationThemeQuestion( $input->getOption( 'theme' ) )
                                     );
         
-        $theme                  = $this->getContainer()->get( 'vs_app.theme_repository' )->findOneByName( $applicationThemeName );
+        $theme                  = $this->get( 'vs_app.theme_repository' )->findOneByName( $applicationThemeName );
         if ( $theme ) {
             $settings   = $settingsRepository->getSettings( $this->application );
             if ( ! $settings ) {
-                $settings   = $this->getContainer()->get( 'vs_application.factory.settings' )->createNew();
+                $settings   = $this->get( 'vs_application.factory.settings' )->createNew();
             }
             
             $settings->setTheme( $applicationThemeName );
@@ -254,7 +254,7 @@ EOT
             ->setValidator(
                 function ( $value ): string {
                     /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->getContainer()->get( 'validator' )->validate( (string) $value, [new Length([
+                    $errors = $this->get( 'validator' )->validate( (string) $value, [new Length([
                         'min' => 3,
                         'max' => 50,
                         'minMessage' => 'Your application name must be at least {{ limit }} characters long',
@@ -277,7 +277,7 @@ EOT
             ->setValidator(
                 function ( $value ): string {
                     /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->getContainer()->get( 'validator' )->validate( (string) $value, [new Length([
+                    $errors = $this->get( 'validator' )->validate( (string) $value, [new Length([
                         'min' => 6,
                         'max' => 256,
                         'minMessage' => 'Your application url must be at least {{ limit }} characters long',
@@ -296,7 +296,7 @@ EOT
     
     private function createApplicationThemeQuestion( $defaultTheme ): ChoiceQuestion
     {
-        $availableThemes    = array_keys( $this->getContainer()->get( 'vs_app.theme_repository' )->findAll() );
+        $availableThemes    = array_keys( $this->get( 'vs_app.theme_repository' )->findAll() );
         $default            = null;
         if ( $defaultTheme ) {
             $questionMessage    = sprintf( 'Please select an application theme to use (defaults to %s): ', $defaultTheme );

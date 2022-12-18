@@ -1,3 +1,11 @@
+1.10.2	|	Release date: **18.12.2022**
+============================================
+* Bug-Fixes:
+  - Remove API Services From Users Bundle.
+  - Fix and Improve abstract class ContainerAwareCommand and all Child Classes.
+  - Fix a Warning in LogEntryRepository .
+
+
 1.10.1	|	Release date: **17.12.2022**
 ============================================
 * Change Subtree Branches
