@@ -21,7 +21,7 @@ EOT
 
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        $fulfilled = $this->getContainer()->get( 'vs_app.installer.checker.application_requirements' )->check( $input, $output );
+        $fulfilled = $this->get( 'vs_app.installer.checker.application_requirements' )->check( $input, $output );
 
         if ( ! $fulfilled ) {
             throw new RuntimeException(

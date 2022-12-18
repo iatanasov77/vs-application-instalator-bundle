@@ -44,7 +44,6 @@ EOT
             throw new \RuntimeException( 'Debugging Only.' );
         } else {
             $commands = $this
-                ->getContainer()
                 ->get( 'vs_app.commands_provider.database_setup' )
                 ->getCommands( $input, $output, $this->getHelper( 'question' ) )
             ;

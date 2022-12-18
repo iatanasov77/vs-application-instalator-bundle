@@ -38,6 +38,8 @@ services:
         class: Vankosoft\ApplicationInstalatorBundle\Command\CreateApplicationUserCommand
         arguments:
             - '@service_container'
+            - '@doctrine'
+            - '@validator'
             - '@file_locator'
             - '@vs_cms.profile_uploader'
         tags:
