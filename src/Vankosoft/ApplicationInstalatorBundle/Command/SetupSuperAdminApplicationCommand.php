@@ -46,12 +46,12 @@ EOT
         $appSetup       = $this->get( 'vs_application.installer.setup_application' );
         
         // Debug
-        $outputStyle->writeln( 'DEBUG APPLICATION VERSION:' );
-        $outputStyle->newLine();
-        $outputStyle->writeln( $appSetup->getApplicationVersion() );
-        $outputStyle->newLine();
-        $outputStyle->newLine();
-        die;
+//         $outputStyle->writeln( 'DEBUG APPLICATION VERSION:' );
+//         $outputStyle->newLine();
+//         $outputStyle->writeln( $appSetup->getApplicationVersion() );
+//         $outputStyle->newLine();
+//         $outputStyle->newLine();
+//         die;
         
         // Add Database Records
         $outputStyle->writeln( 'Create SuperAdmin Application Database Records.' );
