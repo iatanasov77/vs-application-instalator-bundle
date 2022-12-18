@@ -124,7 +124,7 @@ class ApplicationSetup
         $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
         $reflectionClass    = new \ReflectionClass( \App\AdminPanelKernel::class );
         $constants          = $reflectionClass->getConstants();
-        var_dump( $constants ); die;
+        //var_dump( $constants ); die;
         
         $filesystem->dumpFile( $projectRootDir . '/src/AdminPanelKernel.php', str_replace(
             $constants['VERSION'],
@@ -153,7 +153,7 @@ class ApplicationSetup
         
         if ( $this->newProjectInstall && $filesystem->exists( $projectRootDir . '/VERSION' ) ) {
             $this->applicationVersion   = file_get_contents( $projectRootDir . '/VERSION' );
-            //$filesystem->remove( $projectRootDir . '/VERSION' );
+            $filesystem->remove( $projectRootDir . '/VERSION' );
         } elseif( ! $this->newProjectInstall ) {
             $this->applicationVersion   = \App\AdminPanelKernel::VERSION;
         }
