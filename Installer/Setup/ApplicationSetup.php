@@ -152,7 +152,7 @@ class ApplicationSetup
         
         if ( $this->newProjectInstall && $filesystem->exists( $projectRootDir . '/VERSION' ) ) {
             $this->applicationVersion   = file_get_contents( $projectRootDir . '/VERSION' );
-            $filesystem->remove( $projectRootDir . '/VERSION' );
+            //$filesystem->remove( $projectRootDir . '/VERSION' );
         } elseif( ! $this->newProjectInstall ) {
             $this->applicationVersion   = \App\AdminPanelKernel::VERSION;
         }
