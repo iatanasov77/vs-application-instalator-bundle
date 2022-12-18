@@ -124,6 +124,7 @@ class ApplicationSetup
         $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
         $reflectionClass    = new \ReflectionClass( \App\AdminPanelKernel::class );
         $constants          = $reflectionClass->getConstants();
+        var_dump( $constants ); die;
         
         $filesystem->dumpFile( $projectRootDir . '/src/AdminPanelKernel.php', str_replace(
             $constants['VERSION'],
