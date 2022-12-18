@@ -48,7 +48,7 @@ EOT
         // Debug
         $outputStyle->writeln( 'DEBUG APPLICATION VERSION:' );
         $outputStyle->newLine();
-        $appSetup->getApplicationVersion();
+        $outputStyle->writeln( $appSetup->getApplicationVersion() );
         $outputStyle->newLine();
         $outputStyle->newLine();
         die;
