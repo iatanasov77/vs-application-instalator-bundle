@@ -137,6 +137,14 @@ class ApplicationSetup
         $this->removeOriginalKernelConfigs();
     }
     
+    public function getApplicationVersion()
+    {
+        $this->newProjectInstall    = true;
+        $this->_initialize();
+        
+        return $this->applicationVersion;
+    }
+    
     private function _initialize()
     {
         $filesystem     = new Filesystem();

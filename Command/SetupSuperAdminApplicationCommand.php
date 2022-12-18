@@ -43,6 +43,15 @@ EOT
     private function setupSuperAdminPanelApplication( InputInterface $input, OutputInterface $output, string $localeCode ): void
     {
         $outputStyle    = new SymfonyStyle( $input, $output );
+        $appSetup       = $this->get( 'vs_application.installer.setup_application' );
+        
+        // Debug
+        $outputStyle->writeln( 'DEBUG APPLICATION VERSION:' );
+        $outputStyle->newLine();
+        $appSetup->getApplicationVersion();
+        $outputStyle->newLine();
+        $outputStyle->newLine();
+        die;
         
         // Add Database Records
         $outputStyle->writeln( 'Create SuperAdmin Application Database Records.' );
@@ -51,7 +60,6 @@ EOT
         $outputStyle->newLine();
         
         // Setup SuperAdmin Kernel
-        $appSetup           = $this->get( 'vs_application.installer.setup_application' );
         $outputStyle->writeln( 'Create SuperAdmin Application Kernel.' );
         $appSetup->setupAdminPanelKernel();
         $outputStyle->writeln( '<info>SuperAdmin Application Kernel successfully created.</info>' );
