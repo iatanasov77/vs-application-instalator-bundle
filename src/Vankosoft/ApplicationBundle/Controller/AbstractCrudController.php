@@ -144,7 +144,7 @@ class AbstractCrudController extends ResourceController
         if ( ! $this->classInfo ) {
             // when write this code request return: vs_users.controller.users:indexAction
             $info           = explode( '.', $request->attributes->get( '_controller' ) );
-            $controllerInfo = explode( ':', $info[2] );
+            $controllerInfo = explode( '::', $info[2] );
             
             $this->classInfo    = [
                 'bundle'        => $info[0],
