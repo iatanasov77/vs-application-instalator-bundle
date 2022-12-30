@@ -1,3 +1,10 @@
+1.10.3	|	Release date: **30.12.2022**
+============================================
+* Bug-Fixes:
+  - Fix Users RegisterController about new Symfony Security.
+  - Fix a Security Voter.
+
+
 1.10.2	|	Release date: **18.12.2022**
 ============================================
 * Bug-Fixes:
