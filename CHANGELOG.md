@@ -1,3 +1,10 @@
+1.10.5	|	Release date: **02.01.2023**
+============================================
+* Bug-Fixes:
+  - Delete all API Related Classes.
+  - Fix Some View Templates.
+
+
 1.10.4	|	Release date: **30.12.2022**
 ============================================
 * Bug-Fixes:
