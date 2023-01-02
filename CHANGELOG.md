@@ -1,3 +1,10 @@
+1.10.6	|	Release date: **02.01.2023**
+============================================
+* Bug-Fixes:
+  - Fix Locales Index Template .
+  - Fix LocalesController .
+
+
 1.10.5	|	Release date: **02.01.2023**
 ============================================
 * Bug-Fixes:
