@@ -85,8 +85,8 @@
                                                 <a class="btn btn-danger btnDelete" 
                                                     title="{{ 'vs_application.template.items_index_row_action_delete' | trans( {},'VSApplicationBundle' ) }}" 
                                                     href="javascript:void(0);" 
-                                                    data-toggle="modal"
-                                                    data-target="#application-delete-modal"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#application-delete-modal"
                                                     data-title="{{ item.title }}"
                                                     data-url="{{ path('vs_application_application_remove', {'applicationId': item.id}) }}"
                                                 >
