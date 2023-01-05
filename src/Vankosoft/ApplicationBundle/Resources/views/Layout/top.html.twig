@@ -82,8 +82,8 @@
             </li>
         #}
         
-            <li class="nav-item dropdown nav-user">
-                <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item dropdown nav-user dropstart">
+                <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {% if app.user.info and app.user.info.avatar %}
                    <img src="{{ app.user.info.avatar.path|imagine_filter('users_crud_index_thumb') }}" alt="" class="user-avatar-md rounded-circle" />
                 {% else %}
