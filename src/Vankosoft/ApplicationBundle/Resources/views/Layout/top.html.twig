@@ -5,12 +5,11 @@
     	{% endif %}
     	{{ applicationTitle }}
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto navbar-right-top">
-            
+        <ul class="navbar-nav ms-auto navbar-right-top">
             <li class="nav-item">
                 <div id="custom-search" class="top-search-bar">
                     <input class="form-control" type="text" placeholder="Search..">
@@ -19,7 +18,7 @@
             
         {% if app.user %}
             <li class="nav-item dropdown notification">
-                <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
+                <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
                 <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
                     <li>
                         <div class="notification-title"> Notification</div>
@@ -50,7 +49,7 @@
 
         {#
             <li class="nav-item dropdown connection">
-                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-fw fa-th"></i> </a>
+                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-fw fa-th"></i> </a>
                 <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
                     <li class="connection-list">
                         <div class="row">
@@ -83,8 +82,8 @@
             </li>
         #}
         
-            <li class="nav-item dropdown nav-user">
-                <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item dropdown nav-user dropstart">
+                <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {% if app.user.info and app.user.info.avatar %}
                    <img src="{{ app.user.info.avatar.path|imagine_filter('users_crud_index_thumb') }}" alt="" class="user-avatar-md rounded-circle" />
                 {% else %}

@@ -11,10 +11,12 @@
         {# this is the content displayed when hovering the mouse over
            the toolbar panel #}
         <div class="sf-toolbar-info-group">
-            <div class="sf-toolbar-info-piece">
+            <div class="sf-toolbar-info-piece border-bottom">
                 <b>Vs Application</b>
                 <span><a href="https://sylius.com">{{ collector.version }}</a></span>
             </div>
+            <div class="sf-toolbar-info-piece">&nbsp;</div>
+            
             <div class="sf-toolbar-info-piece">
                 <b>Extensions</b>
                 {% for extension in collector.extensions %}
