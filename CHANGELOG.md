@@ -1,3 +1,14 @@
+1.10.7	|	Release date: **05.01.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix Templates Used Tabs About Upgrading to Bootstrap 5
+  - Fix Alining in Templates About Upgrading to Bootstrap 5
+  - Fix Profile Dropdown About Upgrading to Bootstrap 5
+  - Fix All Dropdowns|Accordion About Upgrading to Bootstrap 5
+  - Improve DataCollector Templates.
+  - Fix All Modal amd Alerts Dissmiss About Upgrading to Bootstrap 5
+
+
 1.10.6	|	Release date: **02.01.2023**
 ============================================
 * Bug-Fixes:
