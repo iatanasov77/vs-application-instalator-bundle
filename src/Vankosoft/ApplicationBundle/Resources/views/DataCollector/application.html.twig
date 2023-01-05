@@ -9,11 +9,12 @@
     {% endset %}
 
     {% set text %}
-        <div class="sf-toolbar-info-piece">
+        <div class="sf-toolbar-info-piece border-bottom">
             <b>Applications</b>
             <span class="sf-toolbar-status {% if collector.applications is empty %}sf-toolbar-status-red{% endif %}">{{ collector.applications|length }}</span>
         </div>
-
+        <div class="sf-toolbar-info-piece">&nbsp;</div>
+        
         {% for application in collector.applications %}
             <div class="sf-toolbar-info-piece">
                 <b>{{ application.name }}</b>
