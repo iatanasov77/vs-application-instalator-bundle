@@ -17,7 +17,7 @@ class BumpVersionCommand extends Command
         ;
     }
     
-    protected function execute( InputInterface $input, OutputInterface $output )
+    protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $versionFile		= 'VERSION';
         $changesFile		= 'CHANGELOG.md';
