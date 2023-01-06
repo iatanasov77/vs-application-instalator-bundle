@@ -89,7 +89,7 @@ abstract class AbstractResourceMaker extends AbstractMaker
         // TODO: Implement configureDependencies() method.
     }
     
-    public function interact( InputInterface $input, ConsoleStyle $io, Command $command )
+    public function interact( InputInterface $input, ConsoleStyle $io, Command $command ): void
     {
         $io->title( 'Create the CRUD Resource classes...' );
         
