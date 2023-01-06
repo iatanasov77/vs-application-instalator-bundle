@@ -78,12 +78,19 @@
                         </div>
                     </div>
                     <div class="card-body" style="padding: 0;">
+                        {#
                         <!--  http://gtreetable.gilek.net/ -->
                         <table class="table gtreetable"
                                id="tableTaxons"
                                data-url="{{ url('vs_application_taxonomy_taxons_gtreetable', {'taxonomyId': item.id}) }}"
                         >
                         </table>
+                        #}
+                        {% if item.rootTaxon.children|length > 0 %}
+                            {% include '@VSApplication/Pages/Taxonomy/partial/simpleTreeTable.html.twig' %}
+                        {% else %}
+                            {{ alerts.info('sylius.ui.there_are_no_mappers_to_display'|trans) }}
+                        {% endif %}
                     </div>
 				</div>
 			{% endif %}
