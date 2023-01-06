@@ -84,7 +84,7 @@ class AssetsSourcesCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute( InputInterface $input, OutputInterface $output)
+    protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $kernel     = $this->getApplication()->getKernel();
         $targetArg  = rtrim($input->getArgument( 'target'), '/' );
@@ -150,12 +150,12 @@ class AssetsSourcesCommand extends Command
                     $copyUsed = true;
                 }
                 
-                if ($method === $expectedMethod) {
+                if ( $method === $expectedMethod ) {
                     $rows[] = array( sprintf( '<fg=green;options=bold>%s</>', '\\' === \DIRECTORY_SEPARATOR ? 'OK' : "\xE2\x9C\x94" /* HEAVY CHECK MARK (U+2714) */ ), $message, $method );
                 } else {
                     $rows[] = array( sprintf( '<fg=yellow;options=bold>%s</>', '\\' === \DIRECTORY_SEPARATOR ? 'WARNING' : '!'), $message, $method );
                 }
-            } catch (\Exception $e) {
+            } catch ( \Exception $e ) {
                 $exitCode = 1;
                 $rows[] = array( sprintf( '<fg=red;options=bold>%s</>', '\\' === \DIRECTORY_SEPARATOR ? 'ERROR' : "\xE2\x9C\x98" /* HEAVY BALLOT X (U+2718) */), $message, $e->getMessage() );
             }
