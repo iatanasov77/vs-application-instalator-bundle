@@ -13,7 +13,7 @@
     	<span class="splash-description">Please enter your username and password.</span>
     	
         {% if error %}
-        	<div class="alert alert-danger mt-4 float-left text-left w-100" role="alert">
+        	<div class="alert alert-danger mt-4 float-start text-left w-100" role="alert">
                 <span>{{ error.messageKey|trans(error.messageData, 'security') }}</span>
             </div>
         {% endif %}

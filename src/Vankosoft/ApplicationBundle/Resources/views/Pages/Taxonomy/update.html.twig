@@ -67,8 +67,8 @@
 			{% if( item.id ) %}
 				<div class="card">
 	                <div class="card-header">
-                        <div class="float-left" style="height:30px; padding-top:10px;">Taxonomy Taxons</div>
-                        <div class="btn-group float-right">
+                        <div class="float-start" style="height:30px; padding-top:10px;">Taxonomy Taxons</div>
+                        <div class="btn-group float-end">
                             <a class="btn btn-primary btnTaxonomyTaxon" title="Create New Taxon" href="javascript:void(0);" 
                             	data-url="{{ path('vs_application_taxonomy_taxon_edit', {'taxonomyId': item.id}) }}"
                             	data-easyui-url="{{ path( 'vs_application_taxonomy_taxons_easyui_combotree', {'taxonomyId': item.id} ) }}"
@@ -78,12 +78,11 @@
                         </div>
                     </div>
                     <div class="card-body" style="padding: 0;">
-                        <!--  http://gtreetable.gilek.net/ -->
-                        <table class="table gtreetable"
-                               id="tableTaxons"
-                               data-url="{{ url('vs_application_taxonomy_taxons_gtreetable', {'taxonomyId': item.id}) }}"
-                        >
-                        </table>
+                        {% if item.rootTaxon.children|length > 0 %}
+                            {% include '@VSApplication/Pages/Taxonomy/partial/simpleTreeTable.html.twig' %}
+                        {% else %}
+                            {{ alerts.info('sylius.ui.there_are_no_mappers_to_display'|trans) }}
+                        {% endif %}
                     </div>
 				</div>
 			{% endif %}

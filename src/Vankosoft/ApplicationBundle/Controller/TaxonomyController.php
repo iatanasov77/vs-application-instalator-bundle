@@ -5,7 +5,16 @@ use Vankosoft\ApplicationBundle\Controller\AbstractCrudController;
 use Vankosoft\ApplicationBundle\Component\Slug;
 
 class TaxonomyController extends AbstractCrudController
-{ 
+{
+    protected function customData( Request $request, $entity = null ): array
+    {
+        $taxonTranslations   = $this->classInfo['action'] == 'updateAction' ? $this->getTaxonTranslations() : [];
+        
+        return [
+            'taxonTranslations' => $taxonTranslations,
+        ];
+    }
+    
     protected function prepareEntity( &$entity, &$form, Request $request )
     {
         $formData   = $request->request->get( 'taxonomy_form' );
@@ -34,5 +43,17 @@ class TaxonomyController extends AbstractCrudController
         $rootTaxon->getTranslation()->setTranslatable( $rootTaxon );
         
         return $rootTaxon;
+    }
+    
+    private function getTaxonTranslations()
+    {
+        $translations   = [];
+        $taxonsRepo   = $this->get( 'vs_application.repository.taxon' );
+        
+        foreach ( $taxonsRepo->findAll() as $taxon ) {
+            $translations[$taxon->getId()] = $taxon->getTranslations()->getKeys();
+        }
+        
+        return $translations;
     }
 }
