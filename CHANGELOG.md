@@ -1,3 +1,20 @@
+1.10.8	|	Release date: **06.01.2023**
+============================================
+* New Features:
+  - Add AdminPanel Theme Assets.
+* Bug-Fixes and Improvements:
+  - Remove Uneeded Resources.
+  - Fix FOS Js Include For AdminPanel Theme.
+  - Fix Assets Path to mdb-ui-kit
+  - Positioning Profile Dropdown.
+  - Fix Float Style Classes About Bootstrap 5.
+  - Change GTreeTable With SimpleTreeTable on Taxonomy Edit Page.
+  - Fix and Improve  SimpleTreeTable on Taxonomy Edit Page.
+  - Fully Remove Using Bootstrap GTreeTable.
+  - Improve PageCategories Index Page.
+  - Fix All Index Views Tables Head.
+
+
 1.10.7	|	Release date: **05.01.2023**
 ============================================
 * Bug-Fixes and Improvements:
