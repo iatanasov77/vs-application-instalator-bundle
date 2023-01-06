@@ -28,6 +28,11 @@ final class MakeResourceCrud extends AbstractResourceMaker
         return 'vankosoft:make:resource';
     }
     
+    public static function getCommandDescription(): string
+    {
+        return '';
+    }
+    
     /**
      * Configure the command: set description, input arguments, options, etc.
      *

@@ -38,7 +38,7 @@ class MenuBuilder
     
     protected FactoryInterface $factory;
     
-    protected $currentUri;
+    protected $currentPath;
     
     public function __construct(
         string $config_file,

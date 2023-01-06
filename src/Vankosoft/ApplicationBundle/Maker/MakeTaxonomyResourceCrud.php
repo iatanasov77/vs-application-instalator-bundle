@@ -29,6 +29,11 @@ final class MakeTaxonomyResourceCrud extends AbstractResourceMaker
         return 'vankosoft:make:taxonomy-resource';
     }
     
+    public static function getCommandDescription(): string
+    {
+        return '';
+    }
+    
     /**
      * Configure the command: set description, input arguments, options, etc.
      *
@@ -48,7 +53,7 @@ final class MakeTaxonomyResourceCrud extends AbstractResourceMaker
         ;
     }
     
-    public function interact( InputInterface $input, ConsoleStyle $io, Command $command )
+    public function interact( InputInterface $input, ConsoleStyle $io, Command $command ): void
     {
         parent::interact( $input, $io, $command );
         
