@@ -17,10 +17,13 @@
             
             {% if resources|length > 0 %}
                 <table class="table table-striped table-advance table-hover">
-                    <tr>
-                        <th>{{ 'vs_application.template.items_index_row_name' | trans( {},'VSApplicationBundle' ) }}</th>
-                        <th width="150">{{ 'vs_application.template.items_index_row_action' | trans( {},'VSApplicationBundle' ) }}</th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>{{ 'vs_application.template.items_index_row_name' | trans( {},'VSApplicationBundle' ) }}</th>
+                            <th width="150">{{ 'vs_application.template.items_index_row_action' | trans( {},'VSApplicationBundle' ) }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {% for item in resources %}
                         <tr>
                             <td><a href="{{ path('vs_application_taxonomy_update', {'id': item.id}) }}">{{ item.name }}</a></td>
@@ -46,6 +49,7 @@
                             </td>
                         </tr>
                     {% endfor %}
+                    </tbody>
                 </table>
                 
                 {% if resources.haveToPaginate() %}
