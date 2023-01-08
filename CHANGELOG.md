@@ -1,3 +1,15 @@
+1.10.10	|	Release date: **08.01.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix LoginFormAuthenticator For RegistrationController.
+  - Fix RegistrationController routes.
+  - Fix UsersBundle  routes.
+  - Fix RegistrationController getUser Exception.
+  - Add Missing Translations for Users Profile Page.
+  - Add Missing Translations for ForgotPassword Page.
+  - Improve ChangePassword Page.
+
+
 1.10.9	|	Release date: **06.01.2023**
 ============================================
 * Bug-Fixes:
