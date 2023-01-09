@@ -1,3 +1,13 @@
+1.10.11	|	Release date: **09.01.2023**
+============================================
+* New Features:
+  - Add Some Template Translations
+  - Add Js File Input Scripts For Bootstrap 5.
+* Bug-Fixes:
+  - Fix Cannot set properties of undefined (setting '$')
+  - Fix Form File Inputs For Bootstrap 5.
+
+
 1.10.10	|	Release date: **08.01.2023**
 ============================================
 * Bug-Fixes and Improvements:

@@ -8,6 +8,8 @@ import { VsPath } from '../includes/fos_js_routes.js';
 import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_translations.js';
 VsLoadTranslations(['VSApplicationBundle']);
 
+require( '../includes/bootstrap-5/file-input.js' );
+
 $( function()
 {
     $( '#btnGeneratePassword' ).on( 'click', function ( e )
