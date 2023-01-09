@@ -1,4 +1,4 @@
-import { getFileName } from '../includes/file-input.js';
+import { getFileName } from '../includes/bootstrap-5/file-input.js';
 
 $( function()
 {
