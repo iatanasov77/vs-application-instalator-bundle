@@ -1,3 +1,11 @@
+1.10.12	|	Release date: **11.01.2023**
+============================================
+* New Features:
+  - Add ProcessStreamedResponse Method into ConsoleCommandTrait .
+* Bug-Fixes:
+  - Some Fixes.
+
+
 1.10.11	|	Release date: **09.01.2023**
 ============================================
 * New Features:

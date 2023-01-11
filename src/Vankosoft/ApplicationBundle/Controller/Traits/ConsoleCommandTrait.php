@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\StreamOutput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Process\Process;
 
 /**
  * Call a Command from a Controller and Get Buffered or Streamed Response
@@ -67,6 +68,11 @@ trait ConsoleCommandTrait
         });
             
         return $response;
+    }
+    
+    public function streamedProcessResponse( $callback ): StreamedResponse
+    {
+        return new StreamedResponse( $callback );
     }
     
     abstract protected function getKernel(): KernelInterface;
