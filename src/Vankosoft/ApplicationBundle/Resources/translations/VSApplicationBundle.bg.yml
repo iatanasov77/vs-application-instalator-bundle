@@ -94,6 +94,7 @@ vs_application:
             password: Парола
             btn_close: Затвори
     template:
+        there_are_no_items_to_display: Няма елементи за показване
         default: Основен
         button_view_all_notifications: 'Виж всички известия'
         dashboard_header_title: 'Табло на Приложението'
