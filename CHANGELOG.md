@@ -1,3 +1,14 @@
+1.10.13	|	Release date: **17.01.2023**
+============================================
+* New Features:
+  - Add Filemanger method getFileSize() .
+  - Add Translations to VSCmsBundle .
+  - Add Translations to VSApplicationBundle .
+* Bug-Fixes:
+  - Fix TaxonomyController .
+  - Fix PagesController
+
+
 1.10.12	|	Release date: **11.01.2023**
 ============================================
 * New Features:

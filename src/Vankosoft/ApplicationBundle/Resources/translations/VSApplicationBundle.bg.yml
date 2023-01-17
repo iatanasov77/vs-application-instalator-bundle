@@ -94,6 +94,7 @@ vs_application:
             password: Парола
             btn_close: Затвори
     template:
+        there_are_no_items_to_display: Няма елементи за показване
         default: Основен
         button_view_all_notifications: 'Виж всички известия'
         dashboard_header_title: 'Табло на Приложението'
@@ -121,6 +122,7 @@ vs_application:
         items_index_row_action_settings: Настройки
         items_index_row_action_edit: Редактирай
         items_index_row_action_delete: Изтрий
+        items_index_row_action_download: Даунлоуд
         locales_index_title: 'Списък Локали'
         locales_update_title: 'Редакция на Локал'
         locales_create_title: 'Създаване Нов Локал'

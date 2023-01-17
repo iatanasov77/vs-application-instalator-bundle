@@ -94,6 +94,7 @@ vs_application:
             password: Password
             btn_close: Close
     template:
+        there_are_no_items_to_display: There are no items to display 
         default: Default
         button_view_all_notifications: 'View all notifications'
         dashboard_header_title: 'Application Dashboard'
@@ -121,6 +122,7 @@ vs_application:
         items_index_row_action_settings: Settings
         items_index_row_action_edit: Edit
         items_index_row_action_delete: Delete
+        items_index_row_action_download: Download
         locales_index_title: 'List Available Locales'
         locales_update_title: 'Edit Locale'
         locales_create_title: 'Create New Locale'
