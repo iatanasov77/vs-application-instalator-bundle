@@ -122,6 +122,7 @@ vs_application:
         items_index_row_action_settings: Настройки
         items_index_row_action_edit: Редактирай
         items_index_row_action_delete: Изтрий
+        items_index_row_action_download: Даунлоуд
         locales_index_title: 'Списък Локали'
         locales_update_title: 'Редакция на Локал'
         locales_create_title: 'Създаване Нов Локал'
