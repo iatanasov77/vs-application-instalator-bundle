@@ -116,6 +116,8 @@ vs_application:
         items_index_row_title: Заглавие
         items_index_row_name: Име
         items_index_row_translations: Преводи
+        items_index_row_created: Създаден
+        items_index_row_updated: Редактиран
         items_index_row_action: Действие
         items_index_row_in_maintenance: В Поддръжка
         items_index_row_theme: Тема
