@@ -13,10 +13,10 @@ class <?= $class_name ?> extends AbstractCrudController
     
     protected function prepareEntity( &$entity, &$form, Request $request )
     {
-        $formPost   = $request->request->get( '<?= $form_name ?>' );
+        $locale	= $request->request->get( 'locale' );
         
-        if ( isset( $formPost['locale'] ) ) {
-            $entity->setTranslatableLocale( $formPost['locale'] );
+        if ( $locale ) {
+            $entity->setTranslatableLocale( $locale );
         }
     }
 }

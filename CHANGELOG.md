@@ -1,3 +1,13 @@
+1.10.15	|	Release date: **19.01.2023**
+============================================
+* New Features:
+  - Add Some Translations.
+  - Add JavaScript VS Libraries.
+* Bug-Fixes:
+  - Replace Getting of Whole Form Post in Controllers.
+  - Fix Create New Taxonomy.
+
+
 1.10.14	|	Release date: **17.01.2023**
 ============================================
 * New Features:

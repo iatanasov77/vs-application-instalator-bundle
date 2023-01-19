@@ -116,6 +116,8 @@ vs_application:
         items_index_row_title: Title
         items_index_row_name: Name
         items_index_row_translations: Translations
+        items_index_row_created: Created
+        items_index_row_updated: Updated
         items_index_row_action: Action
         items_index_row_in_maintenance: In Maintenance
         items_index_row_theme: Theme

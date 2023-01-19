@@ -17,7 +17,7 @@ class TaxonomyController extends AbstractCrudController
     
     protected function prepareEntity( &$entity, &$form, Request $request )
     {
-        $taxonomyName   = $request->request->get( 'name' );
+        $taxonomyName   = $request->request->all( 'taxonomy_form' )['name'];
         
         $entity->setCode( $this->get( 'vs_application.slug_generator' )->generate( $taxonomyName ) );
         
