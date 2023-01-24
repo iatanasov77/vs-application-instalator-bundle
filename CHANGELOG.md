@@ -1,3 +1,10 @@
+1.10.17	|	Release date: **24.01.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Improve AdminPanel Pages Index Page.
+  - Fix Adding Categories to Pages.
+
+
 1.10.16	|	Release date: **19.01.2023**
 ============================================
 * New Features:
