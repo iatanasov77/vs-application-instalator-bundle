@@ -1,3 +1,10 @@
+1.10.18	|	Release date: **25.01.2023**
+============================================
+* New Features and Improvements:
+  - Update Installator Application Configs.
+  - Add a Method to TaxonomyTreeDataTrait .
+
+
 1.10.17	|	Release date: **24.01.2023**
 ============================================
 * Bug-Fixes and Improvements:
