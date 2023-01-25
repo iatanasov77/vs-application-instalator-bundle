@@ -51,6 +51,14 @@ trait TaxonomyTreeDataTrait
         return $data;
     }
     
+    protected function easyuiComboTreeDataProvideTaxons( array $taxons, array $selectedValues = [], array $leafs = [] ) : array
+    {
+        $data           = [];
+        $this->buildEasyuiCombotreeData( $taxons, $data, $selectedValues, $leafs, empty( $leafs) );
+        
+        return $data;
+    }
+    
     protected function buildGtreeTableData( $taxons )
     {
         $data   = [];
