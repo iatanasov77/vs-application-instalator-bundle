@@ -180,3 +180,12 @@ input[type=file] {
     top: 0 !important;
     color: inherit !important;
 }
+
+label.required:after {
+    content: '*';
+    color: red;
+}
+
+input:invalid {
+    border-color: red;
+}
