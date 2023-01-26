@@ -1,3 +1,11 @@
+1.10.19	|	Release date: **26.01.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Set Form Type Email to All User Forms.
+  - Add Styles For All Required Input Field Labels in Admin Panel.
+  - Fix Register Form Template.
+
+
 1.10.18	|	Release date: **25.01.2023**
 ============================================
 * New Features and Improvements:
