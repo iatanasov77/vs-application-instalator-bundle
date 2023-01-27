@@ -1,3 +1,9 @@
+1.10.20	|	Release date: **27.01.2023**
+============================================
+* Bug-Fixes:
+  - Fix TocPageController
+
+
 1.10.19	|	Release date: **26.01.2023**
 ============================================
 * Bug-Fixes and Improvements:
