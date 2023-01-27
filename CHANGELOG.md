@@ -1,3 +1,10 @@
+1.10.22	|	Release date: **27.01.2023**
+============================================
+* New Features:
+  - Add Js Util VsRemoveDuplicates .
+  - Add a Security Bridge that Can Use Token Storage to Provide User.
+
+
 1.10.21	|	Release date: **27.01.2023**
 ============================================
 * Bug-Fixes:
