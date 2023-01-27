@@ -1,3 +1,10 @@
+1.10.21	|	Release date: **27.01.2023**
+============================================
+* Bug-Fixes:
+  - Correct Webpack CopyFiles from ckeditor to  from ckeditor4
+  - Fix CKEditor Popup In Bootstrap Modal 'TOC Page Edit'.
+
+
 1.10.20	|	Release date: **27.01.2023**
 ============================================
 * Bug-Fixes:
