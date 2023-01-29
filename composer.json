@@ -50,7 +50,8 @@
         "willdurand\/js-translation-bundle": "^5.0",
         "hackzilla\/password-generator-bundle": "^5.0",
         "pagerfanta\/doctrine-orm-adapter": "^3.6",
-        "pagerfanta\/twig": "^3.6"
+        "pagerfanta\/twig": "^3.6",
+        "oneup/uploader-bundle": "^4.0"
     },
     "replace": {
         "vankosoft\/application-bundle": "self.version",
