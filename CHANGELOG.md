@@ -1,3 +1,11 @@
+1.10.24	|	Release date: **29.01.2023**
+============================================
+* New Features and Improvements:
+  - Improve OneUp PostPersistListener .
+  - Add jQueryFileUpload.js
+
+
+
 1.10.23	|	Release date: **29.01.2023**
 ============================================
 * New Features:
