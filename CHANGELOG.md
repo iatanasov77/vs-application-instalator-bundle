@@ -1,3 +1,11 @@
+1.10.23	|	Release date: **29.01.2023**
+============================================
+* New Features:
+  - Add OneUp Uploader to Handle Chunked Uploads of Large Files.
+* Bug-Fixes:
+  - Fix and Improve User SecurityBridge .
+
+
 1.10.22	|	Release date: **27.01.2023**
 ============================================
 * New Features:
