@@ -3,16 +3,11 @@ require( 'jquery-ui-dist/jquery-ui.css' );
 require( 'jquery-ui-dist/jquery-ui.theme.css' );
 require( 'blueimp-file-upload/js/jquery.fileupload.js' );
 
+import { humanFileSize } from './humanFileSize.js';
+
 // WORKAROUND: Prevent Double Submiting
 global.btnSaveUploadFileClicked = window.btnSaveUploadFileClicked = false;
 
-function  callProgressBar()
-{
-    $( "#progressbar" ).progressbar({
-        value: 0
-    });
- }; 
-     
 export function InitOneUpFileUpload()
 {
     ///////////////////////////////////////////////////////////////////////
@@ -96,8 +91,11 @@ export function InitOneUpFileUpload()
             value: data.loaded,
             max: data.total
         });
-        $( '#FileUploadProgressbar' ).children( 'span.caption' ).html( data.loaded + ' / ' + data.total );
-        $( '#FileUploadProgressbar' ).children( '.ui-progressbar-value' ).css( "display", "block" );
+        
+        var progressPercents    = ( data.loaded / data.total ) * 100;
+        var progressCaption     = humanFileSize( data.loaded, true ) + ' / ' + humanFileSize( data.total, true ) + ' ( ' + progressPercents + '% )';
+        
+        $( '#FileUploadProgressbar' ).children( 'span.caption' ).html( progressCaption );
     });
     
     // Uncomment Console Logs For Debugging
