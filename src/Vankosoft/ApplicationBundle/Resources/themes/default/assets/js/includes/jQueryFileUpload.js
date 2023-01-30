@@ -92,7 +92,7 @@ export function InitOneUpFileUpload()
             max: data.total
         });
         
-        var progressPercents    = ( data.loaded / data.total ) * 100;
+        var progressPercents    = Math.round( ( data.loaded / data.total ) * 100 );
         var progressCaption     = humanFileSize( data.loaded, true ) + ' / ' + humanFileSize( data.total, true ) + ' ( ' + progressPercents + '% )';
         
         $( '#FileUploadProgressbar' ).children( 'span.caption' ).html( progressCaption );
