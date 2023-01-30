@@ -115,6 +115,7 @@ vs_application:
         items_index_row_code: Code
         items_index_row_title: Title
         items_index_row_name: Name
+        items_index_row_position: Position
         items_index_row_category: Category
         items_index_row_active: Active
         items_index_row_enabled: Enabled
