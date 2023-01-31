@@ -96,7 +96,7 @@ $( function ()
     $( "#tocPagesTableBody" ).sortable({
         start: function( event, ui ) {
             sortableIds = $( "#tocPagesTableBody" ).sortable( "toArray" );
-            console.log( sortableIds );
+            //console.log( sortableIds );
         },
         
         update: function( event, ui ) {
