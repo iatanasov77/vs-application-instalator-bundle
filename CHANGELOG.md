@@ -1,3 +1,16 @@
+1.10.25	|	Release date: **31.01.2023**
+============================================
+* New Features and Improvements:
+  - Improve FileUpload Progress.
+  - Add Some Translations.
+  - Add The CkEditor Extra Plugin 'ckeditor_add_class'.
+  - Improve TOC Page CkEditor.
+  - Improve TOC Page Form Options.
+  - Improve CKEditor.
+  - Add a Simplebox-2 CKEditor Plugin.
+  - Add Simplebox-2 to Ckeditor ExtraPlugins For TocPages.
+
+
 1.10.24	|	Release date: **29.01.2023**
 ============================================
 * New Features and Improvements:
