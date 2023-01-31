@@ -8,9 +8,9 @@
 // (i.e. the widgetDef.dialog property is set).
 // When you are opening the dialog window by yourself, you need to take care of this by yourself too.
 
-CKEDITOR.dialog.add( 'simplebox', function( editor ) {
+CKEDITOR.dialog.add( 'simplebox-2', function( editor ) {
 	return {
-		title: 'Edit Simple Box',
+		title: 'Edit Simple Box 2',
 		minWidth: 200,
 		minHeight: 100,
 		contents: [
