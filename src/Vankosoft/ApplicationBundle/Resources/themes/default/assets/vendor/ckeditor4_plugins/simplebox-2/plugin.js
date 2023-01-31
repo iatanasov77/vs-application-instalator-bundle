@@ -16,7 +16,7 @@ CKEDITOR.plugins.add( 'simplebox-2', {
 
 	// Register the icon used for the toolbar button. It must be the same
 	// as the name of the widget.
-	icons: 'simplebox',
+	icons: 'simplebox-2',
 
 	// The plugin initialization logic goes inside this method.
 	init: function( editor ) {
