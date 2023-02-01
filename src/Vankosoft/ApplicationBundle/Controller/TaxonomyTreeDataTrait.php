@@ -108,11 +108,11 @@ trait TaxonomyTreeDataTrait
             
             $data[$k]   = [
                 'text'  => $node->getTranslation()->getName(),
-                'tags'  => ['0'],
-                'nodes' => []
+                'tags'  => ['0']
             ];
             
             if ( $node->getChildren()->count() ) {
+                $data[$k]['nodes']  = [];
                 $expandParent   = $this->bootstrapTreeviewData( $node->getChildren(), $data[$k]['nodes'], $useTarget, $taxonId );
             } else {
                 $expandParent   = false;
