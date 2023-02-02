@@ -123,7 +123,8 @@ trait TaxonomyTreeDataTrait
                         }
                         $data[$k]['nodes'][$l]    = [
                             'text'  => $leaf->getTreeTitle(),
-                            'tags'  => ['0'],
+                            'icon'  => 'treeLeaf',
+                            'tags'  => [$leaf->getTreeTag()],
                             'href'  => $this->targetUrlLeaf( $leaf->getId() ),
                         ];
                     }
