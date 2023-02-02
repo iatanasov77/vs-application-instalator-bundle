@@ -101,21 +101,34 @@ trait TaxonomyTreeDataTrait
         }
     }
     
-    protected function bootstrapTreeviewData( $tree, &$data, $useTarget = true, $taxonId = null )
+    protected function bootstrapTreeviewData( $tree, &$data, $useTarget = true, $taxonId = null, array $leafs = [] )
     {
         foreach( $tree as $k => $node ) {
             $node->setCurrentLocale(  $node->getParent()->getCurrentLocale() );
             
             $data[$k]   = [
                 'text'  => $node->getTranslation()->getName(),
-                'tags'  => ['0'],
-                'nodes' => []
+                'tags'  => ['0']
             ];
             
             if ( $node->getChildren()->count() ) {
-                $expandParent   = $this->bootstrapTreeviewData( $node->getChildren(), $data[$k]['nodes'], $useTarget, $taxonId );
+                $data[$k]['nodes']  = [];
+                $expandParent   = $this->bootstrapTreeviewData( $node->getChildren(), $data[$k]['nodes'], $useTarget, $taxonId, $leafs );
             } else {
                 $expandParent   = false;
+                foreach ( $leafs as $l => $leaf ) {
+                    if ( $leaf->getOwner()->getTaxon()->getId() == $node->getId() ) {
+                        if ( ! isset( $data[$k]['nodes'] ) ) {
+                            $data[$k]['nodes']  = [];
+                        }
+                        $data[$k]['nodes'][$l]    = [
+                            'text'  => $leaf->getTreeTitle(),
+                            'icon'  => 'treeLeaf',
+                            'tags'  => [$leaf->getTreeTag()],
+                            'href'  => $this->targetUrlLeaf( $leaf->getId() ),
+                        ];
+                    }
+                }
             }
             
             $data[$k]['state']   = [
@@ -139,6 +152,11 @@ trait TaxonomyTreeDataTrait
     }
     
     protected function targetUrl( $taxonId )
+    {
+        return '';
+    }
+    
+    protected function targetUrlLeaf( $leafId )
     {
         return '';
     }
