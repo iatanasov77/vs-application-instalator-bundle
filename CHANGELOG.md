@@ -1,3 +1,10 @@
+1.10.26	|	Release date: **02.02.2023**
+============================================
+* New Features and Improvements:
+  - Improve TaxonomyTreeDataTrait::bootstrapTreeviewData .
+  - Get BootstrapTreeTable Data With Leafs.
+
+
 1.10.25	|	Release date: **31.01.2023**
 ============================================
 * New Features and Improvements:
