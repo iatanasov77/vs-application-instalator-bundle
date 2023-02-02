@@ -116,12 +116,12 @@ trait TaxonomyTreeDataTrait
                 $expandParent   = $this->bootstrapTreeviewData( $node->getChildren(), $data[$k]['nodes'], $useTarget, $taxonId );
             } else {
                 $expandParent   = false;
-                foreach ( $leafs as $leaf ) {
+                foreach ( $leafs as $l => $leaf ) {
                     if ( $leaf->getOwner()->getTaxon()->getId() == $node->getId() ) {
                         if ( ! \is_array( $data[$k]['nodes'] ) ) {
                             $data[$k]['nodes']  = [];
                         }
-                        $data[$k]['nodes'][]    = [
+                        $data[$k]['nodes'][$l]    = [
                             'text'  => $leaf->getTitle(),
                             'tags'  => ['0'],
                         ];
