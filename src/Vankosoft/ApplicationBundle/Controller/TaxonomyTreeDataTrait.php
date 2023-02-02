@@ -123,7 +123,7 @@ trait TaxonomyTreeDataTrait
                         }
                         $data[$k]['nodes'][]    = [
                             'text'  => $leaf->getTitle(),
-                            'tags'  => ['0']
+                            'tags'  => ['0'],
                         ];
                     }
                 }
