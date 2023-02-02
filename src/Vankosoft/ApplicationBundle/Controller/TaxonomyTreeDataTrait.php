@@ -113,17 +113,18 @@ trait TaxonomyTreeDataTrait
             
             if ( $node->getChildren()->count() ) {
                 $data[$k]['nodes']  = [];
-                $expandParent   = $this->bootstrapTreeviewData( $node->getChildren(), $data[$k]['nodes'], $useTarget, $taxonId );
+                $expandParent   = $this->bootstrapTreeviewData( $node->getChildren(), $data[$k]['nodes'], $useTarget, $taxonId, $leafs );
             } else {
                 $expandParent   = false;
                 foreach ( $leafs as $l => $leaf ) {
                     if ( $leaf->getOwner()->getTaxon()->getId() == $node->getId() ) {
-                        if ( ! \is_array( $data[$k]['nodes'] ) ) {
+                        if ( ! isset( $data[$k]['nodes'] ) ) {
                             $data[$k]['nodes']  = [];
                         }
                         $data[$k]['nodes'][$l]    = [
-                            'text'  => $leaf->getTitle(),
+                            'text'  => $leaf->getTreeTitle(),
                             'tags'  => ['0'],
+                            'href'  => $this->targetUrlLeaf( $leaf->getId() ),
                         ];
                     }
                 }
@@ -150,6 +151,11 @@ trait TaxonomyTreeDataTrait
     }
     
     protected function targetUrl( $taxonId )
+    {
+        return '';
+    }
+    
+    protected function targetUrlLeaf( $leafId )
     {
         return '';
     }
