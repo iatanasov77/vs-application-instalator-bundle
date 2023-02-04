@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.10.26",
+    "version": "v1.10.27",
     "description": "VankoSoft Symfony Application",
     "keywords": [
         "symfony",
@@ -51,7 +51,8 @@
         "hackzilla\/password-generator-bundle": "^5.0",
         "pagerfanta\/doctrine-orm-adapter": "^3.6",
         "pagerfanta\/twig": "^3.6",
-        "oneup\/uploader-bundle": "^4.0"
+        "oneup\/uploader-bundle": "^4.0",
+        "oneup\/flysystem-bundle": "^4.6"
     },
     "replace": {
         "vankosoft\/application-bundle": "self.version",
