@@ -1,3 +1,10 @@
+1.10.27	|	Release date: **04.02.2023**
+============================================
+* New Features:
+  - Add OneUp Flysystem Bundle to be Used in Streamed Download of Large Files.
+  - Add method getFilesystem() in the FilemanagerUploader .
+
+
 1.10.26	|	Release date: **02.02.2023**
 ============================================
 * New Features and Improvements:
