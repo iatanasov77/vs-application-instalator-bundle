@@ -1,3 +1,10 @@
+1.10.28	|	Release date: **09.02.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix FileUpload ProgressBar Info.
+  - Add Uploader ProgressBar Styles.
+
+
 1.10.27	|	Release date: **04.02.2023**
 ============================================
 * New Features:
