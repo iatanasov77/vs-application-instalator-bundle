@@ -42,7 +42,7 @@
                                	>
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a class="btn btn-danger btnDelete" 
+                                <a class="btn btn-danger btnDeleteResource" 
                                     href="{{ path('<?= $route_name ?>_delete', {'id': item.id}) }}"
                                     data-csrfToken="{{ csrf_token( item.id ) }}"
                                     title="{{ 'vs_application.template.items_index_row_action_delete' | trans( {},'VSApplicationBundle' ) }}"

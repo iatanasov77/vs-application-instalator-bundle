@@ -17,9 +17,10 @@
     	>
             <i class="fas fa-edit"></i>
     	</a>
-    	<a class="btn btn-danger btnTocPageDelete btnDelete"
+    	<a class="btn btn-danger btnTocPageDelete btnDeleteResource"
             href="{{ path('vs_cms_multipage_toc_page_delete', {'documentId': item.id, 'tocPageId': taxon.id}) }}"
-            data-csrfToken="{{ csrf_token( taxon.id ) }}" 
+            data-csrfToken="{{ csrf_token( taxon.id ) }}"
+            data-redirectUrl="{{ path( 'vs_wgp_tablature_index' ) }}" 
             title="{{ 'vs_application.template.items_index_row_action_delete' | trans( {},'VSApplicationBundle' ) }}"
         >
             <i class="icon_close_alt2"></i>
