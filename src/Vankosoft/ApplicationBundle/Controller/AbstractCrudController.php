@@ -118,6 +118,11 @@ class AbstractCrudController extends ResourceController
     {
         try {
             $response = parent::deleteAction( $request );
+            
+            $redirectUrl    = $request->request->get( 'redirectUrl' );
+            if ( $redirectUrl ) {
+                return $this->redirect( $redirectUrl );
+            }
         } catch ( DBALException $e ) {
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
                 throw new \Vankosoft\ApplicationBundle\Component\Exception\PDOException( 'VS Application DBAL Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
