@@ -7,11 +7,11 @@ import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_transla
 VsLoadTranslations(['VSApplicationBundle']);
 
 var onResourceDeleteOk      = function() {
-    $( '#deleteForm' ).submit();
+    $( '#deleteResourceForm' ).submit();
 }
 
 var onResourceDeleteCancel  = function() {
-    $( '#deleteForm' ).attr( 'action', '' );
+    $( '#deleteResourceForm' ).attr( 'action', '' );
     $( '#resource_delete__token' ).val( '' );
     
     $( this ).dialog( "close" );
@@ -39,12 +39,13 @@ export function VsFormDlete( onOk, onCancel )
  */
 $( function()
 {
-	$( ".btnDelete" ).on( "click", function ( e ) 
+	$( ".btnDeleteResource" ).on( "click", function ( e ) 
 	{
 	    e.preventDefault();
 
-	    $( '#deleteForm' ).attr( 'action', $( this ).attr( 'href' ) );
+	    $( '#deleteResourceForm' ).attr( 'action', $( this ).attr( 'href' ) );
 	    $( '#resource_delete__token' ).val( $( this ).attr( 'data-csrftoken' ) );
+	    $( '#resource_delete__redirect' ).val( $( this ).attr( 'data-redirectUrl' ) );
 	    
 	    var dialog  = VsFormDlete( onResourceDeleteOk, onResourceDeleteCancel );
 	});
