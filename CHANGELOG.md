@@ -1,3 +1,11 @@
+1.10.29	|	Release date: **28.02.2023**
+============================================
+* New Features and Improvements:
+  - Improve Assets Includes.
+  - Improve Resource Delete Abstraction.
+  - Update Delete Buttons of Resources.
+
+
 1.10.28	|	Release date: **09.02.2023**
 ============================================
 * Bug-Fixes and Improvements:
