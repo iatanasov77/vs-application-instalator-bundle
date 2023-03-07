@@ -80,12 +80,12 @@ Encore
     //////////////////////////////////////////////////////////////////
     // Payment Pages
     //////////////////////////////////////////////////////////////////
-    .addEntry( 'js/gateway-config', './assets/admin-panel/js/payment_pages/gateway-config.js' )
+    .addEntry( 'js/gateway-config', assetsPath + '/js/payment_pages/gateway-config.js' )
     
     //////////////////////////////////////////////////////////////////
     // Subscription Pages
     //////////////////////////////////////////////////////////////////
-    .addEntry( 'js/payed-services-edit', './assets/admin-panel/js/subscription_pages/payed-services-edit.js' )
+    .addEntry( 'js/payed-services-edit', assetsPath + '/js/subscription_pages/payed-services-edit.js' )
 ;
 
 const config = Encore.getWebpackConfig();
