@@ -1,3 +1,9 @@
+1.10.30	|	Release date: **07.03.2023**
+============================================
+* New Features:
+  - ADD SUBSCRIPTION AND PAYMENT ASSETS.
+
+
 1.10.29	|	Release date: **28.02.2023**
 ============================================
 * New Features and Improvements:
