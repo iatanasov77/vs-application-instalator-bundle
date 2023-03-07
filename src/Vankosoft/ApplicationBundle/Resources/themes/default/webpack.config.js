@@ -76,6 +76,16 @@ Encore
     
     .addEntry( 'js/filemanager-index', assetsPath + '/js/pages/filemanager-index.js' )
     .addEntry( 'js/filemanager-file-upload', assetsPath + '/js/pages/filemanager-file-upload.js' )
+    
+    //////////////////////////////////////////////////////////////////
+    // Payment Pages
+    //////////////////////////////////////////////////////////////////
+    .addEntry( 'js/gateway-config', './assets/admin-panel/js/payment_pages/gateway-config.js' )
+    
+    //////////////////////////////////////////////////////////////////
+    // Subscription Pages
+    //////////////////////////////////////////////////////////////////
+    .addEntry( 'js/payed-services-edit', './assets/admin-panel/js/subscription_pages/payed-services-edit.js' )
 ;
 
 const config = Encore.getWebpackConfig();
