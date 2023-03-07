@@ -1,3 +1,9 @@
+1.10.31	|	Release date: **07.03.2023**
+============================================
+* Bug-Fixes:
+  - FIX SUBSCRIPTION AND PAYMENT ASSETS LOADING.
+
+
 1.10.30	|	Release date: **07.03.2023**
 ============================================
 * New Features:
