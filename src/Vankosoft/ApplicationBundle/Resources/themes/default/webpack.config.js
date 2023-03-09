@@ -81,6 +81,8 @@ Encore
     // Payment Pages
     //////////////////////////////////////////////////////////////////
     .addEntry( 'js/gateway-config', assetsPath + '/js/payment_pages/gateway-config.js' )
+    .addEntry( 'js/currencies', assetsPath + '/js/payment_pages/currencies.js' )
+    .addEntry( 'js/exchange-rates', assetsPath + '/js/payment_pages/exchange-rates.js' )
     
     //////////////////////////////////////////////////////////////////
     // Subscription Pages
