@@ -11,7 +11,7 @@ use Vankosoft\ApplicationBundle\Component\I18N;
 
 class AbstractForm extends AbstractResourceType
 {
-    public function buildForm( FormBuilderInterface $builder, array $options )
+    public function buildForm( FormBuilderInterface $builder, array $options ): void
     {
         $builder
             ->add( 'btnApply', SubmitType::class, ['label' => 'vs_application.form.apply', 'translation_domain' => 'VSApplicationBundle',] )
