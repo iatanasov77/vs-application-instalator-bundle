@@ -1,3 +1,12 @@
+1.10.33	|	Release date: **09.03.2023**
+============================================
+* New Features:
+  - Improve AbstractForm
+  - Update All Forms That Extends AbstractForm.
+* Bug-Fixes:
+  - Fix Installator Locales Fixture.
+
+
 1.10.32	|	Release date: **09.03.2023**
 ============================================
 * New Features:
