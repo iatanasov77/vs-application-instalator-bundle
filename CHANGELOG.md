@@ -1,3 +1,11 @@
+1.10.32	|	Release date: **09.03.2023**
+============================================
+* New Features:
+  - Add New Payment Assets.
+* Bug-Fixes:
+  - Fix No Items Message in Index Templates.
+
+
 1.10.31	|	Release date: **07.03.2023**
 ============================================
 * Bug-Fixes:
