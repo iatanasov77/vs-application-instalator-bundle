@@ -39,6 +39,9 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
             $localeEntity->setTranslatableLocale( $options['translatableLocale'] );
             $localeEntity->setTitle( $options['title'] );
             $localeEntity->setCode( $options['code'] );
+        } else {
+            $localeEntity->setTranslatableLocale( $options['translatableLocale'] );
+            $localeEntity->setTitle( $options['title'] );
         }
         
         return $localeEntity;
