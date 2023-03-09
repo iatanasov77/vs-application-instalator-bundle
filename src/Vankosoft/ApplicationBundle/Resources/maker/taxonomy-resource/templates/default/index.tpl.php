@@ -15,7 +15,7 @@
             {% if items|length > 0 %}
             	{% include '<?= $templates_path ?>/_simpleTreeTable.html.twig' %}
             {% else %}
-                {{ alerts.info('sylius.ui.there_are_no_mappers_to_display'|trans) }}
+                {{ alerts.info( 'vs_application.template.there_are_no_items_to_display' | trans( {},'VSApplicationBundle' ) ) }}
             {% endif %}
         
             {% if resources.haveToPaginate() %}

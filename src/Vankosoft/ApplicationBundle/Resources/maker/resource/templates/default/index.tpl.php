@@ -54,7 +54,9 @@
                     </tr>
         {% else %}
                     <tr>
-                        <td colspan="<?= (count($entity_fields) + 1) ?>">{{ alerts.info('sylius.ui.there_are_no_mappers_to_display'|trans) }}</td>
+                        <td colspan="<?= (count($entity_fields) + 1) ?>">
+                        	{{ alerts.info( 'vs_application.template.there_are_no_items_to_display' | trans( {},'VSApplicationBundle' ) ) }}
+                        </td>
                     </tr>
         {% endfor %}
                 </tbody>
