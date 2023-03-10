@@ -54,6 +54,8 @@ Encore
     .addEntry( 'js/app', assetsPath + '/js/app.js' )
     .addStyleEntry( 'css/global', assetsPath + '/css/main.scss' )
     
+    .addEntry( 'js/resource-delete', assetsPath + '/js/pages/resource-delete.js' )
+    
     .addEntry( 'js/settings', assetsPath + '/js/pages/settings.js' )
     .addEntry( 'js/applications', assetsPath + '/js/pages/applications.js' )
     .addEntry( 'js/profile', assetsPath + '/js/pages/profile.js' )
