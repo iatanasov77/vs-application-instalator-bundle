@@ -1,3 +1,9 @@
+1.10.34	|	Release date: **10.03.2023**
+============================================
+* New Features:
+  - Add a Resource Delete self-contained script.
+
+
 1.10.33	|	Release date: **09.03.2023**
 ============================================
 * New Features:
