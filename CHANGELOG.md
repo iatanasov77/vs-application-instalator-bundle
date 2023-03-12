@@ -1,3 +1,11 @@
+1.10.37	|	Release date: **12.03.2023**
+============================================
+* New Features and Improvements:
+  - Add Base Repository For Category Resources.
+  - Add Missing Translations in CMS Bundle.
+  - Add PaymentBundle Assets.
+
+
 1.10.36	|	Release date: **11.03.2023**
 ============================================
 * Bug-Fixes:
