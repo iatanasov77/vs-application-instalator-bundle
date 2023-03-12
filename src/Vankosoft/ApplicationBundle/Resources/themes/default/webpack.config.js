@@ -86,6 +86,9 @@ Encore
     .addEntry( 'js/currencies', assetsPath + '/js/payment_pages/currencies.js' )
     .addEntry( 'js/exchange-rates', assetsPath + '/js/payment_pages/exchange-rates.js' )
     .addEntry( 'js/product-categories', assetsPath + '/js/payment_pages/product-categories.js' )
+    .addEntry( 'js/product-categories-edit', assetsPath + '/js/payment_pages/product-categories-edit.js' )
+    .addEntry( 'js/products-index', assetsPath + '/js/payment_pages/products-index.js' )
+    .addEntry( 'js/products-edit', assetsPath + '/js/payment_pages/products-edit.js' )
     
     //////////////////////////////////////////////////////////////////
     // Subscription Pages
