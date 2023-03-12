@@ -8,13 +8,13 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
-    public function find( $id ): ?object
+    public function find( $id, $lockMode = null, $lockVersion = null ): ?object
     {
         if( ! is_numeric( $id ) ) {
             return $this->findOneBy( ['slug' => $id] );
         }
         
-        return parent::find( $id );
+        return parent::find( $id, $lockMode, $lockVersion );
     }
     
     public function findByTaxonId( $taxonId )
