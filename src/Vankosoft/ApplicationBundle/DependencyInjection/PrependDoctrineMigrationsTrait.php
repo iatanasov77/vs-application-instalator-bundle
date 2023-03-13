@@ -36,9 +36,18 @@ trait PrependDoctrineMigrationsTrait
         //file_put_contents( '/tmp/debug_doctrine_migrations_config_end', print_r( $this->debugExtensionConfig( $container, 'doctrine_migrations' ), true ) );
     }
 
-    abstract protected function getMigrationsNamespace(): string;
-
-    abstract protected function getMigrationsDirectory(): string;
-
-    abstract protected function getNamespacesOfMigrationsExecutedBefore(): array;
+    protected function getMigrationsNamespace(): string
+    {
+        return 'Vankosoft\ApplicationBundle\DoctrineMigrations';
+    }
+    
+    protected function getMigrationsDirectory(): string
+    {
+        return '@VSApplicationBundle/DoctrineMigrations';
+    }
+    
+    protected function getNamespacesOfMigrationsExecutedBefore(): array
+    {
+        return [];
+    }
 }
