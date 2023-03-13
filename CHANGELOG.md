@@ -1,3 +1,10 @@
+1.10.38	|	Release date: **13.03.2023**
+============================================
+* Bug-Fixes:
+  - Fix Base CategoryRepository
+  - Fix an Asset FileName.
+
+
 1.10.37	|	Release date: **12.03.2023**
 ============================================
 * New Features and Improvements:
