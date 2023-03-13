@@ -2,9 +2,11 @@ require( 'jquery-easyui/css/easyui.css' );
 require( 'jquery-easyui/js/jquery.easyui.min.js' );
 // Need copy of: jquery-easyui/images/*
 
-require( '../includes/clone_preview.js' );
 $( function()
 {
+    var taxonValues = $( '#categoryTaxonIds' ).attr( 'data-values' ).split( ',' );
+    $( '#product_form_category_taxon' ).combotree( 'setValues', taxonValues );
+    
 	$( '#page_form_locale' ).on( 'change', function( e ) {
 		var pageId	= $( '#pageFormContainer' ).attr( 'data-pageId' );
 		var locale	= $( this ).val()
