@@ -1,3 +1,11 @@
+1.10.39	|	Release date: **14.03.2023**
+============================================
+* New Features and Improvements:
+  - Improve Payment Product Update JavaScript.
+  - Refactore PrependDoctrineMigrationsTrait
+  - Handle Duplicate Fields in Payment Product Edit JavaScript.
+
+
 1.10.38	|	Release date: **13.03.2023**
 ============================================
 * Bug-Fixes:
