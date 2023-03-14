@@ -1,3 +1,9 @@
+1.10.40	|	Release date: **14.03.2023**
+============================================
+* New Features:
+  - Improve GetImageController.
+
+
 1.10.39	|	Release date: **14.03.2023**
 ============================================
 * New Features and Improvements:
