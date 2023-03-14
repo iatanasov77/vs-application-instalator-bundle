@@ -44,21 +44,6 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
         $this->prependDoctrineMigrations( $container );
     }
     
-    protected function getMigrationsNamespace(): string
-    {
-        return 'Vankosoft\ApplicationBundle\DoctrineMigrations';
-    }
-    
-    protected function getMigrationsDirectory(): string
-    {
-        return '@VSApplicationBundle/DoctrineMigrations';
-    }
-    
-    protected function getNamespacesOfMigrationsExecutedBefore(): array
-    {
-        return [];
-    }
-    
     private function debugExtensionConfig( ContainerBuilder $container, string $extension )
     {
         $debugArray = $container->getExtensionConfig( $extension );
