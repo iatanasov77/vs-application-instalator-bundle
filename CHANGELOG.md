@@ -1,3 +1,13 @@
+1.10.41	|	Release date: **23.03.2023**
+============================================
+* New Features:
+  - Add More Fields into UserInfo Model.
+  - Add a Doctrine Migration.
+  - Add User Title Into Profile Edit Form.
+* Bug-Fixes:
+  - Fix Profile Orders Listing Template.
+
+
 1.10.40	|	Release date: **14.03.2023**
 ============================================
 * New Features:
