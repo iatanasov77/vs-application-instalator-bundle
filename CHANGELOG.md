@@ -1,3 +1,10 @@
+1.10.42	|	Release date: **23.03.2023**
+============================================
+* Bug-Fixes:
+  - Add UserInfo Title Into Installator Command.
+  - Fix Profile Orders Listing Template.
+
+
 1.10.41	|	Release date: **23.03.2023**
 ============================================
 * New Features:
