@@ -1,3 +1,10 @@
+1.10.43	|	Release date: **23.03.2023**
+============================================
+* Bug-Fixes:
+  - Fix UserInfoForm
+  - Make RegisterController Extandable.
+
+
 1.10.42	|	Release date: **23.03.2023**
 ============================================
 * Bug-Fixes:
