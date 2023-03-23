@@ -87,6 +87,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setDefault( 'locale_code', $this->localeCode )
             ->setDefault( 'api', false )
             
+            ->setDefined('title')
             ->setDefined('first_name')
             ->setDefined('last_name')
             
@@ -109,6 +110,7 @@ class UsersExampleFactory extends AbstractExampleFactory implements ExampleFacto
             
             $this->userManager->createAvatar( $userInfo, $uploadedImage );
         }
+        $userInfo->setTitle( $options['title'] );
         $userInfo->setFirstName( $options['first_name'] );
         $userInfo->setLastName( $options['last_name'] );
         

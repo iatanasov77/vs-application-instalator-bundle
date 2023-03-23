@@ -19,6 +19,7 @@ use Webmozart\Assert\Assert;
 use Vankosoft\CmsBundle\Component\Uploader\FileUploaderInterface;
 use Vankosoft\UsersBundle\Model\UserInterface;
 use Vankosoft\UsersBundle\Repository\UsersRepositoryInterface;
+use Vankosoft\UsersBundle\Component\UserInfo;
 
 final class CreateApplicationUserCommand extends AbstractInstallCommand
 {
@@ -83,7 +84,10 @@ EOT
         try {
             $user = $this->createNewUser( $userManager, $input, $output );
             
-            $userNames  = explode( ' ', $application );
+            $userNames      = explode( ' ', $application );
+            $userInfoTitles = UserInfo::choices();
+            
+            $user->getInfo()->setTitle( $userInfoTitles[UserInfo::TITLE_MISS] );
             $user->getInfo()->setFirstName( $userNames[0] );
             $user->getInfo()->setLastName( end( $userNames ) );
         } catch ( \InvalidArgumentException $exception ) {
