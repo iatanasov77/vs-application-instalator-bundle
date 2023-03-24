@@ -93,6 +93,12 @@ vs_application:
             message: Паролата Ще Бъде Показана Само Този Път !!!
             password: Парола
             btn_close: Затвори
+        website_contact:
+            name: 'Име'
+            email: 'Емейл'
+            subject: 'Тема'
+            message: 'Съобщение' 
+            submit: 'Изпрати'
     template:
         there_are_no_items_to_display: Няма елементи за показване
         default: Основен
@@ -139,6 +145,14 @@ vs_application:
         create_title: 'Създаване Нов'
         item_name_single: 'Обект'
         item_name_plurel: 'Обекти'
+        
+        contact_page:
+            my_address: 'bul. "Al. Stamboliiski", Plovdiv 4000'
+            visit_us: Посетете Ни
+            contact_details: Контакт Детайли
+            opening_hours: Работно Време
+            email_us: Пратете Е-Мейл
+            view_larger_map: Вижте по-голяма карта
         
     modal:
         application_delete:

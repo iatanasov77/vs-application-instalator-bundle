@@ -93,6 +93,12 @@ vs_application:
             message: The Password Will Be Displayed Only This Time !!!
             password: Password
             btn_close: Close
+        website_contact:
+            name: 'Name'
+            email: 'Email'
+            subject: 'Subject'
+            message: 'Message' 
+            submit: 'Send Message'
     template:
         there_are_no_items_to_display: There are no items to display 
         default: Default
@@ -139,6 +145,14 @@ vs_application:
         create_title: 'Create New'
         item_name_single: 'Item'
         item_name_plurel: 'Items'
+        
+        contact_page:
+            my_address: 'bul. "Al. Stamboliiski", Plovdiv 4000'
+            visit_us: Visit us
+            contact_details: Contact Details
+            opening_hours: Opening Hours
+            email_us: Email Us
+            view_larger_map: View Larger Map
         
     modal:
         application_delete:
