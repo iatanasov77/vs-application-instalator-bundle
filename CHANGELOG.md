@@ -1,3 +1,10 @@
+1.10.49	|	Release date: **24.03.2023**
+============================================
+* New Features:
+  - Add a Contact Form Page Into Application Bundle.
+  - Prepair Template For Contact Page.
+
+
 1.10.48	|	Release date: **24.03.2023**
 ============================================
 * Bug-Fixes:
