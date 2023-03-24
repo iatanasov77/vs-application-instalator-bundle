@@ -12,3 +12,7 @@ vs_application_login:
 vs_application_logout:
     path: /logout
     controller: Vankosoft\ApplicationBundle\Controller\AuthController::logout
+    
+vs_application_contact:
+    path: /contact
+    controller: Vankosoft\ApplicationBundle\Controller\ContactController::index
