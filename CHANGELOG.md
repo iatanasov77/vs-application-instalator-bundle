@@ -1,3 +1,11 @@
+1.10.45	|	Release date: **24.03.2023**
+============================================
+* New Features:
+  - Add Some UsersBundle Translations.
+* Bug-Fixes:
+  - Fix ForgotPasswordController.
+
+
 1.10.44	|	Release date: **24.03.2023**
 ============================================
 * New Features:
