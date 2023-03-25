@@ -51,6 +51,11 @@ class ApplicationSetup
      */
     private $newProjectInstall;
     
+    /**
+     * @var boolean $newProjectInstall
+     */
+    private $isExtendedProject;
+    
     /** 
      * @var SlugGenerator
      */
@@ -91,6 +96,7 @@ class ApplicationSetup
     {
         $this->applicationDefaultLocale = $localeCode;
         $this->newProjectInstall        = $newProjectInstall;
+        $this->isExtendedProject        = \array_key_exists( 'VSPaymentBundle', $this->container->getParameter( 'kernel.bundles' ) );
         $this->_initialize();
         
         $applicationDirs                = $this->getApplicationDirectories( $applicationName );
@@ -163,11 +169,16 @@ class ApplicationSetup
     {
         $zip                = new \ZipArchive;
         
+        $configsRootDir     = '@VSApplicationInstalatorBundle/Resources/application/';
+        if ( $this->isExtendedProject ) {
+            $configsRootDir     = '@VSApplicationInstalatorBundle/Resources/application-extended/';
+        }
+        
         try {
             foreach ( $applicationDirs as $key => $dir ) {
                 try {
                     $dirArchive = $this->container->get( 'kernel' )
-                                        ->locateResource( '@VSApplicationInstalatorBundle/Resources/application/' . $key . '.zip' );
+                                        ->locateResource( $configsRootDir . $key . '.zip' );
                     
                     $res = $zip->open( $dirArchive );
                     if ( $res === TRUE ) {
@@ -373,6 +384,13 @@ class ApplicationSetup
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes.yaml', $configRoutes );
+        
+        $configRoutes   = str_replace(
+            ["__application_name__"],
+            [$this->applicationNamespace],
+            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_application.yaml' )
+            );
+        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_application.yaml', $configRoutes );
         
         $configRoutes   = str_replace(
             ["__application_name__"],
