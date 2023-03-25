@@ -1,3 +1,11 @@
+1.10.50	|	Release date: **25.03.2023**
+============================================
+* New Features:
+  - Setup Installator for ApplicationExtendedProject .
+* Bug-Fixes:
+  - Fix Conact Page Template.
+
+
 1.10.49	|	Release date: **24.03.2023**
 ============================================
 * New Features:

@@ -41,7 +41,9 @@ EOT
         $this->setupApplicationsAdminUser( $input, $output, $locale );
         
         // Setup an Application
-        if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to create a default application? (y/N) ', false ) ) ) {
+        if ( $this->isExtendedProject() ) {
+            $this->setupApplication( $input, $output, $locale );
+        } else if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to create a default application? (y/N) ', false ) ) ) {
             $this->setupApplication( $input, $output, $locale );
         }
         
