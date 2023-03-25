@@ -34,6 +34,11 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         return (bool) $this->getParameter( 'kernel.debug' );
     }
     
+    protected function isExtendedProject(): bool
+    {
+        return \array_key_exists( 'VSPaymentBundle', $this->getParameter( 'kernel.bundles' ) );
+    }
+    
     protected function renderTable( array $headers, array $rows, OutputInterface $output ): void
     {
         $table  = new Table( $output );
