@@ -109,6 +109,10 @@ class ApplicationSetup
         $this->setupApplicationLoginPage();
         $this->setupApplicationConfigs();
         
+        if ( $this->isExtendedProject ) {
+            $this->setupApplicationExtendedPages();
+        }
+        
         /*
          * This Not Work Properly but MayBe is Not Needed
          * BUT AFTER FIXING _initialize() MAY BE IT SHOULD WORK
@@ -433,6 +437,47 @@ class ApplicationSetup
         foreach( $originalKernelConfigs as $confFile ) {
             $filesystem->remove( $confFile );
         }
+    }
+    
+    private function setupApplicationExtendedPages()
+    {
+        $filesystem             = new Filesystem();
+        $projectRootDir         = $this->container->get( 'kernel' )->getProjectDir();
+        
+        $applicationAuthController  = str_replace(
+            ["__application_name__", "__application_slug__"],
+            [$this->applicationNamespace, $this->applicationSlug],
+            file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/GlobalFormsTrait.php' )
+            );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/GlobalFormsTrait.php', $applicationAuthController );
+        
+        $applicationAuthController  = str_replace(
+            ["__application_name__", "__application_slug__"],
+            [$this->applicationNamespace, $this->applicationSlug],
+            file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ContactController.php' )
+            );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ContactController.php', $applicationAuthController );
+        
+        $applicationAuthController  = str_replace(
+            ["__application_name__", "__application_slug__"],
+            [$this->applicationNamespace, $this->applicationSlug],
+            file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ForgotPasswordController.php' )
+            );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ForgotPasswordController.php', $applicationAuthController );
+        
+        $applicationAuthController  = str_replace(
+            ["__application_name__", "__application_slug__"],
+            [$this->applicationNamespace, $this->applicationSlug],
+            file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/RegisterController.php' )
+            );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/RegisterController.php', $applicationAuthController );
+        
+        $applicationAuthController  = str_replace(
+            ["__application_name__", "__application_slug__"],
+            [$this->applicationNamespace, $this->applicationSlug],
+            file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ProductController.php' )
+            );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ProductController.php', $applicationAuthController );
     }
     
     private function setupInstalationInfo()
