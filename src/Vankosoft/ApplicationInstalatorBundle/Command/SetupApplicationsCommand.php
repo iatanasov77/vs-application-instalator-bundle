@@ -43,6 +43,9 @@ EOT
         // Setup an Application
         if ( $this->isExtendedProject() ) {
             $this->setupApplication( $input, $output, $locale );
+            if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to load sample data? (y/N) ', false ) ) ) {
+                $this->loadExtendedSampleData( $input, $output );
+            }
         } else if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to create a default application? (y/N) ', false ) ) ) {
             $this->setupApplication( $input, $output, $locale );
         }
@@ -75,6 +78,18 @@ EOT
         $this->commandExecutor->runCommand( 'vankosoft:application:create-user', $parameters, $output );
         
         $outputStyle->writeln( '<info>Admin account for All Applications successfully created.</info>' );
+        $outputStyle->newLine();
+    }
+    
+    private function loadExtendedSampleData( InputInterface $input, OutputInterface $output )
+    {
+        $outputStyle        = new SymfonyStyle( $input, $output );
+        
+        $parameters         = [];
+        $this->commandExecutor->runCommand( 'vankosoft:install:extended-sample-data', $parameters, $output );
+        
+        $outputStyle->newLine();
+        $outputStyle->writeln( '<info>Loading sample data for VankoSoft Extended Project successfully.</info>' );
         $outputStyle->newLine();
     }
 }
