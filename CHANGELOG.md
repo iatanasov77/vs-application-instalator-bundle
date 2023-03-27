@@ -1,3 +1,9 @@
+1.10.52	|	Release date: **27.03.2023**
+============================================
+* New Features:
+  - Add Installator Command For Loading Sample Data for Extended Project.
+
+
 1.10.51	|	Release date: **25.03.2023**
 ============================================
 * Bug-Fixes:
