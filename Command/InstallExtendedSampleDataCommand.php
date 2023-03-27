@@ -45,7 +45,7 @@ EOT
         }
         
         $parameters = [
-            'suite' => $suite,
+            'suite' => $suite ?: 'vankosoft_extended_sample_data_suite',
             '--no-interaction' => true,
         ];
 
