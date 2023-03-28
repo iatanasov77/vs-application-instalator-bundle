@@ -24,6 +24,9 @@ class AbstractCrudController extends ResourceController
     
     public function showAction( Request $request ): Response
     {
+        $this->currentRequest = $request;
+        $this->classInfo( $request );   // call this for every controller action
+        
         $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );
         
         $this->isGrantedOr403( $configuration, ResourceActions::SHOW );
@@ -55,8 +58,8 @@ class AbstractCrudController extends ResourceController
     public function indexAction( Request $request ): Response
     {
         $this->currentRequest = $request;
-        
         $this->classInfo( $request );   // call this for every controller action
+        
         $configuration = $this->requestConfigurationFactory->create( $this->metadata, $request );
         
         $this->isGrantedOr403( $configuration, ResourceActions::INDEX );
@@ -104,6 +107,7 @@ class AbstractCrudController extends ResourceController
     public function editAction( $id, Request $request ): Response
     {
         $this->classInfo( $request );   // call this for every controller action
+        
         $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );
         
         $er             = $this->getRepository();
