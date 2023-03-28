@@ -1,3 +1,9 @@
+1.10.56	|	Release date: **28.03.2023**
+============================================
+* New Features and Improvements:
+  - Override showAction in ResourceController.
+
+
 1.10.55	|	Release date: **28.03.2023**
 ============================================
 * New Features and Improvements:
