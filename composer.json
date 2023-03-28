@@ -38,7 +38,7 @@
         "knplabs\/knp-gaufrette-bundle": "^0.8",
         "friendsofsymfony\/ckeditor-bundle": "^2.4",
         "liip\/imagine-bundle": "^2.9",
-        "artgris\/filemanager-bundle": "^2.5",
+        "artgris\/filemanager-bundle": "^2.6",
         "spe\/filesize-extension-bundle": "^2.0",
         "sylius\/resource-bundle": "^1.10",
         "sylius\/taxonomy": "^1.11",
