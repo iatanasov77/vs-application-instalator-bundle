@@ -1,3 +1,9 @@
+1.10.54	|	Release date: **28.03.2023**
+============================================
+* Bug-Fixes:
+  - Fix Installator Application Extended Configs.
+
+
 1.10.53	|	Release date: **27.03.2023**
 ============================================
 * Bug-Fixes:
