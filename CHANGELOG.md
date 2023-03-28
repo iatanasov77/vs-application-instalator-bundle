@@ -1,3 +1,12 @@
+1.10.55	|	Release date: **28.03.2023**
+============================================
+* New Features and Improvements:
+  - Update Installator Application Extended Configs.
+  - Update composer.json Packages Versions.
+* Bug-Fixes:
+  - Fix Installator Setup About Extended Project Installation.
+
+
 1.10.54	|	Release date: **28.03.2023**
 ============================================
 * Bug-Fixes:
