@@ -303,6 +303,16 @@ class ApplicationSetup
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml', $configLiipImagine );
+        
+        if ( $this->isExtendedProject ) {
+            // Setup Services and Parameters
+            $configServices = str_replace(
+                [ "__application_namespace__"],
+                [$this->applicationNamespace],
+                file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/vs_payment.yaml' )
+            );
+            $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/vs_payment.yaml', $configServices );
+        }
     }
     
     private function ignoreApplicationControllersInAdminPanelServices()
