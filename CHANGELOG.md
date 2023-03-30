@@ -1,3 +1,14 @@
+1.10.58	|	Release date: **30.03.2023**
+============================================
+* New Features:
+  - Create a Console Command for Change Password.
+  - Improve User Roles Index Page.
+  - Improve UsersEdit Template.
+  - Improve Users Role Form.
+* Bug-Fixes:
+  - Fix Update Taxon Related Entities.
+
+
 1.10.57	|	Release date: **28.03.2023**
 ============================================
 * New Features and Improvements:
