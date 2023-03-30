@@ -28,6 +28,7 @@ services:
             - { name: form.type }
         arguments:
             - '%vs_users.model.user_roles.class%'
+            - '@request_stack'
             - '@vs_users.repository.user_roles'
 
     vs_users.command.create_user:
@@ -36,3 +37,12 @@ services:
             - '@vs_users.manager.user'
         tags:
             - { name: console.command }
+            
+    vs_users.command.change_password:
+        class: Vankosoft\UsersBundle\Command\ChangePasswordCommand
+        arguments:
+            - '@vs_users.manager.user'
+            - "@vs_users.repository.users"
+        tags:
+            - { name: console.command }
+    
