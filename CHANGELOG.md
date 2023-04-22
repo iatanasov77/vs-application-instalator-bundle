@@ -1,3 +1,10 @@
+1.10.59	|	Release date: **22.04.2023**
+============================================
+* New Features:
+  - Add Remember Me Login Functionality.
+  - Add Remember Me Login Configuration For Application Configs.
+
+
 1.10.58	|	Release date: **30.03.2023**
 ============================================
 * New Features:
