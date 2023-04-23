@@ -1,3 +1,10 @@
+1.10.60	|	Release date: **23.04.2023**
+============================================
+* Bug-Fixes:
+  - Update Applications Configs.
+  - Fix Checkbox Style In Admin Panel Templates.
+
+
 1.10.59	|	Release date: **22.04.2023**
 ============================================
 * New Features:
