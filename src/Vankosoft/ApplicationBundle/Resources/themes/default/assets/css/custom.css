@@ -200,10 +200,6 @@ input:invalid {
 	padding-left: 2px !important;
 }
 
-.custom-checkbox .custom-control-label::before {
-	left: 2px !important;
-}
-
 .custom-checkbox .custom-control-label {
     margin-left: 5px !important;
 }
