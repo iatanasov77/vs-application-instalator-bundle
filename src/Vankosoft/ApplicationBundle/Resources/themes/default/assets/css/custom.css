@@ -189,3 +189,21 @@ label.required:after {
 input:invalid {
     /*border-color: red;*/
 }
+
+.custom-checkbox .custom-control-input {
+	position: relative !important;
+	z-index: 9999 !important;
+    opacity: 9999 !important;
+}
+
+.custom-checkbox.custom-control {
+	padding-left: 2px !important;
+}
+
+.custom-checkbox .custom-control-label::before {
+	left: 2px !important;
+}
+
+.custom-checkbox .custom-control-label {
+    margin-left: 5px !important;
+}
