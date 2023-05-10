@@ -27,6 +27,6 @@ class ExceptionListener
             $response->setStatusCode( Response::HTTP_INTERNAL_SERVER_ERROR );
         }
         // sends the modified response object to the event
-        $event->setResponse( response );
+        $event->setResponse( $response );
     }
 }
