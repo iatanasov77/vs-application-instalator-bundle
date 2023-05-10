@@ -23,6 +23,11 @@ services:
     Vankosoft\ApplicationBundle\Component\Context\ApplicationContext: '@vs_application.context.application'
     Vankosoft\ApplicationBundle\Component\Context\ApplicationContextInterface: '@Vankosoft\ApplicationBundle\Component\Context\ApplicationContext'
 
+    vs_application.exception_listener:
+        class: Vankosoft\ApplicationBundle\EventListener\ExceptionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+    
     vs_application.slug_generator:
         class: Vankosoft\ApplicationBundle\Component\SlugGenerator
         arguments:
