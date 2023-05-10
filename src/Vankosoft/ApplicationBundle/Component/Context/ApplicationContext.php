@@ -6,6 +6,7 @@ use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
 use Vankosoft\ApplicationBundle\Component\Exception\RequestNotFoundException;
 use Vankosoft\ApplicationBundle\Component\Exception\ApplicationNotFoundException;
+use Vankosoft\ApplicationBundle\Component\Context\ApplicationNotFoundException as ContextApplicationNotFoundException;
 
 final class ApplicationContext implements ApplicationContextInterface
 {
@@ -27,7 +28,8 @@ final class ApplicationContext implements ApplicationContextInterface
             // Do Nothing ( May be The Service is triggered by Command Line )
             return new NullApplication();
         } catch ( ApplicationNotFoundException $exception ) {
-            throw new ApplicationNotFoundException( null, $exception );
+            //throw new ApplicationNotFoundException( null, $exception );
+            throw new ContextApplicationNotFoundException( null, $exception );
         }
     }
     

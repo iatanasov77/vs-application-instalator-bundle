@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="{{ app.request.locale|slice(0, 2) }}">
-	<head>
+    <head>
         <title>{% block title %}.:: VankoSoft{% endblock %}</title>
 
         {% block head_meta %}
@@ -10,6 +10,8 @@
             {% endif %}
         {% endblock %}
 
+        {# DONT USE ASSETS BECAUSE ITS CANNOT FOUND IN OTHER APPLICATIONS
+         ###################################################################
         {% block head_styles %}
             {{ encore_entry_link_tags( 'css/global' ) }}
         {% endblock %}
@@ -17,13 +19,14 @@
         {% block head_scripts %}
             {{ encore_entry_script_tags( 'js/app' ) }}
         {% endblock %}
+        #}
     </head>
     <body>
         {% include '@VSApplication/Layout/alerts.html.twig' %}
         <div class="splash-container">
-        	<div class="card ">
-            	{% block content %}{% endblock %}
-        	</div>
+            <div class="card ">
+                {% block content %}{% endblock %}
+            </div>
         </div>
     </body>
 </html>
