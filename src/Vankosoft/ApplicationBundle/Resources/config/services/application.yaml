@@ -25,6 +25,8 @@ services:
 
     vs_application.exception_listener:
         class: Vankosoft\ApplicationBundle\EventListener\ExceptionListener
+        arguments:
+            - '@twig'
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
     

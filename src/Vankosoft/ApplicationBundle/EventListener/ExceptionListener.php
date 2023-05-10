@@ -3,55 +3,51 @@
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Twig\Environment;
 
 use Vankosoft\ApplicationBundle\Component\Exception\TestException;
 use Vankosoft\ApplicationBundle\Component\Context\ApplicationNotFoundException;
 
+/**
+ * MANUAL: https://symfony.com/doc/current/event_dispatcher.html
+ */
 class ExceptionListener
 {
+    /**
+     * @var Environment $twig
+     */
+    private $twig;
+    
+    public function __construct( Environment $twig )
+    {
+        $this->twig = $twig;
+    }
+    
     public function onKernelException( ExceptionEvent $event )
     {
         $exception  = $event->getThrowable();
-        $response   = new Response();
         
         switch ( true ) {
-            case  ( $exception instanceof TestException ):
-                $message = sprintf(
-                    'Getting following error: %s with code: %s',
-                    $exception->getMessage(),
-                    $exception->getCode()
-                );
-                
-                // Customize your response object to display the exception details
-                $response->setContent( $message );
-                
-                // sends the modified response object to the event
-                $event->setResponse( $response );
-                
-                break;
             case ( $exception instanceof ApplicationNotFoundException ):
-                $message = sprintf(
-                    'VankoSoft Application Error: %s with code: %s',
-                    $exception->getMessage(),
-                    $exception->getCode()
-                );
-                
-                // Customize your response object to display the exception details
-                $response->setContent( $message );
-                
-                // sends the modified response object to the event
-                $event->setResponse( $response );
-                
-                break;
-                
-            case ( $exception instanceof HttpExceptionInterface ):
-                $response->setStatusCode( $exception->getStatusCode() );
-                $response->headers->replace( $exception->getHeaders() );
-                
-                // sends the modified response object to the event
-                $event->setResponse( $response );
+                $this->showFixApplicationForm( $event );
                 
                 break;
         }
+    }
+    
+    private function showFixApplicationForm( &$event )
+    {
+        $response       = new Response();
+        $pageContent    = $this->twig->render( '@VSApplication/Pages/Exception/application-not-found.html.twig',
+            [
+                
+            ]
+        );
+        
+        // Customize your response object to display the exception details
+        $response->setContent( $pageContent  );
+        
+        // sends the modified response object to the event
+        $event->setResponse( $response );
     }
 }
