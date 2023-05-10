@@ -1,3 +1,11 @@
+1.10.61	|	Release date: **10.05.2023**
+============================================
+* New Features and Improvements:
+  - Fix Checkbox Style In Admin Panel Templates.
+  - Create an ExceptionListener.
+  - Add Twig Template for ApplicationNotFound Exception.
+
+
 1.10.60	|	Release date: **23.04.2023**
 ============================================
 * Bug-Fixes:
