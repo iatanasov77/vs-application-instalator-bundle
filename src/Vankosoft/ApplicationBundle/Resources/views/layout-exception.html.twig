@@ -10,6 +10,7 @@
             {% endif %}
         {% endblock %}
 
+        {#
         {% block head_styles %}
             {{ encore_entry_link_tags( 'css/global' ) }}
         {% endblock %}
@@ -17,6 +18,7 @@
         {% block head_scripts %}
             {{ encore_entry_script_tags( 'js/app' ) }}
         {% endblock %}
+        #}
     </head>
     <body>
         {% include '@VSApplication/Layout/alerts.html.twig' %}
