@@ -1,3 +1,11 @@
+1.10.62	|	Release date: **11.05.2023**
+============================================
+* New Features:
+  - Create TocPage Model Sluggable.
+  - Add TranslatableTrait Into TocPage Model.
+  - Add Doctrine Migration for TocPage Slug Field.
+
+
 1.10.61	|	Release date: **10.05.2023**
 ============================================
 * New Features and Improvements:
