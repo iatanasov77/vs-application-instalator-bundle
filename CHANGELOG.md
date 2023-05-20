@@ -1,3 +1,22 @@
+1.10.63	|	Release date: **20.05.2023**
+============================================
+* New Features, Some Tests and Improvements:
+  - Create an ApiTokensManager Service.
+  - Remove ApiTokensManager.
+  - Fix Some Application Layout Templates.
+  - Improve UserNotification Model.
+  - Add Doctrine Migration for UserNotification Model Changes.
+  - Remove Some Uneeded Classes.
+  - Ordering User Activities and Notifications.
+  - Add Filter Method for UserNotification Model to Get Unreaded Notifications.
+  - Show Usser Notifications in Profile Page.
+  - Add User Profile Page Tab Anchors.
+  - Add Link to View All User Notifications.
+  - Use Tab Links in Settings Preferences Page.
+  - Add Applications Links in AdminPanel Side Bar.
+  - Show Notifications Indicator When Have Unreaded.
+
+
 1.10.62	|	Release date: **11.05.2023**
 ============================================
 * New Features:

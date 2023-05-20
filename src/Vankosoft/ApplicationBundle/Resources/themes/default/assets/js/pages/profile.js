@@ -9,6 +9,7 @@ import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_transla
 VsLoadTranslations(['VSApplicationBundle']);
 
 require( '../includes/bootstrap-5/file-input.js' );
+const bootstrap = require( 'bootstrap' );
 
 $( function()
 {
@@ -36,4 +37,18 @@ $( function()
             }
         });
     });
+    
+    var hash = location.hash.replace( /^#/, '' );
+    if ( hash ) {
+        var someVarName = $( '.nav-tabs a[href="#' + hash + '"]' );
+        var tab         = new bootstrap.Tab( someVarName );
+        tab.show();
+    }
+    
+    $( '.nav-tabs a' ).on( 'shown.bs.tab', function ( e )
+    {
+        window.location.hash = e.target.hash;
+        window.scrollTo( 0, 0 );
+    });
+    
 });
