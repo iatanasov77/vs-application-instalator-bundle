@@ -24,7 +24,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end notification-dropdown">
                     <li>
-                        <div class="notification-title">Notification</div>
+                        <div class="notification-title">{{ 'vs_users.template.profile_notifications' | trans( {},'VSUsersBundle' ) }}</div>
                         <div class="notification-list">
                             <div class="list-group">
 
@@ -32,7 +32,9 @@
                             {% for notification in app.user.unreadedNotifications %}
                                 <a href="#" class="list-group-item list-group-item-action active">
                                     <div class="notification-info">
-                                        <div class="notification-list-user-img"><img src="{{ asset( '/build/default/images/avatar-2.jpg' ) }}" alt="" class="user-avatar-md rounded-circle"></div>
+                                        <div class="notification-list-user-img">
+                                            <img src="{{ asset( '/build/default/images/avatar-2.jpg' ) }}" alt="" class="user-avatar-md rounded-circle">
+                                        </div>
                                         <div class="notification-list-user-block">
                                         	<span class="notification-list-user-name">{{ notification.notificationFrom }}</span>{{ notification.notification }}
                                             <div class="notification-date">{{ time_diff( notification.date ) }}</div>
