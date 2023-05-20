@@ -11,7 +11,6 @@ imports:
     - { resource: services/commands.yaml }
     - { resource: services/web_profiler.yaml }
     - { resource: services/repository.yaml }
-    - { resource: services/api.yaml }
     - { resource: services/twig.yaml }
 
 parameters:
