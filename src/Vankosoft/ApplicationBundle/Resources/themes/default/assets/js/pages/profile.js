@@ -9,6 +9,7 @@ import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_transla
 VsLoadTranslations(['VSApplicationBundle']);
 
 require( '../includes/bootstrap-5/file-input.js' );
+const bootstrap = require( 'bootstrap' );
 
 $( function()
 {
