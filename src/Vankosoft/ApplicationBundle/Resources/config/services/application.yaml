@@ -45,4 +45,6 @@ services:
             - '@vs_users.factory.user_activity'
             - '@doctrine.orm.entity_manager'
             - '@security.token_storage'
-        tags: [kernel.event_subscriber]
+        tags:
+            #- { name: 'doctrine.event_subscriber', event: 'kernel.request', method: 'onKernelRequest' }
+            - { name: 'doctrine.event_subscriber', priority: 9000 }
