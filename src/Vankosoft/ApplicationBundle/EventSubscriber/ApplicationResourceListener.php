@@ -41,7 +41,7 @@ class ApplicationResourceListener extends AbstractDoctrineSubscriber
         }
     }
     
-    public function postCreate( GenericEvent $event )
+    public function onCreate( GenericEvent $event )
     {
         //if ( ! is_object( $this->user ) || ! $this->user->hasRole( 'ROLE_ADMIN' ) ) {
         if ( $this->user ) {
@@ -49,11 +49,19 @@ class ApplicationResourceListener extends AbstractDoctrineSubscriber
         }
     }
     
-    public function postUpdate( GenericEvent $event )
+    public function onUpdate( GenericEvent $event )
     {
         //if ( ! is_object( $this->user ) || ! $this->user->hasRole( 'ROLE_ADMIN' ) ) {
         if ( $this->user ) {
             $this->addUserActivity( 'A Resource Updated' );
+        }
+    }
+    
+    public function onDelete( GenericEvent $event )
+    {
+        //if ( ! is_object( $this->user ) || ! $this->user->hasRole( 'ROLE_ADMIN' ) ) {
+        if ( $this->user ) {
+            $this->addUserActivity( 'A Resource Deleted' );
         }
     }
     
@@ -67,9 +75,9 @@ class ApplicationResourceListener extends AbstractDoctrineSubscriber
         ksort( $resources );
         
         foreach ( $resources as $resource ) {
-            $events[]   = $resource->getAlias() . '.post_create';
-            $events[]   = $resource->getAlias() . '.post_update';
-            $events[]   = $resource->getAlias() . '.post_delete';
+            $events[$resource->getAlias() . '.post_create'] = 'onCreate';
+            $events[$resource->getAlias() . '.post_update'] = 'onUpdate';
+            $events[$resource->getAlias() . '.post_delete'] = 'onDelete';
         }
         
         return $events;
