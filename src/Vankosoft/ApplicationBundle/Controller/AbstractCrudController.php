@@ -12,6 +12,7 @@ use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\ORMException;
 
 use Vankosoft\ApplicationBundle\Component\Status;
+use Vankosoft\ApplicationBundle\EventListener\ResourceAction\ResourceActionEvent;
 
 class AbstractCrudController extends ResourceController
 {
@@ -123,6 +124,9 @@ class AbstractCrudController extends ResourceController
             
             $em->persist( $entity );
             $em->flush();
+            
+            $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
+            $this->eventDispatcher->dispatch( new ResourceActionEvent( $entity, $currentUser, ResourceActions::CREATE ) );
             
             if( $request->isXmlHttpRequest() ) {
                 return new JsonResponse([

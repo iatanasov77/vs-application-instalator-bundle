@@ -1,4 +1,5 @@
 imports:
+    - { resource: services/sylius_resource.yaml }
     - { resource: services/application.yaml }
     - { resource: services/controller.yaml }
     - { resource: services/settings.yaml }
