@@ -1,6 +1,6 @@
 <?php namespace Vankosoft\ApplicationBundle\EventSubscriber;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
