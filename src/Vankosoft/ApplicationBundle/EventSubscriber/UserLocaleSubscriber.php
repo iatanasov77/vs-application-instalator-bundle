@@ -24,7 +24,7 @@ class UserLocaleSubscriber implements EventSubscriberInterface
         }
     }
     
-    public static function getSubscribedEvents(): array
+    public function getSubscribedEvents(): array
     {
         return [
             SecurityEvents::INTERACTIVE_LOGIN => 'onInteractiveLogin',
