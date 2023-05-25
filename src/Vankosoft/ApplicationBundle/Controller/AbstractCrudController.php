@@ -97,15 +97,15 @@ class AbstractCrudController extends ResourceController
     
     public function createAction( Request $request ): Response
     {
-        return $this->editAction( 0, $request );
+        return $this->editAction( 0, ResourceActions::CREATE, $request );
     }
     
     public function updateAction( Request $request ): Response
     {
-        return $this->editAction( $request->attributes->get( 'id' ), $request );
+        return $this->editAction( $request->attributes->get( 'id' ), ResourceActions::UPDATE, $request );
     }
     
-    public function editAction( $id, Request $request ): Response
+    public function editAction( $id, $resourceAction , Request $request ): Response
     {
         $this->classInfo( $request );   // call this for every controller action
         
@@ -128,7 +128,8 @@ class AbstractCrudController extends ResourceController
             $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
             // Using Symfony Event Dispatcher ( NOT \Sylius\Bundle\ResourceBundle\Controller\EventDispatcher )
             $this->get( 'event_dispatcher' )->dispatch(
-                new ResourceActionEvent( $entity, $currentUser, ResourceActions::CREATE )
+                new ResourceActionEvent( $entity, $currentUser, $resourceAction ),
+                ResourceActionEvent::NAME
             );
             
             if( $request->isXmlHttpRequest() ) {
@@ -146,7 +147,7 @@ class AbstractCrudController extends ResourceController
         }
         
         if ($configuration->isHtmlRequest()) {
-            return $this->render( $configuration->getTemplate( ResourceActions::UPDATE . '.html' ), array_merge( [
+            return $this->render( $configuration->getTemplate( $resourceAction . '.html' ), array_merge( [
                 'item' => $entity,
                 'form' => $form->createView(),
             ], $this->customData( $request, $entity ) ) );
