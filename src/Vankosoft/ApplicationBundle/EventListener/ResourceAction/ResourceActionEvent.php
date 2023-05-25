@@ -13,13 +13,13 @@ final class ResourceActionEvent
     /** @var ResourceInterface */
     private $resource;
     
-    /** @var UserInterface */
+    /** @var UserInterface|null */
     private $user;
     
     /** @var string */
     private $action;
     
-    public function __construct( ResourceInterface $resource, UserInterface $user, string $action )
+    public function __construct( ResourceInterface $resource, $user, $action )
     {
         $this->resource = $resource;
         $this->user     = $user;

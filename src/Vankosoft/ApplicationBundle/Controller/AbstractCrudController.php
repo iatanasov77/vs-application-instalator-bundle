@@ -126,7 +126,10 @@ class AbstractCrudController extends ResourceController
             $em->flush();
             
             $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
-            $this->eventDispatcher->dispatch( new ResourceActionEvent( $entity, $currentUser, ResourceActions::CREATE ) );
+            // Using Symfony Event Dispatcher ( NOT \Sylius\Bundle\ResourceBundle\Controller\EventDispatcher )
+            $this->get( 'event_dispatcher' )->dispatch(
+                new ResourceActionEvent( $entity, $currentUser, ResourceActions::CREATE )
+            );
             
             if( $request->isXmlHttpRequest() ) {
                 return new JsonResponse([
