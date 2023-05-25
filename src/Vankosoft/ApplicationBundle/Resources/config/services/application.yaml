@@ -34,3 +34,5 @@ services:
         class: Vankosoft\ApplicationBundle\Component\SlugGenerator
         arguments:
             - '@request_stack'
+
+

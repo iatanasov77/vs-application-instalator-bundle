@@ -1,3 +1,12 @@
+1.10.64	|	Release date: **26.05.2023**
+============================================
+* New Features:
+  - Add Event Subscriber For Resource Actions.
+* Bug-Fixes:
+  - Fix Pages Update Twig Template.
+  - Fix Cms PagesController to Can Create Uncategorized Page.
+
+
 1.10.63	|	Release date: **20.05.2023**
 ============================================
 * New Features, Some Tests and Improvements:

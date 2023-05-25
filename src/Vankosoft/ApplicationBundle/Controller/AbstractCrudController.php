@@ -12,6 +12,7 @@ use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\ORMException;
 
 use Vankosoft\ApplicationBundle\Component\Status;
+use Vankosoft\ApplicationBundle\EventSubscriber\ResourceActionEvent;
 
 class AbstractCrudController extends ResourceController
 {
@@ -96,15 +97,15 @@ class AbstractCrudController extends ResourceController
     
     public function createAction( Request $request ): Response
     {
-        return $this->editAction( 0, $request );
+        return $this->editAction( 0, ResourceActions::CREATE, $request );
     }
     
     public function updateAction( Request $request ): Response
     {
-        return $this->editAction( $request->attributes->get( 'id' ), $request );
+        return $this->editAction( $request->attributes->get( 'id' ), ResourceActions::UPDATE, $request );
     }
     
-    public function editAction( $id, Request $request ): Response
+    public function editAction( $id, $resourceAction , Request $request ): Response
     {
         $this->classInfo( $request );   // call this for every controller action
         
@@ -124,6 +125,13 @@ class AbstractCrudController extends ResourceController
             $em->persist( $entity );
             $em->flush();
             
+            $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
+            // Using Symfony Event Dispatcher ( NOT \Sylius\Bundle\ResourceBundle\Controller\EventDispatcher )
+            $this->get( 'event_dispatcher' )->dispatch(
+                new ResourceActionEvent( $this->metadata->getAlias(), $currentUser, $resourceAction ),
+                ResourceActionEvent::NAME
+            );
+            
             if( $request->isXmlHttpRequest() ) {
                 return new JsonResponse([
                     'status'   => Status::STATUS_OK
@@ -139,7 +147,7 @@ class AbstractCrudController extends ResourceController
         }
         
         if ($configuration->isHtmlRequest()) {
-            return $this->render( $configuration->getTemplate( ResourceActions::UPDATE . '.html' ), array_merge( [
+            return $this->render( $configuration->getTemplate( $resourceAction . '.html' ), array_merge( [
                 'item' => $entity,
                 'form' => $form->createView(),
             ], $this->customData( $request, $entity ) ) );
@@ -152,6 +160,13 @@ class AbstractCrudController extends ResourceController
     {
         try {
             $response = parent::deleteAction( $request );
+            
+            $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
+            // Using Symfony Event Dispatcher ( NOT \Sylius\Bundle\ResourceBundle\Controller\EventDispatcher )
+            $this->get( 'event_dispatcher' )->dispatch(
+                new ResourceActionEvent( $this->metadata->getAlias(), $currentUser, ResourceActions::DELETE ),
+                ResourceActionEvent::NAME
+            );
             
             $redirectUrl    = $request->request->get( 'redirectUrl' );
             if ( $redirectUrl ) {
