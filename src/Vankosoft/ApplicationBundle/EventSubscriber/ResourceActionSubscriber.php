@@ -1,4 +1,4 @@
-<?php namespace Vankosoft\ApplicationBundle\EventListener\ResourceAction;
+<?php namespace Vankosoft\ApplicationBundle\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

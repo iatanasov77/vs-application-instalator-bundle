@@ -5,7 +5,7 @@ services:
         public: true
             
     vs_application.resource_action_subscriber:
-        class: Vankosoft\ApplicationBundle\EventListener\ResourceAction\ResourceActionSubscriber
+        class: Vankosoft\ApplicationBundle\EventSubscriber\ResourceActionSubscriber
         arguments:
             - '@vs_users.factory.user_activity'
             - '@doctrine.orm.entity_manager'

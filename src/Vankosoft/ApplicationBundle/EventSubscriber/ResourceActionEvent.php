@@ -1,4 +1,4 @@
-<?php namespace Vankosoft\ApplicationBundle\EventListener\ResourceAction;
+<?php namespace Vankosoft\ApplicationBundle\EventSubscriber;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Vankosoft\UsersBundle\Model\UserInterface;
