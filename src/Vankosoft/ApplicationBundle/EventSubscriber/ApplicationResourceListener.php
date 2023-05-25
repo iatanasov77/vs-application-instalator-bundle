@@ -1,19 +1,17 @@
 <?php namespace Vankosoft\ApplicationBundle\EventSubscriber;
 
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-use Doctrine\ORM\EntityManager;
+use Sylius\Bundle\ResourceBundle\EventListener\AbstractDoctrineSubscriber;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Component\Resource\Factory\Factory;
+use Doctrine\ORM\EntityManager;
 
 use Vankosoft\UsersBundle\Model\UserInterface;
 
-class ApplicationResourceListener implements EventSubscriberInterface
+class ApplicationResourceListener extends AbstractDoctrineSubscriber
 {
     /** @var RegistryInterface */
     private $registry;
