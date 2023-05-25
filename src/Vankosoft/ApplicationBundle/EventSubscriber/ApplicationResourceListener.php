@@ -59,7 +59,7 @@ class ApplicationResourceListener implements EventSubscriberInterface
         }
     }
     
-    public static function getSubscribedEvents(): array
+    public function getSubscribedEvents(): array
     {
         $events =[];
         
