@@ -34,3 +34,15 @@ services:
         class: Vankosoft\ApplicationBundle\Component\SlugGenerator
         arguments:
             - '@request_stack'
+            
+    #################################################################
+    # Subscribe to Application Resources Events
+    #################################################################
+    vs_application.resource_listener:
+        class: Vankosoft\ApplicationBundle\EventSubscriber\ApplicationResourceListener
+        arguments:
+            - '@sylius.resource_registry'
+            - '@vs_users.factory.user_activity'
+            - '@doctrine.orm.entity_manager'
+            - '@security.token_storage'
+        tags: [kernel.event_subscriber]
