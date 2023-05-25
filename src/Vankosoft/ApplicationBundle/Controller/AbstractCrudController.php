@@ -12,7 +12,7 @@ use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\ORMException;
 
 use Vankosoft\ApplicationBundle\Component\Status;
-use Vankosoft\ApplicationBundle\EventListener\ResourceAction\ResourceActionEvent;
+use Vankosoft\ApplicationBundle\EventSubscriber\ResourceActionEvent;
 
 class AbstractCrudController extends ResourceController
 {
