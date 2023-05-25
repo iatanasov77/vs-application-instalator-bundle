@@ -10,7 +10,7 @@ final class ResourceActionEvent
 {
     public const NAME   = 'vs_application.resource_action';
     
-    /** @var ResourceInterface */
+    /** @var string */
     private $resource;
     
     /** @var UserInterface|null */
@@ -19,7 +19,7 @@ final class ResourceActionEvent
     /** @var string */
     private $action;
     
-    public function __construct( ResourceInterface $resource, $user, $action )
+    public function __construct( $resource, $user, $action )
     {
         $this->resource = $resource;
         $this->user     = $user;

@@ -38,20 +38,10 @@ final class ResourceActionSubscriber implements EventSubscriberInterface
     {
         return [ResourceActionEvent::NAME => 'addUserActivity'];
     }
-/*
-    public static function getSubscribedEvents()
-    {
-        return [
-            ResourceActionEvent::NAME => [
-                //['sendNotification', 8],
-                ['addUserActivity', 7],
-            ],
-        ];
-    }
-*/
+
     public function addUserActivity( ResourceActionEvent $event )
     {
-        $this->_addUserActivity( 'Resource Action Triggered - ' . $event->getAction() );
+        $this->_addUserActivity( 'Resource: ' . $event->getResource() . 'Action: ' . $event->getAction() );
     }
     
     private function _addUserActivity( string $activity )

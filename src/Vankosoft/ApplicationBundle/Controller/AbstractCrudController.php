@@ -128,7 +128,7 @@ class AbstractCrudController extends ResourceController
             $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
             // Using Symfony Event Dispatcher ( NOT \Sylius\Bundle\ResourceBundle\Controller\EventDispatcher )
             $this->get( 'event_dispatcher' )->dispatch(
-                new ResourceActionEvent( $entity, $currentUser, $resourceAction ),
+                new ResourceActionEvent( $this->metadata->getAlias(), $currentUser, $resourceAction ),
                 ResourceActionEvent::NAME
             );
             
@@ -160,6 +160,13 @@ class AbstractCrudController extends ResourceController
     {
         try {
             $response = parent::deleteAction( $request );
+            
+            $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
+            // Using Symfony Event Dispatcher ( NOT \Sylius\Bundle\ResourceBundle\Controller\EventDispatcher )
+            $this->get( 'event_dispatcher' )->dispatch(
+                new ResourceActionEvent( $this->metadata->getAlias(), $currentUser, ResourceActions::DELETE ),
+                ResourceActionEvent::NAME
+            );
             
             $redirectUrl    = $request->request->get( 'redirectUrl' );
             if ( $redirectUrl ) {
