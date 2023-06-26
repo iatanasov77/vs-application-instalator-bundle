@@ -1,5 +1,5 @@
 const $ = require( 'jquery' );
-global.$ = $;
+//global.$ = $;
 window.$ = $;
 
 require( 'bootstrap' ); // bootstrap should be before jquery-ui
