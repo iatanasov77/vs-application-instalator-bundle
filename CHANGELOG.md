@@ -1,3 +1,10 @@
+1.10.66	|	Release date: **29.06.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix MaintenanceListener When Using Console Command 'debug:event-dispatcher'
+  - Dispatch Sylius Resource Events In AbstractCrudController.
+
+
 1.10.65	|	Release date: **28.06.2023**
 ============================================
 * Bug-Fixes and Improvements:
