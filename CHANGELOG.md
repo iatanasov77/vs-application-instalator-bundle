@@ -1,3 +1,11 @@
+1.10.65	|	Release date: **28.06.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Improve Resource Action Subscriber.
+  - Fix Default app.js
+  - Fix VsApplicationCollector When Using Console Command 'debug:event-dispatcher'
+
+
 1.10.64	|	Release date: **26.05.2023**
 ============================================
 * New Features:

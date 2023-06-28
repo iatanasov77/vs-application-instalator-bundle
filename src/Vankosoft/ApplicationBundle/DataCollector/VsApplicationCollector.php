@@ -19,20 +19,24 @@ final class VsApplicationCollector extends DataCollector
         array $bundles,
         string $defaultLocaleCode
     ) {
-        $this->data = [
-            'version'               => $version,
-            'default_locale_code'   => $defaultLocaleCode,
-            'locale_code'           => $requestStack->getMainRequest()->getLocale(),
-            'extensions'            => [
-                'VSUsersSubscriptionsBundle'    => ['name' => 'Subscription', 'enabled' => false],
-                'VSPaymentBundle'               => ['name' => 'Payment', 'enabled' => false],
-                'VSApiBundle'                   => ['name' => 'API', 'enabled' => false],
-            ],
-        ];
+        $mainRequest    = $requestStack->getMainRequest();
         
-        foreach ( array_keys( $this->data['extensions'] ) as $bundleName ) {
-            if ( isset( $bundles[$bundleName] ) ) {
-                $this->data['extensions'][$bundleName]['enabled']   = true;
+        if ( $mainRequest ) {
+            $this->data = [
+                'version'               => $version,
+                'default_locale_code'   => $defaultLocaleCode,
+                'locale_code'           => $mainRequest->getLocale(),
+                'extensions'            => [
+                    'VSUsersSubscriptionsBundle'    => ['name' => 'Subscription', 'enabled' => false],
+                    'VSPaymentBundle'               => ['name' => 'Payment', 'enabled' => false],
+                    'VSApiBundle'                   => ['name' => 'API', 'enabled' => false],
+                ],
+            ];
+            
+            foreach ( array_keys( $this->data['extensions'] ) as $bundleName ) {
+                if ( isset( $bundles[$bundleName] ) ) {
+                    $this->data['extensions'][$bundleName]['enabled']   = true;
+                }
             }
         }
     }
