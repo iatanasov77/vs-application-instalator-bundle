@@ -119,14 +119,19 @@ class AbstractCrudController extends ResourceController
             $em     = $this->getDoctrine()->getManager();
             $entity = $form->getData();
             
+            $preEvent = $this->eventDispatcher->dispatchPreEvent( $resourceAction, $configuration, $entity );
+            
             // middleware method
             $this->prepareEntity( $entity, $form, $request );
             
             $em->persist( $entity );
             $em->flush();
             
-            $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
+            // Dispach a Sylius Resource Post Event
+            $postEvent = $this->eventDispatcher->dispatchPostEvent( $resourceAction, $configuration, $entity );
+            
             // Using Symfony Event Dispatcher ( NOT \Sylius\Bundle\ResourceBundle\Controller\EventDispatcher )
+            $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
             $this->get( 'event_dispatcher' )->dispatch(
                 new ResourceActionEvent( $this->metadata->getAlias(), $currentUser, $resourceAction ),
                 ResourceActionEvent::NAME
