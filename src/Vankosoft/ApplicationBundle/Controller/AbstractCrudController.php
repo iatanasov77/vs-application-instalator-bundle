@@ -130,7 +130,10 @@ class AbstractCrudController extends ResourceController
             // Dispach a Sylius Resource Post Event
             $postEvent = $this->eventDispatcher->dispatchPostEvent( $resourceAction, $configuration, $entity );
             
-            // Using Symfony Event Dispatcher ( NOT \Sylius\Bundle\ResourceBundle\Controller\EventDispatcher )
+            /**
+             * Using Symfony Event Dispatcher ( NOT \Sylius\Bundle\ResourceBundle\Controller\EventDispatcher )
+             * Used for 'addUserActivity' Event
+             */
             $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
             $this->get( 'event_dispatcher' )->dispatch(
                 new ResourceActionEvent( $this->metadata->getAlias(), $currentUser, $resourceAction ),
