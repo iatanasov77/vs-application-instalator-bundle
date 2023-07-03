@@ -8,29 +8,40 @@ import { humanFileSize } from './humanFileSize.js';
 // WORKAROUND: Prevent Double Submiting
 global.btnSaveUploadFileClicked = window.btnSaveUploadFileClicked = false;
 
-export function InitOneUpFileUpload()
+/**
+ * options
+ * {
+ *     fileuploadSelector: "#OneUpFileUpload",
+ *     fileinputSelector: "#upload_file_form_file",
+ *     btnStartUploadSelector: "#btnSaveUploadFile",
+ *     isStartedHolder: "btnSaveUploadFileClicked",
+ *
+ *     progressbarSelector: "#FileUploadProgressbar"
+ * }
+ */
+export function InitOneUpFileUpload( options )
 {
     ///////////////////////////////////////////////////////////////////////
     // https://github.com/blueimp/jQuery-File-Upload/wiki/Options
     ///////////////////////////////////////////////////////////////////////
-    $( '#OneUpFileUpload' ).fileupload({
-        url: '' + $( '#OneUpFileUpload' ).attr( 'data-endpoint' ),
+    $( options.fileuploadSelector ).fileupload({
+        url: '' + $( options.fileuploadSelector  ).attr( 'data-endpoint' ),
         type: 'POST',
         dropZone: null,
-        fileInput: $( '#upload_file_form_file' ),
+        fileInput: $( options.fileinputSelector  ),
         maxChunkSize: 1000000,
         autoUpload: false,
         add: function ( e, data )
         {
-            $( '#btnSaveUploadFile' ).on( 'click', function ( e )
+            $( options.btnStartUploadSelector ).on( 'click', function ( e )
             {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                if ( window.btnSaveUploadFileClicked ) {
+                if ( window[options.btnStartUploadSelector] ) {
                     return;
                 }
-                window.btnSaveUploadFileClicked   = true;
+                window[options.btnStartUploadSelector]   = true;
                 
                 $( this ).hide();
                 data.submit();
@@ -75,19 +86,19 @@ export function InitOneUpFileUpload()
      * ===============
      * https://github.com/blueimp/jQuery-File-Upload/wiki/Options#callback-options
      */
-    $( '#FileUploadProgressbar' ).progressbar({
+    $( options.progressbarSelector ).progressbar({
         value: 0
     });
     
-    $( '#OneUpFileUpload' ).on( 'fileuploadstart', function ( e, data )
+    $( options.fileuploadSelector ).on( 'fileuploadstart', function ( e, data )
     {
-        $( '#FileUploadProgressbar' ).show();
+        $( options.progressbarSelector ).show();
     });
     
-    $( '#OneUpFileUpload' ).on( 'fileuploadprogress', function ( e, data )
+    $( options.fileuploadSelector ).on( 'fileuploadprogress', function ( e, data )
     {
         //console.log( data.loaded, data.total, data.bitrate );
-        $( '#FileUploadProgressbar' ).progressbar({
+        $( options.progressbarSelector ).progressbar({
             value: data.loaded,
             max: data.total
         });
@@ -95,17 +106,18 @@ export function InitOneUpFileUpload()
         var progressPercents    = Math.round( ( data.loaded / data.total ) * 100 );
         var progressCaption     = humanFileSize( data.loaded, true ) + ' / ' + humanFileSize( data.total, true ) + ' ( ' + progressPercents + '% )';
         
-        $( '#FileUploadProgressbar' ).find( 'div.progressInfo > span.caption' ).html( progressCaption );
+        $( options.progressbarSelector ).find( 'div.progressInfo > span.caption' ).html( progressCaption );
     });
     
     // Uncomment Console Logs For Debugging
-    $( '#OneUpFileUpload' ).on( 'fileuploaddone', function ( e, data )
+    $( options.fileuploadSelector ).on( 'fileuploaddone', function ( e, data )
     {
         e.preventDefault();
         e.stopPropagation();
-        $( '#FileUploadProgressbar' ).hide();
+        $( options.progressbarSelector ).hide();
         
         //console.log( 'FileUploadDone: ' );
+        console.log( data );
         //console.log( data.result );
         
         document.location   = document.location;
