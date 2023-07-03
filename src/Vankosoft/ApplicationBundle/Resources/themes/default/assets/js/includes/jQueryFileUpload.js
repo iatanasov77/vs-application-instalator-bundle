@@ -49,6 +49,8 @@ export function InitOneUpFileUpload( options )
         },
         formData: function ( form )
         {
+            console.log( 'JQueryFileUpload Request: ' );
+            console.log( form );
             //return form.serializeArray();
             
             /*
