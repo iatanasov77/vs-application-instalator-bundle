@@ -16,7 +16,10 @@ global.btnSaveUploadFileClicked = window.btnSaveUploadFileClicked = false;
  *     btnStartUploadSelector: "#btnSaveUploadFile",
  *     isStartedHolder: "btnSaveUploadFileClicked",
  *
- *     progressbarSelector: "#FileUploadProgressbar"
+ *     progressbarSelector: "#FileUploadProgressbar",
+ *
+ *     fileResourceKey: "",
+ *     fileResourceClass: ""
  * }
  */
 export function InitOneUpFileUpload( options )
@@ -51,12 +54,6 @@ export function InitOneUpFileUpload( options )
         {
             //alert( form[0].name );
             
-            var value   = getFormFieldValue( form, 'video_file_key' );
-            alert( value );
-            
-            value   = getFormFieldValue( form, 'video_file_class' );
-            alert( value );
-            
             /*
              * Send Values Needed For PostPersistListener In Backend
              *
@@ -73,15 +70,11 @@ export function InitOneUpFileUpload( options )
                 },
                 {
                     name: 'fileResourceClass',
-                    value: $( '#FileResourceClass' ).val()
+                    value: getFormFieldValue( form, options.fileResourceClass )
                 },
                 {
-                    name: 'fileResourceOwner',
-                    value: $( '#FileOwnerId' ).val()
-                },
-                {
-                    name: 'fileOwnerClass',
-                    value: $( '#FileOwnerClass' ).val()
+                    name: 'fileResourceKey',
+                    value: getFormFieldValue( form, options.fileResourceKey )
                 }
             ];
         }
@@ -126,7 +119,7 @@ export function InitOneUpFileUpload( options )
         console.log( data );
         //console.log( data.result );
         
-        document.location   = document.location;
+        //document.location   = document.location;
     });
 }
 
