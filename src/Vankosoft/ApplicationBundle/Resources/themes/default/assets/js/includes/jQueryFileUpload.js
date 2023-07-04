@@ -18,6 +18,7 @@ global.btnSaveUploadFileClicked = window.btnSaveUploadFileClicked = false;
  *
  *     progressbarSelector: "#FileUploadProgressbar",
  *
+ *     fileInputFieldName: "file",
  *     fileResourceKey: "",
  *     fileResourceClass: ""
  * }
@@ -63,6 +64,10 @@ export function InitOneUpFileUpload( options )
                 {
                     name: 'formName',
                     value: form[0].name
+                },
+                {
+                    name: 'fileInputFieldName',
+                    value: getFormFieldValue( form, options.fileInputFieldName )
                 },
                 {
                     name: 'fileResourceId',
