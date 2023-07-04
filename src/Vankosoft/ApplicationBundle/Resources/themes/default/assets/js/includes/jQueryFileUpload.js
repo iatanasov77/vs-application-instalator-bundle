@@ -25,6 +25,8 @@ global.btnSaveUploadFileClicked = window.btnSaveUploadFileClicked = false;
  */
 export function InitOneUpFileUpload( options )
 {
+    validateOptions( options );
+    
     ///////////////////////////////////////////////////////////////////////
     // https://github.com/blueimp/jQuery-File-Upload/wiki/Options
     ///////////////////////////////////////////////////////////////////////
@@ -121,11 +123,30 @@ export function InitOneUpFileUpload( options )
         $( options.progressbarSelector ).hide();
         
         //console.log( 'FileUploadDone: ' );
-        console.log( data );
-        //console.log( data.result );
+        //console.log( data );
+        console.log( data.result );
         
         //document.location   = document.location;
     });
+}
+
+function validateOptions( options )
+{
+    let requiredKeys = [
+        'fileuploadSelector',
+        'fileinputSelector',
+        'btnStartUploadSelector',
+        'isStartedHolder',
+        'progressbarSelector',
+        'fileInputFieldName',
+        'fileResourceKey',
+        'fileResourceClass'
+    ];
+    let checkAllKeys = requiredKeys.every( ( i ) => options.hasOwnProperty( i ) );
+    
+    if( ! checkAllKeys ) {
+        throw new Error( 'Exception message' );    
+    }
 }
 
 function getFormFieldValue( form, field )
