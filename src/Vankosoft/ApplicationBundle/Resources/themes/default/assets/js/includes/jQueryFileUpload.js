@@ -67,11 +67,11 @@ export function InitOneUpFileUpload( options )
                 },
                 {
                     name: 'fileInputFieldName',
-                    value: getFormFieldValue( form, options.fileInputFieldName )
+                    value: options.fileInputFieldName
                 },
                 {
                     name: 'fileResourceId',
-                    value: $( '#FileResourceId' ).val()
+                    value: getFormFieldValue( form, 'id' )
                 },
                 {
                     name: 'fileResourceClass',
