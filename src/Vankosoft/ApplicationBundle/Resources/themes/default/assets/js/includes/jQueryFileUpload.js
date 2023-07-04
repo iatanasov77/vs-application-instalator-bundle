@@ -49,19 +49,12 @@ export function InitOneUpFileUpload( options )
         },
         formData: function ( form )
         {
-            //console.log( 'JQueryFileUpload Request: ' );
-            //console.log( form );
+            //alert( form[0].name );
             
-            //return form.serializeArray();
-            var formData = form.serializeArray();
-            console.log( formData );
+            var value   = getFormFieldValue( form, 'video_file_key' );
+            alert( value );
             
-            var myFieldName = 'video_form[title]';
-            var myFieldFilter = function (field) {
-              return field.name == myFieldName;
-            }
-            var value = formData.filter( myFieldFilter )[0].value;
-            alert( form[0].name );
+            value   = getFormFieldValue( form, 'video_file_class' );
             alert( value );
             
             /*
@@ -72,7 +65,7 @@ export function InitOneUpFileUpload( options )
             return [
                 {
                     name: 'formName',
-                    value: $( '#formUpload' ).attr( 'name' )
+                    value: form[0].name
                 },
                 {
                     name: 'fileResourceId',
@@ -135,4 +128,17 @@ export function InitOneUpFileUpload( options )
         
         document.location   = document.location;
     });
+}
+
+function getFormFieldValue( form, field )
+{
+    var formData = form.serializeArray();
+    //console.log( formData );
+    
+    var myFieldName = form[0].name + '[' + field + ']';
+    var myFieldFilter = function (field) {
+        return field.name == myFieldName;
+    }
+    
+    return formData.filter( myFieldFilter )[0].value;
 }
