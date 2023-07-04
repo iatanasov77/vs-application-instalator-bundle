@@ -49,9 +49,18 @@ export function InitOneUpFileUpload( options )
         },
         formData: function ( form )
         {
-            console.log( 'JQueryFileUpload Request: ' );
-            console.log( form );
+            //console.log( 'JQueryFileUpload Request: ' );
+            //console.log( form.name );
+            
             //return form.serializeArray();
+            var formData = form.serializeArray();
+            var myFieldName = 'video_form[title]';
+            var myFieldFilter = function (field) {
+              return field.name == myFieldName;
+            }
+            var value = formData.filter( myFieldFilter )[0].value;
+            alert( form.name );
+            alert( value );
             
             /*
              * Send Values Needed For PostPersistListener In Backend
