@@ -8,6 +8,13 @@ import { humanFileSize } from './humanFileSize.js';
 // WORKAROUND: Prevent Double Submiting
 global.btnSaveUploadFileClicked = window.btnSaveUploadFileClicked = false;
 
+global.OneUpUploadedResources = window.OneUpUploadedResources = {};
+const resourceUploaded = new CustomEvent( "resourceUploaded", {
+    detail: {
+        name: "resource_uploaded",
+    },
+});
+
 /**
  * options
  * {
@@ -42,12 +49,14 @@ export function InitOneUpFileUpload( options )
             $( options.btnStartUploadSelector ).on( 'click', function ( e )
             {
                 e.preventDefault();
-                e.stopPropagation();
+                //e.stopPropagation();
                 
+                /*
                 if ( window[options.btnStartUploadSelector] ) {
                     return;
                 }
                 window[options.btnStartUploadSelector]   = true;
+                */
                 
                 $( this ).hide();
                 data.submit();
@@ -124,9 +133,9 @@ export function InitOneUpFileUpload( options )
         
         //console.log( 'FileUploadDone: ' );
         //console.log( data );
-        console.log( data.result );
-        
-        //document.location   = document.location;
+        //console.log( data.result );
+        window.OneUpUploadedResources   = {...data.result.resources};
+        window.dispatchEvent( resourceUploaded );
     });
 }
 
