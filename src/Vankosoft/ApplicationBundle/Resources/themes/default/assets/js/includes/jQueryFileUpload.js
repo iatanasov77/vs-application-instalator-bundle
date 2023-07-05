@@ -64,6 +64,7 @@ export function InitOneUpFileUpload( options )
         },
         formData: function ( form )
         {
+            console.log( form );
             //alert( form[0].name );
             
             /*
