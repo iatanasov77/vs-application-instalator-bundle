@@ -114,8 +114,10 @@ export function InitOneUpFileUpload( options )
         e.stopPropagation();
         $( options.progressbarSelector ).hide();
         
-        //console.log( data );
-        //console.log( data.result );
+        console.log( 'jQueryFileUpload Debuging:' );
+        console.log( data );
+        console.log( data.result );
+        
         window.dispatchEvent(
             new CustomEvent( "resourceUploaded", {
                 detail: {
