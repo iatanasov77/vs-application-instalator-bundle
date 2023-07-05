@@ -69,11 +69,11 @@ export function InitOneUpFileUpload( options )
                 },
                 {
                     name: 'fileResourceClass',
-                    value: getFormFieldValue( form, options.fileResourceClass )
+                    value: options.fileResourceClass
                 },
                 {
                     name: 'fileResourceKey',
-                    value: getFormFieldValue( form, options.fileResourceKey )
+                    value: options.fileResourceKey
                 }
             ];
         }
@@ -112,13 +112,20 @@ export function InitOneUpFileUpload( options )
     {
         e.preventDefault();
         e.stopPropagation();
+        
+        let result  = JSON.parse( data.result );
+        if ( ! ( "resourceKey" in result ) ) {
+            return;
+        }
+        
         $( options.progressbarSelector ).hide();
         
+        /*
         console.log( 'jQueryFileUpload Debuging:' );
         console.log( data );
         console.log( data.result );
+        */
         
-        let result  = JSON.parse( data.result );
         window.dispatchEvent(
             new CustomEvent( "resourceUploaded", {
                 detail: {
