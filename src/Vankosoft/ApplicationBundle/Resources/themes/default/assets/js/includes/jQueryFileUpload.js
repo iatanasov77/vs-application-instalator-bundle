@@ -41,6 +41,8 @@ export function InitOneUpFileUpload( options )
                 //e.stopPropagation();
                 
                 $( this ).hide();
+                
+                console.log( data );
                 data.submit();
             });
         },
