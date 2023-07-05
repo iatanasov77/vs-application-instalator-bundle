@@ -35,14 +35,15 @@ export function InitOneUpFileUpload( options )
         autoUpload: false,
         add: function ( e, data )
         {
-            $( options.btnStartUploadSelector ).off().on( 'click', function ( e )
+            $( options.btnStartUploadSelector ).on( 'click', function ( e )
             {
                 e.preventDefault();
                 //e.stopPropagation();
                 
                 $( this ).hide();
                 
-                console.log( data );
+                
+                console.log( data.files[0].name );
                 data.submit();
             });
         },
