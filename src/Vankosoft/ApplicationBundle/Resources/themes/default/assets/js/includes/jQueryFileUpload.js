@@ -155,7 +155,7 @@ function validateOptions( options )
     let checkAllKeys = requiredKeys.every( ( i ) => options.hasOwnProperty( i ) );
     
     if( ! checkAllKeys ) {
-        throw new Error( 'Exception message' );    
+        throw new Error( 'Exception message' );
     }
 }
 
