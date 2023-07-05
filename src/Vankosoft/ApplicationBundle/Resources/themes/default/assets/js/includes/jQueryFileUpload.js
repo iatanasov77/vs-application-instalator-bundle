@@ -5,32 +5,40 @@ require( 'blueimp-file-upload/js/jquery.fileupload.js' );
 
 import { humanFileSize } from './humanFileSize.js';
 
-// WORKAROUND: Prevent Double Submiting
-global.btnSaveUploadFileClicked = window.btnSaveUploadFileClicked = false;
-
-export function InitOneUpFileUpload()
+/**
+ * options
+ * {
+ *     fileuploadSelector: "#OneUpFileUpload",
+ *     fileinputSelector: "#upload_file_form_file",
+ *     btnStartUploadSelector: "#btnSaveUploadFile",
+ *
+ *     progressbarSelector: "#FileUploadProgressbar",
+ *
+ *     fileInputFieldName: "file",
+ *     fileResourceKey: "",
+ *     fileResourceClass: ""
+ * }
+ */
+export function InitOneUpFileUpload( options )
 {
+    validateOptions( options );
+    
     ///////////////////////////////////////////////////////////////////////
     // https://github.com/blueimp/jQuery-File-Upload/wiki/Options
     ///////////////////////////////////////////////////////////////////////
-    $( '#OneUpFileUpload' ).fileupload({
-        url: '' + $( '#OneUpFileUpload' ).attr( 'data-endpoint' ),
+    $( options.fileuploadSelector ).fileupload({
+        url: '' + $( options.fileuploadSelector  ).attr( 'data-endpoint' ),
         type: 'POST',
         dropZone: null,
-        fileInput: $( '#upload_file_form_file' ),
+        fileInput: $( options.fileinputSelector  ),
         maxChunkSize: 1000000,
         autoUpload: false,
         add: function ( e, data )
         {
-            $( '#btnSaveUploadFile' ).on( 'click', function ( e )
+            $( options.btnStartUploadSelector ).on( 'click', function ( e )
             {
                 e.preventDefault();
-                e.stopPropagation();
-                
-                if ( window.btnSaveUploadFileClicked ) {
-                    return;
-                }
-                window.btnSaveUploadFileClicked   = true;
+                //e.stopPropagation();
                 
                 $( this ).hide();
                 data.submit();
@@ -38,7 +46,8 @@ export function InitOneUpFileUpload()
         },
         formData: function ( form )
         {
-            //return form.serializeArray();
+            //console.log( form );
+            let formName    = form[0] ? form[0].name : '';
             
             /*
              * Send Values Needed For PostPersistListener In Backend
@@ -48,23 +57,23 @@ export function InitOneUpFileUpload()
             return [
                 {
                     name: 'formName',
-                    value: $( '#formUpload' ).attr( 'name' )
+                    value: formName
+                },
+                {
+                    name: 'fileInputFieldName',
+                    value: options.fileInputFieldName
                 },
                 {
                     name: 'fileResourceId',
-                    value: $( '#FileResourceId' ).val()
+                    value: getFormFieldValue( form, 'id' )
                 },
                 {
                     name: 'fileResourceClass',
-                    value: $( '#FileResourceClass' ).val()
+                    value: options.fileResourceClass
                 },
                 {
-                    name: 'fileResourceOwner',
-                    value: $( '#FileOwnerId' ).val()
-                },
-                {
-                    name: 'fileOwnerClass',
-                    value: $( '#FileOwnerClass' ).val()
+                    name: 'fileResourceKey',
+                    value: options.fileResourceKey
                 }
             ];
         }
@@ -75,19 +84,19 @@ export function InitOneUpFileUpload()
      * ===============
      * https://github.com/blueimp/jQuery-File-Upload/wiki/Options#callback-options
      */
-    $( '#FileUploadProgressbar' ).progressbar({
+    $( options.progressbarSelector ).progressbar({
         value: 0
     });
     
-    $( '#OneUpFileUpload' ).on( 'fileuploadstart', function ( e, data )
+    $( options.fileuploadSelector ).on( 'fileuploadstart', function ( e, data )
     {
-        $( '#FileUploadProgressbar' ).show();
+        $( options.progressbarSelector ).show();
     });
     
-    $( '#OneUpFileUpload' ).on( 'fileuploadprogress', function ( e, data )
+    $( options.fileuploadSelector ).on( 'fileuploadprogress', function ( e, data )
     {
         //console.log( data.loaded, data.total, data.bitrate );
-        $( '#FileUploadProgressbar' ).progressbar({
+        $( options.progressbarSelector ).progressbar({
             value: data.loaded,
             max: data.total
         });
@@ -95,19 +104,70 @@ export function InitOneUpFileUpload()
         var progressPercents    = Math.round( ( data.loaded / data.total ) * 100 );
         var progressCaption     = humanFileSize( data.loaded, true ) + ' / ' + humanFileSize( data.total, true ) + ' ( ' + progressPercents + '% )';
         
-        $( '#FileUploadProgressbar' ).find( 'div.progressInfo > span.caption' ).html( progressCaption );
+        $( options.progressbarSelector ).find( 'div.progressInfo > span.caption' ).html( progressCaption );
     });
     
     // Uncomment Console Logs For Debugging
-    $( '#OneUpFileUpload' ).on( 'fileuploaddone', function ( e, data )
+    $( options.fileuploadSelector ).on( 'fileuploaddone', function ( e, data )
     {
         e.preventDefault();
         e.stopPropagation();
-        $( '#FileUploadProgressbar' ).hide();
         
-        //console.log( 'FileUploadDone: ' );
-        //console.log( data.result );
+        let result  = JSON.parse( data.result );
+        if ( ! ( "resourceKey" in result ) ) {
+            return;
+        }
         
-        document.location   = document.location;
+        $( options.progressbarSelector ).hide();
+        
+        /*
+        console.log( 'jQueryFileUpload Debuging:' );
+        console.log( data );
+        console.log( data.result );
+        */
+        
+        window.dispatchEvent(
+            new CustomEvent( "resourceUploaded", {
+                detail: {
+                    resourceKey: result.resourceKey,
+                    resourceId: result.resourceId
+                },
+            })
+        );
     });
+}
+
+function validateOptions( options )
+{
+    let requiredKeys = [
+        'fileuploadSelector',
+        'fileinputSelector',
+        'btnStartUploadSelector',
+        'progressbarSelector',
+        'fileInputFieldName',
+        'fileResourceKey',
+        'fileResourceClass'
+    ];
+    let checkAllKeys = requiredKeys.every( ( i ) => options.hasOwnProperty( i ) );
+    
+    if( ! checkAllKeys ) {
+        throw new Error( 'Exception message' );
+    }
+}
+
+function getFormFieldValue( form, field )
+{
+    if ( ! form[0] ) {
+        return '';    
+    }
+    
+    var formData = form.serializeArray();
+    //console.log( formData );
+    
+    var myFieldName = form[0].name + '[' + field + ']';
+    var myFieldFilter = function (field) {
+        return field.name == myFieldName;
+    }
+    
+    return formData.filter( myFieldFilter )[0].value;
 }

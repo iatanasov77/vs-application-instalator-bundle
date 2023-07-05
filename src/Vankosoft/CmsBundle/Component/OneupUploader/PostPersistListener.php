@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\CmsBundle\Component\OneupUploader;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Persistence\ManagerRegistry;
 use Oneup\UploaderBundle\Uploader\File\FileInterface;
@@ -20,10 +21,12 @@ class PostPersistListener
     
     public function onUpload( PostPersistEvent $event )
     {
+        /** @var Request */
         $request    = $event->getRequest();
         
         /** @var ResponseInterface */
         $response   = $event->getResponse();
+        
         $request    = $request->request->all();
         if ( ! isset( $request['fileResourceId'] ) ) {
             $response['DebugRequest']   = $request;
@@ -36,7 +39,12 @@ class PostPersistListener
         $file           = $event->getFile();
         $uploadedFile   = $event->getRequest()->files->get( 'file' );
         if ( isset( $request['formName'] ) ) {
-            $uploadedFile   = $event->getRequest()->files->get( 'upload_file_form' )['file'];
+            $formFiles      = $event->getRequest()->files->get( $request['formName'] );
+            if ( ! $formFiles ) {
+                $response['error']  = 'Form Has Not Files !!!';
+                return $response;
+            }
+            $uploadedFile   = $formFiles[$request['fileInputFieldName']];
         }
         
         if ( intval( $request['fileResourceId'] ) ) {
@@ -47,29 +55,18 @@ class PostPersistListener
             $entity = new $entityClass();
         }
         
-        $fileOwner  = $this->doctrine->getRepository( $request['fileOwnerClass'] )->find( intval( $request['fileResourceOwner'] ) );
-        
-        $entity->setPath( $file->getPathname() );  
-        $entity->setType( $file->getFilesystem()->mimeType( $file->getPathname() ) );
+        if ( \method_exists( $file, 'getFilesystem' ) ) {
+            $entity->setType( $file->getFilesystem()->mimeType( $file->getPathname() ) );
+        }
+        $entity->setPath( $file->getPathname() );
         $entity->setOriginalName( $uploadedFile->getClientOriginalName() );
-        $entity->setOwner( $fileOwner );
         
         $this->doctrine->getManager()->persist( $entity );
         $this->doctrine->getManager()->flush();
         
-        $response['success']    = true;
-        
-/* https://github.com/1up-lab/OneupUploaderBundle/blob/master/doc/response.md
-        $response->setSuccess( false );
-        $response->setError( $msg );
-        
-        $response['GaufretteFilesystemPath']    = $file->getPathname();
-        $response['GaufretteFileBasename']      = $file->getBasename();
-        $response['OriginalName']               = $uploadedFile->getClientOriginalName();
-        
-        //$response['MimeType']               = $file->getMimeType();
-        $response['MimeType']               = $file->getFilesystem()->mimeType( $file->getPathname() );
-*/
+        $response['success']        = true;
+        $response['resourceKey']    = $request['fileResourceKey'];
+        $response['resourceId']     = $entity->getId();
         
         return $response;
     }
