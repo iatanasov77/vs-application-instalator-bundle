@@ -1,3 +1,9 @@
+1.10.68	|	Release date: **05.07.2023**
+============================================
+* Bug-Fixes:
+  - Fix JQuery File Upload Double Submiting.
+
+
 1.10.67	|	Release date: **05.07.2023**
 ============================================
 * New Features and Improvements:
