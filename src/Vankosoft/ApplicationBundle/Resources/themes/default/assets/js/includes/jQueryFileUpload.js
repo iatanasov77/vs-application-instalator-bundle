@@ -5,6 +5,7 @@ require( 'blueimp-file-upload/js/jquery.fileupload.js' );
 
 import { humanFileSize } from './humanFileSize.js';
 
+window.UploadedFiles    = [];
 /**
  * options
  * {
@@ -41,7 +42,15 @@ export function InitOneUpFileUpload( options )
                 //e.stopPropagation();
                 
                 $( this ).hide();
-                data.submit();
+                
+                let fileName    = data.files[0].name;
+                if ( ! window.UploadedFiles.includes( fileName ) ) {
+                    console.log( fileName );
+                    window.UploadedFiles.push( fileName );
+                    
+                    data.submit();
+                }
+                
             });
         },
         formData: function ( form )
