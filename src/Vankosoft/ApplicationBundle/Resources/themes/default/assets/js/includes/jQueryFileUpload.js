@@ -161,6 +161,10 @@ function validateOptions( options )
 
 function getFormFieldValue( form, field )
 {
+    if ( ! form[0] ) {
+        return '';    
+    }
+    
     var formData = form.serializeArray();
     //console.log( formData );
     
