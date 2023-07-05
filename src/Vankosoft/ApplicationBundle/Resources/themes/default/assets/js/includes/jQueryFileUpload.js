@@ -45,7 +45,7 @@ export function InitOneUpFileUpload( options )
                 
                 let fileName    = data.files[0].name;
                 if ( ! window.UploadedFiles.includes( fileName ) ) {
-                    console.log( fileName );
+                    //console.log( fileName );
                     window.UploadedFiles.push( fileName );
                     
                     data.submit();
