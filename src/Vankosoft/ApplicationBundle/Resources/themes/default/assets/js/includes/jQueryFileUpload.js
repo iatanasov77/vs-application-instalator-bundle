@@ -64,8 +64,8 @@ export function InitOneUpFileUpload( options )
         },
         formData: function ( form )
         {
-            console.log( form );
-            //alert( form[0].name );
+            //console.log( form );
+            let formName    = form[0] ? form[0].name : '';
             
             /*
              * Send Values Needed For PostPersistListener In Backend
@@ -75,7 +75,7 @@ export function InitOneUpFileUpload( options )
             return [
                 {
                     name: 'formName',
-                    value: form[0].name
+                    value: formName
                 },
                 {
                     name: 'fileInputFieldName',
