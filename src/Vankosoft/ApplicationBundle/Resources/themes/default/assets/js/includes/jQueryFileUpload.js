@@ -118,11 +118,12 @@ export function InitOneUpFileUpload( options )
         console.log( data );
         console.log( data.result );
         
+        let result  = JSON.parse( data.result );
         window.dispatchEvent(
             new CustomEvent( "resourceUploaded", {
                 detail: {
-                    resourceKey: data.result.resourceKey,
-                    resourceId: data.result.resourceId
+                    resourceKey: result.resourceKey,
+                    resourceId: result.resourceId
                 },
             })
         );
