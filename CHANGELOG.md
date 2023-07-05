@@ -1,3 +1,16 @@
+1.10.67	|	Release date: **05.07.2023**
+============================================
+* New Features and Improvements:
+  - Add a Doxygen Config File.
+  - Improve Doxygen Config File.
+  - Debug JQuery File Upload.
+  - Add Validate Options in jQueryFileUpload.InitOneUpFileUpload
+  - Add Check if OneUp File has Filesystem Method.
+  - Create Java Script Custom Event 'resourceUploaded'.
+  - Fix JQuery File Upload.
+  - Improve JQuery File Upload.
+
+
 1.10.66	|	Release date: **29.06.2023**
 ============================================
 * Bug-Fixes and Improvements:
