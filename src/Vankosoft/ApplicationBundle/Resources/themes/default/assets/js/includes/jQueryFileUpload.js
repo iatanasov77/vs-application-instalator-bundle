@@ -5,23 +5,12 @@ require( 'blueimp-file-upload/js/jquery.fileupload.js' );
 
 import { humanFileSize } from './humanFileSize.js';
 
-// WORKAROUND: Prevent Double Submiting
-global.btnSaveUploadFileClicked = window.btnSaveUploadFileClicked = false;
-
-global.OneUpUploadedResources = window.OneUpUploadedResources = {};
-const resourceUploaded = new CustomEvent( "resourceUploaded", {
-    detail: {
-        name: "resource_uploaded",
-    },
-});
-
 /**
  * options
  * {
  *     fileuploadSelector: "#OneUpFileUpload",
  *     fileinputSelector: "#upload_file_form_file",
  *     btnStartUploadSelector: "#btnSaveUploadFile",
- *     isStartedHolder: "btnSaveUploadFileClicked",
  *
  *     progressbarSelector: "#FileUploadProgressbar",
  *
@@ -50,13 +39,6 @@ export function InitOneUpFileUpload( options )
             {
                 e.preventDefault();
                 //e.stopPropagation();
-                
-                /*
-                if ( window[options.btnStartUploadSelector] ) {
-                    return;
-                }
-                window[options.btnStartUploadSelector]   = true;
-                */
                 
                 $( this ).hide();
                 data.submit();
@@ -132,11 +114,16 @@ export function InitOneUpFileUpload( options )
         e.stopPropagation();
         $( options.progressbarSelector ).hide();
         
-        //console.log( 'FileUploadDone: ' );
         //console.log( data );
         //console.log( data.result );
-        window.OneUpUploadedResources   = {...data.result.resources};
-        window.dispatchEvent( resourceUploaded );
+        window.dispatchEvent(
+            new CustomEvent( "resourceUploaded", {
+                detail: {
+                    resourceKey: data.result.resourceKey,
+                    resourceId: data.result.resourceId
+                },
+            })
+        );
     });
 }
 
@@ -146,7 +133,6 @@ function validateOptions( options )
         'fileuploadSelector',
         'fileinputSelector',
         'btnStartUploadSelector',
-        'isStartedHolder',
         'progressbarSelector',
         'fileInputFieldName',
         'fileResourceKey',
