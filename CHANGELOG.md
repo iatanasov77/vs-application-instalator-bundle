@@ -1,3 +1,9 @@
+1.10.69	|	Release date: **06.07.2023**
+============================================
+* New Features and Improvements:
+  - Improve Regenerate Slugs Command.
+
+
 1.10.68	|	Release date: **05.07.2023**
 ============================================
 * Bug-Fixes:
