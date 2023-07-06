@@ -12,7 +12,7 @@ class RegenerateSlugsCommand extends Command
     private $doctrine;
     
     /**
-     * Using: bin/console vankosoft:regenerate-slugs \App\Entity\Foo
+     * Using: bin/console vankosoft:regenerate-slugs \\App\\Entity\\Foo
      * 
      * @var string
      */
