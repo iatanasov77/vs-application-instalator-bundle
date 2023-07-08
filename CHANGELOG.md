@@ -1,3 +1,10 @@
+1.10.70	|	Release date: **08.07.2023**
+============================================
+* New Features and Improvements:
+  - Improve UserNotification Model.
+  - Add Doctrine Migration About UserNotification Model Improvement.
+
+
 1.10.69	|	Release date: **06.07.2023**
 ============================================
 * New Features and Improvements:
