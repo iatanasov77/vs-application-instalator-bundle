@@ -1,3 +1,9 @@
+1.10.71	|	Release date: **11.07.2023**
+============================================
+* New Features and Improvements:
+  - Improve Bootstrap 5 File Inputs.
+
+
 1.10.70	|	Release date: **08.07.2023**
 ============================================
 * New Features and Improvements:
