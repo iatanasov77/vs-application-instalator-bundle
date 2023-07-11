@@ -13,4 +13,8 @@ $( function()
         }
     });
     
+    $( 'div.form-field-file label' ).on( 'click', function()
+    {
+        $( this ).prev().trigger( "click" );
+    });
 });
