@@ -12,12 +12,4 @@ $( function()
             $( label ).html( '' );
         }
     });
-    
-    /*
-    $( 'div.form-field-file label' ).on( 'click', function( e )
-    {
-        e.preventDefault();
-        $( this ).prev().trigger( "click" );
-    });
-    */
 });
