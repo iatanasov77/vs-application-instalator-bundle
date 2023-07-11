@@ -10,6 +10,7 @@
     background: #fff !important;
     width: 100%;
     text-align: left !important;
+    padding-left: 120px;
 }
 
 .form-field-file label:after {
@@ -22,9 +23,15 @@
 
 .form-field-file input[type="file"] {
     position: absolute;
+    
+    z-index: 1;
+    width: 105.1px;
+    
+    /*
     z-index: -1;
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
     overflow: hidden;
+    */
 }
