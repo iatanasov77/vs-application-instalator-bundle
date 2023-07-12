@@ -146,33 +146,46 @@ export function InitOneUpFileUpload( options )
     });
 }
 
-export function TestUploadProgressBar()
+/**
+ * options
+ * {
+ *     btnStartUploadSelector: "#btnSaveUploadFile",
+ *     progressbarSelector: "#FileUploadProgressbar"
+ * }
+ */
+export function TestUploadProgressBar( options )
 {
-    window.btnSaveUploadFileClicked = true;
-    
-    $( '#FileUploadProgressbar' ).progressbar({
-        value: 0
+    $( options.btnStartUploadSelector ).on( 'click', function ( e )
+    {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        window.btnSaveUploadFileClicked = true;
+        
+        $( options.progressbarSelector ).progressbar({
+            value: 0
+        });
+        
+        $( options.progressbarSelector ).show();
+        
+        let data    = {
+            loaded: 0,
+            total: 1000000000
+        };
+        for( let i = 1; i < 100; i++ ) {
+            TestUploadProgress( data, i, $( options.progressbarSelector ) );
+        }
     });
-    
-    $( '#FileUploadProgressbar' ).show();
-    
-    let data    = {
-        loaded: 0,
-        total: 1000000000
-    };
-    for( let i = 1; i < 100; i++ ) {
-        TestUploadProgress( data, i );
-    }
 }
 
-function TestUploadProgress( data, delayIndex )
+function TestUploadProgress( data, delayIndex, selector )
 {
     let loaded  = data.total / ( 100 - delayIndex );
     
     setTimeout(() => {
         data.loaded = loaded;
         
-        $( '#FileUploadProgressbar' ).progressbar({
+        selector.progressbar({
             value: data.loaded,
             max: data.total
         });
@@ -180,7 +193,7 @@ function TestUploadProgress( data, delayIndex )
         var progressPercents    = Math.round( ( data.loaded / data.total ) * 100 );
         var progressCaption     = humanFileSize( data.loaded, true ) + ' / ' + humanFileSize( data.total, true ) + ' ( ' + progressPercents + '% )';
         
-        $( '#FileUploadProgressbar' ).find( 'div.progressInfo > span.caption' ).html( progressCaption );
+        selector.find( 'div.progressInfo > span.caption' ).html( progressCaption );
     }, delayIndex * 3000);
 }
 
