@@ -5,7 +5,12 @@ require( 'blueimp-file-upload/js/jquery.fileupload.js' );
 
 import { humanFileSize } from './humanFileSize.js';
 
-window.UploadedFiles    = [];
+window.UploadedFiles                = [];
+window.TestUploadProgressBarData    = {
+    loaded: 0,
+    total: 1000000000
+};
+
 /**
  * options
  * {
@@ -165,38 +170,30 @@ export function TestUploadProgressBar( options )
         }
         window.TestUploadProgressBarStarted = true;
         
-        //alert( $( options.progressbarSelector ).find( 'div.progressInfo > span.caption' ).text() ); return;
-        
         $( options.progressbarSelector ).progressbar({
             value: 0
         });
         
         $( options.progressbarSelector ).show();
         
-        let data    = {
-            loaded: 0,
-            total: 1000000000
-        };
         for( let i = 1; i < 100; i++ ) {
-            TestUploadProgress( data, i, $( options.progressbarSelector ) );
+            TestUploadProgress( i, $( options.progressbarSelector ) );
         }
     });
 }
 
-function TestUploadProgress( data, delayIndex, selector )
+function TestUploadProgress( delayIndex, selector )
 {
-    let loaded  = data.total / ( 100 - delayIndex );
-    
     setTimeout(() => {
-        data.loaded = loaded;
+        window.TestUploadProgressBarData.loaded = window.TestUploadProgressBarData.total / ( 100 - delayIndex );
         
         selector.progressbar({
-            value: data.loaded,
-            max: data.total
+            value: window.TestUploadProgressBarData.loaded,
+            max: window.TestUploadProgressBarData.total
         });
         
-        var progressPercents    = Math.round( ( data.loaded / data.total ) * 100 );
-        var progressCaption     = humanFileSize( data.loaded, true ) + ' / ' + humanFileSize( data.total, true ) + ' ( ' + progressPercents + '% )';
+        var progressPercents    = Math.round( ( window.TestUploadProgressBarData.loaded / window.TestUploadProgressBarData.total ) * 100 );
+        var progressCaption     = humanFileSize( window.TestUploadProgressBarData.loaded, true ) + ' / ' + humanFileSize( window.TestUploadProgressBarData.total, true ) + ' ( ' + progressPercents + '% )';
         
         selector.find( 'div.progressInfo > span.caption' ).html( progressCaption );
     }, delayIndex * 3000);
