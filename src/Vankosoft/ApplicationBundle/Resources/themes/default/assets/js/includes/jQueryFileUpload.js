@@ -160,7 +160,7 @@ export function TestUploadProgressBar( options )
         e.preventDefault();
         e.stopPropagation();
         
-        alert( selector.find( 'div.progressInfo > span.caption' ).text() ); return;
+        alert( $( options.progressbarSelector ).find( 'div.progressInfo > span.caption' ).text() ); return;
         
         window.btnSaveUploadFileClicked = true;
         
