@@ -146,6 +146,44 @@ export function InitOneUpFileUpload( options )
     });
 }
 
+export function TestUploadProgressBar()
+{
+    window.btnSaveUploadFileClicked = true;
+    
+    $( '#FileUploadProgressbar' ).progressbar({
+        value: 0
+    });
+    
+    $( '#FileUploadProgressbar' ).show();
+    
+    let data    = {
+        loaded: 0,
+        total: 1000000000
+    };
+    for( let i = 1; i < 100; i++ ) {
+        TestUploadProgress( data, i );
+    }
+}
+
+function TestUploadProgress( data, delayIndex )
+{
+    let loaded  = data.total / ( 100 - delayIndex );
+    
+    setTimeout(() => {
+        data.loaded = loaded;
+        
+        $( '#FileUploadProgressbar' ).progressbar({
+            value: data.loaded,
+            max: data.total
+        });
+        
+        var progressPercents    = Math.round( ( data.loaded / data.total ) * 100 );
+        var progressCaption     = humanFileSize( data.loaded, true ) + ' / ' + humanFileSize( data.total, true ) + ' ( ' + progressPercents + '% )';
+        
+        $( '#FileUploadProgressbar' ).find( 'div.progressInfo > span.caption' ).html( progressCaption );
+    }, delayIndex * 3000);
+}
+
 function validateOptions( options )
 {
     let requiredKeys = [
