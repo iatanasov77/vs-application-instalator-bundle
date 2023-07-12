@@ -160,9 +160,12 @@ export function TestUploadProgressBar( options )
         e.preventDefault();
         e.stopPropagation();
         
-        alert( $( options.progressbarSelector ).find( 'div.progressInfo > span.caption' ).text() ); return;
+        if ( window.TestUploadProgressBarStarted ) {
+            return;
+        }
+        window.TestUploadProgressBarStarted = true;
         
-        window.btnSaveUploadFileClicked = true;
+        //alert( $( options.progressbarSelector ).find( 'div.progressInfo > span.caption' ).text() ); return;
         
         $( options.progressbarSelector ).progressbar({
             value: 0
