@@ -3,7 +3,7 @@ require( 'jquery-ui-dist/jquery-ui.css' );
 require( 'jquery-ui-dist/jquery-ui.theme.css' );
 require( 'blueimp-file-upload/js/jquery.fileupload.js' );
 
-import { humanFileSize } from './humanFileSize.js';
+import { humanFileSize } from '../humanFileSize.js';
 
 window.UploadedFiles                = [];
 window.TestUploadProgressBarData    = {

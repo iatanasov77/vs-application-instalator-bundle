@@ -2,7 +2,7 @@ require( 'jquery-easyui/css/easyui.css' );
 require( 'jquery-easyui/js/jquery.easyui.min.js' );
 require( 'blueimp-file-upload/js/jquery.fileupload.js' );
 
-import { humanFileSize } from './humanFileSize.js';
+import { humanFileSize } from '../humanFileSize.js';
 
 window.UploadedFiles                = [];
 window.TestUploadProgressBarData    = {
@@ -188,7 +188,7 @@ function TestUploadProgress( delayIndex, selector )
         
         selector.progressbar({
             value: window.TestUploadProgressBarData.loaded,
-            max: window.TestUploadProgressBarData.total
+            //max: window.TestUploadProgressBarData.total
         });
         
         var progressPercents    = Math.round( ( window.TestUploadProgressBarData.loaded / window.TestUploadProgressBarData.total ) * 100 );
