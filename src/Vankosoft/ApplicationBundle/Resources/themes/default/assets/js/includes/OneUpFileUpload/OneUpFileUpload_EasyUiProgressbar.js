@@ -185,12 +185,15 @@ function TestUploadProgress( delayIndex, selector )
 {
     setTimeout(() => {
         window.TestUploadProgressBarData.loaded = window.TestUploadProgressBarData.total / ( 100 - delayIndex );
+        console.log( window.TestUploadProgressBarData.loaded );
         
         var currentValue   = selector.progressbar( 'getValue' );
-        //if ( currentValue < 100 ) {
-            //value += Math.floor( Math.random() * 10 );
-            selector.progressbar( 'setValue', window.TestUploadProgressBarData.loaded );
-        //}
+        if ( currentValue < 100 ) {
+            currentValue += Math.floor( Math.random() * 10 );
+            selector.progressbar( 'setValue', currentValue );
+            
+            //selector.progressbar( 'setValue', window.TestUploadProgressBarData.loaded );
+        }
         
         var progressPercents    = Math.round( ( window.TestUploadProgressBarData.loaded / window.TestUploadProgressBarData.total ) * 100 );
         var progressCaption     = humanFileSize( window.TestUploadProgressBarData.loaded, true ) + ' / ' + humanFileSize( window.TestUploadProgressBarData.total, true ) + ' ( ' + progressPercents + '% )';
