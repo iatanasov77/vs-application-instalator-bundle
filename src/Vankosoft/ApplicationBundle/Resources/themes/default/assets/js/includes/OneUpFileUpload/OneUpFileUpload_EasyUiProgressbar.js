@@ -159,7 +159,7 @@ export function InitOneUpFileUpload( options )
  */
 export function TestUploadProgressBar( options )
 {
-    $.extend( $.fn.panel.defaults, {
+    $.extend( $.fn.progressbar.defaults, {
         sizeUploaded: 0,
         sizeTotal: 0
     });
