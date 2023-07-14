@@ -159,6 +159,11 @@ export function InitOneUpFileUpload( options )
  */
 export function TestUploadProgressBar( options )
 {
+    $.extend( $.fn.panel.defaults, {
+        sizeUploaded: 0,
+        sizeTotal: 0
+    });
+    
     $( options.btnStartUploadSelector ).on( 'click', function ( e )
     {
         e.preventDefault();
@@ -168,13 +173,13 @@ export function TestUploadProgressBar( options )
             return;
         }
         window.TestUploadProgressBarStarted = true;
-        
-        console.log( $.fn.progressbar.defaults );
         $( options.progressbarSelector ).progressbar({
-            value: 0
+            value: 0,
+            
+            sizeUploaded: 0,
+            sizeTotal: window.TestUploadProgressBarData.total,
+            text: {sizeUploaded} / {sizeTotal} ( {value}% )
         });
-        
-        $( options.progressbarSelector ).show();
         
         for( let i = 1; i < 100; i++ ) {
             TestUploadProgress( i, $( options.progressbarSelector ) );
