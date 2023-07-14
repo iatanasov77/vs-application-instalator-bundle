@@ -28,6 +28,11 @@ export function InitOneUpFileUpload( options )
 {
     validateOptions( options );
     
+    $.extend( $.fn.progressbar.defaults, {
+        sizeUploaded: 0,
+        sizeTotal: 0
+    });
+    
     ///////////////////////////////////////////////////////////////////////
     // https://github.com/blueimp/jQuery-File-Upload/wiki/Options
     ///////////////////////////////////////////////////////////////////////
@@ -92,32 +97,24 @@ export function InitOneUpFileUpload( options )
         }
     });
     
-    /**
-     * FileUpload Event Listeners
-     * ===============
-     * https://github.com/blueimp/jQuery-File-Upload/wiki/Options#callback-options
-     */
-    $( options.progressbarSelector ).progressbar({
-        value: 0
-    });
-    
     $( options.fileuploadSelector ).on( 'fileuploadstart', function ( e, data )
     {
-        $( options.progressbarSelector ).show();
+        $( options.progressbarSelector ).progressbar({
+            value: 0,
+            
+            sizeUploaded: 0,
+            sizeTotal: window.TestUploadProgressBarData.total,
+            //text: "{sizeUploaded} / {sizeTotal} ( {value}% )"
+        });
     });
     
     $( options.fileuploadSelector ).on( 'fileuploadprogress', function ( e, data )
     {
         //console.log( data.loaded, data.total, data.bitrate );
-        $( options.progressbarSelector ).progressbar({
-            value: data.loaded,
-            //max: data.total
-        });
-        
         var progressPercents    = Math.round( ( data.loaded / data.total ) * 100 );
-        var progressCaption     = humanFileSize( data.loaded, true ) + ' / ' + humanFileSize( data.total, true ) + ' ( ' + progressPercents + '% )';
-        
-        $( options.progressbarSelector ).find( 'div.progressInfo > span.caption' ).html( progressCaption );
+        if ( progressPercents <= 100 ) {
+            $( options.progressbarSelector ).progressbar( 'setValue', progressPercents );
+        }
     });
     
     // Uncomment Console Logs For Debugging
@@ -193,16 +190,7 @@ function TestUploadProgress( delayIndex, selector )
         window.TestUploadProgressBarData.loaded = window.TestUploadProgressBarData.total / ( 100 - delayIndex );
         //console.log( window.TestUploadProgressBarData.loaded );
         
-        /* MANUAL EXAMPLE
-        var currentValue   = selector.progressbar( 'getValue' );
-        if ( currentValue < 100 ) {
-            currentValue += Math.floor( Math.random() * 10 );
-            selector.progressbar( 'setValue', currentValue );
-        }
-        */
-        
         var progressPercents    = Math.round( ( window.TestUploadProgressBarData.loaded / window.TestUploadProgressBarData.total ) * 100 );
-        var progressCaption     = humanFileSize( window.TestUploadProgressBarData.loaded, true ) + ' / ' + humanFileSize( window.TestUploadProgressBarData.total, true ) + ' ( ' + progressPercents + '% )';
         //console.log( progressPercents );
         
         if ( progressPercents <= 100 ) {
