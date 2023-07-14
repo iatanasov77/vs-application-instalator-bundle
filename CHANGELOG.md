@@ -1,3 +1,15 @@
+1.10.72	|	Release date: **14.07.2023**
+============================================
+* New Features and Imrovements:
+  - Improve Profile Picture Field in Profile Edit Form.
+  - Add Test Methods in jQueryFileUpload script.
+  - Add EasyuiCombobox script.
+  - Test JQuery Upload ProgressBar.
+  - Create OneUpFileUpload Script That Use EasyUi For ProgressBar.
+  - Create OneUpUpload Progressbar Macroses.
+  - Create OneUpUpload JqueryFileUpload Macros.
+
+
 1.10.71	|	Release date: **11.07.2023**
 ============================================
 * New Features and Improvements:
