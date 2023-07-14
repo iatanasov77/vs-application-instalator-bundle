@@ -185,7 +185,7 @@ function TestUploadProgress( delayIndex, selector )
 {
     setTimeout(() => {
         window.TestUploadProgressBarData.loaded = window.TestUploadProgressBarData.total / ( 100 - delayIndex );
-        console.log( window.TestUploadProgressBarData.loaded );
+        //console.log( window.TestUploadProgressBarData.loaded );
         
         /* MANUAL EXAMPLE
         var currentValue   = selector.progressbar( 'getValue' );
@@ -197,6 +197,7 @@ function TestUploadProgress( delayIndex, selector )
         
         var progressPercents    = Math.round( ( window.TestUploadProgressBarData.loaded / window.TestUploadProgressBarData.total ) * 100 );
         var progressCaption     = humanFileSize( window.TestUploadProgressBarData.loaded, true ) + ' / ' + humanFileSize( window.TestUploadProgressBarData.total, true ) + ' ( ' + progressPercents + '% )';
+        console.log( progressPercents );
         
         if ( progressPercents < 100 ) {
             selector.progressbar( 'setValue', progressPercents );
