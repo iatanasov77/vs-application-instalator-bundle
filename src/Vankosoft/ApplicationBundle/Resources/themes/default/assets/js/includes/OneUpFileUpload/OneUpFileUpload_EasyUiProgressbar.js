@@ -123,6 +123,7 @@ export function InitOneUpFileUpload( options )
         e.preventDefault();
         e.stopPropagation();
         
+        console.log( data );
         let result  = JSON.parse( data.result );
         if ( ! ( "resourceKey" in result ) ) {
             return;
