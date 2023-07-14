@@ -178,7 +178,7 @@ export function TestUploadProgressBar( options )
             
             sizeUploaded: 0,
             sizeTotal: window.TestUploadProgressBarData.total,
-            text: "{sizeUploaded} / {sizeTotal} ( {value}% )"
+            //text: "{sizeUploaded} / {sizeTotal} ( {value}% )"
         });
         
         for( let i = 1; i < 100; i++ ) {
