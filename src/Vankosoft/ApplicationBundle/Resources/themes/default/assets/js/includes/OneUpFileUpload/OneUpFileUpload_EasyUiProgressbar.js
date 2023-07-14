@@ -205,7 +205,7 @@ function TestUploadProgress( delayIndex, selector )
         var progressCaption     = humanFileSize( window.TestUploadProgressBarData.loaded, true ) + ' / ' + humanFileSize( window.TestUploadProgressBarData.total, true ) + ' ( ' + progressPercents + '% )';
         //console.log( progressPercents );
         
-        if ( progressPercents < 100 ) {
+        if ( progressPercents <= 100 ) {
             selector.progressbar( 'setValue', progressPercents );
         }
     }, delayIndex * 3000);
