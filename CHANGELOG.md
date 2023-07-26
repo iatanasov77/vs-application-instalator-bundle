@@ -1,3 +1,9 @@
+1.10.73	|	Release date: **26.07.2023**
+============================================
+* New Features and Improvements:
+  - Add More Assets Scripts For User Subscription Pages.
+
+
 1.10.72	|	Release date: **14.07.2023**
 ============================================
 * New Features and Imrovements:
