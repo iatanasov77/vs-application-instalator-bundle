@@ -94,6 +94,9 @@ Encore
     // Subscription Pages
     //////////////////////////////////////////////////////////////////
     .addEntry( 'js/payed-services-edit', assetsPath + '/js/subscription_pages/payed-services-edit.js' )
+    .addEntry( 'js/payed-services-listing', assetsPath + '/js/subscription_pages/payed-services-listing.js' )
+    .addEntry( 'js/payed-services-categories-listing', assetsPath + '/js/subscription_pages/payed-services-categories-listing.js' )
+    .addEntry( 'js/mailchimp-audiences-listing', assetsPath + '/js/subscription_pages/mailchimp-audiences-listing.js' )
 ;
 
 const config = Encore.getWebpackConfig();

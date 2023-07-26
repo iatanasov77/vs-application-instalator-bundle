@@ -139,6 +139,7 @@ vs_application:
         items_index_row_action_edit: Редактирай
         items_index_row_action_delete: Изтрий
         items_index_row_action_download: Даунлоуд
+        items_index_there_are_no_mappers_to_display: Няма Обекти за Показване
         locales_index_title: 'Списък Локали'
         locales_update_title: 'Редакция на Локал'
         locales_create_title: 'Създаване Нов Локал'
