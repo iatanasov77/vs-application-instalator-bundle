@@ -139,6 +139,7 @@ vs_application:
         items_index_row_action_edit: Edit
         items_index_row_action_delete: Delete
         items_index_row_action_download: Download
+        items_index_there_are_no_mappers_to_display: No Items to Display
         locales_index_title: 'List Available Locales'
         locales_update_title: 'Edit Locale'
         locales_create_title: 'Create New Locale'
