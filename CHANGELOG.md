@@ -1,3 +1,9 @@
+1.10.74	|	Release date: **28.07.2023**
+============================================
+* Bug-Fixes:
+  - Allow PagesController:showAction .
+
+
 1.10.73	|	Release date: **26.07.2023**
 ============================================
 * New Features and Improvements:
