@@ -1,3 +1,9 @@
+1.10.75	|	Release date: **31.07.2023**
+============================================
+* New Features:
+  - Create VankosoftCategoryInterface and implement it in all taxon related Models.
+
+
 1.10.74	|	Release date: **28.07.2023**
 ============================================
 * Bug-Fixes:
