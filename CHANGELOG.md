@@ -1,3 +1,10 @@
+1.10.76	|	Release date: **31.07.2023**
+============================================
+* Bug-Fixes:
+  - Fix PageCategories update template.
+
+
+
 1.10.75	|	Release date: **31.07.2023**
 ============================================
 * New Features:
