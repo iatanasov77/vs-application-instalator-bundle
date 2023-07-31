@@ -1,3 +1,9 @@
+1.10.77	|	Release date: **31.07.2023**
+============================================
+* New Features:
+  - Improve Title in Vankosoft Application Data COllector.
+
+
 1.10.76	|	Release date: **31.07.2023**
 ============================================
 * Bug-Fixes:
