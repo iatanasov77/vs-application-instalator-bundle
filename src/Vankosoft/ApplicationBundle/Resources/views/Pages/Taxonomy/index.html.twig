@@ -19,6 +19,7 @@
                 <thead>
                     <tr>
                         <th>{{ 'vs_application.template.items_index_row_name' | trans( {},'VSApplicationBundle' ) }}</th>
+                        <th>{{ 'vs_application.template.items_index_row_code' | trans( {},'VSApplicationBundle' ) }}</th>
                         <th width="150">{{ 'vs_application.template.items_index_row_action' | trans( {},'VSApplicationBundle' ) }}</th>
                     </tr>
                 </thead>
@@ -26,6 +27,7 @@
                 {% for item in resources %}
                     <tr>
                         <td>{{ item.name }}</td>
+                        <td>{{ item.code }}</td>
 
                         <td>
                             <div class="btn-group">
