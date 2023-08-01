@@ -1,3 +1,10 @@
+1.10.78	|	Release date: **01.08.2023**
+============================================
+* New Features:
+  - Improve Taxonomy Index Page.
+  - Add Assets For Payment Pages(Pricing Plans).
+
+
 1.10.77	|	Release date: **31.07.2023**
 ============================================
 * New Features:
