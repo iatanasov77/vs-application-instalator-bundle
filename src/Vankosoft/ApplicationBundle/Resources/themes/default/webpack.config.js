@@ -89,6 +89,10 @@ Encore
     .addEntry( 'js/product-categories-edit', assetsPath + '/js/payment_pages/product-categories-edit.js' )
     .addEntry( 'js/products-index', assetsPath + '/js/payment_pages/products-index.js' )
     .addEntry( 'js/products-edit', assetsPath + '/js/payment_pages/products-edit.js' )
+    .addEntry( 'js/pricing-plan-categories', assetsPath + '/js/payment_pages/pricing-plan-categories.js' )
+    .addEntry( 'js/pricing-plan-categories-edit', assetsPath + '/js/payment_pages/pricing-plan-categories-edit.js' )
+    .addEntry( 'js/pricing-plans-index', assetsPath + '/js/payment_pages/pricing-plans-index.js' )
+    .addEntry( 'js/pricing-plans-edit', assetsPath + '/js/payment_pages/pricing-plans-edit.js' )
     
     //////////////////////////////////////////////////////////////////
     // Subscription Pages
