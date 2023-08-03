@@ -97,10 +97,17 @@ sylius_fixtures:
                     options:
                         custom:
                             - title: 'Role Super Admin'
-                              description: 'Role Super Admin Description'
+                              description: 'Role used mostly for Project Owners'
                               taxonomy_code: 'user-roles'
                               locale:  '%locale%'
                               role: 'ROLE_SUPER_ADMIN'
+                              parent: null
+                              
+                            - title: 'Role Admin'
+                              description: 'Role used for Project Middleman ( Admin under Super-Admin )'
+                              taxonomy_code: 'user-roles'
+                              locale:  '%locale%'
+                              role: 'ROLE_ADMIN'
                               parent: null
                 
                 user_roles__second_level:
@@ -108,7 +115,7 @@ sylius_fixtures:
                     options:
                         custom:
                             - title: 'Role Application Admin'
-                              description: 'Role Application Admin Description'
+                              description: 'Role used for Project Purchaser ( Project Admin )'
                               taxonomy_code: 'user-roles'
                               locale:  '%locale%'
                               role: 'ROLE_APPLICATION_ADMIN'

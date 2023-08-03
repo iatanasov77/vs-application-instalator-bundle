@@ -1,3 +1,15 @@
+1.10.79	|	Release date: **03.08.2023**
+============================================
+* New Features:
+  - Add Description Field for User Roles.
+  - Add a Doctrine Migration.
+  - Fix User Roles Model.
+  - Add Role Description Field into Update Page.
+  - ROLE_ADMIN into Installator fixtures.
+  - Set Roles Description in Installator Fixtures.
+  - Add Application Installator Configs for Extended Project.
+
+
 1.10.78	|	Release date: **01.08.2023**
 ============================================
 * New Features:
