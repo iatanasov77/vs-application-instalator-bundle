@@ -65,6 +65,12 @@ EOT
         $outputStyle->writeln( '<info>SuperAdmin Application Kernel successfully created.</info>' );
         $outputStyle->newLine();
         
+        // Setup SuperAdmin Default Locale
+        $outputStyle->writeln( 'Setup SuperAdmin Application Default Locale.' );
+        $appSetup->setupAdminPanelDefaultLoale( $localeCode );
+        $outputStyle->writeln( '<info>SuperAdmin Application Default Locale successfully setuped.</info>' );
+        $outputStyle->newLine();
+        
         $outputStyle->newLine();
         $outputStyle->writeln( '<info>SuperAdminPanel Application created successfully.</info>' );
         $outputStyle->newLine();
