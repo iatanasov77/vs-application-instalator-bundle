@@ -18,7 +18,10 @@ services:
         class: Vankosoft\ApplicationBundle\Form\TaxonomyForm
         tags:
             - { name: form.type }
-        arguments: ['%vs_application.model.taxonomy.class%']
+        arguments:
+            - '%vs_application.model.taxonomy.class%'
+            - '@vs_application.repository.locale'
+            - "@request_stack"
         
     vs_application.resources.taxon.form:
         public: true
