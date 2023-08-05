@@ -32,4 +32,7 @@ services:
         class: Vankosoft\ApplicationBundle\Form\LocaleForm
         tags:
             - { name: form.type }
-        arguments: ['%vs_application.model.locale.class%']
+        arguments:
+            - '%vs_application.model.locale.class%'
+            - '@vs_application.repository.locale'
+            - "@request_stack"
