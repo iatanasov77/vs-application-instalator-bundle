@@ -2,24 +2,38 @@
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-use Vankosoft\ApplicationBundle\Component\I18N;
-
 class LocaleForm extends AbstractForm
 {
+    public function __construct(
+        string $dataClass,
+        RepositoryInterface $localesRepository,
+        RequestStack $requestStack
+    ) {
+        parent::__construct( $dataClass );
+        
+        $this->localesRepository    = $localesRepository;
+        $this->requestStack         = $requestStack;
+    }
+    
     public function buildForm( FormBuilderInterface $builder, array $options ): void
     {
         parent::buildForm( $builder, $options );
+        
+        $entity         = $builder->getData();
+        $currentLocale  = $entity->getTranslatableLocale() ?: $this->requestStack->getCurrentRequest()->getLocale();
         
         $builder
             ->add( 'translatableLocale', ChoiceType::class, [
                 'label'                 => 'vs_application.form.translatable_locale',
                 'translation_domain'    => 'VSApplicationBundle',
-                'choices'               => \array_flip( I18N::LanguagesAvailable() ),
-                'data'                  => \Locale::getDefault(),
+                'choices'               => \array_flip( $this->fillLocaleChoices() ),
+                'data'                  => $currentLocale,
                 'mapped'                => false,
             ])
         

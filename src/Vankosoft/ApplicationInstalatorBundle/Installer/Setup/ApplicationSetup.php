@@ -143,6 +143,23 @@ class ApplicationSetup
         ));
     }
     
+    public function setupAdminPanelDefaultLoale( string $defaultLocale )
+    {
+        $filesystem         = new Filesystem();
+        
+        $configServices = str_replace(
+            [
+                "__application_locale__"
+            ],
+            [
+                $defaultLocale
+            ],
+            file_get_contents( $projectRootDir . '/config/admin-panel/services.yaml' )
+        );
+        
+        $filesystem->dumpFile( $projectRootDir . '/config/admin-panel/services.yaml', $configServices );
+    }
+    
     public function finalizeSetup()
     {
         $this->removeOriginalKernelConfigs();
@@ -265,16 +282,14 @@ class ApplicationSetup
                 "__application_slug__",
                 "__kernel_class__",
                 "__application_namespace__",
-                "__application_locale__",
-                "__application_language__"
+                "__application_locale__"
             ],
             [
                 $this->applicationName,
                 $this->applicationSlug,
                 $this->applicationNamespace . 'Kernel',
                 $this->applicationNamespace,
-                $this->applicationDefaultLocale,
-                explode( '_', $this->applicationDefaultLocale )[0]
+                $this->applicationDefaultLocale
             ],
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml' )
         );
