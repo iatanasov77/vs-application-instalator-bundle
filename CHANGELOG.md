@@ -1,3 +1,13 @@
+1.10.80	|	Release date: **05.08.2023**
+============================================
+* New Features:
+  - Remove 'lang' Service Parameter.
+  - Add in Installator to Setup AdminPanel Default Locale.
+  - Fill Translatable Locale ChoiceType From Locales in Database.
+  - Add a Doctrine Migration.
+  - Update Installator Configs for Extended Project.
+
+
 1.10.79	|	Release date: **03.08.2023**
 ============================================
 * New Features:
