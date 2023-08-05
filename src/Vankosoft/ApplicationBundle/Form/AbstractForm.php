@@ -45,8 +45,7 @@ class AbstractForm extends AbstractResourceType
             throw new FormInitializationException( '' );
         }
         
-        $results = $this->localesRepository->createQueryBuilder( 'e' )
-                    ->orderBy( 'e.id', 'ASC' );
+        $results = $this->localesRepository->findAll();
         
         $locales = [];
         foreach( $results as $le ){
