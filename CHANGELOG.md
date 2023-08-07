@@ -1,3 +1,11 @@
+1.10.81	|	Release date: **07.08.2023**
+============================================
+* New Features and Improvements:
+  - Add KNP Paginator Bundle Config Into Application Installator Configs.
+  - Improve Default Template Text Alignment in Footer.
+  - Improve RegisterController .
+
+
 1.10.80	|	Release date: **05.08.2023**
 ============================================
 * New Features:
