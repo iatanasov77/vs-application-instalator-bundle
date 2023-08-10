@@ -46,6 +46,7 @@
                                         <th width="50">N</th>
                                         <th>{{ 'vs_application.template.items_index_row_title' | trans( {},'VSApplicationBundle' ) }}</th>
                                         <th>{{ 'vs_application.template.items_index_row_in_maintenance' | trans( {},'VSApplicationBundle' ) }}</th>
+                                        <th>{{ 'vs_application.template.items_index_row_hostname' | trans( {},'VSApplicationBundle' ) }}</th>
                                         <th>{{ 'vs_application.template.items_index_row_theme' | trans( {},'VSApplicationBundle' ) }}</th>
                                         <th>{{ 'vs_application.template.items_index_row_action' | trans( {},'VSApplicationBundle' ) }}</th>
                                     </tr>
@@ -62,6 +63,7 @@
                                             <i class="fas fa-times" style="color: #ff1e1e;"></i>
                                         {% endif %}
                                         </td>
+                                        <td>{{ item.hostname }}</td>
                                         <td>
                                             {% if appThemes[item.id] %}{{ appThemes[item.id].title }}{% endif %}
                                         </td>
