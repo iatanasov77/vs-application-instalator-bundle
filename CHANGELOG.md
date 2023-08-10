@@ -1,3 +1,12 @@
+1.10.82	|	Release date: **10.08.2023**
+============================================
+* New Features:
+  - Update ApplicationExtended Installator Configs.
+  - Update Application Installator Configs.
+* Bug-Fixes:
+  - Fix Doctrine Migrations.
+
+
 1.10.81	|	Release date: **07.08.2023**
 ============================================
 * New Features and Improvements:
