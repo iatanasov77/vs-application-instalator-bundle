@@ -1,3 +1,9 @@
+1.10.83	|	Release date: **10.08.2023**
+============================================
+* New Features and Improvements:
+  - Improve Settings Page Template.
+
+
 1.10.82	|	Release date: **10.08.2023**
 ============================================
 * New Features:
