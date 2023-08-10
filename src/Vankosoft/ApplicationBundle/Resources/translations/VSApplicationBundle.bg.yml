@@ -134,6 +134,7 @@ vs_application:
         items_index_row_updated: Редактиран
         items_index_row_action: Действие
         items_index_row_in_maintenance: В Поддръжка
+        items_index_row_hostname: Хост
         items_index_row_theme: Тема
         items_index_row_action_settings: Настройки
         items_index_row_action_edit: Редактирай

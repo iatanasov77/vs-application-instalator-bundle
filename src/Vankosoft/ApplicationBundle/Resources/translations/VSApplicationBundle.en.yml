@@ -134,6 +134,7 @@ vs_application:
         items_index_row_updated: Updated
         items_index_row_action: Action
         items_index_row_in_maintenance: In Maintenance
+        items_index_row_hostname: Hostname
         items_index_row_theme: Theme
         items_index_row_action_settings: Settings
         items_index_row_action_edit: Edit
