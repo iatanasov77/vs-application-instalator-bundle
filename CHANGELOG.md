@@ -1,3 +1,12 @@
+1.10.84	|	Release date: **16.08.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Dont Display Delete Button for Role 'ROLE_SUPER_ADMIN' .
+  - Dont Display Delete Button for Super Admin User in Users CRUD Page.
+  - UsersBundle UserFormType Set Password Not Required When User is Edited.
+  - Fix ResourceActionSubscriber .
+
+
 1.10.83	|	Release date: **10.08.2023**
 ============================================
 * New Features and Improvements:
