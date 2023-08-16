@@ -51,6 +51,7 @@ final class ResourceActionSubscriber implements EventSubscriberInterface
         
         //$this->user->addActiviity( $oActivity );
         $oActivity->setUser( $this->user );
+        $oActivity->setDate( new \DateTime() );
         
         $this->entityManager->persist( $oActivity );
         $this->entityManager->flush();
