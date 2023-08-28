@@ -1,3 +1,9 @@
+1.10.85	|	Release date: **28.08.2023**
+============================================
+* New Features and Improvements:
+  - Change Path of Dashboard Route.
+
+
 1.10.84	|	Release date: **16.08.2023**
 ============================================
 * Bug-Fixes and Improvements:
