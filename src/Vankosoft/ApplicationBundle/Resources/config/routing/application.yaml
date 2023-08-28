@@ -1,5 +1,5 @@
 vs_application_dashboard:
-    path: /
+    path: /dashboard
     controller: Vankosoft\ApplicationBundle\Controller\DashboardController::index
     
 vs_application_login:
