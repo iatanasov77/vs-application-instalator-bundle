@@ -17,8 +17,7 @@
                 {% endif %}
             {% endfor %}
             
-            <li class="nav-divider"><hr /></li>
-            <li class="nav-divider">{{ 'vs_application.menu.system' | trans( {},'VSApplicationBundle' ) }}</li>
+            
     		{{ knp_menu_render('mainSystem', {'template': '@VSApplication/Menu/mainSystem.html.twig'}) }}
     		
     		<li class="nav-divider"><hr /></li>
