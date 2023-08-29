@@ -17,22 +17,15 @@
                 {% endif %}
             {% endfor %}
             
-            
     		{{ knp_menu_render('mainSystem', {'template': '@VSApplication/Menu/mainSystem.html.twig'}) }}
     		
-    		<li class="nav-divider"><hr /></li>
-    		<li class="nav-divider">{{ 'vs_application.menu.cms' | trans( {},'VSApplicationBundle' ) }}</li>
             {{ knp_menu_render('mainCms', {'template': '@VSApplication/Menu/mainCms.html.twig'}) }}
             
         {% if installedBundles['VSUsersSubscriptionsBundle'] is defined %}
-            <li class="nav-divider"><hr /></li>
-            <li class="nav-divider">{{ 'vs_application.menu.users_subscriptions' | trans( {},'VSApplicationBundle' ) }}</li>
             {{ knp_menu_render('mainUsersSubscriptions', {'template': '@VSUsersSubscriptions/Menu/mainUsersSubscriptions.html.twig'}) }}
         {% endif %}
             
         {% if installedBundles['VSPaymentBundle'] is defined %}
-            <li class="nav-divider"><hr /></li>
-            <li class="nav-divider">{{ 'vs_application.menu.payment' | trans( {},'VSApplicationBundle' ) }}</li>
             {{ knp_menu_render('mainPayment', {'template': '@VSPayment/Menu/mainPayment.html.twig'}) }}
         {% endif %}
         
