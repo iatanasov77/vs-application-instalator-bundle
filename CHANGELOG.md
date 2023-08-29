@@ -1,3 +1,11 @@
+1.10.86	|	Release date: **29.08.2023**
+============================================
+* New Features and Improvements:
+  - Improve MenuBuilder .
+  - Improve Main System Menu View.
+  - Improve Main CMS  Menu and Extensions Menus in Sidebar View.
+
+
 1.10.85	|	Release date: **28.08.2023**
 ============================================
 * New Features and Improvements:
