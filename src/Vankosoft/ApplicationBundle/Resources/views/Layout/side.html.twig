@@ -6,16 +6,8 @@
     <div class="collapse navbar-collapse" id="navbarNav">
     	<!-- sidebar menu start-->
         <ul class="navbar-nav flex-column">
-            <li class="nav-divider">{{ 'vs_application.menu.application_links' | trans( {},'VSApplicationBundle' ) }}</li>
-            {% for oApplication in applicationsRepo.findAll() %}
-                {% if oApplication.code != 'admin-panel' %}
-                    <li class="nav-item ">
-                        <a class="nav-link main-menu-button" href="http://{{ oApplication.hostname }}" target="_blank">
-                            {{ oApplication.hostname }}
-                        </a>
-                   </li>
-                {% endif %}
-            {% endfor %}
+            
+            {% include '@VSApplication/Menu/mainApplications.html.twig' %}
             
     		{{ knp_menu_render('mainSystem', {'template': '@VSApplication/Menu/mainSystem.html.twig'}) }}
     		
