@@ -1,3 +1,9 @@
+1.10.87	|	Release date: **29.08.2023**
+============================================
+* New Features and Improvements:
+  - Improve SideBar Menu.
+
+
 1.10.86	|	Release date: **29.08.2023**
 ============================================
 * New Features and Improvements:
