@@ -48,8 +48,8 @@ vs_application:
         artgris_file_manager: Artgris File Manager
         browse_files: Browse Files
         upload_a_file: Upload a File
-        
         application_links: Application Links
+        applications: Applications
 
     form:
         errors_title: 'Error!'

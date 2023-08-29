@@ -48,8 +48,8 @@ vs_application:
         artgris_file_manager: Artgris Файлов Мениджър
         browse_files: Преглед на Файлове
         upload_a_file: Добави Файл
-        
         application_links: Приложения Връзки
+        applications: Приложения
 
     form:
         errors_title: 'Грешка!'
