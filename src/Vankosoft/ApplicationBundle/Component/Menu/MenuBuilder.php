@@ -17,27 +17,33 @@ use Vankosoft\ApplicationBundle\Component\Menu\Item\DividerMenuItem;
 
 class MenuBuilder
 {
+    /** @var AuthorizationChecker */
     protected $security;
     
+    /** @var RouterInterface */
     protected $router;
     
+    /** @var array */
     protected $menuConfig;
     
     protected $request;
     
+    /** @var RequestStack */
     protected $requestStack;
     
-    // ContainerBuilder
+    /** @var ContainerBuilder */
     protected $cb;
     
-    // PathRolesService
+    /** @var PathRolesService */
     protected $pathRolesService;
     
-    // TranslatorInterface
+    /** @var TranslatorInterface */
     protected $translator;
     
+    /** @var FactoryInterface */
     protected FactoryInterface $factory;
     
+    /** @var string */
     protected $currentPath;
     
     public function __construct(

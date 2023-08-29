@@ -1,11 +1,14 @@
 <?php namespace Vankosoft\ApplicationBundle\Component\Menu;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\AccessMap;
+
 class PathRolesService
 {
+    /** @var AccessMap */
     protected $accessMap;
     
-    public function __construct( $accessMap )
+    public function __construct( AccessMap $accessMap )
     {
         $this->accessMap = $accessMap;
     }
