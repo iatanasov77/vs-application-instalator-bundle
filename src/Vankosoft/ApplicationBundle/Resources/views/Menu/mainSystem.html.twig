@@ -2,7 +2,7 @@
 
 {% block root %}
     {% for parentItem in item.children %}
-    	{% if( parentItem.displayed ) %}
+    	{% if( parentItem.displayed and parentItem.hasChildren ) %}
 	        <li class="nav-item ">
 	            <a class="nav-link"
 	                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#submenu-system-{{ loop.index }}" aria-controls="submenu-system-{{ loop.index }}"
