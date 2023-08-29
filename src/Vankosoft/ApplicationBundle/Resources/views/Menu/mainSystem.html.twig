@@ -2,12 +2,14 @@
 
 {% block root %}
     {% if item.children is not empty %}
-        <li class="nav-divider"><hr /></li>
-        <li class="nav-divider">{{ 'vs_application.menu.system' | trans( {},'VSApplicationBundle' ) }}</li>
+        
     {% endif %}
     
     {% for parentItem in item.children %}
     	{% if( parentItem.displayed and parentItem.hasChildren ) %}
+            <li class="nav-divider"><hr /></li>
+            <li class="nav-divider">{{ 'vs_application.menu.system' | trans( {},'VSApplicationBundle' ) }}</li>
+            
 	        <li class="nav-item ">
 	            <a class="nav-link"
 	                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#submenu-system-{{ loop.index }}" aria-controls="submenu-system-{{ loop.index }}"
