@@ -1,3 +1,9 @@
+1.10.88	|	Release date: **31.08.2023**
+============================================
+* Bug-Fixes:
+  - Fix CMS PageForm.
+
+
 1.10.87	|	Release date: **29.08.2023**
 ============================================
 * New Features and Improvements:
