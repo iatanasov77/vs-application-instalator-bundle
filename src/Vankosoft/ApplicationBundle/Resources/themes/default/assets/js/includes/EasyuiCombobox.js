@@ -64,12 +64,12 @@ function clickNode( cc, id )
 {
     var opts        = cc.combobox( 'options' );
     
-    /*
+    
     var el          = opts.finder.getEl( this, row[opts.valueField] );
     var isChecked   = el.find( 'input.combobox-checkbox' )._propAttr( 'checked' );  
     console.log( isChecked );
     
-    
+    /*
     if ( node.checked ){
         el.find( 'input.combobox-checkbox' )._propAttr( 'checked', false );
     } else {
