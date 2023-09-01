@@ -1,3 +1,9 @@
+1.10.89	|	Release date: **01.09.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix and Improve JS EasyuiCombobox.js
+
+
 1.10.88	|	Release date: **31.08.2023**
 ============================================
 * Bug-Fixes:
