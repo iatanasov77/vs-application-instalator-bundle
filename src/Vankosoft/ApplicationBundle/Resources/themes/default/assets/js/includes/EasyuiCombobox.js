@@ -22,7 +22,7 @@ export function EasyuiCombobox( selector, options )
         {
            //console.log( node );
            //findNode( node.ID );
-           clickNode( selector, node.id );
+           clickNode( selector, node );
         },
         
         formatter: function( row )
@@ -60,7 +60,7 @@ export function EasyuiCombobox( selector, options )
     });
 }
 
-function clickNode( cc, id )
+function clickNode( cc, row )
 {
     var opts        = cc.combobox( 'options' );
     
