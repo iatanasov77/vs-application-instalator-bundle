@@ -1,3 +1,10 @@
+1.10.90	|	Release date: **02.09.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Improve OneUp Upload JS Scripts to can Edit Entities.
+  - Improve JS EasyuiCombobox Helper.
+
+
 1.10.89	|	Release date: **01.09.2023**
 ============================================
 * Bug-Fixes and Improvements:
