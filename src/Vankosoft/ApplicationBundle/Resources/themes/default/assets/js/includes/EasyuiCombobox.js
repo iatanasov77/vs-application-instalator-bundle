@@ -8,7 +8,7 @@
  */
 export function EasyuiCombobox( selector, options )
 {
-    if ( Array.isArray( options.values ) ) {
+    if ( ! Array.isArray( options.values ) ) {
         options.values  = [];    
     }
     
