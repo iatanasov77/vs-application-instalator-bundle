@@ -21,6 +21,7 @@ window.TestUploadProgressBarData    = {
  *     progressbarSelector: "#FileUploadProgressbar",
  *
  *     fileInputFieldName: "file",
+ *     fileResourceId: 0,
  *     fileResourceKey: "",
  *     fileResourceClass: ""
  * }
@@ -79,7 +80,8 @@ export function InitOneUpFileUpload( options )
                 },
                 {
                     name: 'fileResourceId',
-                    value: getFormFieldValue( form, 'id' )
+                    //value: getFormFieldValue( form, 'id' )
+                    value: options.fileResourceId
                 },
                 {
                     name: 'fileResourceClass',
@@ -207,6 +209,7 @@ function validateOptions( options )
         'btnStartUploadSelector',
         'progressbarSelector',
         'fileInputFieldName',
+        'fileResourceId',
         'fileResourceKey',
         'fileResourceClass'
     ];
