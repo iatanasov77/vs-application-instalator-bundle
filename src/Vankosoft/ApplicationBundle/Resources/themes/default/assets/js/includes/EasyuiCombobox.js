@@ -8,11 +8,16 @@
  */
 export function EasyuiCombobox( selector, options )
 {
+    if ( Array.isArray( options.values ) ) {
+        options.values  = [];    
+    }
+    
     selector.combobox({
         url: selector.attr( 'data-url' ),
         required: options.required,
         multiple: options.multiple,
         checkboxId: options.checkboxId,
+        values: options.values,
         prompt: selector.attr( 'data-placeholder' ),
         
         valueField: 'id',
@@ -48,25 +53,20 @@ export function EasyuiCombobox( selector, options )
                 //$( this ).combobox( 'unselect', node[opts.valueField] );
             }
             
-            console.log( 'onClick 1' );
+            //console.log( 'onClick 1' );
             setValues( opts, $( this ) );
-            console.log( 'onClick 2' );
+            //console.log( 'onClick 2' );
         },
         
         onLoadSuccess: function()
         {
-            //console.log( 'LOADED !!!' );
-            
             var opts    = $( this ).combobox( 'options' );
-            var target  = this;
-            var values  = $( target ).combobox( 'getValues' );
-            //console.log( values );
             
-            $.map( values, function( value )
-            {
-                var el  = opts.finder.getEl( target, value );
-                el.find( 'input.combobox-checkbox-' + opts.checkboxId )._propAttr( 'checked', true );
-            });
+            for ( let i = 0; i < opts.values.length; i++ ) {
+                $( ".combobox-checkbox-" + opts.checkboxId + "[value=" + opts.values[i] + "]" ).prop( "checked", "true" );
+            }
+            
+            setValues( opts, $( this ) );
         },
         
     /*
