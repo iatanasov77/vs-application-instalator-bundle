@@ -107,6 +107,7 @@ vs_application:
             language_code: Language Code
             button_accept_all: Button Accept All
             button_reject_all: Button Reject All
+            language_code_placeholder: '-- Select a Language --'
     template:
         there_are_no_items_to_display: There are no items to display 
         default: Default

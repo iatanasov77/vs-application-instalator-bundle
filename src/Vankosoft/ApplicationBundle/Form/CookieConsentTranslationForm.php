@@ -37,6 +37,7 @@ class CookieConsentTranslationForm extends AbstractForm
                 'label'                 => 'vs_application.form.cookie_consent_translation.language_code',
                 'translation_domain'    => 'VSApplicationBundle',
                 'choices'               => \array_flip( $languageCodes ),
+                'placeholder'           => 'vs_application.form.cookie_consent_translation.language_code_placeholder',
             ])
             
             ->add( 'btnAcceptAll', TextType::class, [
