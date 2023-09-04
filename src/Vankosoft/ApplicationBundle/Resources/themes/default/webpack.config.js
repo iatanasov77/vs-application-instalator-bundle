@@ -63,6 +63,7 @@ Encore
     .addEntry( 'js/taxonomy-vocabolaries-edit', assetsPath + '/js/pages/taxonomy-vocabolaries-edit.js' )
     .addEntry( 'js/locales', assetsPath + '/js/pages/locales.js' )
     .addEntry( 'js/cookie-consent-translations', assetsPath + '/js/pages/cookie-consent-translations.js' )
+    .addEntry( 'js/cookie-consent-translations-edit', assetsPath + '/js/pages/cookie-consent-translations-edit.js' )
     
     .addEntry( 'js/pages-categories', assetsPath + '/js/pages/pages_categories.js' )
     .addEntry( 'js/pages-categories-edit', assetsPath + '/js/pages/pages_categories_edit.js' )

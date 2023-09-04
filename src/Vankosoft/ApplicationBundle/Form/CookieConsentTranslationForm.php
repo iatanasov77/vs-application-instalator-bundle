@@ -24,16 +24,24 @@ class CookieConsentTranslationForm extends AbstractForm
     {
         parent::buildForm( $builder, $options );
         
-        $entity         = $builder->getData();
-        $locales        = $this->localesRepository->findAll();
+        $entity             = $builder->getData();
+        $locales            = $this->localesRepository->findAll();
         
-        $languageCodes  = [];
+        $availableLocales   = [];
+        $languageCodes      = [];
         foreach( $locales as $locale ) {
             $lang                       = \explode( '_', $locale->getCode() );
+            
+            $availableLocales[$lang[0]] = $locale->getCode();
             $languageCodes[$lang[0]]    = $locale->getTitle();
         }
         
         $builder
+            ->add( 'availableLocales', HiddenType::class, [
+                'mapped'    => false,
+                'data'      => \json_encode( $availableLocales )
+            ])
+            
             ->add( 'localeCode', HiddenType::class )
         
             ->add( 'languageCode', ChoiceType::class, [

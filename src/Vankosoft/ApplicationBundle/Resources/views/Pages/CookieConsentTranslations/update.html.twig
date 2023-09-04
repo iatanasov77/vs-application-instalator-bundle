@@ -83,3 +83,9 @@
 		</div>
     </div>  
 {% endblock content %}
+
+{% block body_scripts %}
+    {{ parent() }}
+    
+    {{ encore_entry_script_tags( 'js/cookie-consent-translations-edit' ) }}
+{% endblock %}
