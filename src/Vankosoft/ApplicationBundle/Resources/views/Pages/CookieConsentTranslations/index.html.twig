@@ -46,7 +46,7 @@
                 {% for item in resources %}
                     <tr>
                         <td>{{ loop.index }}</td>
-                        <td><i class="flag flag-{{ item.languageCode }}"></i></td>
+                        <td><i class="flag flag-{{ item.localeCode | split( '_' )[1] | lower }}"></i></td>
                         <td>
                             <div class="btn-group">
                                 <div class="btn-group">

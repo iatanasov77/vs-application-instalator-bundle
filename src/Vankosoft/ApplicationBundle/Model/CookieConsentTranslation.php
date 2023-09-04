@@ -11,6 +11,9 @@ class CookieConsentTranslation implements CookieConsentTranslationInterface
     protected $languageCode;
     
     /** @var string */
+    protected $localeCode;
+    
+    /** @var string */
     protected $btnAcceptAll;
     
     /** @var string */
@@ -35,6 +38,18 @@ class CookieConsentTranslation implements CookieConsentTranslationInterface
     public function setLanguageCode( $languageCode ): self
     {
         $this->languageCode = $languageCode;
+        
+        return $this;
+    }
+    
+    public function getLocaleCode()
+    {
+        return $this->localeCode;
+    }
+    
+    public function setLocaleCode( $localeCode ): self
+    {
+        $this->localeCode = $localeCode;
         
         return $this;
     }

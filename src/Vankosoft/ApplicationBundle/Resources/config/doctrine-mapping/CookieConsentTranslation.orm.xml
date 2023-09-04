@@ -11,6 +11,12 @@
         </id>
         
         <field name="languageCode" column="language_code" type="string" length="8" unique="true" />
+        <field name="localeCode" column="locale_code" type="string" length="8" >
+            <options>
+                <option name="comment">From wich of Locales is this Language Created.</option>
+                <option name="default">en_US</option>
+            </options>
+        </field>
         
         <field name="btnAcceptAll" column="btn_accept_all" type="string" length="32" />
         <field name="btnRejectAll" column="btn_reject_all" type="string" length="32" />
