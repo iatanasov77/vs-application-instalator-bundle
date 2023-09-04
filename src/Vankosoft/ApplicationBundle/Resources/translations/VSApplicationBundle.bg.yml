@@ -50,6 +50,8 @@ vs_application:
         upload_a_file: Добави Файл
         application_links: Приложения Връзки
         applications: Приложения
+        cookie_consent_translations: Cookie Consent Translations
+        create_cookie_consent_translation: Create a New Cookie Consent Translation
 
     form:
         errors_title: 'Грешка!'
@@ -153,6 +155,10 @@ vs_application:
         create_title: 'Създаване Нов'
         item_name_single: 'Обект'
         item_name_plurel: 'Обекти'
+        
+        cookie_consent_translations_create_title: Create a New Cookie Consent Translation
+        cookie_consent_translations_update_title: Update Cookie Consent Translation
+        cookie_consent_translations_details: Cookie Consent Translation Details
         
         contact_page:
             my_address: 'bul. "Al. Stamboliiski", Plovdiv 4000'
