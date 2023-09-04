@@ -4,6 +4,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -33,6 +34,8 @@ class CookieConsentTranslationForm extends AbstractForm
         }
         
         $builder
+            ->add( 'localeCode', HiddenType::class )
+        
             ->add( 'languageCode', ChoiceType::class, [
                 'label'                 => 'vs_application.form.cookie_consent_translation.language_code',
                 'translation_domain'    => 'VSApplicationBundle',
