@@ -51,7 +51,10 @@ vs_application:
         application_links: Application Links
         applications: Applications
         cookie_consent_translations: Cookie Consent Translations
-        create_cookie_consent_translation: Create a New Cookie Consent Translation
+        create_new_cookie_consent_translation: Create a New Cookie Consent Translation
+        edit_cookie_consent_translation: Edit Cookie Consent Translation
+        create_new_locale: Create a New Locale
+        edit_locale: Edit Locale
 
     form:
         errors_title: 'Error!'
