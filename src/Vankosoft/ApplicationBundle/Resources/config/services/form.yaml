@@ -39,3 +39,12 @@ services:
             - '%vs_application.model.locale.class%'
             - '@vs_application.repository.locale'
             - "@request_stack"
+            
+    vs_application.resources.cookie_consent_translation.form:
+        public: true
+        class: Vankosoft\ApplicationBundle\Form\CookieConsentTranslationForm
+        tags:
+            - { name: form.type }
+        arguments:
+            - '%vs_application.model.cookie_consent_translation.class%'
+            - '@vs_application.repository.locale'

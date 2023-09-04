@@ -101,6 +101,10 @@ vs_application:
             subject: 'Subject'
             message: 'Message' 
             submit: 'Send Message'
+        cookie_consent_translation:
+            language_code: Language Code
+            button_accept_all: Button Accept All
+            button_reject_all: Button Reject All
     template:
         there_are_no_items_to_display: There are no items to display 
         default: Default

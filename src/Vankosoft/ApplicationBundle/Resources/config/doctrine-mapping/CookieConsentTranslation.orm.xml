@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+
+    <mapped-superclass name="Vankosoft\ApplicationBundle\Model\CookieConsentTranslation">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+        
+        <field name="languageCode" column="language_code" type="string" length="8" unique="true" />
+        
+        <field name="btnAcceptAll" column="btn_accept_all" type="string" length="32" />
+        <field name="btnRejectAll" column="btn_reject_all" type="string" length="32" />
+        <field name="title" type="string" length="32" />
+        <field name="description" type="text" />
+        
+    </mapped-superclass>
+</doctrine-mapping>
