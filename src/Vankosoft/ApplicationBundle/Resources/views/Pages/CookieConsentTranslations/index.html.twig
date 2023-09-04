@@ -37,25 +37,16 @@
             <table class="table table-striped table-advance table-hover">
                 <thead>
                     <tr>
-                        <th>{{ 'vs_application.form.locale_code' | trans( {},'VSApplicationBundle' ) }}</th>
-                        <th>{{ 'vs_application.template.items_index_row_title' | trans( {},'VSApplicationBundle' ) }}</th>
-                        <th>{{ 'vs_application.template.default' | trans( {},'VSApplicationBundle' ) }}</th>
-                        <th>{{ 'vs_application.template.items_index_row_translations' | trans( {},'VSApplicationBundle' ) }}</th>
+                        <th></th>
+                        <th>{{ 'vs_application.form.cookie_consent_translation.language_code' | trans( {},'VSApplicationBundle' ) }}</th>
                         <th width="150">{{ 'vs_application.template.items_index_row_action' | trans( {},'VSApplicationBundle' ) }}</th>
                     </tr>
                 </thead>
                 <tbody>
                 {% for item in resources %}
                     <tr>
-                        <td>{{ item.code }}</td>
-                        <td>{{ item.title }}</td>
-                        <td>{% if item.code == defaultLocale %}<i class="fas fa-check" style="color: #82c91e;">{% endif %}</td>
-                        <td>
-                            {% for locale in translations[item.id] %}
-                                <i class="flag flag-{{ locale | split( '_' )[1] | lower }}"></i>
-                                {% if not loop.last %}&nbsp;{% endif %}
-                            {% endfor %}
-                        </td>
+                        <td>{{ loop.index }}</td>
+                        <td><i class="flag flag-{{ item.languageCode }}"></i></td>
                         <td>
                             <div class="btn-group">
                                 <div class="btn-group">
@@ -101,11 +92,11 @@
 {% block head_styles %}
     {{ parent() }}
     
-    {{ encore_entry_link_tags( 'js/locales' ) }}
+    {{ encore_entry_link_tags( 'js/cookie-consent-translations' ) }}
 {% endblock %}
 
 {% block body_scripts %}
     {{ parent() }}
     
-    {{ encore_entry_script_tags( 'js/locales' ) }}
+    {{ encore_entry_script_tags( 'js/cookie-consent-translations' ) }}
 {% endblock %}
