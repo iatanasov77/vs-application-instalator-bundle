@@ -28,7 +28,7 @@ class CookieConsentTranslationForm extends AbstractForm
         
         $languageCodes  = [];
         foreach( $locales as $locale ) {
-            $lang                       = \explode( '_', $locale->getCode() )
+            $lang                       = \explode( '_', $locale->getCode() );
             $languageCodes[$lang[0]]    = $locale->getTitle();
         }
         
