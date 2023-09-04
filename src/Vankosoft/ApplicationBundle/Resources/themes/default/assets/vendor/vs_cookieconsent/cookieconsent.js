@@ -7,19 +7,21 @@ require( 'vanilla-cookieconsent/src/cookieconsent.css' );
 const cookieconsentEn   = require( './translations/cookieconsent_en.js' );
 const cookieconsentBg   = require( './translations/cookieconsent_bg.js' );
 
+var cookieconsentLanguages  = {
+    ...cookieconsentEn,
+    ...cookieconsentBg,
+}
+
 $( function()
 {
     var cookieconsent = initCookieConsent();
     cookieconsent.run({
         revision: 1,
-        current_lang: 'en',
+        current_lang: $( 'html' )[0].lang,
         autoclear_cookies: true,    // default: false
         page_scripts: true,         // default: false
     
-        languages: {
-            ...cookieconsentEn,
-            ...cookieconsentBg,
-        },
+        languages: cookieconsentLanguages,
         
         gui_options: {
             consent_modal: {
