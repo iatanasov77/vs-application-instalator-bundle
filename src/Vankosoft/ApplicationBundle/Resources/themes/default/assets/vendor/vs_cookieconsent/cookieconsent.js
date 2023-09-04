@@ -11,6 +11,7 @@ var cookieconsentLanguages  = {
     ...cookieconsentEn,
     ...cookieconsentBg,
 }
+console.log( JSON.stringify( cookieconsentLanguages, null, "\t" ) );
 
 $( function()
 {
