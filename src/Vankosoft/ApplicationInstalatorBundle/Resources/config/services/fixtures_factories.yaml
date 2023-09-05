@@ -61,3 +61,8 @@ services:
             - '@vs_users.factory.user_info'
             - '%locale%'
             - '@file_locator'
+            
+    vs_application.fixture.example_factory.cookie_consent_translations:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\CookieConsentTranslationsExampleFactory
+        arguments:
+            - '@vs_application.factory.cookie_consent_translation'
