@@ -1,3 +1,9 @@
+1.10.92	|	Release date: **05.09.2023**
+============================================
+* Bug-Fixes:
+  - Fix Installator Setup AdminPanel Default Locale.
+
+
 1.10.91	|	Release date: **05.09.2023**
 ============================================
 * New Features and Improvements:
