@@ -68,3 +68,11 @@ services:
             - '@vs_application.fixture.example_factory.users'
         tags:
             - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.cookie_consent_translations:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\CookieConsentTranslationsFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.cookie_consent_translations'
+        tags:
+            - 'sylius_fixtures.fixture'
