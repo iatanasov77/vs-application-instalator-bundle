@@ -67,7 +67,7 @@ EOT
         
         // Setup SuperAdmin Default Locale
         $outputStyle->writeln( 'Setup SuperAdmin Application Default Locale.' );
-        $appSetup->setupAdminPanelDefaultLoale( $localeCode );
+        $appSetup->setupAdminPanelDefaultLocale( $localeCode );
         $outputStyle->writeln( '<info>SuperAdmin Application Default Locale successfully setuped.</info>' );
         $outputStyle->newLine();
         
