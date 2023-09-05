@@ -143,16 +143,21 @@ class ApplicationSetup
         ));
     }
     
-    public function setupAdminPanelDefaultLoale( string $defaultLocale )
+    public function setupAdminPanelDefaultLocale( string $defaultLocale )
     {
-        $filesystem         = new Filesystem();
+        if ( $defaultLocale == $this->container->getParameter( 'vs_application.default_locale' ) ) {
+            return;    
+        }
+        
+        $filesystem     = new Filesystem();
+        $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
         
         $configServices = str_replace(
             [
-                "__application_locale__"
+                "locale: '%vs_application.default_locale%'"
             ],
             [
-                $defaultLocale
+                "locale: '" + $defaultLocale + "'"
             ],
             file_get_contents( $projectRootDir . '/config/admin-panel/services.yaml' )
         );
