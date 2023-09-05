@@ -4,6 +4,7 @@
 require( 'vanilla-cookieconsent/src/cookieconsent.js' );
 require( 'vanilla-cookieconsent/src/cookieconsent.css' );
 
+/*
 const cookieconsentEn   = require( './translations/cookieconsent_en.js' );
 const cookieconsentBg   = require( './translations/cookieconsent_bg.js' );
 
@@ -12,13 +13,15 @@ var cookieconsentLanguages  = {
     ...cookieconsentBg,
 }
 //console.log( JSON.stringify( cookieconsentLanguages, null, "\t" ) );
+*/
 
-$( function()
+export function VsCookieConsent( cookieconsentLanguages, currentLang )
 {
     var cookieconsent = initCookieConsent();
+    
     cookieconsent.run({
         revision: 1,
-        current_lang: $( 'html' )[0].lang,
+        current_lang: currentLang,
         autoclear_cookies: true,    // default: false
         page_scripts: true,         // default: false
     
@@ -38,5 +41,7 @@ $( function()
             }
         }
     
-    });
-});
+    });    
+}
+
+

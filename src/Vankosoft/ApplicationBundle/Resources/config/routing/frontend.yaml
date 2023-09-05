@@ -1,0 +1,4 @@
+vs_application_cookie_consent_translations:
+    path: /cookie-consent-translations
+    controller: Vankosoft\ApplicationBundle\Controller\CookieConsentTranslationsExtController::getCookieConsentTranslationsAction
+

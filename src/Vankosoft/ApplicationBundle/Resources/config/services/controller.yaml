@@ -73,4 +73,10 @@ services:
             }
             - '@mailer'
             - '@vs_users.notifications'
+            
+    Vankosoft\ApplicationBundle\Controller\CookieConsentTranslationsExtController:
+        tags: ['controller.service_arguments']
+        autowire: true
+        arguments:
+            - '@vs_application.repository.cookie_consent_translation'
 
