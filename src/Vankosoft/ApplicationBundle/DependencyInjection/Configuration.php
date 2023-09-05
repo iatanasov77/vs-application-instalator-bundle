@@ -48,6 +48,11 @@ use Gedmo\Translatable\Entity\Repository\TranslationRepository;
 use Vankosoft\ApplicationBundle\Model\LogEntry;
 use Vankosoft\ApplicationBundle\Repository\LogEntryRepository;
 
+use Vankosoft\ApplicationBundle\Model\CookieConsentTranslation;
+use Vankosoft\ApplicationBundle\Model\Interfaces\CookieConsentTranslationInterface;
+use Vankosoft\ApplicationBundle\Controller\CookieConsentTranslationsController;
+use Vankosoft\ApplicationBundle\Form\CookieConsentTranslationForm;
+
 /**
  * This is the class that validates and merges configuration from your app/config files
  *
@@ -245,9 +250,27 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode( 'model' )->defaultValue( Locale::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'interface' )->defaultValue( LocaleInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->defaultValue( LocalesController::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'repository' )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
                                         ->scalarNode( 'form' )->defaultValue( LocaleForm::class )->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        
+                        ->arrayNode( 'cookie_consent_translation' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( CookieConsentTranslation::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( CookieConsentTranslationInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'controller' )->defaultValue( CookieConsentTranslationsController::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
+                                        ->scalarNode( 'form' )->defaultValue( CookieConsentTranslationForm::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

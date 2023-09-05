@@ -50,6 +50,11 @@ vs_application:
         upload_a_file: Добави Файл
         application_links: Приложения Връзки
         applications: Приложения
+        cookie_consent_translations: Cookie Consent Translations
+        create_new_cookie_consent_translation: Create a New Cookie Consent Translation
+        edit_cookie_consent_translation: Edit Cookie Consent Translation
+        create_new_locale: Create a New Locale
+        edit_locale: Edit Locale
 
     form:
         errors_title: 'Грешка!'
@@ -101,6 +106,11 @@ vs_application:
             subject: 'Тема'
             message: 'Съобщение' 
             submit: 'Изпрати'
+        cookie_consent_translation:
+            language_code: Language Code
+            button_accept_all: Button Accept All
+            button_reject_all: Button Reject All
+            language_code_placeholder: '-- Select a Language --'
     template:
         there_are_no_items_to_display: Няма елементи за показване
         default: Основен
@@ -149,6 +159,10 @@ vs_application:
         create_title: 'Създаване Нов'
         item_name_single: 'Обект'
         item_name_plurel: 'Обекти'
+        
+        cookie_consent_translations_create_title: Create a New Cookie Consent Translation
+        cookie_consent_translations_update_title: Update Cookie Consent Translation
+        cookie_consent_translations_details: Cookie Consent Translation Details
         
         contact_page:
             my_address: 'bul. "Al. Stamboliiski", Plovdiv 4000'

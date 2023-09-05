@@ -33,3 +33,11 @@ vs_application_locales:
         path: /locales
         templates: "@VSApplication/Pages/Locales"
     type: sylius.resource
+    
+vs_application_cookie_consent_translations:
+    resource: |
+        alias: vs_application.cookie_consent_translation
+        except: ['show']
+        path: /cookie-consent-translations
+        templates: "@VSApplication/Pages/CookieConsentTranslations"
+    type: sylius.resource

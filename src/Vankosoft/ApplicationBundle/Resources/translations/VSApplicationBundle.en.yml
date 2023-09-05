@@ -50,6 +50,11 @@ vs_application:
         upload_a_file: Upload a File
         application_links: Application Links
         applications: Applications
+        cookie_consent_translations: Cookie Consent Translations
+        create_new_cookie_consent_translation: Create a New Cookie Consent Translation
+        edit_cookie_consent_translation: Edit Cookie Consent Translation
+        create_new_locale: Create a New Locale
+        edit_locale: Edit Locale
 
     form:
         errors_title: 'Error!'
@@ -101,6 +106,11 @@ vs_application:
             subject: 'Subject'
             message: 'Message' 
             submit: 'Send Message'
+        cookie_consent_translation:
+            language_code: Language Code
+            button_accept_all: Button Accept All
+            button_reject_all: Button Reject All
+            language_code_placeholder: '-- Select a Language --'
     template:
         there_are_no_items_to_display: There are no items to display 
         default: Default
@@ -149,6 +159,10 @@ vs_application:
         create_title: 'Create New'
         item_name_single: 'Item'
         item_name_plurel: 'Items'
+        
+        cookie_consent_translations_create_title: Create a New Cookie Consent Translation
+        cookie_consent_translations_update_title: Update Cookie Consent Translation
+        cookie_consent_translations_details: Cookie Consent Translation Details
         
         contact_page:
             my_address: 'bul. "Al. Stamboliiski", Plovdiv 4000'

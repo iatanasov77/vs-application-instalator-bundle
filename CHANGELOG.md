@@ -1,3 +1,21 @@
+1.10.91	|	Release date: **05.09.2023**
+============================================
+* New Features and Improvements:
+  - Improve JS EasyuiCombobox Helper.
+  - Improve Cookie Consent Script.
+  - Create CookieConsentTranslation Resource.
+  - Add Routes and Templates for CookieConsentTranslation Resource.
+  - Add Doctrine Migration for CookieConsentTranslation Resource.
+  - Update Routes in CookieConsentTranslation Resource Templates.
+  - Improve Settings Menu.
+  - Update Menu Translations.
+  - Improve CookieConsentTranslation Model.
+  - Improve CookieConsentTranslation Form.
+  - Create CookieConsentTranslations Controller that Provide JSON Object with Translations.
+  - Application Installator Configs about to use CookieConsentTranslations.
+  - Application Installator Fixtures about to use CookieConsentTranslations.
+
+
 1.10.90	|	Release date: **02.09.2023**
 ============================================
 * Bug-Fixes and Improvements:
