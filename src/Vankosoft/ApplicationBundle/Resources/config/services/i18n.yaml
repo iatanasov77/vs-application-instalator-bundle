@@ -1,3 +1,6 @@
+parameters:
+    vs_application.default_locale: 'en_US'
+
 services:
     _defaults:
         autowire: true
