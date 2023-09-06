@@ -20,13 +20,13 @@ final class LocaleSetup implements LocaleSetupInterface
     private $localeFactory;
 
     /** @var string */
-    private $locale;
+    private $defaultLocale;
 
-    public function __construct( RepositoryInterface $localeRepository, FactoryInterface $localeFactory, string $locale )
+    public function __construct( RepositoryInterface $localeRepository, FactoryInterface $localeFactory, string $defaultLocale )
     {
         $this->localeRepository = $localeRepository;
         $this->localeFactory    = $localeFactory;
-        $this->locale           = trim( $locale );
+        $this->defaultLocale    = trim( $defaultLocale );
     }
 
     public function setup( InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper ): LocaleInterface
@@ -35,7 +35,7 @@ final class LocaleSetup implements LocaleSetupInterface
 
         $output->writeln( sprintf( 'Adding <info>%s</info> locale.', $code ) );
 
-        if ( $this->locale !== $code ) {
+        if ( $this->defaultLocale !== $code ) {
             $output->writeln( '<info>You may also need to add this locale into config/services.yaml configuration.</info>' );
         }
 
@@ -75,7 +75,7 @@ final class LocaleSetup implements LocaleSetupInterface
 
     private function getNewLanguageCode( InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper ): string
     {
-        $question   = new Question( 'Language (press enter to use ' . $this->locale . '): ', $this->locale );
+        $question   = new Question( 'Language (press enter to use ' . $this->defaultLocale . '): ', $this->defaultLocale );
 
         return trim( $questionHelper->ask( $input, $output, $question ) );
     }
