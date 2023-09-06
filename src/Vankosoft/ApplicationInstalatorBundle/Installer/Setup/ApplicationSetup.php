@@ -145,17 +145,18 @@ class ApplicationSetup
     
     public function setupAdminPanelDefaultLocale( string $defaultLocale )
     {
-        $filesystem         = new Filesystem();
+        $filesystem     = new Filesystem();
+        $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
         
         $configServices = str_replace(
             [
-                "__application_locale__"
+                "locale: en_US"
             ],
             [
-                $defaultLocale
+                "locale: " . $defaultLocale
             ],
             file_get_contents( $projectRootDir . '/config/admin-panel/services.yaml' )
-            );
+        );
         
         $filesystem->dumpFile( $projectRootDir . '/config/admin-panel/services.yaml', $configServices );
     }

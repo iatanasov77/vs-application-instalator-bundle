@@ -1,3 +1,11 @@
+1.10.94	|	Release date: **06.09.2023**
+============================================
+* Bug-Fixes:
+  - Fix Installator LocaleSetup Service.
+  - Update Installator ApplicationSetup Service.
+  - Fix Installator Application Configs.
+
+
 1.10.93	|	Release date: **06.09.2023**
 ============================================
 * Bug-Fixes:
