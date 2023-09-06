@@ -62,6 +62,7 @@ final class LocaleSetup implements LocaleSetupInterface
         $locale->setCode( $language['code'] );
         $locale->setTitle( $language['language'] );
         
+        $this->translatableListener->setDefaultLocale( $language['code'] );
         $this->translatableListener->setTranslatableLocale( $language['code'] );
         $this->localeRepository->add( $locale );
         
