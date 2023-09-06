@@ -150,10 +150,10 @@ class ApplicationSetup
         
         $configServices = str_replace(
             [
-                "__application_locale__"
+                "locale: en_US"
             ],
             [
-                $defaultLocale
+                "locale: " . $defaultLocale
             ],
             file_get_contents( $projectRootDir . '/config/admin-panel/services.yaml' )
         );
