@@ -107,7 +107,7 @@ vs_application:
             message: 'Message' 
             submit: 'Send Message'
         cookie_consent_translation:
-            language_code: Language Code
+            language_code: Language
             button_accept_all: Button Accept All
             button_reject_all: Button Reject All
             language_code_placeholder: '-- Select a Language --'
