@@ -5,7 +5,7 @@ $( function()
     
     var activePosition  = $( '.main-menu-current-item' ).position();
     if( ! activePosition ) {
-        var activeItemPath  = $( 'ol.breadcrumb' ).children( 'li.breadcrumb-item' ).find( 'a' ).attr( 'href' );
+        var activeItemPath  = $( 'ol.breadcrumb' ).children( 'li.breadcrumb-item' ).eq( 1 ).find( 'a' ).attr( 'href' );
         activePosition      = $( 'a.nav-link[href="' + activeItemPath + '"]' ).position();
         
         alert( activeItemPath );
