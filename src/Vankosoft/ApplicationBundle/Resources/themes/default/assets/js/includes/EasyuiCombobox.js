@@ -8,11 +8,10 @@
  */
 export function EasyuiCombobox( selector, options )
 {
-    if ( ! Array.isArray( options.values ) ) {
-        options.values  = [];    
-    }
+    //selector.find( ':selected' ).removeAttr( 'selected' );
     
     selector.combobox({
+        loadedBoxes: [],
         url: selector.attr( 'data-url' ),
         required: options.required,
         multiple: options.multiple,
@@ -23,90 +22,62 @@ export function EasyuiCombobox( selector, options )
         valueField: 'id',
         textField: 'text',
         
-        
         formatter: function( row )
         {
-            var values  = $( this ).combobox( 'getData' );
-            //console.log( values );
-            //console.log( row );
+            var opts            = $( this ).combobox( 'options' );
+            var checkboxId      = 'combobox-checkbox-' + opts.checkboxId + '-' + row[opts.valueField];
+            var checkboxClass   = 'combobox-checkbox-' + opts.checkboxId;
             
-            var opts = $( this ).combobox( 'options' );
-            //alert( opts.checkboxId );
-            
-            return '<input type="checkbox" class="combobox-checkbox-' + opts.checkboxId + '" value="' + row[opts.valueField] + '">' + row[opts.textField];
-        },
-        
-        onClick: function( node )
-        {
-            //console.log( node );
-            //findNode( node.ID );
-            
-            var opts    = $( this ).combobox( 'options' );
-            var el      = opts.finder.getEl( this, node[opts.valueField] );
-            var checked = el.find( 'input.combobox-checkbox-' + opts.checkboxId )._propAttr( 'checked' );
-            
-            //var values    = $( this ).combobox( 'getValues' );
-            //console.log( 'Selected Values: ' + values );
-            
-            if ( checked ) {
-                //console.log( 'Checked: ' + checked );
-                //$( this ).combobox( 'unselect', node[opts.valueField] );
-            }
-            
-            //console.log( 'onClick 1' );
-            setValues( opts, $( this ) );
-            //console.log( 'onClick 2' );
+            return '<input type="checkbox" class="' + checkboxClass + '" value="' + row[opts.valueField] + '" id="' + checkboxId + '">' + row[opts.textField];
         },
         
         onLoadSuccess: function()
         {
             var opts    = $( this ).combobox( 'options' );
             
+            if ( opts.loadedBoxes.includes( opts.checkboxId ) ) {
+                //return;
+            }
+            //console.log( opts.values );
+            opts.loadedBoxes.push( opts.checkboxId );
+            
+            if ( ! Array.isArray( opts.values ) ) {
+                opts.values = [];
+            }
+            
             for ( let i = 0; i < opts.values.length; i++ ) {
                 $( ".combobox-checkbox-" + opts.checkboxId + "[value=" + opts.values[i] + "]" ).prop( "checked", "true" );
+                $( ".combobox-checkbox-" + opts.checkboxId + "[value=" + opts.values[i] + "]" ).attr( "checked", "checked" );
+                
+                //console.log( $( ".combobox-checkbox-" + opts.checkboxId + "[value=" + opts.values[i] + "]" ).val() );
+                //console.log( $( ".combobox-checkbox-" + opts.checkboxId + "[value=" + opts.values[i] + "]" ).prop( "checked" ) );
+            }
+            
+            // https://stackoverflow.com/questions/13943511/remove-data-from-jquery-easyui-combobox
+            $( '.combobox-checkbox-' + opts.checkboxId ).parent(  '.combobox-item-selected'  ).remove();
+
+            setValues( opts, $( this ) );
+        },
+        
+        onClick: function( node )
+        {
+            var opts    = $( this ).combobox( 'options' );
+            var el      = opts.finder.getEl( this, node[opts.valueField] );
+            var checked = el.find( 'input.combobox-checkbox-' + opts.checkboxId )._propAttr( 'checked' );
+            
+            if ( checked ) {
+                $( this ).combobox( 'select', node[opts.valueField] );
+                $( this ).combobox( 'select', node[opts.textField] );
+            } else {
+                $( this ).combobox( 'unselect', node[opts.valueField] );
+                $( this ).combobox( 'unselect', node[opts.textField] );
             }
             
             setValues( opts, $( this ) );
         },
         
-    /*
-        onSelect: function( row )
-        {
-            console.log( row );
-            var opts    = $( this ).combobox( 'options' );
-            var el      = opts.finder.getEl( this, row[opts.valueField] );
-            el.find( 'input.combobox-checkbox-' + opts.checkboxId )._propAttr( 'checked', true );
-            
-            //row['selected']   = true;
-            
-            //$( this ).combobox( 'setValues', [] );
-            //$( this ).combobox( 'setValue', '' );
-            
-            var values  = $( this ).combobox( 'getValues' );
-            console.log( 'Selected Values: ' + values );
-        },
-        
-        onUnselect: function( row )
-        {
-            //console.log( row );
-            var opts    = $( this ).combobox( 'options' );
-            var el      = opts.finder.getEl( this, row[opts.valueField] );
-            el.find( 'input.combobox-checkbox-' + opts.checkboxId )._propAttr( 'checked', false );
-            
-            //row['selected']   = false;
-            //$( this ).combobox( 'clear' );
-            
-            //$( this ).combobox( 'setValues', [6,7] );
-            //$( this ).combobox( 'setValue', '6,7' );
-            //$( this ).combobox( 'loadData', [] );
-        },
-    */
-        
         onChange: function( newValue, oldValue )
         {
-            //console.log( 'onChange' );
-            //console.log( newValue );
-            
             var opts    = $( this ).combobox( 'options' );
             setValues( opts, $( this ) );
         }
@@ -119,12 +90,12 @@ function setValues( opts, selector )
     $( 'input.combobox-checkbox-' + opts.checkboxId ).each( function( index )
     {
         if ( $( this ).is( ':checked' ) ) {
-            //alert( "CHECKED: " + $( this ).val() );
             values.push( $( this ).val() );
-        } else {
-            //alert( "NOT CHECKED: " + $( this ).val() );
         }
     });
-            
-    selector.combobox( 'setValues', values );
+    
+    //selector.combobox( 'setValues', values );
+    
+    let uniqueValues = [...new Set( values )];
+    selector.combobox( 'setValues', uniqueValues );
 }

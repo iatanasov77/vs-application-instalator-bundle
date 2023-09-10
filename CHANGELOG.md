@@ -1,3 +1,11 @@
+1.10.95	|	Release date: **10.09.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Update Translations.
+  - Improve EasyuiCombobox.js script.
+  - Fix Active Main Menu Elements.
+
+
 1.10.94	|	Release date: **06.09.2023**
 ============================================
 * Bug-Fixes:
