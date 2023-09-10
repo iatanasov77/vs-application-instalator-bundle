@@ -8,11 +8,12 @@ $( function()
         var activeItemPath  = $( 'ol.breadcrumb' ).children( 'li.breadcrumb-item' ).eq( 1 ).find( 'a' ).attr( 'href' );
         var currentElement  = $( 'a.nav-link[href="' + activeItemPath + '"]' )
         
-        activePosition      = currentElement.position();
-        alert( activeItemPath );
+        if ( currentElement ) {
+            activePosition      = currentElement.position();
         
-        currentElement.addClass( 'active' );
-        currentElement.closest( '.submenu' ).addClass( 'show' );
+            currentElement.addClass( 'active' );
+            currentElement.closest( '.submenu' ).addClass( 'show' );
+        }
     }
     
     if ( activePosition ) {
