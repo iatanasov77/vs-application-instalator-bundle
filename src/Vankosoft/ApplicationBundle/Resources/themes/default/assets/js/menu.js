@@ -6,9 +6,13 @@ $( function()
     var activePosition  = $( '.main-menu-current-item' ).position();
     if( ! activePosition ) {
         var activeItemPath  = $( 'ol.breadcrumb' ).children( 'li.breadcrumb-item' ).eq( 1 ).find( 'a' ).attr( 'href' );
-        activePosition      = $( 'a.nav-link[href="' + activeItemPath + '"]' ).position();
+        var currentElement  = $( 'a.nav-link[href="' + activeItemPath + '"]' )
         
+        activePosition      = currentElement.position();
         alert( activeItemPath );
+        
+        currentElement.addClass( 'active' );
+        currentElement.closest( '.submenu' ).addClass( 'show' );
     }
     
     if ( activePosition ) {
