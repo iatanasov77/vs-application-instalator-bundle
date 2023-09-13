@@ -1,3 +1,11 @@
+1.10.96	|	Release date: **13.09.2023**
+============================================
+* New Features and Improvements:
+  - Remove EasyuiCombobox.js It is added Into NPM Repository Already.
+  - Imrove FosCkEditor Form Fields.
+  - Add Script That Fix Bootstrap Dropdowns on Custom Entries.
+
+
 1.10.95	|	Release date: **10.09.2023**
 ============================================
 * Bug-Fixes and Improvements:
