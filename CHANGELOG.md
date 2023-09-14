@@ -1,3 +1,12 @@
+1.10.97	|	Release date: **14.09.2023**
+============================================
+* Bug-Fixes:
+  - Fixing Create Translated Static Pages.
+  - Make Static Pages Slug Field Translatable.
+  - Make TOC Pages Slug Field Translatable.
+  - Display Static Pages Translation in Order How Its Created.
+
+
 1.10.96	|	Release date: **13.09.2023**
 ============================================
 * New Features and Improvements:
