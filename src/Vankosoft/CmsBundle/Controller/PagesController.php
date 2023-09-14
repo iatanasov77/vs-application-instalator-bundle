@@ -34,8 +34,8 @@ class PagesController extends AbstractCrudController
         $categories = new ArrayCollection();
         $pcr        = $this->get( 'vs_cms.repository.page_categories' );
         
-        $formLocale = $request->request->get( 'locale' );
         $formPost   = $request->request->all( 'page_form' );
+        $formLocale = $formPost['locale'];
         
         if ( $formLocale ) {
             $entity->setTranslatableLocale( $formLocale );
@@ -64,7 +64,8 @@ class PagesController extends AbstractCrudController
         $transRepo      = $this->get( 'vs_application.repository.translation' );
         
         foreach ( $this->getRepository()->findAll() as $page ) {
-            $translations[$page->getId()] = array_keys( $transRepo->findTranslations( $page ) );
+            //$translations[$page->getId()] = \array_keys( $transRepo->findTranslations( $page ) );
+            $translations[$page->getId()] = \array_reverse( \array_keys( $transRepo->findTranslations( $page ) ) );
         }
         
         return $translations;
