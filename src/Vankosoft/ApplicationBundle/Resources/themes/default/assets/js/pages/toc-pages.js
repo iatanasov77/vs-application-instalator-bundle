@@ -71,8 +71,6 @@ $( function ()
         var tocPageId   = parseInt( $( '#multipageTocPageModal' ).attr( 'data-tocPageId' ) );
         var locale      = $( this ).val()
         
-        console.log( tocPageId );
-        alert( tocPageId );
         if ( tocPageId ) {
             $.ajax({
                 type: 'GET',
