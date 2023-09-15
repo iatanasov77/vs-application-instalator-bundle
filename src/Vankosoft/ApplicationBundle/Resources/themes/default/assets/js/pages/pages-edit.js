@@ -7,7 +7,8 @@ import { VsPath } from '../includes/fos_js_routes.js';
 
 $( function()
 {
-	$( '#page_form_locale' ).on( 'change', function( e ) {
+    // bin/console fos:js-routing:dump --format=json --target=public/shared_assets/js/fos_js_routes_admin.json
+	$( '#FormContainer' ).on( 'change', '#page_form_locale', function( e ) {
 		var pageId	= $( '#FormContainer' ).attr( 'data-itemId' );
 		var locale	= $( this ).val()
 		
