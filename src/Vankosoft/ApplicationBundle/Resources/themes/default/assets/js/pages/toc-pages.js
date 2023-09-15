@@ -65,6 +65,27 @@ $( function ()
         });
     });
     
+    $( '#containerTocPages' ).on( 'change', '#toc_page_form_locale', function( e )
+    {
+        var documentId  = $( '#multipageTocPageModal' ).attr( 'data-documentId' );
+        var tocPageId   = $( '#multipageTocPageModal' ).attr( 'data-tocPageId' );
+        var locale      = $( this ).val()
+        
+        if ( tocPageId ) {
+            $.ajax({
+                type: 'GET',
+                url: VsPath( 'vs_cms_multipage_toc_page_edit', {'documentId': documentId, 'tocPageId': tocPageId, 'locale': locale} ),
+                success: function ( response ) {
+                    $( '#modalBodyTocPage > div.card-body' ).html( response );
+                    $( '#toc_page_form_parent' ).combotree();
+                }, 
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert( 'FATAL ERROR!!!' );
+                }
+            });
+        }
+    });
+    
     $( '#multipageTocPageModal' ).on( 'shown.bs.modal', function ( e )
     {
         $( '#toc_page_form_parent' ).combotree();
