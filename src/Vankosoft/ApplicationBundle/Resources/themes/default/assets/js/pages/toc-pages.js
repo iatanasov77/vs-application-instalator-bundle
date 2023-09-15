@@ -86,16 +86,19 @@ $( function ()
         }
     });
     
+    /*  */
     $( '#multipageTocPageModal' ).on( 'shown.bs.modal', function ( e )
     {
         $( '#toc_page_form_parent' ).combotree();
     });
     
+    /*
     $( '#multipageTocPageModal' ).on( 'hide.bs.modal', function ( e )
     {
         $( '#toc_page_form_parent' ).combotree( 'destroy' );
         $( '#modalBodyTocPage > div.card-body' ).html( '' );
     });
+    */
     
     $( '#btnSaveTocPage' ).on( 'click', function( e )
     {
