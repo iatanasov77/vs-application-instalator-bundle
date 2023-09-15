@@ -1,3 +1,11 @@
+1.10.99	|	Release date: **15.09.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix TocPageForm Options Type.
+  - Make Document TOC Pages Translatable.
+  - Fix Document TOC Page Edit Modal..
+
+
 1.10.98	|	Release date: **15.09.2023**
 ============================================
 * Bug-Fixes and Improvements:

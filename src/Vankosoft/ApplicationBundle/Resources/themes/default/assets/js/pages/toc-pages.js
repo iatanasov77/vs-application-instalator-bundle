@@ -55,6 +55,8 @@ $( function ()
                  * https://stackoverflow.com/questions/19570661/ckeditor-plugin-text-fields-not-editable
                  */
                 $( '#multipageTocPageModal' ).removeAttr( "tabindex" );
+                $( '#multipageTocPageModal' ).attr( "data-documentId", documentId );
+                $( '#multipageTocPageModal' ).attr( "data-tocPageId", tocPageId );
             },
             error: function()
             {
@@ -63,16 +65,40 @@ $( function ()
         });
     });
     
+    $( '#multipageTocPageModal' ).on( 'change', '#toc_page_form_locale', function( e )
+    {
+        var documentId  = parseInt( $( '#multipageTocPageModal' ).attr( 'data-documentId' ) );
+        var tocPageId   = parseInt( $( '#multipageTocPageModal' ).attr( 'data-tocPageId' ) );
+        var locale      = $( this ).val()
+        
+        if ( tocPageId ) {
+            $.ajax({
+                type: 'GET',
+                url: VsPath( 'vs_cms_multipage_toc_page_edit', {'documentId': documentId, 'tocPageId': tocPageId, 'locale': locale} ),
+                success: function ( response ) {
+                    $( '#modalBodyTocPage > div.card-body' ).html( response );
+                    $( '#toc_page_form_parent' ).combotree();
+                }, 
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert( 'FATAL ERROR!!!' );
+                }
+            });
+        }
+    });
+    
+    /*  */
     $( '#multipageTocPageModal' ).on( 'shown.bs.modal', function ( e )
     {
         $( '#toc_page_form_parent' ).combotree();
     });
     
+    /*
     $( '#multipageTocPageModal' ).on( 'hide.bs.modal', function ( e )
     {
         $( '#toc_page_form_parent' ).combotree( 'destroy' );
         $( '#modalBodyTocPage > div.card-body' ).html( '' );
     });
+    */
     
     $( '#btnSaveTocPage' ).on( 'click', function( e )
     {
