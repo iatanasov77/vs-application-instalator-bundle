@@ -65,7 +65,7 @@ $( function ()
         });
     });
     
-    $( '#containerTocPages' ).on( 'change', '#toc_page_form_locale', function( e )
+    $( '#multipageTocPageModal' ).on( 'change', '#toc_page_form_locale', function( e )
     {
         var documentId  = $( '#multipageTocPageModal' ).attr( 'data-documentId' );
         var tocPageId   = $( '#multipageTocPageModal' ).attr( 'data-tocPageId' );
