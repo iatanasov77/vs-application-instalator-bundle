@@ -55,6 +55,8 @@ $( function ()
                  * https://stackoverflow.com/questions/19570661/ckeditor-plugin-text-fields-not-editable
                  */
                 $( '#multipageTocPageModal' ).removeAttr( "tabindex" );
+                $( '#multipageTocPageModal' ).attr( "data-documentId", documentId );
+                $( '#multipageTocPageModal' ).attr( "data-tocPageId", tocPageId );
             },
             error: function()
             {
