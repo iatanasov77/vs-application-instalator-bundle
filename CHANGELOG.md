@@ -1,3 +1,9 @@
+1.10.98	|	Release date: **15.09.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Improve CMS Page Update Form.
+
+
 1.10.97	|	Release date: **14.09.2023**
 ============================================
 * Bug-Fixes:
