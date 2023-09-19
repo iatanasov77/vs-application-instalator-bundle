@@ -1,3 +1,9 @@
+1.10.101	|	Release date: **19.09.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Remove using ENV Variable API_TOKEN_DOMAIN
+
+
 1.10.100	|	Release date: **15.09.2023**
 ============================================
 * New Features and Improvements:
