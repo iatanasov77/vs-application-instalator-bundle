@@ -59,6 +59,11 @@ sylius_fixtures:
                               title: 'File Managers'
                               description: 'FileManagers Taxonomy'
                               locale:  '%locale%'
+                              
+                            - code: 'tags-whitelist-contexts'
+                              title: 'Tags Whitelist Contexts'
+                              description: 'Tags Whitelist Contexts'
+                              locale:  '%locale%'
 
                 pages_categories:
                     name: page_categories
@@ -142,3 +147,27 @@ sylius_fixtures:
                               description: "Можете да продължите да ползвате нашия уебсайт без да променяте настройките си, получавайки всички бисквитки, които сайтът използва, \
                                               или можете да промените своите настройки за бисквитки по всяко време. \
                                               Ползвайки уебсайта или затваряйки това съобщение, Вие се съгласявате с използването на бисквитки от нас."
+
+                tags_whitelist_contexts:
+                    name: tags_whitelist_contexts
+                    options:
+                        custom:
+                            - title: 'Static Pages'
+                              description: 'Pages Displayed When the Application is in Maintenance Mode'
+                              taxonomy_code: 'tags-whitelist-contexts'
+                              locale:  '%locale%'
+                              
+                tags_whitelist_tags:
+                    name: tags_whitelist_tags
+                    options:
+                        custom:
+                            - context_code: 'static-pages'
+                              tag: 'VankoSoft'
+                            - context_code: 'static-pages'
+                              tag: 'Application'
+                            - context_code: 'static-pages'
+                              tag: 'Maintenance'
+                            - context_code: 'static-pages'
+                              tag: 'About Us'
+                              
+

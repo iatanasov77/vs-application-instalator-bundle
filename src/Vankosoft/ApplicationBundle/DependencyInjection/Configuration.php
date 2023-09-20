@@ -56,6 +56,8 @@ use Vankosoft\ApplicationBundle\Form\CookieConsentTranslationForm;
 use Vankosoft\ApplicationBundle\Model\TagsWhitelistContext;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistContextInterface;
 use Vankosoft\ApplicationBundle\Repository\TagsWhitelistContextsRepository;
+use Vankosoft\ApplicationBundle\Controller\TagsWhitelistContextsController;
+use Vankosoft\ApplicationBundle\Form\TagsWhitelistContextForm;
 
 use Vankosoft\ApplicationBundle\Model\TagsWhitelistTag;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistTagInterface;
@@ -295,6 +297,8 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode( 'interface' )->defaultValue( TagsWhitelistContextInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( TagsWhitelistContextsRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
+                                        ->scalarNode( 'controller' )->defaultValue( TagsWhitelistContextsController::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'form' )->defaultValue( TagsWhitelistContextForm::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

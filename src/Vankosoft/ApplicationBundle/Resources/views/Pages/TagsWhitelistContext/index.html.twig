@@ -4,33 +4,14 @@
 {% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
 {% from "@VSApplication/Macros/pagination.html.twig" import pagination %}
 
-{% block title %}{{ parent() }} :: {{ 'vs_application.template.cookie_consent_translations_index_title' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
+{% block title %}{{ parent() }} :: {{ 'vs_application.template.tags_whitelist_contexts_index_title' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
 
 {% block pageTitle %}
-    <h2 class="pageheader-title"><i class="icon_genius"></i> {{ 'vs_application.template.cookie_consent_translations_index_title' | trans( {},'VSApplicationBundle' ) }}</h2>
+    <h2 class="pageheader-title"><i class="icon_genius"></i> {{ 'vs_application.template.tags_whitelist_contexts_index_title' | trans( {},'VSApplicationBundle' ) }}</h2>
     <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div>
-                <div style="float: left; margin-left: 30px; margin-bottom: 20px;">
-                    <a class="btn btn-info"
-                        href="{{ path( 'vs_application_cookie_consent_translation_create' ) }}"
-                        title="{{ 'vs_application.menu.create_new_cookie_consent_translation' | trans( {},'VSApplicationBundle' ) }}"
-                    >
-                        {{ 'vs_application.menu.create_new_cookie_consent_translation' | trans( {},'VSApplicationBundle' ) }}
-                    </a>
-                </div>
-                <div style="float: right; margin-right: 30px; margin-bottom: 20px;">
-                    
-                </div>
-                <div style="clear: both;"></div>
-            </div>
-        </div>
-    </div>
-    
     <div class="row">
         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
             
@@ -38,7 +19,8 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>{{ 'vs_application.form.cookie_consent_translation.language_code' | trans( {},'VSApplicationBundle' ) }}</th>
+                        <th>{{ 'vs_application.template.items_index_row_name' | trans( {},'VSApplicationBundle' ) }}</th>
+                        <th>{{ 'vs_application.template.items_index_row_code' | trans( {},'VSApplicationBundle' ) }}</th>
                         <th width="150">{{ 'vs_application.template.items_index_row_action' | trans( {},'VSApplicationBundle' ) }}</th>
                     </tr>
                 </thead>
@@ -46,7 +28,8 @@
                 {% for item in resources %}
                     <tr>
                         <td>{{ loop.index }}</td>
-                        <td><i class="flag flag-{{ item.localeCode | split( '_' )[1] | lower }}"></i></td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.name }}</td>
                         <td>
                             <div class="btn-group">
                                 <div class="btn-group">
@@ -90,11 +73,11 @@
 {% block head_styles %}
     {{ parent() }}
     
-    {{ encore_entry_link_tags( 'js/cookie-consent-translations' ) }}
+    {{ encore_entry_link_tags( 'js/tags-whitelist-contexts' ) }}
 {% endblock %}
 
 {% block body_scripts %}
     {{ parent() }}
     
-    {{ encore_entry_script_tags( 'js/cookie-consent-translations' ) }}
+    {{ encore_entry_script_tags( 'js/tags-whitelist-contexts' ) }}
 {% endblock %}

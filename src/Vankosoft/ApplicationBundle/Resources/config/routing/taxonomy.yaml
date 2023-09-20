@@ -30,3 +30,11 @@ vs_application_taxonomy_taxon_edit:
 vs_application_taxonomy_taxon_handle:
     path: /taxonomy-taxon/{taxonomyId}/handle
     controller: Vankosoft\ApplicationBundle\Controller\TaxonomyTaxonsController::handleTaxon
+
+vs_application_tags_whitelist_context:
+    resource: |
+        alias: vs_application.tags_whitelist_context
+        except: ['show']
+        path: /tags-whitelist-contexts
+        templates: "@VSApplication/Pages/TagsWhitelistContext"
+    type: sylius.resource

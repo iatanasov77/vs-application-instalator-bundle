@@ -66,3 +66,17 @@ services:
         class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\CookieConsentTranslationsExampleFactory
         arguments:
             - '@vs_application.factory.cookie_consent_translation'
+            
+    vs_application.fixture.example_factory.tags_whitelist_contexts:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\TagsWhitelistContextsExampleFactory
+        arguments:
+            - '@vs_application.repository.taxonomy'
+            - '@vs_application.factory.taxon'
+            - '@vs_application.factory.tags_whitelist_context'
+            - '@vs_application.slug_generator'
+            
+    vs_application.fixture.example_factory.tags_whitelist_tags:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\TagsWhitelistTagsExampleFactory
+        arguments:
+            - '@vs_application.repository.tags_whitelist_context'
+            - '@vs_application.factory.tags_whitelist_tag'

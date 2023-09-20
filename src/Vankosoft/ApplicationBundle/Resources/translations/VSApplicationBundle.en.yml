@@ -160,9 +160,15 @@ vs_application:
         item_name_single: 'Item'
         item_name_plurel: 'Items'
         
+        cookie_consent_translations_index_title: 'List Available Cookie Consent Translations'
         cookie_consent_translations_create_title: Create a New Cookie Consent Translation
         cookie_consent_translations_update_title: Update Cookie Consent Translation
         cookie_consent_translations_details: Cookie Consent Translation Details
+        
+        tags_whitelist_contexts_index_title: 'List Available Tags Whitelist Contexts'
+        tags_whitelist_contexts_create_title: Create a New Tags Whitelist Context
+        tags_whitelist_contexts_update_title: Update Tags Whitelist Context
+        tags_whitelist_contexts_details: Tags Whitelist Context Details
         
         contact_page:
             my_address: 'bul. "Al. Stamboliiski", Plovdiv 4000'
