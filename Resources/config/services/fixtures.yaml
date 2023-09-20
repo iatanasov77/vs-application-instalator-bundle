@@ -76,3 +76,19 @@ services:
             - '@vs_application.fixture.example_factory.cookie_consent_translations'
         tags:
             - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.tags_whitelist_contexts:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\TagsWhitelistContextsFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.tags_whitelist_contexts'
+        tags:
+            - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.tags_whitelist_tags:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\TagsWhitelistTagsFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.tags_whitelist_tags'
+        tags:
+            - 'sylius_fixtures.fixture'
