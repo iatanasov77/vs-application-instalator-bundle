@@ -55,6 +55,9 @@ vs_application:
         edit_cookie_consent_translation: Edit Cookie Consent Translation
         create_new_locale: Create a New Locale
         edit_locale: Edit Locale
+        tags_whitelist_contexts: Tags Whitelist Contexts
+        create_new_tags_whitelist_context: Create New Tags Whitelist Context
+        edit_tags_whitelist_context: Edit Tags Whitelist Context
 
     form:
         errors_title: 'Error!'
