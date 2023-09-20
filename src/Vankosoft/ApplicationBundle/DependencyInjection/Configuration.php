@@ -53,6 +53,14 @@ use Vankosoft\ApplicationBundle\Model\Interfaces\CookieConsentTranslationInterfa
 use Vankosoft\ApplicationBundle\Controller\CookieConsentTranslationsController;
 use Vankosoft\ApplicationBundle\Form\CookieConsentTranslationForm;
 
+use Vankosoft\ApplicationBundle\Model\TagsWhitelistContext;
+use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistContextInterface;
+use Vankosoft\ApplicationBundle\Repository\TagsWhitelistContextsRepository;
+
+use Vankosoft\ApplicationBundle\Model\TagsWhitelistTag;
+use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistTagInterface;
+use Vankosoft\ApplicationBundle\Repository\TagsWhitelistTagsRepository;
+
 /**
  * This is the class that validates and merges configuration from your app/config files
  *
@@ -271,6 +279,38 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
                                         ->scalarNode( 'form' )->defaultValue( CookieConsentTranslationForm::class )->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        
+                        ->arrayNode( 'tags_whitelist_context' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( TagsWhitelistContext::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( TagsWhitelistContextInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( TagsWhitelistContextsRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        
+                        ->arrayNode( 'tags_whitelist_tag' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( TagsWhitelistTag::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( TagsWhitelistTagInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( TagsWhitelistTagsRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
                                     ->end()
                                 ->end()
                             ->end()
