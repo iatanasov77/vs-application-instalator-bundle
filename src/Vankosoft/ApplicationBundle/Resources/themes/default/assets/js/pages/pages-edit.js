@@ -15,6 +15,12 @@ var tagsInput;
 var tagify;
 var dragsort;
 
+// must update Tagify's value according to the re-ordered nodes in the DOM
+function onDragEnd( elm )
+{
+    tagify.updateValueByDOMTags();
+}
+
 function initForm()
 {
     $( '#page_form_category_taxon' ).combotree();
