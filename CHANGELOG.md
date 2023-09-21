@@ -1,3 +1,12 @@
+1.10.102	|	Release date: **21.09.2023**
+============================================
+* New Features and Improvements:
+  - Update Application Installator Configs.
+  - Improve LoginFormAuthenticator .
+  - Create Tags Whitelist Resources.
+  - Use Tags in CMS Page Model.
+
+
 1.10.101	|	Release date: **19.09.2023**
 ============================================
 * Bug-Fixes and Improvements:
