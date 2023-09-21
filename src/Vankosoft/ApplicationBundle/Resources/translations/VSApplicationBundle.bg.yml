@@ -69,6 +69,7 @@ vs_application:
         name: 'Име'
         hostname: 'Име на Хост'
         description: 'Описание'
+        tags: 'Тагове'
         parent: 'Родител'
         parent_category: 'Родителска Категория'
         parent_category_placeholder: '-- Избери Родителска Категория --'

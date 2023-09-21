@@ -69,6 +69,7 @@ vs_application:
         name: 'Name'
         hostname: 'Hostname'
         description: 'Description'
+        tags: 'Tags'
         parent: 'Parent'
         parent_category: 'Parent Category'
         parent_category_placeholder: '-- Choose a Parent Category --'
