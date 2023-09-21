@@ -5,6 +5,46 @@ require( 'jquery-easyui/js/jquery.easyui.min.js' );
 require( '../includes/clone_preview.js' );
 import { VsPath } from '../includes/fos_js_routes.js';
 
+import Tagify from '@yaireo/tagify';
+import '@yaireo/tagify/dist/tagify.css';
+
+import DragSort from '@yaireo/dragsort';
+import '@yaireo/dragsort/dist/dragsort.css';
+
+var tagsInput;
+var tagify;
+var dragsort;
+
+function initForm()
+{
+    $( '#page_form_category_taxon' ).combotree();
+    
+    var tagsInputWhitelist  = $( '#page_form_tagsInputWhitelist' ).val().split( ',' );
+    //console.log( tagsInputWhitelist );
+    
+    tagsInput   = $( '#page_form_tags' )[0];
+    tagify      = new Tagify( tagsInput, {
+        whitelist : tagsInputWhitelist,
+        dropdown : {
+            classname     : "color-blue",
+            enabled       : 0,              // show the dropdown immediately on focus
+            maxItems      : 5,
+            position      : "text",         // place the dropdown near the typed text
+            closeOnSelect : false,          // keep the dropdown open after selecting a suggestion
+            highlightFirst: true
+        }
+    });
+    
+    // bind "DragSort" to Tagify's main element and tell
+    // it that all the items with the below "selector" are "draggable"
+    dragsort    = new DragSort( tagify.DOM.scope, {
+        selector: '.'+tagify.settings.classNames.tag,
+        callbacks: {
+            dragEnd: onDragEnd
+        }
+    }); 
+}
+
 $( function()
 {
     // bin/console fos:js-routing:dump --format=json --target=public/shared_assets/js/fos_js_routes_admin.json
@@ -18,7 +58,7 @@ $( function()
                 url: VsPath( 'vs_cms_pages_form_in_locale', { 'itemId': pageId, 'locale': locale } ),
                 success: function ( data ) {
                     $( '#FormContainer' ).html( data );
-                    $( '#page_form_category_taxon' ).combotree();
+                    initForm();
                 }, 
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alert( 'FATAL ERROR!!!' );
