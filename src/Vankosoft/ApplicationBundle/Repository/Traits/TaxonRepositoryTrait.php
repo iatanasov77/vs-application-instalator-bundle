@@ -1,0 +1,37 @@
+<?php namespace Vankosoft\ApplicationBundle\Repository\Traits;
+
+trait TaxonRepositoryTrait
+{
+    public function find( $id, $lockMode = null, $lockVersion = null ): ?object
+    {
+        if( ! is_numeric( $id ) ) {
+            return $this->findOneBy( ['slug'=>$id] );
+        }
+        
+        return parent::find( $id, $lockMode, $lockVersion );
+    }
+    
+    public function findByTaxonId( $taxonId )
+    {
+        $allCategories  = $this->findAll();
+        foreach ( $allCategories as $cat ) {
+            if ( $cat->getTaxon()->getId() == $taxonId ) {
+                return $cat;
+            }
+        }
+        
+        return null;
+    }
+    
+    public function findByTaxonCode( $code )
+    {
+        $allCategories  = $this->findAll();
+        foreach ( $allCategories as $cat ) {
+            if ( $cat->getTaxon()->getCode() == $code ) {
+                return $cat;
+            }
+        }
+        
+        return null;
+    }
+}

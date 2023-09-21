@@ -32,11 +32,7 @@
 		                </div>
 		            {% endif %}
 		            
-                    {% if(item.id) %}
-                        {% set method = "PUT" %}
-                    {% else %}
-                        {% set method = "POST" %}
-                    {% endif %}
+                    {% if(item.id) %}{% set method = "PUT" %}{% else %}{% set method = "POST" %}{% endif %}
                     {{ form_start(form, { 'attr': {'class': 'form-horizontal '}, 'method': method }) }}
                         {{ form_widget(form.availableLocales) }}
                         {{ form_widget(form.localeCode) }}

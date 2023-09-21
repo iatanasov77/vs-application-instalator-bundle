@@ -1,6 +1,7 @@
 <?php namespace Vankosoft\ApplicationBundle\Model;
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface;
 
 class Taxonomy implements TaxonomyInterface
 {
@@ -16,8 +17,10 @@ class Taxonomy implements TaxonomyInterface
     /** @var string */
     protected $description;
     
+    /** @var TaxonInterface */
     protected $rootTaxon;
     
+    /** @var string */
     protected $locale;
     
     public function getCode()
@@ -32,7 +35,7 @@ class Taxonomy implements TaxonomyInterface
         return $this;
     }
     
-    public function getRootTaxon()
+    public function getRootTaxon(): ?TaxonInterface
     {
         return $this->rootTaxon;    
     }
@@ -54,7 +57,7 @@ class Taxonomy implements TaxonomyInterface
         return $this->id;
     }
     
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -66,7 +69,7 @@ class Taxonomy implements TaxonomyInterface
         return $this;
     }
     
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }

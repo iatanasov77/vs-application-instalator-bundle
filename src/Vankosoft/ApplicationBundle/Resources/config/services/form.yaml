@@ -48,3 +48,11 @@ services:
         arguments:
             - '%vs_application.model.cookie_consent_translation.class%'
             - '@vs_application.repository.locale'
+            
+    vs_application.resources.tags_whitelist_context.form:
+        public: true
+        class: Vankosoft\ApplicationBundle\Form\TagsWhitelistContextForm
+        tags:
+            - { name: form.type }
+        arguments:
+            - '%vs_application.model.tags_whitelist_context.class%'
