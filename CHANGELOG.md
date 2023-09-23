@@ -1,3 +1,9 @@
+1.10.104	|	Release date: **23.09.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix Installator ApplicationSetup .
+
+
 1.10.103	|	Release date: **23.09.2023**
 ============================================
 * New Features and Improvements:
