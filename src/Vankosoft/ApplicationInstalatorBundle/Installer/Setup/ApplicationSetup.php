@@ -428,6 +428,15 @@ class ApplicationSetup
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_users.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_users.yaml', $configRoutes );
+        
+        if ( $this->isExtendedProject ) {
+            $configRoutes   = str_replace(
+                ["__application_name__"],
+                [$this->applicationNamespace],
+                file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_application_extended.yaml' )
+            );
+            $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_application_extended.yaml', $configRoutes );
+        }
     }
     
     private function removeOriginalKernelConfigs()
