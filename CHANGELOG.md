@@ -1,3 +1,9 @@
+1.10.105	|	Release date: **23.09.2023**
+============================================
+* Bug-Fixes:
+  - Fix Installator ApplicationSetup For Application Extended Routes.
+
+
 1.10.104	|	Release date: **23.09.2023**
 ============================================
 * Bug-Fixes and Improvements:
