@@ -1,3 +1,9 @@
+1.10.107	|	Release date: **24.09.2023**
+============================================
+* New Features:
+  - Update Application Extended Resources.
+
+
 1.10.106	|	Release date: **23.09.2023**
 ============================================
 * Bug-Fixes:
