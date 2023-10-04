@@ -1,3 +1,10 @@
+1.10.108	|	Release date: **04.10.2023**
+============================================
+* New Features and Improvements:
+  - Remove SPE FileSize Twig Extension Bundle.
+  - Improve Application Extended Configs.
+
+
 1.10.107	|	Release date: **24.09.2023**
 ============================================
 * New Features:
