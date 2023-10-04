@@ -419,7 +419,7 @@ class ApplicationSetup
             ["__application_name__"],
             [$this->applicationNamespace],
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_application.yaml' )
-            );
+        );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_application.yaml', $configRoutes );
         
         $configRoutes   = str_replace(
@@ -436,6 +436,13 @@ class ApplicationSetup
                 file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_application_extended.yaml' )
             );
             $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_application_extended.yaml', $configRoutes );
+            
+            $configRoutes   = str_replace(
+                ["__application_name__"],
+                [$this->applicationNamespace],
+                file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_payment.yaml' )
+            );
+            $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_payment.yaml', $configRoutes );
         }
     }
     
@@ -483,43 +490,57 @@ class ApplicationSetup
             ["__application_name__", "__application_slug__"],
             [$this->applicationNamespace, $this->applicationSlug],
             file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/GlobalFormsTrait.php' )
-            );
+        );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/GlobalFormsTrait.php', $applicationAuthController );
         
         $applicationAuthController  = str_replace(
             ["__application_name__", "__application_slug__"],
             [$this->applicationNamespace, $this->applicationSlug],
             file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ContactController.php' )
-            );
+        );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ContactController.php', $applicationAuthController );
         
         $applicationAuthController  = str_replace(
             ["__application_name__", "__application_slug__"],
             [$this->applicationNamespace, $this->applicationSlug],
             file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ForgotPasswordController.php' )
-            );
+        );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ForgotPasswordController.php', $applicationAuthController );
         
         $applicationAuthController  = str_replace(
             ["__application_name__", "__application_slug__"],
             [$this->applicationNamespace, $this->applicationSlug],
             file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/RegisterController.php' )
-            );
+        );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/RegisterController.php', $applicationAuthController );
         
         $applicationAuthController  = str_replace(
             ["__application_name__", "__application_slug__"],
             [$this->applicationNamespace, $this->applicationSlug],
             file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ProductController.php' )
-            );
+        );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ProductController.php', $applicationAuthController );
         
         $applicationAuthController  = str_replace(
             ["__application_name__", "__application_slug__"],
             [$this->applicationNamespace, $this->applicationSlug],
-            file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/PricingPlansController.php' )
-            );
-        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/PricingPlansController.php', $applicationAuthController );
+            file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/PricingPlanCheckoutController.php' )
+        );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/PricingPlanCheckoutController.php', $applicationAuthController );
+        
+        $applicationAuthController  = str_replace(
+            ["__application_name__", "__application_slug__"],
+            [$this->applicationNamespace, $this->applicationSlug],
+            file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ShoppingCartCheckoutController.php' )
+        );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ShoppingCartCheckoutController.php', $applicationAuthController );
+        
+        $applicationAuthController  = str_replace(
+            ["__application_name__", "__application_slug__"],
+            [$this->applicationNamespace, $this->applicationSlug],
+            file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/CreditCardController.php' )
+        );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/CreditCardController.php', $applicationAuthController );
     }
     
     private function setupInstalationInfo()
