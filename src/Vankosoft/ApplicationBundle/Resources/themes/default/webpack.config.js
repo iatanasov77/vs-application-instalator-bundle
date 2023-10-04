@@ -98,6 +98,7 @@ Encore
     .addEntry( 'js/pricing-plans-index', assetsPath + '/js/payment_pages/pricing-plans-index.js' )
     .addEntry( 'js/pricing-plans-edit', assetsPath + '/js/payment_pages/pricing-plans-edit.js' )
     .addEntry( 'js/recieved-payments', assetsPath + '/js/payment_pages/recieved-payments.js' )
+    .addEntry( 'js/orders', assetsPath + '/js/payment_pages/orders.js' )
     
     //////////////////////////////////////////////////////////////////
     // Subscription Pages
