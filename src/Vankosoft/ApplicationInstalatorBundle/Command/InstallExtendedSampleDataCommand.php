@@ -38,12 +38,6 @@ EOT
             $suite ?? 'vankosoft_extended_sample_data_suite'
         ) );
 
-        if ( ! $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Continue? (y/N) ', null !== $suite ) ) ) {
-            $outputStyle->writeln( 'Cancelled loading sample data.' );
-
-            return Command::SUCCESS;
-        }
-        
         $parameters = [
             'suite' => $suite ?: 'vankosoft_extended_sample_data_suite',
             '--no-interaction' => true,
