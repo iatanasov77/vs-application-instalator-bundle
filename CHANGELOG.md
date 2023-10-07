@@ -1,3 +1,15 @@
+1.10.109	|	Release date: **07.10.2023**
+============================================
+* New Features , Fixes and Improvements:
+  - Fix Application Extended Installation .
+  - Fix Installtor Application Exteneded Configs.
+  - Add Assets for Payment Extension.
+  - Add a PayedServiceSubscription index page java script.
+  - Update Installator Application Extended Configs.
+  - Update Payment JS.
+  - Improve Installator Command InstallExtendedSampleDataCommand .
+
+
 1.10.108	|	Release date: **04.10.2023**
 ============================================
 * New Features and Improvements:
