@@ -98,6 +98,8 @@ Encore
     .addEntry( 'js/pricing-plans-index', assetsPath + '/js/payment_pages/pricing-plans-index.js' )
     .addEntry( 'js/pricing-plans-edit', assetsPath + '/js/payment_pages/pricing-plans-edit.js' )
     .addEntry( 'js/recieved-payments', assetsPath + '/js/payment_pages/recieved-payments.js' )
+    .addEntry( 'js/orders', assetsPath + '/js/payment_pages/orders.js' )
+    .addEntry( 'js/pricing-plan-subscriptions', assetsPath + '/js/payment_pages/pricing-plan-subscriptions.js' )
     
     //////////////////////////////////////////////////////////////////
     // Subscription Pages
@@ -106,6 +108,7 @@ Encore
     .addEntry( 'js/payed-services-listing', assetsPath + '/js/subscription_pages/payed-services-listing.js' )
     .addEntry( 'js/payed-services-categories-listing', assetsPath + '/js/subscription_pages/payed-services-categories-listing.js' )
     .addEntry( 'js/mailchimp-audiences-listing', assetsPath + '/js/subscription_pages/mailchimp-audiences-listing.js' )
+    .addEntry( 'js/payed-service-subscriptions', assetsPath + '/js/subscription_pages/payed-service-subscriptions.js' )
 ;
 
 const config = Encore.getWebpackConfig();

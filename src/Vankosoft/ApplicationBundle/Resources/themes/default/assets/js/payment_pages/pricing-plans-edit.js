@@ -2,8 +2,15 @@ require( 'jquery-easyui/css/easyui.css' );
 require( 'jquery-easyui/js/jquery.easyui.min.js' );
 // Need copy of: jquery-easyui/images/*
 
+require ( 'jquery-duplicate-fields/jquery.duplicateFields.js' );
+
 $( function()
 {
+    $( '#paidServicesContainer' ).duplicateFields({
+        btnRemoveSelector: ".btnRemoveField",
+        btnAddSelector:    ".btnAddField"
+    });
+    
     var taxonValues = $( '#categoryTaxonIds' ).attr( 'data-values' ).split( ',' );
     $( '#product_form_category_taxon' ).combotree( 'setValues', taxonValues );
     
