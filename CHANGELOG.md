@@ -1,3 +1,9 @@
+1.10.110	|	Release date: **11.10.2023**
+============================================
+* New Features:
+  - Update Installator Application Extended Configs.
+
+
 1.10.109	|	Release date: **07.10.2023**
 ============================================
 * New Features , Fixes and Improvements:
