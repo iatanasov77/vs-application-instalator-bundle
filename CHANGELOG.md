@@ -1,3 +1,9 @@
+1.10.111	|	Release date: **20.10.2023**
+============================================
+* New Features and Improvements:
+  - Update ProfileController to Set User Info Title Field.
+
+
 1.10.110	|	Release date: **11.10.2023**
 ============================================
 * New Features:
