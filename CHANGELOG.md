@@ -1,3 +1,13 @@
+1.10.113	|	Release date: **23.10.2023**
+============================================
+* Bug-Fixes and Improvemets:
+  - Fix Page Category Model Interface.
+  - Improve Route Paths of Settings.
+  - Improve Menu Builder.
+  - Improve Admin Panel Theme Top Logo.
+  - Improve Default Theme Layout.
+
+
 1.10.112	|	Release date: **23.10.2023**
 ============================================
 * New Features and Improvements:
