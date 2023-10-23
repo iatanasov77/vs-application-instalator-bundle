@@ -163,7 +163,7 @@ class MenuBuilder
                 if ( is_array( $roles ) ) {
                     foreach ( $roles as $pathRole ) {
                         $pathGranted    = false;
-                        if ( $this->security->isGranted( $pathRole ) ) { // VoterInterface::ACCESS_ABSTAIN
+                        if ( $this->security->isGranted( $pathRole ) && ! $hasGrantedChild ) { // VoterInterface::ACCESS_ABSTAIN
                                                                          //VoterInterface::ACCESS_DENIED
                             $pathGranted        = true;
                             $hasGrantedChild    = true;
