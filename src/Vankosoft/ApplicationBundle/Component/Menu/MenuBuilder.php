@@ -195,6 +195,7 @@ class MenuBuilder
             
             if ( isset( $mg['childs'] ) && is_array( $mg['childs'] ) ) {
                 $isGranted  = $this->build( $menu[$menuName], $mg['childs'] );
+                
                 $child->setDisplay( $isGranted );
             }
             

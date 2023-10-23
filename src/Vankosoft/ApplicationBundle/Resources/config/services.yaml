@@ -15,6 +15,9 @@ imports:
     - { resource: services/sylius_resource.yaml }
 
 parameters:
+    applicationIcon: 'build/default/images/superman.svg'
+    applicationTitle: 'vs_application.template.super_admin_panel'
+    
     vs_application.version: !php/const Vankosoft\ApplicationBundle\Component\Application\Kernel::VERSION
     vs_application.public_dir: "%kernel.project_dir%/public/admin-panel"
     vs_application.settings.application_id: null

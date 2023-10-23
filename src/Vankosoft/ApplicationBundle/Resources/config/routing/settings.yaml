@@ -1,28 +1,28 @@
 vs_application_settings:
     resource: |
         alias: vs_application.settings
-        path: /settings
+        path: /settings/preferences
         templates: "@VSApplication/Pages/Settings"
     type: sylius.resource
 
 vs_application_application_form:
-    path: /application-edit/form-{applicationId}
+    path: /settings/application-edit/form-{applicationId}
     controller: Vankosoft\ApplicationBundle\Controller\ApplicationExtController::index
     
 vs_application_application_handle:
-    path: /application-edit/handle-{applicationId}
+    path: /settings/application-edit/handle-{applicationId}
     controller: Vankosoft\ApplicationBundle\Controller\ApplicationExtController::handle
     
 vs_application_application_remove:
-    path: /application-edit/remove-{applicationId}
+    path: /settings/application-edit/remove-{applicationId}
     controller: Vankosoft\ApplicationBundle\Controller\ApplicationExtController::remove
 
 vs_application_settings_form:
-    path: /settings-edit/form-{applicationId}
+    path: /settings/settings-edit/form-{applicationId}
     controller: Vankosoft\ApplicationBundle\Controller\SettingsExtController::index
 
 vs_application_settings_handle:
-    path: /settings-edit/handle-{applicationId}
+    path: /settings/settings-edit/handle-{applicationId}
     controller: Vankosoft\ApplicationBundle\Controller\SettingsExtController::handle
 
 
@@ -30,7 +30,7 @@ vs_application_locales:
     resource: |
         alias: vs_application.locale
         except: ['show']
-        path: /locales
+        path: /settings/locales
         templates: "@VSApplication/Pages/Locales"
     type: sylius.resource
     
@@ -38,6 +38,6 @@ vs_application_cookie_consent_translations:
     resource: |
         alias: vs_application.cookie_consent_translation
         except: ['show']
-        path: /cookie-consent-translations
+        path: /settings/cookie-consent-translations
         templates: "@VSApplication/Pages/CookieConsentTranslations"
     type: sylius.resource

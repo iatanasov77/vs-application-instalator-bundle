@@ -116,6 +116,7 @@ vs_application:
             button_reject_all: Button Reject All
             language_code_placeholder: '-- Select a Language --'
     template:
+        super_admin_panel: SuperAdmin Panel
         there_are_no_items_to_display: There are no items to display 
         default: Default
         button_view_all_notifications: 'View all notifications'

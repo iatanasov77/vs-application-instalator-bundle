@@ -1,7 +1,15 @@
 {% extends 'knp_menu.html.twig' %}
 
 {% block root %}
-    {% if ( item.children | first ) is not empty %}
+
+    {% set hasChilds = false %}
+    {% for parentItem in item.children %}
+        {% if parentItem is not empty %}
+            {% set hasChilds = true %}
+        {% endif %}
+    {% endfor %}
+    
+    {% if hasChilds %}
         <li class="nav-divider">{{ 'vs_application.menu.system' | trans( {},'VSApplicationBundle' ) }}</li>
     {% endif %}
     
@@ -37,7 +45,8 @@
 	    {% endif %}
     {% endfor %}
     
-    {% if ( item.children | first ) is not empty %}
+    {% if hasChilds %}
         <li class="nav-divider"><hr /></li>
     {% endif %}
+    
 {% endblock %}

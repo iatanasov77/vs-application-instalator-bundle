@@ -35,6 +35,6 @@ vs_application_tags_whitelist_context:
     resource: |
         alias: vs_application.tags_whitelist_context
         except: ['show']
-        path: /tags-whitelist-contexts
+        path: /settings/tags-whitelist-contexts
         templates: "@VSApplication/Pages/TagsWhitelistContext"
     type: sylius.resource
