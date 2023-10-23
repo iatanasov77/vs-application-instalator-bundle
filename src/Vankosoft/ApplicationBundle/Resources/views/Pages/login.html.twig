@@ -7,8 +7,8 @@
     <div class="card-header text-center">
     	<a class="navbar-brand" href="/">
     		<!-- <img class="logo-img" src="{{ asset('assets/build/new-template/images/logo.png') }}" alt="logo"> -->
-    		{{ 'VankoSoft Application' | trans }}<br />
-    		{{ applicationTitle }}
+    		{{ 'vs_application.template.vankosoft_application' | trans( {},'VSApplicationBundle' ) }}<br />
+            {{ applicationTitle | trans( {},'VSApplicationBundle' ) }}
     	</a>
     	<span class="splash-description">Please enter your username and password.</span>
     	
