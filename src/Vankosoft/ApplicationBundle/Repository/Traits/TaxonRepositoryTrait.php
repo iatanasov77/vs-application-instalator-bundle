@@ -5,7 +5,7 @@ trait TaxonRepositoryTrait
     public function find( $id, $lockMode = null, $lockVersion = null ): ?object
     {
         if( ! is_numeric( $id ) ) {
-            return $this->findOneBy( ['slug'=>$id] );
+            return $this->findOneBy( ['code'=>$id] );
         }
         
         return parent::find( $id, $lockMode, $lockVersion );
