@@ -1,5 +1,5 @@
 {% set applications = applicationsRepo.findAll() %}
-{% if applications is not empty %}
+{% if ( applications | length ) > 1 %}
     <li class="nav-divider">{{ 'vs_application.menu.application_links' | trans( {},'VSApplicationBundle' ) }}</li>
     
     <li class="nav-item ">
