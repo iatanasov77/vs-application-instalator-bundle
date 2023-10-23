@@ -1,3 +1,9 @@
+1.10.118	|	Release date: **23.10.2023**
+============================================
+* New Features and Improvements:
+  - Improve Login Form Template.
+
+
 1.10.117	|	Release date: **23.10.2023**
 ============================================
 * Bug-Fixes:
