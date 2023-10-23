@@ -4,6 +4,10 @@ trait TaxonRepositoryTrait
 {
     public function find( $id, $lockMode = null, $lockVersion = null ): ?object
     {
+        if ( ! \intval( $id ) ) {
+            return null;
+        }
+        
         if( ! is_numeric( $id ) ) {
             return $this->findOneBy( ['code'=>$id] );
         }
