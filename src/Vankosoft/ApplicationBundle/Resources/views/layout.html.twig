@@ -11,12 +11,11 @@
         {% endblock %}
 
         {% block head_styles %}
-            {{ encore_entry_link_tags( 'css/global' ) }}
-            {{ encore_entry_link_tags( 'js/app' ) }}
+            {% include '@VSApplication/Layout/head-styles.html.twig' %}
         {% endblock %}
 
         {% block head_scripts %}
-            {{ encore_entry_script_tags( 'js/app' ) }}
+            {% include '@VSApplication/Layout/head-scripts.html.twig' %}
         {% endblock %}
     </head>
     <body>
