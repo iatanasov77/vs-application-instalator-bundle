@@ -1,3 +1,9 @@
+1.10.114	|	Release date: **23.10.2023**
+============================================
+* New Features:
+  - Add a Service Parameter to Display Layout Top Search Field.
+
+
 1.10.113	|	Release date: **23.10.2023**
 ============================================
 * Bug-Fixes and Improvemets:
