@@ -1,3 +1,8 @@
+.layoutTopApplicationIcon {
+    width: 30px;
+    height: 30px;
+}
+
 .dropdown-menu li {
     position: relative;
 }
@@ -18,4 +23,4 @@
 .profile-submenu:hover .dropdown-menu {
     display: block;
     margin-top: 0;
- }
+}

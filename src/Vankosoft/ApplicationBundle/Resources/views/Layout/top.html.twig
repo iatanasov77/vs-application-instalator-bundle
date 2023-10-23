@@ -1,15 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-white fixed-top">
     <a class="navbar-brand" href="/">
-        {% if applicationIconDimensions is defined %}
-            {% set topIconDimensions    = applicationIconDimensions | split( 'x' ) %}
-            {% set topIconWidth         = topIconDimensions[0] %}
-            {% set topIconHeight        = topIconDimensions[1] %}
-        {% else %}
-            {% set topIconWidth         = 30 %}
-            {% set topIconHeight        = 30 %}
-        {% endif %}
-        
-    	{% if applicationIcon is defined %}
+        {% if applicationIcon is defined %}
     		<img src="{{ asset( applicationIcon ) }}" class="layoutTopApplicationIcon" />
     	{% endif %}
     	
