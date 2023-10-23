@@ -1,3 +1,9 @@
+1.10.112	|	Release date: **23.10.2023**
+============================================
+* New Features and Improvements:
+  - Improve Default Theme Main Menu.
+
+
 1.10.111	|	Release date: **20.10.2023**
 ============================================
 * New Features and Improvements:

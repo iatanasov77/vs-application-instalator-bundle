@@ -2,7 +2,6 @@
 
 {% block root %}
     {% if ( item.children | first ) is not empty %}
-        <li class="nav-divider"><hr /></li>
         <li class="nav-divider">{{ 'vs_application.menu.cms' | trans( {},'VSApplicationBundle' ) }}</li>
     {% endif %}
     
@@ -37,4 +36,8 @@
 	        </li>
 	    {% endif %}
     {% endfor %}
+    
+    {% if ( item.children | first ) is not empty %}
+        <li class="nav-divider"><hr /></li>
+    {% endif %}
 {% endblock %}
