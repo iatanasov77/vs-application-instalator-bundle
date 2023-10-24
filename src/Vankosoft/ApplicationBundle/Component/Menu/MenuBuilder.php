@@ -196,7 +196,11 @@ class MenuBuilder
             if ( isset( $mg['childs'] ) && is_array( $mg['childs'] ) ) {
                 $isGranted  = $this->build( $menu[$menuName], $mg['childs'] );
                 
-                $child->setDisplay( $isGranted );
+                if ( ! empty( $mg['childs'] ) && ! $isGranted ) {
+                    $menu->removeChild( $menuName );
+                } else {
+                    $child->setDisplay( $isGranted );
+                }
             }
             
             if ( $path == $this->currentPath ) {
