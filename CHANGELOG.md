@@ -1,3 +1,9 @@
+1.10.119	|	Release date: **24.10.2023**
+============================================
+* New Features and Improvements:
+  - Improve MenuBuilder.
+
+
 1.10.118	|	Release date: **23.10.2023**
 ============================================
 * New Features and Improvements:
