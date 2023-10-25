@@ -42,7 +42,7 @@ class AbstractForm extends AbstractResourceType
     protected function fillLocaleChoices(): array
     {
         if ( ! $this->localesRepository && ! $this->requestStack ) {
-            throw new FormInitializationException( '' );
+            throw new FormInitializationException( 'To Can Fill Locale Choices Needs Locales Repository and Request Stack.' );
         }
         
         $results = $this->localesRepository->findAll();
