@@ -18,6 +18,7 @@ use Vankosoft\CmsBundle\Component\Uploader\FileUploaderInterface;
 use Vankosoft\UsersBundle\Component\UserRole;
 use Vankosoft\UsersBundle\Form\UserInfoForm;
 use Vankosoft\UsersBundle\Model\UserInfoInterface;
+use Vankosoft\UsersBundle\Model\UserRoleInterface;
 
 class UsersExtController extends AbstractController
 {
@@ -39,20 +40,25 @@ class UsersExtController extends AbstractController
     /** @var RepositoryInterface */
     protected $usersRolesRepository;
     
+    /** @var bool */
+    protected $allowCreateUserSiblings;
+    
     public function __construct(
         ManagerRegistry $doctrine,
         RepositoryInterface $usersRepository,
         FactoryInterface $userInfoFactory,
         FactoryInterface $avatarImageFactory,
         FileUploaderInterface $imageUploader,
-        RepositoryInterface $usersRolesRepository
+        RepositoryInterface $usersRolesRepository,
+        bool $allowCreateUserSiblings
     ) {
-        $this->doctrine             = $doctrine;
-        $this->usersRepository      = $usersRepository;
-        $this->userInfoFactory      = $userInfoFactory;
-        $this->avatarImageFactory   = $avatarImageFactory;
-        $this->imageUploader        = $imageUploader;
-        $this->usersRolesRepository = $usersRolesRepository;
+        $this->doctrine                 = $doctrine;
+        $this->usersRepository          = $usersRepository;
+        $this->userInfoFactory          = $userInfoFactory;
+        $this->avatarImageFactory       = $avatarImageFactory;
+        $this->imageUploader            = $imageUploader;
+        $this->usersRolesRepository     = $usersRolesRepository;
+        $this->allowCreateUserSiblings  = $allowCreateUserSiblings;
     }
     
     public function displayUserInfo( $userId, Request $request ): Response
@@ -98,19 +104,36 @@ class UsersExtController extends AbstractController
         ]);
     }
     
-    public function rolesEasyuiComboTreeWithSelectedSource( $userId, Request $request ): JsonResponse
+    public function rolesEasyuiComboTreeWithSelectedSource( $currentUserId, $editUserId, Request $request ): JsonResponse
     {
-            $selectedRoles  = $userId ? $this->usersRepository->find( $userId )->getRoles() : [];
-            $data           = [];
-            
-            $topRoles       = $this->usersRolesRepository->findBy( ['parent' => null] );
-            $rolesTree      = [];
-            $this->getRolesTree( new ArrayCollection( $topRoles ), $rolesTree );
-            $this->buildEasyuiCombotreeDataFromCollection( $rolesTree, $data, $selectedRoles );
-            
-            //$this->buildEasyuiCombotreeData( UserRole::choicesTree(), $data, $selectedRoles );
-            
-            return new JsonResponse( $data );
+        $currentUser    = $currentUserId ? $this->usersRepository->find( $currentUserId ) : null;
+        $editUser       = $editUserId ? $this->usersRepository->find( $editUserId ) : null;
+        $selectedRoles  = $editUser  ? $editUser ->getRoles() : [];
+        $data           = [];
+        
+        $userTopRole    = $currentUser->topRole();
+        $topRoles       = new ArrayCollection( $this->usersRolesRepository->findBy( ['parent' => null] ) );
+        
+        /**
+         * $topRoles->first() MUST TO BE 'ROLE_SUPER_ADMIN' AND 'ROLE_APPLICATION_ADMIN' TO BE HIS CHILD
+         * 
+         * SUPER WORKAROUND
+         */
+        if ( $userTopRole->getRole() == 'ROLE_APPLICATION_ADMIN' ) {
+            if ( $this->allowCreateUserSiblings ) {
+                $topRoles   =   $topRoles->first()->getChildren();
+            } else {
+                $topRoles   =   $topRoles->first()->getChildren()->first()->getChildren();
+            }
+        }
+        
+        $rolesTree      = [];
+        $this->getRolesTree(  $topRoles, $rolesTree );
+        $this->buildEasyuiCombotreeDataFromCollection( $rolesTree, $data, $selectedRoles );
+        
+        //$this->buildEasyuiCombotreeData( UserRole::choicesTree(), $data, $selectedRoles );
+        
+        return new JsonResponse( $data );
     }
     
     protected function buildEasyuiCombotreeDataFromCollection( $tree, &$data, array $selectedValues )

@@ -94,9 +94,19 @@ class Taxon extends BaseTaxon implements VsTaxonInterface, Comparable
         }
     }
     
+    /**
+     * {@inheritDoc}
+     * @see \Doctrine\Common\Comparable::compareTo($other)
+     */
     public function compareTo($other): int
     {
-        return $this->code === $other->getCode() ? 0 : 1;
+        if ( $this->code === $other->getCode() ) {
+            return 0;
+        } elseif ( $this->getParent() && $this->getParent()->getCode() === $other->getCode() ) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
     
     public function getExistingTranslations()

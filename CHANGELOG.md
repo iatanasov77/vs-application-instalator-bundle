@@ -1,3 +1,12 @@
+1.10.120	|	Release date: **29.10.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix a Service Parameter.
+  - Add an Exception Message.
+  - Improve Taxon, UserRoles and Users Comparations.
+  - Improve UserRoles and Users Comparations.
+
+
 1.10.119	|	Release date: **24.10.2023**
 ============================================
 * New Features and Improvements:

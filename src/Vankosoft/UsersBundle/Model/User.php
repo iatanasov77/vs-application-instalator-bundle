@@ -1,9 +1,10 @@
 <?php namespace Vankosoft\UsersBundle\Model;
 
+use Doctrine\Common\Comparable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class User implements UserInterface
+class User implements UserInterface, Comparable
 {
     use Traits\UserPasswordTrait;
     use Traits\UserRolesArrayTrait;
@@ -223,5 +224,51 @@ class User implements UserInterface
     public function getUserIdentifier(): string
     {
         return $this->username;
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \Doctrine\Common\Comparable::compareTo($other)
+     */
+    public function compareTo($other): int
+    {
+        if ( ! ( $other instanceof UserInterface ) ) {
+            throw new \Exception( 'Vankosoft User can to be Compared with other Vankosoft User Objects !!!' );
+        }
+        
+        $compareValue   = 1;
+        foreach ( $this->rolesCollection as $role ) {
+            if ( $compareValue === -1 ) {
+                break;
+            }
+            
+            foreach ( $other->getRolesCollection() as $otherRole ) {
+                if ( $compareValue === -1 ) {
+                    break;
+                }
+                
+                $compareValue   = $role->compareTo( $otherRole );
+            }
+        }
+        
+        return $compareValue;
+    }
+    
+    /**
+     * Get Top Role of This User
+     * 
+     * @throws \Exception
+     * @return UserRoleInterface
+     */
+    public function topRole(): UserRoleInterface
+    {
+        $topRole    = $this->rolesCollection->first();
+        foreach ( $this->rolesCollection as $role ) {
+            if ( $role->compareTo( $topRole ) == 1 ) {
+                $topRole    = $role;
+            }
+        }
+        
+        return $topRole;
     }
 }
