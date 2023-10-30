@@ -1,3 +1,9 @@
+1.10.121	|	Release date: **30.10.2023**
+============================================
+* New Features:
+  - Improve AbstractCrudController with New Midleware Method 'afterSaveEntity'.
+
+
 1.10.120	|	Release date: **29.10.2023**
 ============================================
 * Bug-Fixes and Improvements:
