@@ -140,6 +140,9 @@ class AbstractCrudController extends ResourceController
                 ResourceActionEvent::NAME
             );
             
+            // middleware method to add Custom Events After Save ETC.
+            $this->afterSaveEntity( $entity, $request );
+            
             if( $request->isXmlHttpRequest() ) {
                 return new JsonResponse([
                     'status'   => Status::STATUS_OK
@@ -224,6 +227,11 @@ class AbstractCrudController extends ResourceController
     protected function customData( Request $request, $entity = null ): array
     {
         return [];
+    }
+    
+    protected function afterSaveEntity( $entity, Request $request )
+    {
+        
     }
     
     protected function getRepository()
