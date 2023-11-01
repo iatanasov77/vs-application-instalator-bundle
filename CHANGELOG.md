@@ -1,3 +1,11 @@
+1.10.122	|	Release date: **01.11.2023**
+============================================
+* New Features:
+  - Add VsSpinner Feature.
+* Bug-Fixes:
+  - Fix Menu Builder
+
+
 1.10.121	|	Release date: **30.10.2023**
 ============================================
 * New Features:
