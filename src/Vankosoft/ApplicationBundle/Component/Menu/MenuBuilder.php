@@ -197,7 +197,8 @@ class MenuBuilder
                 $isGranted  = $this->build( $menu[$menuName], $mg['childs'] );
                 
                 if ( ! empty( $mg['childs'] ) && ! $isGranted ) {
-                    $menu->removeChild( $menuName );
+                    // Not Sure if this should exist
+                    //$menu->removeChild( $menuName );
                 } else {
                     $child->setDisplay( $isGranted );
                 }
