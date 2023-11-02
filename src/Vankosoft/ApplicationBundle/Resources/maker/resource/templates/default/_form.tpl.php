@@ -16,6 +16,6 @@
     {{ form_widget( form ) }}
     
     {# Remove Comment After You Prepare The Form Template
-    {{ vs_form.buttons( form ) }}
+    {{ vs_form.buttons( form, metadata ) }}
     #}
 {{ form_end( form, {'render_rest': false} ) }}
