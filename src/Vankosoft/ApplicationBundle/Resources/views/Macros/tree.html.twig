@@ -1,5 +1,6 @@
 {% macro easyuiCombobox( twigWidget, dataSourceUrl, dataValue, options ) %}
     {% set comboDataOptions    = "
+            cascadeCheck: false,
             url:'" ~ dataSourceUrl ~ 
             "', required:" ~ options.required ~", multiple : " ~ options.multiple ~", checkbox : " ~ options.checkbox ~", prompt:'" ~ options.placeholder ~"',
             onBeforeLoad:function( node ) {
