@@ -48,7 +48,7 @@ class AbstractCrudController extends ResourceController
                         'resource'                  => $resource,
                         $this->metadata->getName()  => $resource,
                     ],
-                    $this->customData( $request )
+                    $this->customData( $request, $resource )
                 )
             );
         }
