@@ -1,3 +1,11 @@
+1.10.124	|	Release date: **02.11.2023**
+============================================
+* New Features and Improvements:
+  - Make Cancel Button of All Forms to Work.
+  - Set 'cascadeCheck' to False on EasyUi Combotree in Twig Macros.
+  - Improve  EasyUi Combotree in Twig Macros.
+
+
 1.10.123	|	Release date: **02.11.2023**
 ============================================
 * Bug-Fixes:
