@@ -4,7 +4,7 @@
 	https://twig.symfony.com/doc/3.x/tags/macro.html
 #}
 
-{% macro buttons( form ) %}
+{% macro buttons( form, metadata = null ) %}
 	<div class="row">&nbsp;</div>
 	
     <div class="input-group row vsFormButtonsGroup">
@@ -14,11 +14,13 @@
         <div class="col-sm-2">
             {{ form_widget(form.btnSave, {'attr': {'class': 'btn btn-primary', 'id':'btnSave'}}) }}
         </div>
+        {% if metadata %}
         <div class="col-sm-2">
             <a class="btn btn-default" href="{{ path( metadata.applicationName ~ '_' ~ metadata.name ~ '_index' ) }}">
                 {{ 'vs_application.form.cancel' | trans( {},'VSApplicationBundle' ) }}
             </a>
         </div>
+        {% endif %}
         <div class="col-sm-6"></div>
     </div>
 {% endmacro %}
