@@ -159,8 +159,9 @@ class AbstractCrudController extends ResourceController
         
         if ($configuration->isHtmlRequest()) {
             return $this->render( $configuration->getTemplate( $resourceAction . '.html' ), array_merge( [
-                'item' => $entity,
-                'form' => $form->createView(),
+                'metadata'  => $this->metadata,
+                'item'      => $entity,
+                'form'      => $form->createView(),
             ], $this->customData( $request, $entity ) ) );
         }
         

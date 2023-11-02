@@ -15,7 +15,9 @@
             {{ form_widget(form.btnSave, {'attr': {'class': 'btn btn-primary', 'id':'btnSave'}}) }}
         </div>
         <div class="col-sm-2">
-            {{ form_widget(form.btnCancel, {'attr': {'class': 'btn btn-default', 'id':'btnCancel'}}) }}
+            <a class="btn btn-default" href="{{ path( metadata.applicationName ~ '_' ~ metadata.name ~ '_index' ) }}">
+                {{ 'vs_application.form.cancel' | trans( {},'VSApplicationBundle' ) }}
+            </a>
         </div>
         <div class="col-sm-6"></div>
     </div>
