@@ -1,8 +1,12 @@
 {% macro easyuiCombobox( twigWidget, dataSourceUrl, dataValue, options ) %}
     {% set comboDataOptions    = "
-            cascadeCheck: false,
-            url:'" ~ dataSourceUrl ~ 
-            "', required:" ~ options.required ~", multiple : " ~ options.multiple ~", checkbox : " ~ options.checkbox ~", prompt:'" ~ options.placeholder ~"',
+            url:'" ~ dataSourceUrl ~ "',
+            required:" ~ options.required ~ ",
+            multiple : " ~ options.multiple ~ ",
+            checkbox : " ~ options.checkbox ~ ",
+            cascadeCheck: " ~ options.cascadeCheck ~ ",
+            prompt:'" ~ options.placeholder ~ "',
+            
             onBeforeLoad:function( node ) {
                 //showSpiner
             },
@@ -45,6 +49,7 @@
         'required': true,
         'multiple': true,
         'checkbox': true,
+        'cascadeCheck': false,
         'placeholder': comboTreePlaceholder
     }
 ) }}
