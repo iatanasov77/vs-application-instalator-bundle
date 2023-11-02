@@ -1,3 +1,9 @@
+1.10.125	|	Release date: **02.11.2023**
+============================================
+* Bug-Fixes:
+  - Fix Role Edit Page.
+
+
 1.10.124	|	Release date: **02.11.2023**
 ============================================
 * New Features and Improvements:
