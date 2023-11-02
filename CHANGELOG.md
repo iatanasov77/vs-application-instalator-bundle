@@ -1,3 +1,9 @@
+1.10.123	|	Release date: **02.11.2023**
+============================================
+* Bug-Fixes:
+  - Fix AbstractCrudController::showAction
+
+
 1.10.122	|	Release date: **01.11.2023**
 ============================================
 * New Features:
