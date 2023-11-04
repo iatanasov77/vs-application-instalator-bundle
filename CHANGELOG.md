@@ -1,3 +1,9 @@
+1.10.126	|	Release date: **04.11.2023**
+============================================
+* New Features:
+  - Improve OneUpFileUpload JS Helpers.
+
+
 1.10.125	|	Release date: **02.11.2023**
 ============================================
 * Bug-Fixes:
