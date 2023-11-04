@@ -1,6 +1,7 @@
 require( 'jquery-ui-dist/jquery-ui.js' );
 require( 'jquery-ui-dist/jquery-ui.css' );
 require( 'jquery-ui-dist/jquery-ui.theme.css' );
+require( 'jquery-validation' );
 require( 'blueimp-file-upload/js/jquery.fileupload.js' );
 
 import { humanFileSize } from '../humanFileSize.js';
@@ -49,14 +50,20 @@ export function InitOneUpFileUpload( options )
                 
                 $( this ).hide();
                 
+                let form        = $( this ).closest( 'form' );
+                let formIsValid = true;
+                if ( form ) {
+                    form.validate();
+                    formIsValid = form.valid();
+                }
+                
                 let fileName    = data.files[0].name;
-                if ( ! window.UploadedFiles.includes( fileName ) ) {
+                if ( ! window.UploadedFiles.includes( fileName ) && formIsValid ) {
                     //console.log( fileName );
                     window.UploadedFiles.push( fileName );
                     
                     data.submit();
                 }
-                
             });
         },
         formData: function ( form )
