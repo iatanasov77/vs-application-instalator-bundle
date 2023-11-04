@@ -1,7 +1,6 @@
 require( 'jquery-ui-dist/jquery-ui.js' );
 require( 'jquery-ui-dist/jquery-ui.css' );
 require( 'jquery-ui-dist/jquery-ui.theme.css' );
-require( 'jquery-validation' );
 require( 'blueimp-file-upload/js/jquery.fileupload.js' );
 
 import { humanFileSize } from '../humanFileSize.js';
@@ -27,7 +26,7 @@ window.TestUploadProgressBarData    = {
  *     fileResourceClass: ""
  * }
  */
-export function InitOneUpFileUpload( options )
+export function InitOneUpFileUpload( options, preFormSubmit = null )
 {
     validateOptions( options );
     
@@ -50,15 +49,13 @@ export function InitOneUpFileUpload( options )
                 
                 $( this ).hide();
                 
-                let form        = $( this ).closest( 'form' );
-                let formIsValid = true;
-                if ( form ) {
-                    form.validate();
-                    formIsValid = form.valid();
+                let submitForm  = true;
+                if ( preFormSubmit ) {
+                     submitForm = preFormSubmit();
                 }
                 
                 let fileName    = data.files[0].name;
-                if ( ! window.UploadedFiles.includes( fileName ) && formIsValid ) {
+                if ( ! window.UploadedFiles.includes( fileName ) && submitForm ) {
                     //console.log( fileName );
                     window.UploadedFiles.push( fileName );
                     
