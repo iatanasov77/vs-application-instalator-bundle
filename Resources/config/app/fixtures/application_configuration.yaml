@@ -18,9 +18,19 @@ sylius_fixtures:
                             - title: 'English (US)'
                               code: 'en_US'
                               translatableLocale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'English (US)'
+                                  bg_BG:
+                                      title: 'Английски'
                             - title: 'Bulgarian'
                               code: 'bg_BG'
                               translatableLocale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Bulgarian'
+                                  bg_BG:
+                                      title: 'Български'
                 
                 general_settings:
                     name: general_settings

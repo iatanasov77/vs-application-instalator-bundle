@@ -50,9 +50,16 @@ abstract class AbstractResourceFixture implements FixtureInterface
 
         $i = 0;
         foreach ( $options['custom'] as $resourceOptions ) {
+            
             $resource = $this->exampleFactory->create( $resourceOptions );
-
             $this->objectManager->persist( $resource );
+            
+            if ( isset( $resourceOptions['translations'] ) ) {
+                foreach ( $resourceOptions['translations'] as $localeCode => $translationOptions ) {
+                    $translationResource = $this->exampleFactory->createTranslation( $resource, $localeCode, $translationOptions );
+                    $this->objectManager->persist( $translationResource );
+                }
+            }
 
             ++$i;
 
