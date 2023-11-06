@@ -1,3 +1,9 @@
+1.10.128	|	Release date: **06.11.2023**
+============================================
+* New Features:
+  - AdminPanel Login Form Improvements.
+
+
 1.10.127	|	Release date: **04.11.2023**
 ============================================
 * New Features:
