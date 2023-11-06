@@ -7,10 +7,10 @@
     <div class="card-header text-center">
     	<a class="navbar-brand" href="/">
     		<!-- <img class="logo-img" src="{{ asset('assets/build/new-template/images/logo.png') }}" alt="logo"> -->
-    		{{ 'vs_application.template.vankosoft_application' | trans( {},'VSApplicationBundle' ) }}<br />
+    		{{ applicationCompany | trans( {},'VSApplicationBundle' ) }}<br />
             {{ applicationTitle | trans( {},'VSApplicationBundle' ) }}
     	</a>
-    	<span class="splash-description">Please enter your username and password.</span>
+    	<span class="splash-description">{{ 'vs_application.form.login.sub_title' | trans( {},'VSApplicationBundle' ) }}</span>
     	
         {% if error %}
         	<div class="alert alert-danger mt-4 float-start text-left w-100" role="alert">

@@ -90,6 +90,7 @@ vs_application:
         picture_invalid: 'Невалиден Формат на Картинка !!!'
         
         login:
+            sub_title: Моля, въведете вашето потребителско име и парола.
             remember_me: 'Запомни ме'
             button_login: 'Влез'
             button_register: 'Създай Акаунт'

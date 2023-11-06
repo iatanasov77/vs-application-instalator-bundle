@@ -90,6 +90,7 @@ vs_application:
         picture_invalid: 'Invalid Picture Format !!!'
         
         login:
+            sub_title: Please enter your username and password.
             remember_me: 'Remember Me'
             button_login: 'Login'
             button_register: 'Create An Account'
