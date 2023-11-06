@@ -58,6 +58,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
                 foreach ( $resourceOptions['translations'] as $localeCode => $translationOptions ) {
                     $translationResource = $this->exampleFactory->createTranslation( $resource, $localeCode, $translationOptions );
                     $this->objectManager->persist( $translationResource );
+                    $this->objectManager->flush();
                 }
             }
 
