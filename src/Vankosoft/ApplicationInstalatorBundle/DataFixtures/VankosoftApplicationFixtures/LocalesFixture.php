@@ -17,6 +17,7 @@ final class LocalesFixture extends AbstractResourceFixture
                 ->scalarNode( 'translatableLocale' )->end()
                 ->scalarNode( 'title' )->end()
                 ->scalarNode( 'code' )->end()
+                ->variableNode( 'translations' )->cannotBeEmpty()->defaultValue( [] )->end()
         ;
     }
 }

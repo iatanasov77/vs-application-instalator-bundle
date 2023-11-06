@@ -21,11 +21,11 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
         FactoryInterface $localesFactory,
         RepositoryInterface $localesRepository
     ) {
-            $this->localesFactory       = $localesFactory;
-            $this->localesRepository    = $localesRepository;
-            
-            $this->optionsResolver  = new OptionsResolver();
-            $this->configureOptions( $this->optionsResolver );
+        $this->localesFactory       = $localesFactory;
+        $this->localesRepository    = $localesRepository;
+        
+        $this->optionsResolver  = new OptionsResolver();
+        $this->configureOptions( $this->optionsResolver );
     }
     
     public function create( array $options = [] ): LocaleInterface
@@ -44,7 +44,20 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
             $localeEntity->setTitle( $options['title'] );
         }
         
+        foreach ( $options['translations'] as $localeCode => $translationOptions ) {
+            //$localeEntity->setTranslatableLocale( $localeCode );
+            //$localeEntity->setTitle( $translationOptions['title'] );
+        }
+        
         return $localeEntity;
+    }
+    
+    public function createTranslation( $entity, $localeCode, $options )
+    {
+        $entity->setTranslatableLocale( $localeCode );
+        $entity->setTitle( $options['title'] );
+        
+        return $entity;
     }
     
     protected function configureOptions( OptionsResolver $resolver ): void
@@ -58,6 +71,9 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
             
             ->setDefault( 'code', null )
             ->setAllowedTypes( 'code', ['string'] )
+            
+            ->setDefault( 'translations', [] )
+            ->setAllowedTypes( 'translations', ['array'] )
         ;
     }
 }
