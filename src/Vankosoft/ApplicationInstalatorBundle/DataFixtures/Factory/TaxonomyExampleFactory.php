@@ -57,7 +57,7 @@ class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFa
         return $taxonomyEntity;
     }
     
-    public function createTranslation( $entity, $localeCode, $options )
+    public function createTranslation( $entity, $localeCode, $options = [] )
     {
         $entity->setCurrentLocale( $localeCode );
         $entity->setName( $options['title'] );

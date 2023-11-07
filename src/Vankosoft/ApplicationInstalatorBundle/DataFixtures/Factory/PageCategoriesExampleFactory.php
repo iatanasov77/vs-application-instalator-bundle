@@ -62,7 +62,7 @@ class PageCategoriesExampleFactory extends AbstractExampleFactory implements Exa
         return $pageCategoryEntity;
     }
     
-    public function createTranslation( $entity, $localeCode, $options )
+    public function createTranslation( $entity, $localeCode, $options = [] )
     {
         $taxonEntity    = $entity->getTaxon();
         

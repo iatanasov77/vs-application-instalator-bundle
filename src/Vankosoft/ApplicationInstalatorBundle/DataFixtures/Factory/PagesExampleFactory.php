@@ -54,7 +54,7 @@ class PagesExampleFactory extends AbstractExampleFactory implements ExampleFacto
         return $pageEntity;
     }
     
-    public function createTranslation( $entity, $localeCode, $options )
+    public function createTranslation( $entity, $localeCode, $options, $options = [] )
     {
         $entity->setTranslatableLocale( $localeCode );
         $entity->setTitle( $options['title'] );

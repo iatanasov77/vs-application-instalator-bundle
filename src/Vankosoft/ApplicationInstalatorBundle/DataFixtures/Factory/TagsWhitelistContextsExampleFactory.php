@@ -62,7 +62,7 @@ class TagsWhitelistContextsExampleFactory extends AbstractExampleFactory impleme
         return $tagsWhitelistContextEntity;
     }
     
-    public function createTranslation( $entity, $localeCode, $options )
+    public function createTranslation( $entity, $localeCode, $options = [] )
     {
         $taxonEntity    = $entity->getTaxon();
         
