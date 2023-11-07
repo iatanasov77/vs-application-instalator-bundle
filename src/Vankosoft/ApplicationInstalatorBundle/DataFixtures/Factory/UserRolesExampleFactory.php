@@ -80,7 +80,7 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
         return $userRoleEntity;
     }
     
-    public function createTranslation( $entity, $localeCode, $options )
+    public function createTranslation( $entity, $localeCode, $options = [] )
     {
         $taxonEntity    = $entity->getTaxon();
         
