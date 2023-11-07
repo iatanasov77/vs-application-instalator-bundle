@@ -84,10 +84,26 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
     {
         $taxonEntity    = $entity->getTaxon();
         
+        $taxonEntity->getTranslation( $localeCode );
         $taxonEntity->setCurrentLocale( $localeCode );
-        $taxonEntity->getTranslation()->setName( $options['title'] );
-        $taxonEntity->getTranslation()->setDescription( $options['description'] );
-        $taxonEntity->getTranslation()->setTranslatable( $taxonEntity );
+        
+        if ( ! in_array( $localeCode, $taxonEntity->getExistingTranslations() ) ) {
+            $translation    = $taxonEntity->createNewTranslation();
+            
+            $translation->setLocale( $localeCode );
+            $translation->setName( $options['title'] );
+            $translation->setDescription( $options['description'] );
+            
+            $this->slugGenerator->setLocaleCode( $localeCode );
+            $translation->setSlug( $this->slugGenerator->generate( $options['title'] ) );
+            
+            $taxonEntity->addTranslation( $translation );
+        } else {
+            $translation   = $taxonEntity->getTranslation( $localeCode );
+            
+            $translation->setName( $options['title'] );
+            $translation->setDescription( $options['description'] );
+        }
         
         $entity->setTaxon( $taxonEntity );
         
