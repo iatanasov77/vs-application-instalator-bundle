@@ -9,6 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 
 use Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\ExampleFactoryInterface;
+use Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\ExampleTranslationsFactoryInterface;
 
 abstract class AbstractResourceFixture implements FixtureInterface
 {
@@ -54,7 +55,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
             $resource = $this->exampleFactory->create( $resourceOptions );
             $this->objectManager->persist( $resource );
             
-            if ( isset( $resourceOptions['translations'] ) ) {
+            if ( isset( $resourceOptions['translations'] ) && $this->exampleFactory instanceof ExampleTranslationsFactoryInterface ) {
                 foreach ( $resourceOptions['translations'] as $localeCode => $translationOptions ) {
                     $translationResource = $this->exampleFactory->createTranslation( $resource, $localeCode, $translationOptions );
                     $this->objectManager->persist( $translationResource );

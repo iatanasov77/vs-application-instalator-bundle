@@ -9,7 +9,7 @@ use Vankosoft\ApplicationBundle\Repository\TaxonRepository;
 use Vankosoft\UsersBundle\Model\UserRoleInterface;
 use Vankosoft\UsersBundle\Repository\UserRolesRepository;
 
-class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface, ExampleTranslationsFactoryInterface
 {
     /** @var RepositoryInterface */
     private $taxonomyRepository;
@@ -80,6 +80,20 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
         return $userRoleEntity;
     }
     
+    public function createTranslation( $entity, $localeCode, $options )
+    {
+        $taxonEntity    = $entity->getTaxon();
+        
+        $taxonEntity->setCurrentLocale( $localeCode );
+        $taxonEntity->getTranslation()->setName( $options['title'] );
+        $taxonEntity->getTranslation()->setDescription( $options['description'] );
+        $taxonEntity->getTranslation()->setTranslatable( $taxonEntity );
+        
+        $entity->setTaxon( $taxonEntity );
+        
+        return $entity;
+    }
+    
     protected function configureOptions( OptionsResolver $resolver ): void
     {
         $resolver
@@ -100,6 +114,9 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
             
             ->setDefault( 'parent', null )
             ->setAllowedTypes( 'parent', ['string', 'null'] )
+            
+            ->setDefault( 'translations', [] )
+            ->setAllowedTypes( 'translations', ['array'] )
         ;
     }
     

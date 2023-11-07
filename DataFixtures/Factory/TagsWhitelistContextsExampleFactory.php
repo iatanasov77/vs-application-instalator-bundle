@@ -7,7 +7,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistContextInterface;
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 
-class TagsWhitelistContextsExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class TagsWhitelistContextsExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface, ExampleTranslationsFactoryInterface
 {
     /** @var RepositoryInterface */
     private $taxonomyRepository;
@@ -62,6 +62,20 @@ class TagsWhitelistContextsExampleFactory extends AbstractExampleFactory impleme
         return $tagsWhitelistContextEntity;
     }
     
+    public function createTranslation( $entity, $localeCode, $options )
+    {
+        $taxonEntity    = $entity->getTaxon();
+        
+        $taxonEntity->setCurrentLocale( $localeCode );
+        $taxonEntity->getTranslation()->setName( $options['title'] );
+        $taxonEntity->getTranslation()->setDescription( $options['description'] );
+        $taxonEntity->getTranslation()->setTranslatable( $taxonEntity );
+        
+        $entity->setTaxon( $taxonEntity );
+        
+        return $entity;
+    }
+    
     protected function configureOptions( OptionsResolver $resolver ): void
     {
         $resolver
@@ -76,6 +90,9 @@ class TagsWhitelistContextsExampleFactory extends AbstractExampleFactory impleme
             
             ->setDefault( 'taxonomy_code', null )
             ->setAllowedTypes( 'taxonomy_code', ['string'] )
+            
+            ->setDefault( 'translations', [] )
+            ->setAllowedTypes( 'translations', ['array'] )
         ;
     }
 }

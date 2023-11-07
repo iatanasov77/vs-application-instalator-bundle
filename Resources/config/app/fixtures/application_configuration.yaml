@@ -49,31 +49,73 @@ sylius_fixtures:
                               title: 'Page Categories'
                               description: 'Page Categories'
                               locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Page Categories'
+                                      description: 'Page Categories'
+                                  bg_BG:
+                                      title: 'Категории Странци'
+                                      description: 'Категории Странци'
                               
                             - code: 'document-categories'
                               title: 'Document Categories'
                               description: 'Categories for TOC Documents'
                               locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Document Categories'
+                                      description: 'Categories for TOC Documents'
+                                  bg_BG:
+                                      title: 'Категории Документи'
+                                      description: 'Категории за Документи със Съдържание'
                               
                             - code: 'document-pages'
                               title: 'Document Pages'
                               description: 'Document Pages for Building a TOC'
                               locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Document Pages'
+                                      description: 'Document Pages for Building a TOC'
+                                  bg_BG:
+                                      title: 'Документ Страници'
+                                      description: 'Документ Страници за Съставяне на Съдържание'
                               
                             - code: 'user-roles'
                               title: 'User Roles'
                               description: 'User Roles Taxonomy'
                               locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'User Roles'
+                                      description: 'User Roles Taxonomy'
+                                  bg_BG:
+                                      title: 'Потребителски Роли'
+                                      description: 'Потребителски Роли'
                               
                             - code: 'file-managers'
                               title: 'File Managers'
                               description: 'FileManagers Taxonomy'
                               locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'File Managers'
+                                      description: 'FileManagers Taxonomy'
+                                  bg_BG:
+                                      title: 'Файлови Менъджери'
+                                      description: 'Файлови Менъджери'
                               
                             - code: 'tags-whitelist-contexts'
                               title: 'Tags Whitelist Contexts'
                               description: 'Tags Whitelist Contexts'
                               locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Tags Whitelist Contexts'
+                                      description: 'Tags Whitelist Contexts'
+                                  bg_BG:
+                                      title: 'Контекст Списък с Тагове'
+                                      description: 'Контекст Списък с Тагове'
 
                 pages_categories:
                     name: page_categories
@@ -83,22 +125,61 @@ sylius_fixtures:
                               description: 'Pages Displayed When the Application is in Maintenance Mode'
                               taxonomy_code: 'page-categories'
                               locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Maintenance Pages'
+                                      description: 'Pages Displayed When the Application is in Maintenance Mode'
+                                  bg_BG:
+                                      title: 'Страници Режим Поддръжка'
+                                      description: 'Страници, показвани, когато приложението е в режим на поддръжка'
                               
                             - title: 'VS Application Pages'
                               description: 'VS Application Pages ( Terms and Conditions, etc. )'
                               taxonomy_code: 'page-categories'
                               locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'VS Application Pages'
+                                      description: 'VS Application Pages ( Terms and Conditions, etc. )'
+                                  bg_BG:
+                                      title: 'Страници на приложения'
+                                      description: 'Страници на приложения (Правила и условия и т.н.)'
 
                 pages:
                     name: pages
                     options:
                         custom:
-                            - title: 'Under Construction'
+                            - title: 'Maintenance Mode'
                               description: 'Page Displayed When the Application is in Maintenance Mode'
+                              text: '<h1>Maintenance Mode</h1>'
+                              published: true
+                              category_code: 'maintenance-pages'
+                              locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Maintenance Mode'
+                                      description: 'Page Displayed When the Application is in Maintenance Mode'
+                                      text: '<h1>Maintenance Mode</h1>'
+                                  bg_BG:
+                                      title: 'Режим на поддръжка'
+                                      description: 'Страницата се показва, когато приложението е в режим на поддръжка'
+                                      text: '<h1>Режим на поддръжка</h1>'
+                                      
+                            - title: 'Under Construction'
+                              description: 'Page Displayed When the Application is Under Construction'
                               text: '<h1>Under Construction</h1>'
                               published: true
                               category_code: 'maintenance-pages'
                               locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Under Construction'
+                                      description: 'Page Displayed When the Application is Under Construction'
+                                      text: '<h1>Under Construction</h1>'
+                                  bg_BG:
+                                      title: 'В процес на изграждане'
+                                      description: 'Страницата се показва, когато приложението е в процес на изграждане'
+                                      text: '<h1>В процес на изграждане</h1>'
                               
                             - title: 'Terms and Conditions'
                               description: 'Terms and Conditions Page for Application'
@@ -106,6 +187,15 @@ sylius_fixtures:
                               published: true
                               category_code: 'vs-application-pages'
                               locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Terms and Conditions'
+                                      description: 'Terms and Conditions Page for Application'
+                                      text: '<p>Terms and Conditions</p>'
+                                  bg_BG:
+                                      title: 'Правила и условия'
+                                      description: 'Страница с правила и условия за приложението'
+                                      text: '<p>Правила и условия</p>'
                               
                 user_roles__top_level:
                     name: user_roles
@@ -117,25 +207,45 @@ sylius_fixtures:
                               locale:  '%locale%'
                               role: 'ROLE_SUPER_ADMIN'
                               parent: null
-                              
-                            - title: 'Role Admin'
-                              description: 'Role used for Project Middleman ( Admin under Super-Admin )'
-                              taxonomy_code: 'user-roles'
-                              locale:  '%locale%'
-                              role: 'ROLE_ADMIN'
-                              parent: null
+                              translations:
+                                  en_US:
+                                      title: 'Role Super Administrator'
+                                      description: 'Role used mostly for Project Owners'
+                                  bg_BG:
+                                      title: 'Роля Супер администратор'
+                                      description: 'Роля, използвана най-вече за собственици на проекти'
                 
                 user_roles__second_level:
                     name: user_roles
                     options:
                         custom:
+                            - title: 'Role Admin'
+                              description: 'Role used for Project Middleman ( Admin under Super-Admin )'
+                              taxonomy_code: 'user-roles'
+                              locale:  '%locale%'
+                              role: 'ROLE_ADMIN'
+                              parent: role-super-admin
+                              translations:
+                                  en_US:
+                                      title: 'Role Administrator'
+                                      description: 'Role used for Project Middleman ( Administrator under Super-Administrator )'
+                                  bg_BG:
+                                      title: 'Роля Администратор'
+                                      description: 'Роля, използвана за Project Middleman (администратор под суперадминистратор)'
+                              
                             - title: 'Role Application Admin'
                               description: 'Role used for Project Purchaser ( Project Admin )'
                               taxonomy_code: 'user-roles'
                               locale:  '%locale%'
                               role: 'ROLE_APPLICATION_ADMIN'
-                              #parent: role-super-admin
-                              parent: null
+                              parent: role-super-admin
+                              translations:
+                                  en_US:
+                                      title: 'Role Application Administrator'
+                                      description: 'Role used for Project Purchaser ( Project Admin )'
+                                  bg_BG:
+                                      title: 'Роля Администратор на приложение'
+                                      description: 'Роля, използвана за купувач на проект (администратор на проекта)'
                               
                 cookie_consent_translations:
                     name: cookie_consent_translations
@@ -163,9 +273,16 @@ sylius_fixtures:
                     options:
                         custom:
                             - title: 'Static Pages'
-                              description: 'Pages Displayed When the Application is in Maintenance Mode'
+                              description: 'Tags for Static Pages'
                               taxonomy_code: 'tags-whitelist-contexts'
                               locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Static Pages'
+                                      description: 'Tags for Static Pages'
+                                  bg_BG:
+                                      title: 'Статични страници'
+                                      description: 'Тагове за статични страници'
                               
                 tags_whitelist_tags:
                     name: tags_whitelist_tags

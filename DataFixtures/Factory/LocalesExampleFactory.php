@@ -6,7 +6,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
 
-class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface, ExampleTranslationsFactoryInterface
 {
     /** @var FactoryInterface */
     private $localesFactory;
@@ -42,11 +42,6 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
         } else {
             $localeEntity->setTranslatableLocale( $options['translatableLocale'] );
             $localeEntity->setTitle( $options['title'] );
-        }
-        
-        foreach ( $options['translations'] as $localeCode => $translationOptions ) {
-            //$localeEntity->setTranslatableLocale( $localeCode );
-            //$localeEntity->setTitle( $translationOptions['title'] );
         }
         
         return $localeEntity;
