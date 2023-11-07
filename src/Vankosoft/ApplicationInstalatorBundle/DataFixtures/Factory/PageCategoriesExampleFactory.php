@@ -74,7 +74,7 @@ class PageCategoriesExampleFactory extends AbstractExampleFactory implements Exa
             $translation->setLocale( $localeCode );
             $translation->setName( $options['title'] );
             $translation->setDescription( $options['description'] );
-            //$translation->setSlug( $this->get( 'vs_application.slug_generator' )->generate( $options['title'] ) );
+            $translation->setSlug( $this->slugGenerator->generate( $options['title'] ) );
             
             $taxonEntity->addTranslation( $translation );
         } else {
