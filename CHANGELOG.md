@@ -1,3 +1,9 @@
+1.10.129	|	Release date: **07.11.2023**
+============================================
+* New Features and Improvements:
+  - Installator Create Resource Translations.
+
+
 1.10.128	|	Release date: **06.11.2023**
 ============================================
 * New Features:

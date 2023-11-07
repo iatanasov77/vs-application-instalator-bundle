@@ -9,7 +9,7 @@ use Vankosoft\ApplicationBundle\Repository\TaxonRepository;
 use Vankosoft\UsersBundle\Model\UserRoleInterface;
 use Vankosoft\UsersBundle\Repository\UserRolesRepository;
 
-class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface, ExampleTranslationsFactoryInterface
 {
     /** @var RepositoryInterface */
     private $taxonomyRepository;
@@ -80,6 +80,36 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
         return $userRoleEntity;
     }
     
+    public function createTranslation( $entity, $localeCode, $options = [] )
+    {
+        $taxonEntity    = $entity->getTaxon();
+        
+        $taxonEntity->getTranslation( $localeCode );
+        $taxonEntity->setCurrentLocale( $localeCode );
+        
+        if ( ! in_array( $localeCode, $taxonEntity->getExistingTranslations() ) ) {
+            $translation    = $taxonEntity->createNewTranslation();
+            
+            $translation->setLocale( $localeCode );
+            $translation->setName( $options['title'] );
+            $translation->setDescription( $options['description'] );
+            
+            $this->slugGenerator->setLocaleCode( $localeCode );
+            $translation->setSlug( $this->slugGenerator->generate( $options['title'] ) );
+            
+            $taxonEntity->addTranslation( $translation );
+        } else {
+            $translation   = $taxonEntity->getTranslation( $localeCode );
+            
+            $translation->setName( $options['title'] );
+            $translation->setDescription( $options['description'] );
+        }
+        
+        $entity->setTaxon( $taxonEntity );
+        
+        return $entity;
+    }
+    
     protected function configureOptions( OptionsResolver $resolver ): void
     {
         $resolver
@@ -100,6 +130,9 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
             
             ->setDefault( 'parent', null )
             ->setAllowedTypes( 'parent', ['string', 'null'] )
+            
+            ->setDefault( 'translations', [] )
+            ->setAllowedTypes( 'translations', ['array'] )
         ;
     }
     

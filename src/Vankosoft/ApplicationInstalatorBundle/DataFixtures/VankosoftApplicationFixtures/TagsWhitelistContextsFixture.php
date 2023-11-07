@@ -18,6 +18,7 @@ final class TagsWhitelistContextsFixture extends AbstractResourceFixture
                 ->scalarNode( 'title' )->end()
                 ->scalarNode( 'description' )->end()
                 ->scalarNode( 'taxonomy_code' )->end()
+                ->variableNode( 'translations' )->cannotBeEmpty()->defaultValue( [] )->end()
         ;
     }
 }

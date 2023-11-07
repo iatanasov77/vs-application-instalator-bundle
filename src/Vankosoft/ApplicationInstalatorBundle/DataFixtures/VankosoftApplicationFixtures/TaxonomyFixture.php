@@ -18,6 +18,7 @@ final class TaxonomyFixture extends AbstractResourceFixture
                 ->scalarNode( 'title' )->end()
                 ->scalarNode( 'description' )->end()
                 ->scalarNode( 'locale' )->end()
+                ->variableNode( 'translations' )->cannotBeEmpty()->defaultValue( [] )->end()
         ;
     }
 }

@@ -7,7 +7,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistContextInterface;
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 
-class TagsWhitelistContextsExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class TagsWhitelistContextsExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface, ExampleTranslationsFactoryInterface
 {
     /** @var RepositoryInterface */
     private $taxonomyRepository;
@@ -62,6 +62,36 @@ class TagsWhitelistContextsExampleFactory extends AbstractExampleFactory impleme
         return $tagsWhitelistContextEntity;
     }
     
+    public function createTranslation( $entity, $localeCode, $options = [] )
+    {
+        $taxonEntity    = $entity->getTaxon();
+        
+        $taxonEntity->getTranslation( $localeCode );
+        $taxonEntity->setCurrentLocale( $localeCode );
+        
+        if ( ! in_array( $localeCode, $taxonEntity->getExistingTranslations() ) ) {
+            $translation    = $taxonEntity->createNewTranslation();
+            
+            $translation->setLocale( $localeCode );
+            $translation->setName( $options['title'] );
+            $translation->setDescription( $options['description'] );
+            
+            $this->slugGenerator->setLocaleCode( $localeCode );
+            $translation->setSlug( $this->slugGenerator->generate( $options['title'] ) );
+            
+            $taxonEntity->addTranslation( $translation );
+        } else {
+            $translation   = $taxonEntity->getTranslation( $localeCode );
+            
+            $translation->setName( $options['title'] );
+            $translation->setDescription( $options['description'] );
+        }
+        
+        $entity->setTaxon( $taxonEntity );
+        
+        return $entity;
+    }
+    
     protected function configureOptions( OptionsResolver $resolver ): void
     {
         $resolver
@@ -76,6 +106,9 @@ class TagsWhitelistContextsExampleFactory extends AbstractExampleFactory impleme
             
             ->setDefault( 'taxonomy_code', null )
             ->setAllowedTypes( 'taxonomy_code', ['string'] )
+            
+            ->setDefault( 'translations', [] )
+            ->setAllowedTypes( 'translations', ['array'] )
         ;
     }
 }

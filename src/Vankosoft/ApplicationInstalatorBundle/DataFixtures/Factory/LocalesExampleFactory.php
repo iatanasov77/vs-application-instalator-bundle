@@ -6,7 +6,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
 
-class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface, ExampleTranslationsFactoryInterface
 {
     /** @var FactoryInterface */
     private $localesFactory;
@@ -21,11 +21,11 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
         FactoryInterface $localesFactory,
         RepositoryInterface $localesRepository
     ) {
-            $this->localesFactory       = $localesFactory;
-            $this->localesRepository    = $localesRepository;
-            
-            $this->optionsResolver  = new OptionsResolver();
-            $this->configureOptions( $this->optionsResolver );
+        $this->localesFactory       = $localesFactory;
+        $this->localesRepository    = $localesRepository;
+        
+        $this->optionsResolver  = new OptionsResolver();
+        $this->configureOptions( $this->optionsResolver );
     }
     
     public function create( array $options = [] ): LocaleInterface
@@ -47,6 +47,14 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $localeEntity;
     }
     
+    public function createTranslation( $entity, $localeCode, $options = [] )
+    {
+        $entity->setTranslatableLocale( $localeCode );
+        $entity->setTitle( $options['title'] );
+        
+        return $entity;
+    }
+    
     protected function configureOptions( OptionsResolver $resolver ): void
     {
         $resolver
@@ -58,6 +66,9 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
             
             ->setDefault( 'code', null )
             ->setAllowedTypes( 'code', ['string'] )
+            
+            ->setDefault( 'translations', [] )
+            ->setAllowedTypes( 'translations', ['array'] )
         ;
     }
 }

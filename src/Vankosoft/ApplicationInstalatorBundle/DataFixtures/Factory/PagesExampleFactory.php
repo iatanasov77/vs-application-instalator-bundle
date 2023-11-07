@@ -7,7 +7,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Vankosoft\CmsBundle\Model\PageInterface;
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 
-class PagesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class PagesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface, ExampleTranslationsFactoryInterface
 {
     /** @var FactoryInterface */
     private $pagesFactory;
@@ -54,6 +54,16 @@ class PagesExampleFactory extends AbstractExampleFactory implements ExampleFacto
         return $pageEntity;
     }
     
+    public function createTranslation( $entity, $localeCode, $options = [] )
+    {
+        $entity->setTranslatableLocale( $localeCode );
+        $entity->setTitle( $options['title'] );
+        $entity->setDescription( $options['description'] );
+        $entity->setText( $options['text'] );
+        
+        return $entity;
+    }
+    
     protected function configureOptions( OptionsResolver $resolver ): void
     {
         $resolver
@@ -74,6 +84,9 @@ class PagesExampleFactory extends AbstractExampleFactory implements ExampleFacto
             
             ->setDefault( 'category_code', null )
             ->setAllowedTypes( 'category_code', ['string'] )
+            
+            ->setDefault( 'translations', [] )
+            ->setAllowedTypes( 'translations', ['array'] )
         ;
     }
 }
