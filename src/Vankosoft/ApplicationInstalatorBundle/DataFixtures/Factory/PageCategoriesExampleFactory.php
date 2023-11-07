@@ -74,6 +74,8 @@ class PageCategoriesExampleFactory extends AbstractExampleFactory implements Exa
             $translation->setLocale( $localeCode );
             $translation->setName( $options['title'] );
             $translation->setDescription( $options['description'] );
+            
+            $this->slugGenerator->setLocaleCode( $options['title'] ) );
             $translation->setSlug( $this->slugGenerator->generate( $options['title'] ) );
             
             $taxonEntity->addTranslation( $translation );
@@ -83,10 +85,6 @@ class PageCategoriesExampleFactory extends AbstractExampleFactory implements Exa
             $translation->setName( $options['title'] );
             $translation->setDescription( $options['description'] );
         }
-        
-//         $taxonEntity->getTranslation()->setName( $options['title'] );
-//         $taxonEntity->getTranslation()->setDescription( $options['description'] );
-//         $taxonEntity->getTranslation()->setTranslatable( $taxonEntity );
         
         $entity->setTaxon( $taxonEntity );
         
