@@ -47,7 +47,7 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $localeEntity;
     }
     
-    public function createTranslation( $entity, $localeCode, $options )
+    public function createTranslation( $entity, $localeCode, $options = [] )
     {
         $entity->setTranslatableLocale( $localeCode );
         $entity->setTitle( $options['title'] );
