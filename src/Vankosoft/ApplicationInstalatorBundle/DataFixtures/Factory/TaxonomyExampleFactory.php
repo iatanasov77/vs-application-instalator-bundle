@@ -6,7 +6,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
 
-class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface, ExampleTranslationsFactoryInterface
 {
     /** @var FactoryInterface */
     private $taxonomyFactory;
@@ -57,6 +57,15 @@ class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFa
         return $taxonomyEntity;
     }
     
+    public function createTranslation( $entity, $localeCode, $options )
+    {
+        $entity->setCurrentLocale( $localeCode );
+        $entity->setName( $options['title'] );
+        $entity->setDescription( $options['description'] );
+        
+        return $entity;
+    }
+    
     protected function configureOptions( OptionsResolver $resolver ): void
     {
         $resolver
@@ -71,6 +80,9 @@ class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFa
             
             ->setDefault( 'locale', 'en_US' )
             ->setAllowedTypes( 'locale', ['string'] )
+            
+            ->setDefault( 'translations', [] )
+            ->setAllowedTypes( 'translations', ['array'] )
         ;
     }
 }

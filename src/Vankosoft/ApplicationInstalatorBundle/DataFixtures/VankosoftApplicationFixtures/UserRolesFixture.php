@@ -20,6 +20,7 @@ final class UserRolesFixture extends AbstractResourceFixture
                 ->scalarNode( 'taxonomy_code' )->end()
                 ->scalarNode( 'role' )->end()
                 ->scalarNode( 'parent' )->end()
+                ->variableNode( 'translations' )->cannotBeEmpty()->defaultValue( [] )->end()
         ;
     }
 }

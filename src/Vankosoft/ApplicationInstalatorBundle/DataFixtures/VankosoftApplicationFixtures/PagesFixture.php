@@ -21,6 +21,7 @@ final class PagesFixture extends AbstractResourceFixture
                 ->booleanNode( 'published' )->defaultTrue()->end()
                 
                 ->scalarNode( 'category_code' )->end()
+                ->variableNode( 'translations' )->cannotBeEmpty()->defaultValue( [] )->end()
             ;
     }
 }
