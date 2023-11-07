@@ -66,10 +66,21 @@ class PageCategoriesExampleFactory extends AbstractExampleFactory implements Exa
     {
         $taxonEntity    = $entity->getTaxon();
         
+        $taxonEntity->getTranslation( $localeCode );
         $taxonEntity->setCurrentLocale( $localeCode );
-        $taxonEntity->getTranslation()->setName( $options['title'] );
-        $taxonEntity->getTranslation()->setDescription( $options['description'] );
-        $taxonEntity->getTranslation()->setTranslatable( $taxonEntity );
+        if ( ! in_array( $localeCode, $taxonEntity->getExistingTranslations() ) ) {
+            $taxonTranslation   = $this->createTranslation( $taxonEntity, $localeCode, $options['title'] );
+            
+            $taxonEntity->addTranslation( $taxonTranslation );
+        } else {
+            $taxonTranslation   = $taxonEntity->getTranslation( $localeCode );
+            
+            $taxonTranslation->setName( $options['title'] );
+        }
+        
+//         $taxonEntity->getTranslation()->setName( $options['title'] );
+//         $taxonEntity->getTranslation()->setDescription( $options['description'] );
+//         $taxonEntity->getTranslation()->setTranslatable( $taxonEntity );
         
         $entity->setTaxon( $taxonEntity );
         
