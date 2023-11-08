@@ -1,3 +1,11 @@
+1.10.130	|	Release date: **08.11.2023**
+============================================
+* New Features and Improvements:
+  - Add Translated application title in footer.
+  - Update KNP Time Bundle Version.
+  - Improve Default Theme Layout.
+
+
 1.10.129	|	Release date: **07.11.2023**
 ============================================
 * New Features and Improvements:
