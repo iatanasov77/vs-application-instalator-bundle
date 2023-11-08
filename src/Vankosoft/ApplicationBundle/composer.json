@@ -22,7 +22,7 @@
 		"stof/doctrine-extensions-bundle": "^1.7",
 		"knplabs/knp-menu-bundle" : "^3.1",
 		"knplabs/knp-paginator-bundle": "^5.9",
-		"knplabs/knp-time-bundle": "^1.20",
+		"knplabs/knp-time-bundle": "^2.1",
 		"sylius-labs/doctrine-migrations-extra-bundle": "^0.2",
 		"sylius/resource-bundle": "^1.10",
 		"sylius/taxonomy": "^1.11",
