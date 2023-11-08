@@ -34,7 +34,7 @@
         "doctrine\/doctrine-fixtures-bundle": "^3.4",
         "knplabs\/knp-menu-bundle": "^3.1",
         "knplabs\/knp-paginator-bundle": "^5.9",
-        "knplabs\/knp-time-bundle": "^1.20",
+        "knplabs\/knp-time-bundle": "^2.1",
         "knplabs\/knp-gaufrette-bundle": "^0.8",
         "friendsofsymfony\/ckeditor-bundle": "^2.4",
         "liip\/imagine-bundle": "^2.9",
