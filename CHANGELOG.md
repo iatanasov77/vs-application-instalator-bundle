@@ -1,3 +1,10 @@
+1.10.131	|	Release date: **11.11.2023**
+============================================
+* New Featuresand Improvements:
+  - Update Bulgarian Translations.
+  - Improve Js Helper 'VsFormSubmit'.
+
+
 1.10.130	|	Release date: **08.11.2023**
 ============================================
 * New Features and Improvements:
