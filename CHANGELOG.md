@@ -1,3 +1,9 @@
+1.10.135	|	Release date: **13.11.2023**
+============================================
+* New Features and Improvements:
+  - Improve Register Controller.
+
+
 1.10.134	|	Release date: **13.11.2023**
 ============================================
 * Bug-Fixes and Improvements:
