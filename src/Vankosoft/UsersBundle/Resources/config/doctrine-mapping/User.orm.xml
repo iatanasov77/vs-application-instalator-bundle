@@ -21,7 +21,9 @@
         
         <many-to-many field="applications" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface" mapped-by="users">
             <cascade>
-                <cascade-all/>
+                <cascade-persist/>
+                <cascade-merge/>
+                <cascade-detach/>
             </cascade>
         </many-to-many>
         

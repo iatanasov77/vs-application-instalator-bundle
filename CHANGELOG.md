@@ -1,3 +1,11 @@
+1.10.134	|	Release date: **13.11.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Remove Cascade All of Users/Applications Doctrine Mapping.
+  - Add Cascade Persist of Users->Applications Doctrine Mapping.
+  - Improve Users CRUD Index Page.
+
+
 1.10.133	|	Release date: **13.11.2023**
 ============================================
 * New Features and Improvements:
