@@ -95,6 +95,9 @@ vs_application:
             button_login: 'Login'
             button_register: 'Create An Account'
             button_forgot_password: 'Forgot Password'
+        register:
+            alert_success: 'Your registration were saved! Check your email and confirm your account.'
+            alert_verified: 'Your e-mail address has been verified.'
         vs_form_delete:
             title: DELETE ITEM
             message: Do you want to delete this Item?
