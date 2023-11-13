@@ -95,6 +95,9 @@ vs_application:
             button_login: 'Влез'
             button_register: 'Създай Акаунт'
             button_forgot_password: 'Забравена Парола'
+        register:
+            alert_success: 'Your registration were saved! Check your email and confirm your account.'
+            alert_verified: 'Your e-mail address has been verified.'
         vs_form_delete:
             title: ИЗТРИЙ ОБЕКТ
             message: Наистина ли искате да изтриете обекта?
