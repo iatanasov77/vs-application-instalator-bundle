@@ -8,6 +8,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
 use Pagerfanta\Pagerfanta;
 
+use Doctrine\DBAL\Driver\PDO\PDOException;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\ORMException;
 
@@ -188,13 +189,17 @@ class AbstractCrudController extends ResourceController
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
                 throw new \Vankosoft\ApplicationBundle\Component\Exception\PDOException( 'VS Application DBAL Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
             }
-        } catch ( \PDOException $e ) {
+        } catch ( PDOException $e ) { // Doctrine DBAL PDOException
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
-                throw new \Vankosoft\ApplicationBundle\Component\Exception\PDOException( 'VS Application PDO Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
+                throw new \Vankosoft\ApplicationBundle\Component\Exception\PDOException( 'VS Application DBAL PDO Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
             }
         } catch ( ORMException $e ) {
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
                 throw new \Vankosoft\ApplicationBundle\Component\Exception\PDOException( 'VS Application ORM Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
+            }
+        } catch ( \PDOException $e ) {
+            if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
+                throw new \Vankosoft\ApplicationBundle\Component\Exception\PDOException( 'VS Application PDO Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
             }
         } catch ( \Exception $e ) {
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
@@ -202,6 +207,7 @@ class AbstractCrudController extends ResourceController
             }
         }
         
+        //var_dump( $this->getParameter( 'vs_application.supress_pdo_exception' ) ); die;
         return $response;
     }
         

@@ -1,3 +1,10 @@
+1.10.133	|	Release date: **13.11.2023**
+============================================
+* New Features and Improvements:
+  - Improve AbstractCrudController .
+  - Update JS Resource Delete Helper.
+
+
 1.10.132	|	Release date: **13.11.2023**
 ============================================
 * Bug-Fixes and Improvements:

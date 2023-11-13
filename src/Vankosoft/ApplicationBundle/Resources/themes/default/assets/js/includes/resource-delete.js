@@ -17,15 +17,13 @@ var onResourceDeleteCancel  = function() {
     $( this ).dialog( "close" );
 }
 
-export function VsFormDlete( onOk, onCancel )
+export function VsFormDlete( onOk, onCancel, message = null )
 {
-    var myButtons = {};
-    var _Translator = VsTranslator( 'VSApplicationBundle' );
+    var myButtons           = {};
+    var _Translator         = VsTranslator( 'VSApplicationBundle' );
     
-    //var translatedDialog    = '<div title="DELETE ITEM">Do you want to delete this Item?</div>';
-    var translatedDialog    = '<div title="' + _Translator.trans( 'vs_application.form.vs_form_delete.title' ) + '">' + 
-                                _Translator.trans( 'vs_application.form.vs_form_delete.message' ) + 
-                            '</div>';
+    var strMessage          = message ? _Translator.trans( message ) : _Translator.trans( 'vs_application.form.vs_form_delete.message' );
+    var translatedDialog    = '<div title="' + _Translator.trans( 'vs_application.form.vs_form_delete.title' ) + '">' + strMessage + '</div>';
     
     myButtons[_Translator.trans( 'vs_application.form.vs_form_delete.btn_ok' )] = onOk;
     myButtons[_Translator.trans( 'vs_application.form.vs_form_delete.btn_cancel' )] = onCancel;
@@ -39,7 +37,7 @@ export function VsFormDlete( onOk, onCancel )
  */
 $( function()
 {
-	$( ".btnDeleteResource" ).on( "click", function ( e ) 
+	$( ".btnDeleteResource" ).on( "click", function ( e )
 	{
 	    e.preventDefault();
 
@@ -47,6 +45,7 @@ $( function()
 	    $( '#resource_delete__token' ).val( $( this ).attr( 'data-csrftoken' ) );
 	    $( '#resource_delete__redirect' ).val( $( this ).attr( 'data-redirectUrl' ) );
 	    
-	    var dialog  = VsFormDlete( onResourceDeleteOk, onResourceDeleteCancel );
+	    var message    = $( this ).attr( 'data-message' );
+	    var dialog     = VsFormDlete( onResourceDeleteOk, onResourceDeleteCancel, message );
 	});
 });

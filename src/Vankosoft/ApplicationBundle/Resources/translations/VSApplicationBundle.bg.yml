@@ -98,6 +98,7 @@ vs_application:
         vs_form_delete:
             title: ИЗТРИЙ ОБЕКТ
             message: Наистина ли искате да изтриете обекта?
+            users_crud_message: Наистина ли искате да изтриете потребителя и всички асоциирани с него обекти?
             btn_ok: Да
             btn_cancel: Отказ
         vs_form_display_password:
