@@ -1,3 +1,10 @@
+1.10.132	|	Release date: **13.11.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Improve Register and Profile Controllers.
+  - Fix Users Crud Delete Action.
+
+
 1.10.131	|	Release date: **11.11.2023**
 ============================================
 * New Featuresand Improvements:
