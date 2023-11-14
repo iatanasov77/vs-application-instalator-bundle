@@ -1,3 +1,9 @@
+1.10.136	|	Release date: **14.11.2023**
+============================================
+* Bug-Fixes:
+  - Fix ProfileController.
+
+
 1.10.135	|	Release date: **13.11.2023**
 ============================================
 * New Features and Improvements:
