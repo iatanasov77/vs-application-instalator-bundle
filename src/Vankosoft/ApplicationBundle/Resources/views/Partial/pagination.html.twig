@@ -10,20 +10,31 @@
     <nav aria-label="Page navigation example" class="mx-auto d-flex justify-content-center">
         <ul class="pagination">
             {%- set prevPath = 'javascript:void(0);' -%}
+            {%- set firstPath = 'javascript:void(0);' -%}
             {%- set nextPath = 'javascript:void(0);' -%}
+            {%- set lastPath = 'javascript:void(0);' -%}
             
             {%- if pagerfanta.hasPreviousPage() -%}
                 {%- set prevPath = route_generator.route( pagerfanta.getPreviousPage() ) -%}
+                {%- set firstPath = route_generator.route(1) -%}
             {%- endif -%}
         
             {%- if pagerfanta.hasNextPage() -%}
                 {%- set nextPath = route_generator.route( pagerfanta.getNextPage() ) -%}
+                {%- set lastPath = route_generator.route(nb_pages) -%}
             {%- endif -%}
+            
+            {# First Page Link #}
+            <li class="page-item">
+                <a class="page-link" href="{{ firstPath }}" aria-label="First">
+                    <span aria-hidden="true">«</span><span class="sr-only">First</span>
+                </a>
+            </li>
             
             {# Previous Page Link #}
             <li class="page-item">
                 <a class="page-link" href="{{ prevPath }}" aria-label="Previous">
-                    <span aria-hidden="true">«</span><span class="sr-only">Previous</span>
+                    <span aria-hidden="true">‹</span><span class="sr-only">Previous</span>
                 </a>
             </li>
             
@@ -39,8 +50,15 @@
             
             {# Next Page Link #}
             <li class="page-item">
-                <a class="page-link" href="{{ nextPath }}" aria-label="Next"><span aria-hidden="true">»</span>
+                <a class="page-link" href="{{ nextPath }}" aria-label="Next"><span aria-hidden="true">›</span>
                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+            
+            {# Last Page Link #}
+            <li class="page-item">
+                <a class="page-link" href="{{ lastPath }}" aria-label="Last"><span aria-hidden="true">»</span>
+                   <span class="sr-only">Last</span>
                 </a>
             </li>
         </ul>
