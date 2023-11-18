@@ -1,3 +1,10 @@
+1.10.137	|	Release date: **18.11.2023**
+============================================
+* New Features:
+  - Update Payment Java Script.
+  - Improve Pagination Template.
+
+
 1.10.136	|	Release date: **14.11.2023**
 ============================================
 * Bug-Fixes:
