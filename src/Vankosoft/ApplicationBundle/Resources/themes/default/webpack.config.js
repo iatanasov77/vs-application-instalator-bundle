@@ -100,6 +100,7 @@ Encore
     .addEntry( 'js/recieved-payments', assetsPath + '/js/payment_pages/recieved-payments.js' )
     .addEntry( 'js/orders', assetsPath + '/js/payment_pages/orders.js' )
     .addEntry( 'js/pricing-plan-subscriptions', assetsPath + '/js/payment_pages/pricing-plan-subscriptions.js' )
+    .addEntry( 'js/pricing-plan-subscription-payments', assetsPath + '/js/payment_pages/pricing-plan-subscription-payments.js' )
     
     //////////////////////////////////////////////////////////////////
     // Subscription Pages
