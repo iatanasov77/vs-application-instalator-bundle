@@ -5,7 +5,7 @@ use Twig\Environment;
 use Psr\Cache\CacheItemPoolInterface;
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\ItemInterface;
 
-class WidgetRenderer implements RenderInterface
+class WidgetRenderer implements RendererInterface
 {
     /** @var Environment */
     private $engine;
