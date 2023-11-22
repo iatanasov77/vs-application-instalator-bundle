@@ -21,6 +21,8 @@ class WidgetController extends PdWidgetController
         ManagerRegistry $doctrine,
         WidgetUserRepository $widgetUserRepo
     ) {
+        parent::__construct( $widgetUserRepo, $cache );
+        
         $this->cache            = $cache;
         $this->doctrine         = $doctrine;
         $this->widgetUserRepo   = $widgetUserRepo;
