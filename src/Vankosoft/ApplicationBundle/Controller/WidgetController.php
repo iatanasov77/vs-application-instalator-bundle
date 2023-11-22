@@ -1,17 +1,29 @@
 <?php namespace Vankosoft\ApplicationBundle\Controller;
 
-use Pd\WidgetBundle\Controller\WidgetController;
+use Symfony\Contracts\Cache\CacheInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Pd\WidgetBundle\Controller\WidgetController;
+use Pd\WidgetBundle\Repository\WidgetUserRepository;
 
 class WidgetController extends WidgetController
 {
+    /** @var CacheInterface */
+    protected $cache;
+    
     /** @var ManagerRegistry */
     protected $doctrine;
     
+    /** @var WidgetUserRepository */
+    protected $widgetUserRepo;
+    
     public function __construct(
-        ManagerRegistry $doctrine
+        CacheInterface $cache,
+        ManagerRegistry $doctrine,
+        WidgetUserRepository $widgetUserRepo
     ) {
-        $this->doctrine = $doctrine;
+        $this->cache            = $cache;
+        $this->doctrine         = $doctrine;
+        $this->widgetUserRepo   = $widgetUserRepo;
     }
     
     protected function getDoctrine()
