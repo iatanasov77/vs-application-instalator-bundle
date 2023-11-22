@@ -1,19 +1,19 @@
-widget_index:
-    path: /widget/listing
+vs_application_widget_ext_index:
+    path: /widget-ext/listing
     controller:  Vankosoft\ApplicationBundle\Controller\WidgetExtController::index
 
-widget_status:
-    path: /widget/status/{widgetId}/{status}
+vs_application_widget_ext_status:
+    path: /widget-ext/status/{widgetId}/{status}
     controller:  Vankosoft\ApplicationBundle\Controller\WidgetExtController::status
     requirements:
         status: \d+
 
-widget_config:
-    path: /widget/config/{widgetId}
+vs_application_widget_ext_config:
+    path: /widget-ext/config/{widgetId}
     controller:  Vankosoft\ApplicationBundle\Controller\WidgetExtController::configs
 
-widget_order:
-    path: /widget/order/{widgetId}/{order}
+vs_application_widget_ext_order:
+    path: /widget-ext/order/{widgetId}/{order}
     controller:  Vankosoft\ApplicationBundle\Controller\WidgetExtController::order
     requirements:
         order: \d+
