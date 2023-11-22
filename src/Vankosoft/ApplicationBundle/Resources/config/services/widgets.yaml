@@ -4,12 +4,14 @@ services:
         autoconfigure: true
         public: true
         
-    Vankosoft\ApplicationBundle\Controller\WidgetController:
+    Vankosoft\ApplicationBundle\Controller\WidgetExtController:
         tags: ['controller.service_arguments']
         autowire: true
         arguments:
             - '@cache.app'
             - '@doctrine'
+            - '@vs_application.repository.widget'
+            - '@vs_application.factory.widget'
     
     # Load All Widgets
 #     Vankosoft\ApplicationBundle\Widgets\:
