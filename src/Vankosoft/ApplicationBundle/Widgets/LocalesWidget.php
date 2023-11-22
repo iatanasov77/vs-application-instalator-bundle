@@ -16,6 +16,7 @@ class LocalesWidget
                 ->setGroup( 'admin' )
                 ->setName( 'widget_user_info.name' )
                 ->setDescription( 'widget_user_info.description' )
+                ->setActive( true )
             
                 ->setTemplate( '@VSApplication/Widgets/locales.html.twig' )
                 //->setContent( 'pdWidget Text Content' )
