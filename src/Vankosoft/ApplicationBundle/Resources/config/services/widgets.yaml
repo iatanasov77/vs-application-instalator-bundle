@@ -4,6 +4,10 @@ services:
         autoconfigure: true
         public: true
         
+    Pd\WidgetBundle\Controller\WidgetController:
+        tags: ['controller.service_arguments']
+        autowire: true
+    
     # Load All Widgets
 #     Vankosoft\ApplicationBundle\Widgets\:
 #         resource: '../src/Widgets/*'
