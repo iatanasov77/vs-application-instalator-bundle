@@ -4,11 +4,11 @@ services:
         autoconfigure: true
         public: true
         
-    Pd\WidgetBundle\Controller\WidgetController:
+    Vankosoft\ApplicationBundle\Controller\WidgetController:
         tags: ['controller.service_arguments']
         autowire: true
-        calls:
-            - [ setContainer, [ '@service_container' ] ]
+        arguments:
+            - '@doctrine'
     
     # Load All Widgets
 #     Vankosoft\ApplicationBundle\Widgets\:

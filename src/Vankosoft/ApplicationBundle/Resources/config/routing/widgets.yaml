@@ -1,0 +1,15 @@
+widget_status:
+    path: /widget/status/{widgetId}/{status}
+    controller:  Vankosoft\ApplicationBundle\Controller\WidgetController::status
+    requirements:
+        status: \d+
+
+widget_config:
+    path: /widget/config/{widgetId}
+    controller:  Vankosoft\ApplicationBundle\Controller\WidgetController::configs
+
+widget_order:
+    path: /widget/order/{widgetId}/{order}
+    controller:  Vankosoft\ApplicationBundle\Controller\WidgetController::order
+    requirements:
+        order: \d+
