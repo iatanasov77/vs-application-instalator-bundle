@@ -15,7 +15,7 @@ services:
             - '@vs_application.repository.widget'
             
     vs_application.widgets_container:
-        class: Vankosoft\ApplicationBundle\Component\Widget
+        class: Vankosoft\ApplicationBundle\Component\Widget\Widget
         arguments:
             - '@security.helper'
             - '@event_dispatcher'
