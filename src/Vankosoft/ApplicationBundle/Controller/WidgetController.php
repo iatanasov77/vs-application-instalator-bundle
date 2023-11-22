@@ -2,10 +2,10 @@
 
 use Symfony\Contracts\Cache\CacheInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Pd\WidgetBundle\Controller\WidgetController;
+use Pd\WidgetBundle\Controller\WidgetController as PdWidgetController;
 use Pd\WidgetBundle\Repository\WidgetUserRepository;
 
-class WidgetController extends WidgetController
+class WidgetController extends PdWidgetController
 {
     /** @var CacheInterface */
     protected $cache;
