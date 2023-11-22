@@ -6,7 +6,7 @@ use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
 /**
  * MANUAL: https://github.com/cesurapp/pd-widget
  */
-class LocalesWidget
+class UserInfoWidget
 {
     public function builder( WidgetEvent $event )
     {
@@ -14,12 +14,20 @@ class LocalesWidget
         $widgets    = $event->getWidgetContainer();
         
         // Create Widget Item
-        $widgetItem = new Item( 'profile_menu_locales', 3600 );
-        $widgetItem->setGroup( 'admin_profile_menu' )
+        $widgetItem = new Item( 'user_info', 3600 ); // Add Cache Time or Default 3600 Second
+        $widgetItem->setGroup( 'admin' )
                     ->setName( 'widget_user_info.name' )
                     ->setDescription( 'widget_user_info.description' )
                     ->setActive( true )
-                    ->setTemplate( '@VSApplication/Widgets/locales.html.twig' );
+                    
+                    ->setTemplate( '@VSApplication/Widgets/user_info.html.twig' )
+                    //->setContent( 'pdWidget Text Content' )
+                    //->setRole( ['USER_INFO_WIDGET'] )
+                    
+                    ->setData( function () {
+                        return ['userCount' => 5];
+                    })
+                    ->setOrder( 5 );
                         
         // Add Widgets
         $widgets->addWidget( $widgetItem );

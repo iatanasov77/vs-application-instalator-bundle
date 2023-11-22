@@ -17,11 +17,13 @@
         </div>
     </div>
     
-    # Render all 'admin' widget groups
-    {{ pd_widget_render( 'admin' ) }}
-    
-    # Render selected widgets in 'admin' group
-    {{ pd_widget_render( 'admin', ['user_info'] ) }}
+    {% if app_environment == 'dev' %}
+        # Render all 'admin' widget groups
+        {{ vs_widget_render( 'admin' ) }}
+        
+        # Render selected widgets in 'admin' group
+        {{ vs_widget_render( 'admin', ['user_info'] ) }}
+    {% endif %}
 
 {% endblock %}
 

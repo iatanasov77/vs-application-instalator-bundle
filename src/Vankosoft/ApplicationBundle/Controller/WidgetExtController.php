@@ -69,7 +69,7 @@ class WidgetExtController extends AbstractController
         }
         
         // Response
-        return $this->redirect( $request->headers->get( 'referer', $this->generateUrl( $this->getParameter( 'pd_widget.return_route' ) ) ) );
+        return $this->redirect( $request->headers->get( 'referer', $this->generateUrl( $this->getParameter( 'vs_application.widgets.return_route' ) ) ) );
     }
     
     /**
@@ -102,7 +102,7 @@ class WidgetExtController extends AbstractController
         }
         
         // Response
-        return $this->redirect( $request->headers->get( 'referer', $this->generateUrl( $this->getParameter( 'pd_widget.return_route' ) ) ) );
+        return $this->redirect( $request->headers->get( 'referer', $this->generateUrl( $this->getParameter( 'vs_application.widgets.return_route' ) ) ) );
     }
     
     /**

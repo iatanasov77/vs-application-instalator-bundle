@@ -11,6 +11,18 @@ use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
 
 class Widget implements WidgetInterface
 {
+    /** @var AuthorizationCheckerInterface */
+    private $security;
+    
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
+    
+    /** @var CacheItemPoolInterface */
+    private $cache;
+    
+    /** @var TokenStorageInterface */
+    private $token;
+    
     /**
      * Widget Storage.
      *
@@ -22,13 +34,15 @@ class Widget implements WidgetInterface
     private bool $checkRole;
 
     public function __construct(
-        private AuthorizationCheckerInterface $security,
-        private EventDispatcherInterface $eventDispatcher,
-        private CacheItemPoolInterface $cache,
-        private TokenStorageInterface $token
+        AuthorizationCheckerInterface $security,
+        EventDispatcherInterface $eventDispatcher,
+        CacheItemPoolInterface $cache,
+        TokenStorageInterface $token
     ) {
-        
-        
+        $this->security         = $security;
+        $this->eventDispatcher  = $eventDispatcher;
+        $this->cache            = $cache;
+        $this->token            = $token;
     }
 
     /**
