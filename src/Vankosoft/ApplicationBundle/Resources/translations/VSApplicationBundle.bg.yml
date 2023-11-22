@@ -58,6 +58,7 @@ vs_application:
         tags_whitelist_contexts: Тагове Контексти
         create_new_tags_whitelist_context: Създаване Тагове Контекст
         edit_tags_whitelist_context: Редакция Тагове Контекст
+        widgets: Уиджети
 
     form:
         errors_title: 'Грешка!'
