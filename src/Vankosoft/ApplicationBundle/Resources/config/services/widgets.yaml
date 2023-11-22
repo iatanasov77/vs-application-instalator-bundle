@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+        
+    # Load All Widgets
+#     Vankosoft\ApplicationBundle\Widgets\:
+#         resource: '../src/Widgets/*'
+#         tags:
+#             - { name: kernel.event_listener, event: widget.start, method: builder }
+            
+    # Load Single Widget
+    Vankosoft\ApplicationBundle\Widgets\LocalesWidget:
+        tags:
+            - { name: kernel.event_listener, event: widget.start, method: builder }

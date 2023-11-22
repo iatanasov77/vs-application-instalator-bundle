@@ -17,3 +17,10 @@
         </div>
     </div>
 {% endblock %}
+
+# Render all 'admin' widget groups
+{{ pd_widget_render( 'admin' ) }}
+
+# Render selected widgets in 'admin' group
+{{ pd_widget_render( 'admin', ['user_info'] ) }}
+
