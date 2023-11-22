@@ -30,7 +30,8 @@
 		"sylius/theme-bundle" : "^2.2",
 		"friendsofsymfony/jsrouting-bundle": "^3.2",
         "willdurand/js-translation-bundle": "^5.0",
-		"hackzilla\/password-generator-bundle": "^5.0"
+		"hackzilla/password-generator-bundle": "^5.0",
+        "appaydin/pd-widget": "^3.0"
 	},
 	"suggest" : {
 		"symfony/debug-bundle" : "Allows developement debugging",
