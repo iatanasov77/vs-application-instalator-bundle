@@ -4,6 +4,12 @@ services:
         autoconfigure: true
         public: true
         
+    vs_application.widgets_builder:
+        class: Vankosoft\ApplicationBundle\Component\Widget\WidgetBuilder
+        arguments:
+            - '@security.token_storage'
+            - '@vs_application.repository.widget'
+    
     Vankosoft\ApplicationBundle\Controller\WidgetExtController:
         tags: ['controller.service_arguments']
         autowire: true
@@ -12,14 +18,8 @@ services:
             - '@doctrine'
             - '@vs_application.repository.widget'
             - '@vs_application.factory.widget'
-    
-    # Load All Widgets
-#     Vankosoft\ApplicationBundle\Widgets\:
-#         resource: '../src/Widgets/*'
-#         tags:
-#             - { name: kernel.event_listener, event: widget.start, method: builder }
             
-    # Load Single Widget
-    Vankosoft\ApplicationBundle\Widgets\LocalesWidget:
+    # Load Widgets
+    Vankosoft\ApplicationBundle\EventListener\Widgets\LocalesWidget:
         tags:
             - { name: kernel.event_listener, event: widget.start, method: builder }

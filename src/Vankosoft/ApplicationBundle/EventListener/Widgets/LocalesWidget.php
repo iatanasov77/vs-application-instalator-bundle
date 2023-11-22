@@ -1,7 +1,7 @@
-<?php namespace Vankosoft\ApplicationBundle\Widgets;
+<?php namespace Vankosoft\ApplicationBundle\EventListener\Widgets;
 
-use Pd\WidgetBundle\Builder\Item;
-use Pd\WidgetBundle\Event\WidgetEvent;
+use Vankosoft\ApplicationBundle\Component\Widget\Builder\Item;
+use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
 
 /**
  * MANUAL: https://github.com/cesurapp/pd-widget
