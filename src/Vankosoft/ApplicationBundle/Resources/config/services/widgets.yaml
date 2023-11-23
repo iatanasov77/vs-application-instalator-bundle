@@ -55,6 +55,8 @@ services:
             - { name: kernel.event_listener, event: widget.start, method: builder }
     
     Vankosoft\ApplicationBundle\EventListener\Widgets\LocalesWidget:
+        arguments:
+            - '@vs_application.repository.locale'
         tags:
             - { name: kernel.event_listener, event: widget.start, method: builder }
 

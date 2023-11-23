@@ -14,6 +14,8 @@ class Item implements ItemInterface
     private string $description = '';
     private string $content     = '';
     private string $template    = '';
+    private string $params      = [];
+    
     /**
      * @var callable
      */
@@ -81,10 +83,16 @@ class Item implements ItemInterface
     {
         return $this->template;
     }
+    
+    public function getParams(): array
+    {
+        return $this->params;
+    }
 
-    public function setTemplate( string $template ): ItemInterface
+    public function setTemplate( string $template, array $params = [] ): ItemInterface
     {
         $this->template = $template;
+        $this->params   = $params;
 
         return $this;
     }

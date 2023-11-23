@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationBundle\EventListener\Widgets;
 
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\Item;
 use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
 
@@ -8,6 +9,14 @@ use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
  */
 class LocalesWidget
 {
+    /** @var EntityRepository */
+    private $localesRepository;
+    
+    public function __construct( EntityRepository $localesRepository )
+    {
+        $this->localesRepository    = $localesRepository;
+    }
+    
     public function builder( WidgetEvent $event )
     {
         // Get Widget Container
@@ -19,7 +28,9 @@ class LocalesWidget
                     ->setName( 'widget_user_info.name' )
                     ->setDescription( 'widget_user_info.description' )
                     ->setActive( true )
-                    ->setTemplate( '@VSApplication/Widgets/locales.html.twig' );
+                    ->setTemplate( '@VSApplication/Widgets/locales.html.twig', [
+                        'locales'   => $this->localesRepository->findAll(),
+                    ]);
                         
         // Add Widgets
         $widgets->addWidget( $widgetItem );
