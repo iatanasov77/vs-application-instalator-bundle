@@ -21,7 +21,9 @@
         <fieldset class="border border-dark rounded p-3">
             <legend class="w-auto float-none ps-2 pe-2">{{ 'vs_application.template.test_widgets' | trans( {},'VSApplicationBundle' ) }}</legend>
             
-            <p class="lead">Nam pulvinar interdum turpis a mattis. Etiam augue leo, mollis a massa sagittis, egestas pretium risus. Aliquam auctor nibh mauris, at fringilla elit lobortis sodales. Praesent volutpat felis et placerat elementum. </p>
+            <p class="lead">
+                Widgets are inspired form <a href="https://github.com/cesurapp/pd-widget">https://github.com/cesurapp/pd-widget</a>
+            </p>
             
             # Render all 'admin' widget groups
             {{ vs_widget_render( 'admin' ) }}
