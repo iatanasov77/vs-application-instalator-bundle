@@ -10,5 +10,5 @@
     {% block add %}{% endblock %}
     <li class="nav-item"><a class="nav-link mover {{ color is defined ? color }}" href="#"><i class="material-icons">open_with</i></a></li>
     <li class="nav-item"><a class="nav-link {{ color is defined ? color }}" href="#" data-toggle="popover" title="{{ widget.name|trans }}" data-content="{{ widget.description|trans }}"><i class="material-icons">help</i></a></li>
-    <li class="nav-item"><a class="nav-link {{ color is defined ? color }}" href="{{ path('widget_status', { 'widgetId': widget.id, 'status': widget.isActive ? 0 : 1 }) }}"><i class="material-icons">close</i></a></li>
+    <li class="nav-item"><a class="nav-link {{ color is defined ? color }}" href="{{ path('vs_application_widget_ext_status', { 'widgetId': widget.id, 'status': widget.isActive ? 0 : 1 }) }}"><i class="material-icons">close</i></a></li>
 </ul>
