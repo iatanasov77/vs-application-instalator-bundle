@@ -186,6 +186,7 @@ vs_application:
         
         reload_widgets: Презареждане Уиджети
         no_one: Никой
+        test_widgets: Тестване Уиджети
         
         contact_page:
             my_address: 'бул. "Ал. Стамболийски", Пловдив 4000'

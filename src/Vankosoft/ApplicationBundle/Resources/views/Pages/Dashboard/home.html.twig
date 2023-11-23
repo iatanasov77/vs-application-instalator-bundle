@@ -18,11 +18,17 @@
     </div>
     
     {% if app_environment == 'dev' %}
-        # Render all 'admin' widget groups
-        {{ vs_widget_render( 'admin' ) }}
-        
-        # Render selected widgets in 'admin' group
-        {{ vs_widget_render( 'admin', ['user_info'] ) }}
+        <fieldset class="border border-dark rounded p-3">
+            <legend class="w-auto float-none ps-2 pe-2">{{ 'vs_application.template.test_widgets' | trans( {},'VSApplicationBundle' ) }}</legend>
+            
+            <p class="lead">Nam pulvinar interdum turpis a mattis. Etiam augue leo, mollis a massa sagittis, egestas pretium risus. Aliquam auctor nibh mauris, at fringilla elit lobortis sodales. Praesent volutpat felis et placerat elementum. </p>
+            
+            # Render all 'admin' widget groups
+            {{ vs_widget_render( 'admin' ) }}
+            
+            # Render selected widgets in 'admin' group
+            {{ vs_widget_render( 'admin', ['user_info'] ) }}
+        </fieldset>
     {% endif %}
 
 {% endblock %}
