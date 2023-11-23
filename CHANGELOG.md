@@ -1,3 +1,17 @@
+1.10.139	|	Release date: **23.11.2023**
+============================================
+* New Features:
+  - Add a Payment Java Script.
+  - Create First Widget.
+  - Create Widget Model as Sylius Resource.
+  - Create Widget Event and EventListener .
+  - Create Twig Extension For Widgets Rendering.
+  - Improve Widgets Config Routing.
+  - Add some translations.
+  - Use Widgets For Profile Languages Menu.
+  - Use Widgets For Main Menu Applications Links.
+
+
 1.10.138	|	Release date: **18.11.2023**
 ============================================
 * New Features:
