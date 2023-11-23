@@ -14,7 +14,7 @@ class Item implements ItemInterface
     private string $description = '';
     private string $content     = '';
     private string $template    = '';
-    private string $params      = [];
+    private array $params       = [];
     
     /**
      * @var callable
