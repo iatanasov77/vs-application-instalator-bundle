@@ -3,7 +3,7 @@ vs_application_widget_ext_index:
     controller:  Vankosoft\ApplicationBundle\Controller\WidgetExtController::index
     
 vs_application_widget_ext_refresh:
-    path: /widget-ext/listing
+    path: /widget-ext/refresh
     controller:  Vankosoft\ApplicationBundle\Controller\WidgetExtController::refresh
 
 vs_application_widget_ext_status:
