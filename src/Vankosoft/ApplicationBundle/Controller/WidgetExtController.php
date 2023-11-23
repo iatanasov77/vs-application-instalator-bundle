@@ -70,9 +70,9 @@ class WidgetExtController extends AbstractController
             
             // Add or Remove Config Parameters
             if ( $request->get( 'remove' ) ) {
-                $widgetConfig->removeWidgetConfig( $widgetId, $widgets[$widgetId]->getConfigProcess( $request ) ?? [] );
+                $widgetConfig->removeWidgetConfig( $widgetId, $widgets[$widgetId]->getConfigProcess( $request ) ?? ['status' => 1] );
             } else {
-                $widgetConfig->addWidgetConfig( $widgetId, $widgets[$widgetId]->getConfigProcess( $request ) ?? [] );
+                $widgetConfig->addWidgetConfig( $widgetId, $widgets[$widgetId]->getConfigProcess( $request ) ?? ['status' => 1] );
             }
             
             // Save
