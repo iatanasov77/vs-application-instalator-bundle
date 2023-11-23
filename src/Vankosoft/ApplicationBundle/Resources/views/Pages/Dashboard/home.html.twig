@@ -16,4 +16,22 @@
             </div>
         </div>
     </div>
+    
+    {% if app_environment == 'dev' %}
+        <fieldset class="border border-dark rounded p-3">
+            <legend class="w-auto float-none ps-2 pe-2">{{ 'vs_application.template.test_widgets' | trans( {},'VSApplicationBundle' ) }}</legend>
+            
+            <p class="lead">
+                Widgets are inspired form <a href="https://github.com/cesurapp/pd-widget">https://github.com/cesurapp/pd-widget</a>
+            </p>
+            
+            # Render all 'admin' widget groups
+            {{ vs_widget_render( 'admin' ) }}
+            
+            # Render selected widgets in 'admin' group
+            {{ vs_widget_render( 'admin', ['user_info'] ) }}
+        </fieldset>
+    {% endif %}
+
 {% endblock %}
+

@@ -1,5 +1,4 @@
-{% set applications = applicationsRepo.findAll() %}
-{% if ( applications | length ) > 1 %}
+{% if widget.isActive and ( widget.params.applications | length ) > 1 %}
     <li class="nav-divider">{{ 'vs_application.menu.application_links' | trans( {},'VSApplicationBundle' ) }}</li>
     
     <li class="nav-item ">
@@ -12,7 +11,7 @@
         
         <div id="submenu-applications" class="collapse submenu" style="">
             <ul class="nav flex-column">
-                {% for oApplication in applications %}
+                {% for oApplication in widget.params.applications %}
                     {% if oApplication.code != 'admin-panel' %}
                         <li class="nav-item ">
                             <a class="nav-link main-menu-button" href="http://{{ oApplication.hostname }}" target="_blank">

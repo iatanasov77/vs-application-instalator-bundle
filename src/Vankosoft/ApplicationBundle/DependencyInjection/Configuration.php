@@ -63,6 +63,9 @@ use Vankosoft\ApplicationBundle\Model\TagsWhitelistTag;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistTagInterface;
 use Vankosoft\ApplicationBundle\Repository\TagsWhitelistTagsRepository;
 
+use Vankosoft\ApplicationBundle\Model\Widget;
+use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetInterface;
+
 /**
  * This is the class that validates and merges configuration from your app/config files
  *
@@ -314,6 +317,22 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode( 'model' )->defaultValue( TagsWhitelistTag::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'interface' )->defaultValue( TagsWhitelistTagInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( TagsWhitelistTagsRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        
+                        ->arrayNode( 'widget' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( Widget::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( WidgetInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
                                     ->end()
                                 ->end()
