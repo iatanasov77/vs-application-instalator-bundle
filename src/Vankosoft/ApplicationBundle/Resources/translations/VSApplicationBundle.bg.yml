@@ -183,6 +183,8 @@ vs_application:
         tags_whitelist_contexts_update_title: Редакция Тагове Контекст
         tags_whitelist_contexts_details: Тагове Контекст Детайли
         
+        reload_widgets: Презареждане Уиджети
+        
         contact_page:
             my_address: 'бул. "Ал. Стамболийски", Пловдив 4000'
             visit_us: Посетете Ни

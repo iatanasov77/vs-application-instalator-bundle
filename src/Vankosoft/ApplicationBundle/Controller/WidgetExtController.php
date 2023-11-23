@@ -45,11 +45,47 @@ class WidgetExtController extends AbstractController
         $this->widgetFactory    = $widgetFactory;
     }
     
-    public function index( Request $reques ): Response
+    public function index( Request $request ): Response
     {
         $widgets    = $this->widgetRepository->findAll();
         
         return $this->render( '@VSApplication/Pages/Widgets/index.html.twig', ['widgets' => $widgets] );
+    }
+    
+    /**
+     * Used to Load New Widgets into Database
+     * 
+     * @param Request $reques
+     * @return Response
+     */
+    public function refresh( Request $request ): Response
+    {
+        // Build Widget
+        $widgets = $this->widgets->getWidgets();
+        
+        foreach ( $widgets as $widgetId => $widgetVal ) {
+            // Get User Widgets
+            $widgetConfig = $this->widgetRepository->findOneBy( ['owner' => $this->getUser()] ) ??
+                            ( $this->widgetFactory->createNew() )->setOwner( $this->getUser() );
+            
+            // Add or Remove Config Parameters
+            if ( $request->get( 'remove' ) ) {
+                $widgetConfig->removeWidgetConfig( $widgetId, $widgets[$widgetId]->getConfigProcess( $request ) ?? [] );
+            } else {
+                $widgetConfig->addWidgetConfig( $widgetId, $widgets[$widgetId]->getConfigProcess( $request ) ?? [] );
+            }
+            
+            // Save
+            $em = $this->doctrine->getManager();
+            $em->persist( $widgetConfig );
+            $em->flush();
+            
+            // Flush Widget Cache
+            $this->cache->delete( $widgetId . $this->getUser()->getId() );
+        }
+        
+        // Response
+        return $this->redirect( $request->headers->get( 'referer', $this->generateUrl( $this->getParameter( 'vs_application.widgets.return_route' ) ) ) );
     }
     
     /**

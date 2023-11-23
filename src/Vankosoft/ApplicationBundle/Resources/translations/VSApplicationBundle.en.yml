@@ -183,6 +183,8 @@ vs_application:
         tags_whitelist_contexts_update_title: Update Tags Whitelist Context
         tags_whitelist_contexts_details: Tags Whitelist Context Details
         
+        reload_widgets: Reload Widgets
+        
         contact_page:
             my_address: 'bul. "Al. Stamboliiski", Plovdiv 4000'
             visit_us: Visit us
