@@ -7,7 +7,7 @@ use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
 /**
  * MANUAL: https://github.com/cesurapp/pd-widget
  */
-class LocalesWidget
+class LocalesMenuWidget
 {
     /** @var EntityRepository */
     private $localesRepository;
