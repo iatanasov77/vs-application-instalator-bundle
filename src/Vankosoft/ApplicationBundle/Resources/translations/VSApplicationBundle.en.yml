@@ -146,6 +146,7 @@ vs_application:
         items_index_row_code: Code
         items_index_row_title: Title
         items_index_row_name: Name
+        items_index_row_owner: Owner
         items_index_row_position: Position
         items_index_row_category: Category
         items_index_row_active: Active
@@ -184,6 +185,7 @@ vs_application:
         tags_whitelist_contexts_details: Tags Whitelist Context Details
         
         reload_widgets: Reload Widgets
+        no_one: No-One
         
         contact_page:
             my_address: 'bul. "Al. Stamboliiski", Plovdiv 4000'

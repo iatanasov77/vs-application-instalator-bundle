@@ -146,6 +146,7 @@ vs_application:
         items_index_row_code: Код
         items_index_row_title: Заглавие
         items_index_row_name: Име
+        items_index_row_owner: Притежател
         items_index_row_position: Позиция
         items_index_row_category: Категория
         items_index_row_active: Активен
@@ -184,6 +185,7 @@ vs_application:
         tags_whitelist_contexts_details: Тагове Контекст Детайли
         
         reload_widgets: Презареждане Уиджети
+        no_one: Никой
         
         contact_page:
             my_address: 'бул. "Ал. Стамболийски", Пловдив 4000'
