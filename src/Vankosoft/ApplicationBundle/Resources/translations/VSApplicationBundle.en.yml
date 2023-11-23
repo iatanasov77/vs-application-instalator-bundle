@@ -141,6 +141,7 @@ vs_application:
         taxonomy_update_list_taxons_title: 'Taxonomy Taxons'
         button_create_taxon: 'Create New Taxon'
         items_index_row_number: Number
+        items_index_row_id: ID
         items_index_row_slug: Slug
         items_index_row_code: Code
         items_index_row_title: Title

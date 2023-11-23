@@ -43,6 +43,7 @@ services:
         arguments:
             - '@cache.app'
             - '@doctrine'
+            - '@vs_application.widgets_container'
             - '@vs_application.repository.widget'
             - '@vs_application.factory.widget'
             

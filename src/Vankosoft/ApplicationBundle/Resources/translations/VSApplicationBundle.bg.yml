@@ -141,6 +141,7 @@ vs_application:
         taxonomy_update_list_taxons_title: 'Таксони на Таксономия'
         button_create_taxon: 'Добави Нов Таксон'
         items_index_row_number: Номер
+        items_index_row_id: ID
         items_index_row_slug: Слуг
         items_index_row_code: Код
         items_index_row_title: Заглавие

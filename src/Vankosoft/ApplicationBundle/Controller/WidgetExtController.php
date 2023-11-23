@@ -9,6 +9,7 @@ use Symfony\Contracts\Cache\CacheInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
+use Vankosoft\ApplicationBundle\Component\Widget\WidgetInterface;
 
 /**
  * CLONED FROM: \Pd\WidgetBundle\Controller\WidgetController
@@ -21,6 +22,9 @@ class WidgetExtController extends AbstractController
     /** @var ManagerRegistry */
     protected $doctrine;
     
+    /** @var WidgetInterface */
+    protected $widgets;
+    
     /** @var EntityRepository */
     protected $widgetRepository;
     
@@ -30,11 +34,13 @@ class WidgetExtController extends AbstractController
     public function __construct(
         CacheInterface $cache,
         ManagerRegistry $doctrine,
+        WidgetInterface $widgets,
         EntityRepository $widgetRepository,
         Factory $widgetFactory
     ) {
         $this->cache            = $cache;
         $this->doctrine         = $doctrine;
+        $this->widgets          = $widgets;
         $this->widgetRepository = $widgetRepository;
         $this->widgetFactory    = $widgetFactory;
     }
@@ -49,10 +55,10 @@ class WidgetExtController extends AbstractController
     /**
      * Change Widget Status.
      */
-    public function status( Request $request, WidgetInterface $widget, string $widgetId, bool $status = true ): RedirectResponse
+    public function status( Request $request, string $widgetId, bool $status = true ): RedirectResponse
     {
         // Build Widget
-        $widgets = $widget->getWidgets();
+        $widgets = $this->widgets->getWidgets();
         
         if ( isset( $widgets[$widgetId] ) ) {
             // Get User Widgets
@@ -63,7 +69,7 @@ class WidgetExtController extends AbstractController
             $widgetConfig->addWidgetConfig( $widgetId, ['status' => $status] );
             
             // Save
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->doctrine->getManager();
             $em->persist( $widgetConfig );
             $em->flush();
         }
@@ -75,10 +81,10 @@ class WidgetExtController extends AbstractController
     /**
      * Change Widget Configuration.
      */
-    public function configs( Request $request, WidgetInterface $widget, string $widgetId ): RedirectResponse
+    public function configs( Request $request, string $widgetId ): RedirectResponse
     {
         // Build Widget
-        $widgets = $widget->getWidgets();
+        $widgets = $this->widgets->getWidgets();
         
         if ( isset( $widgets[$widgetId] ) ) {
             // Get User Widgets
@@ -93,7 +99,7 @@ class WidgetExtController extends AbstractController
             }
             
             // Save
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->doctrine->getManager();
             $em->persist( $widgetConfig );
             $em->flush();
             
@@ -108,10 +114,10 @@ class WidgetExtController extends AbstractController
     /**
      * Change Widget Order.
      */
-    public function order( WidgetInterface $widget, string $widgetId, int $order ): JsonResponse
+    public function order( Request $request, string $widgetId, int $order ): JsonResponse
     {
         // Build Widget
-        $widgets = $widget->getWidgets();
+        $widgets = $this->widgets->getWidgets();
         
         if ( isset( $widgets[$widgetId] ) ) {
             // Get User Widgets
@@ -122,7 +128,7 @@ class WidgetExtController extends AbstractController
             $widgetConfig->addWidgetConfig( $widgetId, ['order' => $order] );
             
             // Save
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->doctrine->getManager();
             $em->persist( $widgetConfig );
             $em->flush();
         }
@@ -131,10 +137,5 @@ class WidgetExtController extends AbstractController
         return $this->json([
             'result' => 'success',
         ]);
-    }
-    
-    protected function getDoctrine()
-    {
-        return $this->doctrine;
     }
 }
