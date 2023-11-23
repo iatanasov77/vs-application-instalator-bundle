@@ -7,7 +7,7 @@
     	<!-- sidebar menu start-->
         <ul class="navbar-nav flex-column">
             
-            {% include '@VSApplication/Menu/mainApplications.html.twig' %}
+            {{ vs_widget_render( 'admin_main_menu', ['main_menu_applications'] ) }}
             
     		{{ knp_menu_render('mainSystem', {'template': '@VSApplication/Menu/mainSystem.html.twig'}) }}
     		
