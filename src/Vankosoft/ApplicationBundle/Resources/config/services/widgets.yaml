@@ -24,6 +24,8 @@ services:
             - '@event_dispatcher'
             - '@cache.app'
             - '@security.token_storage'
+            - '@vs_application.repository.widget'
+            - '@vs_application.factory.widget'
             
     vs_application.twig_widget_renderer:
         class: Vankosoft\ApplicationBundle\Twig\Renderer\WidgetRenderer

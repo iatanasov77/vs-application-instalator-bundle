@@ -5,6 +5,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Resource\Factory\Factory;
 
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\ItemInterface;
 use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
@@ -24,6 +26,12 @@ class Widget implements WidgetInterface
     /** @var TokenStorageInterface */
     private $token;
     
+    /** @var EntityRepository */
+    private $widgetRepository;
+    
+    /** @var Factory */
+    private $widgetFactory;
+    
     /**
      * Widget Storage.
      *
@@ -38,12 +46,16 @@ class Widget implements WidgetInterface
         AuthorizationCheckerInterface $security,
         EventDispatcherInterface $eventDispatcher,
         CacheItemPoolInterface $cache,
-        TokenStorageInterface $token
+        TokenStorageInterface $token,
+        EntityRepository $widgetRepository,
+        Factory $widgetFactory
     ) {
         $this->security         = $security;
         $this->eventDispatcher  = $eventDispatcher;
         $this->cache            = $cache;
         $this->token            = $token;
+        $this->widgetRepository = $widgetRepository;
+        $this->widgetFactory    = $widgetFactory;
     }
 
     /**
