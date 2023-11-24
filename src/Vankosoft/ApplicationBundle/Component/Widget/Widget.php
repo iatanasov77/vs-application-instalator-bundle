@@ -8,6 +8,7 @@ use Psr\Cache\InvalidArgumentException;
 
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\ItemInterface;
 use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
+use Vankosoft\UsersBundle\Model\UserInterface;
 
 class Widget implements WidgetInterface
 {
@@ -45,6 +46,36 @@ class Widget implements WidgetInterface
         $this->token            = $token;
     }
 
+    /**
+     * Used to Load Widgets into Database
+     */
+    public function loadWidgets( ?UserInterface $user )
+    {
+        // Build Widgets
+        $widgets = $this->getWidgets();
+        
+        foreach ( $widgets as $widgetId => $widgetVal ) {
+            // Get User Widgets
+            $widgetConfig = $this->widgetRepository->findOneBy( ['owner' => $user] ) ??
+                            ( $this->widgetFactory->createNew() )->setOwner( $user );
+            
+            // Add Config Parameters
+            $widgetConfig->addWidgetConfig( $widgetId, ['status' => 1] );
+            
+            // Save
+            $em = $this->doctrine->getManager();
+            $em->persist( $widgetConfig );
+            $em->flush();
+            
+            // Flush Widget Cache
+            if ( $user ) {
+                $this->cache->delete( $widgetId . $user->getId() );
+            } else {
+                $this->cache->delete( $widgetId );
+            }
+        }
+    }
+    
     /**
      * Get Widgets.
      *
