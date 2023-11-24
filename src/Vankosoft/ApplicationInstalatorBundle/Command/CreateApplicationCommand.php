@@ -94,7 +94,7 @@ EOT
         if ( $theme ) {
             $outputStyle->writeln( '<info>Application Theme is setted up.</info>' );
         } else {
-            $outputStyle->writeln( '<info>No Application Theme is NOT setted up. Set Theme Later.</info>' );
+            $outputStyle->writeln( '<info>Application Theme is NOT setted up. Set Theme Later.</info>' );
         }
         
         $outputStyle->newLine();
