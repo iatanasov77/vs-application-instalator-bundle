@@ -60,29 +60,7 @@ class WidgetExtController extends AbstractController
      */
     public function refresh( Request $request ): Response
     {
-        // Build Widget
-        $widgets = $this->widgets->getWidgets();
-        
-        foreach ( $widgets as $widgetId => $widgetVal ) {
-            // Get User Widgets
-            $widgetConfig = $this->widgetRepository->findOneBy( ['owner' => $this->getUser()] ) ??
-                            ( $this->widgetFactory->createNew() )->setOwner( $this->getUser() );
-            
-            // Add or Remove Config Parameters
-            if ( $request->get( 'remove' ) ) {
-                $widgetConfig->removeWidgetConfig( $widgetId, $widgets[$widgetId]->getConfigProcess( $request ) ?? ['status' => 1] );
-            } else {
-                $widgetConfig->addWidgetConfig( $widgetId, $widgets[$widgetId]->getConfigProcess( $request ) ?? ['status' => 1] );
-            }
-            
-            // Save
-            $em = $this->doctrine->getManager();
-            $em->persist( $widgetConfig );
-            $em->flush();
-            
-            // Flush Widget Cache
-            $this->cache->delete( $widgetId . $this->getUser()->getId() );
-        }
+        $this->widgets->loadWidgets( $this->getUser() );
         
         // Response
         return $this->redirect( $request->headers->get( 'referer', $this->generateUrl( $this->getParameter( 'vs_application.widgets.return_route' ) ) ) );

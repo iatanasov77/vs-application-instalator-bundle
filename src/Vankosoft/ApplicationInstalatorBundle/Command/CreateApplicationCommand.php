@@ -93,6 +93,8 @@ EOT
         $theme  = $this->setupApplicationTheme( $input, $output );
         if ( $theme ) {
             $outputStyle->writeln( '<info>Application Theme is setted up.</info>' );
+        } else {
+            $outputStyle->writeln( '<info>Application Theme is NOT setted up. Set Theme Later.</info>' );
         }
         
         $outputStyle->newLine();
@@ -224,26 +226,25 @@ EOT
         $entityManager          = $this->get( 'doctrine' )->getManager();
         $settingsRepository     = $this->get( 'vs_application.repository.settings' );
         
-        $applicationThemeName   = $this->getHelper( 'question' )->ask(
-                                        $input,
-                                        $output,
-                                        $this->createApplicationThemeQuestion( $input->getOption( 'theme' ) )
-                                    );
-        
-        $theme                  = $this->get( 'vs_app.theme_repository' )->findOneByName( $applicationThemeName );
-        if ( $theme ) {
-            $settings   = $settingsRepository->getSettings( $this->application );
-            if ( ! $settings ) {
-                $settings   = $this->get( 'vs_application.factory.settings' )->createNew();
-            }
-            
-            $settings->setTheme( $applicationThemeName );
-            $settings->setApplication( $this->application );
-            $settings->setMaintenanceMode( 0 );
-            
-            $entityManager->persist( $settings );
-            $entityManager->flush();
+        $settings   = $settingsRepository->getSettings( $this->application );
+        if ( ! $settings ) {
+            $settings   = $this->get( 'vs_application.factory.settings' )->createNew();
         }
+        
+        $settings->setApplication( $this->application );
+        $settings->setMaintenanceMode( 0 );
+        
+        $applicationThemeName   = $this->createApplicationThemeQuestion( $input, $output );
+        $theme                  = null;
+        if ( $applicationThemeName ) {
+            $theme                  = $this->get( 'vs_app.theme_repository' )->findOneByName( $applicationThemeName );
+            if ( $theme ) {
+                $settings->setTheme( $applicationThemeName );
+            }
+        }
+        
+        $entityManager->persist( $settings );
+        $entityManager->flush();
         
         return $theme;
     }
@@ -294,27 +295,37 @@ EOT
         ;
     }
     
-    private function createApplicationThemeQuestion( $defaultTheme ): ChoiceQuestion
+    private function createApplicationThemeQuestion( InputInterface $input, OutputInterface $output ): ?string
     {
-        $availableThemes    = array_keys( $this->get( 'vs_app.theme_repository' )->findAll() );
-        $default            = null;
-        if ( $defaultTheme ) {
-            $questionMessage    = sprintf( 'Please select an application theme to use (defaults to %s): ', $defaultTheme );
-            $default            = $defaultTheme;
-        } elseif ( ! empty( $availableThemes ) ) {
-            $questionMessage    = sprintf( 'Please select an application theme to use (defaults to %s): ', $availableThemes[0] );
-            $default            = $availableThemes[0];
-        } else {
-            $questionMessage    = 'Please select an appliocation theme to use: ';
+        $availableThemes        = array_keys( $this->get( 'vs_app.theme_repository' )->findAll() );
+        $applicationThemeName   = null;
+        
+        if ( ! empty( $availableThemes ) ) {
+            $defaultTheme       = $input->getOption( 'theme' );
+            $default            = null;
+            if ( $defaultTheme ) {
+                $questionMessage    = sprintf( 'Please select an application theme to use (defaults to %s): ', $defaultTheme );
+                $default            = $defaultTheme;
+            } else {
+                $questionMessage    = sprintf( 'Please select an application theme to use (defaults to %s): ', $availableThemes[0] );
+                $default            = $availableThemes[0];
+            }
+            
+            $choiceQuestion = new ChoiceQuestion(
+                $questionMessage,
+                // choices can also be PHP objects that implement __toString() method
+                $availableThemes,
+                $default
+            );
+            $choiceQuestion->setErrorMessage( 'Theme %s is invalid.' );
+            
+            $applicationThemeName   = $this->getHelper( 'question' )->ask(
+                $input,
+                $output,
+                $choiceQuestion
+            );
         }
         
-        return ( new ChoiceQuestion(
-                    $questionMessage,
-                    // choices can also be PHP objects that implement __toString() method
-                    $availableThemes,
-                    $default
-                )
-            )->setErrorMessage( 'Theme %s is invalid.' )
-        ;
+        return $applicationThemeName;
     }
 }

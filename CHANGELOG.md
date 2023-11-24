@@ -1,3 +1,12 @@
+1.10.140	|	Release date: **24.11.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix a Payment Page Java Script.
+  - Fix and Improve Create Application Command
+  - Improve Widgets Container Service.
+  - Load Widgets at Project Installation.
+
+
 1.10.139	|	Release date: **23.11.2023**
 ============================================
 * New Features:

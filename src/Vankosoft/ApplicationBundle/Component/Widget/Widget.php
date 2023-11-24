@@ -5,9 +5,13 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
+use Doctrine\Persistence\ManagerRegistry;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Resource\Factory\Factory;
 
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\ItemInterface;
 use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
+use Vankosoft\UsersBundle\Model\UserInterface;
 
 class Widget implements WidgetInterface
 {
@@ -23,6 +27,15 @@ class Widget implements WidgetInterface
     /** @var TokenStorageInterface */
     private $token;
     
+    /** @var ManagerRegistry */
+    private $doctrine;
+    
+    /** @var EntityRepository */
+    private $widgetRepository;
+    
+    /** @var Factory */
+    private $widgetFactory;
+    
     /**
      * Widget Storage.
      *
@@ -37,14 +50,50 @@ class Widget implements WidgetInterface
         AuthorizationCheckerInterface $security,
         EventDispatcherInterface $eventDispatcher,
         CacheItemPoolInterface $cache,
-        TokenStorageInterface $token
+        TokenStorageInterface $token,
+        ManagerRegistry $doctrine,
+        EntityRepository $widgetRepository,
+        Factory $widgetFactory
     ) {
         $this->security         = $security;
         $this->eventDispatcher  = $eventDispatcher;
         $this->cache            = $cache;
         $this->token            = $token;
+        $this->doctrine         = $doctrine;
+        $this->widgetRepository = $widgetRepository;
+        $this->widgetFactory    = $widgetFactory;
     }
 
+    /**
+     * Used to Load Widgets into Database
+     */
+    public function loadWidgets( ?UserInterface $user )
+    {
+        // Build Widgets
+        $widgets = $this->getWidgets();
+        
+        foreach ( $widgets as $widgetId => $widgetVal ) {
+            // Get User Widgets
+            $widgetConfig = $this->widgetRepository->findOneBy( ['owner' => $user] ) ??
+                            ( $this->widgetFactory->createNew() )->setOwner( $user );
+            
+            // Add Config Parameters
+            $widgetConfig->addWidgetConfig( $widgetId, ['status' => 1] );
+            
+            // Save
+            $em = $this->doctrine->getManager();
+            $em->persist( $widgetConfig );
+            $em->flush();
+            
+            // Flush Widget Cache
+            if ( $user ) {
+                $this->cache->delete( $widgetId . $user->getId() );
+            } else {
+                $this->cache->delete( $widgetId );
+            }
+        }
+    }
+    
     /**
      * Get Widgets.
      *
