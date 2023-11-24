@@ -5,6 +5,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
+use Doctrine\Persistence\ManagerRegistry;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
 
@@ -25,6 +26,9 @@ class Widget implements WidgetInterface
     
     /** @var TokenStorageInterface */
     private $token;
+    
+    /** @var ManagerRegistry */
+    private $doctrine;
     
     /** @var EntityRepository */
     private $widgetRepository;
@@ -47,6 +51,7 @@ class Widget implements WidgetInterface
         EventDispatcherInterface $eventDispatcher,
         CacheItemPoolInterface $cache,
         TokenStorageInterface $token,
+        ManagerRegistry $doctrine,
         EntityRepository $widgetRepository,
         Factory $widgetFactory
     ) {
@@ -54,6 +59,7 @@ class Widget implements WidgetInterface
         $this->eventDispatcher  = $eventDispatcher;
         $this->cache            = $cache;
         $this->token            = $token;
+        $this->doctrine         = $doctrine;
         $this->widgetRepository = $widgetRepository;
         $this->widgetFactory    = $widgetFactory;
     }

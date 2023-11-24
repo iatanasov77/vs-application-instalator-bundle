@@ -24,6 +24,7 @@ services:
             - '@event_dispatcher'
             - '@cache.app'
             - '@security.token_storage'
+            - '@doctrine'
             - '@vs_application.repository.widget'
             - '@vs_application.factory.widget'
             
