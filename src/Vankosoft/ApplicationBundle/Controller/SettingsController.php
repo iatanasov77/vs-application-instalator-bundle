@@ -31,8 +31,10 @@ class SettingsController extends ResourceController
             if ( $app->getSettings()->isEmpty() ) {
                 $appThemes[$app->getId()]   = null;
             } else {
-                $appThemes[$app->getId()]   = $this->get( 'vs_app.theme_repository' )
-                                                    ->findOneByName(  $app->getSettings()[0]->getTheme() );
+                $themeName  = $app->getSettings()[0]->getTheme();
+                $appThemes[$app->getId()]   = $themeName ?
+                                                $this->get( 'vs_app.theme_repository' )->findOneByName( $themeName ) :
+                                                null;
             }
         }
         
