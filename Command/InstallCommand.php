@@ -88,6 +88,7 @@ EOT
         $errored        = false;
         try {
             $this->executeCommands( $input, $output );
+            $this->loadWidgets();
         } catch ( RuntimeException $exception ) {
             $errored = true;
         }
@@ -146,6 +147,15 @@ EOT
             
             $this->commandExecutor->runCommand( 'vankosoft:install:' . $command['command'], $parameters, $output );
         }
+    }
+    
+    private function loadWidgets(): void
+    {
+        $users  = $this->get( 'vs_users.repository.users' )->findAll();
+        foreach ( $users as $user ) {
+            $this->get( 'vs_application.widgets_container' )->loadWidgets( $user );
+        }
+        $this->get( 'vs_application.widgets_container' )->loadWidgets( null );
     }
     
     private function getProperFinalMessage( bool $errored ): string
