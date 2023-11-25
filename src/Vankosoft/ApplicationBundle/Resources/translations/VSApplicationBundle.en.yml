@@ -92,6 +92,10 @@ vs_application:
         
         login:
             sub_title: Please enter your username and password.
+            username: Username
+            username_placeholder: Enter username
+            password: Password
+            password_placeholder: Enter password
             remember_me: 'Remember Me'
             button_login: 'Login'
             button_register: 'Create An Account'
