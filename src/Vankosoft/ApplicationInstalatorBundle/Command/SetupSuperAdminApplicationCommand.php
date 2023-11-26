@@ -108,7 +108,8 @@ EOT
         $parameters     = [
             '--application' => 'Super Admin',
             '--roles'       => ['ROLE_SUPER_ADMIN'],
-            '--locale'      => $localeCode
+            '--locale'      => $localeCode,
+            '--designation' => 'Lead Designer / Developer',
         ];
         $this->commandExecutor->runCommand( 'vankosoft:application:create-user', $parameters, $output );
         
