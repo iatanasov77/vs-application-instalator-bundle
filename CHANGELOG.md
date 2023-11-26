@@ -1,3 +1,10 @@
+1.10.142	|	Release date: **26.11.2023**
+============================================
+* New Features and Improvements:
+  - Improve UserInfo Model.
+  - Add a Doctrine Migration.
+
+
 1.10.141	|	Release date: **26.11.2023**
 ============================================
 * Bug-Fixes and Improvements:
