@@ -73,7 +73,8 @@ EOT
         $parameters     = [
             '--application' => 'Applications Admin',
             '--roles'       => ['ROLE_APPLICATION_ADMIN'],
-            '--locale'      => $localeCode
+            '--locale'      => $localeCode,
+            '--designation' => 'Project Owner',
         ];
         $this->commandExecutor->runCommand( 'vankosoft:application:create-user', $parameters, $output );
         

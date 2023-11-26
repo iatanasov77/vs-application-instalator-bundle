@@ -70,6 +70,13 @@ EOT
                 'Prefered User Locale.',
                 'en_US'
             )
+            ->addOption(
+                'designation',
+                'd',
+                InputOption::VALUE_REQUIRED,
+                'User Designation.',
+                'Project User'
+            )
         ;
     }
     
@@ -78,6 +85,7 @@ EOT
         $application    = $input->getOption( 'application' );
         $roles          = $input->getOption( 'roles' );
         $locale         = $input->getOption( 'locale' );
+        $designation    = $input->getOption( 'designation' );
         $userManager    = $this->get( 'vs_users.manager.user' );
         
         // Setup UserInfo Object
@@ -90,6 +98,7 @@ EOT
             $user->getInfo()->setTitle( $userInfoTitles[UserInfo::TITLE_MISS] );
             $user->getInfo()->setFirstName( $userNames[0] );
             $user->getInfo()->setLastName( end( $userNames ) );
+            $user->getInfo()->setDesignation( $designation );
         } catch ( \InvalidArgumentException $exception ) {
             return Command::FAILURE;
         }
