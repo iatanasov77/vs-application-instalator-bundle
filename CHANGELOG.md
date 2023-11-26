@@ -1,3 +1,12 @@
+1.10.141	|	Release date: **26.11.2023**
+============================================
+* Bug-Fixes and Improvements:
+  - Update Application Installator Configs.
+  - Fix Application Settings Controller.
+  - Add Some Translations.
+  - Fix Profile Edit Form Template.
+
+
 1.10.140	|	Release date: **24.11.2023**
 ============================================
 * Bug-Fixes and Improvements:
