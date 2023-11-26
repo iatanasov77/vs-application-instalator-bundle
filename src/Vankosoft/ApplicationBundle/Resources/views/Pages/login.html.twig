@@ -24,10 +24,16 @@
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
             
             <div class="form-group">
-                <input type="text" class="form-control form-control-lg" placeholder="Username" autofocus id="username" name="_username" value="{{ last_username }}" />
+                <input type="text" class="form-control form-control-lg"
+                    placeholder="{{ 'vs_application.form.login.username_placeholder' | trans( {},'VSApplicationBundle' ) }}"
+                    autofocus id="username" name="_username" value="{{ last_username }}"
+                />
             </div>
             <div class="form-group">
-                <input type="password" class="form-control form-control-lg" placeholder="Password" id="password" name="_password" />
+                <input type="password" class="form-control form-control-lg"
+                    placeholder="{{ 'vs_application.form.login.password_placeholder' | trans( {},'VSApplicationBundle' ) }}"
+                    id="password" name="_password"
+                />
             </div>
             <div class="form-group">
             	<label class="custom-control custom-checkbox">

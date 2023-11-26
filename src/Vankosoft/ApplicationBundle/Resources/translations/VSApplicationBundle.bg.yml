@@ -92,6 +92,10 @@ vs_application:
         
         login:
             sub_title: Моля, въведете вашето потребителско име и парола.
+            username: Потребител
+            username_placeholder: Въведете потребител
+            password: Парола
+            password_placeholder: Въведете парола
             remember_me: 'Запомни ме'
             button_login: 'Влез'
             button_register: 'Създай Акаунт'
