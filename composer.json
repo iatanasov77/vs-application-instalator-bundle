@@ -51,7 +51,8 @@
         "pagerfanta\/doctrine-orm-adapter": "^3.6",
         "pagerfanta\/twig": "^3.6",
         "oneup\/uploader-bundle": "^4.0",
-        "oneup\/flysystem-bundle": "^4.6"
+        "oneup\/flysystem-bundle": "^4.6",
+        "symfony/ux-toggle-password": "^2.13"
     },
     "replace": {
         "vankosoft\/application-bundle": "self.version",
