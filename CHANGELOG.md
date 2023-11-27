@@ -1,3 +1,15 @@
+1.10.143	|	Release date: **27.11.2023**
+============================================
+* New Features and Improvements:
+  - Update Profile Forms.
+  - Improve Profile Controller .
+  - Create a Change Avatar Form.
+  - Create Some Profile Templates.
+  - Add Some Translations.
+  - Improve Forgot Password Form..
+  - Improve Profile Edit Page.
+
+
 1.10.142	|	Release date: **26.11.2023**
 ============================================
 * New Features and Improvements:
