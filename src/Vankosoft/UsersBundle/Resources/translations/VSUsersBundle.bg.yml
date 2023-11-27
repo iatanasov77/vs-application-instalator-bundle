@@ -8,24 +8,34 @@ vs_users:
         dont_have_accont: Нямате Акаунт?
         
         profile:
+            personal_details: Лични Данни
+            designation: Длъжност
             picture_lable: 'Снимка на Профила'
             picture_info: 'Позволени Типове: jpeg, png'
+            change_avatar: Смени Аватар
             change_password:
                 old_password: 'Стара Парола'
+                old_password_placeholder: Въведи текуща парола
                 new_password: 'Нова Парола'
+                new_password_placeholder: Въведи нова парола
                 new_password_repeat: 'Потвърди Нова Парола'
+                btn_change_password: Смени Парола
+                
         user:
             prefered_locale: 'Предпочитан Език'
             prefered_locale_placeholder: '-- Избери Предпочитан Език --'
             roles: 'Потребителски Роли'
             roles_placeholder: '-- Избери Потребителски Роли --'
             email: 'Емейл'
+            email_placeholder: 'Въведи емейл'
             username: 'Потребителско Име'
             password: 'Парола'
             password_repeat: 'Потвърди Парола'
             title: Титла
             firstName: 'Име'
+            firstName_placeholder: Въведи име
             lastName: 'Фамилия'
+            lastName_placeholder: Въведи фамилия
             enabled: 'Разрешен'
             verified: 'Проверен'
             applications_allowed: Разрешени Приложения
@@ -60,6 +70,11 @@ vs_users:
             parent_role: Родителска Роля
             parent_role_placeholder: '-- Избери Родителска Роля --'
             parent_role_no_parent: Няма Родител
+            
+        forgot_password:
+            email_label: Вашият Емейл
+            email_placeholder: Въведете Вашият Емейл
+            submit_button: Изпратете линк за нулиране
             
     template:
         profile_show_title: 'Моят Профил'
@@ -127,3 +142,13 @@ vs_users:
         
         profile_notifications: 'Известия'
         profile_notification_name: 'Известие'
+        profile_overview: Преглед
+        profile_activities: Действия
+        profile_edit_profile: Редактиране Профил
+        profile_about: Информация
+        
+        reset_password_title: 'Забравена Парола?'
+        reset_password_subtitle: Забравена Парола в
+        reset_password_description: Въведете своя имейл и ще ви бъдат изпратени инструкции!
+        reset_password_i_remember: Чакай, помня паролата си...
+        reset_password_click_here: Кликни тук

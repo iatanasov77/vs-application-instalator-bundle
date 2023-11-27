@@ -8,24 +8,34 @@ vs_users:
         dont_have_accont: Don't have an account?
         
         profile:
+            personal_details: Personal Details
+            designation: Designation
             picture_lable: 'Profile picture'
             picture_info: 'Allowed Types: jpeg, png'
+            change_avatar: Change Avatar
             change_password:
                 old_password: 'Old Password'
+                old_password_placeholder: Enter current password
                 new_password: 'New Password'
+                new_password_placeholder: Enter new password
                 new_password_repeat: 'Confirm New Password'
+                btn_change_password: Change Password
+                
         user:
             prefered_locale: 'Prefered Locale'
             prefered_locale_placeholder: '-- Select Prefered Locale --'
             roles: 'User Roles'
             roles_placeholder: '-- Select User Roles --'
             email: 'E-mail'
+            email_placeholder: 'Enter your email'
             username: 'Username'
             password: 'Password'
             password_repeat: 'Confirm Password'
             title: Title
             firstName: 'First Name'
+            firstName_placeholder: Enter your firstname
             lastName: 'Last Name'
+            lastName_placeholder: Enter your lastname
             enabled: 'Enabled'
             verified: 'Verified'
             applications_allowed: Allowed Applications
@@ -60,6 +70,11 @@ vs_users:
             parent_role: Parent Role
             parent_role_placeholder: '-- Select Parent Role --'
             parent_role_no_parent: No Parent
+            
+        forgot_password:
+            email_label: Your Email
+            email_placeholder: Enter Your Email
+            submit_button: Send Reset Link
     
     template:
         profile_show_title: 'My Profile'
@@ -127,3 +142,13 @@ vs_users:
         
         profile_notifications: 'Notifications'
         profile_notification_name: 'Notification'
+        profile_overview: Overview
+        profile_activities: Activities
+        profile_edit_profile: Edit Profile
+        profile_about: About
+        
+        reset_password_title: 'Forgot Password?'
+        reset_password_subtitle: Reset password with
+        reset_password_description: Enter your email and instructions will be sent to you!
+        reset_password_i_remember: Wait, I remember my password...
+        reset_password_click_here: Click here
