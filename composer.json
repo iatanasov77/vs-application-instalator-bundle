@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.10.143",
+    "version": "v1.10.144",
     "description": "VankoSoft Symfony Application",
     "keywords": [
         "symfony",
@@ -52,7 +52,7 @@
         "pagerfanta\/twig": "^3.6",
         "oneup\/uploader-bundle": "^4.0",
         "oneup\/flysystem-bundle": "^4.6",
-        "symfony/ux-toggle-password": "^2.13"
+        "symfony\/ux-toggle-password": "^2.13"
     },
     "replace": {
         "vankosoft\/application-bundle": "self.version",
