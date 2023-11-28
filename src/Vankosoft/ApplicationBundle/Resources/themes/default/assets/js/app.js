@@ -8,3 +8,4 @@ require( 'bootstrap' ); // bootstrap should be before jquery-ui
 require( '../vendor/slimscroll/jquery.slimscroll.js' );
 require( './main.js' );
 require( './menu.js' );
+require( './authentication.js' );

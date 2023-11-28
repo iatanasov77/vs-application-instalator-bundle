@@ -1,3 +1,13 @@
+1.10.144	|	Release date: **28.11.2023**
+============================================
+* New Features and Improvements:
+  - Use Symfony UX TogglePassword for Password Fields.
+  - Add rmixicons to global css.
+  - Fix Styling of Password Addon Icon on Login Page.
+  - Improve Login Form Template.
+  - Add to Application Installator Configs.
+
+
 1.10.143	|	Release date: **27.11.2023**
 ============================================
 * New Features and Improvements:
