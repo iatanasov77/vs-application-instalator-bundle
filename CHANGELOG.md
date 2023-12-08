@@ -1,3 +1,12 @@
+1.10.145	|	Release date: **08.12.2023**
+============================================
+* New Features and Improvements:
+  - Update Application Extended Installator Configs.
+  - Add VsSpinner Js
+* Bug-Fixes:
+  - Fix Profile Template.
+
+
 1.10.144	|	Release date: **28.11.2023**
 ============================================
 * New Features and Improvements:
