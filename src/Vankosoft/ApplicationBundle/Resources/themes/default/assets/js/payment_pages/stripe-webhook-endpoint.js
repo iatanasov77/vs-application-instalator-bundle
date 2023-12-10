@@ -5,11 +5,11 @@ import { EasyuiCombobox } from 'jquery-easyui-extensions/EasyuiCombobox.js';
 
 $( function ()
 {
-    let selectedEvents  = JSON.parse( $( '#webhook_endpoint_form_enabled_events').val() );
+    //let selectedEvents  = JSON.parse( $( '#webhook_endpoint_form_selectedEvents').val() );
     EasyuiCombobox( $( '#webhook_endpoint_form_enabled_events' ), {
-        required: false,
+        required: true,
         multiple: true,
         checkboxId: "webhook_endpoint_events",
-        values: selectedEvents
+        values: [] // selectedEvents
     });
 });
