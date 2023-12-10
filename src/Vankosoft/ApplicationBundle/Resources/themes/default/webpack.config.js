@@ -101,6 +101,7 @@ Encore
     .addEntry( 'js/orders', assetsPath + '/js/payment_pages/orders.js' )
     .addEntry( 'js/pricing-plan-subscriptions', assetsPath + '/js/payment_pages/pricing-plan-subscriptions.js' )
     .addEntry( 'js/pricing-plan-subscription-payments', assetsPath + '/js/payment_pages/pricing-plan-subscription-payments.js' )
+    .addEntry( 'js/stripe-webhook-endpoint', assetsPath + '/js/payment_pages/stripe-webhook-endpoint.js' )
     
     //////////////////////////////////////////////////////////////////
     // Subscription Pages
