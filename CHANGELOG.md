@@ -1,3 +1,9 @@
+1.10.146	|	Release date: **10.12.2023**
+============================================
+* New Features:
+  - Add A Payment Page JS Script.
+
+
 1.10.145	|	Release date: **08.12.2023**
 ============================================
 * New Features and Improvements:
