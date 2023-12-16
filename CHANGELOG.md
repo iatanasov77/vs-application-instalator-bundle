@@ -1,3 +1,10 @@
+1.10.148	|	Release date: **16.12.2023**
+============================================
+* New Features and Improvements:
+  - Improve AbstractCrudController with a Helper Method to Get All Form Errors..
+  - AbstractCrudController Check Form is Valid On Submit.
+
+
 1.10.147	|	Release date: **10.12.2023**
 ============================================
 * Bug-Fixes:
