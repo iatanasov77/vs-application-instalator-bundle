@@ -117,7 +117,7 @@ class AbstractCrudController extends ResourceController
         $entity         = $id ? $er->findOneBy( ['id' => $id] ) : $this->getFactory()->createNew();
         $form           = $this->resourceFormFactory->create( $configuration, $entity );
         
-        if ( in_array( $request->getMethod(), ['POST', 'PUT', 'PATCH'], true ) && $form->handleRequest( $request) ) { // ->isValid()
+        if ( in_array( $request->getMethod(), ['POST', 'PUT', 'PATCH'], true ) && $form->handleRequest( $request )->isValid() ) { // ->isValid()
             $em     = $this->getDoctrine()->getManager();
             $entity = $form->getData();
             
