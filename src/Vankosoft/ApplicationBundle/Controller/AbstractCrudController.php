@@ -3,6 +3,7 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Form\FormInterface;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
@@ -158,11 +159,17 @@ class AbstractCrudController extends ResourceController
             }
         }
         
-        if ($configuration->isHtmlRequest()) {
+        if ( $configuration->isHtmlRequest() ) {
+            $formErrors = $this->getErrorsFromForm( $form );
+            if ( ! empty( $formErrors ) ) {
+                //echo '<pre>'; var_dump( $formErrors ); die;
+            }
+            
             return $this->render( $configuration->getTemplate( $resourceAction . '.html' ), array_merge( [
-                'metadata'  => $this->metadata,
-                'item'      => $entity,
-                'form'      => $form->createView(),
+                'metadata'      => $this->metadata,
+                'item'          => $entity,
+                'form'          => $form->createView(),
+                'formErrors'    => $formErrors,
             ], $this->customData( $request, $entity ) ) );
         }
         
@@ -249,5 +256,28 @@ class AbstractCrudController extends ResourceController
     protected function getFactory()
     {
         return $this->get( $this->classInfo['bundle'] . '.factory.' . $this->classInfo['controller'] );
+    }
+    
+    protected function getErrorsFromForm( FormInterface $form, bool $child = false ): array
+    {
+        $errors = [];
+        
+        foreach ( $form->getErrors() as $error ) {
+            if ( $child ) {
+                $errors[] = $error->getMessage();
+            } else {
+                $errors[$error->getOrigin()->getName()][] = $error->getMessage();
+            }
+        }
+        
+        foreach ( $form->all() as $childForm ) {
+            if ( $childForm instanceof FormInterface ) {
+                if ( $childErrors = $this->getErrorsFromForm( $childForm, true ) ) {
+                    $errors[$childForm->getName()] = $childErrors;
+                }
+            }
+        }
+        
+        return $errors;
     }
 }
