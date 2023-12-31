@@ -67,8 +67,11 @@ class AbstractCrudController extends ResourceController
         
         $this->isGrantedOr403( $configuration, ResourceActions::INDEX );
         $this->resources    = $this->resourcesCollectionProvider->get( $configuration, $this->repository );
+        
+        $metadataParameters = $this->metadata->getParameters();
         if (
-            $this->metadata->getParameters()['classes']['interface'] == 'Vankosoft\ApplicationBundle\Model\Interfaces\TaxonRelationInterface'
+            isset( $metadataParameters['classes']['interface'] ) &&
+            $metadataParameters['classes']['interface'] == 'Vankosoft\ApplicationBundle\Model\Interfaces\TaxonRelationInterface'
         ) {
             foreach ( $this->resources as $r ) {
                 $r->setCurrentLocale( $request->getLocale() );
