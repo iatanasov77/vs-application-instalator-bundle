@@ -1,3 +1,9 @@
+1.10.151	|	Release date: **31.12.2023**
+============================================
+* New Features and Improvements:
+  - Remove Deprecations for  All Console Commands.
+
+
 1.10.150	|	Release date: **31.12.2023**
 ============================================
 * New Features and Improvements:
