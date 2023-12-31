@@ -8,7 +8,6 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
 
-use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfoInterface;
 use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfo;
 
 /**
@@ -55,7 +54,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( InstalationInfo::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( InstalationInfoInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
                                     ->end()
