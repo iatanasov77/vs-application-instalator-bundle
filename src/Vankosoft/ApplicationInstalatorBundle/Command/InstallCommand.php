@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -10,10 +11,13 @@ use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\Table;
 
+#[AsCommand(
+    name: 'vankosoft:install',
+    description: 'Installs VankoSoft Application in your preferred environment.',
+    hidden: false
+)]
 final class InstallCommand extends AbstractInstallCommand
 {
-    protected static $defaultName   = 'vankosoft:install';
-    
     private $defaultLocale          = null;
     
     /**
@@ -66,7 +70,6 @@ final class InstallCommand extends AbstractInstallCommand
     protected function configure(): void
     {
         $this
-            ->setDescription( 'Installs VankoSoft Application in your preferred environment.' )
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command installs VankoSoft Application.
 EOT

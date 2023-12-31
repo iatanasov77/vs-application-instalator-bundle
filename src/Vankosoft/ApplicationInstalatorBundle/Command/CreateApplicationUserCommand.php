@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,11 +22,17 @@ use Vankosoft\UsersBundle\Model\UserInterface;
 use Vankosoft\UsersBundle\Repository\UsersRepositoryInterface;
 use Vankosoft\UsersBundle\Component\UserInfo;
 
+#[AsCommand(
+    name: 'vankosoft:application:create-user',
+    description: 'VankoSoft Application User Setup.',
+    hidden: false
+)]
 final class CreateApplicationUserCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'vankosoft:application:create-user';
-    
+    /** @var FileLocatorInterface|null */
     private ?FileLocatorInterface $fileLocator;
+    
+    /** @var FileUploaderInterface|null */
     private ?FileUploaderInterface $imageUploader;
     
     public function __construct(
@@ -44,7 +51,6 @@ final class CreateApplicationUserCommand extends AbstractInstallCommand
     protected function configure(): void
     {
         $this
-            ->setDescription( 'VankoSoft Application User Setup.' )
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command allows user to configure Admin User for the VankoSoft Application.
 EOT

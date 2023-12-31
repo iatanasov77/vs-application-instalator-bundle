@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,14 +12,16 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 
+#[AsCommand(
+    name: 'vankosoft:install:setup-super-admin-application',
+    description: 'VankoSoft Application SuperAdmin User setup.',
+    hidden: false
+)]
 final class SetupSuperAdminApplicationCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'vankosoft:install:setup-super-admin-application';
-    
     protected function configure(): void
     {
         $this
-            ->setDescription( 'VankoSoft Application configuration setup.' )
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command allows user to configure basic VankoSoft Application data.
 EOT
