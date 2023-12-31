@@ -6,17 +6,14 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 use Vankosoft\ApplicationBundle\Model\Locale;
-use Vankosoft\ApplicationBundle\Model\Interfaces\LocaleInterface;
 use Vankosoft\ApplicationBundle\Controller\LocalesController;
 use Vankosoft\ApplicationBundle\Form\LocaleForm;
 
 use Vankosoft\ApplicationBundle\Repository\ApplicationRepository;
-use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use Vankosoft\ApplicationBundle\Model\Application;
 use Vankosoft\ApplicationBundle\Form\ApplicationForm;
 
@@ -31,15 +28,12 @@ use Vankosoft\ApplicationBundle\Controller\TaxonomyController;
 use Vankosoft\ApplicationBundle\Form\TaxonomyForm;
 
 use Vankosoft\ApplicationBundle\Model\TaxonImage;
-use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonImageInterface;
 
 use Vankosoft\ApplicationBundle\Repository\TaxonRepository;
 use Vankosoft\ApplicationBundle\Model\Taxon;
-use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface;
 use Vankosoft\ApplicationBundle\Form\TaxonForm;
 //use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
 use Vankosoft\ApplicationBundle\Model\TaxonTranslation;
-use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 //use Sylius\Component\Taxonomy\Factory\TaxonFactory;
 
 use Vankosoft\ApplicationBundle\Model\Translation;
@@ -49,22 +43,18 @@ use Vankosoft\ApplicationBundle\Model\LogEntry;
 use Vankosoft\ApplicationBundle\Repository\LogEntryRepository;
 
 use Vankosoft\ApplicationBundle\Model\CookieConsentTranslation;
-use Vankosoft\ApplicationBundle\Model\Interfaces\CookieConsentTranslationInterface;
 use Vankosoft\ApplicationBundle\Controller\CookieConsentTranslationsController;
 use Vankosoft\ApplicationBundle\Form\CookieConsentTranslationForm;
 
 use Vankosoft\ApplicationBundle\Model\TagsWhitelistContext;
-use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistContextInterface;
 use Vankosoft\ApplicationBundle\Repository\TagsWhitelistContextsRepository;
 use Vankosoft\ApplicationBundle\Controller\TagsWhitelistContextsController;
 use Vankosoft\ApplicationBundle\Form\TagsWhitelistContextForm;
 
 use Vankosoft\ApplicationBundle\Model\TagsWhitelistTag;
-use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistTagInterface;
 use Vankosoft\ApplicationBundle\Repository\TagsWhitelistTagsRepository;
 
 use Vankosoft\ApplicationBundle\Model\Widget;
-use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetInterface;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -122,7 +112,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( Application::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( ApplicationInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( ApplicationRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'form' )->defaultValue( ApplicationForm::class )->cannotBeEmpty()->end()
@@ -138,7 +127,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( Settings::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->defaultValue( SettingsController::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( SettingsRepository::class )->cannotBeEmpty()->end()
                                         //->scalarNode( 'repository' )->cannotBeEmpty()->end()
@@ -156,7 +144,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( Taxonomy::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->defaultValue( TaxonomyController::class )->cannotBeEmpty()->end()
                                         //->scalarNode( 'repository' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( TaxonomyRepository::class )->cannotBeEmpty()->end()
@@ -175,7 +162,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( TaxonImage::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( TaxonImageInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->defaultValue( ResourceController::class )->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
@@ -192,7 +178,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( Taxon::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( TaxonInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->cannotBeEmpty()->end()
                                         //->scalarNode( 'repository' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( TaxonRepository::class )->cannotBeEmpty()->end()
@@ -209,7 +194,6 @@ class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('model')->defaultValue( TaxonTranslation::class )->cannotBeEmpty()->end()
-                                                ->scalarNode('interface')->defaultValue( TaxonTranslationInterface::class )->cannotBeEmpty()->end()
                                                 ->scalarNode('controller')->defaultValue( ResourceController::class )->cannotBeEmpty()->end()
                                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue( Factory::class )->end()
@@ -229,7 +213,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( Translation::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( TranslationRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
@@ -245,7 +228,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( LogEntry::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( LogEntryRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
@@ -261,7 +243,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( Locale::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( LocaleInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->defaultValue( LocalesController::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
@@ -279,7 +260,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( CookieConsentTranslation::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( CookieConsentTranslationInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->defaultValue( CookieConsentTranslationsController::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
@@ -297,7 +277,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( TagsWhitelistContext::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( TagsWhitelistContextInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( TagsWhitelistContextsRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
                                         ->scalarNode( 'controller' )->defaultValue( TagsWhitelistContextsController::class )->cannotBeEmpty()->end()
@@ -315,7 +294,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( TagsWhitelistTag::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( TagsWhitelistTagInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( TagsWhitelistTagsRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
                                     ->end()
@@ -331,7 +309,6 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( Widget::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( WidgetInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
                                     ->end()

@@ -1,3 +1,10 @@
+1.10.150	|	Release date: **31.12.2023**
+============================================
+* New Features and Improvements:
+  - Update Application Installator Configs.
+  - Fix Some Deprecations.
+
+
 1.10.149	|	Release date: **31.12.2023**
 ============================================
 * New Features and Improvements:
