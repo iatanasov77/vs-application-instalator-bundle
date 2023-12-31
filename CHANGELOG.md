@@ -1,3 +1,10 @@
+1.10.149	|	Release date: **31.12.2023**
+============================================
+* New Features and Improvements:
+  - Update Application Extended Installation Configs.
+  - An Improvement on AbstractCrudController .
+
+
 1.10.148	|	Release date: **16.12.2023**
 ============================================
 * New Features and Improvements:
