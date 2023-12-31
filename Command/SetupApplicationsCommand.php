@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,14 +15,16 @@ use Symfony\Component\Console\Input\ArrayInput;
 
 use Vankosoft\ApplicationBundle\Component\Slug;
 
+#[AsCommand(
+    name: 'vankosoft:install:setup-applications',
+    description: 'VankoSoft Main Applications configuration setup.',
+    hidden: false
+)]
 final class SetupApplicationsCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'vankosoft:install:setup-applications';
-    
     protected function configure(): void
     {
         $this
-            ->setDescription( 'VankoSoft Main Applications configuration setup.' )
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command allows user to configure basic VankoSoft Application data.
 EOT

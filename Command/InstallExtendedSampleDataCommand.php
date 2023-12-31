@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -8,14 +9,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+    name: 'vankosoft:install:extended-sample-data',
+    description: 'Install extended sample data into VankoSoft Extended Project.',
+    hidden: false
+)]
 final class InstallExtendedSampleDataCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'vankosoft:install:extended-sample-data';
-
     protected function configure(): void
     {
         $this
-            ->setDescription( 'Install extended sample data into VankoSoft Extended Project.' )
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command loads the sample data for VankoSoft Extended Project.
 EOT
