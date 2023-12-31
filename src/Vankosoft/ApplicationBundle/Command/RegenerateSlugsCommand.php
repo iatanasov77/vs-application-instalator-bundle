@@ -1,22 +1,21 @@
 <?php namespace Vankosoft\ApplicationBundle\Command;
 
-use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Doctrine\Persistence\ManagerRegistry;
 use Gedmo\Sluggable\Util as Sluggable;
 
+#[AsCommand(
+    name: 'vankosoft:regenerate-slugs',
+    description: 'Regenerate the slugs for all Foo and Bar entities.',
+    hidden: false
+)]
 class RegenerateSlugsCommand extends Command
 {
     private $doctrine;
-    
-    /**
-     * Using: bin/console vankosoft:regenerate-slugs \\App\\Entity\\Foo
-     * 
-     * @var string
-     */
-    protected static $defaultName = "vankosoft:regenerate-slugs";
     
     public function __construct( ManagerRegistry $doctrine )
     {
@@ -28,7 +27,10 @@ class RegenerateSlugsCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription( 'Regenerate the slugs for all Foo and Bar entities.' )
+            ->setHelp(<<<EOT
+Usage: <info>bin/console vankosoft:regenerate-slugs \\App\\Entity\\Foo</info>
+EOT
+            )
             ->addArgument( 'classWithNamespace', InputArgument::REQUIRED, 'The Full Class Path?' )
         ;
     }

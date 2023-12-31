@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,16 +22,18 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use Vankosoft\UsersBundle\Model\UserRoleInterface;
 
+#[AsCommand(
+    name: 'vankosoft:application:create',
+    description: 'VankoSoft Application Create Command.',
+    hidden: false
+)]
 final class CreateApplicationCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'vankosoft:application:create';
-    
     private $application;
     
     protected function configure(): void
     {
         $this
-            ->setDescription( 'VankoSoft Application Create Command.' )
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command allows user to create a VankoSoft Application.
 EOT

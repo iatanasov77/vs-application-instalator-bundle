@@ -1,18 +1,22 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+    name: 'vankosoft:install:database',
+    description: 'Install VankoSoft Application database.',
+    hidden: false
+)]
 final class InstallDatabaseCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'vankosoft:install:database';
-
     protected function configure(): void
     {
         $this
-            ->setDescription( 'Install VankoSoft Application database.' )
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command creates VankoSoft Application database.
 EOT
@@ -52,6 +56,6 @@ EOT
             $outputStyle->newLine();
         }
         
-        return 0;
+        return Command::SUCCESS;
     }
 }

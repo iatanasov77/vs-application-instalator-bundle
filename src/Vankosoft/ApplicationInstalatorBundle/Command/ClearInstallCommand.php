@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -8,14 +9,16 @@ use Symfony\Component\Console\Input\ArrayInput;
 
 use Vankosoft\ApplicationBundle\Command\ContainerAwareCommand;
 
+#[AsCommand(
+    name: 'vankosoft:clear-install',
+    description: 'Clear VankoSoft Application Installation.',
+    hidden: false
+)]
 final class ClearInstallCommand extends ContainerAwareCommand
 {
-    protected static $defaultName = 'vankosoft:clear-install';
-    
     protected function configure(): void
     {
         $this
-            ->setDescription( 'Clear VankoSoft Application Installation.' )
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command clear installation of VankoSoft Application.
 EOT
