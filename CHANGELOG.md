@@ -1,3 +1,12 @@
+1.10.152	|	Release date: **01.01.2024**
+============================================
+* New Features:
+  - Create a Twig Macros for Entity Translations.
+  - Update Application Installator Configs.
+* Bug-Fixes:
+  - Fix TaxonImage Model .
+
+
 1.10.151	|	Release date: **31.12.2023**
 ============================================
 * New Features and Improvements:
