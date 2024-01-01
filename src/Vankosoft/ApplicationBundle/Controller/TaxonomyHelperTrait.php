@@ -60,7 +60,8 @@ trait TaxonomyHelperTrait
             
             $translations[$category->getId()] = $category->getTaxon()->getExistingTranslations();
         }
-        //echo "<pre>"; var_dump($translations); die;
+        //echo "<pre>"; var_dump( $translations ); die;
+        
         return $translations;
     }
 }
