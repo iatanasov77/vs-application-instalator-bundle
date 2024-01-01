@@ -2,6 +2,7 @@
 
 {# Import Macros #}
 {% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
+{% import "@VSApplication/Macros/translations.html.twig" as vs_translations %}
 {% from "@VSApplication/Macros/pagination.html.twig" import pagination %}
 
 {% block title %}{{ parent() }} :: {{ 'vs_application.template.locales_index_title' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
@@ -50,12 +51,7 @@
                         <td>{{ item.code }}</td>
                         <td>{{ item.title }}</td>
                         <td>{% if item.code == defaultLocale %}<i class="fas fa-check" style="color: #82c91e;">{% endif %}</td>
-                        <td>
-                            {% for locale in translations[item.id] %}
-                                <i class="flag flag-{{ locale | split( '_' )[1] | lower }}"></i>
-                                {% if not loop.last %}&nbsp;{% endif %}
-                            {% endfor %}
-                        </td>
+                        <td>{{ vs_translations.flags( translations[item.id] ) }}</td>
                         <td>
                             <div class="btn-group">
                                 <div class="btn-group">
