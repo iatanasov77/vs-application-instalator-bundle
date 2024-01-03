@@ -1,3 +1,9 @@
+1.10.153	|	Release date: **03.01.2024**
+============================================
+* New Features:
+  - Add Payment Pages Java Scriptt Asset.
+
+
 1.10.152	|	Release date: **01.01.2024**
 ============================================
 * New Features:
