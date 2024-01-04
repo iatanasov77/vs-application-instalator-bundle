@@ -1,3 +1,9 @@
+1.10.154	|	Release date: **04.01.2024**
+============================================
+* New Features:
+  - Add Some Payment Pages Java Scripts.
+
+
 1.10.153	|	Release date: **03.01.2024**
 ============================================
 * New Features:
