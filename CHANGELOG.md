@@ -1,3 +1,9 @@
+1.10.157	|	Release date: **06.01.2024**
+============================================
+* Bug-Fixes:
+  - Fix Recieved Payments Page Java Script.
+
+
 1.10.156	|	Release date: **06.01.2024**
 ============================================
 * New Features:
