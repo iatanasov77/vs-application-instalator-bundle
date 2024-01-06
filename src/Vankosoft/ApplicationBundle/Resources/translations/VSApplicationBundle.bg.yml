@@ -86,6 +86,9 @@ vs_application:
         cancel: 'Отказ'
         close: 'Затвори'
         
+        search: Търси
+        clear_filter: Изчисти Филтъра
+        
         picture: Картинка
         picture_placeholder: Избери Картинка
         picture_invalid: 'Невалиден Формат на Картинка !!!'
