@@ -86,6 +86,9 @@ vs_application:
         cancel: 'Cancel'
         close: 'Close'
         
+        search: Search
+        clear_filter: Clear Filter
+        
         picture: Picture
         picture_placeholder: Choose a Picture
         picture_invalid: 'Invalid Picture Format !!!'
