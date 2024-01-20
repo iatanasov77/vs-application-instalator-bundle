@@ -10,10 +10,29 @@
             <generator strategy="AUTO" />
         </id>
         
-        <one-to-one field="owner" target-entity="Vankosoft\UsersBundle\Model\UserInterface">
-            <join-column name="owner_id" referenced-column-name="id" nullable="true" on-delete="CASCADE"/>
-        </one-to-one>
+        <many-to-one field="group" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\WidgetGroupInterface" inversed-by="widgets">
+            <join-column name="group_id" referenced-column-name="id" nullable="false" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </many-to-one>
         
-        <field name="config" type="array" />
+        <field name="code" column="code" type="string" unique="true" />
+    
+        <field name="name" column="name" type="string" length="255" nullable="false">
+            <gedmo:translatable />
+        </field>
+        
+        <field name="description" column="description" type="text">
+            <gedmo:translatable />
+        </field>
+        
+        <field name="enabled" column="active" type="boolean">
+            <options>
+                <option name="default">1</option>
+            </options>
+        </field>
+    
+        <gedmo:translation entity="Vankosoft\ApplicationBundle\Model\Interfaces\TranslationInterface" locale="locale" />
     </mapped-superclass>
 </doctrine-mapping>

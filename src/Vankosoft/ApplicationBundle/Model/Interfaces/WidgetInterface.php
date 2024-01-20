@@ -1,10 +1,14 @@
 <?php namespace Vankosoft\ApplicationBundle\Model\Interfaces;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Vankosoft\UsersBundle\Model\UserInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
 
-interface WidgetInterface extends ResourceInterface
+interface WidgetInterface extends ResourceInterface, TranslatableInterface
 {
-    public function getOwner(): ?UserInterface;
-    public function getConfig(): array;
+    public function getGroup(): ?WidgetGroupInterface
+    public function getCode(): string;
+    public function getName(): string;
+    public function getDescription(): string;
+    public function getActive(): ?bool;
+    public function isActive(): bool;
 }

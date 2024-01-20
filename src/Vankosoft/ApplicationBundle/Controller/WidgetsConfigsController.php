@@ -14,7 +14,7 @@ use Vankosoft\ApplicationBundle\Component\Widget\WidgetInterface;
 /**
  * CLONED FROM: \Pd\WidgetBundle\Controller\WidgetController
  */
-class WidgetExtController extends AbstractController
+class WidgetsConfigsController extends AbstractController
 {
     /** @var CacheInterface */
     protected $cache;
@@ -49,7 +49,7 @@ class WidgetExtController extends AbstractController
     {
         $widgets    = $this->widgetRepository->findAll();
         
-        return $this->render( '@VSApplication/Pages/Widgets/index.html.twig', ['widgets' => $widgets] );
+        return $this->render( '@VSApplication/Pages/WidgetsConfigs/index.html.twig', ['widgets' => $widgets] );
     }
     
     /**

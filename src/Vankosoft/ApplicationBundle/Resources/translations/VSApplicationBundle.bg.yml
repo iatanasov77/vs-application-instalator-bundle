@@ -63,6 +63,7 @@ vs_application:
     form:
         errors_title: 'Грешка!'
         enabled: 'Разрешен'
+        active: Активен
         locale: 'Език'
         translatable_locale: 'Език за Превод'
         locale_code: 'Локал Код'
@@ -70,6 +71,8 @@ vs_application:
         name: 'Име'
         hostname: 'Име на Хост'
         description: 'Описание'
+        group_label: Група
+        group_placeholder: '-- Избери Група --'
         tags: 'Тагове'
         parent: 'Родител'
         parent_category: 'Родителска Категория'
@@ -191,9 +194,17 @@ vs_application:
         tags_whitelist_contexts_update_title: Редакция Тагове Контекст
         tags_whitelist_contexts_details: Тагове Контекст Детайли
         
+        widgets_index_title: Уиджети
         reload_widgets: Презареждане Уиджети
         no_one: Никой
         test_widgets: Тестване Уиджети
+        
+        widgets_group_create_title: Създаване на Уиджет Група
+        widgets_group_update_title: Редакция Уиджет Група
+        widgets_group: Уиджет Група
+        widgets_create_title: Създаване на Уиджет
+        widgets_update_title: Редакция Уиджет
+        widget: Уиджет
         
         contact_page:
             my_address: 'бул. "Ал. Стамболийски", Пловдив 4000'

@@ -54,7 +54,15 @@ use Vankosoft\ApplicationBundle\Form\TagsWhitelistContextForm;
 use Vankosoft\ApplicationBundle\Model\TagsWhitelistTag;
 use Vankosoft\ApplicationBundle\Repository\TagsWhitelistTagsRepository;
 
+use Vankosoft\ApplicationBundle\Model\WidgetGroup;
+use Vankosoft\ApplicationBundle\Controller\WidgetsGroupsController;
+use Vankosoft\ApplicationBundle\Form\WidgetsGroupForm;
+
 use Vankosoft\ApplicationBundle\Model\Widget;
+use Vankosoft\ApplicationBundle\Controller\WidgetsController;
+use Vankosoft\ApplicationBundle\Form\WidgetForm;
+
+use Vankosoft\ApplicationBundle\Model\WidgetConfig;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -301,6 +309,23 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         
+                        ->arrayNode( 'widget_group' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( WidgetGroup::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
+                                        ->scalarNode( 'controller' )->defaultValue( WidgetsGroupsController::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'form' )->defaultValue( WidgetsGroupForm::class )->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        
                         ->arrayNode( 'widget' )
                             ->addDefaultsIfNotSet()
                             ->children()
@@ -309,6 +334,23 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( Widget::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
+                                        ->scalarNode( 'controller' )->defaultValue( WidgetsController::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'form' )->defaultValue( WidgetForm::class )->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        
+                        ->arrayNode( 'widget_config' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( WidgetConfig::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
                                     ->end()

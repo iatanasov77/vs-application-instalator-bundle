@@ -1,23 +1,41 @@
+vs_application_widget_group:
+    resource: |
+        alias: vs_application.widget_group
+        path: /widgets-groups
+        templates: "@VSApplication/Pages/WidgetGroup"
+    type: sylius.resource
+    options:
+        expose: true
+        
+vs_application_widget:
+    resource: |
+        alias: vs_application.widget
+        path: /widgets
+        templates: "@VSApplication/Pages/Widget"
+    type: sylius.resource
+    options:
+        expose: true
+
 vs_application_widget_ext_index:
     path: /widget-ext/listing
-    controller:  Vankosoft\ApplicationBundle\Controller\WidgetExtController::index
+    controller:  Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController::index
     
 vs_application_widget_ext_refresh:
     path: /widget-ext/refresh
-    controller:  Vankosoft\ApplicationBundle\Controller\WidgetExtController::refresh
+    controller:  Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController::refresh
 
 vs_application_widget_ext_status:
     path: /widget-ext/status/{widgetId}/{status}
-    controller:  Vankosoft\ApplicationBundle\Controller\WidgetExtController::status
+    controller:  Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController::status
     requirements:
         status: \d+
 
 vs_application_widget_ext_config:
     path: /widget-ext/config/{widgetId}
-    controller:  Vankosoft\ApplicationBundle\Controller\WidgetExtController::configs
+    controller:  Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController::configs
 
 vs_application_widget_ext_order:
     path: /widget-ext/order/{widgetId}/{order}
-    controller:  Vankosoft\ApplicationBundle\Controller\WidgetExtController::order
+    controller:  Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController::order
     requirements:
         order: \d+

@@ -63,6 +63,7 @@ vs_application:
     form:
         errors_title: 'Error!'
         enabled: 'Enabled'
+        active: Active
         locale: 'Locale'
         translatable_locale: 'Translatable Locale'
         locale_code: 'Locale Code'
@@ -70,6 +71,8 @@ vs_application:
         name: 'Name'
         hostname: 'Hostname'
         description: 'Description'
+        group_label: Group
+        group_placeholder: '-- Choose a Group --'
         tags: 'Tags'
         parent: 'Parent'
         parent_category: 'Parent Category'
@@ -191,9 +194,17 @@ vs_application:
         tags_whitelist_contexts_update_title: Update Tags Whitelist Context
         tags_whitelist_contexts_details: Tags Whitelist Context Details
         
+        widgets_index_title: Widgets
         reload_widgets: Reload Widgets
         no_one: No-One
         test_widgets: Test Widgets
+        
+        widgets_group_create_title: Create Widget Group
+        widgets_group_update_title: Edit Widget Group
+        widgets_group: Widget Group
+        widgets_create_title: Create Widget
+        widgets_update_title: Edit Widget
+        widget: Widget
         
         contact_page:
             my_address: 'bul. "Al. Stamboliiski", Plovdiv 4000'

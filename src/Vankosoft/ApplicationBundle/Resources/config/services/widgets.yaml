@@ -43,7 +43,7 @@ services:
             - '@vs_application.widgets_builder'
             - '@vs_application.widgets_container'
         
-    Vankosoft\ApplicationBundle\Controller\WidgetExtController:
+    Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController:
         tags: ['controller.service_arguments']
         autowire: true
         arguments:
