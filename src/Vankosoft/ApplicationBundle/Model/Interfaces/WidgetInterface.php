@@ -5,7 +5,7 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
 
 interface WidgetInterface extends ResourceInterface, TranslatableInterface
 {
-    public function getGroup(): ?WidgetGroupInterface
+    public function getGroup(): ?WidgetGroupInterface;
     public function getCode(): string;
     public function getName(): string;
     public function getDescription(): string;
