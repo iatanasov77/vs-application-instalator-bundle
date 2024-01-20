@@ -116,6 +116,18 @@ sylius_fixtures:
                                   bg_BG:
                                       title: 'Контекст Списък с Тагове'
                                       description: 'Контекст Списък с Тагове'
+                            
+                            - code: 'widgets-groups'
+                              title: 'Widgets Groups'
+                              description: 'Widgets Groups'
+                              locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Widgets Groups'
+                                      description: 'Widgets Groups'
+                                  bg_BG:
+                                      title: 'Уиджет Групи'
+                                      description: 'Уиджет Групи'
 
                 pages_categories:
                     name: page_categories
