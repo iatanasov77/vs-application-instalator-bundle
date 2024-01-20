@@ -59,6 +59,13 @@ vs_application:
         create_new_tags_whitelist_context: Create New Tags Whitelist Context
         edit_tags_whitelist_context: Edit Tags Whitelist Context
         widgets: Widgets
+        list_widget_groups: Widget Groups
+        create_widget_group: Create Widget Group
+        update_widget_group: Update Widget Group
+        list_widgets: Widgets
+        create_new_widget: Create New Widget
+        update_widget: Update Widget
+        widget_configs: Widget Configs
 
     form:
         errors_title: 'Error!'

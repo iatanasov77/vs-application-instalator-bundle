@@ -59,6 +59,13 @@ vs_application:
         create_new_tags_whitelist_context: Създаване Тагове Контекст
         edit_tags_whitelist_context: Редакция Тагове Контекст
         widgets: Уиджети
+        list_widget_groups: Уиджет Групи
+        create_widget_group: Създаване Уиджет Група
+        update_widget_group: Редакция Уиджет Група
+        list_widgets: Уиджети
+        create_new_widget: Създаване Нов Уиджет
+        update_widget: Редакция Уиджет
+        widget_configs: Уиджет Конфигурации
 
     form:
         errors_title: 'Грешка!'
