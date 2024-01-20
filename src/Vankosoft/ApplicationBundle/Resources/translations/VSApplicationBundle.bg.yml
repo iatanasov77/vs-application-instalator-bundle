@@ -160,6 +160,7 @@ vs_application:
         items_index_row_number: Номер
         items_index_row_id: ID
         items_index_row_slug: Слуг
+        items_index_row_group: Група
         items_index_row_code: Код
         items_index_row_title: Заглавие
         items_index_row_name: Име
@@ -206,6 +207,7 @@ vs_application:
         no_one: Никой
         test_widgets: Тестване Уиджети
         
+        widgets_groups_index_title: Уиджет Групи
         widgets_group_create_title: Създаване на Уиджет Група
         widgets_group_update_title: Редакция Уиджет Група
         widgets_group: Уиджет Група

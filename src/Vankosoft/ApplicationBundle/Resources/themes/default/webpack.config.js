@@ -83,6 +83,9 @@ Encore
     .addEntry( 'js/filemanager-index', assetsPath + '/js/pages/filemanager-index.js' )
     .addEntry( 'js/filemanager-file-upload', assetsPath + '/js/pages/filemanager-file-upload.js' )
     
+    .addEntry( 'js/widget-groups', assetsPath + '/js/pages/widget-groups.js' )
+    .addEntry( 'js/widgets', assetsPath + '/js/pages/widgets.js' )
+    
     //////////////////////////////////////////////////////////////////
     // Payment Pages
     //////////////////////////////////////////////////////////////////

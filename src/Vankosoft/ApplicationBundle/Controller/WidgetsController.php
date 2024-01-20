@@ -8,7 +8,7 @@ class WidgetsController extends AbstractCrudController
     protected function customData( Request $request, $entity = null ): array
     {
         return [
-            
+            'translations'  => $this->classInfo['action'] == 'indexAction' ? $this->getTranslations() : [],
         ];
     }
     
@@ -17,5 +17,21 @@ class WidgetsController extends AbstractCrudController
         $widgetName = $form->get( 'name' )->getData();
         
         $entity->setCode( $this->get( 'vs_application.slug_generator' )->generate( $widgetName ) );
+    }
+    
+    private function getTranslations(): array
+    {
+        $translations   = [];
+        $transRepo      = $this->get( 'vs_application.repository.translation' );
+        
+        /* THIS MAKE FATAL ERROR IN PRODUCTION ( I DONT KNOW WHY )
+         * ========================================================
+         */
+        foreach ( $this->getRepository()->findAll() as $widget ) {
+            $translations[$locale->getId()] = array_keys( $transRepo->findTranslations( $widget ) );
+        }
+        
+        
+        return $translations;
     }
 }

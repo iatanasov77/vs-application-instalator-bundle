@@ -45,6 +45,11 @@ class WidgetGroup implements WidgetGroupInterface
         $this->taxon = $taxon;
     }
     
+    public function getCode(): string
+    {
+        return $this->taxon ? $this->taxon->getCode() : '';
+    }
+    
     public function getName(): string
     {
         return $this->taxon ? $this->taxon->getName() : '';

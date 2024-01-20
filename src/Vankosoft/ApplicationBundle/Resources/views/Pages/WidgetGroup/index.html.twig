@@ -5,53 +5,32 @@
 {% import "@VSApplication/Macros/translations.html.twig" as vs_translations %}
 {% from "@VSApplication/Macros/pagination.html.twig" import pagination %}
 
-{% block title %}{{ parent() }} :: {{ 'vs_application.template.locales_index_title' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
+{% block title %}{{ parent() }} :: {{ 'vs_application.template.widgets_groups_index_title' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
 
 {% block pageTitle %}
-    <h2 class="pageheader-title"><i class="icon_genius"></i> {{ 'vs_application.template.locales_index_title' | trans( {},'VSApplicationBundle' ) }}</h2>
+    <h2 class="pageheader-title"><i class="icon_genius"></i> {{ 'vs_application.template.widgets_groups_index_title' | trans( {},'VSApplicationBundle' ) }}</h2>
     <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div>
-                <div style="float: left; margin-left: 30px; margin-bottom: 20px;">
-                    <a class="btn btn-info btn-circle btn-sm"
-                        href="{{ path( 'vs_application_locale_create' ) }}"
-                        title="{{ 'vs_application.menu.create_locale' | trans( {},'VSApplicationBundle' ) }}"
-                    >
-                        {{ 'vs_application.menu.create_locale' | trans( {},'VSApplicationBundle' ) }}
-                    </a>
-                </div>
-                <div style="float: right; margin-right: 30px; margin-bottom: 20px;">
-                    
-                </div>
-                <div style="clear: both;"></div>
-            </div>
-        </div>
-    </div>
-    
     <div class="row">
         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
             
             <table class="table table-striped table-advance table-hover">
                 <thead>
                     <tr>
-                        <th>{{ 'vs_application.form.locale_code' | trans( {},'VSApplicationBundle' ) }}</th>
-                        <th>{{ 'vs_application.template.items_index_row_title' | trans( {},'VSApplicationBundle' ) }}</th>
-                        <th>{{ 'vs_application.template.default' | trans( {},'VSApplicationBundle' ) }}</th>
-                        <th>{{ 'vs_application.template.items_index_row_translations' | trans( {},'VSApplicationBundle' ) }}</th>
+                        <th></th>
+                        <th>{{ 'vs_application.template.items_index_row_name' | trans( {},'VSApplicationBundle' ) }}</th>
+                        <th>{{ 'vs_application.template.items_index_row_code' | trans( {},'VSApplicationBundle' ) }}</th>
                         <th width="150">{{ 'vs_application.template.items_index_row_action' | trans( {},'VSApplicationBundle' ) }}</th>
                     </tr>
                 </thead>
                 <tbody>
                 {% for item in resources %}
                     <tr>
-                        <td>{{ item.code }}</td>
-                        <td>{{ item.title }}</td>
-                        <td>{% if item.code == defaultLocale %}<i class="fas fa-check" style="color: #82c91e;">{% endif %}</td>
-                        <td>{{ vs_translations.flags( translations[item.id] ) }}</td>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.taxon.code }}</td>
                         <td>
                             <div class="btn-group">
                                 <div class="btn-group">
@@ -97,11 +76,11 @@
 {% block head_styles %}
     {{ parent() }}
     
-    {{ encore_entry_link_tags( 'js/locales' ) }}
+    {{ encore_entry_link_tags( 'js/widget-groups' ) }}
 {% endblock %}
 
 {% block body_scripts %}
     {{ parent() }}
     
-    {{ encore_entry_script_tags( 'js/locales' ) }}
+    {{ encore_entry_script_tags( 'js/widget-groups' ) }}
 {% endblock %}

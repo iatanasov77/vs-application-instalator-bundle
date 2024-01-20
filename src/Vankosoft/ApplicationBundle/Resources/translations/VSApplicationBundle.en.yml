@@ -160,6 +160,7 @@ vs_application:
         items_index_row_number: Number
         items_index_row_id: ID
         items_index_row_slug: Slug
+        items_index_row_group: Group
         items_index_row_code: Code
         items_index_row_title: Title
         items_index_row_name: Name
@@ -206,6 +207,7 @@ vs_application:
         no_one: No-One
         test_widgets: Test Widgets
         
+        widgets_groups_index_title: Widget Groups
         widgets_group_create_title: Create Widget Group
         widgets_group_update_title: Edit Widget Group
         widgets_group: Widget Group
