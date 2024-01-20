@@ -57,6 +57,14 @@ services:
         arguments:
             - '%vs_application.model.tags_whitelist_context.class%'
             
+    vs_application.resources.widget_group.form:
+        public: true
+        class: Vankosoft\ApplicationBundle\Form\WidgetsGroupForm
+        tags:
+            - { name: form.type }
+        arguments:
+            - '%vs_application.model.widget_group.class%'
+    
     vs_application.resources.widget.form:
         class: Vankosoft\ApplicationBundle\Form\WidgetForm
         tags:
