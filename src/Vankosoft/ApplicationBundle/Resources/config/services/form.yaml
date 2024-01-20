@@ -58,12 +58,11 @@ services:
             - '%vs_application.model.tags_whitelist_context.class%'
             
     vs_application.resources.widget.form:
-        class: Vankosoft\PaymentBundle\Form\ProductForm
+        class: Vankosoft\ApplicationBundle\Form\WidgetForm
         tags:
             - { name: form.type }
         arguments:
-            - '%vs_payment.model.product.class%'
+            - '%vs_application.model.widget.class%'
             - '@request_stack'
             - '@vs_application.repository.locale'
-            - '%vs_payment.model.product_category.class%'
-            - '%vs_payment.model.currency.class%'
+            - '%vs_application.model.widget_group.class%'
