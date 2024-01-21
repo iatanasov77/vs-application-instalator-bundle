@@ -26,30 +26,44 @@ class WidgetsConfigsController extends AbstractController
     protected $widgets;
     
     /** @var EntityRepository */
-    protected $widgetRepository;
+    protected $widgetConfigRepository;
     
     /** @var Factory */
-    protected $widgetFactory;
+    protected $widgetConfigFactory;
+    
+    /** @var EntityRepository */
+    protected $widgetRepository;
     
     public function __construct(
         CacheInterface $cache,
         ManagerRegistry $doctrine,
         WidgetInterface $widgets,
-        EntityRepository $widgetRepository,
-        Factory $widgetFactory
+        EntityRepository $widgetConfigRepository,
+        Factory $widgetConfigFactory,
+        EntityRepository $widgetRepository
     ) {
-        $this->cache            = $cache;
-        $this->doctrine         = $doctrine;
-        $this->widgets          = $widgets;
-        $this->widgetRepository = $widgetRepository;
-        $this->widgetFactory    = $widgetFactory;
+        $this->cache                    = $cache;
+        $this->doctrine                 = $doctrine;
+        $this->widgets                  = $widgets;
+        $this->widgetConfigRepository   = $widgetConfigRepository;
+        $this->widgetConfigFactory      = $widgetConfigFactory;
+        $this->widgetRepository         = $widgetRepository;
     }
     
     public function index( Request $request ): Response
     {
-        $widgets    = $this->widgetRepository->findAll();
+        $widgets    = $this->widgetConfigRepository->findAll();
         
         return $this->render( '@VSApplication/Pages/WidgetsConfigs/index.html.twig', ['widgets' => $widgets] );
+    }
+    
+    public function load( $widgetId, Request $request ): Response
+    {
+        $this->widgets->addWidget( $this->widgets->createWidgetItem( $widgetId ) );
+        $this->widgets->loadWidgets( $this->getUser() );
+        
+        // Response
+        return $this->redirect( $request->headers->get( 'referer', $this->generateUrl( $this->getParameter( 'vs_application.widgets.return_route' ) ) ) );
     }
     
     /**
@@ -76,8 +90,8 @@ class WidgetsConfigsController extends AbstractController
         
         if ( isset( $widgets[$widgetId] ) ) {
             // Get User Widgets
-            $widgetConfig = $this->widgetRepository->findOneBy( ['owner' => $this->getUser()] ) ??
-                            ( $this->widgetFactory->createNew() )->setOwner( $this->getUser() );
+            $widgetConfig = $this->widgetConfigRepository->findOneBy( ['owner' => $this->getUser()] ) ??
+                                ( $this->widgetConfigFactory->createNew() )->setOwner( $this->getUser() );
             
             // Add Config Parameters
             $widgetConfig->addWidgetConfig( $widgetId, ['status' => $status] );
@@ -102,8 +116,8 @@ class WidgetsConfigsController extends AbstractController
         
         if ( isset( $widgets[$widgetId] ) ) {
             // Get User Widgets
-            $widgetConfig = $this->widgetRepository->findOneBy( ['owner' => $this->getUser()] ) ??
-                            ( $this->widgetFactory->createNew() )->setOwner( $this->getUser() );
+            $widgetConfig = $this->widgetConfigRepository->findOneBy( ['owner' => $this->getUser()] ) ??
+                                ( $this->widgetConfigFactory->createNew() )->setOwner( $this->getUser() );
             
             // Add or Remove Config Parameters
             if ( $request->get( 'remove' ) ) {
@@ -135,8 +149,8 @@ class WidgetsConfigsController extends AbstractController
         
         if ( isset( $widgets[$widgetId] ) ) {
             // Get User Widgets
-            $widgetConfig = $this->widgetRepository->findOneBy( ['owner' => $this->getUser()] ) ??
-                            ( $this->widgetFactory->createNew() )->setOwner( $this->getUser() );
+            $widgetConfig = $this->widgetConfigRepository->findOneBy( ['owner' => $this->getUser()] ) ??
+                                ( $this->widgetConfigFactory->createNew() )->setOwner( $this->getUser() );
             
             // Add Config Parameters
             $widgetConfig->addWidgetConfig( $widgetId, ['order' => $order] );

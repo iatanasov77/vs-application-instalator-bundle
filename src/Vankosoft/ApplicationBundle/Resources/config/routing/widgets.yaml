@@ -23,6 +23,10 @@ vs_application_widget_ext_index:
 vs_application_widget_ext_refresh:
     path: /widget-ext/refresh
     controller:  Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController::refresh
+    
+vs_application_widget_ext_load:
+    path: /widget-ext/load/{widgetId}
+    controller:  Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController::load
 
 vs_application_widget_ext_status:
     path: /widget-ext/status/{widgetId}/{status}

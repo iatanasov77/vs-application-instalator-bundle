@@ -45,22 +45,28 @@
                         <td>{{ vs_translations.flags( translations[item.id] ) }}</td>
                         <td>
                             <div class="btn-group">
-                                <div class="btn-group">
-                                    <a class="btn btn-primary"
-                                        href="{{ path('vs_application_widget_update', {'id': item.id}) }}"
-                                        title="{{ 'vs_application.template.items_index_row_action_edit' | trans( {},'VSApplicationBundle' ) }}"
-                                    >
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    
-                                    <a class="btn btn-danger btnDeleteResource"
-                                    	href="{{ path('vs_application_widget_delete', {'id': item.id}) }}" 
-                                    	data-csrfToken="{{ csrf_token( item.id ) }}" 
-                                    	title="{{ 'vs_application.template.items_index_row_action_delete' | trans( {},'VSApplicationBundle' ) }}"
-                                    >
-                                        <i class="icon_close_alt2"></i>
-                                    </a>
-                                </div>
+                                <a class="btn btn-primary"
+                                    href="{{ path('vs_application_widget_ext_load', {'id': item.id}) }}"
+                                    title="{{ 'vs_application.template.load_widget' | trans( {},'VSApplicationBundle' ) }}"
+                                >
+                                    <i class="fas fa-save"></i>
+                                    <i class="fas fa-truck-loading"></i>
+                                </a>
+                                
+                                <a class="btn btn-primary"
+                                    href="{{ path('vs_application_widget_update', {'id': item.id}) }}"
+                                    title="{{ 'vs_application.template.items_index_row_action_edit' | trans( {},'VSApplicationBundle' ) }}"
+                                >
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                
+                                <a class="btn btn-danger btnDeleteResource"
+                                	href="{{ path('vs_application_widget_delete', {'id': item.id}) }}" 
+                                	data-csrfToken="{{ csrf_token( item.id ) }}" 
+                                	title="{{ 'vs_application.template.items_index_row_action_delete' | trans( {},'VSApplicationBundle' ) }}"
+                                >
+                                    <i class="icon_close_alt2"></i>
+                                </a>
                             </div>
                         </td>
                     </tr>

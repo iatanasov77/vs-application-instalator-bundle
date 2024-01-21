@@ -28,6 +28,7 @@ services:
             - '@doctrine'
             - '@vs_application.repository.widget_config'
             - '@vs_application.factory.widget_config'
+            - '@vs_application.repository.widget'
             
     vs_application.twig_widget_renderer:
         class: Vankosoft\ApplicationBundle\Twig\Renderer\WidgetRenderer
@@ -53,6 +54,7 @@ services:
             - '@vs_application.widgets_container'
             - '@vs_application.repository.widget_config'
             - '@vs_application.factory.widget_config'
+            - '@vs_application.repository.widget'
             
     ###################################################################
     # Load Widgets

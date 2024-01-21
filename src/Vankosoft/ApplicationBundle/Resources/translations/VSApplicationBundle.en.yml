@@ -214,6 +214,7 @@ vs_application:
         widgets_create_title: Create Widget
         widgets_update_title: Edit Widget
         widget: Widget
+        load_widget: Load Widget
         
         contact_page:
             my_address: 'bul. "Al. Stamboliiski", Plovdiv 4000'
