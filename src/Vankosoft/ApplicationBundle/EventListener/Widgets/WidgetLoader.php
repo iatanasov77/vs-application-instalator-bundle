@@ -5,7 +5,7 @@ use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\ItemInterface;
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\Item;
 
-class WidgetLoader
+abstract class WidgetLoader
 {
     /** @var EntityRepository */
     protected $widgetsRepository;
