@@ -28,7 +28,7 @@ class WidgetsController extends AbstractCrudController
          * ========================================================
          */
         foreach ( $this->getRepository()->findAll() as $widget ) {
-            $translations[$locale->getId()] = array_keys( $transRepo->findTranslations( $widget ) );
+            $translations[$widget->getId()] = array_keys( $transRepo->findTranslations( $widget ) );
         }
         
         
