@@ -7,32 +7,29 @@ use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
 /**
  * MANUAL: https://github.com/cesurapp/pd-widget
  */
-class ApplicationsMenuWidget
+class ApplicationsMenuWidget extends WidgetLoader
 {
     /** @var EntityRepository */
     private $applicationsRepository;
     
-    public function __construct( EntityRepository $applicationsRepository )
+    public function __construct( EntityRepository $widgetsRepository, EntityRepository $applicationsRepository )
     {
+        parent::__construct( $widgetsRepository );
+        
         $this->applicationsRepository   = $applicationsRepository;
     }
     
     public function builder( WidgetEvent $event )
     {
-        // Get Widget Container
-        $widgets    = $event->getWidgetContainer();
-        
-        // Create Widget Item
-        $widgetItem = new Item( 'main_menu_applications', 3600 );
-        $widgetItem->setGroup( 'admin_main_menu' )
-                    ->setName( 'widget_applications_menu.name' )
-                    ->setDescription( 'widget_applications_menu.description' )
-                    ->setActive( true )
-                    ->setTemplate( '@VSApplication/Widgets/applications_menu.html.twig', [
-                        'applications'  => $this->applicationsRepository->findAll(),
-                    ]);
-                        
-        // Add Widgets
-        $widgets->addWidget( $widgetItem );
+        /** @var Item */
+        $widgetItem = $this->createWidgetItem( 'main-menu-applications' );
+        if( $widgetItem ) {
+            $widgetItem->setTemplate( '@VSApplication/Widgets/locales_menu.html.twig', [
+                'locales'   => $this->localesRepository->findAll(),
+            ]);
+            
+            // Add Widgets
+            $event->getWidgetContainer()->addWidget( $widgetItem );
+        }
     }
 }
