@@ -76,7 +76,7 @@ class Widget implements WidgetInterface
      */
     public function createWidgetItem( string $widgetCode ): ItemInterface
     {
-        $widget     = $this->widgetsRepository->findOneBy( ['code' => $widgetCode] );
+        $widget     = $this->widgetRepository->findOneBy( ['code' => $widgetCode] );
         
         if ( $widget ) {
             // Create Widget Item
