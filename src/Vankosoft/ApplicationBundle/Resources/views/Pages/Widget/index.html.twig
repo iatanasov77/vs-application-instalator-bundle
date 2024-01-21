@@ -53,7 +53,6 @@
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     
-                                {% if item.code != defaultLocale %}
                                     <a class="btn btn-danger btnDeleteResource"
                                     	href="{{ path('vs_application_widget_delete', {'id': item.id}) }}" 
                                     	data-csrfToken="{{ csrf_token( item.id ) }}" 
@@ -61,7 +60,6 @@
                                     >
                                         <i class="icon_close_alt2"></i>
                                     </a>
-                                {% endif %}
                                 </div>
                             </div>
                         </td>
