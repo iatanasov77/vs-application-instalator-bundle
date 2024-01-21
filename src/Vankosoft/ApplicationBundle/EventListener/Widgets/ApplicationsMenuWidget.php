@@ -24,8 +24,8 @@ class ApplicationsMenuWidget extends WidgetLoader
         /** @var Item */
         $widgetItem = $this->createWidgetItem( 'main-menu-applications' );
         if( $widgetItem ) {
-            $widgetItem->setTemplate( '@VSApplication/Widgets/locales_menu.html.twig', [
-                'locales'   => $this->localesRepository->findAll(),
+            $widgetItem->setTemplate( '@VSApplication/Widgets/applications_menu.html.twig', [
+                'applications'  => $this->applicationsRepository->findAll(),
             ]);
             
             // Add Widgets

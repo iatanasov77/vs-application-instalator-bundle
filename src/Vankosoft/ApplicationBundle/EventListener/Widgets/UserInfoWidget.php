@@ -13,9 +13,14 @@ class UserInfoWidget extends WidgetLoader
         /** @var Item */
         $widgetItem = $this->createWidgetItem( 'user-info' );
         if( $widgetItem ) {
-            $widgetItem->setTemplate( '@VSApplication/Widgets/locales_menu.html.twig', [
-                'locales'   => $this->localesRepository->findAll(),
-            ]);
+            $widgetItem->setTemplate( '@VSApplication/Widgets/user_info.html.twig' )
+            //->setContent( 'pdWidget Text Content' )
+            //->setRole( ['USER_INFO_WIDGET'] )
+            
+            ->setData( function () {
+                return ['userCount' => 5];
+            })
+            ->setOrder( 5 );
             
             // Add Widgets
             $event->getWidgetContainer()->addWidget( $widgetItem );
