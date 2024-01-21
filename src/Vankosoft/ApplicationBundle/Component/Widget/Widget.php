@@ -63,7 +63,7 @@ class Widget implements WidgetInterface
         $this->widgetRepository = $widgetRepository;
         $this->widgetFactory    = $widgetFactory;
     }
-
+    
     /**
      * Used to Load Widgets into Database
      */

@@ -15,6 +15,7 @@ services:
         class: Vankosoft\ApplicationBundle\Component\Widget\WidgetBuilder
         arguments:
             - '@security.token_storage'
+            - '@vs_application.repository.widget'
             - '@vs_application.repository.widget_config'
             
     vs_application.widgets_container:
@@ -62,6 +63,7 @@ services:
     
     Vankosoft\ApplicationBundle\EventListener\Widgets\LocalesMenuWidget:
         arguments:
+            - '@vs_application.repository.widget'
             - '@vs_application.repository.locale'
         tags:
             - { name: kernel.event_listener, event: widget.start, method: builder }

@@ -10,24 +10,30 @@ use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
 class LocalesMenuWidget
 {
     /** @var EntityRepository */
+    private $widgetsRepository;
+    
+    /** @var EntityRepository */
     private $localesRepository;
     
-    public function __construct( EntityRepository $localesRepository )
+    public function __construct( EntityRepository $widgetsRepository, EntityRepository $localesRepository )
     {
+        $this->widgetsRepository    = $widgetsRepository;
         $this->localesRepository    = $localesRepository;
     }
     
     public function builder( WidgetEvent $event )
     {
+        $widget     = $this->widgetsRepository->findOneBy( ['code' => 'profile-menu-locales'] );
+        
         // Get Widget Container
         $widgets    = $event->getWidgetContainer();
         
         // Create Widget Item
-        $widgetItem = new Item( 'profile_menu_locales', 3600 );
-        $widgetItem->setGroup( 'admin_profile_menu' )
-                    ->setName( 'widget_locales_menu.name' )
-                    ->setDescription( 'widget_locales_menu.description' )
-                    ->setActive( true )
+        $widgetItem = new Item( $widget->getCode(), 3600 );
+        $widgetItem->setGroup( $widget->getGroup()->getCode() )
+                    ->setName( $widget->getName() )
+                    ->setDescription( $widget->getDescription() )
+                    ->setActive( $widget->getActive() )
                     ->setTemplate( '@VSApplication/Widgets/locales_menu.html.twig', [
                         'locales'   => $this->localesRepository->findAll(),
                     ]);
