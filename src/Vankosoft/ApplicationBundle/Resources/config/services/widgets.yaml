@@ -60,21 +60,17 @@ services:
     # Load Widgets
     ###################################################################
     Vankosoft\ApplicationBundle\EventListener\Widgets\UserInfoWidget:
-        arguments:
-            - '@vs_application.repository.widget'
         tags:
             - { name: kernel.event_listener, event: widget.start, method: builder }
     
     Vankosoft\ApplicationBundle\EventListener\Widgets\LocalesMenuWidget:
         arguments:
-            - '@vs_application.repository.widget'
             - '@vs_application.repository.locale'
         tags:
             - { name: kernel.event_listener, event: widget.start, method: builder }
             
     Vankosoft\ApplicationBundle\EventListener\Widgets\ApplicationsMenuWidget:
         arguments:
-            - '@vs_application.repository.widget'
             - '@vs_application.repository.application'
         tags:
             - { name: kernel.event_listener, event: widget.start, method: builder }
