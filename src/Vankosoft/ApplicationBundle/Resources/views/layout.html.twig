@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="{{ app.request.locale|slice(0, 2) }}">
 	<head>
-        <title>{% block title %}.:: {{ applicationTitle }} ( Admin Panel ){% endblock %}</title>
+        <title>{% block title %}.:: {{ applicationTitle | trans( {},'VSApplicationBundle' ) }}{% endblock %}</title>
 
         {% block head_meta %}
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

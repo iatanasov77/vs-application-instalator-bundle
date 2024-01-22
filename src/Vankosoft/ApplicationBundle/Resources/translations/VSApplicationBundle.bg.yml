@@ -59,10 +59,18 @@ vs_application:
         create_new_tags_whitelist_context: Създаване Тагове Контекст
         edit_tags_whitelist_context: Редакция Тагове Контекст
         widgets: Уиджети
+        list_widget_groups: Уиджет Групи
+        create_widget_group: Създаване Уиджет Група
+        update_widget_group: Редакция Уиджет Група
+        list_widgets: Уиджети
+        create_new_widget: Създаване Нов Уиджет
+        update_widget: Редакция Уиджет
+        widget_configs: Уиджет Конфигурации
 
     form:
         errors_title: 'Грешка!'
         enabled: 'Разрешен'
+        active: Активен
         locale: 'Език'
         translatable_locale: 'Език за Превод'
         locale_code: 'Локал Код'
@@ -70,6 +78,8 @@ vs_application:
         name: 'Име'
         hostname: 'Име на Хост'
         description: 'Описание'
+        group_label: Група
+        group_placeholder: '-- Избери Група --'
         tags: 'Тагове'
         parent: 'Родител'
         parent_category: 'Родителска Категория'
@@ -150,6 +160,7 @@ vs_application:
         items_index_row_number: Номер
         items_index_row_id: ID
         items_index_row_slug: Слуг
+        items_index_row_group: Група
         items_index_row_code: Код
         items_index_row_title: Заглавие
         items_index_row_name: Име
@@ -191,9 +202,19 @@ vs_application:
         tags_whitelist_contexts_update_title: Редакция Тагове Контекст
         tags_whitelist_contexts_details: Тагове Контекст Детайли
         
+        widgets_index_title: Уиджети
         reload_widgets: Презареждане Уиджети
         no_one: Никой
         test_widgets: Тестване Уиджети
+        
+        widgets_groups_index_title: Уиджет Групи
+        widgets_group_create_title: Създаване на Уиджет Група
+        widgets_group_update_title: Редакция Уиджет Група
+        widgets_group: Уиджет Група
+        widgets_create_title: Създаване на Уиджет
+        widgets_update_title: Редакция Уиджет
+        widget: Уиджет
+        load_widget: Зареди Уиджет
         
         contact_page:
             my_address: 'бул. "Ал. Стамболийски", Пловдив 4000'

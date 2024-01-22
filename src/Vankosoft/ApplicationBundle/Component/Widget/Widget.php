@@ -9,6 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
 
+use Vankosoft\ApplicationBundle\Component\Widget\Builder\Item;
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\ItemInterface;
 use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
 use Vankosoft\UsersBundle\Model\UserInterface;
@@ -31,10 +32,13 @@ class Widget implements WidgetInterface
     private $doctrine;
     
     /** @var EntityRepository */
-    private $widgetRepository;
+    private $widgetConfigRepository;
     
     /** @var Factory */
-    private $widgetFactory;
+    private $widgetConfigFactory;
+    
+    /** @var EntityRepository */
+    private $widgetRepository;
     
     /**
      * Widget Storage.
@@ -42,6 +46,13 @@ class Widget implements WidgetInterface
      * @var array|ItemInterface[]
      */
     private array $widgets = [];
+    
+    /**
+     * Widget Params
+     * 
+     * @var array
+     */
+    private array $widgetParams = [];
     
     
     private bool $checkRole;
@@ -52,18 +63,44 @@ class Widget implements WidgetInterface
         CacheItemPoolInterface $cache,
         TokenStorageInterface $token,
         ManagerRegistry $doctrine,
-        EntityRepository $widgetRepository,
-        Factory $widgetFactory
+        EntityRepository $widgetConfigRepository,
+        Factory $widgetConfigFactory,
+        EntityRepository $widgetRepository
     ) {
-        $this->security         = $security;
-        $this->eventDispatcher  = $eventDispatcher;
-        $this->cache            = $cache;
-        $this->token            = $token;
-        $this->doctrine         = $doctrine;
-        $this->widgetRepository = $widgetRepository;
-        $this->widgetFactory    = $widgetFactory;
+        $this->security                 = $security;
+        $this->eventDispatcher          = $eventDispatcher;
+        $this->cache                    = $cache;
+        $this->token                    = $token;
+        $this->doctrine                 = $doctrine;
+        $this->widgetConfigRepository   = $widgetConfigRepository;
+        $this->widgetConfigFactory      = $widgetConfigFactory;
+        $this->widgetRepository         = $widgetRepository;
     }
-
+    
+    /**
+     * 
+     * @param string $widgetCode
+     * @return ItemInterface|null
+     */
+    public function createWidgetItem( string $widgetCode, bool $checkRole = true ): ?ItemInterface
+    {
+        $this->checkRole    = $checkRole;
+        $widget             = $this->widgetRepository->findOneBy( ['code' => $widgetCode] );
+        
+        if ( $widget ) {
+            // Create Widget Item
+            $widgetItem = new Item( $widget->getCode(), 3600 );
+            $widgetItem->setGroup( $widget->getGroup()->getCode() )
+                        ->setName( $widget->getName() )
+                        ->setDescription( $widget->getDescription() )
+                        ->setActive( $widget->getActive() );
+            
+            return $widgetItem;
+        }
+        
+        return null;
+    }
+    
     /**
      * Used to Load Widgets into Database
      */
@@ -74,8 +111,8 @@ class Widget implements WidgetInterface
         
         foreach ( $widgets as $widgetId => $widgetVal ) {
             // Get User Widgets
-            $widgetConfig = $this->widgetRepository->findOneBy( ['owner' => $user] ) ??
-                            ( $this->widgetFactory->createNew() )->setOwner( $user );
+            $widgetConfig = $this->widgetConfigRepository->findOneBy( ['owner' => $user] ) ??
+                                ( $this->widgetConfigFactory->createNew() )->setOwner( $user );
             
             // Add Config Parameters
             $widgetConfig->addWidgetConfig( $widgetId, ['status' => 1] );

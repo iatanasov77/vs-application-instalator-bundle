@@ -1,13 +1,14 @@
 <?php namespace Vankosoft\ApplicationBundle\EventListener\Widgets;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Vankosoft\ApplicationBundle\Component\Widget\Widget;
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\Item;
 use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
 
 /**
  * MANUAL: https://github.com/cesurapp/pd-widget
  */
-class ApplicationsMenuWidget
+class ApplicationsMenuWidget implements WidgetLoaderInterface
 {
     /** @var EntityRepository */
     private $applicationsRepository;
@@ -19,20 +20,18 @@ class ApplicationsMenuWidget
     
     public function builder( WidgetEvent $event )
     {
-        // Get Widget Container
-        $widgets    = $event->getWidgetContainer();
+        /** @var Widget */
+        $widgetContainer    = $event->getWidgetContainer();
         
-        // Create Widget Item
-        $widgetItem = new Item( 'main_menu_applications', 3600 );
-        $widgetItem->setGroup( 'admin_main_menu' )
-                    ->setName( 'widget_applications_menu.name' )
-                    ->setDescription( 'widget_applications_menu.description' )
-                    ->setActive( true )
-                    ->setTemplate( '@VSApplication/Widgets/applications_menu.html.twig', [
-                        'applications'  => $this->applicationsRepository->findAll(),
-                    ]);
-                        
-        // Add Widgets
-        $widgets->addWidget( $widgetItem );
+        /** @var Item */
+        $widgetItem = $widgetContainer->createWidgetItem( 'main-menu-applications' );
+        if( $widgetItem ) {
+            $widgetItem->setTemplate( '@VSApplication/Widgets/applications_menu.html.twig', [
+                'applications'  => $this->applicationsRepository->findAll(),
+            ]);
+            
+            // Add Widgets
+            $widgetContainer->addWidget( $widgetItem );
+        }
     }
 }

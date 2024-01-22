@@ -1,13 +1,14 @@
 <?php namespace Vankosoft\ApplicationBundle\EventListener\Widgets;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Vankosoft\ApplicationBundle\Component\Widget\Widget;
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\Item;
 use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
 
 /**
  * MANUAL: https://github.com/cesurapp/pd-widget
  */
-class LocalesMenuWidget
+class LocalesMenuWidget implements WidgetLoaderInterface
 {
     /** @var EntityRepository */
     private $localesRepository;
@@ -19,20 +20,18 @@ class LocalesMenuWidget
     
     public function builder( WidgetEvent $event )
     {
-        // Get Widget Container
-        $widgets    = $event->getWidgetContainer();
+        /** @var Widget */
+        $widgetContainer    = $event->getWidgetContainer();
         
-        // Create Widget Item
-        $widgetItem = new Item( 'profile_menu_locales', 3600 );
-        $widgetItem->setGroup( 'admin_profile_menu' )
-                    ->setName( 'widget_locales_menu.name' )
-                    ->setDescription( 'widget_locales_menu.description' )
-                    ->setActive( true )
-                    ->setTemplate( '@VSApplication/Widgets/locales_menu.html.twig', [
-                        'locales'   => $this->localesRepository->findAll(),
-                    ]);
-                        
-        // Add Widgets
-        $widgets->addWidget( $widgetItem );
+        /** @var Item */
+        $widgetItem = $widgetContainer->createWidgetItem( 'profile-menu-locales' );
+        if( $widgetItem ) {
+            $widgetItem->setTemplate( '@VSApplication/Widgets/locales_menu.html.twig', [
+                'locales'   => $this->localesRepository->findAll(),
+            ]);
+            
+            // Add Widgets
+            $widgetContainer->addWidget( $widgetItem );
+        }
     }
 }

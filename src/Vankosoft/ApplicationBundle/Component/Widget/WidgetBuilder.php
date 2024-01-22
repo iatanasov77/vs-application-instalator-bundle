@@ -12,6 +12,9 @@ class WidgetBuilder implements WidgetBuilderInterface
     /** @var EntityRepository */
     private $widgetRepository;
     
+    /** @var EntityRepository */
+    private $widgetConfigRepository;
+    
     /**
      * User Widget Configuration.
      * 
@@ -21,12 +24,22 @@ class WidgetBuilder implements WidgetBuilderInterface
 
     public function __construct(
         TokenStorageInterface $tokenStorage,
-        EntityRepository $widgetRepository
+        EntityRepository $widgetRepository,
+        EntityRepository $widgetConfigRepository
     ) {
-        $this->tokenStorage     = $tokenStorage;
-        $this->widgetRepository = $widgetRepository;
+        $this->tokenStorage             = $tokenStorage;
+        $this->widgetRepository         = $widgetRepository;
+        $this->widgetConfigRepository   = $widgetConfigRepository;
     }
 
+    public function buildUserConfig( ?array $users = null ): ?array
+    {
+        $widgets    = $this->widgetRepository->findAll();
+        foreach ( $widgets as $widget ) {
+            
+        }
+    }
+    
     /**
      * Build Widgets.
      *
@@ -108,7 +121,7 @@ class WidgetBuilder implements WidgetBuilderInterface
     private function loadUserConfig(): void
     {
         if ( ! $this->widgetConfig ) {
-            $config = $this->widgetRepository->findOneBy([
+            $config = $this->widgetConfigRepository->findOneBy([
                 'owner' => $this->tokenStorage->getToken()->getUser(),
             ]);
 

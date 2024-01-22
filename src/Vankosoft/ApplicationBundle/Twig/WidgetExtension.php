@@ -53,7 +53,7 @@ class WidgetExtension extends AbstractExtension
      *
      * @return ItemInterface[]
      */
-    public function getWidget( string $widgetGroup = '', array $widgetId = [] ): array
+    public function getWidget( string $widgetGroup = '', array $widgetId = [], array $widgetParams = [] ): array
     {
         return $this->widgetBuilder->build( $this->widgets->getWidgets(), $widgetGroup, $widgetId, false );
     }

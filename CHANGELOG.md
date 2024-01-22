@@ -1,3 +1,19 @@
+1.10.158	|	Release date: **22.01.2024**
+============================================
+* New Features and Improvements:
+  - Some Improvements.
+  - Some Improvements on Application Installator Configs.
+  - Add to Application Installator Extended Configs.
+  - Add to Application Installator Configs.
+  - Create More Widget Management Features.
+  - Add Application Installator Configs.
+  - Create Installator Fixtures for New Widgets Models.
+  - Add WidgetGroup Repository.
+  - Add Feature to pass Parameters to Widgets in Twig.
+  - Remove Feature to pass Parameters to Widgets in Twig.
+  - Update Application Installator Configs.
+
+
 1.10.157	|	Release date: **06.01.2024**
 ============================================
 * Bug-Fixes:

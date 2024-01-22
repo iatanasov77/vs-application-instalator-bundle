@@ -16,6 +16,7 @@ services:
         arguments:
             - '@security.token_storage'
             - '@vs_application.repository.widget'
+            - '@vs_application.repository.widget_config'
             
     vs_application.widgets_container:
         class: Vankosoft\ApplicationBundle\Component\Widget\Widget
@@ -25,8 +26,9 @@ services:
             - '@cache.app'
             - '@security.token_storage'
             - '@doctrine'
+            - '@vs_application.repository.widget_config'
+            - '@vs_application.factory.widget_config'
             - '@vs_application.repository.widget'
-            - '@vs_application.factory.widget'
             
     vs_application.twig_widget_renderer:
         class: Vankosoft\ApplicationBundle\Twig\Renderer\WidgetRenderer
@@ -43,15 +45,16 @@ services:
             - '@vs_application.widgets_builder'
             - '@vs_application.widgets_container'
         
-    Vankosoft\ApplicationBundle\Controller\WidgetExtController:
+    Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController:
         tags: ['controller.service_arguments']
         autowire: true
         arguments:
             - '@cache.app'
             - '@doctrine'
             - '@vs_application.widgets_container'
+            - '@vs_application.repository.widget_config'
+            - '@vs_application.factory.widget_config'
             - '@vs_application.repository.widget'
-            - '@vs_application.factory.widget'
             
     ###################################################################
     # Load Widgets

@@ -92,3 +92,19 @@ services:
             - '@vs_application.fixture.example_factory.tags_whitelist_tags'
         tags:
             - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.widgets_groups:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\WidgetsGroupsFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.widgets_groups'
+        tags:
+            - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.widgets:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\WidgetsFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.widgets'
+        tags:
+            - 'sylius_fixtures.fixture'
