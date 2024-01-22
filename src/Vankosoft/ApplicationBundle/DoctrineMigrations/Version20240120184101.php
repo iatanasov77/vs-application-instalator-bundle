@@ -19,6 +19,8 @@ final class Version20240120184101 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        $this->addSql('TRUNCATE TABLE VSAPP_Widgets');
+
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE VSAPP_WidgetGroups (id INT AUTO_INCREMENT NOT NULL, taxon_id INT DEFAULT NULL, UNIQUE INDEX UNIQ_A6E1C666DE13F470 (taxon_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE VSAPP_WidgetsConfigs (id INT AUTO_INCREMENT NOT NULL, owner_id INT DEFAULT NULL, config LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', UNIQUE INDEX UNIQ_9FA9B94B7E3C61F9 (owner_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
