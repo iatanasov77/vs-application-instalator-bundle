@@ -80,3 +80,18 @@ services:
         arguments:
             - '@vs_application.repository.tags_whitelist_context'
             - '@vs_application.factory.tags_whitelist_tag'
+            
+    vs_application.fixture.example_factory.widgets_groups:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\WidgetsGroupsExampleFactory
+        arguments:
+            - '@vs_application.repository.taxonomy'
+            - '@vs_application.factory.taxon'
+            - '@vs_application.factory.widget_group'
+            - '@vs_application.slug_generator'
+            
+    vs_application.fixture.example_factory.widgets:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\WidgetsExampleFactory
+        arguments:
+            - '@vs_application.repository.widget_group'
+            - '@vs_application.factory.widget'
+            - '@vs_application.slug_generator'
