@@ -309,4 +309,78 @@ sylius_fixtures:
                             - context_code: 'static-pages'
                               tag: 'About Us'
                               
+                widgets_groups:
+                    name: widgets_groups
+                    options:
+                        custom:
+                            - title: 'Admin Main Menu'
+                              description: 'Widgets for Admin Panel Main Menu'
+                              taxonomy_code: 'widgets-groups'
+                              locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Admin Main Menu'
+                                      description: 'Widgets for Admin Panel Main Menu'
+                                  bg_BG:
+                                      title: 'Admin Main Menu'
+                                      description: 'Widgets for Admin Panel Main Menu'
+                            - title: 'Admin Profile Menu'
+                              description: 'Widgets for Admin Panel Profile Menu'
+                              taxonomy_code: 'widgets-groups'
+                              locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Admin Profile Menu'
+                                      description: 'Widgets for Admin Panel Profile Menu'
+                                  bg_BG:
+                                      title: 'Admin Profile Menu'
+                                      description: 'Widgets for Admin Panel Profile Menu'
+                            - title: 'Admin Profile Page'
+                              description: 'Widgets for Admin Panel Profile Page'
+                              taxonomy_code: 'widgets-groups'
+                              locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Admin Profile Page'
+                                      description: 'Widgets for Admin Panel Profile Page'
+                                  bg_BG:
+                                      title: 'Admin Profile Page'
+                                      description: 'Widgets for Admin Panel Profile Page'
+                            - title: 'Test Widgets'
+                              description: 'Widgets for Testing'
+                              taxonomy_code: 'widgets-groups'
+                              locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Test Widgets'
+                                      description: 'Widgets for Testing'
+                                  bg_BG:
+                                      title: 'Test Widgets'
+                                      description: 'Widgets for Testing'
+                                      
+                widgets:
+                    name: widgets
+                    options:
+                        custom:
+                            - group_code: 'admin-main-menu'
+                              locale:  '%locale%'
+                              name: 'Main Menu Applications'
+                              description: 'Main Menu Applications'
+                              active: true
+                            - group_code: 'admin-profile-menu'
+                              locale:  '%locale%'
+                              name: 'Profile Menu Locales'
+                              description: 'Profile Menu Locales'
+                              active: true
+                            - group_code: 'admin-profile-page'
+                              locale:  '%locale%'
+                              name: 'User Info'
+                              description: 'User Info'
+                              active: true
+                            - group_code: 'test-widgets'
+                              locale:  '%locale%'
+                              name: 'Test Widget 1'
+                              description: 'Test Widget 1'
+                              active: true
+                              
 
