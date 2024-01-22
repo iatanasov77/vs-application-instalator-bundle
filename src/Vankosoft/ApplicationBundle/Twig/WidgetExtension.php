@@ -45,6 +45,8 @@ class WidgetExtension extends AbstractExtension
      */
     public function renderWidget( string $widgetGroup = '', array $widgetId = [], array $widgetParams = [] ): string
     {
+        $this->widgets->setWidgetParams( $widgetParams );
+        
         return $this->engine->render( $this->widgetBuilder->build( $this->widgets->getWidgets(), $widgetGroup, $widgetId, true ) );
     }
 
@@ -55,6 +57,8 @@ class WidgetExtension extends AbstractExtension
      */
     public function getWidget( string $widgetGroup = '', array $widgetId = [], array $widgetParams = [] ): array
     {
+        $this->widgets->setWidgetParams( $widgetParams );
+        
         return $this->widgetBuilder->build( $this->widgets->getWidgets(), $widgetGroup, $widgetId, false );
     }
 }
