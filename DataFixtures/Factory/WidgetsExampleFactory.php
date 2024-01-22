@@ -5,6 +5,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetInterface;
+use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 
 class WidgetsExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
