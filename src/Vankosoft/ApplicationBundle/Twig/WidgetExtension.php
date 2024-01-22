@@ -43,7 +43,7 @@ class WidgetExtension extends AbstractExtension
     /**
      * Render Widget Group|Item.
      */
-    public function renderWidget( string $widgetGroup = '', array $widgetId = [] ): string
+    public function renderWidget( string $widgetGroup = '', array $widgetId = [], array $widgetParams = [] ): string
     {
         return $this->engine->render( $this->widgetBuilder->build( $this->widgets->getWidgets(), $widgetGroup, $widgetId, true ) );
     }
@@ -53,7 +53,7 @@ class WidgetExtension extends AbstractExtension
      *
      * @return ItemInterface[]
      */
-    public function getWidget( string $widgetGroup = '', array $widgetId = [] ): array
+    public function getWidget( string $widgetGroup = '', array $widgetId = [], array $widgetParams = [] ): array
     {
         return $this->widgetBuilder->build( $this->widgets->getWidgets(), $widgetGroup, $widgetId, false );
     }
