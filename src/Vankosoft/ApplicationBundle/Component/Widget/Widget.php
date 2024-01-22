@@ -204,24 +204,4 @@ class Widget implements WidgetInterface
             }
         }
     }
-    
-    /**
-     * Set Widget Params to Use in Widget Loader
-     * 
-     * @param array $widgetParams
-     */
-    public function setWidgetParams( array $widgetParams ): void
-    {
-        $this->widgetParams = $widgetParams;
-    }
-    
-    /**
-     * Get Widget Params
-     * 
-     * @return array
-     */
-    public function getWidgetParams(): array
-    {
-        return $this->widgetParams;
-    }
 }
