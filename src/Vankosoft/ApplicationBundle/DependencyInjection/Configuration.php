@@ -55,6 +55,7 @@ use Vankosoft\ApplicationBundle\Model\TagsWhitelistTag;
 use Vankosoft\ApplicationBundle\Repository\TagsWhitelistTagsRepository;
 
 use Vankosoft\ApplicationBundle\Model\WidgetGroup;
+use Vankosoft\ApplicationBundle\Repository\WidgetGroupRepository;
 use Vankosoft\ApplicationBundle\Controller\WidgetsGroupsController;
 use Vankosoft\ApplicationBundle\Form\WidgetsGroupForm;
 
@@ -317,7 +318,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( WidgetGroup::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( WidgetGroupRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
                                         ->scalarNode( 'controller' )->defaultValue( WidgetsGroupsController::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'form' )->defaultValue( WidgetsGroupForm::class )->cannotBeEmpty()->end()
