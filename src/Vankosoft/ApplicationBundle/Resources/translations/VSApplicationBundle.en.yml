@@ -1,4 +1,11 @@
 vs_application:
+    data_collector:
+        applications: Applications
+        change: change
+        title: Vankosoft Application
+        extensions: Extensions
+        locales: Locales
+    
     menu:
         dashboard: Dashboard
         system: System

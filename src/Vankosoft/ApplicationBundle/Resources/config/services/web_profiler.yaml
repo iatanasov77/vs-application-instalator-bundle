@@ -8,6 +8,7 @@ services:
         class: Vankosoft\ApplicationBundle\DataCollector\VsApplicationCollector
         arguments:
             - '@request_stack'
+            - '@vs_application.repository.locale'
             - '%vs_application.version%'
             - '%kernel.bundles%'
             - '%locale%'
