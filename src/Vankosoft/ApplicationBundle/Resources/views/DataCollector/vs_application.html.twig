@@ -37,14 +37,15 @@
                 <b>{{ 'vs_application.data_collector.locales' | trans( {},'VSApplicationBundle' ) }}</b>
                 {% for locale in collector.locales %}
                 
-                    {% set localeTitle = locale.code %}
-                    
                     {% if locale.current %}
                         {% set localeColor = 'green' %}
+                        {% set localeTitle = 'Current Locle' %}
                     {% elseif locale.default %}
                         {% set localeColor = 'yellow' %}
+                        {% set localeTitle = 'Default Locale' %}
                     {% else %}
                         {% set localeColor = 'red' %}
+                        {% set localeTitle = locale.code %}
                     {% endif %}
                     
                     <span class="sf-toolbar-status sf-toolbar-status-{{ localeColor }}">
