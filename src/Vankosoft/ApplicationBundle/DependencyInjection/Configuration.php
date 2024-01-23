@@ -9,6 +9,8 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
+use Vankosoft\ApplicationBundle\Component\Application\Project;
+
 use Vankosoft\ApplicationBundle\Model\Locale;
 use Vankosoft\ApplicationBundle\Controller\LocalesController;
 use Vankosoft\ApplicationBundle\Form\LocaleForm;
@@ -84,6 +86,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
+                ->scalarNode( 'project_type' )->defaultValue( Project::PROJECT_TYPE_APPLICATION )->cannotBeEmpty()->end()
                 ->booleanNode( 'prepend_doctrine_migrations' )->defaultTrue()->end()
                 ->scalarNode( 'orm_driver' )->defaultValue( SyliusResourceBundle::DRIVER_DOCTRINE_ORM )->cannotBeEmpty()->end()
                 ->arrayNode( 'taxonomy' )
