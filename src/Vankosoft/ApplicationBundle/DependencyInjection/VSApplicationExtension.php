@@ -33,6 +33,7 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
         $this->registerResources( 'vs_application', $config['orm_driver'], $config['resources'], $container );
         
         // Set values need to be accesible from controller
+        $container->setParameter( 'vs_application.project_type', $config[ 'project_type' ] );
         $container->setParameter( 'vs_application.taxonomy', $config[ 'taxonomy' ] );
     }
     

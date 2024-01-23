@@ -1,6 +1,7 @@
 <?php namespace Vankosoft\ApplicationBundle\DataCollector;
 
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -15,6 +16,7 @@ final class VsApplicationCollector extends DataCollector
 {
     public function __construct(
         RequestStack $requestStack,
+        RepositoryInterface $localesRepository,
         string $version,
         array $bundles,
         string $defaultLocaleCode
@@ -22,13 +24,26 @@ final class VsApplicationCollector extends DataCollector
         $mainRequest    = $requestStack->getMainRequest();
         
         if ( $mainRequest ) {
+            $currentLocale  = $mainRequest->getLocale();
+            
+            $locales        = [];
+            foreach ( $localesRepository->findAll() as $locale ) {
+                $locales[]  = [
+                    'code'      => $locale->getCode(),
+                    'current'   => ( $currentLocale == $locale->getCode() ),
+                    'default'   => ( $defaultLocaleCode == $locale->getCode() ),
+                ];
+            }
+            
             $this->data = [
                 'version'               => $version,
                 'default_locale_code'   => $defaultLocaleCode,
-                'locale_code'           => $mainRequest->getLocale(),
+                'locale_code'           => $currentLocale,
+                'locales'               => $locales,
                 'extensions'            => [
                     'VSUsersSubscriptionsBundle'    => ['name' => 'Subscription', 'enabled' => false],
                     'VSPaymentBundle'               => ['name' => 'Payment', 'enabled' => false],
+                    'VSCatalogBundle'               => ['name' => 'Catalog', 'enabled' => false],
                     'VSApiBundle'                   => ['name' => 'API', 'enabled' => false],
                 ],
             ];
@@ -49,6 +64,11 @@ final class VsApplicationCollector extends DataCollector
     public function getExtensions(): array
     {
         return $this->data['extensions'];
+    }
+    
+    public function getLocales(): array
+    {
+        return $this->data['locales'];
     }
     
     /**
