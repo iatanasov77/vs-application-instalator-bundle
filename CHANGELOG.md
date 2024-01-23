@@ -1,3 +1,12 @@
+1.10.159	|	Release date: **23.01.2024**
+============================================
+* New Features:
+  - Add NestedTree Trait and Interface to be used in Tree Models.
+  - Add a Project Type Application Config Option.
+  - Improve WebProfiler DataCollector
+
+
+
 1.10.158	|	Release date: **22.01.2024**
 ============================================
 * New Features and Improvements:
