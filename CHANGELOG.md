@@ -1,3 +1,11 @@
+1.10.160	|	Release date: **24.01.2024**
+============================================
+* New Features:
+  - Improve WebProfiler DataCollector
+  - Improve Installator to Install Different Project Types.
+
+
+
 1.10.159	|	Release date: **23.01.2024**
 ============================================
 * New Features:
