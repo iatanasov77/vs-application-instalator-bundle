@@ -8,6 +8,7 @@ use Symfony\Component\Yaml\Exception\ParseException;
 use Twig\Environment;
 
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
+use Vankosoft\ApplicationBundle\Component\Application\Project;
 
 class ApplicationSetup
 {
@@ -96,7 +97,6 @@ class ApplicationSetup
     {
         $this->applicationDefaultLocale = $localeCode;
         $this->newProjectInstall        = $newProjectInstall;
-        $this->isExtendedProject        = \array_key_exists( 'VSPaymentBundle', $this->container->getParameter( 'kernel.bundles' ) );
         $this->_initialize();
         
         $applicationDirs                = $this->getApplicationDirectories( $applicationName );
@@ -109,7 +109,7 @@ class ApplicationSetup
         $this->setupApplicationLoginPage();
         $this->setupApplicationConfigs();
         
-        if ( $this->isExtendedProject ) {
+        if ( $this->isCatalogProject() || $this->isExtendedProject() ) {
             $this->setupApplicationExtendedPages();
         }
         
@@ -187,13 +187,44 @@ class ApplicationSetup
         }
     }
     
+    private function getProjectType(): ?string
+    {
+        return $this->container->getParameter( 'vs_application.project_type' );
+    }
+    
+    private function isBaseProject(): bool
+    {
+        return $this->getProjectType() == Project::PROJECT_TYPE_APPLICATION;
+    }
+    
+    private function isCatalogProject(): bool
+    {
+        // \array_key_exists( 'VSPaymentBundle', $this->container->getParameter( 'kernel.bundles' ) );
+        return $this->getProjectType() == Project::PROJECT_TYPE_CATALOG;
+    }
+    
+    private function isExtendedProject(): bool
+    {
+        // \array_key_exists( 'VSPaymentBundle', $this->container->getParameter( 'kernel.bundles' ) );
+        return $this->getProjectType() == Project::PROJECT_TYPE_EXTENDED;
+    }
+    
     private function setupApplicationDirectories( $applicationDirs ): void
     {
-        $zip                = new \ZipArchive;
+        $zip            = new \ZipArchive;
         
-        $configsRootDir     = '@VSApplicationInstalatorBundle/Resources/application/';
-        if ( $this->isExtendedProject ) {
-            $configsRootDir     = '@VSApplicationInstalatorBundle/Resources/application-extended/';
+        switch ( $this->getProjectType() ) {
+            case Project::PROJECT_TYPE_APPLICATION:
+                $configsRootDir = '@VSApplicationInstalatorBundle/Resources/application/';
+                break;
+            case Project::PROJECT_TYPE_CATALOG:
+                $configsRootDir = '@VSApplicationInstalatorBundle/Resources/application-catalog/';
+                break;
+            case Project::PROJECT_TYPE_EXTENDED:
+                $configsRootDir = '@VSApplicationInstalatorBundle/Resources/application-extended/';
+                break;
+            default:
+                throw new SetupException( 'Unknown Project Type !' );
         }
         
         try {
@@ -320,7 +351,7 @@ class ApplicationSetup
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml', $configLiipImagine );
         
-        if ( $this->isExtendedProject ) {
+        if ( $this->isCatalogProject() || $this->isExtendedProject() ) {
             // Setup Services and Parameters
             $configServices = str_replace(
                 [ "__application_namespace__"],
@@ -429,7 +460,7 @@ class ApplicationSetup
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_users.yaml', $configRoutes );
         
-        if ( $this->isExtendedProject ) {
+        if ( $this->isCatalogProject() || $this->isExtendedProject() ) {
             $configRoutes   = str_replace(
                 ["__application_name__"],
                 [$this->applicationNamespace],

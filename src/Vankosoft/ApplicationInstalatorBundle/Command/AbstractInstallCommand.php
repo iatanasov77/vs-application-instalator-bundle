@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use Vankosoft\ApplicationBundle\Component\Application\Project;
 use Vankosoft\ApplicationBundle\Command\ContainerAwareCommand;
 use Vankosoft\ApplicationInstalatorBundle\Installer\Executor\CommandExecutor;
 
@@ -34,9 +35,26 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         return (bool) $this->getParameter( 'kernel.debug' );
     }
     
+    protected function getProjectType(): ?string
+    {
+        return $this->getParameter( 'vs_application.project_type' );
+    }
+    
+    protected function isBaseProject(): bool
+    {
+        return $this->getProjectType() == Project::PROJECT_TYPE_APPLICATION;
+    }
+    
+    protected function isCatalogProject(): bool
+    {
+        // \array_key_exists( 'VSPaymentBundle', $this->getParameter( 'kernel.bundles' ) );
+        return $this->getProjectType() == Project::PROJECT_TYPE_CATALOG;
+    }
+    
     protected function isExtendedProject(): bool
     {
-        return \array_key_exists( 'VSPaymentBundle', $this->getParameter( 'kernel.bundles' ) );
+        // \array_key_exists( 'VSPaymentBundle', $this->getParameter( 'kernel.bundles' ) );
+        return $this->getProjectType() == Project::PROJECT_TYPE_EXTENDED;
     }
     
     protected function renderTable( array $headers, array $rows, OutputInterface $output ): void

@@ -21,6 +21,10 @@
             {{ knp_menu_render('mainPayment', {'template': '@VSPayment/Menu/mainPayment.html.twig'}) }}
         {% endif %}
         
+        {% if installedBundles['VSCatalogBundle'] is defined %}
+            {{ knp_menu_render('mainCatalog', {'template': '@VSCatalog/Menu/mainCatalog.html.twig'}) }}
+        {% endif %}
+        
         </ul>
     	<!-- sidebar menu end-->
     </div>
