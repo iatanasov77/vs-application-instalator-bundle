@@ -109,7 +109,12 @@ class ApplicationSetup
         $this->setupApplicationLoginPage();
         $this->setupApplicationConfigs();
         
-        if ( $this->isCatalogProject() || $this->isExtendedProject() ) {
+        if ( $this->isCatalogProject() ) {
+            $this->setupApplicationCatalogPages();
+        }
+        
+        if ( $this->isExtendedProject() ) {
+            $this->setupApplicationCatalogPages();
             $this->setupApplicationExtendedPages();
         }
         
@@ -512,7 +517,7 @@ class ApplicationSetup
         }
     }
     
-    private function setupApplicationExtendedPages()
+    private function setupApplicationCatalogPages()
     {
         $filesystem             = new Filesystem();
         $projectRootDir         = $this->container->get( 'kernel' )->getProjectDir();
@@ -548,6 +553,13 @@ class ApplicationSetup
         $applicationAuthController  = str_replace(
             ["__application_name__", "__application_slug__"],
             [$this->applicationNamespace, $this->applicationSlug],
+            file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ProfileController.php' )
+        );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ProfileController.php', $applicationAuthController );
+        
+        $applicationAuthController  = str_replace(
+            ["__application_name__", "__application_slug__"],
+            [$this->applicationNamespace, $this->applicationSlug],
             file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ProductController.php' )
         );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ProductController.php', $applicationAuthController );
@@ -572,6 +584,11 @@ class ApplicationSetup
             file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/CreditCardController.php' )
         );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/CreditCardController.php', $applicationAuthController );
+    }
+    
+    private function setupApplicationExtendedPages()
+    {
+        
     }
     
     private function setupInstalationInfo()
