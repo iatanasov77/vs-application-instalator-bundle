@@ -1,3 +1,10 @@
+1.10.162	|	Release date: **25.01.2024**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix and Improve ApplicationSetup Component.
+  - Fix Application Installator Configs.
+
+
 1.10.161	|	Release date: **25.01.2024**
 ============================================
 * New Features:
