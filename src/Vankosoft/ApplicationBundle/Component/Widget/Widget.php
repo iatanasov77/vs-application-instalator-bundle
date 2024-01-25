@@ -104,10 +104,10 @@ class Widget implements WidgetInterface
     /**
      * Used to Load Widgets into Database
      */
-    public function loadWidgets( ?UserInterface $user )
+    public function loadWidgets( ?UserInterface $user, $checkRole = true )
     {
         // Build Widgets
-        $widgets = $this->getWidgets();
+        $widgets = $this->getWidgets( $checkRole );
         
         foreach ( $widgets as $widgetId => $widgetVal ) {
             // Get User Widgets

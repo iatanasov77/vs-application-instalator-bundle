@@ -156,9 +156,9 @@ EOT
     {
         $users  = $this->get( 'vs_users.repository.users' )->findAll();
         foreach ( $users as $user ) {
-            $this->get( 'vs_application.widgets_container' )->loadWidgets( $user );
+            $this->get( 'vs_application.widgets_container' )->loadWidgets( $user, false );
         }
-        $this->get( 'vs_application.widgets_container' )->loadWidgets( null );
+        $this->get( 'vs_application.widgets_container' )->loadWidgets( null, false );
     }
     
     private function getProperFinalMessage( bool $errored ): string
