@@ -1,6 +1,8 @@
-const Encore        = require('@symfony/webpack-encore');
+const Encore        = require( '@symfony/webpack-encore' );
+const pathExists    = require( 'path-exists' );
 
-const assetsPath    = './vendor/vankosoft/application/src/Vankosoft/ApplicationBundle/Resources/themes/default/assets';
+const projectAssetsPath = './assets';
+const baseAssetsPath    = './vendor/vankosoft/application/src/Vankosoft/ApplicationBundle/Resources/themes/default/assets';
 
 Encore
     .setOutputPath( 'public/admin-panel/build/default/' )
@@ -40,84 +42,90 @@ Encore
     
     // CKeditor 4 Extra Plugins
     .copyFiles([
-        {from: assetsPath + '/vendor/ckeditor4_plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
+        {from: baseAssetsPath + '/vendor/ckeditor4_plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
     ])
     
     .copyFiles([
-        {from: assetsPath + '/images', to: 'images/[path][name].[ext]'},
+        {from: baseAssetsPath + '/images', to: 'images/[path][name].[ext]'},
         {from: './node_modules/bootstrap-sass/assets/fonts/bootstrap', to: 'fonts/bootstrap/[name].[ext]'},
     ])
      
     //////////////////////////////////////////////////////////////////
     // ASSETS
     //////////////////////////////////////////////////////////////////
-    .addEntry( 'js/app', assetsPath + '/js/app.js' )
-    .addStyleEntry( 'css/global', assetsPath + '/css/main.scss' )
+    .addEntry( 'js/app', baseAssetsPath + '/js/app.js' )
+    .addStyleEntry( 'css/global', baseAssetsPath + '/css/main.scss' )
     
-    .addEntry( 'js/resource-delete', assetsPath + '/js/pages/resource-delete.js' )
+    .addEntry( 'js/resource-delete', baseAssetsPath + '/js/pages/resource-delete.js' )
     
-    .addEntry( 'js/settings', assetsPath + '/js/pages/settings.js' )
-    .addEntry( 'js/applications', assetsPath + '/js/pages/applications.js' )
-    .addEntry( 'js/profile', assetsPath + '/js/pages/profile.js' )
-    .addEntry( 'js/taxonomy-vocabolaries', assetsPath + '/js/pages/taxonomy-vocabolaries.js' )
-    .addEntry( 'js/taxonomy-vocabolaries-edit', assetsPath + '/js/pages/taxonomy-vocabolaries-edit.js' )
-    .addEntry( 'js/locales', assetsPath + '/js/pages/locales.js' )
-    .addEntry( 'js/cookie-consent-translations', assetsPath + '/js/pages/cookie-consent-translations.js' )
-    .addEntry( 'js/cookie-consent-translations-edit', assetsPath + '/js/pages/cookie-consent-translations-edit.js' )
-    .addEntry( 'js/tags-whitelist-contexts', assetsPath + '/js/pages/tags-whitelist-contexts.js' )
+    .addEntry( 'js/settings', baseAssetsPath + '/js/pages/settings.js' )
+    .addEntry( 'js/applications', baseAssetsPath + '/js/pages/applications.js' )
+    .addEntry( 'js/profile', baseAssetsPath + '/js/pages/profile.js' )
+    .addEntry( 'js/taxonomy-vocabolaries', baseAssetsPath + '/js/pages/taxonomy-vocabolaries.js' )
+    .addEntry( 'js/taxonomy-vocabolaries-edit', baseAssetsPath + '/js/pages/taxonomy-vocabolaries-edit.js' )
+    .addEntry( 'js/locales', baseAssetsPath + '/js/pages/locales.js' )
+    .addEntry( 'js/cookie-consent-translations', baseAssetsPath + '/js/pages/cookie-consent-translations.js' )
+    .addEntry( 'js/cookie-consent-translations-edit', baseAssetsPath + '/js/pages/cookie-consent-translations-edit.js' )
+    .addEntry( 'js/tags-whitelist-contexts', baseAssetsPath + '/js/pages/tags-whitelist-contexts.js' )
     
-    .addEntry( 'js/pages-categories', assetsPath + '/js/pages/pages_categories.js' )
-    .addEntry( 'js/pages-categories-edit', assetsPath + '/js/pages/pages_categories_edit.js' )
-    .addEntry( 'js/pages-index', assetsPath + '/js/pages/pages-index.js' )
-    .addEntry( 'js/pages-edit', assetsPath + '/js/pages/pages-edit.js' )
-    .addEntry( 'js/documents-index', assetsPath + '/js/pages/documents-index.js' )
-    .addEntry( 'js/documents-edit', assetsPath + '/js/pages/documents-edit.js' )
-    .addEntry( 'js/toc-pages', assetsPath + '/js/pages/toc-pages.js' )
-    .addEntry( 'js/toc-pages-delete', assetsPath + '/js/pages/toc-pages-delete.js' )
+    .addEntry( 'js/pages-categories', baseAssetsPath + '/js/pages/pages_categories.js' )
+    .addEntry( 'js/pages-categories-edit', baseAssetsPath + '/js/pages/pages_categories_edit.js' )
+    .addEntry( 'js/pages-index', baseAssetsPath + '/js/pages/pages-index.js' )
+    .addEntry( 'js/pages-edit', baseAssetsPath + '/js/pages/pages-edit.js' )
+    .addEntry( 'js/documents-index', baseAssetsPath + '/js/pages/documents-index.js' )
+    .addEntry( 'js/documents-edit', baseAssetsPath + '/js/pages/documents-edit.js' )
+    .addEntry( 'js/toc-pages', baseAssetsPath + '/js/pages/toc-pages.js' )
+    .addEntry( 'js/toc-pages-delete', baseAssetsPath + '/js/pages/toc-pages-delete.js' )
     
-    .addEntry( 'js/users-index', assetsPath + '/js/pages/users-index.js' )
-    .addEntry( 'js/users-edit', assetsPath + '/js/pages/users-edit.js' )
-    .addEntry( 'js/users-roles-index', assetsPath + '/js/pages/users-roles-index.js' )
-    .addEntry( 'js/users-roles-edit', assetsPath + '/js/pages/users-roles-edit.js' )
+    .addEntry( 'js/users-index', baseAssetsPath + '/js/pages/users-index.js' )
+    .addEntry( 'js/users-edit', baseAssetsPath + '/js/pages/users-edit.js' )
+    .addEntry( 'js/users-roles-index', baseAssetsPath + '/js/pages/users-roles-index.js' )
+    .addEntry( 'js/users-roles-edit', baseAssetsPath + '/js/pages/users-roles-edit.js' )
     
-    .addEntry( 'js/filemanager-index', assetsPath + '/js/pages/filemanager-index.js' )
-    .addEntry( 'js/filemanager-file-upload', assetsPath + '/js/pages/filemanager-file-upload.js' )
+    .addEntry( 'js/filemanager-index', baseAssetsPath + '/js/pages/filemanager-index.js' )
+    .addEntry( 'js/filemanager-file-upload', baseAssetsPath + '/js/pages/filemanager-file-upload.js' )
     
-    .addEntry( 'js/widget-groups', assetsPath + '/js/pages/widget-groups.js' )
-    .addEntry( 'js/widgets', assetsPath + '/js/pages/widgets.js' )
+    .addEntry( 'js/widget-groups', baseAssetsPath + '/js/pages/widget-groups.js' )
+    .addEntry( 'js/widgets', baseAssetsPath + '/js/pages/widgets.js' )
     
     //////////////////////////////////////////////////////////////////
     // Payment Pages
     //////////////////////////////////////////////////////////////////
-    .addEntry( 'js/gateway-config', assetsPath + '/js/payment_pages/gateway-config.js' )
-    .addEntry( 'js/currencies', assetsPath + '/js/payment_pages/currencies.js' )
-    .addEntry( 'js/exchange-rates', assetsPath + '/js/payment_pages/exchange-rates.js' )
-    .addEntry( 'js/product-categories', assetsPath + '/js/payment_pages/product-categories.js' )
-    .addEntry( 'js/product-categories-edit', assetsPath + '/js/payment_pages/product-categories-edit.js' )
-    .addEntry( 'js/products-index', assetsPath + '/js/payment_pages/products-index.js' )
-    .addEntry( 'js/products-edit', assetsPath + '/js/payment_pages/products-edit.js' )
-    .addEntry( 'js/pricing-plan-categories', assetsPath + '/js/payment_pages/pricing-plan-categories.js' )
-    .addEntry( 'js/pricing-plan-categories-edit', assetsPath + '/js/payment_pages/pricing-plan-categories-edit.js' )
-    .addEntry( 'js/pricing-plans-index', assetsPath + '/js/payment_pages/pricing-plans-index.js' )
-    .addEntry( 'js/pricing-plans-edit', assetsPath + '/js/payment_pages/pricing-plans-edit.js' )
-    .addEntry( 'js/recieved-payments', assetsPath + '/js/payment_pages/recieved-payments.js' )
-    .addEntry( 'js/orders', assetsPath + '/js/payment_pages/orders.js' )
-    .addEntry( 'js/pricing-plan-subscriptions', assetsPath + '/js/payment_pages/pricing-plan-subscriptions.js' )
-    .addEntry( 'js/pricing-plan-subscription-payments', assetsPath + '/js/payment_pages/pricing-plan-subscription-payments.js' )
-    .addEntry( 'js/stripe-webhook-endpoint', assetsPath + '/js/payment_pages/stripe-webhook-endpoint.js' )
-    .addEntry( 'js/coupon-objects', assetsPath + '/js/payment_pages/coupon-objects.js' )
-    .addEntry( 'js/coupons-index', assetsPath + '/js/payment_pages/coupons-index.js' )
-    .addEntry( 'js/coupons-edit', assetsPath + '/js/payment_pages/coupons-edit.js' )
+    .addEntry( 'js/gateway-config', baseAssetsPath + '/js/payment_pages/gateway-config.js' )
+    .addEntry( 'js/currencies', baseAssetsPath + '/js/payment_pages/currencies.js' )
+    .addEntry( 'js/exchange-rates', baseAssetsPath + '/js/payment_pages/exchange-rates.js' )
+    .addEntry( 'js/product-categories', baseAssetsPath + '/js/payment_pages/product-categories.js' )
+    .addEntry( 'js/product-categories-edit', baseAssetsPath + '/js/payment_pages/product-categories-edit.js' )
+    .addEntry( 'js/products-index', baseAssetsPath + '/js/payment_pages/products-index.js' )
+    .addEntry( 'js/products-edit', baseAssetsPath + '/js/payment_pages/products-edit.js' )
+    .addEntry( 'js/pricing-plan-categories', baseAssetsPath + '/js/payment_pages/pricing-plan-categories.js' )
+    .addEntry( 'js/pricing-plan-categories-edit', baseAssetsPath + '/js/payment_pages/pricing-plan-categories-edit.js' )
+    .addEntry( 'js/pricing-plans-index', baseAssetsPath + '/js/payment_pages/pricing-plans-index.js' )
+    .addEntry( 'js/pricing-plans-edit', baseAssetsPath + '/js/payment_pages/pricing-plans-edit.js' )
+    .addEntry( 'js/recieved-payments', baseAssetsPath + '/js/payment_pages/recieved-payments.js' )
+    .addEntry( 'js/orders', baseAssetsPath + '/js/payment_pages/orders.js' )
+    .addEntry( 'js/pricing-plan-subscriptions', baseAssetsPath + '/js/payment_pages/pricing-plan-subscriptions.js' )
+    .addEntry( 'js/pricing-plan-subscription-payments', baseAssetsPath + '/js/payment_pages/pricing-plan-subscription-payments.js' )
+    .addEntry( 'js/stripe-webhook-endpoint', baseAssetsPath + '/js/payment_pages/stripe-webhook-endpoint.js' )
+    .addEntry( 'js/coupon-objects', baseAssetsPath + '/js/payment_pages/coupon-objects.js' )
+    .addEntry( 'js/coupons-index', baseAssetsPath + '/js/payment_pages/coupons-index.js' )
+    .addEntry( 'js/coupons-edit', baseAssetsPath + '/js/payment_pages/coupons-edit.js' )
     
     //////////////////////////////////////////////////////////////////
     // Subscription Pages
     //////////////////////////////////////////////////////////////////
-    .addEntry( 'js/payed-services-edit', assetsPath + '/js/subscription_pages/payed-services-edit.js' )
-    .addEntry( 'js/payed-services-listing', assetsPath + '/js/subscription_pages/payed-services-listing.js' )
-    .addEntry( 'js/payed-services-categories-listing', assetsPath + '/js/subscription_pages/payed-services-categories-listing.js' )
-    .addEntry( 'js/mailchimp-audiences-listing', assetsPath + '/js/subscription_pages/mailchimp-audiences-listing.js' )
-    .addEntry( 'js/payed-service-subscriptions', assetsPath + '/js/subscription_pages/payed-service-subscriptions.js' )
+    .addEntry( 'js/payed-services-edit', baseAssetsPath + '/js/subscription_pages/payed-services-edit.js' )
+    .addEntry( 'js/payed-services-listing', baseAssetsPath + '/js/subscription_pages/payed-services-listing.js' )
+    .addEntry( 'js/payed-services-categories-listing', baseAssetsPath + '/js/subscription_pages/payed-services-categories-listing.js' )
+    .addEntry( 'js/mailchimp-audiences-listing', baseAssetsPath + '/js/subscription_pages/mailchimp-audiences-listing.js' )
+    .addEntry( 'js/payed-service-subscriptions', baseAssetsPath + '/js/subscription_pages/payed-service-subscriptions.js' )
 ;
+
+if ( pathExists.sync( projectAssetsPath + '/test-js.js' ) ) {
+    Encore
+        .addEntry( 'test-js', baseAssetsPath + '/test-js.js' )
+    ;
+}
 
 const config = Encore.getWebpackConfig();
 config.name = 'adminPanel';
