@@ -123,7 +123,7 @@ Encore
 
 if ( pathExists.sync( projectAssetsPath + '/test-js.js' ) ) {
     Encore
-        .addEntry( 'test-js', baseAssetsPath + '/test-js.js' )
+        .addEntry( 'test-js', projectAssetsPath + '/test-js.js' )
     ;
 }
 
