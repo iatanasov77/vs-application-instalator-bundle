@@ -1,3 +1,9 @@
+1.10.166	|	Release date: **31.01.2024**
+============================================
+* Bug-Fixes:
+  - Fix Installtor Install Application Configuration Command.
+
+
 1.10.165	|	Release date: **31.01.2024**
 ============================================
 * Bug-Fixes:
