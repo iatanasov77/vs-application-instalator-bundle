@@ -5,7 +5,7 @@
 ###################################################################################################
 sylius_fixtures:
     suites:
-        vankosoft_application_suite:
+        vankosoft_application_configuration_suite:
             listeners:
                 #orm_purger: ~
                 logger: ~
