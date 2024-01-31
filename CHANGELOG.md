@@ -1,3 +1,13 @@
+1.10.163	|	Release date: **31.01.2024**
+============================================
+* New Features and Improvements:
+  - Improve Widgets Loading.
+  - Update Product Edit JS.
+  - Test Somethig With Webpack Encore.
+  - Add to Webpack Config Paths to Scripts From Application Extensions.
+  - Improve Web Profiler Data Collector.
+
+
 1.10.162	|	Release date: **25.01.2024**
 ============================================
 * Bug-Fixes and Improvements:
