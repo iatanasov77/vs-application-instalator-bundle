@@ -38,11 +38,11 @@ EOT
         $outputStyle->writeln( sprintf(
             'Loading sample data into VankoSoft Extended Project for environment <info>%s</info> from suite <info>%s</info>.',
             $this->getEnvironment(),
-            $suite ?? 'vankosoft_extended_sample_data_suite'
+            $suite ?? 'vankosoft_catalog_sample_data_suite'
         ) );
 
         $parameters = [
-            'suite' => $suite ?: 'vankosoft_extended_sample_data_suite',
+            'suite' => $suite ?: 'vankosoft_catalog_sample_data_suite',
             '--no-interaction' => true,
         ];
 

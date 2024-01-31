@@ -32,6 +32,25 @@ EOT
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper( 'question' );
         $suite          = $input->getOption( 'fixture-suite' );
+        
+        if ( $suite ) {
+            return $this->installApplicationSampleData( $input, $output, $suite );
+        }
+        
+        if ( $this->isCatalogProject() || $this->isExtendedProject() ) {
+            if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to load sample data? (y/N) ', false ) ) ) {
+                return $this->installApplicationSampleData( $input, $output, 'vankosoft_catalog_sample_data_suite' );
+                //return $this->loadExtendedSampleData( $input, $output );
+            }
+        }
+        
+        return Command::SUCCESS;
+    }
+    
+    private function installApplicationSampleData( InputInterface $input, OutputInterface $output, $suite ): int
+    {
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper = $this->getHelper( 'question' );
 
         $outputStyle    = new SymfonyStyle( $input, $output );
         $outputStyle->newLine();
@@ -52,7 +71,7 @@ EOT
             $publicDir = $this->getParameter( 'vs_application.public_dir' );
 
             $this->ensureDirectoryExistsAndIsWritable( $publicDir . '/media/', $output );
-            $this->ensureDirectoryExistsAndIsWritable( $publicDir . '/media/image/', $output );
+            $this->ensureDirectoryExistsAndIsWritable( $publicDir . '/media/cache/', $output );
         } catch ( \RuntimeException $exception ) {
             $outputStyle->writeln( $exception->getMessage() );
 
@@ -71,6 +90,20 @@ EOT
         $this->runCommands( $commands, $output );
         $outputStyle->newLine( 2 );
 
+        return Command::SUCCESS;
+    }
+    
+    private function loadExtendedSampleData( InputInterface $input, OutputInterface $output ): int
+    {
+        $outputStyle        = new SymfonyStyle( $input, $output );
+        
+        $parameters         = [];
+        $this->commandExecutor->runCommand( 'vankosoft:install:extended-sample-data', $parameters, $output );
+        
+        $outputStyle->newLine();
+        $outputStyle->writeln( '<info>Loading sample data for VankoSoft Extended Project successfully.</info>' );
+        $outputStyle->newLine();
+        
         return Command::SUCCESS;
     }
 }
