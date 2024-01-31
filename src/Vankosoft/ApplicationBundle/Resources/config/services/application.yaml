@@ -4,6 +4,11 @@ services:
         autoconfigure: true
         public: true
         
+    vs_application.project_type:
+        class: Vankosoft\ApplicationBundle\Component\Application\Project
+        arguments:
+            - '%vs_application.project_type%'
+            
     vs_application.context.application.hostname_based_request_resolver:
         class: Vankosoft\ApplicationBundle\Component\Context\HostnameBasedRequestResolver
         arguments:
@@ -20,6 +25,7 @@ services:
             - { name: 'vs_application.context.application' }
     
     # Create Aliases for Autowiring
+    Vankosoft\ApplicationBundle\Component\Application\Project: '@vs_application.project_type'
     Vankosoft\ApplicationBundle\Component\Context\ApplicationContext: '@vs_application.context.application'
     Vankosoft\ApplicationBundle\Component\Context\ApplicationContextInterface: '@Vankosoft\ApplicationBundle\Component\Context\ApplicationContext'
 
