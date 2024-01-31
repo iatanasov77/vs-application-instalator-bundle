@@ -29,24 +29,34 @@ EOT
 
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        return $this->installApplicationConfiguration( $input, $output );
-    }
-    
-    private function installApplicationConfiguration( InputInterface $input, OutputInterface $output ): int
-    {
         $suite          = $input->getOption( 'fixture-suite' );
         
+        if ( $suite ) {
+            return $this->installApplicationConfiguration( $input, $output, $suite );
+        } else {
+            $return = $this->installApplicationConfiguration( $input, $output, 'vankosoft_application_configuration_suite' );
+            if ( $this->isCatalogProject() || $this->isExtendedProject() ) {
+                $return = $this->installCatalogConfiguration( $input, $output, 'vankosoft_catalog_configuration_suite' );
+            }
+            
+            return $return;
+        }
+    }
+    
+    private function installApplicationConfiguration( InputInterface $input, OutputInterface $output, $suite ): int
+    {
         $outputStyle    = new SymfonyStyle( $input, $output );
         $outputStyle->newLine();
+        
         $outputStyle->writeln( sprintf(
             'Loading application configuration data for environment <info>%s</info> from suite <info>%s</info>.',
             $this->getEnvironment(),
-            $suite ?? 'vankosoft_application_suite'
+            $suite
         ) );
         //$outputStyle->writeln( '<error>Warning! This action will erase your database.</error>' );
         
         $parameters = [
-            'suite' => $suite ?: 'vankosoft_application_suite',
+            'suite' => $suite,
             '--no-interaction' => true,
         ];
         

@@ -43,20 +43,18 @@ EOT
         // Setup Admin account for All Applications.
         $this->setupApplicationsAdminUser( $input, $output, $locale );
         
-        // Setup an Application
-        if ( $this->isExtendedProject() ) {
-            $this->setupApplication( $input, $output, $locale );
-            if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to load sample data? (y/N) ', false ) ) ) {
-                $this->loadExtendedSampleData( $input, $output );
-            }
-        } else if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to create a default application? (y/N) ', false ) ) ) {
-            $this->setupApplication( $input, $output, $locale );
+        // Setup a Catalog Application
+        if ( $this->isCatalogProject() || $this->isExtendedProject() ) {
+            return $this->setupApplication( $input, $output, $locale );
         }
         
-        return Command::SUCCESS;
+        // Setup a Standard Application
+        if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to create a default application? (y/N) ', false ) ) ) {
+            return $this->setupApplication( $input, $output, $locale );
+        }
     }
     
-    private function setupApplication( InputInterface $input, OutputInterface $output, string $localeCode )
+    private function setupApplication( InputInterface $input, OutputInterface $output, string $localeCode ): int
     {
         $outputStyle        = new SymfonyStyle( $input, $output );
         
@@ -66,6 +64,8 @@ EOT
         $outputStyle->newLine();
         $outputStyle->writeln( '<info>Default Application created successfully.</info>' );
         $outputStyle->newLine();
+        
+        return Command::SUCCESS;
     }
     
     private function setupApplicationsAdminUser( InputInterface $input, OutputInterface $output, string $localeCode ) : void
@@ -82,18 +82,6 @@ EOT
         $this->commandExecutor->runCommand( 'vankosoft:application:create-user', $parameters, $output );
         
         $outputStyle->writeln( '<info>Admin account for All Applications successfully created.</info>' );
-        $outputStyle->newLine();
-    }
-    
-    private function loadExtendedSampleData( InputInterface $input, OutputInterface $output )
-    {
-        $outputStyle        = new SymfonyStyle( $input, $output );
-        
-        $parameters         = [];
-        $this->commandExecutor->runCommand( 'vankosoft:install:extended-sample-data', $parameters, $output );
-        
-        $outputStyle->newLine();
-        $outputStyle->writeln( '<info>Loading sample data for VankoSoft Extended Project successfully.</info>' );
         $outputStyle->newLine();
     }
 }

@@ -47,18 +47,16 @@ final class InstallCommand extends AbstractInstallCommand
             'message' => 'Setup Main Application Layout.',
         ],
         
+        [
+            'command' => 'sample-data',
+            'message' => 'Install Application Simple Data.',
+        ],
+        
         // I think this Command Is Not Needed Anymore
         //
         // [
         //     'command' => 'assets',
         //     'message' => 'Installing assets.',
-        // ],
-        
-        // For Now Sample Data is In Construction and is Not Available
-        //
-        // [
-        //     'command' => 'sample-data',
-        //     'message' => 'Install Application Simple Data.',
         // ],
         
         [
@@ -74,8 +72,9 @@ final class InstallCommand extends AbstractInstallCommand
 The <info>%command.name%</info> command installs VankoSoft Application.
 EOT
             )
-            ->addOption( 'fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
             ->addOption( 'debug-commands', 'd', InputOption::VALUE_OPTIONAL, 'Debug Executed Commands', null )
+            ->addOption( 'app-config-fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
+            ->addOption( 'sample-data-fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
         ;
     }
     
@@ -106,9 +105,11 @@ EOT
     
     private function executeCommands( InputInterface $input, OutputInterface $output )
     {
-        $suite          = $input->getOption( 'fixture-suite' );
-        $debug          = $input->getOption( 'debug-commands' );
-        $outputStyle    = new SymfonyStyle( $input, $output );
+        $debug              = $input->getOption( 'debug-commands' );
+        $appConfigSuite     = $input->getOption( 'app-config-fixture-suite' );
+        $sampleDataSuite    = $input->getOption( 'sample-data-fixture-suite' );
+        
+        $outputStyle        = new SymfonyStyle( $input, $output );
         
         foreach ( $this->commands as $step => $command ) {
             
@@ -123,8 +124,6 @@ EOT
             $parameters = [];
             switch ( $command['command'] ) {
                 case 'database':
-                    if ( $suite )
-                        $parameters['--fixture-suite']  = $suite;
                     if ( $debug )
                         $parameters['--debug-commands'] = $debug;
                     
@@ -132,6 +131,10 @@ EOT
                 case 'application-configuration':
                     // Database is already Installed. Setup Default Locale.
                     $this->defaultLocale  = $this->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
+                    
+                    if ( $appConfigSuite ) {
+                        $parameters['--fixture-suite']  = $appConfigSuite;
+                    }
                     
                     break;
                 case 'setup-super-admin-application':
@@ -143,7 +146,11 @@ EOT
                     
                     break;
                 case 'sample-data':
-                    $parameters['--fixture-suite']  = 'vankosoft_sampledata_suite';
+                    if ( $sampleDataSuite ) {
+                        $parameters['--fixture-suite']  = $sampleDataSuite;
+                    } else {
+                        $parameters['--fixture-suite']  = 'vankosoft_sampledata_suite';
+                    }
                     
                     break;
             }

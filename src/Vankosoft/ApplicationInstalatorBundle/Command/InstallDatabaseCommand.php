@@ -21,14 +21,12 @@ final class InstallDatabaseCommand extends AbstractInstallCommand
 The <info>%command.name%</info> command creates VankoSoft Application database.
 EOT
             )
-            ->addOption( 'fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
             ->addOption( 'debug-commands', 'd', InputOption::VALUE_OPTIONAL, 'Debug Executed Commands', null )
         ;
     }
 
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        $suite = $input->getOption( 'fixture-suite' );
         $debug = $input->getOption( 'debug-commands' );
         
         $outputStyle    = new SymfonyStyle( $input, $output );
