@@ -1,3 +1,12 @@
+1.10.164	|	Release date: **31.01.2024**
+============================================
+* New Features and Improvements:
+  - Remove AdminPanel Default Theme Payment and UsersSubscriptions Assets, Because its moved to their own bundles.
+  - Installator Load Fixtures Refactoring.
+* Bug-Fixes:
+  - Fix AdminPanel Default Theme Webpack Config.
+
+
 1.10.163	|	Release date: **31.01.2024**
 ============================================
 * New Features and Improvements:
