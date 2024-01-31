@@ -1,4 +1,5 @@
 const Encore        = require( '@symfony/webpack-encore' );
+const path          = require( 'path' );
 const pathExists    = require( 'path-exists' );
 
 const projectAssetsPath             = './assets';
