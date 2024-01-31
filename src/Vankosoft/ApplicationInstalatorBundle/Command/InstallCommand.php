@@ -73,7 +73,7 @@ The <info>%command.name%</info> command installs VankoSoft Application.
 EOT
             )
             ->addOption( 'debug-commands', 'd', InputOption::VALUE_OPTIONAL, 'Debug Executed Commands', null )
-            ->addOption( 'app-config-fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
+            ->addOption( 'app-config-fixture-suite', 'c', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
             ->addOption( 'sample-data-fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
         ;
     }
@@ -148,8 +148,6 @@ EOT
                 case 'sample-data':
                     if ( $sampleDataSuite ) {
                         $parameters['--fixture-suite']  = $sampleDataSuite;
-                    } else {
-                        $parameters['--fixture-suite']  = 'vankosoft_sampledata_suite';
                     }
                     
                     break;
