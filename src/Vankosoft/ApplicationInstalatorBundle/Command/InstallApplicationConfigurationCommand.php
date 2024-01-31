@@ -36,7 +36,7 @@ EOT
         } else {
             $return = $this->installApplicationConfiguration( $input, $output, 'vankosoft_application_configuration_suite' );
             if ( $this->isCatalogProject() || $this->isExtendedProject() ) {
-                $return = $this->installCatalogConfiguration( $input, $output, 'vankosoft_catalog_configuration_suite' );
+                $return = $this->installApplicationConfiguration( $input, $output, 'vankosoft_catalog_configuration_suite' );
             }
             
             return $return;
