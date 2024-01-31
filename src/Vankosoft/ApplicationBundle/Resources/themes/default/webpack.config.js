@@ -30,6 +30,10 @@ Encore
         assets: '[name].[ext]?[hash:8]'
     })
     
+    .addAliases({
+        '@': path.resolve( __dirname, 'assets' )
+    })
+    
     // FOS CkEditor
     .copyFiles([
         {from: './node_modules/ckeditor4/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
@@ -94,34 +98,34 @@ Encore
     //////////////////////////////////////////////////////////////////
     // Payment Pages
     //////////////////////////////////////////////////////////////////
-    .addEntry( 'js/gateway-config', applicationAssetsPath + '/js/payment_pages/gateway-config.js' )
-    .addEntry( 'js/currencies', applicationAssetsPath + '/js/payment_pages/currencies.js' )
-    .addEntry( 'js/exchange-rates', applicationAssetsPath + '/js/payment_pages/exchange-rates.js' )
-    .addEntry( 'js/product-categories', applicationAssetsPath + '/js/payment_pages/product-categories.js' )
-    .addEntry( 'js/product-categories-edit', applicationAssetsPath + '/js/payment_pages/product-categories-edit.js' )
-    .addEntry( 'js/products-index', applicationAssetsPath + '/js/payment_pages/products-index.js' )
-    .addEntry( 'js/products-edit', applicationAssetsPath + '/js/payment_pages/products-edit.js' )
-    .addEntry( 'js/pricing-plan-categories', applicationAssetsPath + '/js/payment_pages/pricing-plan-categories.js' )
-    .addEntry( 'js/pricing-plan-categories-edit', applicationAssetsPath + '/js/payment_pages/pricing-plan-categories-edit.js' )
-    .addEntry( 'js/pricing-plans-index', applicationAssetsPath + '/js/payment_pages/pricing-plans-index.js' )
-    .addEntry( 'js/pricing-plans-edit', applicationAssetsPath + '/js/payment_pages/pricing-plans-edit.js' )
-    .addEntry( 'js/recieved-payments', applicationAssetsPath + '/js/payment_pages/recieved-payments.js' )
-    .addEntry( 'js/orders', applicationAssetsPath + '/js/payment_pages/orders.js' )
-    .addEntry( 'js/pricing-plan-subscriptions', applicationAssetsPath + '/js/payment_pages/pricing-plan-subscriptions.js' )
-    .addEntry( 'js/pricing-plan-subscription-payments', applicationAssetsPath + '/js/payment_pages/pricing-plan-subscription-payments.js' )
-    .addEntry( 'js/stripe-webhook-endpoint', applicationAssetsPath + '/js/payment_pages/stripe-webhook-endpoint.js' )
-    .addEntry( 'js/coupon-objects', applicationAssetsPath + '/js/payment_pages/coupon-objects.js' )
-    .addEntry( 'js/coupons-index', applicationAssetsPath + '/js/payment_pages/coupons-index.js' )
-    .addEntry( 'js/coupons-edit', applicationAssetsPath + '/js/payment_pages/coupons-edit.js' )
+//     .addEntry( 'js/gateway-config', applicationAssetsPath + '/js/payment_pages/gateway-config.js' )
+//     .addEntry( 'js/currencies', applicationAssetsPath + '/js/payment_pages/currencies.js' )
+//     .addEntry( 'js/exchange-rates', applicationAssetsPath + '/js/payment_pages/exchange-rates.js' )
+//     .addEntry( 'js/product-categories', applicationAssetsPath + '/js/payment_pages/product-categories.js' )
+//     .addEntry( 'js/product-categories-edit', applicationAssetsPath + '/js/payment_pages/product-categories-edit.js' )
+//     .addEntry( 'js/products-index', applicationAssetsPath + '/js/payment_pages/products-index.js' )
+//     .addEntry( 'js/products-edit', applicationAssetsPath + '/js/payment_pages/products-edit.js' )
+//     .addEntry( 'js/pricing-plan-categories', applicationAssetsPath + '/js/payment_pages/pricing-plan-categories.js' )
+//     .addEntry( 'js/pricing-plan-categories-edit', applicationAssetsPath + '/js/payment_pages/pricing-plan-categories-edit.js' )
+//     .addEntry( 'js/pricing-plans-index', applicationAssetsPath + '/js/payment_pages/pricing-plans-index.js' )
+//     .addEntry( 'js/pricing-plans-edit', applicationAssetsPath + '/js/payment_pages/pricing-plans-edit.js' )
+//     .addEntry( 'js/recieved-payments', applicationAssetsPath + '/js/payment_pages/recieved-payments.js' )
+//     .addEntry( 'js/orders', applicationAssetsPath + '/js/payment_pages/orders.js' )
+//     .addEntry( 'js/pricing-plan-subscriptions', applicationAssetsPath + '/js/payment_pages/pricing-plan-subscriptions.js' )
+//     .addEntry( 'js/pricing-plan-subscription-payments', applicationAssetsPath + '/js/payment_pages/pricing-plan-subscription-payments.js' )
+//     .addEntry( 'js/stripe-webhook-endpoint', applicationAssetsPath + '/js/payment_pages/stripe-webhook-endpoint.js' )
+//     .addEntry( 'js/coupon-objects', applicationAssetsPath + '/js/payment_pages/coupon-objects.js' )
+//     .addEntry( 'js/coupons-index', applicationAssetsPath + '/js/payment_pages/coupons-index.js' )
+//     .addEntry( 'js/coupons-edit', applicationAssetsPath + '/js/payment_pages/coupons-edit.js' )
     
     //////////////////////////////////////////////////////////////////
     // Subscription Pages
     //////////////////////////////////////////////////////////////////
-    .addEntry( 'js/payed-services-edit', applicationAssetsPath + '/js/subscription_pages/payed-services-edit.js' )
-    .addEntry( 'js/payed-services-listing', applicationAssetsPath + '/js/subscription_pages/payed-services-listing.js' )
-    .addEntry( 'js/payed-services-categories-listing', applicationAssetsPath + '/js/subscription_pages/payed-services-categories-listing.js' )
-    .addEntry( 'js/mailchimp-audiences-listing', applicationAssetsPath + '/js/subscription_pages/mailchimp-audiences-listing.js' )
-    .addEntry( 'js/payed-service-subscriptions', applicationAssetsPath + '/js/subscription_pages/payed-service-subscriptions.js' )
+//     .addEntry( 'js/payed-services-edit', applicationAssetsPath + '/js/subscription_pages/payed-services-edit.js' )
+//     .addEntry( 'js/payed-services-listing', applicationAssetsPath + '/js/subscription_pages/payed-services-listing.js' )
+//     .addEntry( 'js/payed-services-categories-listing', applicationAssetsPath + '/js/subscription_pages/payed-services-categories-listing.js' )
+//     .addEntry( 'js/mailchimp-audiences-listing', applicationAssetsPath + '/js/subscription_pages/mailchimp-audiences-listing.js' )
+//     .addEntry( 'js/payed-service-subscriptions', applicationAssetsPath + '/js/subscription_pages/payed-service-subscriptions.js' )
 ;
 
 //////////////////////////////////////////////////////////////////
@@ -134,6 +138,42 @@ if ( pathExists.sync( usersSubscriptionsAssetsPath ) ) {
         .addEntry( 'js/payed-services-categories-listing', usersSubscriptionsAssetsPath + '/js/pages/payed-services-categories-listing.js' )
         .addEntry( 'js/mailchimp-audiences-listing', usersSubscriptionsAssetsPath + '/js/pages/mailchimp-audiences-listing.js' )
         .addEntry( 'js/payed-service-subscriptions', usersSubscriptionsAssetsPath + '/js/pages/payed-service-subscriptions.js' )
+    ;
+}
+
+//////////////////////////////////////////////////////////////////
+// Payment Pages
+//////////////////////////////////////////////////////////////////
+if ( pathExists.sync( paymentAssetsPath ) ) {
+    Encore
+        .addEntry( 'js/gateway-config', paymentAssetsPath + '/js/pages/gateway-config.js' )
+        .addEntry( 'js/currencies', paymentAssetsPath + '/js/pages/currencies.js' )
+        .addEntry( 'js/exchange-rates', paymentAssetsPath + '/js/pages/exchange-rates.js' )
+        .addEntry( 'js/recieved-payments', paymentAssetsPath + '/js/pages/recieved-payments.js' )
+        .addEntry( 'js/orders', paymentAssetsPath + '/js/pages/orders.js' )
+        .addEntry( 'js/stripe-webhook-endpoint', paymentAssetsPath + '/js/pages/stripe-webhook-endpoint.js' )
+        .addEntry( 'js/coupon-objects', paymentAssetsPath + '/js/pages/coupon-objects.js' )
+        .addEntry( 'js/coupons-index', paymentAssetsPath + '/js/pages/coupons-index.js' )
+        .addEntry( 'js/coupons-edit', paymentAssetsPath + '/js/pages/coupons-edit.js' )
+    ;
+}
+    
+//////////////////////////////////////////////////////////////////
+// Catalog Pages
+//////////////////////////////////////////////////////////////////
+if ( pathExists.sync( catalogAssetsPath ) ) {
+    Encore
+        .addEntry( 'js/product-categories', catalogAssetsPath + '/js/pages/product-categories.js' )
+        .addEntry( 'js/product-categories-edit', catalogAssetsPath + '/js/pages/product-categories-edit.js' )
+        .addEntry( 'js/products-index', catalogAssetsPath + '/js/pages/products-index.js' )
+        .addEntry( 'js/products-edit', catalogAssetsPath + '/js/pages/products-edit.js' )
+        .addEntry( 'js/pricing-plan-categories', catalogAssetsPath + '/js/pages/pricing-plan-categories.js' )
+        .addEntry( 'js/pricing-plan-categories-edit', catalogAssetsPath + '/js/pages/pricing-plan-categories-edit.js' )
+        .addEntry( 'js/pricing-plans-index', catalogAssetsPath + '/js/pages/pricing-plans-index.js' )
+        .addEntry( 'js/pricing-plans-edit', catalogAssetsPath + '/js/pages/pricing-plans-edit.js' )
+        .addEntry( 'js/pricing-plan-subscriptions', catalogAssetsPath + '/js/pages/pricing-plan-subscriptions.js' )
+        .addEntry( 'js/pricing-plan-subscription-payments', catalogAssetsPath + '/js/pages/pricing-plan-subscription-payments.js' )
+        .addEntry( 'js/association-types-index', catalogAssetsPath + '/js/pages/association-types-index.js' )
     ;
 }
 
