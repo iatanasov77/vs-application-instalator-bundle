@@ -95,38 +95,6 @@ Encore
     
     .addEntry( 'js/widget-groups', applicationAssetsPath + '/js/pages/widget-groups.js' )
     .addEntry( 'js/widgets', applicationAssetsPath + '/js/pages/widgets.js' )
-    
-    //////////////////////////////////////////////////////////////////
-    // Payment Pages
-    //////////////////////////////////////////////////////////////////
-//     .addEntry( 'js/gateway-config', applicationAssetsPath + '/js/payment_pages/gateway-config.js' )
-//     .addEntry( 'js/currencies', applicationAssetsPath + '/js/payment_pages/currencies.js' )
-//     .addEntry( 'js/exchange-rates', applicationAssetsPath + '/js/payment_pages/exchange-rates.js' )
-//     .addEntry( 'js/product-categories', applicationAssetsPath + '/js/payment_pages/product-categories.js' )
-//     .addEntry( 'js/product-categories-edit', applicationAssetsPath + '/js/payment_pages/product-categories-edit.js' )
-//     .addEntry( 'js/products-index', applicationAssetsPath + '/js/payment_pages/products-index.js' )
-//     .addEntry( 'js/products-edit', applicationAssetsPath + '/js/payment_pages/products-edit.js' )
-//     .addEntry( 'js/pricing-plan-categories', applicationAssetsPath + '/js/payment_pages/pricing-plan-categories.js' )
-//     .addEntry( 'js/pricing-plan-categories-edit', applicationAssetsPath + '/js/payment_pages/pricing-plan-categories-edit.js' )
-//     .addEntry( 'js/pricing-plans-index', applicationAssetsPath + '/js/payment_pages/pricing-plans-index.js' )
-//     .addEntry( 'js/pricing-plans-edit', applicationAssetsPath + '/js/payment_pages/pricing-plans-edit.js' )
-//     .addEntry( 'js/recieved-payments', applicationAssetsPath + '/js/payment_pages/recieved-payments.js' )
-//     .addEntry( 'js/orders', applicationAssetsPath + '/js/payment_pages/orders.js' )
-//     .addEntry( 'js/pricing-plan-subscriptions', applicationAssetsPath + '/js/payment_pages/pricing-plan-subscriptions.js' )
-//     .addEntry( 'js/pricing-plan-subscription-payments', applicationAssetsPath + '/js/payment_pages/pricing-plan-subscription-payments.js' )
-//     .addEntry( 'js/stripe-webhook-endpoint', applicationAssetsPath + '/js/payment_pages/stripe-webhook-endpoint.js' )
-//     .addEntry( 'js/coupon-objects', applicationAssetsPath + '/js/payment_pages/coupon-objects.js' )
-//     .addEntry( 'js/coupons-index', applicationAssetsPath + '/js/payment_pages/coupons-index.js' )
-//     .addEntry( 'js/coupons-edit', applicationAssetsPath + '/js/payment_pages/coupons-edit.js' )
-    
-    //////////////////////////////////////////////////////////////////
-    // Subscription Pages
-    //////////////////////////////////////////////////////////////////
-//     .addEntry( 'js/payed-services-edit', applicationAssetsPath + '/js/subscription_pages/payed-services-edit.js' )
-//     .addEntry( 'js/payed-services-listing', applicationAssetsPath + '/js/subscription_pages/payed-services-listing.js' )
-//     .addEntry( 'js/payed-services-categories-listing', applicationAssetsPath + '/js/subscription_pages/payed-services-categories-listing.js' )
-//     .addEntry( 'js/mailchimp-audiences-listing', applicationAssetsPath + '/js/subscription_pages/mailchimp-audiences-listing.js' )
-//     .addEntry( 'js/payed-service-subscriptions', applicationAssetsPath + '/js/subscription_pages/payed-service-subscriptions.js' )
 ;
 
 //////////////////////////////////////////////////////////////////
