@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 use Vankosoft\ApplicationBundle\Component\Application\Kernel;
+use Vankosoft\ApplicationBundle\Component\Application\Project;
 
 /**
  * Tutorial: https://symfony.com/doc/current/profiler/data_collector.html
@@ -16,6 +17,7 @@ final class VsApplicationCollector extends DataCollector
 {
     public function __construct(
         RequestStack $requestStack,
+        Project $projectType,
         RepositoryInterface $localesRepository,
         string $version,
         array $bundles,
@@ -36,6 +38,7 @@ final class VsApplicationCollector extends DataCollector
             }
             
             $this->data = [
+                'project_type'          => $projectType->projectType(),
                 'version'               => $version,
                 'default_locale_code'   => $defaultLocaleCode,
                 'locale_code'           => $currentLocale,
@@ -54,6 +57,11 @@ final class VsApplicationCollector extends DataCollector
                 }
             }
         }
+    }
+    
+    public function getProjectType(): string
+    {
+        return $this->data['project_type'];
     }
     
     public function getVersion()
