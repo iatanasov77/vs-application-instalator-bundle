@@ -23,12 +23,12 @@ trait TaxonDescendentTrait
         $this->taxon = $taxon;
     }
     
-    public function getCode()
+    public function getCode(): string
     {
         return $this->taxon ? $this->taxon->getCode() : '';
     }
     
-    public function setCode( ?string $code ) : self
+    public function setCode( ?string $code ): self
     {
         if ( ! $this->taxon ) {
             // Create new taxon into the controller and set the properties passed from form
@@ -39,12 +39,12 @@ trait TaxonDescendentTrait
         return $this;
     }
     
-    public function getName()
+    public function getName(): string
     {
         return $this->taxon ? $this->taxon->getName() : '';
     }
     
-    public function setName( string $name ) : self
+    public function setName( string $name ): self
     {
         if ( ! $this->taxon ) {
             // Create new taxon into the controller and set the properties passed from form
@@ -55,7 +55,7 @@ trait TaxonDescendentTrait
         return $this;
     }
     
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->taxon ? $this->taxon->getDescription() : null;
     }
