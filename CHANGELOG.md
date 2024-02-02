@@ -1,3 +1,9 @@
+1.10.169	|	Release date: **02.02.2024**
+============================================
+* New Features:
+  - Update Model TaxonDescendentTrait .
+
+
 1.10.168	|	Release date: **02.02.2024**
 ============================================
 * New Features:
