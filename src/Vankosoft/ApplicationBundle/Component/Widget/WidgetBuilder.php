@@ -121,8 +121,10 @@ class WidgetBuilder implements WidgetBuilderInterface
     private function loadUserConfig(): void
     {
         if ( ! $this->widgetConfig ) {
-            $config = $this->widgetConfigRepository->findOneBy([
-                'owner' => $this->tokenStorage->getToken()->getUser(),
+            $currentUser    = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
+            
+            $config         = $this->widgetConfigRepository->findOneBy([
+                'owner' => $currentUser,
             ]);
 
             if ( null !== $config ) {
