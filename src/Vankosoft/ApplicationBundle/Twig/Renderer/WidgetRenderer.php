@@ -49,7 +49,9 @@ class WidgetRenderer implements RendererInterface
         $output = '';
 
         // Get User ID
-        $userId = $this->tokenStorage->getToken()->getUser()->getId();
+        $userId = $this->tokenStorage->getToken() ?
+                    $this->tokenStorage->getToken()->getUser()->getId() :
+                    0;
 
         foreach ( $widgets as $widget ) {
             if ( $widget->isActive() ) {

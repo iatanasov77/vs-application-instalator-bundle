@@ -10,7 +10,7 @@ trait WidgetUserTrait
     /** @var array */
     protected $config;
     
-    /** @var UserInterface */
+    /** @var UserInterface | null */
     protected $owner;
     
     public function setConfig(array $config): self
