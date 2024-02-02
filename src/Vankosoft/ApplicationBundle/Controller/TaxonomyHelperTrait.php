@@ -37,12 +37,13 @@ trait TaxonomyHelperTrait
         return $useThisCode;
     }
     
-    protected function createTranslation( $taxon, $locale, $name )
+    protected function createTranslation( $taxon, $locale, $name, $description = null )
     {
         $translation    = $taxon->createNewTranslation();
         
         $translation->setLocale( $locale );
         $translation->setName( $name );
+        $translation->setDescription( $description );
         $translation->setSlug( $this->get( 'vs_application.slug_generator' )->generate( $name ) );
         
         return $translation;
