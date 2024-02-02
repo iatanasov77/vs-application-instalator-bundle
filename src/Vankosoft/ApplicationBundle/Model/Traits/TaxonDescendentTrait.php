@@ -4,6 +4,9 @@ use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface;
 
 trait TaxonDescendentTrait
 {
+    /** @var TaxonInterface */
+    protected $taxon;
+    
     /**
      * {@inheritdoc}
      */
