@@ -1,3 +1,9 @@
+1.10.170	|	Release date: **02.02.2024**
+============================================
+* New Features:
+  - Improve Controller Helper Trait.
+
+
 1.10.169	|	Release date: **02.02.2024**
 ============================================
 * New Features:
