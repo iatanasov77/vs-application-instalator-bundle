@@ -1,3 +1,10 @@
+1.10.167	|	Release date: **02.02.2024**
+============================================
+* New Features:
+  - Allow Widgets for Anonymous Users.
+  - Update Application Catalog Installator Configs.
+
+
 1.10.166	|	Release date: **31.01.2024**
 ============================================
 * Bug-Fixes:
