@@ -479,6 +479,13 @@ class ApplicationSetup
                 file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_payment.yaml' )
             );
             $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_payment.yaml', $configRoutes );
+            
+            $configRoutes   = str_replace(
+                ["__application_name__"],
+                [$this->applicationNamespace],
+                file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_catalog.yaml' )
+            );
+            $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_catalog.yaml', $configRoutes );
         }
     }
     
@@ -563,6 +570,13 @@ class ApplicationSetup
             file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ProductController.php' )
         );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ProductController.php', $applicationAuthController );
+        
+        $applicationAuthController  = str_replace(
+            ["__application_name__", "__application_slug__"],
+            [$this->applicationNamespace, $this->applicationSlug],
+            file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/CatalogController.php' )
+            );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/CatalogController.php', $applicationAuthController );
         
         $applicationAuthController  = str_replace(
             ["__application_name__", "__application_slug__"],
