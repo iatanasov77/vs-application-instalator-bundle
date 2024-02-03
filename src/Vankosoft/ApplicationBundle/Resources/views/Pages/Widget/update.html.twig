@@ -85,7 +85,7 @@
                         {% set comboDataSourceUrl  = url( 'vs_application_widget_ext_json_roles', {'editWidgetId': itemId}) %}
                         {% set comboTreePlaceholder = 'vs_application.form.allowed_roles_placeholder' | trans( {},'VSApplicationBundle' ) %}
                         <div class="form-group">
-                            {{ form_label( form.roles_options, null, {
+                            {{ form_label( form.allowedRoles, null, {
                                 'label_attr': {'class': 'col-form-label'}
                                 } ) 
                             }}
