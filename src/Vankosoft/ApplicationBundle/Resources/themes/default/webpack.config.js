@@ -95,6 +95,7 @@ Encore
     
     .addEntry( 'js/widget-groups', applicationAssetsPath + '/js/pages/widget-groups.js' )
     .addEntry( 'js/widgets', applicationAssetsPath + '/js/pages/widgets.js' )
+    .addEntry( 'js/widgets-edit', applicationAssetsPath + '/js/pages/widgets-edit.js' )
 ;
 
 //////////////////////////////////////////////////////////////////

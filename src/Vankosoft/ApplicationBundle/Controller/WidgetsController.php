@@ -1,7 +1,8 @@
 <?php namespace Vankosoft\ApplicationBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Vankosoft\ApplicationBundle\Controller\AbstractCrudController;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class WidgetsController extends AbstractCrudController
 {
@@ -17,6 +18,9 @@ class WidgetsController extends AbstractCrudController
         $widgetName = $form->get( 'name' )->getData();
         
         $entity->setCode( $this->get( 'vs_application.slug_generator' )->generate( $widgetName ) );
+        
+        $selectedRoles  = \json_decode( $request->request->get( 'selectedRoles' ), true );
+        $this->buildRoles( $entity, $selectedRoles );
     }
     
     private function getTranslations(): array
@@ -33,5 +37,16 @@ class WidgetsController extends AbstractCrudController
         
         
         return $translations;
+    }
+    
+    private function buildRoles( &$entity, array $roles )
+    {
+        //var_dump( $roles ); die;
+        $repo   = $this->get( 'vs_users.repository.user_roles' );
+        
+        $entity->setRolesCollection( new ArrayCollection() );
+        foreach ( $roles as $r ) {
+            $entity->addRole( $repo->find( $r['id'] ) );
+        }
     }
 }

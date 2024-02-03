@@ -104,6 +104,13 @@ class Widget implements WidgetInterface
         return $this->allowedRoles;
     }
     
+    public function setAllowedRoles( Collection $allowedRoles ): self
+    {
+        $this->allowedRoles  = $allowedRoles;
+        
+        return $this;
+    }
+    
     public function addAllowedRole( UserRoleInterface $allowedRole ): self
     {
         if ( ! $this->allowedRoles->contains( $allowedRole ) ) {
