@@ -2,9 +2,12 @@
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetGroupInterface;
+use Vankosoft\UsersBundle\Model\UserRoleInterface;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class Widget implements WidgetInterface
 {
@@ -26,11 +29,19 @@ class Widget implements WidgetInterface
     /** @var string */
     protected $description;
     
+    /** @var Collection|UserRoleInterface[] */
+    protected $allowedRoles;
+    
     /** @var bool */
     protected $enabled = true;
     
     /** @var string */
     protected $locale;
+    
+    public function __construct()
+    {
+        $this->allowedRoles = new ArrayCollection();
+    }
     
     public function getId()
     {
@@ -81,6 +92,32 @@ class Widget implements WidgetInterface
     public function setDescription( string $description ) : self
     {
         $this->description = $description;
+        
+        return $this;
+    }
+    
+    /**
+     * @return Collection|UserRoleInterface[]
+     */
+    public function getAllowedRoles(): Collection
+    {
+        return $this->allowedRoles;
+    }
+    
+    public function addAllowedRole( UserRoleInterface $allowedRole ): self
+    {
+        if ( ! $this->allowedRoles->contains( $allowedRole ) ) {
+            $this->allowedRoles[] = $allowedRole;
+        }
+        
+        return $this;
+    }
+    
+    public function removeAllowedRole( UserRoleInterface $allowedRole ): self
+    {
+        if ( $this->allowedRoles->contains( $allowedRole ) ) {
+            $this->allowedRoles->removeElement( $allowedRole );
+        }
         
         return $this;
     }

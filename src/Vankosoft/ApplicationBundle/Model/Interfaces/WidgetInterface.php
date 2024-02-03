@@ -2,6 +2,7 @@
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
+use Doctrine\Common\Collections\Collection;
 
 interface WidgetInterface extends ResourceInterface, TranslatableInterface
 {
@@ -9,6 +10,7 @@ interface WidgetInterface extends ResourceInterface, TranslatableInterface
     public function getCode(): string;
     public function getName(): string;
     public function getDescription(): string;
+    public function getAllowedRoles(): Collection;
     public function getActive(): ?bool;
     public function isActive(): bool;
 }

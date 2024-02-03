@@ -11,6 +11,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
+use Vankosoft\UsersBundle\Component\UserRole;
+
 class WidgetForm extends AbstractForm
 {
     public function __construct(
@@ -65,6 +67,15 @@ class WidgetForm extends AbstractForm
             ->add( 'description', TextareaType::class, [
                 'label' => 'vs_application.form.description',
                 'translation_domain' => 'VSApplicationBundle',
+            ])
+            
+            ->add( 'allowedRoles', ChoiceType::class, [
+                'label'                 => 'vs_application.form.allowed_roles_label',
+                'placeholder'           => 'vs_application.form.allowed_roles_placeholder',
+                'translation_domain'    => 'VSApplicationBundle',
+                "mapped"                => false,
+                "multiple"              => true,
+                'choices'               => UserRole::choices()
             ])
         ;
     }

@@ -16,6 +16,10 @@ vs_application_widget:
     options:
         expose: true
 
+vs_application_widget_ext_json_roles:
+    path: /widget-ext/json-roles/{editWidgetId}
+    controller:  Vankosoft\ApplicationBundle\Controller\WidgetsExtController::rolesEasyuiComboTreeWithSelectedSource
+
 vs_application_widget_ext_index:
     path: /widget-ext/listing
     controller:  Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController::index

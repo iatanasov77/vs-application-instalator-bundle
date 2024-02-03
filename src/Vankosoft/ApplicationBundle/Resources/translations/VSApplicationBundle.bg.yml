@@ -87,6 +87,8 @@ vs_application:
         description: 'Описание'
         group_label: Група
         group_placeholder: '-- Избери Група --'
+        allowed_roles_label: Позволени Потребителски Роли
+        allowed_roles_placeholder: '-- Избери Потребителски Роли --'
         tags: 'Тагове'
         parent: 'Родител'
         parent_category: 'Родителска Категория'

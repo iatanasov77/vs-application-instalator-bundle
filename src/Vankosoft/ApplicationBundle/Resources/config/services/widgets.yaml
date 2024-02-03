@@ -56,6 +56,13 @@ services:
             - '@vs_application.factory.widget_config'
             - '@vs_application.repository.widget'
             
+    Vankosoft\ApplicationBundle\Controller\WidgetsExtController:
+        tags: ['controller.service_arguments']
+        autowire: true
+        arguments:
+            - '@vs_application.repository.widget'
+            - '@vs_users.repository.user_roles'
+            
     ###################################################################
     # Load Widgets
     ###################################################################
