@@ -109,6 +109,7 @@ class Widget implements WidgetInterface
      */
     public function getAllowedRolesFromCollection(): array
     {
+        $roles  = [];
         foreach ( $this->allowedRoles as $role ) {
             $roles[]    = $role->getRole();
         }
