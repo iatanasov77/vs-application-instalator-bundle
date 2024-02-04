@@ -213,6 +213,8 @@ vs_application:
         
         widgets_index_title: Widgets
         reload_widgets: Reload Widgets
+        reload_registered_widgets: Reload Registered Widgets
+        reload_all_widgets: Reload All Widgets
         no_one: No-One
         test_widgets: Test Widgets
         

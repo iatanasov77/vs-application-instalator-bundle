@@ -213,6 +213,8 @@ vs_application:
         
         widgets_index_title: Уиджети
         reload_widgets: Презареждане Уиджети
+        reload_registered_widgets: Презареждане Регистрирани Уиджети
+        reload_all_widgets: Презареждане Всички Уиджети
         no_one: Никой
         test_widgets: Тестване Уиджети
         
