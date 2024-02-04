@@ -3,6 +3,7 @@
 {# Import Macros #}
 {% import "@VSApplication/Macros/form.html.twig" as vs_form %}
 {% import "@VSApplication/Macros/tree.html.twig" as vs_tree %}
+{% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
 
 {% if( item.id ) %}
 	{% set pageTitle = 'vs_application.template.widgets_update_title' | trans( {},'VSApplicationBundle' ) %}
@@ -26,14 +27,12 @@
             <div class="card">
             	<h5 class="card-header">{{ 'vs_application.template.widget' | trans( {},'VSApplicationBundle' ) }}</h5>
             	<div class="card-body">
-					{% if form_errors(form) is not empty %}
-		                <div class="alert alert-block alert-danger fade in">
-		                    <button type="button" class="close close-sm" data-bs-dismiss="alert">
-		                        <i class="icon-remove"></i>
-		                    </button>
-		                    <strong>{{ 'vs_application.form.errors_title' | trans( {},'VSApplicationBundle' ) }}</strong> {{ form_errors(form) }}
-		                </div>
-		            {% endif %}
+            	
+                    {% if not form.vars.valid %}
+                        {% for error in form.vars.errors %}
+                            {{ alerts.error( error.message ) }}
+                        {%endfor%}
+                    {% endif %}
 		            
                     {% if(item.id) %}
                         {% set method = "PUT" %}
