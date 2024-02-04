@@ -93,7 +93,9 @@ class Widget implements WidgetInterface
             $widgetItem->setGroup( $widget->getGroup()->getCode() )
                         ->setName( $widget->getName() )
                         ->setDescription( $widget->getDescription() )
-                        ->setActive( $widget->getActive() );
+                        ->setActive( $widget->getActive() )
+                        ->setRole( $widget->getAllowedRolesFromCollection() )
+            ;
             
             return $widgetItem;
         }
