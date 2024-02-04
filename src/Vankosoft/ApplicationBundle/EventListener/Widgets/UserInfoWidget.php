@@ -18,13 +18,12 @@ class UserInfoWidget implements WidgetLoaderInterface
         $widgetItem = $widgetContainer->createWidgetItem( 'user-info' );
         if( $widgetItem ) {
             $widgetItem->setTemplate( '@VSApplication/Widgets/user_info.html.twig' )
-            //->setContent( 'pdWidget Text Content' )
-            //->setRole( ['USER_INFO_WIDGET'] )
-            
-            ->setData( function () {
-                return ['userCount' => 5];
-            })
-            ->setOrder( 5 );
+                //->setContent( 'pdWidget Text Content' )
+                ->setData( function () {
+                    return ['userCount' => 5];
+                })
+                ->setOrder( 5 )
+            ;
             
             // Add Widgets
             $widgetContainer->addWidget( $widgetItem );

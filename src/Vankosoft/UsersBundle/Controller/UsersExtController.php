@@ -19,9 +19,12 @@ use Vankosoft\UsersBundle\Component\UserRole;
 use Vankosoft\UsersBundle\Form\UserInfoForm;
 use Vankosoft\UsersBundle\Model\UserInfoInterface;
 use Vankosoft\UsersBundle\Model\UserRoleInterface;
+use Vankosoft\UsersBundle\Model\UserRole as UserRoleModel;
 
 class UsersExtController extends AbstractController
 {
+    use UserRolesAwareTrait;
+    
     /** @var ManagerRegistry */
     protected ManagerRegistry $doctrine;
     
@@ -129,35 +132,11 @@ class UsersExtController extends AbstractController
         
         $rolesTree      = [];
         $this->getRolesTree(  $topRoles, $rolesTree );
-        $this->buildEasyuiCombotreeDataFromCollection( $rolesTree, $data, $selectedRoles );
+        $this->buildEasyuiCombotreeDataFromCollection( $rolesTree, $data, $selectedRoles, [UserRoleModel::ANONYMOUS] );
         
         //$this->buildEasyuiCombotreeData( UserRole::choicesTree(), $data, $selectedRoles );
         
         return new JsonResponse( $data );
-    }
-    
-    protected function buildEasyuiCombotreeDataFromCollection( $tree, &$data, array $selectedValues )
-    {
-        $key    = 0;
-        
-        if ( is_array( $tree ) ) {
-            foreach( $tree as $nodeKey => $node ) {
-                $data[$key]   = [
-                    'id'        => $node['id'],
-                    'text'      => $node['role'],
-                    'children'  => []
-                ];
-                if ( in_array( $nodeKey, $selectedValues ) ) {
-                    $data[$key]['checked'] = true;
-                }
-                
-                if ( ! empty( $node['children'] ) ) {
-                    $this->buildEasyuiCombotreeDataFromCollection( $node['children'], $data[$key]['children'], $selectedValues );
-                }
-                
-                $key++;
-            }
-        }
     }
     
     /**
@@ -198,21 +177,6 @@ class UsersExtController extends AbstractController
         
         if ( ! $userInfo->getAvatar() ) {
             $userInfo->setAvatar( $avatarImage );
-        }
-    }
-    
-    private function getRolesTree( Collection $roles, &$rolesTree )
-    {
-        foreach ( $roles as $role ) {
-            $rolesTree[$role->getRole()] = [
-                'id'        => $role->getId(),
-                'role'      => $role->getRole(),
-                'children'  => [],
-            ];
-            
-            if ( ! $role->getChildren()->isEmpty() ) {
-                $this->getRolesTree( $role->getChildren(), $rolesTree[$role->getRole()]['children'] );
-            }
         }
     }
 }

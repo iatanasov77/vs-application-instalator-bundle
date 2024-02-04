@@ -61,6 +61,16 @@ class TagsWhitelistContext implements TagsWhitelistContextInterface
         return $this;
     }
     
+    public function getTagsArray(): array
+    {
+        $tags   = [];
+        foreach ( $this->tags as $tag ) {
+            $tags[] = $tag->getTag();
+        }
+        
+        return $tags;
+    }
+    
     /**
      * @return Collection|TagsWhitelistTag[]
      */

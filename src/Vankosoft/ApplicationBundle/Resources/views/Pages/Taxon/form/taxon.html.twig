@@ -1,13 +1,12 @@
 {% import "@VSApplication/Macros/tree.html.twig" as vs_tree %}
+{% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
 
 {{ form_start(form, { 'action': path('vs_application_taxonomy_taxon_handle', {'taxonomyId': taxonomyId}) }) }}
-    {% if form_errors(form) is not empty %}
-        <div class="alert alert-block alert-danger fade in">
-            <button type="button" class="close close-sm" data-bs-dismiss="alert">
-                <i class="icon-remove"></i>
-            </button>
-            <strong>{{ 'vs_application.form.errors_title' | trans( {},'VSApplicationBundle' ) }}</strong> {{ form_errors(form) }}
-        </div>
+    
+    {% if not form.vars.valid %}
+        {% for error in form.vars.errors %}
+            {{ alerts.error( error.message ) }}
+        {%endfor%}
     {% endif %}
 
     {% set comboDataSourceUrl  = url( 'vs_application_taxonomy_taxons_easyui_combotree', {'taxonomyId': taxonomyId} ) %}

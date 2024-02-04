@@ -3,6 +3,7 @@
 use Vankosoft\ApplicationBundle\Form\AbstractForm;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -11,6 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+use Vankosoft\UsersBundle\Model\UserRole;
+use Vankosoft\UsersBundle\Model\UserRoleInterface;
 
 class UserRoleForm extends AbstractForm
 {
@@ -79,7 +83,10 @@ class UserRoleForm extends AbstractForm
                 {
                     $qb = $er->createQueryBuilder( 'ur' );
                     if  ( $role && $role->getId() ) {
-                        $qb->where( 'ur.id != :id' )->setParameter( 'id', $role->getId() );
+                        $qb
+                            ->where( 'ur.id != :id' )->setParameter( 'id', $role->getId() )
+                            ->orWhere( 'ur.role != :anonymousRole' )->setParameter( 'anonymousRole', UserRole::ANONYMOUS )
+                        ;
                     }
                     
                     return $qb;
@@ -89,6 +96,21 @@ class UserRoleForm extends AbstractForm
                 'required'      => false,
                 'placeholder'   => 'vs_users.form.user_role.parent_role_placeholder',
             ])
+        ;
+    }
+    
+    public function configureOptions( OptionsResolver $resolver ) : void
+    {
+        parent::configureOptions( $resolver );
+        
+        $resolver
+            ->setDefaults([
+                'csrf_protection' => false,
+            ])
+            ->setDefined([
+                'user_roles',
+            ])
+            ->setAllowedTypes( 'user_roles', UserRoleInterface::class )
         ;
     }
     

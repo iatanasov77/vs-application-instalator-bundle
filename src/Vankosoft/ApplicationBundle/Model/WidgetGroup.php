@@ -88,7 +88,7 @@ class WidgetGroup implements WidgetGroupInterface
     {
         if ( $this->widgets->contains( $widget ) ) {
             $this->widgets->removeElement( $widget );
-            $tag->setGroup( null );
+            $widget->setGroup( null );
         }
         
         return $this;

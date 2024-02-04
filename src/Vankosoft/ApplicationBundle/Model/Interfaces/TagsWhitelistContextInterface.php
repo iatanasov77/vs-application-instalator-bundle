@@ -7,4 +7,5 @@ interface TagsWhitelistContextInterface extends ResourceInterface
 {
     public function getName(): ?string;
     public function getTags(): Collection;
+    public function getTagsArray(): array;
 }

@@ -21,14 +21,19 @@ class WidgetsExampleFactory extends AbstractExampleFactory implements ExampleFac
     /** @var SlugGenerator */
     private $slugGenerator;
     
+    /** @var RepositoryInterface */
+    private $userRolesRepository;
+    
     public function __construct(
         RepositoryInterface $widgetsGroupsRepository,
         FactoryInterface $widgetsFactory,
-        SlugGenerator $slugGenerator
+        SlugGenerator $slugGenerator,
+        RepositoryInterface $userRolesRepository
     ) {
         $this->widgetsGroupsRepository  = $widgetsGroupsRepository;
         $this->widgetsFactory           = $widgetsFactory;
         $this->slugGenerator            = $slugGenerator;
+        $this->userRolesRepository      = $userRolesRepository;
         
         $this->optionsResolver          = new OptionsResolver();
         $this->configureOptions( $this->optionsResolver );
@@ -51,6 +56,10 @@ class WidgetsExampleFactory extends AbstractExampleFactory implements ExampleFac
         $group          = $this->widgetsGroupsRepository->findByTaxonCode( $options['group_code'] );
         $widgetEntity->setGroup( $group );
         
+        if ( isset( $options['allowedRoles'] ) && null !== $options['allowedRoles'] ) {
+            $this->addWidgetAllowedRoles( $widgetEntity, $options['allowedRoles'] );
+        }
+        
         return $widgetEntity;
     }
     
@@ -71,6 +80,19 @@ class WidgetsExampleFactory extends AbstractExampleFactory implements ExampleFac
             
             ->setDefault( 'active', true )
             ->setAllowedTypes( 'active', ['bool'] )
+            
+            ->setDefault( 'allowedRoles', null )
         ;
+    }
+    
+    private function addWidgetAllowedRoles( &$entity, array $allowedRoles )
+    {
+        foreach( $allowedRoles as $ar ) {
+            $role   = $this->userRolesRepository->findOneBy( ['role' => $ar['role']] );
+            
+            if ( $role ) {
+                $entity->addAllowedRole( $role );
+            }
+        }
     }
 }

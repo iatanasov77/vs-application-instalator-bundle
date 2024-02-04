@@ -65,7 +65,7 @@ use Vankosoft\ApplicationBundle\Model\Widget;
 use Vankosoft\ApplicationBundle\Controller\WidgetsController;
 use Vankosoft\ApplicationBundle\Form\WidgetForm;
 
-use Vankosoft\ApplicationBundle\Model\WidgetConfig;
+use Vankosoft\ApplicationBundle\Model\WidgetsRegistry;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -347,14 +347,14 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         
-                        ->arrayNode( 'widget_config' )
+                        ->arrayNode( 'widgets_registry' )
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->variableNode( 'options' )->end()
                                 ->arrayNode( 'classes' )
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode( 'model' )->defaultValue( WidgetConfig::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'model' )->defaultValue( WidgetsRegistry::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
                                     ->end()

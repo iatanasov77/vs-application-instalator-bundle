@@ -93,7 +93,9 @@ class Widget implements WidgetInterface
             $widgetItem->setGroup( $widget->getGroup()->getCode() )
                         ->setName( $widget->getName() )
                         ->setDescription( $widget->getDescription() )
-                        ->setActive( $widget->getActive() );
+                        ->setActive( $widget->getActive() )
+                        ->setRole( $widget->getAllowedRolesFromCollection() )
+            ;
             
             return $widgetItem;
         }
@@ -104,10 +106,10 @@ class Widget implements WidgetInterface
     /**
      * Used to Load Widgets into Database
      */
-    public function loadWidgets( ?UserInterface $user, $checkRole = true )
+    public function loadWidgets( ?UserInterface $user, bool $checkRole = true, bool $all = false )
     {
         // Build Widgets
-        $widgets = $this->getWidgets( $checkRole );
+        $widgets = $all ? $this->getAllWidgets() : $this->getWidgets( $checkRole );
         
         foreach ( $widgets as $widgetId => $widgetVal ) {
             // Get User Widgets
@@ -136,7 +138,7 @@ class Widget implements WidgetInterface
      *
      * @return ItemInterface[]|null
      */
-    public function getWidgets( $checkRole = true ): ?array
+    public function getWidgets( bool $checkRole = true ): ?array
     {
         // Check Role
         $this->checkRole = $checkRole;
@@ -147,6 +149,26 @@ class Widget implements WidgetInterface
         }
 
         return $this->widgets;
+    }
+    
+    /**
+     * Get All Widgets Including New Widgets.
+     *
+     * @return ItemInterface[]|null
+     */
+    public function getAllWidgets(): ?array
+    {
+        $allWidgets = $this->widgetRepository->findAll();
+        
+        $widgets    = [];
+        foreach ( $allWidgets as $w ) {
+            $widgetItem = $this->createWidgetItem( $w->getCode(), false );
+            if ( $widgetItem ) {
+                $widgets[$w->getCode()] = $widgetItem;
+            }
+        }
+            
+        return $widgets;
     }
 
     /**

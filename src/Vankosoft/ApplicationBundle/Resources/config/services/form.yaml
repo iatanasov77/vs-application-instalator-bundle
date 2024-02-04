@@ -74,3 +74,4 @@ services:
             - '@request_stack'
             - '@vs_application.repository.locale'
             - '%vs_application.model.widget_group.class%'
+            - '%vs_users.model.user_roles.class%'

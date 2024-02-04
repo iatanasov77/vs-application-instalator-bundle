@@ -1,9 +1,9 @@
 <?php namespace Vankosoft\ApplicationBundle\Model;
 
-use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetConfigInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetsRegistryInterface;
 use Vankosoft\ApplicationBundle\Model\Traits\WidgetUserTrait;
 
-class WidgetConfig implements WidgetConfigInterface
+class WidgetsRegistry implements WidgetsRegistryInterface
 {
     use WidgetUserTrait;
     

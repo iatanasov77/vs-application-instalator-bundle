@@ -213,6 +213,19 @@ sylius_fixtures:
                     name: user_roles
                     options:
                         custom:
+                            - title: 'Role Anonymous User'
+                              description: 'Role used in widgets that need to showed for not logged in users'
+                              taxonomy_code: 'user-roles'
+                              locale:  '%locale%'
+                              role: 'ROLE_ANONYMOUS_USER'
+                              parent: null
+                              translations:
+                                  en_US:
+                                      title: 'Role Anonymous User'
+                                      description: 'Role used in widgets that need to showed for not logged in users'
+                                  bg_BG:
+                                      title: 'Роля Анонимен Потребител'
+                                      description: 'Роля, използвана за уиджети, които трябва да се показват за не логнати потребители'
                             - title: 'Role Super Admin'
                               description: 'Role used mostly for Project Owners'
                               taxonomy_code: 'user-roles'
@@ -367,20 +380,37 @@ sylius_fixtures:
                               name: 'Main Menu Applications'
                               description: 'Main Menu Applications'
                               active: true
+                              allowedRoles:
+                                - role: 'ROLE_SUPER_ADMIN'
+                                - role: 'ROLE_ADMIN'
+                                - role: 'ROLE_APPLICATION_ADMIN'
                             - group_code: 'admin-profile-menu'
                               locale:  '%locale%'
                               name: 'Profile Menu Locales'
                               description: 'Profile Menu Locales'
                               active: true
+                              allowedRoles:
+                                - role: 'ROLE_SUPER_ADMIN'
+                                - role: 'ROLE_ADMIN'
+                                - role: 'ROLE_APPLICATION_ADMIN'
                             - group_code: 'admin-profile-page'
                               locale:  '%locale%'
                               name: 'User Info'
                               description: 'User Info'
                               active: true
+                              allowedRoles:
+                                - role: 'ROLE_SUPER_ADMIN'
+                                - role: 'ROLE_ADMIN'
+                                - role: 'ROLE_APPLICATION_ADMIN'
                             - group_code: 'test-widgets'
                               locale:  '%locale%'
                               name: 'Test Widget 1'
                               description: 'Test Widget 1'
                               active: true
+                              allowedRoles:
+                                - role: 'ROLE_ANONYMOUS_USER'
+                                - role: 'ROLE_SUPER_ADMIN'
+                                - role: 'ROLE_ADMIN'
+                                - role: 'ROLE_APPLICATION_ADMIN'
                               
 

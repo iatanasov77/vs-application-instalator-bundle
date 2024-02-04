@@ -1,15 +1,27 @@
 <?php namespace Vankosoft\ApplicationBundle\Component\Widget;
 
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\ItemInterface;
+use Vankosoft\UsersBundle\Model\UserInterface;
 
 interface WidgetInterface
 {
+    public function createWidgetItem( string $widgetCode, bool $checkRole = true ): ?ItemInterface;
+    
+    public function loadWidgets( ?UserInterface $user, bool $checkRole = true, bool $all = false );
+    
     /**
      * Get Items to Widget Storage.
      *
      * @return ItemInterface[]|null
      */
-    public function getWidgets( $checkRole = true ): ?array;
+    public function getWidgets( bool $checkRole = true ): ?array;
+    
+    /**
+     * Get Items to Widget Storage.
+     *
+     * @return ItemInterface[]|null
+     */
+    public function getAllWidgets(): ?array;
 
     /**
      * Add Item to Widget Storage.

@@ -159,11 +159,13 @@ EOT
     
     private function loadWidgets(): void
     {
+        $widgetsContainer   = $this->get( 'vs_application.widgets_container' );
+        
         $users  = $this->get( 'vs_users.repository.users' )->findAll();
         foreach ( $users as $user ) {
-            $this->get( 'vs_application.widgets_container' )->loadWidgets( $user, false );
+            $widgetsContainer->loadWidgets( $user, false, true );
         }
-        $this->get( 'vs_application.widgets_container' )->loadWidgets( null, false );
+        $widgetsContainer->loadWidgets( null, false, true );
     }
     
     private function getProperFinalMessage( bool $errored ): string
