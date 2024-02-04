@@ -34,13 +34,17 @@ class WidgetsConfigsController extends AbstractController
     /** @var EntityRepository */
     protected $widgetRepository;
     
+    /** @var EntityRepository */
+    protected $usersRepository;
+    
     public function __construct(
         CacheInterface $cache,
         ManagerRegistry $doctrine,
         WidgetInterface $widgets,
         EntityRepository $widgetConfigRepository,
         Factory $widgetConfigFactory,
-        EntityRepository $widgetRepository
+        EntityRepository $widgetRepository,
+        EntityRepository $usersRepository
     ) {
         $this->cache                    = $cache;
         $this->doctrine                 = $doctrine;
@@ -48,6 +52,7 @@ class WidgetsConfigsController extends AbstractController
         $this->widgetConfigRepository   = $widgetConfigRepository;
         $this->widgetConfigFactory      = $widgetConfigFactory;
         $this->widgetRepository         = $widgetRepository;
+        $this->usersRepository          = $usersRepository;
     }
     
     public function index( Request $request ): Response
@@ -92,10 +97,13 @@ class WidgetsConfigsController extends AbstractController
      */
     public function refreshAllUsers( $all, Request $request ): Response
     {
-        if ( $all ) {
-            $this->widgets->loadWidgets( $this->getUser(), false, true );
-        } else {
-            $this->widgets->loadWidgets( $this->getUser() );
+        $users  = $this->usersRepository->findAll();
+        foreach ( $users as $user ) {
+            if ( $all ) {
+                $this->widgets->loadWidgets( $user, false, true );
+            } else {
+                $this->widgets->loadWidgets( $user );
+            }
         }
         
         // Response

@@ -55,6 +55,7 @@ services:
             - '@vs_application.repository.widget_config'
             - '@vs_application.factory.widget_config'
             - '@vs_application.repository.widget'
+            - '@vs_users.repository.users'
             
     Vankosoft\ApplicationBundle\Controller\WidgetsExtController:
         tags: ['controller.service_arguments']

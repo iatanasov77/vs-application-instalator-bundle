@@ -164,7 +164,7 @@ class Widget implements WidgetInterface
         foreach ( $allWidgets as $w ) {
             $widgetItem = $this->createWidgetItem( $w->getCode(), false );
             if ( $widgetItem ) {
-                $widgets[]  = $widgetItem;
+                $widgets[$w->getCode()] = $widgetItem;
             }
         }
             
