@@ -380,20 +380,37 @@ sylius_fixtures:
                               name: 'Main Menu Applications'
                               description: 'Main Menu Applications'
                               active: true
+                              allowedRoles:
+                                - role: 'ROLE_SUPER_ADMIN'
+                                - role: 'ROLE_ADMIN'
+                                - role: 'ROLE_APPLICATION_ADMIN'
                             - group_code: 'admin-profile-menu'
                               locale:  '%locale%'
                               name: 'Profile Menu Locales'
                               description: 'Profile Menu Locales'
                               active: true
+                              allowedRoles:
+                                - role: 'ROLE_SUPER_ADMIN'
+                                - role: 'ROLE_ADMIN'
+                                - role: 'ROLE_APPLICATION_ADMIN'
                             - group_code: 'admin-profile-page'
                               locale:  '%locale%'
                               name: 'User Info'
                               description: 'User Info'
                               active: true
+                              allowedRoles:
+                                - role: 'ROLE_SUPER_ADMIN'
+                                - role: 'ROLE_ADMIN'
+                                - role: 'ROLE_APPLICATION_ADMIN'
                             - group_code: 'test-widgets'
                               locale:  '%locale%'
                               name: 'Test Widget 1'
                               description: 'Test Widget 1'
                               active: true
+                              allowedRoles:
+                                - role: 'ROLE_ANONYMOUS_USER'
+                                - role: 'ROLE_SUPER_ADMIN'
+                                - role: 'ROLE_ADMIN'
+                                - role: 'ROLE_APPLICATION_ADMIN'
                               
 

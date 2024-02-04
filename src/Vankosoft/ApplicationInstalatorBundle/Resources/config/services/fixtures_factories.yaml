@@ -95,3 +95,4 @@ services:
             - '@vs_application.repository.widget_group'
             - '@vs_application.factory.widget'
             - '@vs_application.slug_generator'
+            - '@vs_users.repository.user_roles'
