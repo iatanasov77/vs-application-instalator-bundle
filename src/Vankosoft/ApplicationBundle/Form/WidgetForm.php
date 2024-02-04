@@ -15,11 +15,18 @@ use Vankosoft\UsersBundle\Component\UserRole;
 
 class WidgetForm extends AbstractForm
 {
+    /** @var string */
+    private $groupClass;
+    
+    /** @var string */
+    private $userRolesClass;
+    
     public function __construct(
         string $dataClass,
         RequestStack $requestStack,
         RepositoryInterface $localesRepository,
-        string $groupClass
+        string $groupClass,
+        string $userRolesClass
     ) {
         parent::__construct( $dataClass );
         
@@ -27,6 +34,7 @@ class WidgetForm extends AbstractForm
         $this->localesRepository    = $localesRepository;
         
         $this->groupClass           = $groupClass;
+        $this->userRolesClass       = $userRolesClass;
     }
     
     public function buildForm( FormBuilderInterface $builder, array $options ): void
@@ -69,13 +77,14 @@ class WidgetForm extends AbstractForm
                 'translation_domain' => 'VSApplicationBundle',
             ])
             
-            ->add( 'allowedRoles', ChoiceType::class, [
+            ->add( 'allowedRoles', EntityType::class, [
                 'label'                 => 'vs_application.form.allowed_roles_label',
                 'placeholder'           => 'vs_application.form.allowed_roles_placeholder',
                 'translation_domain'    => 'VSApplicationBundle',
                 'mapped'                => false,
                 'multiple'              => true,
-                'choices'               => UserRole::choices(),
+                'class'                 => $this->userRolesClass,
+                'choice_label'          => 'role',
                 
                 // Combotree Makes Error on Chrome if field is required 
                 'required'              => false,
