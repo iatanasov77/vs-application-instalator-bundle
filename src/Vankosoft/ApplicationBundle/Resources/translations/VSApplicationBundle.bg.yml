@@ -72,7 +72,7 @@ vs_application:
         list_widgets: Уиджети
         create_new_widget: Създаване Нов Уиджет
         update_widget: Редакция Уиджет
-        widget_configs: Уиджет Конфигурации
+        widgets_registry: Регистър Уиджети
 
     form:
         errors_title: 'Грешка!'

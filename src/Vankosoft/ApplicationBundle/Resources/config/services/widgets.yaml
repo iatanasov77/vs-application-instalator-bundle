@@ -16,7 +16,7 @@ services:
         arguments:
             - '@security.token_storage'
             - '@vs_application.repository.widget'
-            - '@vs_application.repository.widget_config'
+            - '@vs_application.repository.widgets_registry'
             
     vs_application.widgets_container:
         class: Vankosoft\ApplicationBundle\Component\Widget\Widget
@@ -26,8 +26,8 @@ services:
             - '@cache.app'
             - '@security.token_storage'
             - '@doctrine'
-            - '@vs_application.repository.widget_config'
-            - '@vs_application.factory.widget_config'
+            - '@vs_application.repository.widgets_registry'
+            - '@vs_application.factory.widgets_registry'
             - '@vs_application.repository.widget'
             
     vs_application.twig_widget_renderer:
@@ -52,8 +52,8 @@ services:
             - '@cache.app'
             - '@doctrine'
             - '@vs_application.widgets_container'
-            - '@vs_application.repository.widget_config'
-            - '@vs_application.factory.widget_config'
+            - '@vs_application.repository.widgets_registry'
+            - '@vs_application.factory.widgets_registry'
             - '@vs_application.repository.widget'
             - '@vs_users.repository.users'
             
