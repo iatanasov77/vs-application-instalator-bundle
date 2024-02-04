@@ -1,3 +1,21 @@
+1.10.173	|	Release date: **04.02.2024**
+============================================
+* New Features and Improvements:
+  - Add an Anonymous User Role and Exclude it From Users Crud Forms.
+  - Add User Roles Field to the Widget Model.
+  - Improve Alerts Twig Macro
+  - Use Alerts Macros for Form Errors.
+  - Use OptionsResolver in UserRoleForm .
+  - Improve Widgets System
+  - Improve Application Installtor for Widgets.
+  - Create New Widget Configs Actions.
+  - Rename WidgetConfig model to WidgetsRegistry .
+  - Add a Doctrine Migration.
+  - Update Application Configs.
+* Bug-Fixes:
+  - Fix Pages Tags Whitelist Got From Context
+
+
 1.10.172	|	Release date: **03.02.2024**
 ============================================
 * Bug-Fixes:
