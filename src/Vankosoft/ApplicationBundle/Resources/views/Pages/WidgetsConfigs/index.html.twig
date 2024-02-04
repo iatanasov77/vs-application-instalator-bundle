@@ -18,18 +18,18 @@
                 <div style="float: left; margin-left: 30px; margin-bottom: 20px;">
                     <a class="btn btn-rounded btn-primary"
                         href="{{ path( 'vs_application_widget_ext_refresh' ) }}"
-                        title="{{ 'vs_application.template.reload_registered_widgets' | trans( {},'VSApplicationBundle' ) }}"
+                        title="{{ 'vs_application.template.reload_current_user_registered_widgets' | trans( {},'VSApplicationBundle' ) }}"
                     >
-                        {{ 'vs_application.template.reload_registered_widgets' | trans( {},'VSApplicationBundle' ) }}
+                        {{ 'vs_application.template.reload_current_user_registered_widgets' | trans( {},'VSApplicationBundle' ) }}
                     </a>
                 </div>
                 
                 <div style="float: left; margin-left: 30px; margin-bottom: 20px;">
                     <a class="btn btn-rounded btn-primary"
                         href="{{ path( 'vs_application_widget_ext_refresh', {'all': 1} ) }}"
-                        title="{{ 'vs_application.template.reload_all_widgets' | trans( {},'VSApplicationBundle' ) }}"
+                        title="{{ 'vs_application.template.reload_current_user_all_widgets' | trans( {},'VSApplicationBundle' ) }}"
                     >
-                        {{ 'vs_application.template.reload_all_widgets' | trans( {},'VSApplicationBundle' ) }}
+                        {{ 'vs_application.template.reload_current_user_all_widgets' | trans( {},'VSApplicationBundle' ) }}
                     </a>
                 </div>
                 
