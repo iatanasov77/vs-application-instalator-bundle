@@ -11,6 +11,7 @@ interface WidgetInterface extends ResourceInterface, TranslatableInterface
     public function getName(): string;
     public function getDescription(): string;
     public function getAllowedRoles(): Collection;
+    public function getAllowedRolesFromCollection(): array;
     public function getActive(): ?bool;
     public function isActive(): bool;
 }

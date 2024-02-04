@@ -30,7 +30,7 @@ class WidgetsExtController extends AbstractController
     {
         $editWidget       = $editWidgetId ? $this->widgetsRepository->find( $editWidgetId ) : null;
         
-        $selectedRoles  = $editWidget  ? $editWidget ->getAllowedRoles() : [];
+        $selectedRoles  = $editWidget  ? $editWidget ->getAllowedRolesFromCollection() : [];
         $data           = [];
         
         $topRoles       = new ArrayCollection( $this->usersRolesRepository->findBy( ['parent' => null] ) );

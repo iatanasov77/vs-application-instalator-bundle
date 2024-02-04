@@ -104,6 +104,18 @@ class Widget implements WidgetInterface
         return $this->allowedRoles;
     }
     
+    /**
+     * @return array
+     */
+    public function getAllowedRolesFromCollection(): array
+    {
+        foreach ( $this->allowedRoles as $role ) {
+            $roles[]    = $role->getRole();
+        }
+        
+        return \array_unique( $roles );
+    }
+    
     public function setAllowedRoles( Collection $allowedRoles ): self
     {
         $this->allowedRoles  = $allowedRoles;
