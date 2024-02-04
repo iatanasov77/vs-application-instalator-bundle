@@ -21,7 +21,7 @@ class TagsWhitelistTag implements TagsWhitelistTagInterface
     
     public function getContext(): ?TagsWhitelistContextInterface
     {
-        return $this->tag;
+        return $this->context;
     }
     
     public function setContext( TagsWhitelistContextInterface $context )
