@@ -22,6 +22,8 @@
     {% else %}
         {% set additionalClass = ''  %}
     {% endif %}
+    
+    {# Dont Use on required Fields #}
     {{ form_widget( twigWidget, {
         'attr': {
             'class': 'easyui-combotree form-control ' ~ additionalClass,
@@ -29,6 +31,7 @@
             'data-value': dataValue
         }
     }) }}
+    
 {% endmacro %}
 
 {# ============= #}

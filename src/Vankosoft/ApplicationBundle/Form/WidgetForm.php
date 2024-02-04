@@ -73,9 +73,12 @@ class WidgetForm extends AbstractForm
                 'label'                 => 'vs_application.form.allowed_roles_label',
                 'placeholder'           => 'vs_application.form.allowed_roles_placeholder',
                 'translation_domain'    => 'VSApplicationBundle',
-                "mapped"                => false,
-                "multiple"              => true,
-                'choices'               => UserRole::choices()
+                'mapped'                => false,
+                'multiple'              => true,
+                'choices'               => UserRole::choices(),
+                
+                // Combotree Makes Error on Chrome if field is required 
+                'required'              => false,
             ])
         ;
     }
