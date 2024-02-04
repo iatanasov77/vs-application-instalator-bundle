@@ -44,9 +44,9 @@ class WidgetsController extends AbstractCrudController
         //var_dump( $roles ); die;
         $repo   = $this->get( 'vs_users.repository.user_roles' );
         
-        $entity->setRolesCollection( new ArrayCollection() );
+        $entity->setAllowedRoles( new ArrayCollection() );
         foreach ( $roles as $r ) {
-            $entity->addRole( $repo->find( $r['id'] ) );
+            $entity->addAllowedRole( $repo->find( $r['id'] ) );
         }
     }
 }
