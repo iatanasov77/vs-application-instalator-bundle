@@ -14,7 +14,7 @@
 
 {% macro error(text) %}
 <div class="alert alert-danger alert-dismissible" role="alert">
-  {{ text }}
+  <strong>{{ 'vs_application.form.errors_title' | trans( {},'VSApplicationBundle' ) }}</strong> {{ text }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 {% endmacro %}
