@@ -25,8 +25,14 @@ vs_application_widget_ext_index:
     controller:  Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController::index
     
 vs_application_widget_ext_refresh:
-    path: /widget-ext/refresh
+    path: /widget-ext/refresh-{all}
     controller:  Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController::refresh
+    defaults:   { all: 0 }
+    
+vs_application_widget_ext_refresh_all_users:
+    path: /widget-ext/refresh-all-users-{all}
+    controller:  Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController::refreshAllUsers
+    defaults:   { all: 0 }
     
 vs_application_widget_ext_load:
     path: /widget-ext/load/{widgetId}

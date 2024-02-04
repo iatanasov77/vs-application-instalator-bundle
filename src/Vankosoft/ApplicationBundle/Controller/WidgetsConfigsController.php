@@ -72,9 +72,31 @@ class WidgetsConfigsController extends AbstractController
      * @param Request $reques
      * @return Response
      */
-    public function refresh( Request $request ): Response
+    public function refresh( $all, Request $request ): Response
     {
-        $this->widgets->loadWidgets( $this->getUser() );
+        if ( $all ) {
+            $this->widgets->loadWidgets( $this->getUser(), false, true );
+        } else {
+            $this->widgets->loadWidgets( $this->getUser() );
+        }
+        
+        // Response
+        return $this->redirect( $request->headers->get( 'referer', $this->generateUrl( $this->getParameter( 'vs_application.widgets.return_route' ) ) ) );
+    }
+    
+    /**
+     * Used to Load New Widgets into Database
+     *
+     * @param Request $reques
+     * @return Response
+     */
+    public function refreshAllUsers( $all, Request $request ): Response
+    {
+        if ( $all ) {
+            $this->widgets->loadWidgets( $this->getUser(), false, true );
+        } else {
+            $this->widgets->loadWidgets( $this->getUser() );
+        }
         
         // Response
         return $this->redirect( $request->headers->get( 'referer', $this->generateUrl( $this->getParameter( 'vs_application.widgets.return_route' ) ) ) );

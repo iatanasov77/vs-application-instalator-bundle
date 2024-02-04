@@ -215,6 +215,8 @@ vs_application:
         reload_widgets: Презареждане Уиджети
         reload_registered_widgets: Презареждане Регистрирани Уиджети
         reload_all_widgets: Презареждане Всички Уиджети
+        reload_all_users_registered_widgets: Презареждане Регистрирани Уиджети за Всички Потребители
+        reload_all_users_all_widgets: Презареждане Всички Уиджети за Всички Потребители
         no_one: Никой
         test_widgets: Тестване Уиджети
         
