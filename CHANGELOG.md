@@ -1,3 +1,14 @@
+1.10.174	|	Release date: **05.02.2024**
+============================================
+* New Features:
+  - Start Checking Roles When Registering Widgets.
+  - Update Application Install Configs.
+* Bug-Fixes:
+  - Fix Widgets Cache Index For Guest Users.
+	  Start Checking Roles When Registering Widgets.
+	  Update Application Install Configs.
+
+
 1.10.173	|	Release date: **04.02.2024**
 ============================================
 * New Features and Improvements:
