@@ -12,7 +12,9 @@ use Sylius\Component\Resource\Factory\Factory;
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\Item;
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\ItemInterface;
 use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
+use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetInterface;
 use Vankosoft\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\UserRole;
 
 class Widget implements WidgetInterface
 {
@@ -86,18 +88,25 @@ class Widget implements WidgetInterface
     {
         $this->checkRole    = $checkRole;
         $widget             = $this->widgetRepository->findOneBy( ['code' => $widgetCode] );
+        $allowed            = true;
         
         if ( $widget ) {
-            // Create Widget Item
-            $widgetItem = new Item( $widget->getCode(), 3600 );
-            $widgetItem->setGroup( $widget->getGroup()->getCode() )
-                        ->setName( $widget->getName() )
-                        ->setDescription( $widget->getDescription() )
-                        ->setActive( $widget->getActive() )
-                        ->setRole( $widget->getAllowedRolesFromCollection() )
-            ;
+            if ( $checkRole ) {
+                $allowed    = $this->enableWidgetForUser( $widget );
+            }
             
-            return $widgetItem;
+            if ( $allowed ) {
+                // Create Widget Item
+                $widgetItem = new Item( $widget->getCode(), 3600 );
+                $widgetItem->setGroup( $widget->getGroup()->getCode() )
+                            ->setName( $widget->getName() )
+                            ->setDescription( $widget->getDescription() )
+                            ->setActive( $widget->getActive() )
+                            ->setRole( $widget->getAllowedRolesFromCollection() )
+                ;
+                
+                return $widgetItem;
+            }
         }
         
         return null;
@@ -109,7 +118,7 @@ class Widget implements WidgetInterface
     public function loadWidgets( ?UserInterface $user, bool $checkRole = true, bool $all = false )
     {
         // Build Widgets
-        $widgets = $all ? $this->getAllWidgets() : $this->getWidgets( $checkRole );
+        $widgets = $all ? $this->getAllWidgets( $checkRole ) : $this->getWidgets( $checkRole );
         
         foreach ( $widgets as $widgetId => $widgetVal ) {
             // Get User Widgets
@@ -156,13 +165,13 @@ class Widget implements WidgetInterface
      *
      * @return ItemInterface[]|null
      */
-    public function getAllWidgets(): ?array
+    public function getAllWidgets( bool $checkRole = true ): ?array
     {
         $allWidgets = $this->widgetRepository->findAll();
         
         $widgets    = [];
         foreach ( $allWidgets as $w ) {
-            $widgetItem = $this->createWidgetItem( $w->getCode(), false );
+            $widgetItem = $this->createWidgetItem( $w->getCode(), $checkRole );
             if ( $widgetItem ) {
                 $widgets[$w->getCode()] = $widgetItem;
             }
@@ -225,5 +234,15 @@ class Widget implements WidgetInterface
             } catch ( InvalidArgumentException $e ) {
             }
         }
+    }
+    
+    private function enableWidgetForUser( WidgetInterface $widget ): bool
+    {
+        $user           = $this->token->getToken() ? $this->token->getToken()->getUser() : null;
+        $userRoles      = $user ? $user->getRoles() : [UserRole::ANONYMOUS];
+        
+        $allowedRoles   = \array_intersect( $userRoles, $widget->getAllowedRolesFromCollection() );
+        
+        return ! empty( $allowedRoles );
     }
 }
