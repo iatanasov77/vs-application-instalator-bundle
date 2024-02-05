@@ -21,7 +21,7 @@ interface WidgetInterface
      *
      * @return ItemInterface[]|null
      */
-    public function getAllWidgets(): ?array;
+    public function getAllWidgets( bool $checkRole = true ): ?array;
 
     /**
      * Add Item to Widget Storage.
