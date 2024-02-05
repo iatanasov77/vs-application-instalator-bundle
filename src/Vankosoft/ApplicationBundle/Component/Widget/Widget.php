@@ -216,7 +216,7 @@ class Widget implements WidgetInterface
     {
         // Get Widgets
         $widgets    = $this->getWidgets( false );
-        $userId     = $this->token->getToken()->getUser()->getId();
+        $userId     = $this->token->getToken() ? $this->token->getToken()->getUser()->getId() : '';
 
         // Clear Cache
         foreach ( $widgets as $widget ) {

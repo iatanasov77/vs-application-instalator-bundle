@@ -162,7 +162,7 @@ class WidgetsConfigsController extends AbstractController
             $em->flush();
             
             // Flush Widget Cache
-            $this->cache->delete( $widgetId . $this->getUser()->getId() );
+            $this->cache->delete( $widgetId . $this->getUser() ? $this->getUser()->getId() : '' );
         }
         
         // Response
