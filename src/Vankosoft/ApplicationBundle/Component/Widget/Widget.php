@@ -12,7 +12,7 @@ use Sylius\Component\Resource\Factory\Factory;
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\Item;
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\ItemInterface;
 use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
-use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetInterface as WidgetModelInterface;
 use Vankosoft\UsersBundle\Model\UserInterface;
 use Vankosoft\UsersBundle\Model\UserRole;
 
@@ -236,7 +236,7 @@ class Widget implements WidgetInterface
         }
     }
     
-    private function enableWidgetForUser( WidgetInterface $widget ): bool
+    private function enableWidgetForUser( WidgetModelInterface $widget ): bool
     {
         $user           = $this->token->getToken() ? $this->token->getToken()->getUser() : null;
         $userRoles      = $user ? $user->getRoles() : [UserRole::ANONYMOUS];
