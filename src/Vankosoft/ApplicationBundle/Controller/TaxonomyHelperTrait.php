@@ -49,12 +49,13 @@ trait TaxonomyHelperTrait
         return $translation;
     }
     
-    protected function getTranslations()
+    protected function getTranslations( bool $paginated = true )
     {
         $locales        = $this->get( 'vs_application.repository.locale' )->findAll();
         
+        $resources      = $paginated ? $this->resources->getCurrentPageResults() : $this->getRepository()->findAll();
         $translations   = [];
-        foreach ( $this->resources->getCurrentPageResults() as $category ) {
+        foreach ( $resources as $category ) {
             foreach( $locales as $locale ) {
                 $category->getTaxon()->getTranslation( $locale->getCode() );
             }

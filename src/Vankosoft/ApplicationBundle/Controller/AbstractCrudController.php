@@ -89,8 +89,13 @@ class AbstractCrudController extends ResourceController
                         'resources'                         => $this->resources,
                         $this->metadata->getPluralName()    => $this->resources,
                         
-                        /** @TODO Make Admin Panel To Use Paginated Rsources and Remove This */
-                        'items'                             => $this->getRepository()->findAll(),
+                        /**
+                         * @TODO Make Admin Panel To Use Paginated Rsources and Remove This
+                         *
+                         * In Category Resources that Create Simpla Tree Table in Index Pages 
+                         * Add This Parameter in customData Method
+                         */
+                        //'items'                             => $this->getRepository()->findAll(),
                     ],
                     $this->customData( $request )
                 )
