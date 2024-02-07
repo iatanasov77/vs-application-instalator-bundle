@@ -1,3 +1,9 @@
+1.10.175	|	Release date: **07.02.2024**
+============================================
+* New Features and Improvements:
+  - Remove Templates Variable 'items' From AbstractCrudController and get Only where is Needed.
+
+
 1.10.174	|	Release date: **05.02.2024**
 ============================================
 * New Features:
