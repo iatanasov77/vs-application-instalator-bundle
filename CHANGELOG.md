@@ -1,3 +1,9 @@
+1.10.176	|	Release date: **09.02.2024**
+============================================
+* New Features:
+  - Add Application Installator Configs and Some Translations.
+
+
 1.10.175	|	Release date: **07.02.2024**
 ============================================
 * New Features and Improvements:
