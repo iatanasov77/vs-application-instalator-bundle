@@ -112,6 +112,10 @@ vs_application:
         picture_placeholder: Choose a Picture
         picture_invalid: 'Invalid Picture Format !!!'
         
+        file: File
+        file_placeholder: Choose a File
+        file_invalid: 'Invalid File Format !!!'
+        
         login:
             sub_title: Please enter your username and password.
             username: Username

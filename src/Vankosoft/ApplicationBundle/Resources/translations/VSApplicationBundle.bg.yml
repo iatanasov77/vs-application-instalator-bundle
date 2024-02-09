@@ -112,6 +112,10 @@ vs_application:
         picture_placeholder: Избери Картинка
         picture_invalid: 'Невалиден Формат на Картинка !!!'
         
+        file: Файл
+        file_placeholder: Избери Файл
+        file_invalid: 'Невалиден Формат на Файл !!!'
+        
         login:
             sub_title: Моля, въведете вашето потребителско име и парола.
             username: Потребител
