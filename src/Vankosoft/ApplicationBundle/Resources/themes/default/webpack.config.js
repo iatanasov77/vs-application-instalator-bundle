@@ -105,7 +105,6 @@ if ( pathExists.sync( usersSubscriptionsAssetsPath ) ) {
     Encore
         .addEntry( 'js/payed-services-edit', usersSubscriptionsAssetsPath + '/js/pages/payed-services-edit.js' )
         .addEntry( 'js/payed-services-listing', usersSubscriptionsAssetsPath + '/js/pages/payed-services-listing.js' )
-        .addEntry( 'js/payed-services-categories-listing', usersSubscriptionsAssetsPath + '/js/pages/payed-services-categories-listing.js' )
         .addEntry( 'js/mailchimp-audiences-listing', usersSubscriptionsAssetsPath + '/js/pages/mailchimp-audiences-listing.js' )
         .addEntry( 'js/payed-service-subscriptions', usersSubscriptionsAssetsPath + '/js/pages/payed-service-subscriptions.js' )
     ;
