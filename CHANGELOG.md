@@ -1,3 +1,9 @@
+1.10.177	|	Release date: **13.02.2024**
+============================================
+* New Features:
+  - Remove PayedServiceCategory Configs From Installtor for Catalog and Extended Applications.
+
+
 1.10.176	|	Release date: **09.02.2024**
 ============================================
 * New Features:
