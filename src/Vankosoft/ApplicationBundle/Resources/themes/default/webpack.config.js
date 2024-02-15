@@ -121,9 +121,15 @@ if ( pathExists.sync( paymentAssetsPath ) ) {
         .addEntry( 'js/recieved-payments', paymentAssetsPath + '/js/pages/recieved-payments.js' )
         .addEntry( 'js/orders', paymentAssetsPath + '/js/pages/orders.js' )
         .addEntry( 'js/stripe-webhook-endpoint', paymentAssetsPath + '/js/pages/stripe-webhook-endpoint.js' )
+        
         .addEntry( 'js/coupon-objects', paymentAssetsPath + '/js/pages/coupon-objects.js' )
         .addEntry( 'js/coupons-index', paymentAssetsPath + '/js/pages/coupons-index.js' )
         .addEntry( 'js/coupons-edit', paymentAssetsPath + '/js/pages/coupons-edit.js' )
+        
+        .addEntry( 'js/promotions-index', paymentAssetsPath + '/js/pages/promotions-index.js' )
+        .addEntry( 'js/promotions-edit', paymentAssetsPath + '/js/pages/promotions-edit.js' )
+        .addEntry( 'js/promotion-coupons-index', paymentAssetsPath + '/js/pages/promotion-coupons-index.js' )
+        .addEntry( 'js/promotion-coupons-edit', paymentAssetsPath + '/js/pages/promotion-coupons-edit.js' )
     ;
 }
     
