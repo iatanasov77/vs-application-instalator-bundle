@@ -1,3 +1,9 @@
+1.10.178	|	Release date: **15.02.2024**
+============================================
+* New Features:
+  - Add Some New Entries into Webpack Config of Default AdminPanel Theme.
+
+
 1.10.177	|	Release date: **13.02.2024**
 ============================================
 * New Features:
