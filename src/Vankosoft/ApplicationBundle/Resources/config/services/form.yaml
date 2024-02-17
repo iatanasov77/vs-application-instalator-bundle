@@ -1,4 +1,12 @@
 services:
+    vs_application.form.data_transformer.taxons_to_codes:
+        class: Vankosoft\ApplicationBundle\Form\DataTransformer\TaxonsToCodesTransformer
+        arguments: ['@vs_application.repository.taxon']
+        
+    vs_application.form.type.application_collection:
+        class: Vankosoft\ApplicationBundle\Form\Type\ApplicationCollectionType
+        arguments: ['@vs_application.repository.application']
+
     vs_application.resources.application.form:
         public: true
         class: Vankosoft\ApplicationBundle\Form\ApplicationForm
