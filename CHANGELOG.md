@@ -1,3 +1,9 @@
+1.10.179	|	Release date: **17.02.2024**
+============================================
+* New Features:
+  - Add Some Form DataTransformers and Types.
+
+
 1.10.178	|	Release date: **15.02.2024**
 ============================================
 * New Features:
