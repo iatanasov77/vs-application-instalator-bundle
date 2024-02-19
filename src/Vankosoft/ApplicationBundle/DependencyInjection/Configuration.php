@@ -39,7 +39,7 @@ use Vankosoft\ApplicationBundle\Model\TaxonTranslation;
 //use Sylius\Component\Taxonomy\Factory\TaxonFactory;
 
 use Vankosoft\ApplicationBundle\Model\Translation;
-use Gedmo\Translatable\Entity\Repository\TranslationRepository;
+use Vankosoft\ApplicationBundle\Repository\TranslationRepository;
 
 use Vankosoft\ApplicationBundle\Model\LogEntry;
 use Vankosoft\ApplicationBundle\Repository\LogEntryRepository;

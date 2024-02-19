@@ -3,12 +3,17 @@
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepositoryTrait;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Exception\UnexpectedValueException;
 
-class TaxonRepository extends NestedTreeRepository
+class TaxonRepository extends NestedTreeRepository implements RepositoryInterface
 {
+    use ResourceRepositoryTrait;
+    
     protected string $rootDir;
     protected ?\Exception $exception;
     
