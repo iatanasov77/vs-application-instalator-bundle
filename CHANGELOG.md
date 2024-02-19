@@ -1,3 +1,9 @@
+1.10.180	|	Release date: **19.02.2024**
+============================================
+* Bug-Fixes:
+  - Fix ApplicationCollectionType Service Definition.
+
+
 1.10.179	|	Release date: **17.02.2024**
 ============================================
 * New Features:
