@@ -5,6 +5,8 @@ services:
         
     vs_application.form.type.application_collection:
         class: Vankosoft\ApplicationBundle\Form\Type\ApplicationCollectionType
+        tags:
+            - { name: form.type }
         arguments: ['@vs_application.repository.application']
 
     vs_application.resources.application.form:
