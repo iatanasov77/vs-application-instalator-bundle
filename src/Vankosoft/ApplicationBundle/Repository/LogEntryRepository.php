@@ -3,6 +3,9 @@
 use Gedmo\Loggable\Entity\Repository\LogEntryRepository as BaseRepository;
 use Gedmo\Tool\Wrapper\EntityWrapper;
 
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepositoryTrait;
+
 /**
  * The LogEntryRepository has some useful functions
  * to interact with log entries.
@@ -10,8 +13,10 @@ use Gedmo\Tool\Wrapper\EntityWrapper;
  * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-class LogEntryRepository extends BaseRepository
+class LogEntryRepository extends BaseRepository implements RepositoryInterface
 {
+    use ResourceRepositoryTrait;
+    
     /**
      * @NOTE: Copied from Base Repository
      * 
