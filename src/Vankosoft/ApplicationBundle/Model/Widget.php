@@ -4,8 +4,7 @@ use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetGroupInterface;
 use Vankosoft\UsersBundle\Model\UserRoleInterface;
 use Sylius\Component\Resource\Model\ToggleableTrait;
-use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
+use Vankosoft\ApplicationBundle\Model\Traits\TranslatableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -174,10 +173,5 @@ class Widget implements WidgetInterface
         $this->locale = $locale;
         
         return $this;
-    }
-    
-    protected function createTranslation(): TranslationInterface
-    {
-        
     }
 }
