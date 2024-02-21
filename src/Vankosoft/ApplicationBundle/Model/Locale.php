@@ -1,8 +1,7 @@
 <?php namespace Vankosoft\ApplicationBundle\Model;
 
 use Sylius\Component\Locale\Model\Locale as BaseLocale;
-use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
+use Vankosoft\ApplicationBundle\Model\Traits\TranslatableTrait;
 use Vankosoft\ApplicationBundle\Model\Interfaces\LocaleInterface;
 
 class Locale extends BaseLocale implements LocaleInterface
@@ -45,13 +44,5 @@ class Locale extends BaseLocale implements LocaleInterface
         $this->translatableLocale   = $translatableLocale;
         
         return $this;
-    }
-    
-    /*
-     * @NOTE: Decalared abstract in TranslatableTrait
-     */
-    protected function createTranslation(): TranslationInterface
-    {
-        
     }
 }

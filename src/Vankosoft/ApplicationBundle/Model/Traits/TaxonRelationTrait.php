@@ -1,6 +1,6 @@
 <?php namespace Vankosoft\ApplicationBundle\Model\Traits;
 
-use Sylius\Component\Resource\Model\TranslatableTrait;
+use Vankosoft\ApplicationBundle\Model\Traits\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
 /**
  * @see TaxonRelationInterface
@@ -17,13 +17,5 @@ trait TaxonRelationTrait
     public function setFallbackLocale( string $fallbackLocale ): void
     {
         $this->taxon->setFallbackLocale( $fallbackLocale );
-    }
-    
-    /**
-     * Create resource translation model.
-     */
-    protected function createTranslation(): TranslationInterface
-    {
-        
     }
 }
