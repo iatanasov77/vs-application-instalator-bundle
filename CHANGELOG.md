@@ -1,3 +1,9 @@
+1.10.184	|	Release date: **21.02.2024**
+============================================
+* Bug-Fixes:
+  - Fix Extended TranslatableTrait .
+
+
 1.10.183	|	Release date: **21.02.2024**
 ============================================
 * New Features and Improvements:
