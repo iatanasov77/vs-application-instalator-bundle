@@ -159,10 +159,13 @@ class AbstractCrudController extends ResourceController
                 ]);
             } else {
                 $routesPrefix   = $this->classInfo['bundle'] . '_' . $this->classInfo['controller'];
+                $routeParams    = $this->getRouteParams( $request );
+                
                 if ( $form->getClickedButton() && 'btnApply' === $form->getClickedButton()->getName() ) {
-                    return $this->redirect( $this->generateUrl( $routesPrefix . '_update', ['id' => $entity->getId()] ) );
+                    $routeParams    = \array_merge( ['id' => $entity->getId()], $routeParams );
+                    return $this->redirect( $this->generateUrl( $routesPrefix . '_update', $routeParams ) );
                 } else {
-                    return $this->redirect( $this->generateUrl( $routesPrefix . '_index' ) );
+                    return $this->redirect( $this->generateUrl( $routesPrefix . '_index', $routeParams ) );
                 }
             }
         }
@@ -287,5 +290,16 @@ class AbstractCrudController extends ResourceController
         }
         
         return $errors;
+    }
+    
+    protected function getRouteParams( Request $request ): array
+    {
+        $routeParams = $request->attributes->get('_route_params');
+        if ( isset( $routeParams['_sylius'] ) ) {
+            unset( $routeParams['_sylius'] );
+        }
+        //var_dump($routeParams);die;
+        
+        return $routeParams;
     }
 }
