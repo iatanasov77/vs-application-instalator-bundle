@@ -16,6 +16,9 @@ trait TranslatableTrait
         return $this->translations ?: new ArrayCollection();
     }
     
+    /*
+     * @NOTE: Decalared abstract in BaseTranslatableTrait
+     */
     protected function createTranslation(): TranslationInterface
     {
         
