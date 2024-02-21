@@ -1,3 +1,11 @@
+1.10.183	|	Release date: **21.02.2024**
+============================================
+* New Features and Improvements:
+  - Extend Sylius TranslatableTrait .
+  - Use Extended Sylius TranslatableTrait .
+  - Improve AbstractCrudController .
+
+
 1.10.182	|	Release date: **19.02.2024**
 ============================================
 * Bug-Fixes:
