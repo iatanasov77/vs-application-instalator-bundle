@@ -1,3 +1,10 @@
+1.10.185	|	Release date: **22.02.2024**
+============================================
+* New Features:
+  - Update Application Catalog Installator Configs.
+  - Payment Entries Into Webpack Config.
+
+
 1.10.184	|	Release date: **21.02.2024**
 ============================================
 * Bug-Fixes:
