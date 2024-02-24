@@ -18,6 +18,8 @@
 		"symfony/webpack-encore-bundle": "^1.16",
 		"symfony/templating": "^5.4 || ^6.1",
 		"twig/extra-bundle" : "^3.3",
+		"twig/string-extra": "^3.3",
+		"twig/intl-extra": "^3.5",
 		"doctrine/doctrine-migrations-bundle": "^3.2",
 		"stof/doctrine-extensions-bundle": "^1.7",
 		"knplabs/knp-menu-bundle" : "^3.1",
