@@ -1,7 +1,22 @@
 <?php namespace Vankosoft\ApplicationBundle\Controller;
 
+use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
+use Vankosoft\ApplicationBundle\Component\Exception\TaxonomyNotFoundException;
+
 trait TaxonomyHelperTrait
 {
+    protected function getTaxonomy( string $taxonomyCodeParameter ): TaxonomyInterface
+    {
+        $taxonomyCode   = $this->getParameter( $taxonomyCodeParameter );
+        $taxonomy       = $this->get( 'vs_application.repository.taxonomy' )->findByCode( $taxonomyCode );
+        if ( ! $taxonomy ) {
+            $message    = \sprintf( 'Taxonomy with code "%s" Not Exists. Please create it before!', $taxonomyCode );
+            throw new TaxonomyNotFoundException( $message );
+        }
+        
+        return $taxonomy;
+    }
+    
     protected function createTaxon( $name, $locale, $parent, $taxonomyId )
     {
         $taxon  = $this->get( 'vs_application.factory.taxon' )->createNew();

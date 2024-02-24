@@ -152,7 +152,7 @@ vs_application:
             button_reject_all: Откажи Всички
             language_code_placeholder: '-- Избери Език --'
     template:
-        vankosoft_application: ВанкоСофт Прилоение
+        vankosoft_application: ВанкоСофт Приложение
         super_admin_panel: Админ Панел
         there_are_no_items_to_display: Няма елементи за показване
         default: Основен

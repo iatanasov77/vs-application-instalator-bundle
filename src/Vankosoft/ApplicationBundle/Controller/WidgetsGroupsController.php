@@ -10,9 +10,7 @@ class WidgetsGroupsController extends AbstractCrudController
     
     protected function customData( Request $request, $entity = null ): array
     {
-        $taxonomy       = $this->get( 'vs_application.repository.taxonomy' )->findByCode(
-            $this->getParameter( 'vs_application.widgets_groups.taxonomy_code' )
-        );
+        $taxonomy   = $this->getTaxonomy( 'vs_application.widgets_groups.taxonomy_code' );
         
         if ( $entity && $entity->getTaxon() ) {
             $entity->getTaxon()->setCurrentLocale( $request->getLocale() );

@@ -2,7 +2,7 @@
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ApplicationNotFoundException extends NotFoundHttpException
+class TaxonomyNotFoundException extends NotFoundHttpException
 {
     
 }
