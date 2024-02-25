@@ -157,21 +157,4 @@ class Widget implements WidgetInterface
     {
         return $this->enabled;
     }
-    
-    public function getLocale()
-    {
-        return $this->currentLocale;
-    }
-    
-    public function getTranslatableLocale(): ?string
-    {
-        return $this->locale;
-    }
-    
-    public function setTranslatableLocale($locale): self
-    {
-        $this->locale = $locale;
-        
-        return $this;
-    }
 }
