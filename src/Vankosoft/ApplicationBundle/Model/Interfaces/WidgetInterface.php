@@ -1,7 +1,6 @@
 <?php namespace Vankosoft\ApplicationBundle\Model\Interfaces;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\TranslatableInterface;
 use Doctrine\Common\Collections\Collection;
 
 interface WidgetInterface extends ResourceInterface, TranslatableInterface
