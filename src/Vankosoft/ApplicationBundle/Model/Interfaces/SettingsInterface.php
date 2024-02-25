@@ -1,7 +1,7 @@
 <?php namespace Vankosoft\ApplicationBundle\Model\Interfaces;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Vankosoft\CmsBundle\Model\PageInterface;
+use Vankosoft\CmsBundle\Model\Interfaces\PageInterface;
 
 interface SettingsInterface extends ResourceInterface
 {
