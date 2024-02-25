@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\Collection;
 
 interface TagsWhitelistContextInterface extends ResourceInterface, TaxonDescendentInterface
 {
-    public function getName(): ?string;
     public function getTags(): Collection;
     public function getTagsArray(): array;
 }
