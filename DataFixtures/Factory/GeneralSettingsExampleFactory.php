@@ -5,7 +5,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\SettingsInterface;
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
-use Vankosoft\CmsBundle\Model\PageInterface;
+use Vankosoft\CmsBundle\Model\Interfaces\PageInterface;
 
 class GeneralSettingsExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
