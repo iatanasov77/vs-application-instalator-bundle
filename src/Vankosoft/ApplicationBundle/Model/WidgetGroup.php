@@ -2,16 +2,15 @@
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Vankosoft\ApplicationBundle\Model\Traits\TaxonDescendentTrait;
 use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetGroupInterface;
-use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface;
 
 class WidgetGroup implements WidgetGroupInterface
 {
+    use TaxonDescendentTrait;
+    
     /** @var integer */
     protected $id;
-    
-    /** @var TaxonInterface */
-    protected $taxon;
     
     /** @var Collection|Widget[] */
     protected $widgets;
@@ -27,43 +26,6 @@ class WidgetGroup implements WidgetGroupInterface
     public function getId()
     {
         return $this->id;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxon(): ?TaxonInterface
-    {
-        return $this->taxon;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setTaxon( ?TaxonInterface $taxon ): void
-    {
-        $this->taxon = $taxon;
-    }
-    
-    public function getCode(): string
-    {
-        return $this->taxon ? $this->taxon->getCode() : '';
-    }
-    
-    public function getName(): string
-    {
-        return $this->taxon ? $this->taxon->getName() : '';
-    }
-    
-    public function setName( string $name ) : self
-    {
-        if ( ! $this->taxon ) {
-            // Create new taxon into the controller and set the properties passed from form
-            return $this;
-        }
-        $this->taxon->setName( $name );
-        
-        return $this;
     }
     
     /**
