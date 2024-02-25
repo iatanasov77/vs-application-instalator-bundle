@@ -75,7 +75,6 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
         $userRoleEntity->setParent( $this->userRolesRepository->findByTaxonCode( $options['parent'] ) );
         $userRoleEntity->setTaxon( $taxonEntity );
         $userRoleEntity->setRole( $options['role'] );
-        $userRoleEntity->setDescription( $options['description'] );
         
         return $userRoleEntity;
     }
