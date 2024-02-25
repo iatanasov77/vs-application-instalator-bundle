@@ -30,6 +30,7 @@ parameters:
     vs_application.user_roles.taxonomy_code: 'user-roles'
     vs_application.tags_whitelist_contexts.taxonomy_code: 'tags-whitelist-contexts'
     vs_application.widgets_groups.taxonomy_code: 'widgets-groups'
+    vs_application.sliders.taxonomy_code: 'sliders'
     vs_application.mailer_user: 'webmaster@vankosoft.org'
 
 services:

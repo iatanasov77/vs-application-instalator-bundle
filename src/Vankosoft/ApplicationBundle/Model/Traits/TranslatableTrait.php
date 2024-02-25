@@ -11,9 +11,29 @@ trait TranslatableTrait
         BaseTranslatableTrait::getTranslations as parentGetTranslations;
     }
     
+    /** @var string */
+    protected $locale;
+    
     public function getTranslations(): Collection
     {
         return $this->translations ?: new ArrayCollection();
+    }
+    
+    public function getLocale(): ?string
+    {
+        return $this->currentLocale;
+    }
+    
+    public function getTranslatableLocale(): ?string
+    {
+        return $this->locale;
+    }
+    
+    public function setTranslatableLocale( $locale ): self
+    {
+        $this->locale = $locale;
+        
+        return $this;
     }
     
     /*
