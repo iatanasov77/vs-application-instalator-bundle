@@ -6,8 +6,6 @@ use Doctrine\Common\Collections\Collection;
 
 interface VankosoftCategoryInterface extends ResourceInterface
 {
-    public function getName(): ?string;
-    public function getTaxon(): ?TaxonInterface;
     public function getParent();
     public function getChildren(): Collection;
 }
