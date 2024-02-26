@@ -28,7 +28,7 @@ trait TaxonomyHelperTrait
      * @TODO Need Reorder Method Params as 'createTranslation' method
      * @TODO Need Replace parameter $taxonomyId with $taxonomy to reduce sql queries
      */
-    protected function createTaxon( string $name, string $locale, TaxonInterface $parent, int $taxonomyId, $description = null )
+    protected function createTaxon( string $name, string $locale, ?TaxonInterface $parent, int $taxonomyId, $description = null )
     {
         $taxon  = $this->get( 'vs_application.factory.taxon' )->createNew();
         
