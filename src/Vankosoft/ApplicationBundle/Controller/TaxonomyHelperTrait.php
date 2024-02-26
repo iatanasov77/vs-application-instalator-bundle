@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationBundle\Controller;
 
+use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface;
 use Vankosoft\ApplicationBundle\Component\Exception\TaxonomyNotFoundException;
@@ -25,10 +26,18 @@ trait TaxonomyHelperTrait
     }
     
     /**
+     * 
      * @TODO Need Reorder Method Params as 'createTranslation' method
      * @TODO Need Replace parameter $taxonomyId with $taxonomy to reduce sql queries
+     * 
+     * @param string $name
+     * @param string $locale
+     * @param TaxonInterface|null $parent
+     * @param int $taxonomyId
+     * @param string|null $description
+     * @return TaxonInterface
      */
-    protected function createTaxon( string $name, string $locale, ?TaxonInterface $parent, int $taxonomyId, $description = null )
+    protected function createTaxon( string $name, string $locale, ?TaxonInterface $parent, int $taxonomyId, $description = null ): TaxonInterface
     {
         $taxon  = $this->get( 'vs_application.factory.taxon' )->createNew();
         
@@ -55,7 +64,12 @@ trait TaxonomyHelperTrait
         return $taxon;
     }
     
-    protected function createTaxonCode( $taxonName )
+    /**
+     * 
+     * @param string $taxonName
+     * @return string
+     */
+    protected function createTaxonCode( string $taxonName ): string
     {
         $code           = $this->get( 'vs_application.slug_generator' )->generate( $taxonName );
         $useThisCode    = $code;
@@ -69,7 +83,15 @@ trait TaxonomyHelperTrait
         return $useThisCode;
     }
     
-    protected function createTranslation( $taxon, $locale, $name, $description = null )
+    /**
+     * 
+     * @param TaxonInterface $taxon
+     * @param string $locale
+     * @param string $name
+     * @param string|null $description
+     * @return TaxonTranslationInterface
+     */
+    protected function createTranslation( TaxonInterface $taxon, string $locale, string $name, $description = null ): TaxonTranslationInterface
     {
         $translation    = $taxon->createNewTranslation();
         
@@ -81,6 +103,11 @@ trait TaxonomyHelperTrait
         return $translation;
     }
     
+    /**
+     * 
+     * @param bool $paginated
+     * @return array
+     */
     protected function getTranslations( bool $paginated = true ): array
     {
         $locales        = $this->get( 'vs_application.repository.locale' )->findAll();
