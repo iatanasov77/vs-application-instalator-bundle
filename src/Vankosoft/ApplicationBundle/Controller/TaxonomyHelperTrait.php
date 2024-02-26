@@ -1,10 +1,17 @@
 <?php namespace Vankosoft\ApplicationBundle\Controller;
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface;
 use Vankosoft\ApplicationBundle\Component\Exception\TaxonomyNotFoundException;
 
 trait TaxonomyHelperTrait
 {
+    /**
+     * 
+     * @param string $taxonomyCodeParameter
+     * @throws TaxonomyNotFoundException
+     * @return TaxonomyInterface
+     */
     protected function getTaxonomy( string $taxonomyCodeParameter ): TaxonomyInterface
     {
         $taxonomyCode   = $this->getParameter( $taxonomyCodeParameter );
@@ -21,7 +28,7 @@ trait TaxonomyHelperTrait
      * @TODO Need Reorder Method Params as 'createTranslation' method
      * @TODO Need Replace parameter $taxonomyId with $taxonomy to reduce sql queries
      */
-    protected function createTaxon( $name, $locale, $parent, $taxonomyId, $description = null )
+    protected function createTaxon( string $name, string $locale, TaxonInterface $parent, int $taxonomyId, $description = null )
     {
         $taxon  = $this->get( 'vs_application.factory.taxon' )->createNew();
         
@@ -74,7 +81,7 @@ trait TaxonomyHelperTrait
         return $translation;
     }
     
-    protected function getTranslations( bool $paginated = true )
+    protected function getTranslations( bool $paginated = true ): array
     {
         $locales        = $this->get( 'vs_application.repository.locale' )->findAll();
         
