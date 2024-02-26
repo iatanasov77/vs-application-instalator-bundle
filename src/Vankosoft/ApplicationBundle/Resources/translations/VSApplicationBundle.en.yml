@@ -73,6 +73,16 @@ vs_application:
         create_new_widget: Create New Widget
         update_widget: Update Widget
         widgets_registry: Widgets Registry
+        website_elements: Website Elements
+        frequently_asked_questions: Frequently Asked Questions
+        create_question: Create a Question
+        update_question: Edit Question
+        quick_links_list: Quick Links
+        quick_links_create: Create a Quick Link
+        quick_links_update: Edit Quick Link
+        sliders_list: Sliders
+        sliders_create: Create a Slider
+        sliders_update: Edit Slider
 
     form:
         errors_title: 'Error!'

@@ -73,6 +73,16 @@ vs_application:
         create_new_widget: Създаване Нов Уиджет
         update_widget: Редакция Уиджет
         widgets_registry: Регистър Уиджети
+        website_elements: Уебсайт Елементи 
+        frequently_asked_questions: Често Задавани Въпроси
+        create_question: Създаване Въпрос
+        update_question: Редакция Въпрос
+        quick_links_list: Бързи Връзки
+        quick_links_create: Създаване Бърза Връзка
+        quick_links_update: Редакция Бърза Връзка
+        sliders_list: Слайдери
+        sliders_create: Създаване Слайдер
+        sliders_update: Редакция Слайдер
 
     form:
         errors_title: 'Грешка!'
