@@ -68,7 +68,7 @@ $( function()
         });
     });
     
-    $( '#sliderItemModal' ).on( 'change', '#toc_page_form_locale', function( e )
+    $( '#sliderItemModal' ).on( 'change', '#slider_item_form_locale', function( e )
     {
         var sliderId    = parseInt( $( '#sliderItemModal' ).attr( 'data-sliderId' ) );
         var itemId      = parseInt( $( '#sliderItemModal' ).attr( 'data-itemId' ) );
@@ -96,27 +96,27 @@ $( function()
         window.btnSaveSliderItemClicked = true;
         
         var sliderId    = $( '#SliderFormContainer' ).attr( 'data-sliderId' );
-        var formData    = new FormData( $( '#form_toc_page' )[ 0 ] );
-        var submitUrl   = $( '#form_toc_page' ).attr( 'action' );
+        var formData    = new FormData( $( '#FormSliderItem' )[ 0 ] );
+        var submitUrl   = $( '#FormSliderItem' ).attr( 'action' );
         var redirectUrl = VsPath( 'vs_cms_slider_update', {'id': sliderId} );
         
-        var pageText    = CKEDITOR.instances.toc_page_form_text.getData();
-        formData.set( "toc_page_form[text]", pageText );
+        var description = CKEDITOR.instances.slider_item_form_description.getData();
+        formData.set( "slider_item_form[description]", description );
         
         VsFormSubmit( formData, submitUrl, redirectUrl );
     });
     
     let sortableIds;
-    $( "#tocPagesTableBody" ).sortable({
+    $( "#sliderItemsTableBody" ).sortable({
         start: function( event, ui ) {
-            sortableIds = $( "#tocPagesTableBody" ).sortable( "toArray" );
+            sortableIds = $( "#sliderItemsTableBody" ).sortable( "toArray" );
             //console.log( sortableIds );
         },
         
         update: function( event, ui ) {
             var itemId      = ui.item.attr( "data-node-id" );
-            var sortedIDs   = $( "#tocPagesTableBody" ).sortable( "toArray" );
-            var itemIndex   = sortedIDs.indexOf( 'tocPage-' + itemId );
+            var sortedIDs   = $( "#sliderItemsTableBody" ).sortable( "toArray" );
+            var itemIndex   = sortedIDs.indexOf( 'sliderItem-' + itemId );
             
             var sortedItems = [];
             for ( let i = 0; i < sortedIDs.length; i++ ) {
