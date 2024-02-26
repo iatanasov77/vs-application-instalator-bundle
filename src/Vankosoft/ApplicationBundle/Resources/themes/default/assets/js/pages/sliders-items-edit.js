@@ -1,5 +1,5 @@
-require( '@/js/includes/bootstrap-5/file-input.js' );
-import { VsPath } from '@/js/includes/fos_js_routes.js';
+require( '../includes/bootstrap-5/file-input.js' );
+import { VsPath } from '../includes/fos_js_routes.js';
 
 $( function()
 {

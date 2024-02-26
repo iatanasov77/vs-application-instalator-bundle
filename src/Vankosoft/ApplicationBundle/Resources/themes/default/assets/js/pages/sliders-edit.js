@@ -1,5 +1,14 @@
-require( '@/js/includes/bootstrap-5/file-input.js' );
-import { VsPath } from '@/js/includes/fos_js_routes.js';
+require( '../includes/resource-delete.js' );
+require( '../includes/bootstrap-5/file-input.js' );
+import { VsPath } from '../includes/fos_js_routes.js';
+
+import { VsFormSubmit } from '../includes/vs_form.js';
+import { changeOrder, computeNewPosition, changeOrderNew, getInsertAfterId } from '../includes/sortable.js';
+
+const bootstrap = require( 'bootstrap' );
+
+// WORKAROUND: Prevent Double Submiting
+global.btnSaveSliderItemClicked = window.btnSaveSliderItemClicked = false;
 
 $( function()
 {
@@ -19,6 +28,105 @@ $( function()
                     alert( 'FATAL ERROR!!!' );
                 }
             });
+        }
+    });
+    
+    $( '#containerSliderItems' ).on( 'click', '.btnSliderItem', function( e )
+    {
+        e.preventDefault();
+        
+        var sliderId    = $( this ).attr( 'data-sliderId' );
+        var itemId     = $( this ).attr( 'data-itemId' );
+        
+        $.ajax({
+            type: "GET",
+            url: VsPath( 'vs_cms_slider_item_ext_edit', {'sliderId': sliderId, 'itemId': itemId} ),
+            success: function( response )
+            {
+                $( '#modalBodySliderItem > div.card-body' ).html( response );
+                
+                /** Bootstrap 5 Modal Toggle */
+                const myModal = new bootstrap.Modal('#sliderItemModal', {
+                    keyboard: false
+                });
+                myModal.show( $( '#sliderItemModal' ).get( 0 ) );
+                
+                /**
+                 * FIXING THE MODAL/CKEDITOR ISSUE. При мен се случваше само на диалога за Снимка.
+                 * --------------------------------------------------------------------------------------
+                 * https://stackoverflow.com/questions/19570661/ckeditor-plugin-text-fields-not-editable
+                 */
+                $( '#sliderItemModal' ).removeAttr( "tabindex" );
+                $( '#sliderItemModal' ).attr( "data-documentId", documentId );
+                $( '#sliderItemModal' ).attr( "data-tocPageId", tocPageId );
+            },
+            error: function()
+            {
+                alert( "SYSTEM ERROR!!!" );
+            }
+        });
+    });
+    
+    $( '#sliderItemModal' ).on( 'change', '#toc_page_form_locale', function( e )
+    {
+        var sliderId    = parseInt( $( '#sliderItemModal' ).attr( 'data-sliderId' ) );
+        var itemId      = parseInt( $( '#sliderItemModal' ).attr( 'data-itemId' ) );
+        var locale      = $( this ).val()
+        
+        if ( itemId ) {
+            $.ajax({
+                type: 'GET',
+                url: VsPath( 'vs_cms_slider_item_ext_edit', {'sliderId': sliderId, 'itemId': itemId, 'locale': locale} ),
+                success: function ( response ) {
+                    $( '#modalBodySliderItem > div.card-body' ).html( response );
+                }, 
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert( 'FATAL ERROR!!!' );
+                }
+            });
+        }
+    });
+    
+    $( '#btnSaveSliderItem' ).on( 'click', function( e )
+    {
+        if ( window.btnSaveSliderItemClicked ) {
+            return;
+        }
+        window.btnSaveSliderItemClicked = true;
+        
+        var sliderId    = $( '#SliderFormContainer' ).attr( 'data-sliderId' );
+        var formData    = new FormData( $( '#form_toc_page' )[ 0 ] );
+        var submitUrl   = $( '#form_toc_page' ).attr( 'action' );
+        var redirectUrl = VsPath( 'vs_cms_slider_update', {'id': sliderId} );
+        
+        var pageText    = CKEDITOR.instances.toc_page_form_text.getData();
+        formData.set( "toc_page_form[text]", pageText );
+        
+        VsFormSubmit( formData, submitUrl, redirectUrl );
+    });
+    
+    let sortableIds;
+    $( "#tocPagesTableBody" ).sortable({
+        start: function( event, ui ) {
+            sortableIds = $( "#tocPagesTableBody" ).sortable( "toArray" );
+            //console.log( sortableIds );
+        },
+        
+        update: function( event, ui ) {
+            var itemId      = ui.item.attr( "data-node-id" );
+            var sortedIDs   = $( "#tocPagesTableBody" ).sortable( "toArray" );
+            var itemIndex   = sortedIDs.indexOf( 'tocPage-' + itemId );
+            
+            var sortedItems = [];
+            for ( let i = 0; i < sortedIDs.length; i++ ) {
+                sortedItems.push( $( '#' + sortedIDs[i] ).attr( 'data-node-id' ) );
+            }
+            console.log( sortedIDs );
+            console.log( sortedItems );
+            //alert( "Position: " + ui.position.top + " Original Position: " + ui.originalPosition.top );
+            
+            let insertAfterId = getInsertAfterId( itemIndex, sortedItems );
+            changeOrderNew( itemId, insertAfterId );
         }
     });
 });

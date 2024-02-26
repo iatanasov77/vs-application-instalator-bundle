@@ -126,6 +126,8 @@ vs_application:
         file_placeholder: Choose a File
         file_invalid: 'Invalid File Format !!!'
         
+        drag_and_drop_title: 'Drag and Drop to Change Order'
+        
         login:
             sub_title: Please enter your username and password.
             username: Username

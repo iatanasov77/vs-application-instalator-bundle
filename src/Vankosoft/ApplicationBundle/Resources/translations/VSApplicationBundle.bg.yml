@@ -126,6 +126,8 @@ vs_application:
         file_placeholder: Избери Файл
         file_invalid: 'Невалиден Формат на Файл !!!'
         
+        drag_and_drop_title: 'Плъзнете и пуснете, за да промените реда'
+        
         login:
             sub_title: Моля, въведете вашето потребителско име и парола.
             username: Потребител
