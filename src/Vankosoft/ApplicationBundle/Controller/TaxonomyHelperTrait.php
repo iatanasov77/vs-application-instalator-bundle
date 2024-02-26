@@ -17,7 +17,11 @@ trait TaxonomyHelperTrait
         return $taxonomy;
     }
     
-    protected function createTaxon( $name, $locale, $parent, $taxonomyId )
+    /**
+     * @TODO Need Reorder Method Params as 'createTranslation' method
+     * @TODO Need Replace parameter $taxonomyId with $taxonomy to reduce sql queries
+     */
+    protected function createTaxon( $name, $locale, $parent, $taxonomyId, $description = null )
     {
         $taxon  = $this->get( 'vs_application.factory.taxon' )->createNew();
         
@@ -34,6 +38,12 @@ trait TaxonomyHelperTrait
             $parent     = $taxonomy->getRootTaxon();
         }
         $taxon->setParent( $parent );
+        
+        $defaultLocale  = $this->getParameter( 'locale' );
+        if ( $locale != $defaultLocale ) {
+            $translation    = $this->createTranslation( $taxon, $defaultLocale, $name, $description );
+            $taxon->addTranslation( $translation );
+        }
         
         return $taxon;
     }
