@@ -36,7 +36,7 @@ $( function()
         e.preventDefault();
         
         var sliderId    = $( this ).attr( 'data-sliderId' );
-        var itemId     = $( this ).attr( 'data-itemId' );
+        var itemId      = $( this ).attr( 'data-itemId' );
         
         $.ajax({
             type: "GET",
@@ -57,8 +57,9 @@ $( function()
                  * https://stackoverflow.com/questions/19570661/ckeditor-plugin-text-fields-not-editable
                  */
                 $( '#sliderItemModal' ).removeAttr( "tabindex" );
-                $( '#sliderItemModal' ).attr( "data-documentId", documentId );
-                $( '#sliderItemModal' ).attr( "data-tocPageId", tocPageId );
+                
+                $( '#sliderItemModal' ).attr( "data-sliderId", sliderId );
+                $( '#sliderItemModal' ).attr( "data-itemId", itemId );
             },
             error: function()
             {
