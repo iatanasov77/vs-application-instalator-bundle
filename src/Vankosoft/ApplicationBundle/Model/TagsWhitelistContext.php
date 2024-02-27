@@ -2,16 +2,15 @@
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Vankosoft\ApplicationBundle\Model\Traits\TaxonDescendentTrait;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistContextInterface;
-use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface;
 
 class TagsWhitelistContext implements TagsWhitelistContextInterface
 {
+    use TaxonDescendentTrait;
+    
     /** @var integer */
     protected $id;
-    
-    /** @var TaxonInterface */
-    protected $taxon;
     
     /** @var Collection|TagsWhitelistTag[] */
     protected $tags;
@@ -27,38 +26,6 @@ class TagsWhitelistContext implements TagsWhitelistContextInterface
     public function getId()
     {
         return $this->id;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxon(): ?TaxonInterface
-    {
-        return $this->taxon;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setTaxon( ?TaxonInterface $taxon ): void
-    {
-        $this->taxon = $taxon;
-    }
-    
-    public function getName(): string
-    {
-        return $this->taxon ? $this->taxon->getName() : '';
-    }
-    
-    public function setName( string $name ) : self
-    {
-        if ( ! $this->taxon ) {
-            // Create new taxon into the controller and set the properties passed from form
-            return $this;
-        }
-        $this->taxon->setName( $name );
-        
-        return $this;
     }
     
     public function getTagsArray(): array

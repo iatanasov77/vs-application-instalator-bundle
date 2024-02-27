@@ -73,6 +73,16 @@ vs_application:
         create_new_widget: Създаване Нов Уиджет
         update_widget: Редакция Уиджет
         widgets_registry: Регистър Уиджети
+        website_elements: Уебсайт Елементи 
+        frequently_asked_questions: Често Задавани Въпроси
+        create_question: Създаване Въпрос
+        update_question: Редакция Въпрос
+        quick_links_list: Бързи Връзки
+        quick_links_create: Създаване Бърза Връзка
+        quick_links_update: Редакция Бърза Връзка
+        sliders_list: Слайдери
+        sliders_create: Създаване Слайдер
+        sliders_update: Редакция Слайдер
 
     form:
         errors_title: 'Грешка!'
@@ -116,6 +126,8 @@ vs_application:
         file_placeholder: Избери Файл
         file_invalid: 'Невалиден Формат на Файл !!!'
         
+        drag_and_drop_title: 'Плъзнете и пуснете, за да промените реда'
+        
         login:
             sub_title: Моля, въведете вашето потребителско име и парола.
             username: Потребител
@@ -152,7 +164,7 @@ vs_application:
             button_reject_all: Откажи Всички
             language_code_placeholder: '-- Избери Език --'
     template:
-        vankosoft_application: ВанкоСофт Прилоение
+        vankosoft_application: ВанкоСофт Приложение
         super_admin_panel: Админ Панел
         there_are_no_items_to_display: Няма елементи за показване
         default: Основен

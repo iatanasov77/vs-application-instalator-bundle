@@ -9,7 +9,7 @@ use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface as VsTaxonInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
-use Vankosoft\CmsBundle\Model\FileInterface;
+use Vankosoft\CmsBundle\Model\Interfaces\FileInterface;
 
 class Taxon extends BaseTaxon implements VsTaxonInterface, Comparable
 {

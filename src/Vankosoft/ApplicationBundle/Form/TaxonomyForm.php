@@ -37,8 +37,16 @@ class TaxonomyForm extends AbstractForm
                 'mapped'                => false,
             ])
         
-            ->add( 'name', TextType::class, ['label' => 'vs_application.form.title', 'translation_domain' => 'VSApplicationBundle',] )
-            ->add( 'description', TextType::class, ['label' => 'vs_application.form.description', 'translation_domain' => 'VSApplicationBundle',] )
+            ->add( 'name', TextType::class, [
+                'label'                 => 'vs_application.form.title',
+                'translation_domain'    => 'VSApplicationBundle',
+            ])
+            
+            ->add( 'description', TextType::class, [
+                'label'                 => 'vs_application.form.description',
+                'translation_domain'    => 'VSApplicationBundle',
+                'required'              => false,
+            ])
         ;
     }
 

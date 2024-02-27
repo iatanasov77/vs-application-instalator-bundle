@@ -1,6 +1,8 @@
 <?php namespace Vankosoft\ApplicationBundle\Component\Exception;
 
-class ApplicationNotFoundException extends \Exception
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+class ApplicationNotFoundException extends NotFoundHttpException
 {
     
 }

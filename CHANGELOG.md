@@ -1,3 +1,43 @@
+1.10.186	|	Release date: **27.02.2024**
+============================================
+* New Features and Improvements:
+  - Improve TaxonomyHelperTrait and Controllers that Get Taxonomies.
+  - Create a Separate Namespace for Model Namespaces in CMS Bundle.
+  - Add Depend on 'twig/intl-extra' package.
+  - Adding Most Used Website Elements into Cms Bundle.
+  - Add Slider Photo Uploader Component.
+  - Fix PageCategory Model.
+  - Fix Translatable Models.
+  - Fix Model Interfaces Namespace.
+  - Use Taxon Descendant Trait and Interface in all Models.
+  - Add CK Editor Options for Description Fields
+  - Fix Model Interfaces Namespace.
+  - Fix a Model.
+  - Add a Doctrine Migration.
+  - Improve Taxonomy Views.
+  - Add a Doctrine Migration.
+  - Add Main Menu Translations.
+  - Fix Translated Strings in Website Elements Views.
+  - Fix Forms Services.
+  - Create Slider Items.
+  - Add a Doctrine Migration.
+  - Fix Sliders Index Page.
+  - Improve TaxonomyHelperTrait .
+  - Fix Slider Edit Page.
+  - Fix SliderItemExtController .
+  - Fix SliderItem Model .
+  - Fix SliderItemForm .
+  - Register Gaufrete Filesystem for Slider Items Photos.
+  - Update Application Installator Configs.
+  - Get SliderItems Available Translations in Slider Controller.
+  - Improve Sortable JS.
+  - Improve Sortable Repositories.
+  - Improve Sortable Models.
+  - Add a Doctrine Migrations.
+  - Improve Create Slider Item Modal.
+  - Improve Create TOC Page Modal.
+
+
 1.10.185	|	Release date: **22.02.2024**
 ============================================
 * New Features:

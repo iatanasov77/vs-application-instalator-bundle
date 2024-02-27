@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.10.185",
+    "version": "v1.10.186",
     "description": "VankoSoft Symfony Application",
     "keywords": [
         "symfony",
@@ -26,6 +26,7 @@
         "symfony\/mailer": "^5.4 || ^6.1",
         "twig\/extra-bundle": "^3.3",
         "twig\/string-extra": "^3.3",
+        "twig\/intl-extra": "^3.5",
         "symfonycasts\/verify-email-bundle": "^1.12",
         "symfonycasts\/reset-password-bundle": "1.14.*",
         "lexik\/jwt-authentication-bundle": "^2.16",

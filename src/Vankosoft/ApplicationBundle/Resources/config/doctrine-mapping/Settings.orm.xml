@@ -24,7 +24,7 @@
             </options>
         </field>
         
-        <many-to-one field="maintenancePage" target-entity="Vankosoft\CmsBundle\Model\PageInterface">
+        <many-to-one field="maintenancePage" target-entity="Vankosoft\CmsBundle\Model\Interfaces\PageInterface">
             <join-column name="maintenance_page_id " referenced-column-name="id" nullable="true" on-delete="CASCADE" />
         </many-to-one>
         

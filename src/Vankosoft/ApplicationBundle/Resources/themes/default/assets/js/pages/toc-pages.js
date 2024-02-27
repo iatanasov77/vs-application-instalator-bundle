@@ -9,7 +9,11 @@ require( '@kanety/jquery-simple-tree-table/dist/jquery-simple-tree-table.js' );
 
 import { VsPath } from '../includes/fos_js_routes.js';
 import { VsFormSubmit } from '../includes/vs_form.js';
-import { changeOrder, computeNewPosition, changeOrderNew, getInsertAfterId } from '../includes/sortable.js';
+import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_translations.js';
+VsLoadTranslations(['VSCmsBundle']);
+
+import VsSortable from '../includes/sortable';
+const tocSortable   = new VsSortable( 'vs_cms_multipage_toc_page_sort_action' );
 
 const bootstrap = require( 'bootstrap' );
 
@@ -33,14 +37,20 @@ $( function ()
     {
         e.preventDefault();
         
-        var documentId    = $( this ).attr( 'data-documentId' );
-        var tocPageId     = $( this ).attr( 'data-tocPageId' );
+        var documentId  = $( this ).attr( 'data-documentId' );
+        var tocPageId   = $( this ).attr( 'data-tocPageId' );
+        var _Translator = VsTranslator( 'VSCmsBundle' );
         
         $.ajax({
             type: "GET",
             url: VsPath( 'vs_cms_multipage_toc_page_edit', {'documentId': documentId, 'tocPageId': tocPageId} ),
             success: function( response )
             {
+                let modalTitle  = itemId == '0' ?
+                                    _Translator.trans( 'vs_cms.modal.multipage_toc_page.create_title' ) :
+                                    _Translator.trans( 'vs_cms.modal.multipage_toc_page.update_title' );
+                                    
+                $( '#modalTitle' ).text( modalTitle );
                 $( '#modalBodyTocPage > div.card-body' ).html( response );
                 
                 /** Bootstrap 5 Modal Toggle */
@@ -134,12 +144,12 @@ $( function ()
             for ( let i = 0; i < sortedIDs.length; i++ ) {
                 sortedItems.push( $( '#' + sortedIDs[i] ).attr( 'data-node-id' ) );
             }
-            console.log( sortedIDs );
-            console.log( sortedItems );
+            //console.log( sortedIDs );
+            //console.log( sortedItems );
             //alert( "Position: " + ui.position.top + " Original Position: " + ui.originalPosition.top );
             
-            let insertAfterId = getInsertAfterId( itemIndex, sortedItems );
-            changeOrderNew( itemId, insertAfterId );
+            let insertAfterId = tocSortable.getInsertAfterId( itemIndex, sortedItems );
+            tocSortable.changeOrderNew( itemId, insertAfterId );
         }
     });
 });

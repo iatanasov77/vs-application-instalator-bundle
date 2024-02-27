@@ -12,6 +12,8 @@ use Doctrine\Common\Collections\Collection;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonLeafInterface;
 use Vankosoft\ApplicationBundle\Model\Traits\TaxonLeafTrait;
 use Vankosoft\ApplicationBundle\Model\Interfaces\LoggableObjectInterface;
+use Vankosoft\CmsBundle\Model\Interfaces\PageInterface;
+use Vankosoft\CmsBundle\Model\Interfaces\PageCategoryInterface;
 
 class Page implements PageInterface, TaxonLeafInterface, LoggableObjectInterface
 {
@@ -65,7 +67,7 @@ class Page implements PageInterface, TaxonLeafInterface, LoggableObjectInterface
         return $this->categories;
     }
     
-    public function addCategory( PageCategory $category ): PageInterface
+    public function addCategory( PageCategoryInterface $category ): self
     {
         if ( ! $this->categories->contains( $category ) ) {
             $this->categories[] = $category;
@@ -74,7 +76,7 @@ class Page implements PageInterface, TaxonLeafInterface, LoggableObjectInterface
         return $this;
     }
     
-    public function removeCategory( PageCategory $category ): PageInterface
+    public function removeCategory( PageCategoryInterface $category ): self
     {
         if ( $this->categories->contains( $category ) ) {
             $this->categories->removeElement( $category );

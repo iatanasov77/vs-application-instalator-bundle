@@ -2,7 +2,7 @@
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\SettingsInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
-use Vankosoft\CmsBundle\Model\PageInterface;
+use Vankosoft\CmsBundle\Model\Interfaces\PageInterface;
 
 class Settings implements SettingsInterface
 {   
@@ -12,7 +12,7 @@ class Settings implements SettingsInterface
     /** @var boolean */
     protected $maintenanceMode;
     
-    /** @var Vankosoft\CmsBundle\Model\PageInterface */
+    /** @var PageInterface */
     protected $maintenancePage;
     
     /** @var string */
