@@ -4,7 +4,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-use Vankosoft\CmsBundle\Model\PageCategoryInterface;
+use Vankosoft\CmsBundle\Model\Interfaces\PageCategoryInterface;
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 
 class PageCategoriesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface, ExampleTranslationsFactoryInterface

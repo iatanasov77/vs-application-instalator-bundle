@@ -1,3 +1,9 @@
+1.10.187	|	Release date: **27.02.2024**
+============================================
+* Bug-Fixes:
+  - Fix Application Installator Factory.
+
+
 1.10.186	|	Release date: **27.02.2024**
 ============================================
 * New Features and Improvements:
