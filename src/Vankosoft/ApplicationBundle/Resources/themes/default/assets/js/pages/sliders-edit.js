@@ -1,6 +1,9 @@
 require( '../includes/resource-delete.js' );
 require( '../includes/bootstrap-5/file-input.js' );
+
 import { VsPath } from '../includes/fos_js_routes.js';
+import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_translations.js';
+VsLoadTranslations(['VSCmsBundle']);
 
 import { VsFormSubmit } from '../includes/vs_form.js';
 
@@ -39,12 +42,18 @@ $( function()
         
         var sliderId    = $( this ).attr( 'data-sliderId' );
         var itemId      = $( this ).attr( 'data-itemId' );
+        var _Translator = VsTranslator( 'VSCmsBundle' );
         
         $.ajax({
             type: "GET",
             url: VsPath( 'vs_cms_slider_item_ext_edit', {'sliderId': sliderId, 'itemId': itemId} ),
             success: function( response )
             {
+                let modalTitle  = itemId == '0' ?
+                                    _Translator.trans( 'vs_cms.modal.slider_item.create_title' ) :
+                                    _Translator.trans( 'vs_cms.modal.slider_item.update_title' );
+                                    
+                $( '#modalTitle' ).text( modalTitle );
                 $( '#modalBodySliderItem > div.card-body' ).html( response );
                 
                 /** Bootstrap 5 Modal Toggle */
