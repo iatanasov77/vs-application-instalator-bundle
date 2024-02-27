@@ -124,8 +124,8 @@ $( function()
             for ( let i = 0; i < sortedIDs.length; i++ ) {
                 sortedItems.push( $( '#' + sortedIDs[i] ).attr( 'data-node-id' ) );
             }
-            console.log( sortedIDs );
-            console.log( sortedItems );
+            //console.log( sortedIDs );
+            //console.log( sortedItems );
             //alert( "Position: " + ui.position.top + " Original Position: " + ui.originalPosition.top );
             
             let insertAfterId = siSortable.getInsertAfterId( itemIndex, sortedItems );

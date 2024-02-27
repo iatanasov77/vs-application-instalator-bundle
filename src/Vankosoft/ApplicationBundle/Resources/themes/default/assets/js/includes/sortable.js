@@ -52,6 +52,8 @@ class VsSortable
     
     changeOrderNew( itemId, insertAfterId )
     {
+        //alert( insertAfterId );
+        
         $.ajax({
             type: 'GET',
             url: VsPath( this.sortActionRoute, { 'id': itemId, 'insertAfterId': insertAfterId } ),
