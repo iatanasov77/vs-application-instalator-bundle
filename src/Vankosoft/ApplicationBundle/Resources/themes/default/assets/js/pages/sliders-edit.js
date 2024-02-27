@@ -3,6 +3,7 @@ require( '../includes/bootstrap-5/file-input.js' );
 import { VsPath } from '../includes/fos_js_routes.js';
 
 import { VsFormSubmit } from '../includes/vs_form.js';
+
 import VsSortable from '../includes/sortable';
 const siSortable  = new VsSortable( 'vs_cms_slider_item_ext_sort_action' );
 
