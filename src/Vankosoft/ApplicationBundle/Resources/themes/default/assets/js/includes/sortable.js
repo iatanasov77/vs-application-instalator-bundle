@@ -2,9 +2,6 @@ import { VsPath } from '../includes/fos_js_routes.js';
 
 class VsSortable
 {
-    /**
-     * sortActionRoute = 'vs_cms_multipage_toc_page_sort_action'
-     */
     constructor( sortActionRoute )
     {
         this.sortActionRoute    = sortActionRoute;
