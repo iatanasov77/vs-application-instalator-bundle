@@ -13,6 +13,7 @@ trait UserAwareEntity
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\UserManagement\User")
      */
+    #[ORM\ManyToOne(targetEntity: "App\Entity\UserManagement\User")]
     protected $createdBy;
     
     /**
@@ -20,6 +21,7 @@ trait UserAwareEntity
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\UserManagement\User")
      */
+    #[ORM\ManyToOne(targetEntity: "App\Entity\UserManagement\User")]
     protected $updatedBy;
     
     /**
@@ -27,6 +29,7 @@ trait UserAwareEntity
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\UserManagement\User")
      */
+    #[ORM\ManyToOne(targetEntity: "App\Entity\UserManagement\User")]
     protected $deletedBy;
     
     public function getCreatedBy() : ?UserInterface
