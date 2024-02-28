@@ -454,6 +454,13 @@ class ApplicationSetup
         $configRoutes   = str_replace(
             ["__application_name__"],
             [$this->applicationNamespace],
+            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/attributes.yaml' )
+            );
+        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/attributes.yaml', $configRoutes );
+        
+        $configRoutes   = str_replace(
+            ["__application_name__"],
+            [$this->applicationNamespace],
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_application.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_application.yaml', $configRoutes );
