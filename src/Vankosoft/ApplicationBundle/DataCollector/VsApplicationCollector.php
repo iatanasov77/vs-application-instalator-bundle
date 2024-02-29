@@ -94,7 +94,7 @@ final class VsApplicationCollector extends DataCollector
                 $locales[]  = [
                     'code'      => $locale->getCode(),
                     'current'   => ( $currentLocale == $locale->getCode() ),
-                    'default'   => ( $$this->defaultLocaleCode == $locale->getCode() ),
+                    'default'   => ( $this->defaultLocaleCode == $locale->getCode() ),
                 ];
             }
             
