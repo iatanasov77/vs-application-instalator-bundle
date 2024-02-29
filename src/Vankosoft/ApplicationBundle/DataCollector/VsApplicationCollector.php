@@ -88,20 +88,20 @@ final class VsApplicationCollector extends DataCollector
 //         if ( $mainRequest ) {
 //             $currentLocale  = $mainRequest->getLocale();
             
-            $currentLocale  = $request->getLocale()
+            $currentLocale  = $request->getLocale();
             $locales        = [];
-            foreach ( $localesRepository->findAll() as $locale ) {
+            foreach ( $this->localesRepository->findAll() as $locale ) {
                 $locales[]  = [
                     'code'      => $locale->getCode(),
                     'current'   => ( $currentLocale == $locale->getCode() ),
-                    'default'   => ( $defaultLocaleCode == $locale->getCode() ),
+                    'default'   => ( $$this->defaultLocaleCode == $locale->getCode() ),
                 ];
             }
             
             $this->data = [
-                'project_type'          => $projectType->projectType(),
-                'version'               => $version,
-                'default_locale_code'   => $defaultLocaleCode,
+                'project_type'          => $this->projectType->projectType(),
+                'version'               => $this->version,
+                'default_locale_code'   => $this->defaultLocaleCode,
                 'locale_code'           => $currentLocale,
                 'locales'               => $locales,
                 'extensions'            => [
@@ -113,7 +113,7 @@ final class VsApplicationCollector extends DataCollector
             ];
             
             foreach ( array_keys( $this->data['extensions'] ) as $bundleName ) {
-                if ( isset( $bundles[$bundleName] ) ) {
+                if ( isset( $this->bundles[$bundleName] ) ) {
                     $this->data['extensions'][$bundleName]['enabled']   = true;
                 }
             }
