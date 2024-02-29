@@ -31,6 +31,8 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
         
         // Register resources
         $this->registerResources( 'vs_application', $config['orm_driver'], $config['resources'], $container );
+        $container->getDefinition( 'vs_application.repository.application' )->setLazy( true );
+        $container->getDefinition( 'vs_application.repository.locale' )->setLazy( true );
         
         // Set values need to be accesible from controller
         $container->setParameter( 'vs_application.project_type', $config[ 'project_type' ] );

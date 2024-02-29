@@ -31,7 +31,7 @@ final class ApplicationCollector extends DataCollector
         ];
     }
     
-    public function getApplication() : ?array
+    public function getApplication(): ?array
     {
         return $this->data['application'];
     }
@@ -44,12 +44,12 @@ final class ApplicationCollector extends DataCollector
         return $this->data['applications'];
     }
     
-    public function isApplicationChangeSupported() : bool
+    public function isApplicationChangeSupported(): bool
     {
         return $this->data['application_change_support'];
     }
     
-    public function collect( Request $request, Response $response, \Throwable $exception = null ) : void
+    public function collect( Request $request, Response $response, \Throwable $exception = null ): void
     {
         try {
             $this->data['application']  = $this->pluckApplication( $this->applicationContext->getApplication() );
@@ -58,7 +58,7 @@ final class ApplicationCollector extends DataCollector
         }
     }
     
-    public function reset() : void
+    public function reset(): void
     {
         $this->data['application']  = null;
     }
@@ -68,7 +68,7 @@ final class ApplicationCollector extends DataCollector
         return 'vs_application.application_collector';
     }
     
-    private function pluckApplication( ApplicationInterface $application ) : array
+    private function pluckApplication( ApplicationInterface $application ): array
     {
         return [
             'name'      => $application->getTitle(),
