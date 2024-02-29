@@ -1,3 +1,19 @@
+1.10.188	|	Release date: **29.02.2024**
+============================================
+* New Features:
+  - Improve TaxonDescendentTrait .
+  - Update All Composer Dependencies Versions.
+  - Update Application Installator Standard Configs.
+  - Update all Composer Jsons
+  - Replace Using Annotations in Routes with Using Attributes.
+  - Add Doctrine Mapping with Attributtes in Model Traits.
+  - Improve Doctrine Mapping of Entities used Gedmo Loggable.
+  - Improve ResetPasswordRequestRepository .
+  - Update Application Standard Installator Configs.
+* Bug-Fixes:
+  - Fix a Translation Index.
+
+
 1.10.187	|	Release date: **27.02.2024**
 ============================================
 * Bug-Fixes:

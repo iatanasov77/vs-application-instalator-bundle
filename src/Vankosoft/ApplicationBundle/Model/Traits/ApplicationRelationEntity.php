@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationBundle\Model\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
 /**
@@ -12,6 +13,7 @@ trait ApplicationRelationEntity
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Application\Application")
      */
+    #[ORM\ManyToOne(targetEntity: "App\Entity\Application\Application")]
     protected $application;
     
     public function getApplication() : ?ApplicationInterface

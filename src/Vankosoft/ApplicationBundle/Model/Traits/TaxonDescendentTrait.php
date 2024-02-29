@@ -41,7 +41,21 @@ trait TaxonDescendentTrait
     
     public function getName(): string
     {
-        return $this->taxon ? $this->taxon->getName() : '';
+        if ( $this->taxon ) {
+            /**
+             * WORKAROUND
+             * ==========
+             * Taxons CurrentLocale is NULL Sometimes and throws an Exception
+             */
+            $taxonCurrentLocale = $this->taxon->getCurrentLocale();
+            if ( ! $taxonCurrentLocale ) {
+                $this->taxon->setCurrentLocale( 'en_US' );
+            }
+            
+            return $this->taxon->getName();
+        }
+        
+        return '';
     }
     
     public function setName( string $name ): self
@@ -57,7 +71,21 @@ trait TaxonDescendentTrait
     
     public function getDescription(): ?string
     {
-        return $this->taxon ? $this->taxon->getDescription() : null;
+        if ( $this->taxon ) {
+            /**
+             * WORKAROUND
+             * ==========
+             * Taxons CurrentLocale is NULL Sometimes and throws an Exception
+             */
+            $taxonCurrentLocale = $this->taxon->getCurrentLocale();
+            if ( ! $taxonCurrentLocale ) {
+                $this->taxon->setCurrentLocale( 'en_US' );
+            }
+            
+            return $this->taxon->getDescription();
+        }
+        
+        return null;
     }
     
     public function setDescription( ?string $description ) : self
