@@ -55,7 +55,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
             
             $resource = $this->exampleFactory->create( $resourceOptions );
             $this->objectManager->persist( $resource );
-            
+            /*
             if ( isset( $resourceOptions['translations'] ) && $this->exampleFactory instanceof ExampleTranslationsFactoryInterface ) {
                 $this->objectManager->flush();
                     
@@ -73,6 +73,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
                     }
                 }
             }
+            */
 
             ++$i;
 
