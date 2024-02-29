@@ -29,7 +29,7 @@ class LocaleForm extends AbstractForm
         $currentLocale  = $entity->getTranslatableLocale() ?: $this->requestStack->getCurrentRequest()->getLocale();
         
         $builder
-            ->add( 'translatableLocale', ChoiceType::class, [
+            ->add( 'locale', ChoiceType::class, [
                 'label'                 => 'vs_application.form.translatable_locale',
                 'translation_domain'    => 'VSApplicationBundle',
                 'choices'               => \array_flip( $this->fillLocaleChoices() ),
