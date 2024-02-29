@@ -15,20 +15,23 @@ use Vankosoft\ApplicationBundle\Repository\ApplicationRepositoryInterface;
  */
 final class ApplicationCollector extends DataCollector
 {
-    private ApplicationContextInterface $applicationContext;
+    /** @var ApplicationContextInterface */
+    private $applicationContext;
+    
+    /** @var ApplicationRepositoryInterface */
+    private $applicationRepository;
+    
+    /** @var bool */
+    private $applicationChangeSupport;
     
     public function __construct(
         ApplicationRepositoryInterface $applicationRepository,
         ApplicationContextInterface $applicationContext,
         bool $applicationChangeSupport  = false
     ) {
-        $this->applicationContext   = $applicationContext;
-        
-        $this->data                 = [
-            'application'                   => null,
-            'applications'                  => array_map([$this, 'pluckApplication'], $applicationRepository->findAll()),
-            'application_change_support'    => $applicationChangeSupport,
-        ];
+        $this->applicationContext       = $applicationContext;
+        $this->applicationRepository    = $applicationRepository;
+        $this->applicationChangeSupport = $applicationChangeSupport;
     }
     
     public function getApplication(): ?array
@@ -52,10 +55,16 @@ final class ApplicationCollector extends DataCollector
     public function collect( Request $request, Response $response, \Throwable $exception = null ): void
     {
         try {
-            $this->data['application']  = $this->pluckApplication( $this->applicationContext->getApplication() );
+            $application    = $this->pluckApplication( $this->applicationContext->getApplication() );
         } catch ( ApplicationNotFoundException $exception ) {
             
         }
+        
+        $this->data                 = [
+            'application'                   => $application,
+            'applications'                  => array_map([$this, 'pluckApplication'], $this->applicationRepository->findAll()),
+            'application_change_support'    => $this->applicationChangeSupport,
+        ];
     }
     
     public function reset(): void
