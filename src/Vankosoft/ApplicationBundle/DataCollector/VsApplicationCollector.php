@@ -31,7 +31,6 @@ final class VsApplicationCollector extends DataCollector
     private $defaultLocaleCode;
     
     public function __construct(
-        RequestStack $requestStack,
         Project $projectType,
         RepositoryInterface $localesRepository,
         string $version,
@@ -83,41 +82,35 @@ final class VsApplicationCollector extends DataCollector
     
     public function collect( Request $request, Response $response, \Throwable $exception = null )
     {
-//         $mainRequest    = $requestStack->getMainRequest();
-        
-//         if ( $mainRequest ) {
-//             $currentLocale  = $mainRequest->getLocale();
-            
-            $currentLocale  = $request->getLocale();
-            $locales        = [];
-            foreach ( $this->localesRepository->findAll() as $locale ) {
-                $locales[]  = [
-                    'code'      => $locale->getCode(),
-                    'current'   => ( $currentLocale == $locale->getCode() ),
-                    'default'   => ( $this->defaultLocaleCode == $locale->getCode() ),
-                ];
-            }
-            
-            $this->data = [
-                'project_type'          => $this->projectType->projectType(),
-                'version'               => $this->version,
-                'default_locale_code'   => $this->defaultLocaleCode,
-                'locale_code'           => $currentLocale,
-                'locales'               => $locales,
-                'extensions'            => [
-                    'VSUsersSubscriptionsBundle'    => ['name' => 'Subscription', 'enabled' => false],
-                    'VSPaymentBundle'               => ['name' => 'Payment', 'enabled' => false],
-                    'VSCatalogBundle'               => ['name' => 'Catalog', 'enabled' => false],
-                    'VSApiBundle'                   => ['name' => 'API', 'enabled' => false],
-                ],
+        $currentLocale  = $request->getLocale();
+        $locales        = [];
+        foreach ( $this->localesRepository->findAll() as $locale ) {
+            $locales[]  = [
+                'code'      => $locale->getCode(),
+                'current'   => ( $currentLocale == $locale->getCode() ),
+                'default'   => ( $this->defaultLocaleCode == $locale->getCode() ),
             ];
-            
-            foreach ( array_keys( $this->data['extensions'] ) as $bundleName ) {
-                if ( isset( $this->bundles[$bundleName] ) ) {
-                    $this->data['extensions'][$bundleName]['enabled']   = true;
-                }
+        }
+        
+        $this->data = [
+            'project_type'          => $this->projectType->projectType(),
+            'version'               => $this->version,
+            'default_locale_code'   => $this->defaultLocaleCode,
+            'locale_code'           => $currentLocale,
+            'locales'               => $locales,
+            'extensions'            => [
+                'VSUsersSubscriptionsBundle'    => ['name' => 'Subscription', 'enabled' => false],
+                'VSPaymentBundle'               => ['name' => 'Payment', 'enabled' => false],
+                'VSCatalogBundle'               => ['name' => 'Catalog', 'enabled' => false],
+                'VSApiBundle'                   => ['name' => 'API', 'enabled' => false],
+            ],
+        ];
+        
+        foreach ( array_keys( $this->data['extensions'] ) as $bundleName ) {
+            if ( isset( $this->bundles[$bundleName] ) ) {
+                $this->data['extensions'][$bundleName]['enabled']   = true;
             }
-//         }
+        }
     }
     
     public function reset(): void
