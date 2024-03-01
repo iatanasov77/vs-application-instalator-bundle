@@ -52,6 +52,8 @@ EOT
         if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to create a default application? (y/N) ', false ) ) ) {
             return $this->setupApplication( $input, $output, $locale );
         }
+        
+        return Command::SUCCESS;
     }
     
     private function setupApplication( InputInterface $input, OutputInterface $output, string $localeCode ): int
