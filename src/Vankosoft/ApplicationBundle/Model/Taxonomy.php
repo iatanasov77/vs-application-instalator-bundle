@@ -1,10 +1,13 @@
 <?php namespace Vankosoft\ApplicationBundle\Model;
 
+use Vankosoft\ApplicationBundle\Model\Traits\TranslatableTrait;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface;
 
 class Taxonomy implements TaxonomyInterface
 {
+    use TranslatableTrait;
+    
     /** @var integer */
     protected $id;
     
@@ -19,9 +22,6 @@ class Taxonomy implements TaxonomyInterface
     
     /** @var TaxonInterface */
     protected $rootTaxon;
-    
-    /** @var string */
-    protected $locale;
     
     public function getCode()
     {
@@ -77,18 +77,6 @@ class Taxonomy implements TaxonomyInterface
     public function setDescription( $description )
     {
         $this->description = $description;
-        
-        return $this;
-    }
-    
-    public function getLocale()
-    {
-        return $this->locale;
-    }
-    
-    public function setTranslatableLocale($locale)
-    {
-        $this->locale = $locale;
         
         return $this;
     }

@@ -13,9 +13,6 @@ class Locale extends BaseLocale implements LocaleInterface
      */
     protected $title;
     
-    /** @var string */
-    protected $translatableLocale;
-    
     /**
      * There is getName() Method at \Sylius\Component\Locale\Model\Locale
      * 
@@ -30,18 +27,6 @@ class Locale extends BaseLocale implements LocaleInterface
     public function setTitle($title): LocaleInterface
     {
         $this->title = $title;
-        
-        return $this;
-    }
-    
-    public function getTranslatableLocale(): ?string
-    {
-        return $this->translatableLocale;
-    }
-    
-    public function setTranslatableLocale($translatableLocale): LocaleInterface
-    {
-        $this->translatableLocale   = $translatableLocale;
         
         return $this;
     }

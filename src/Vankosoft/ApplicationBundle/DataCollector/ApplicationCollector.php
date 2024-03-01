@@ -15,23 +15,26 @@ use Vankosoft\ApplicationBundle\Repository\ApplicationRepositoryInterface;
  */
 final class ApplicationCollector extends DataCollector
 {
-    private ApplicationContextInterface $applicationContext;
+    /** @var ApplicationContextInterface */
+    private $applicationContext;
+    
+    /** @var ApplicationRepositoryInterface */
+    private $applicationRepository;
+    
+    /** @var bool */
+    private $applicationChangeSupport;
     
     public function __construct(
         ApplicationRepositoryInterface $applicationRepository,
         ApplicationContextInterface $applicationContext,
         bool $applicationChangeSupport  = false
     ) {
-        $this->applicationContext   = $applicationContext;
-        
-        $this->data                 = [
-            'application'                   => null,
-            'applications'                  => array_map([$this, 'pluckApplication'], $applicationRepository->findAll()),
-            'application_change_support'    => $applicationChangeSupport,
-        ];
+        $this->applicationContext       = $applicationContext;
+        $this->applicationRepository    = $applicationRepository;
+        $this->applicationChangeSupport = $applicationChangeSupport;
     }
     
-    public function getApplication() : ?array
+    public function getApplication(): ?array
     {
         return $this->data['application'];
     }
@@ -44,21 +47,27 @@ final class ApplicationCollector extends DataCollector
         return $this->data['applications'];
     }
     
-    public function isApplicationChangeSupported() : bool
+    public function isApplicationChangeSupported(): bool
     {
         return $this->data['application_change_support'];
     }
     
-    public function collect( Request $request, Response $response, \Throwable $exception = null ) : void
+    public function collect( Request $request, Response $response, \Throwable $exception = null ): void
     {
         try {
-            $this->data['application']  = $this->pluckApplication( $this->applicationContext->getApplication() );
+            $application    = $this->pluckApplication( $this->applicationContext->getApplication() );
         } catch ( ApplicationNotFoundException $exception ) {
             
         }
+        
+        $this->data                 = [
+            'application'                   => $application,
+            'applications'                  => array_map([$this, 'pluckApplication'], $this->applicationRepository->findAll()),
+            'application_change_support'    => $this->applicationChangeSupport,
+        ];
     }
     
-    public function reset() : void
+    public function reset(): void
     {
         $this->data['application']  = null;
     }
@@ -68,7 +77,7 @@ final class ApplicationCollector extends DataCollector
         return 'vs_application.application_collector';
     }
     
-    private function pluckApplication( ApplicationInterface $application ) : array
+    private function pluckApplication( ApplicationInterface $application ): array
     {
         return [
             'name'      => $application->getTitle(),

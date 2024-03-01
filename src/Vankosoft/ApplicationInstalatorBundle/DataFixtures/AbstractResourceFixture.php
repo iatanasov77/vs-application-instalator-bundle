@@ -10,6 +10,7 @@ use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 
 use Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\ExampleFactoryInterface;
 use Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\ExampleTranslationsFactoryInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\TranslatableInterface;
 
 abstract class AbstractResourceFixture implements FixtureInterface
 {
@@ -56,12 +57,21 @@ abstract class AbstractResourceFixture implements FixtureInterface
             $this->objectManager->persist( $resource );
             
             if ( isset( $resourceOptions['translations'] ) && $this->exampleFactory instanceof ExampleTranslationsFactoryInterface ) {
-                $this->objectManager->flush();
-                
+                // This Makes an Exception
+                //$this->objectManager->flush();
+                    
                 foreach ( $resourceOptions['translations'] as $localeCode => $translationOptions ) {
                     $translationResource = $this->exampleFactory->createTranslation( $resource, $localeCode, $translationOptions );
-                    $this->objectManager->persist( $translationResource );
-                    $this->objectManager->flush();
+                    
+                    if ( $resource instanceof TranslatableInterface ) {
+                        if ( $translationResource->getTranslatableLocale() != $resource->getTranslatableLocale() ) {
+                            $this->objectManager->persist( $translationResource );
+                            $this->objectManager->flush();
+                        }
+                    } else {
+                        $this->objectManager->persist( $translationResource );
+                        $this->objectManager->flush();
+                    }
                 }
             }
 

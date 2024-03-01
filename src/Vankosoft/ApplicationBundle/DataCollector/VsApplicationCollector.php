@@ -15,48 +15,33 @@ use Vankosoft\ApplicationBundle\Component\Application\Project;
  */
 final class VsApplicationCollector extends DataCollector
 {
+    /** @var Project */
+    private $projectType;
+    
+    /** @var RepositoryInterface */
+    private $localesRepository;
+    
+    /** @var string */
+    private $version;
+    
+    /** @var array */
+    private $bundles;
+    
+    /** @var string */
+    private $defaultLocaleCode;
+    
     public function __construct(
-        RequestStack $requestStack,
         Project $projectType,
         RepositoryInterface $localesRepository,
         string $version,
         array $bundles,
         string $defaultLocaleCode
     ) {
-        $mainRequest    = $requestStack->getMainRequest();
-        
-        if ( $mainRequest ) {
-            $currentLocale  = $mainRequest->getLocale();
-            
-            $locales        = [];
-            foreach ( $localesRepository->findAll() as $locale ) {
-                $locales[]  = [
-                    'code'      => $locale->getCode(),
-                    'current'   => ( $currentLocale == $locale->getCode() ),
-                    'default'   => ( $defaultLocaleCode == $locale->getCode() ),
-                ];
-            }
-            
-            $this->data = [
-                'project_type'          => $projectType->projectType(),
-                'version'               => $version,
-                'default_locale_code'   => $defaultLocaleCode,
-                'locale_code'           => $currentLocale,
-                'locales'               => $locales,
-                'extensions'            => [
-                    'VSUsersSubscriptionsBundle'    => ['name' => 'Subscription', 'enabled' => false],
-                    'VSPaymentBundle'               => ['name' => 'Payment', 'enabled' => false],
-                    'VSCatalogBundle'               => ['name' => 'Catalog', 'enabled' => false],
-                    'VSApiBundle'                   => ['name' => 'API', 'enabled' => false],
-                ],
-            ];
-            
-            foreach ( array_keys( $this->data['extensions'] ) as $bundleName ) {
-                if ( isset( $bundles[$bundleName] ) ) {
-                    $this->data['extensions'][$bundleName]['enabled']   = true;
-                }
-            }
-        }
+        $this->projectType          = $projectType;
+        $this->localesRepository    = $localesRepository;
+        $this->version              = $version;
+        $this->bundles              = $bundles;
+        $this->defaultLocaleCode    = $defaultLocaleCode;
     }
     
     public function getProjectType(): string
@@ -97,7 +82,35 @@ final class VsApplicationCollector extends DataCollector
     
     public function collect( Request $request, Response $response, \Throwable $exception = null )
     {
+        $currentLocale  = $request->getLocale();
+        $locales        = [];
+        foreach ( $this->localesRepository->findAll() as $locale ) {
+            $locales[]  = [
+                'code'      => $locale->getCode(),
+                'current'   => ( $currentLocale == $locale->getCode() ),
+                'default'   => ( $this->defaultLocaleCode == $locale->getCode() ),
+            ];
+        }
         
+        $this->data = [
+            'project_type'          => $this->projectType->projectType(),
+            'version'               => $this->version,
+            'default_locale_code'   => $this->defaultLocaleCode,
+            'locale_code'           => $currentLocale,
+            'locales'               => $locales,
+            'extensions'            => [
+                'VSUsersSubscriptionsBundle'    => ['name' => 'Subscription', 'enabled' => false],
+                'VSPaymentBundle'               => ['name' => 'Payment', 'enabled' => false],
+                'VSCatalogBundle'               => ['name' => 'Catalog', 'enabled' => false],
+                'VSApiBundle'                   => ['name' => 'API', 'enabled' => false],
+            ],
+        ];
+        
+        foreach ( array_keys( $this->data['extensions'] ) as $bundleName ) {
+            if ( isset( $this->bundles[$bundleName] ) ) {
+                $this->data['extensions'][$bundleName]['enabled']   = true;
+            }
+        }
     }
     
     public function reset(): void
