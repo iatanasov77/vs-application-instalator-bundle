@@ -1,3 +1,9 @@
+1.10.190	|	Release date: **01.03.2024**
+============================================
+* New Features:
+  - Create a TaxonDescendentEntity .
+
+
 1.10.189	|	Release date: **01.03.2024**
 ============================================
 * Bug-Fixes and Improvements:
