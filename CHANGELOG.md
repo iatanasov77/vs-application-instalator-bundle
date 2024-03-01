@@ -1,3 +1,12 @@
+1.10.189	|	Release date: **01.03.2024**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix Loading DataCollectors in Console Commands.
+  - Improve Translatable Models in Application Bundle.
+  - Set CMS Page Slug Not Translatable.
+  - Fix Application Installator.
+
+
 1.10.188	|	Release date: **29.02.2024**
 ============================================
 * New Features:
