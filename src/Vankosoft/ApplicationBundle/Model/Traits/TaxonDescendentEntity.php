@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationBundle\Model\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface;
 
 trait TaxonDescendentEntity
