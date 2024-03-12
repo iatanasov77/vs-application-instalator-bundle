@@ -53,7 +53,8 @@
         "pagerfanta\/twig": "^4.3",
         "oneup\/uploader-bundle": "^4.0",
         "oneup\/flysystem-bundle": "^4.11",
-        "symfony\/ux-toggle-password": "^2.15"
+        "symfony\/ux-toggle-password": "^2.15",
+        "vankosoft\/agent-bundle": "^0.1"
     },
     "replace": {
         "vankosoft\/application-bundle": "self.version",
