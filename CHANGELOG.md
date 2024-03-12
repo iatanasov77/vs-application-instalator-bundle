@@ -1,3 +1,12 @@
+1.10.192	|	Release date: **12.03.2024**
+============================================
+* New Features:
+  - Using VankoSoft Agent.
+  - Add Loading of Vankosoft AgentBundle into Application Configs.
+* Bug-Fixes:
+  - Fixing UserFormType Submit Error.
+
+
 1.10.191	|	Release date: **01.03.2024**
 ============================================
 * New Features:
