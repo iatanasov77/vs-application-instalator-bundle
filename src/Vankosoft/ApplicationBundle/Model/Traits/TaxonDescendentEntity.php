@@ -30,6 +30,18 @@ trait TaxonDescendentEntity
         $this->taxon = $taxon;
     }
     
+    public function getSlug(): string
+    {
+        return $this->getCode();
+    }
+    
+    public function setSlug( ?string $code ): self
+    {
+        $this->setCode( $code );
+        
+        return $this;
+    }
+    
     public function getCode(): string
     {
         return $this->taxon ? $this->taxon->getCode() : '';
@@ -95,7 +107,7 @@ trait TaxonDescendentEntity
         return null;
     }
     
-    public function setDescription( ?string $description ) : self
+    public function setDescription( ?string $description ): self
     {
         if ( ! $this->taxon ) {
             // Create new taxon into the controller and set the properties passed from form

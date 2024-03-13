@@ -1,3 +1,10 @@
+1.10.193	|	Release date: **13.03.2024**
+============================================
+* New Features amd Improvements:
+  - Update Application Installator Configs.
+  - Improve TaxonDescendent Model Traits.
+
+
 1.10.192	|	Release date: **12.03.2024**
 ============================================
 * New Features:
