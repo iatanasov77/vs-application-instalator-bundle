@@ -67,9 +67,13 @@
 			{% if( item.id ) %}
 				<div class="card">
 	                <div class="card-header">
-                        <div class="float-start" style="height:30px; padding-top:10px;">Taxonomy Taxons</div>
+                        <div class="float-start" style="height:30px; padding-top:10px;">
+                            {{ 'vs_application.template.taxonomy_update_list_taxons_title' | trans( {},'VSApplicationBundle' ) }}
+                        </div>
                         <div class="btn-group float-end">
-                            <a class="btn btn-primary btnTaxonomyTaxon" title="Create New Taxon" href="javascript:void(0);" 
+                            <a class="btn btn-primary btnTaxonomyTaxon"
+                                title="{{ 'vs_application.template.button_create_taxon' | trans( {},'VSApplicationBundle' ) }}"
+                                href="javascript:void(0);" 
                             	data-url="{{ path('vs_application_taxonomy_taxon_edit', {'taxonomyId': item.id}) }}"
                             	data-easyui-url="{{ path( 'vs_application_taxonomy_taxons_easyui_combotree', {'taxonomyId': item.id} ) }}"
                             >
