@@ -1,47 +1,42 @@
 /*
  * Manual: https://github.com/orestbida/cookieconsent/
  */
-require( 'vanilla-cookieconsent/src/cookieconsent.js' );
-require( 'vanilla-cookieconsent/src/cookieconsent.css' );
+import "vanilla-cookieconsent/dist/cookieconsent.css";
+import * as CookieConsent from "vanilla-cookieconsent";
 
-/*
+/* */
 const cookieconsentEn   = require( './translations/cookieconsent_en.js' );
 const cookieconsentBg   = require( './translations/cookieconsent_bg.js' );
 
-var cookieconsentLanguages  = {
+var testCookieconsentLanguages  = {
     ...cookieconsentEn,
-    ...cookieconsentBg,
+    //...cookieconsentBg,
 }
 //console.log( JSON.stringify( cookieconsentLanguages, null, "\t" ) );
-*/
+
 
 export function VsCookieConsent( cookieconsentLanguages, currentLang )
 {
-    var cookieconsent = initCookieConsent();
-    
-    cookieconsent.run({
+    CookieConsent.run({
         revision: 1,
-        current_lang: currentLang,
-        autoclear_cookies: true,    // default: false
-        page_scripts: true,         // default: false
-    
-        languages: cookieconsentLanguages,
         
-        gui_options: {
-            consent_modal: {
-                layout: 'cloud',               // box/cloud/bar
-                position: 'bottom center',     // bottom/middle/top + left/right/center
-                transition: 'slide',           // zoom/slide
-                swap_buttons: false            // enable to invert buttons
+        language: {
+            default: currentLang,
+            //translations: cookieconsentLanguages
+            translations: testCookieconsentLanguages
+        },
+        
+        guiOptions: {
+            consentModal: {
+                layout: 'cloud',
+                position: 'bottom center'
             },
-            settings_modal: {
-                layout: 'box',                 // box/bar
-                // position: 'left',           // left/right
-                transition: 'slide'            // zoom/slide
+            preferencesModal: {
+                layout: 'bar wide',
+                position: 'left'
             }
         }
-    
-    });    
+    });   
 }
 
 
