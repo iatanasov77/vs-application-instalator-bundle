@@ -20,6 +20,14 @@ export function VsCookieConsent( cookieconsentLanguages, currentLang )
     CookieConsent.run({
         revision: 1,
         
+        categories: {
+            necessary: {
+                enabled: true,  // this category is enabled by default
+                readOnly: true  // this category cannot be disabled
+            },
+            analytics: {}
+        },
+    
         language: {
             default: currentLang,
             //translations: cookieconsentLanguages
