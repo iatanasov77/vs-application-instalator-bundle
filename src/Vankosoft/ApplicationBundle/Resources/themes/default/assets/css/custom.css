@@ -184,6 +184,7 @@ input[type=file] {
 label.required:after {
     content: '*';
     color: red;
+    margin-left: 5px;
 }
 
 input:invalid {

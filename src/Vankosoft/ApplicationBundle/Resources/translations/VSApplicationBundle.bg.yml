@@ -93,6 +93,7 @@ vs_application:
         locale_code: 'Локал Код'
         title: 'Име'
         name: 'Име'
+        label: 'Етикет'
         hostname: 'Име на Хост'
         description: 'Описание'
         group_label: Група
@@ -162,7 +163,10 @@ vs_application:
             language_code: Език
             button_accept_all: Приеми Всички
             button_reject_all: Откажи Всички
+            button_accept_necessary: Button Accept necessary
+            button_show_preferences: Button Manage Preferences
             language_code_placeholder: '-- Избери Език --'
+            
     template:
         vankosoft_application: ВанкоСофт Приложение
         super_admin_panel: Админ Панел

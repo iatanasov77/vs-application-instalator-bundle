@@ -93,6 +93,7 @@ vs_application:
         locale_code: 'Locale Code'
         title: 'Title'
         name: 'Name'
+        label: 'Label'
         hostname: 'Hostname'
         description: 'Description'
         group_label: Group
@@ -162,7 +163,10 @@ vs_application:
             language_code: Language
             button_accept_all: Button Accept All
             button_reject_all: Button Reject All
+            button_accept_necessary: Button Accept necessary
+            button_show_preferences: Button Manage Preferences
             language_code_placeholder: '-- Select a Language --'
+            
     template:
         vankosoft_application: VankoSoft Application
         super_admin_panel: SuperAdmin Panel

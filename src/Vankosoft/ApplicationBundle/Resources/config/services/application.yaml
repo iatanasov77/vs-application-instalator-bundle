@@ -1,3 +1,6 @@
+parameters:
+    vs_application.doctrine_dbal_cache_dsn: '%env(resolve:DATABASE_URL)%'
+
 services:
     _defaults:
         autowire: true
@@ -40,5 +43,10 @@ services:
         class: Vankosoft\ApplicationBundle\Component\SlugGenerator
         arguments:
             - '@request_stack'
+            
+    vs_application.doctrine_dbal_cache:
+        class: Vankosoft\ApplicationBundle\Component\VsDoctrineDbalCache
+        arguments:
+            - '%vs_application.doctrine_dbal_cache_dsn%'
 
 

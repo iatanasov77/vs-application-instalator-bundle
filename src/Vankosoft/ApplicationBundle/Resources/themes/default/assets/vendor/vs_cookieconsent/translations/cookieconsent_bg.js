@@ -5,41 +5,22 @@ let description = `
 `;
 
 export const bg = {
-    consent_modal: {
+    consentModal: {
+        label: 'Съгласие за бисквитки',
         title: 'Ние използваме бисквитки!',
         description:  description,
-        primary_btn: {
-            text: 'Съгласен съм',
-            role: 'accept_all'              // 'accept_selected' or 'accept_all'
-        },
-        secondary_btn: {
-            text: 'Избери кои',
-            role: 'accept_necessary'        // 'settings' or 'accept_necessary'
-        }
+        revision_message: '<br> Dude, my terms have changed. Sorry for bothering you again!',
+        acceptAllBtn: 'Съгласен съм',
+        acceptNecessaryBtn: 'Избери кои',
+        showPreferencesBtn: 'Управлявайте индивидуалните предпочитания'
     },
 
-    settings_modal: {
+    preferencesModal: {
         title: 'Cookie preferences',
-        save_settings_btn: 'Save settings',
-        accept_all_btn: 'Accept all',
-        reject_all_btn: 'Reject all',
-        close_btn_label: 'Close',
-        cookie_table_headers: [
-            {col1: 'Name'},
-            {col2: 'Domain'},
-            {col3: 'Expiration'},
-            {col4: 'Description'}
-        ],
-        blocks: [
-            {
-                title: 'Строго необходими бисквитки',
-                description: 'Тези бисквитки са от съществено значение за правилното функциониране на моя уебсайт. Без тези бисквитки уебсайтът няма да работи правилно',
-                toggle: {
-                    value: 'necessary',
-                    enabled: true,
-                    readonly: true          // cookie categories with readonly=true are all treated as "necessary cookies"
-                }
-            },
-        ]
+        acceptAllBtn: 'Accept all',
+        acceptNecessaryBtn: 'Accept necessary only',
+        savePreferencesBtn: 'Accept current selection',
+        closeIconLabel: 'Close modal',
+        sections: []
     }
 }

@@ -31,6 +31,9 @@ class CookieConsentTranslationsExampleFactory extends AbstractExampleFactory imp
         $entity->setLocaleCode( $options['localeCode'] );
         $entity->setBtnAcceptAll( $options['btnAcceptAll'] );
         $entity->setBtnRejectAll( $options['btnRejectAll'] );
+        $entity->setBtnAcceptNecessary( $options['btnAcceptNecessary'] );
+        $entity->setBtnShowPreferences( $options['btnShowPreferences'] );
+        $entity->setLabel( $options['label'] );
         $entity->setTitle( $options['title'] );
         $entity->setDescription( $options['description'] );
         
@@ -51,6 +54,15 @@ class CookieConsentTranslationsExampleFactory extends AbstractExampleFactory imp
             
             ->setDefault( 'btnRejectAll', null )
             ->setAllowedTypes( 'btnRejectAll', ['string'] )
+            
+            ->setDefault( 'btnAcceptNecessary', null )
+            ->setAllowedTypes( 'btnAcceptNecessary', ['string'] )
+            
+            ->setDefault( 'btnShowPreferences', null )
+            ->setAllowedTypes( 'btnShowPreferences', ['string'] )
+            
+            ->setDefault( 'label', null )
+            ->setAllowedTypes( 'label', ['string'] )
             
             ->setDefault( 'title', null )
             ->setAllowedTypes( 'title', ['string'] )

@@ -78,5 +78,6 @@ services:
         tags: ['controller.service_arguments']
         autowire: true
         arguments:
+            - '@vs_application.doctrine_dbal_cache'
             - '@vs_application.repository.cookie_consent_translation'
 

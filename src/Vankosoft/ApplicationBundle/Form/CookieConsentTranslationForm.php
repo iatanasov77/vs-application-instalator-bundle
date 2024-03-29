@@ -61,6 +61,21 @@ class CookieConsentTranslationForm extends AbstractForm
                 'translation_domain'    => 'VSApplicationBundle',
             ])
             
+            ->add( 'btnAcceptNecessary', TextType::class, [
+                'label'                 => 'vs_application.form.cookie_consent_translation.button_accept_necessary',
+                'translation_domain'    => 'VSApplicationBundle',
+            ])
+            
+            ->add( 'btnShowPreferences', TextType::class, [
+                'label'                 => 'vs_application.form.cookie_consent_translation.button_show_preferences',
+                'translation_domain'    => 'VSApplicationBundle',
+            ])
+            
+            ->add( 'label', TextType::class, [
+                'label'                 => 'vs_application.form.label',
+                'translation_domain'    => 'VSApplicationBundle',
+            ])
+            
             ->add( 'title', TextType::class, [
                 'label'                 => 'vs_application.form.title',
                 'translation_domain'    => 'VSApplicationBundle',

@@ -25,6 +25,15 @@ class CookieConsentTranslation implements CookieConsentTranslationInterface
     /** @var string */
     protected $description;
     
+    /** @var string */
+    protected $label;
+    
+    /** @var string */
+    protected $btnAcceptNecessary;
+    
+    /** @var string */
+    protected $btnShowPreferences;
+    
     public function getId()
     {
         return $this->id;
@@ -98,6 +107,42 @@ class CookieConsentTranslation implements CookieConsentTranslationInterface
     public function setDescription( $description ): self
     {
         $this->description  = $description;
+        
+        return $this;
+    }
+    
+    public function getLabel()
+    {
+        return $this->label;
+    }
+    
+    public function setLabel( $label ): self
+    {
+        $this->label = $label;
+        
+        return $this;
+    }
+    
+    public function getBtnAcceptNecessary()
+    {
+        return $this->btnAcceptNecessary;
+    }
+    
+    public function setBtnAcceptNecessary( $btnAcceptNecessary ): self
+    {
+        $this->btnAcceptNecessary = $btnAcceptNecessary;
+        
+        return $this;
+    }
+    
+    public function getBtnShowPreferences()
+    {
+        return $this->btnShowPreferences;
+    }
+    
+    public function setBtnShowPreferences( $btnShowPreferences ): self
+    {
+        $this->btnShowPreferences = $btnShowPreferences;
         
         return $this;
     }
