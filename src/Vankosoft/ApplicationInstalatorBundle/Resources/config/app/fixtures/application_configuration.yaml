@@ -292,6 +292,9 @@ sylius_fixtures:
                               localeCode: 'en_US'
                               btnAcceptAll:  'Accept all'
                               btnRejectAll: 'Reject all'
+                              btnAcceptNecessary: 'Accept necessary'
+                              btnShowPreferences: 'Manage individual preferences'
+                              label: 'Cookie Consent'
                               title:  'We use cookies!'
                               description: "You can continue to use our website without changing your settings, receiving all the cookies that the site uses,\
                                             or you can change your cookie settings at any time.\
@@ -300,6 +303,9 @@ sylius_fixtures:
                               localeCode: 'bg_BG'
                               btnAcceptAll:  'Съгласен съм'
                               btnRejectAll: 'Отказвам'
+                              btnAcceptNecessary: 'Приеми необходимите'
+                              btnShowPreferences: 'Управление на индивидуалните предпочитания'
+                              label: 'Съгласие за бисквитки'
                               title:  'Ние използваме бисквитки!'
                               description: "Можете да продължите да ползвате нашия уебсайт без да променяте настройките си, получавайки всички бисквитки, които сайтът използва, \
                                               или можете да промените своите настройки за бисквитки по всяко време. \
