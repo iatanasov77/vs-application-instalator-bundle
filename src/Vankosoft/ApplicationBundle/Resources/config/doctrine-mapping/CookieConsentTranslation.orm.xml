@@ -22,6 +22,21 @@
         <field name="btnRejectAll" column="btn_reject_all" type="string" length="32" />
         <field name="title" type="string" length="32" />
         <field name="description" type="text" />
+        <field name="label" type="string" length="32">
+            <options>
+                <option name="default">Cookie Consent</option>
+            </options>
+        </field>
+        <field name="btnAcceptNecessary" column="btn_accept_necessary" type="string" length="32">
+            <options>
+                <option name="default">Accept necessary</option>
+            </options>
+        </field>
+        <field name="btnShowPreferences" column="btn_show_preferences" type="string" length="32">
+            <options>
+                <option name="default">Manage individual preferences</option>
+            </options>
+        </field>
         
     </mapped-superclass>
 </doctrine-mapping>

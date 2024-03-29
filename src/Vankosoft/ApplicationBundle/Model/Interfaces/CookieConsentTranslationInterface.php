@@ -9,4 +9,5 @@ interface CookieConsentTranslationInterface extends ResourceInterface
     public function getBtnRejectAll();
     public function getTitle();
     public function getDescription();
+    public function getLabel();
 }

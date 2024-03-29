@@ -26,10 +26,11 @@ class CookieConsentTranslationsExtController
         foreach ( $cookieConsentTranslations as $trans ) {
             $template   = $this->cookieConsentTranslationTemplate();
             
-            $template["consent_modal"]["title"]                 = $trans->getTitle();
-            $template["consent_modal"]["description"]           = $trans->getDescription();
-            $template["consent_modal"]["primary_btn"]["text"]   = $trans->getBtnAcceptAll();
-            $template["consent_modal"]["secondary_btn"]["text"] = $trans->getBtnRejectAll();
+            $template["consentModal"]["label"]          = $trans->getLabel();
+            $template["consentModal"]["title"]          = $trans->getTitle();
+            $template["consentModal"]["description"]    = $trans->getDescription();
+            $template["consentModal"]["acceptAllBtn"]   = $trans->getBtnAcceptAll();
+            $template["consentModal"]["rejectAllBtn"]   = $trans->getBtnRejectAll();
             
             $cookieConsentTranslationsResponse[$trans->getLanguageCode()]   = $template;
         }
@@ -43,53 +44,30 @@ class CookieConsentTranslationsExtController
     private function cookieConsentTranslationTemplate()
     {
         return [
-            "consent_modal"     => [
-                "title"             => "We use cookies!",
-                "description"       => "Description Text",
-                "revision_message"  => "<br> Dude, my terms have changed. Sorry for bothering you again!",
-                "primary_btn"       => [
-                    "text"  => "Accept all",
-                    "role"  => "accept_all"
-                ],
-                "secondary_btn"     => [
-                    "text"  => "Reject all",
-                    "role"  => "accept_necessary"
-                ]
+            "consentModal"     => [
+                "label"                 => "Cookie Consent",
+                "title"                 => "We use cookies!",
+                "description"           => "Description Text",
+                "revision_message"      => "<br> Dude, my terms have changed. Sorry for bothering you again!",
+                "acceptAllBtn"          => "Accept all",
+                "rejectAllBtn"          => "Reject all",
+                "acceptNecessaryBtn"    => "Accept necessary",
+                "showPreferencesBtn"    => "Manage individual preferences",
             ],
             
-            "settings_modal"    => [
+            "preferencesModal"    => [
                 "title"                 => "Cookie preferences",
-                "save_settings_btn"     => "Save settings",
-                "accept_all_btn"        => "Accept all",
-                "reject_all_btn"        => "Reject all",
-                "close_btn_label"       => "Close",
-                
-                "cookie_table_headers"  => [
+                "acceptAllBtn"          => "Accept all",
+                "acceptNecessaryBtn"    => "Accept necessary only",
+                "savePreferencesBtn"    => "Accept current selection",
+                "closeIconLabel"        => "Close modal",
+                "sections"              => [
                     [
-                        "col1"  => "Name"
-                    ],
-                    [
-                        "col2"  => "Domain"
-                    ],
-                    [
-                        "col3"  => "Expiration"
-                    ],
-                    [
-                        "col4"  => "Description"
+                        "title"             => "Strictly necessary cookies",
+                        "description"       => "Description Text",
+                        "linkedCategory"    => "necessary",
                     ]
                 ],
-                
-                "blocks"                => [
-                    [
-                        "title"         => "Strictly necessary cookies",
-                        "description"   => "Description Text",
-                        "toggle"        => [
-                            "value"     => "necessary",
-                            "enabled"   => true,
-                            "readonly"  => true
-                        ]
-                    ]
-                ]
             ]
         ];
     }

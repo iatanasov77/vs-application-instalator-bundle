@@ -10,7 +10,7 @@ const cookieconsentBg   = require( './translations/cookieconsent_bg.js' );
 
 var testCookieconsentLanguages  = {
     ...cookieconsentEn,
-    //...cookieconsentBg,
+    ...cookieconsentBg,
 }
 //console.log( JSON.stringify( cookieconsentLanguages, null, "\t" ) );
 
@@ -30,8 +30,8 @@ export function VsCookieConsent( cookieconsentLanguages, currentLang )
     
         language: {
             default: currentLang,
-            //translations: cookieconsentLanguages
-            translations: testCookieconsentLanguages
+            translations: cookieconsentLanguages
+            //translations: testCookieconsentLanguages
         },
         
         guiOptions: {
