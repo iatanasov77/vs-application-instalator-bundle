@@ -1,4 +1,4 @@
-<?php namespace App\Component;
+<?php namespace Vankosoft\ApplicationBundle\Component;
 
 use Symfony\Component\Cache\Adapter\DoctrineDbalAdapter;
 
