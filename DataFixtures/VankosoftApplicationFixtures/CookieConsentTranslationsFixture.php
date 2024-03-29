@@ -18,6 +18,9 @@ final class CookieConsentTranslationsFixture extends AbstractResourceFixture
                 ->scalarNode( 'localeCode' )->end()
                 ->scalarNode( 'btnAcceptAll' )->end()
                 ->scalarNode( 'btnRejectAll' )->end()
+                ->scalarNode( 'btnAcceptNecessary' )->end()
+                ->scalarNode( 'btnShowPreferences' )->end()
+                ->scalarNode( 'label' )->end()
                 ->scalarNode( 'title' )->end()
                 ->scalarNode( 'description' )->end()
         ;
