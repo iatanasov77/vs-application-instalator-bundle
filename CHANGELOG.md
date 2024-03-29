@@ -1,3 +1,16 @@
+1.10.194	|	Release date: **29.03.2024**
+============================================
+* New Features and Improvements:
+  - Update Application Installator Configs.
+  - Improve Form Required Labels.
+  - Translate some Not Translated Strings in Templates.
+  - Update VsCookieConsent to V3.0
+  - Update cookieconsent Js and CookieConsentTranslation Model.
+  - Add VsDoctrineDbalCache Component.
+  - Use VsDoctrineDbalCache for Cookie Consent Translations.
+  - Add New Fields of CookieConsentTranslation Model into Instala Installator Fixtures.
+
+
 1.10.193	|	Release date: **13.03.2024**
 ============================================
 * New Features amd Improvements:
