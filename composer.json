@@ -2,7 +2,7 @@
     "name": "vankosoft\/application",
     "type": "library",
     "version": "v1.10.194",
-    "description": "VankoSoft Symfony Application",
+    "description": "VankoSoft Symfony Application Core Library",
     "keywords": [
         "symfony",
         "sylius",
@@ -24,6 +24,7 @@
         "symfony\/templating": "^6.4",
         "symfony\/security-bundle": "^6.4",
         "symfony\/mailer": "^6.4",
+        "symfony\/http-client": "^6.4",
         "twig\/extra-bundle": "^3.3",
         "twig\/string-extra": "^3.3",
         "twig\/intl-extra": "^3.5",
