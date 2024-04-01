@@ -94,8 +94,11 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode( 'locale' )->defaultValue( 'en_US' )->cannotBeEmpty()->end()
                 ->arrayNode( 'vankosoft_api' )
-                    ->booleanNode( 'enabled' )->defaultFalse()->end()
-                    ->scalarNode( 'host' )->defaultValue( 'http://vankosoft.org/api' )->cannotBeEmpty()->end()
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode( 'enabled' )->defaultFalse()->end()
+                        ->scalarNode( 'host' )->defaultValue( 'http://vankosoft.org/api' )->cannotBeEmpty()->end()
+                    ->end()
                 ->end()
             ->end()
         ;
