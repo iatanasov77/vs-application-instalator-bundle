@@ -3,54 +3,26 @@
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Psr\Cache\CacheItemPoolInterface;
-use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
-use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
+
+use Vankosoft\ApplicationBundle\Component\Application\ProjectIssue;
 
 class VankosoftIssueController extends AbstractController
 {
-    /** @var HttpClientInterface */
-    private $httpClient;
-    
-    /** @var CacheItemPoolInterface */
-    private $cache;
+    /** @var ProjectIssue */
+    private $vsProject;
     
     public function __construct(
-        HttpClientInterface $httpClient,
-        CacheItemPoolInterface $cache
+        ProjectIssue $vsProject
     ) {
-        $this->httpClient   = $httpClient;
-        $this->cache        = $cache;
+        $this->vsProject    = $vsProject;
     }
     
     public function indexAction( Request $request ): Response
     {
-        $vankosoftApiHost   = $this->getParameter( 'vs_application.vankosoft_api.host' );
-        $apiLoginUrl        = $vankosoftApiHost . '/login_check';
-        //$apiLoginUrl    = 'http://vankosoft.lh/api/project-issues';
-        
-        try {
-            $response       = $this->httpClient->request( 'POST', $apiLoginUrl, [
-                'json' => [
-                    'username' => 'admin',
-                    'password' => 'admin'
-                ],
-            ]);
-        }  catch ( JWTEncodeFailureException $e ) {
-            //throw new ApiLoginException( 'JWTEncodeFailureException: ' . $e->getMessage() );
-        }
-        
-        try {
-            //echo '<pre>'; var_dump( $response ); die;
-            $payload = $response->toArray( false );
-        } catch ( \JsonException $e ) {
-            throw new VankosoftApiException( 'Invalid JSON Payload !!!' );
-        }
-        echo '<pre>'; var_dump( $payload ); die;
+        $issues = $this->vsProject->getIssues();
         
         return $this->render( '@VSApplication/Pages/ProjectIssues/index.html.twig', [
-            'issues'    => [],
+            'issues'    => $issues,
         ]);
     }
 }

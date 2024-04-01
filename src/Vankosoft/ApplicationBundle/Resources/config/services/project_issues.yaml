@@ -6,10 +6,15 @@ services:
         autoconfigure: true
         public: true
         
-    Vankosoft\ApplicationBundle\Controller\VankosoftIssueController:
-        tags: ['controller.service_arguments']
+    vs_application.project_issues:
+        class: Vankosoft\ApplicationBundle\Component\Application\ProjectIssue
         arguments:
             - '@http_client'
             - '@vs_application.doctrine_dbal_cache'
+    
+    Vankosoft\ApplicationBundle\Controller\VankosoftIssueController:
+        tags: ['controller.service_arguments']
+        arguments:
+            - '@vs_application.project_issues'
 
 
