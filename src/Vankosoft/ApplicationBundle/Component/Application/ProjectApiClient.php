@@ -13,12 +13,17 @@ class ProjectApiClient implements ProjectApiClientInterface
     /** @var CacheItemPoolInterface */
     protected $cache;
     
+    /** @var array */
+    protected $apiConnection
+    
     public function __construct(
         HttpClientInterface $httpClient,
-        CacheItemPoolInterface $cache
+        CacheItemPoolInterface $cache,
+        array $apiConnection
     ) {
-        $this->httpClient   = $httpClient;
-        $this->cache        = $cache;
+        $this->httpClient       = $httpClient;
+        $this->cache            = $cache;
+        $this->apiConnection    = $apiConnection;
     }
     
     /**
@@ -26,14 +31,13 @@ class ProjectApiClient implements ProjectApiClientInterface
      */
     public function login(): string
     {
-        $vankosoftApiHost   = $this->getParameter( 'vs_application.vankosoft_api.host' );
-        $apiLoginUrl        = $vankosoftApiHost . '/login_check';
+        $apiLoginUrl        = $this->apiConnection['host'] . '/login_check';
         
         try {
             $response       = $this->httpClient->request( 'POST', $apiLoginUrl, [
                 'json' => [
-                    'username' => 'admin',
-                    'password' => 'admin'
+                    'username' => $this->apiConnection['host'],
+                    'password' => $this->apiConnection['host']
                 ],
             ]);
         }  catch ( JWTEncodeFailureException $e ) {

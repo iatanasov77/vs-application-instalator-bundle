@@ -98,6 +98,8 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->booleanNode( 'enabled' )->defaultFalse()->end()
                         ->scalarNode( 'host' )->defaultValue( 'http://vankosoft.org/api' )->cannotBeEmpty()->end()
+                        ->scalarNode( 'user' )->defaultValue( 'admin' )->cannotBeEmpty()->end()
+                        ->scalarNode( 'password' )->defaultValue( 'admin' )->cannotBeEmpty()->end()
                     ->end()
                 ->end()
             ->end()
