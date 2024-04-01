@@ -20,6 +20,7 @@ class VankosoftIssueController extends AbstractController
     public function indexAction( Request $request ): Response
     {
         $issues = $this->vsProject->getIssues();
+        //echo '<pre>'; var_dump( $issues ); die;
         
         return $this->render( '@VSApplication/Pages/ProjectIssues/index.html.twig', [
             'issues'    => $issues,

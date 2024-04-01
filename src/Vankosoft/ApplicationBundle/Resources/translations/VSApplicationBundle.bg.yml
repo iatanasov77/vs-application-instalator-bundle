@@ -257,6 +257,11 @@ vs_application:
             opening_hours: Работно Време
             email_us: Пратете Е-Мейл
             view_larger_map: Вижте по-голяма карта
+            
+        project_issues:
+            index_title: Проблеми в Проекта
+            labels: Етиткети
+            status: Статус
         
     modal:
         application_delete:

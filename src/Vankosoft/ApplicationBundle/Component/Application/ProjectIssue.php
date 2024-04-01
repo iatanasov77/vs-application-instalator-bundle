@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationBundle\Component\Application;
 
+use Vankosoft\ApplicationBundle\Component\Status;
 use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 
 final class ProjectIssue extends ProjectApiClient
@@ -26,6 +27,10 @@ final class ProjectIssue extends ProjectApiClient
         }
         //echo '<pre>'; var_dump( $payload ); die;
         
-        return $payload;
+        if ( ! isset( $payload['status'] )|| $payload['status'] == Status::STATUS_ERRORStatus ) {
+            throw new VankosoftApiException( 'ERROR: ' . $payload['message'] );
+        }
+        
+        return $payload['payload'];
     }
 }

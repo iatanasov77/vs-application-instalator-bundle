@@ -257,6 +257,11 @@ vs_application:
             opening_hours: Opening Hours
             email_us: Email Us
             view_larger_map: View Larger Map
+            
+        project_issues:
+            index_title: Project Issues
+            labels: Labels
+            status: Status
         
     modal:
         application_delete:
