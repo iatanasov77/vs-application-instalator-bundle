@@ -21,7 +21,7 @@ final class ProjectIssue extends ProjectApiClient
         } catch ( \JsonException $e ) {
             throw new VankosoftApiException( 'Invalid JSON Payload !!!' );
         }
-        //echo '<pre>'; var_dump( $payload ); die;
+        echo '<pre>'; var_dump( $payload ); die;
         
         return $payload;
     }
