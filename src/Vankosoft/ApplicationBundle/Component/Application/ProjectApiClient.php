@@ -17,6 +17,7 @@ class ProjectApiClient implements ProjectApiClientInterface
     /** @var array */
     protected $apiConnection;
     
+    /** @var string */
     protected $projectSlug;
     
     public function __construct(
