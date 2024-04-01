@@ -26,7 +26,8 @@ class VankosoftIssueController extends AbstractController
     
     public function indexAction( Request $request ): Response
     {
-        $apiLoginUrl    = 'http://vankosoft.lh/api/login_check';
+        $vankosoftApiHost   = $this->getParameter( 'vs_application.vankosoft_api.host' );
+        $apiLoginUrl        = $vankosoftApiHost . '/login_check';
         //$apiLoginUrl    = 'http://vankosoft.lh/api/project-issues';
         
         try {

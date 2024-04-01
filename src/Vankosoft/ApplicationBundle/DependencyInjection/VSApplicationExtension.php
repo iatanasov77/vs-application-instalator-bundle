@@ -39,6 +39,10 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
         // Set values need to be accesible from controller
         $container->setParameter( 'vs_application.project_type', $config[ 'project_type' ] );
         $container->setParameter( 'vs_application.taxonomy', $config[ 'taxonomy' ] );
+        
+        // VankoSoft API
+        $container->setParameter( 'vs_application.vankosoft_api.enabled', $config[ 'vankosoft_api' ]['enabled'] );
+        $container->setParameter( 'vs_application.vankosoft_api.host', $config[ 'vankosoft_api' ]['host'] );
     }
     
     public function prepend( ContainerBuilder $container ): void
