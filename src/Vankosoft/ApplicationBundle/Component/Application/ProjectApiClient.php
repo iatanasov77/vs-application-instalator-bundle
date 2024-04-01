@@ -42,6 +42,10 @@ class ProjectApiClient implements ProjectApiClientInterface
         }
         //echo '<pre>'; var_dump( $payload ); die;
         
+        if ( ! isset( $payload['payload'] ) ) {
+            throw new VankosoftApiException( $payload['message'], $payload['code'] );
+        }
+        
         return $payload['payload']['token'];
     }
     
@@ -52,8 +56,8 @@ class ProjectApiClient implements ProjectApiClientInterface
         try {
             $response       = $this->httpClient->request( 'POST', $apiLoginUrl, [
                 'json' => [
-                    'username' => $this->apiConnection['host'],
-                    'password' => $this->apiConnection['host']
+                    'username' => $this->apiConnection['user'],
+                    'password' => $this->apiConnection['password']
                 ],
             ]);
         }  catch ( JWTEncodeFailureException $e ) {
