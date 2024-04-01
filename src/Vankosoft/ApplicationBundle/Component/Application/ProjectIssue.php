@@ -13,7 +13,7 @@ final class ProjectIssue extends ProjectApiClient
             'headers'   => [
                 'Authorization' => 'Bearer ' . $apiToken,
             ],
-            'body'      => [
+            'query'      => [
                 'projectSlug' => $this->projectSlug
             ],
         ]);
