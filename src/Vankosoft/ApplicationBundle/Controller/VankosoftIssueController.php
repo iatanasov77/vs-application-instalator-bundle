@@ -30,19 +30,23 @@ class VankosoftIssueController extends AbstractController
     
     public function createAction( Request $request ): Response
     {
+        //$issue = $this->vsProject->createIssue();
         $form   = $this->createForm( ProjectIssueForm::class );
         
         return $this->render( '@VSApplication/Pages/ProjectIssues/create.html.twig', [
-            'form'    => $form,
+            'form'      => $form,
+            'itemId'    => 0,
         ]);
     }
     
     public function updateAction( $id, Request $request ): Response
     {
+        //$issue  = $this->vsProject->getIssue( $id );
         $form   = $this->createForm( ProjectIssueForm::class );
         
         return $this->render( '@VSApplication/Pages/ProjectIssues/update.html.twig', [
-            'form'    => $form,
+            'form'      => $form,
+            'itemId'    => $id,
         ]);
     }
 }

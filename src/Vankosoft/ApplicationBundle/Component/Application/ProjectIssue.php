@@ -15,6 +15,8 @@ final class ProjectIssue extends ProjectApiClient
         self::ISSUE_COMPLETED   => 'vs_application.form.project_issue.status_completed',
     ];
     
+    
+    
     public function getIssues(): array
     {
         $apiToken       = $this->login();
@@ -42,5 +44,10 @@ final class ProjectIssue extends ProjectApiClient
         }
         
         return $payload['payload'];
+    }
+    
+    public function createIssue()
+    {
+        ;
     }
 }

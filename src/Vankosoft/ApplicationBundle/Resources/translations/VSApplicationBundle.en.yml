@@ -272,6 +272,9 @@ vs_application:
             
         project_issues:
             index_title: Project Issues
+            create_title: Create Project Issue
+            update_title: Update Project Issue
+            issue_details: Issue Details
             labels: Labels
             status: Status
         

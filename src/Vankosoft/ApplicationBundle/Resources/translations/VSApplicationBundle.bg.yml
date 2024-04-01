@@ -272,6 +272,9 @@ vs_application:
             
         project_issues:
             index_title: Проблеми в Проекта
+            create_title: Създаване Нов Проблем
+            update_title: Редакция на Проблем
+            issue_details: Проблем Детайли
             labels: Етиткети
             status: Статус
         
