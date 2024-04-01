@@ -2,3 +2,8 @@ vs_application_cookie_consent_translations:
     path: /cookie-consent-translations
     controller: Vankosoft\ApplicationBundle\Controller\CookieConsentTranslationsExtController::getCookieConsentTranslationsAction
 
+vs_application_project_issues_index:
+    path: /project-issues
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueController::indexAction
+
+

@@ -83,6 +83,7 @@ vs_application:
         sliders_list: Sliders
         sliders_create: Create a Slider
         sliders_update: Edit Slider
+        project_issues: Project Issues
 
     form:
         errors_title: 'Error!'

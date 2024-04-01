@@ -83,6 +83,7 @@ vs_application:
         sliders_list: Слайдери
         sliders_create: Създаване Слайдер
         sliders_update: Редакция Слайдер
+        project_issues: Проблеми в Проекта
 
     form:
         errors_title: 'Грешка!'
