@@ -16,6 +16,7 @@ services:
                 user: '%vs_application.vankosoft_api.user%',
                 password: '%vs_application.vankosoft_api.password%',
             }
+            - '%vs_application.vankosoft_api.project%'
     
     Vankosoft\ApplicationBundle\Controller\VankosoftIssueController:
         tags: ['controller.service_arguments']

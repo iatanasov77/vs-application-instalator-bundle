@@ -10,8 +10,11 @@ final class ProjectIssue extends ProjectApiClient
         $issuesEndpoint = $this->apiConnection['host'] . '/project-issues';
         
         $response       = $this->httpClient->request( 'GET', $issuesEndpoint, [
-            'headers' => [
+            'headers'   => [
                 'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'body'      => [
+                'projectSlug' => $this->projectSlug
             ],
         ]);
         

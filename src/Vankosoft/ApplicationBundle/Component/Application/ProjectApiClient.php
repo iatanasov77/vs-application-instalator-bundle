@@ -17,14 +17,18 @@ class ProjectApiClient implements ProjectApiClientInterface
     /** @var array */
     protected $apiConnection;
     
+    protected $projectSlug;
+    
     public function __construct(
         HttpClientInterface $httpClient,
         CacheItemPoolInterface $cache,
-        array $apiConnection
+        array $apiConnection,
+        string $projectSlug
     ) {
         $this->httpClient       = $httpClient;
         $this->cache            = $cache;
         $this->apiConnection    = $apiConnection;
+        $this->projectSlug      = $projectSlug;
     }
     
     /**
