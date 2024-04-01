@@ -27,7 +27,7 @@ final class ProjectIssue extends ProjectApiClient
         }
         //echo '<pre>'; var_dump( $payload ); die;
         
-        if ( ! isset( $payload['status'] )|| $payload['status'] == Status::STATUS_ERRORStatus ) {
+        if ( ! isset( $payload['status'] )|| $payload['status'] == Status::STATUS_ERROR ) {
             throw new VankosoftApiException( 'ERROR: ' . $payload['message'] );
         }
         
