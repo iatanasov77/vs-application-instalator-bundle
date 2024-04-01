@@ -5,7 +5,7 @@ final class ProjectIssue extends ProjectApiClient
     public function getIssues(): array
     {
         $apiToken       = $this->login();
-        $issuesEndpoint = 'http://vankosoft.lh/api/project-issues';
+        $issuesEndpoint = $this->apiConnection['host'] . '/project-issues';
         
         $response       = $this->httpClient->request( 'GET', $issuesEndpoint );
         

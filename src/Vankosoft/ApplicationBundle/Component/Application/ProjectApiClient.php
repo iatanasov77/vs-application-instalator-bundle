@@ -1,6 +1,7 @@
 <?php namespace Vankosoft\ApplicationBundle\Component\Application;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
@@ -31,6 +32,21 @@ class ProjectApiClient implements ProjectApiClientInterface
      */
     public function login(): string
     {
+        $response   = $this->_doLogin();
+        //echo '<pre>'; var_dump( $response ); die;
+        
+        try {
+            $payload = $response->toArray( false );
+        } catch ( \JsonException $e ) {
+            throw new VankosoftApiException( 'Invalid JSON Payload !!!' );
+        }
+        //echo '<pre>'; var_dump( $payload ); die;
+        
+        return $payload['payload']['token'];
+    }
+    
+    protected function _doLogin(): ResponseInterface
+    {
         $apiLoginUrl        = $this->apiConnection['host'] . '/login_check';
         
         try {
@@ -41,17 +57,9 @@ class ProjectApiClient implements ProjectApiClientInterface
                 ],
             ]);
         }  catch ( JWTEncodeFailureException $e ) {
-            //throw new ApiLoginException( 'JWTEncodeFailureException: ' . $e->getMessage() );
+            throw new VankosoftApiException( 'JWTEncodeFailureException: ' . $e->getMessage() );
         }
         
-        try {
-            echo '<pre>'; var_dump( $response ); die;
-            $payload = $response->toArray( false );
-        } catch ( \JsonException $e ) {
-            throw new VankosoftApiException( 'Invalid JSON Payload !!!' );
-        }
-        echo '<pre>'; var_dump( $payload ); die;
-        
-        return $payload['payload']['token'];
+        return $response;
     }
 }
