@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{# Import Macros #}
+{% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
+{% from "@VSApplication/Macros/pagination.html.twig" import pagination %}
+
+{# Override Blocs #}
+{% block title %}{{ parent() }} :: {{ 'orfey.template.list_networks' | trans( {},'OrfeyBilling' ) }}{% endblock %}
+{% block pageTitle %}{{ 'orfey.template.list_networks' | trans( {},'OrfeyBilling' ) }}{% endblock %}
+
+{% block content %}
+
+{% endblock %}

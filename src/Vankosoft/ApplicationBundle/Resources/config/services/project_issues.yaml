@@ -1,0 +1,15 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+        
+    Vankosoft\ApplicationBundle\Controller\VankosoftIssueController:
+        tags: ['controller.service_arguments']
+        arguments:
+            - '@http_client'
+            - '@vs_application.doctrine_dbal_cache'
+
+
