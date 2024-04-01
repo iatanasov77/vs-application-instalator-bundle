@@ -22,12 +22,9 @@ class ProjectApiClient implements ProjectApiClientInterface
     }
     
     /**
-     * Login to VankoSoft API
-     * 
-     * @throws VankosoftApiException
-     * @return string Vankosoft API Token
+     * @inheritdoc
      */
-    protected function login(): string
+    public function login(): string
     {
         $vankosoftApiHost   = $this->getParameter( 'vs_application.vankosoft_api.host' );
         $apiLoginUrl        = $vankosoftApiHost . '/login_check';

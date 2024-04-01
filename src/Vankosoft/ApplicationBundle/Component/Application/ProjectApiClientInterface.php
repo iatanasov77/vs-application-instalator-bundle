@@ -2,5 +2,11 @@
 
 interface ProjectApiClientInterface
 {
-    protected function login(): string;
+    /**
+     * Login to VankoSoft API
+     *
+     * @throws VankosoftApiException
+     * @return string Vankosoft API Token
+     */
+    public function login(): string;
 }
