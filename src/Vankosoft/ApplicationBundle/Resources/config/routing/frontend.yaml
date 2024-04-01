@@ -5,5 +5,13 @@ vs_application_cookie_consent_translations:
 vs_application_project_issues_index:
     path: /project-issues
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueController::indexAction
+    
+vs_application_project_issues_create:
+    path: /project-issues/new
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueController::createAction
+    
+vs_application_project_issues_update:
+    path: /project-issues/{id}
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueController::updateAction
 
 

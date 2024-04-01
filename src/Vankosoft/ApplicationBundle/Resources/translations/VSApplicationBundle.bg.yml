@@ -84,6 +84,7 @@ vs_application:
         sliders_create: Създаване Слайдер
         sliders_update: Редакция Слайдер
         project_issues: Проблеми в Проекта
+        create_issue: Създай Нов Проблем
 
     form:
         errors_title: 'Грешка!'
@@ -167,6 +168,17 @@ vs_application:
             button_accept_necessary: Button Accept necessary
             button_show_preferences: Button Manage Preferences
             language_code_placeholder: '-- Избери Език --'
+            
+        project_issue:
+            title: Заглавие
+            description: 'Описание'
+            projects: 'Проекти'
+            projects_placeholder: '-- Избери Проекти --'
+            labels: Етикети
+            status: 'Статус на Проблема'
+            status_opened: Отворен
+            status_closed: Затворен като Незавършен
+            status_completed: Затворен като Завършен
             
     template:
         vankosoft_application: ВанкоСофт Приложение

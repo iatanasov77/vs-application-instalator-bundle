@@ -5,6 +5,16 @@ use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 
 final class ProjectIssue extends ProjectApiClient
 {
+    const ISSUE_OPENED      = 'opened';
+    const ISSUE_CLOSED      = 'closed';
+    const ISSUE_COMPLETED   = 'completed';
+    
+    const ISSUE_STATUS  = [
+        self::ISSUE_OPENED      => 'vs_application.form.project_issue.status_opened',
+        self::ISSUE_CLOSED      => 'vs_application.form.project_issue.status_closed',
+        self::ISSUE_COMPLETED   => 'vs_application.form.project_issue.status_completed',
+    ];
+    
     public function getIssues(): array
     {
         $apiToken       = $this->login();

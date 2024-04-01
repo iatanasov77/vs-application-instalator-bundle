@@ -84,6 +84,7 @@ vs_application:
         sliders_create: Create a Slider
         sliders_update: Edit Slider
         project_issues: Project Issues
+        create_issue: Create Issue
 
     form:
         errors_title: 'Error!'
@@ -167,6 +168,17 @@ vs_application:
             button_accept_necessary: Button Accept necessary
             button_show_preferences: Button Manage Preferences
             language_code_placeholder: '-- Select a Language --'
+            
+        project_issue:
+            title: Title
+            description: 'Description'
+            projects: 'Projects'
+            projects_placeholder: '-- Choose Projects --'
+            labels: Labels
+            status: 'Issue Status'
+            status_opened: Opened
+            status_closed: Closed as Incompleted
+            status_completed: Closed as Completed
             
     template:
         vankosoft_application: VankoSoft Application
