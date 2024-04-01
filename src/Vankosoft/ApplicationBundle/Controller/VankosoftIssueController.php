@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
-use Vankosoft\ApiBundle\Exception\ApiLoginException;
+use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 
 class VankosoftIssueController extends AbstractController
 {
@@ -41,8 +41,12 @@ class VankosoftIssueController extends AbstractController
             //throw new ApiLoginException( 'JWTEncodeFailureException: ' . $e->getMessage() );
         }
         
-        //echo '<pre>'; var_dump( $response ); die;
-        $payload = $response->toArray( false );
+        try {
+            //echo '<pre>'; var_dump( $response ); die;
+            $payload = $response->toArray( false );
+        } catch ( \JsonException $e ) {
+            throw new VankosoftApiException( 'Invalid JSON Payload !!!' );
+        }
         echo '<pre>'; var_dump( $payload ); die;
         
         return $this->render( '@VSApplication/Pages/ProjectIssues/index.html.twig', [
