@@ -14,7 +14,7 @@ class ProjectApiClient implements ProjectApiClientInterface
     protected $cache;
     
     /** @var array */
-    protected $apiConnection
+    protected $apiConnection;
     
     public function __construct(
         HttpClientInterface $httpClient,
