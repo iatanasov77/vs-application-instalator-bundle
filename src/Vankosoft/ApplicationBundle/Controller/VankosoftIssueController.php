@@ -40,6 +40,19 @@ class VankosoftIssueController extends AbstractController
         
         //$issue = $this->vsProject->createIssue();
         $form           = $this->createForm( ProjectIssueForm::class );
+        $form->handleRequest( $request );
+        if( $form->isSubmitted() && $form->isValid() ) {
+            $entity = $form->getData();
+            echo '<pre>'; var_dump( $entity ); die;
+            
+            /*
+            $em = $this->doctrine->getManager();
+            $em->persist( $entity );
+            $em->flush();
+            */
+            
+            return $this->redirect( $this->generateUrl( 'vs_application_project_issues_index' ) );
+        }
         
         return $this->render( '@VSApplication/Pages/ProjectIssues/create.html.twig', [
             'form'      => $form,
@@ -55,6 +68,16 @@ class VankosoftIssueController extends AbstractController
         
         //$issue  = $this->vsProject->getIssue( $id );
         $form           = $this->createForm( ProjectIssueForm::class );
+        $form->handleRequest( $request );
+        if( $form->isSubmitted() && $form->isValid() ) {
+            $entity = $form->getData();
+            
+            $em = $this->doctrine->getManager();
+            $em->persist( $entity );
+            $em->flush();
+            
+            return $this->redirect( $this->generateUrl( 'vs_application_project_issues_index' ) );
+        }
         
         return $this->render( '@VSApplication/Pages/ProjectIssues/update.html.twig', [
             'form'      => $form,
