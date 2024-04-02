@@ -22,5 +22,6 @@ services:
         tags: ['controller.service_arguments']
         arguments:
             - '@vs_application.project_issues'
+            - '@vs_application.repository.tags_whitelist_context'
 
 

@@ -3,6 +3,7 @@
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 use Vankosoft\ApplicationBundle\Component\Application\ProjectIssue;
 use Vankosoft\ApplicationBundle\Form\ProjectIssueForm;
@@ -12,10 +13,15 @@ class VankosoftIssueController extends AbstractController
     /** @var ProjectIssue */
     private $vsProject;
     
+    /** @var RepositoryInterface */
+    private $tagsWhitelistContextRepository;
+    
     public function __construct(
-        ProjectIssue $vsProject
+        ProjectIssue $vsProject,
+        RepositoryInterface $tagsWhitelistContextRepository
     ) {
-        $this->vsProject    = $vsProject;
+        $this->vsProject                        = $vsProject;
+        $this->tagsWhitelistContextRepository   = $tagsWhitelistContextRepository;
     }
     
     public function indexAction( Request $request ): Response
@@ -30,10 +36,10 @@ class VankosoftIssueController extends AbstractController
     
     public function createAction( Request $request ): Response
     {
-        $tagsContext    = $this->get( 'vs_application.repository.tags_whitelist_context' )->findByTaxonCode( 'project-issue-labels' );
+        $tagsContext    = $this->tagsWhitelistContextRepository->findByTaxonCode( 'project-issue-labels' );
         
         //$issue = $this->vsProject->createIssue();
-        $form   = $this->createForm( ProjectIssueForm::class );
+        $form           = $this->createForm( ProjectIssueForm::class );
         
         return $this->render( '@VSApplication/Pages/ProjectIssues/create.html.twig', [
             'form'      => $form,
@@ -45,10 +51,10 @@ class VankosoftIssueController extends AbstractController
     
     public function updateAction( $id, Request $request ): Response
     {
-        $tagsContext    = $this->get( 'vs_application.repository.tags_whitelist_context' )->findByTaxonCode( 'project-issue-labels' );
+        $tagsContext    = $this->tagsWhitelistContextRepository->findByTaxonCode( 'project-issue-labels' );
         
         //$issue  = $this->vsProject->getIssue( $id );
-        $form   = $this->createForm( ProjectIssueForm::class );
+        $form           = $this->createForm( ProjectIssueForm::class );
         
         return $this->render( '@VSApplication/Pages/ProjectIssues/update.html.twig', [
             'form'      => $form,
