@@ -55,7 +55,7 @@ final class ProjectIssue extends ProjectApiClient
             'headers'   => [
                 'Authorization' => 'Bearer ' . $apiToken,
             ],
-            'body'      => $formData,
+            'json'      => $formData,
         ]);
         
         try {
