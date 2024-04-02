@@ -51,6 +51,7 @@ final class ProjectIssue extends ProjectApiClient
         $apiToken       = $this->login();
         $issuesEndpoint = $this->apiConnection['host'] . '/project-issues/new';
         
+        $formData['projectSlug']    = $this->projectSlug;
         $response       = $this->httpClient->request( 'POST', $issuesEndpoint, [
             'headers'   => [
                 'Authorization' => 'Bearer ' . $apiToken,
@@ -62,13 +63,13 @@ final class ProjectIssue extends ProjectApiClient
             //echo '<pre>'; var_dump( $response ); die;
             $payload = $response->toArray( false );
         } catch ( \JsonException $e ) {
-            echo '<pre>'; var_dump( $e ); die;
+            //echo '<pre>'; var_dump( $e ); die;
             throw new VankosoftApiException( 'Invalid JSON Payload !!!' );
         }
         //echo '<pre>'; var_dump( $payload ); die;
         
         if ( ! isset( $payload['status'] )|| $payload['status'] == Status::STATUS_ERROR ) {
-            echo '<pre>'; var_dump( $payload ); die;
+            //echo '<pre>'; var_dump( $payload ); die;
             throw new VankosoftApiException( 'ERROR: ' . $payload['message'] );
         }
         
