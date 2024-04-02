@@ -45,8 +45,8 @@ class VankosoftIssueController extends AbstractController
             $formData   = $form->getData();
             //echo '<pre>'; var_dump( $formData ); die;
             
-            $response   = $this->vsProject->createIssues( $formData );
-            var_dump( $response ); die;
+            $response   = $this->vsProject->createIssue( $formData );
+            echo '<pre>'; var_dump( $response ); die;
             
             return $this->redirect( $this->generateUrl( 'vs_application_project_issues_index' ) );
         }
@@ -68,9 +68,10 @@ class VankosoftIssueController extends AbstractController
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {
             $formData   = $form->getData();
-            echo '<pre>'; var_dump( $formData ); die;
+            //echo '<pre>'; var_dump( $formData ); die;
             
-            $issue = $this->vsProject->updateIssues( $formData );
+            $response = $this->vsProject->updateIssue( $formData );
+            echo '<pre>'; var_dump( $response ); die;
             
             return $this->redirect( $this->generateUrl( 'vs_application_project_issues_index' ) );
         }
