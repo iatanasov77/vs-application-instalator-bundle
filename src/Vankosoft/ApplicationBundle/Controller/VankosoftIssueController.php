@@ -48,7 +48,11 @@ class VankosoftIssueController extends AbstractController
             $response   = $this->vsProject->createIssue( $formData );
             //echo '<pre>'; var_dump( $response ); die;
             
-            return $this->redirect( $this->generateUrl( 'vs_application_project_issues_index' ) );
+            if ( $form->getClickedButton() && 'btnApply' === $form->getClickedButton()->getName() ) {
+                return $this->redirect( $this->generateUrl( 'vs_application_project_issues_update', ['id' => $response['issue_id']] ) );
+            } else {
+                return $this->redirect( $this->generateUrl( 'vs_application_project_issues_index' ) );
+            }
         }
         
         return $this->render( '@VSApplication/Pages/ProjectIssues/create.html.twig', [
@@ -71,9 +75,13 @@ class VankosoftIssueController extends AbstractController
             //echo '<pre>'; var_dump( $formData ); die;
             
             $response = $this->vsProject->updateIssue( $formData );
-            echo '<pre>'; var_dump( $response ); die;
+            //echo '<pre>'; var_dump( $response ); die;
             
-            return $this->redirect( $this->generateUrl( 'vs_application_project_issues_index' ) );
+            if ( $form->getClickedButton() && 'btnApply' === $form->getClickedButton()->getName() ) {
+                return $this->redirect( $this->generateUrl( 'vs_application_project_issues_update', ['id' => $response['issue_id']] ) );
+            } else {
+                return $this->redirect( $this->generateUrl( 'vs_application_project_issues_index' ) );
+            }
         }
         
         return $this->render( '@VSApplication/Pages/ProjectIssues/update.html.twig', [
@@ -82,5 +90,10 @@ class VankosoftIssueController extends AbstractController
             
             'labelsWhitelist'   => $tagsContext->getTagsArray(),
         ]);
+    }
+    
+    public function deleteAction( $id, Request $request ): Response
+    {
+        
     }
 }
