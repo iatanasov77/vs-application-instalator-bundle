@@ -65,10 +65,11 @@ class VankosoftIssueController extends AbstractController
     
     public function updateAction( $id, Request $request ): Response
     {
+        $response       = $this->vsProject->getIssue( intval( $id ) );
         $tagsContext    = $this->tagsWhitelistContextRepository->findByTaxonCode( 'project-issue-labels' );
         
         //$issue  = $this->vsProject->getIssue( $id );
-        $form           = $this->createForm( ProjectIssueForm::class );
+        $form           = $this->createForm( ProjectIssueForm::class, $response );
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {
             $formData   = $form->getData();

@@ -33,6 +33,23 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
+    public function getIssue( int $id ): array
+    {
+        $apiToken       = $this->login();
+        $issuesEndpoint = $this->apiConnection['host'] . '/project-issues/' . $id;
+        
+        $response       = $this->httpClient->request( 'GET', $issuesEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'query'      => [
+                'projectSlug' => $this->projectSlug
+            ],
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
     public function createIssue( array $formData )
     {
         $apiToken       = $this->login();
@@ -79,7 +96,7 @@ final class ProjectIssue extends ProjectApiClient
         }
         //echo '<pre>'; var_dump( $payload ); die;
         
-        if ( ! isset( $payload['status'] )|| $payload['status'] == Status::STATUS_ERROR ) {
+        if ( ! isset( $payload['status'] ) || $payload['status'] == Status::STATUS_ERROR ) {
             //echo '<pre>'; var_dump( $payload ); die;
             throw new VankosoftApiException( 'ERROR: ' . $payload['message'] );
         }
