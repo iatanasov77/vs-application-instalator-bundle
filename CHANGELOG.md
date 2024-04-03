@@ -1,3 +1,23 @@
+1.10.195	|	Release date: **03.04.2024**
+============================================
+* New Features:
+  - Add Symfony Http Client Requirement.
+  - add ProjectIssuesController.
+  - Add Configuration for VankoSoft API.
+  - Add an Exception Class for Using Vankosoft API.
+  - Create Component to Handle Vankosoft API Requests.
+  - Add More Config Options for VankoSoft API Connection.
+  - Create VankoSoft API Get Issues Method.
+  - Add Project Option into VankoSoft API Configuration.
+  - Send Projects Slug From Api Client Issues Controler.
+  - Create Project Issues Index Page.
+  - Create Project Issues Form.
+  - Improve VankosoftIssuesController.
+  - Handle Project Issue on  VankosoftIssuesController.
+  - Create Delete Issue on ProjectIssue API.
+  - Create Update Issue Action on Vankosoft API.
+
+
 1.10.194	|	Release date: **29.03.2024**
 ============================================
 * New Features and Improvements:
