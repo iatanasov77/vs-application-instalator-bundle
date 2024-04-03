@@ -66,7 +66,7 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
-    public function updateIssue( array $formData )
+    public function updateIssue( int $id, array $formData )
     {
         $apiToken       = $this->login();
         $issuesEndpoint = $this->apiConnection['host'] . '/project-issues/' . $id;

@@ -75,7 +75,7 @@ class VankosoftIssueController extends AbstractController
             $formData   = $form->getData();
             //echo '<pre>'; var_dump( $formData ); die;
             
-            $response = $this->vsProject->updateIssue( $formData );
+            $response = $this->vsProject->updateIssue( intval( $id ), $formData );
             //echo '<pre>'; var_dump( $response ); die;
             
             if ( $form->getClickedButton() && 'btnApply' === $form->getClickedButton()->getName() ) {
