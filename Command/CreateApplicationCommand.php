@@ -29,6 +29,9 @@ use Vankosoft\UsersBundle\Model\UserRoleInterface;
 )]
 final class CreateApplicationCommand extends AbstractInstallCommand
 {
+    const THEME_NONE_ID = 'no-theme';
+    
+    /** @var ApplicationInterface */
     private $application;
     
     protected function configure(): void
@@ -240,7 +243,7 @@ EOT
         
         $applicationThemeName   = $this->createApplicationThemeQuestion( $input, $output );
         $theme                  = null;
-        if ( $applicationThemeName ) {
+        if ( $applicationThemeName && $applicationThemeName !== self::THEME_NONE_ID ) {
             $theme                  = $this->get( 'vs_app.theme_repository' )->findOneByName( $applicationThemeName );
             if ( $theme ) {
                 $settings->setTheme( $applicationThemeName );
@@ -302,8 +305,9 @@ EOT
     private function createApplicationThemeQuestion( InputInterface $input, OutputInterface $output ): ?string
     {
         $availableThemes        = array_keys( $this->get( 'vs_app.theme_repository' )->findAll() );
-        $applicationThemeName   = null;
+        \array_unshift( $availableThemes , self::THEME_NONE_ID );
         
+        $applicationThemeName   = null;
         if ( ! empty( $availableThemes ) ) {
             $defaultTheme       = $input->getOption( 'theme' );
             $default            = null;
