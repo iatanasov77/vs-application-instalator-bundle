@@ -16,3 +16,5 @@ vs_application_logout:
 vs_application_contact:
     path: /contact
     controller: Vankosoft\ApplicationBundle\Controller\ContactController::index
+
+
