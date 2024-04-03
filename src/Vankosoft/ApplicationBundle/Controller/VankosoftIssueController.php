@@ -94,6 +94,8 @@ class VankosoftIssueController extends AbstractController
     
     public function deleteAction( $id, Request $request ): Response
     {
+        $response   = $this->vsProject->deleteIssue( intval( $id ) );
         
+        return $this->redirect( $this->generateUrl( 'vs_application_project_issues_index' ) );
     }
 }

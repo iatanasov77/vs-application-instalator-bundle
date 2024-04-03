@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationBundle\Component\Application;
 
+use Symfony\Contracts\HttpClient\ResponseInterface;
 use Vankosoft\ApplicationBundle\Component\Status;
 use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 
@@ -15,8 +16,6 @@ final class ProjectIssue extends ProjectApiClient
         self::ISSUE_COMPLETED   => 'vs_application.form.project_issue.status_completed',
     ];
     
-    
-    
     public function getIssues(): array
     {
         $apiToken       = $this->login();
@@ -31,19 +30,7 @@ final class ProjectIssue extends ProjectApiClient
             ],
         ]);
         
-        try {
-            //echo '<pre>'; var_dump( $response ); die;
-            $payload = $response->toArray( false );
-        } catch ( \JsonException $e ) {
-            throw new VankosoftApiException( 'Invalid JSON Payload !!!' );
-        }
-        //echo '<pre>'; var_dump( $payload ); die;
-        
-        if ( ! isset( $payload['status'] )|| $payload['status'] == Status::STATUS_ERROR ) {
-            throw new VankosoftApiException( 'ERROR: ' . $payload['message'] );
-        }
-        
-        return $payload['payload'];
+        return $this->processApiResponse( $response );
     }
     
     public function createIssue( array $formData )
@@ -59,6 +46,30 @@ final class ProjectIssue extends ProjectApiClient
             'json'      => $formData,
         ]);
         
+        return $this->processApiResponse( $response );
+    }
+    
+    public function updateIssue( array $formData )
+    {
+        
+    }
+    
+    public function deleteIssue( int $id )
+    {
+        $apiToken       = $this->login();
+        $issuesEndpoint = $this->apiConnection['host'] . '/project-issues/' . $id;
+        
+        $response = $httpClient->request('DELETE', $issuesEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ]
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
+    private function processApiResponse( ResponseInterface $response ): array
+    {
         try {
             //echo '<pre>'; var_dump( $response ); die;
             $payload = $response->toArray( false );
