@@ -180,6 +180,8 @@ vs_application:
             status_closed: Затворен като Незавършен
             status_completed: Затворен като Завършен
             
+        save_tags: 'Запази Таговете'
+            
     template:
         vankosoft_application: ВанкоСофт Приложение
         super_admin_panel: Админ Панел

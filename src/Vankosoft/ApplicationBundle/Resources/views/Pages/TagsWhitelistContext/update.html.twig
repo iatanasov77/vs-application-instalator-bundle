@@ -60,13 +60,19 @@
                         </div>
                     </div>
                     <div class="card-body" style="padding: 0;">
-                        <div id="contextTagsContainer" class="mt-4 mb-4"
-                            data-prototype="{% apply escape %}{% include '@VSApplication/Pages/TagsWhitelistContext/add-tag-prototype.html.twig' with {'form': tagsForm.tags.vars.prototype} %}{% endapply %}"
-                        >
-                            {% for tag in tagsForm.tags %}
-                                {% include '@VSApplication/Pages/TagsWhitelistContext/add-tag-prototype.html.twig' with {'form': tag} %}
-                            {% endfor %}
-                        </div>
+                        {{ form_start( tagsForm, { 'attr': {'class': 'form-horizontal '} } ) }}
+                            <div id="contextTagsContainer" class="mt-4 mb-4"
+                                data-prototype="{% apply escape %}{% include '@VSApplication/Pages/TagsWhitelistContext/add-tag-prototype.html.twig' with {'form': tagsForm.tags.vars.prototype} %}{% endapply %}"
+                            >
+                                {% for tag in tagsForm.tags %}
+                                    {% include '@VSApplication/Pages/TagsWhitelistContext/add-tag-prototype.html.twig' with {'form': tag} %}
+                                {% endfor %}
+                            </div>
+                            
+                            <div class="input-group">
+                                {{ form_widget(tagsForm.btnSubmitTags, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        {{ form_end( tagsForm ) }}
                     </div>
                 </div>
             {% endif %}

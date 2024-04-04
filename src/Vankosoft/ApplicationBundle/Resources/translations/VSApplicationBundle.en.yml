@@ -180,6 +180,8 @@ vs_application:
             status_closed: Closed as Incompleted
             status_completed: Closed as Completed
             
+        save_tags: 'Save Tags'
+            
     template:
         vankosoft_application: VankoSoft Application
         super_admin_panel: SuperAdmin Panel

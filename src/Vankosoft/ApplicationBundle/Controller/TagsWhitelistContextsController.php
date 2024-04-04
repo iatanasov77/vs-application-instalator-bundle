@@ -18,7 +18,12 @@ class TagsWhitelistContextsController extends AbstractCrudController
         }
         
         $tagsForm   = $this->classInfo['action'] == 'updateAction' ?
-                        $this->createForm( TagsWhitelistContextTagsForm::class, $entity ) :
+                        $this->createForm( TagsWhitelistContextTagsForm::class, $entity, [
+                            'action' => $this->generateUrl( 'vs_application_whitelist_context_update_tags', [
+                                'contextId' => $entity->getId()
+                            ]),
+                            'method' => 'POST',
+                        ]) :
                         null;
         
         return [

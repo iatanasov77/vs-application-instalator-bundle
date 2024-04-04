@@ -15,7 +15,7 @@ use Vankosoft\ApplicationBundle\Component\Status;
 class ApplicationExtController extends AbstractController
 {
     /** @var ManagerRegistry */
-    protected ManagerRegistry $doctrine;
+    protected $doctrine;
     
     /** @var EntityRepository */
     protected $applicationRepository;

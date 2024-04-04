@@ -5,6 +5,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Vankosoft\ApplicationBundle\Form\Type\WhitelistContextTagType;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistContextInterface;
 
@@ -19,6 +20,11 @@ class TagsWhitelistContextTagsForm extends AbstractType
                 'allow_delete' => true,
                 'prototype'    => true,
                 'by_reference' => false
+            ])
+            
+            ->add( 'btnSubmitTags', SubmitType::class, [
+                'label'                 => 'vs_application.form.save_tags',
+                'translation_domain'    => 'VSApplicationBundle',
             ])
         ;
     }
