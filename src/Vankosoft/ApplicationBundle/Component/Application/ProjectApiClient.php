@@ -37,14 +37,27 @@ class ProjectApiClient implements ProjectApiClientInterface
      */
     public function login(): string
     {
-        $response   = $this->_doLogin();
-        //echo '<pre>'; var_dump( $response ); die;
+        $cacheKey   = 'project_api_connection';
+        $cache      = $this->cache->getItem( $cacheKey );
         
-        try {
-            $payload = $response->toArray( false );
-        } catch ( \JsonException $e ) {
-            throw new VankosoftApiException( 'Invalid JSON Payload !!!' );
+        if ( false === $cache->isHit() ) {
+            $response   = $this->_doLogin();
+            //echo '<pre>'; var_dump( $response ); die;
+            
+            try {
+                $payload = $response->toArray( false );
+            } catch ( \JsonException $e ) {
+                throw new VankosoftApiException( 'Invalid JSON Payload !!!' );
+            }
+            
+            $jsonPayload   = \json_encode( $payload );
+            $cache->set( $jsonPayload );
+            
+            $this->cache->save( $cache );
         }
+        
+        $cachedConnection   = $cache->get();
+        $payload            = \json_decode( $cachedConnection, true );
         //echo '<pre>'; var_dump( $payload ); die;
         
         if ( ! isset( $payload['payload'] ) ) {
