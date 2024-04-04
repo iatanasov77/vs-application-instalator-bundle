@@ -243,6 +243,7 @@ vs_application:
         tags_whitelist_contexts_create_title: Create a New Tags Whitelist Context
         tags_whitelist_contexts_update_title: Update Tags Whitelist Context
         tags_whitelist_contexts_details: Tags Whitelist Context Details
+        tags_whitelist_contexts_tags: Tags in Context
         
         widgets_index_title: Widgets
         reload_widgets: Reload Widgets

@@ -243,6 +243,7 @@ vs_application:
         tags_whitelist_contexts_create_title: Създаване Тагове Контекст
         tags_whitelist_contexts_update_title: Редакция Тагове Контекст
         tags_whitelist_contexts_details: Тагове Контекст Детайли
+        tags_whitelist_contexts_tags: Тагове в Контекста
         
         widgets_index_title: Уиджети
         reload_widgets: Презареждане Уиджети
