@@ -1,3 +1,12 @@
+1.10.196	|	Release date: **04.04.2024**
+============================================
+* New Features and Improvements:
+  - Improve Installator Create Application Command.
+  - Change Vankosoft API Host Default Value.
+  - Creating Tags on Whitelist Context in AdminPanel.
+  - Add Cache For Por Project API Client Logn Response.
+
+
 1.10.195	|	Release date: **03.04.2024**
 ============================================
 * New Features:
