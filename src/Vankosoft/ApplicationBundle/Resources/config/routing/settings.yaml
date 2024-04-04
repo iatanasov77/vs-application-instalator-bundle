@@ -41,3 +41,7 @@ vs_application_cookie_consent_translations:
         path: /settings/cookie-consent-translations
         templates: "@VSApplication/Pages/CookieConsentTranslations"
     type: sylius.resource
+    
+vs_application_whitelist_context_update_tags:
+    path: /whitelist-context/{contextId}/update-tags
+    controller: Vankosoft\ApplicationBundle\Controller\TagsWhitelistContextsExtController::updateTagsWhitelistContextTagsAction

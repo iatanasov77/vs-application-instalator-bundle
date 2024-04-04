@@ -22,6 +22,7 @@
         <!-- basic tabs  -->
         <!-- ============================================================== -->
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        
             <div class="card">
             	<h5 class="card-header">{{ 'vs_application.template.tags_whitelist_contexts_details' | trans( {},'VSApplicationBundle' ) }}</h5>
             	<div class="card-body">
@@ -47,6 +48,47 @@
                     {{ form_end( form ) }}
         		</div>
 			</div>
+			
+			{% if( item.id ) %}
+                <div class="card">
+                    <div class="card-header">
+                        <div class="float-start" style="height:30px; padding-top:10px;">
+                            {{ 'vs_application.template.tags_whitelist_contexts_tags' | trans( {},'VSApplicationBundle' ) }}
+                        </div>
+                        <div class="btn-group float-end">
+                        
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        {{ form_start( tagsForm, { 'attr': {'class': 'form-horizontal '} } ) }}
+                            <div id="contextTagsContainer" class="mt-4 mb-4"
+                                data-prototype="{% apply escape %}{% include '@VSApplication/Pages/TagsWhitelistContext/add-tag-prototype.html.twig' with {'form': tagsForm.tags.vars.prototype} %}{% endapply %}"
+                            >
+                                {% for tag in tagsForm.tags %}
+                                    {% include '@VSApplication/Pages/TagsWhitelistContext/add-tag-prototype.html.twig' with {'form': tag} %}
+                                {% endfor %}
+                            </div>
+                            
+                            <div class="input-group row ms-2 mb-2">
+                                <div class="col-sm-2">
+                                    {{ form_widget(tagsForm.btnSubmitTags, {'attr': {'class': 'btn btn-primary'}}) }}
+                                </div>
+                            </div>
+                        {{ form_end( tagsForm ) }}
+                    </div>
+                </div>
+            {% endif %}
+			
 		</div>
     </div>  
 {% endblock content %}
+
+{% block head_styles %} 
+    {{ parent() }}
+    {{ encore_entry_link_tags( 'js/tags-whitelist-contexts-edit' ) }}
+{% endblock %}
+
+{% block body_scripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags( 'js/tags-whitelist-contexts-edit' ) }}
+{% endblock %}

@@ -101,7 +101,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode( 'connection' )
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode( 'host' )->defaultValue( 'http://vankosoft.org/api' )->cannotBeEmpty()->end()
+                                ->scalarNode( 'host' )->defaultValue( 'http://api.vankosoft.org/api' )->cannotBeEmpty()->end()
                                 ->scalarNode( 'user' )->defaultValue( 'admin' )->cannotBeEmpty()->end()
                                 ->scalarNode( 'password' )->defaultValue( 'admin' )->cannotBeEmpty()->end()
                             ->end()

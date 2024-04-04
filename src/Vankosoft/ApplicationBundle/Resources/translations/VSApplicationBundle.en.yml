@@ -180,6 +180,8 @@ vs_application:
             status_closed: Closed as Incompleted
             status_completed: Closed as Completed
             
+        save_tags: 'Save Tags'
+            
     template:
         vankosoft_application: VankoSoft Application
         super_admin_panel: SuperAdmin Panel
@@ -243,6 +245,7 @@ vs_application:
         tags_whitelist_contexts_create_title: Create a New Tags Whitelist Context
         tags_whitelist_contexts_update_title: Update Tags Whitelist Context
         tags_whitelist_contexts_details: Tags Whitelist Context Details
+        tags_whitelist_contexts_tags: Tags in Context
         
         widgets_index_title: Widgets
         reload_widgets: Reload Widgets

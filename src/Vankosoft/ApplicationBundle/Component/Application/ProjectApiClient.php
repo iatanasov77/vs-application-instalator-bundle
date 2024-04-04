@@ -37,14 +37,7 @@ class ProjectApiClient implements ProjectApiClientInterface
      */
     public function login(): string
     {
-        $response   = $this->_doLogin();
-        //echo '<pre>'; var_dump( $response ); die;
-        
-        try {
-            $payload = $response->toArray( false );
-        } catch ( \JsonException $e ) {
-            throw new VankosoftApiException( 'Invalid JSON Payload !!!' );
-        }
+        $payload    = $this->getLoginPayload();
         //echo '<pre>'; var_dump( $payload ); die;
         
         if ( ! isset( $payload['payload'] ) ) {
@@ -54,7 +47,37 @@ class ProjectApiClient implements ProjectApiClientInterface
         return $payload['payload']['token'];
     }
     
-    protected function _doLogin(): ResponseInterface
+    private function getLoginPayload(): array
+    {
+        $cacheKey   = 'project_api_connection';
+        $cache      = $this->cache->getItem( $cacheKey );
+        
+        if ( false === $cache->isHit() ) {
+            $response   = $this->_doLogin();
+            //echo '<pre>'; var_dump( $response ); die;
+            
+            try {
+                $payload = $response->toArray( false );
+            } catch ( \JsonException $e ) {
+                throw new VankosoftApiException( 'Invalid JSON Payload !!!' );
+            }
+            
+            $jsonPayload   = \json_encode( $payload );
+            $cache->set( $jsonPayload );
+            
+            // Set Cache Expiration Time
+            $dt = new \DateTime();
+            $dt->setTimestamp( $payload['payload']['tokenExpired'] );
+            $cache->expiresAt( $dt );
+            
+            $this->cache->save( $cache );
+        }
+        
+        $cachedConnection   = $cache->get();
+        return \json_decode( $cachedConnection, true );
+    }
+    
+    private function _doLogin(): ResponseInterface
     {
         $apiLoginUrl        = $this->apiConnection['host'] . '/login_check';
         

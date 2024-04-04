@@ -3,6 +3,7 @@
 use Symfony\Component\HttpFoundation\Request;
 use Vankosoft\ApplicationBundle\Controller\AbstractCrudController;
 use Vankosoft\ApplicationBundle\Controller\TaxonomyHelperTrait;
+use Vankosoft\ApplicationBundle\Form\TagsWhitelistContextTagsForm;
 
 class TagsWhitelistContextsController extends AbstractCrudController
 {
@@ -16,8 +17,18 @@ class TagsWhitelistContextsController extends AbstractCrudController
             $entity->getTaxon()->setCurrentLocale( $request->getLocale() );
         }
         
+        $tagsForm   = $this->classInfo['action'] == 'updateAction' ?
+                        $this->createForm( TagsWhitelistContextTagsForm::class, $entity, [
+                            'action' => $this->generateUrl( 'vs_application_whitelist_context_update_tags', [
+                                'contextId' => $entity->getId()
+                            ]),
+                            'method' => 'POST',
+                        ]) :
+                        null;
+        
         return [
             'taxonomyId'    => $taxonomy ? $taxonomy->getId() : 0,
+            'tagsForm'      => $tagsForm ? $tagsForm->createView() : null,
         ];
     }
     
