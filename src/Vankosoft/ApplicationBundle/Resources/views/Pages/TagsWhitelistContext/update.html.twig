@@ -69,8 +69,10 @@
                                 {% endfor %}
                             </div>
                             
-                            <div class="input-group">
-                                {{ form_widget(tagsForm.btnSubmitTags, {'attr': {'class': 'form-control'}}) }}
+                            <div class="input-group row">
+                                <div class="col-sm-2">
+                                    {{ form_widget(tagsForm.btnSubmitTags, {'attr': {'class': 'btn btn-primary'}}) }}
+                                </div>
                             </div>
                         {{ form_end( tagsForm ) }}
                     </div>
