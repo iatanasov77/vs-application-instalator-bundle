@@ -11,6 +11,15 @@ use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistContextInterface;
 
 class TagsWhitelistContextTagsForm extends AbstractType
 {
+    /** @var string */
+    private $dataClass;
+    
+    public function __construct(
+        string $dataClass
+    ) {
+        $this->dataClass    = $dataClass;
+    }
+    
     public function buildForm( FormBuilderInterface $builder, array $options ): void
     {
         $builder
@@ -35,7 +44,7 @@ class TagsWhitelistContextTagsForm extends AbstractType
         
         $resolver->setDefaults([
             'csrf_protection'   => false,
-            'data_class'        => TagsWhitelistContextInterface::class
+            'data_class'        => $this->dataClass
         ]);
     }
     

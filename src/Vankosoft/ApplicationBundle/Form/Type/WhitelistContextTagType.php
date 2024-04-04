@@ -6,10 +6,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistTagInterface;
 
 class WhitelistContextTagType extends AbstractType
 {
+    /** @var string */
+    private $dataClass;
+    
+    public function __construct(
+        string $dataClass
+    ) {
+        $this->dataClass    = $dataClass;
+    }
+    
     public function buildForm( FormBuilderInterface $builder, array $options )
     {
         $builder
@@ -25,7 +33,7 @@ class WhitelistContextTagType extends AbstractType
     {
         $resolver->setDefaults(array(
             'csrf_protection'   => false,
-            'data_class'        => TagsWhitelistTagInterface::class
+            'data_class'        => $this->dataClass
         ));
     }
     
