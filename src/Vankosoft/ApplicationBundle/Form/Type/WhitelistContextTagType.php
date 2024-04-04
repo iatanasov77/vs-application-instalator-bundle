@@ -21,7 +21,7 @@ class WhitelistContextTagType extends AbstractType
     public function buildForm( FormBuilderInterface $builder, array $options )
     {
         $builder
-            ->add( 'id', HiddenType::class )
+            ->add( 'id', HiddenType::class, ['mapped' => false] )
             ->add( 'tag', TextType::class, [
                 'required'              => false,
                 'translation_domain'    => 'VSApplicationBundle',
