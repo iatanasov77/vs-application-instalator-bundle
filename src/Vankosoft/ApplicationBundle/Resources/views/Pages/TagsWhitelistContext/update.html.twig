@@ -22,6 +22,7 @@
         <!-- basic tabs  -->
         <!-- ============================================================== -->
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        
             <div class="card">
             	<h5 class="card-header">{{ 'vs_application.template.tags_whitelist_contexts_details' | trans( {},'VSApplicationBundle' ) }}</h5>
             	<div class="card-body">
@@ -47,6 +48,45 @@
                     {{ form_end( form ) }}
         		</div>
 			</div>
+			
+			{% if( item.id ) %}
+                <div class="card">
+                    <div class="card-header">
+                        <div class="float-start" style="height:30px; padding-top:10px;">
+                            {{ 'vs_application.template.taxonomy_update_list_taxons_title' | trans( {},'VSApplicationBundle' ) }}
+                        </div>
+                        <div class="btn-group float-end">
+                        {#
+                            <a class="btn btn-primary btnTaxonomyTaxon"
+                                title="{{ 'vs_application.template.button_create_taxon' | trans( {},'VSApplicationBundle' ) }}"
+                                href="javascript:void(0);" 
+                                data-url="{{ path('vs_application_taxonomy_taxon_edit', {'taxonomyId': item.id}) }}"
+                                data-easyui-url="{{ path( 'vs_application_taxonomy_taxons_easyui_combotree', {'taxonomyId': item.id} ) }}"
+                            >
+                                {{ 'vs_application.template.button_create_taxon' | trans( {},'VSApplicationBundle' ) }}
+                            </a>&nbsp;
+                        #}
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        {% for tag in item.tags %}
+                            
+                        
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+			
 		</div>
     </div>  
 {% endblock content %}
+
+{% block head_styles %} 
+    {{ parent() }}
+    {{ encore_entry_link_tags( 'js/tags-whitelist-contexts-edit' ) }}
+{% endblock %}
+
+{% block body_scripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags( 'js/tags-whitelist-contexts-edit' ) }}
+{% endblock %}
