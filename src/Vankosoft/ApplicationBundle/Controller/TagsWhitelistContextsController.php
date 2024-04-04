@@ -23,7 +23,7 @@ class TagsWhitelistContextsController extends AbstractCrudController
         
         return [
             'taxonomyId'    => $taxonomy ? $taxonomy->getId() : 0,
-            'tagsForm'      => $tagsForm->createView(), 
+            'tagsForm'      => $tagsForm->createView(),
         ];
     }
     

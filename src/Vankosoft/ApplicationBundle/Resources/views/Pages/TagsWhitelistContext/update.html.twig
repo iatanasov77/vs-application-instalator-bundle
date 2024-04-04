@@ -60,9 +60,9 @@
                         </div>
                     </div>
                     <div class="card-body" style="padding: 0;">
-                        <div id="contextTagsContainer"
+                        <div id="contextTagsContainer" class="mt-4 mb-4"
                             data-prototype="{% apply escape %}{% include '@VSApplication/Pages/TagsWhitelistContext/add-tag-prototype.html.twig' with {'form': tagsForm.tags.vars.prototype} %}{% endapply %}"
-                        > 
+                        >
                             {% for tag in tagsForm.tags %}
                                 {% include '@VSApplication/Pages/TagsWhitelistContext/add-tag-prototype.html.twig' with {'form': tag} %}
                             {% endfor %}
