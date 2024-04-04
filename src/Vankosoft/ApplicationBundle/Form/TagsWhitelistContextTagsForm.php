@@ -5,6 +5,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Vankosoft\ApplicationBundle\Form\Type\WhitelistContextTagType;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TagsWhitelistContextInterface;
 
 class TagsWhitelistContextTagsForm extends AbstractType
@@ -13,7 +14,7 @@ class TagsWhitelistContextTagsForm extends AbstractType
     {
         $builder
             ->add( 'tags', CollectionType::class, [
-                'entry_type'   => ProjectAttributeType::class,
+                'entry_type'   => WhitelistContextTagType::class,
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'prototype'    => true,
