@@ -1,3 +1,13 @@
+1.10.198	|	Release date: **06.04.2024**
+============================================
+* New Features:
+  - Improve Creating of Vankosoft Issue Form.
+  - Add a Form Trait to Use for FOS CKEditor Configuration.
+  - Use CKEditor Config Trait in ProjectIssueForm .
+  - Use CKEditor Config Trait in All Forms that use CKEditorType.
+  - Improve CKEditor File Browse Config.
+
+
 1.10.197	|	Release date: **05.04.2024**
 ============================================
 * New Features:
