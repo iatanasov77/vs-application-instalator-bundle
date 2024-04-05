@@ -13,15 +13,10 @@ class VankosoftIssueController extends AbstractController
     /** @var ProjectIssue */
     private $vsProject;
     
-    /** @var RepositoryInterface */
-    private $tagsWhitelistContextRepository;
-    
     public function __construct(
-        ProjectIssue $vsProject,
-        RepositoryInterface $tagsWhitelistContextRepository
+        ProjectIssue $vsProject
     ) {
-        $this->vsProject                        = $vsProject;
-        $this->tagsWhitelistContextRepository   = $tagsWhitelistContextRepository;
+        $this->vsProject    = $vsProject;
     }
     
     public function indexAction( Request $request ): Response
@@ -36,7 +31,7 @@ class VankosoftIssueController extends AbstractController
     
     public function createAction( Request $request ): Response
     {
-        $tagsContext    = $this->tagsWhitelistContextRepository->findByTaxonCode( 'project-issue-labels' );
+        $labelsWhitelist    = $this->vsProject->getIssueLabelWhitelist();
         
         //$issue = $this->vsProject->createIssue();
         $form           = $this->createForm( ProjectIssueForm::class );
@@ -56,20 +51,20 @@ class VankosoftIssueController extends AbstractController
         }
         
         return $this->render( '@VSApplication/Pages/ProjectIssues/create.html.twig', [
-            'form'      => $form,
-            'itemId'    => 0,
+            'form'              => $form,
+            'itemId'            => 0,
             
-            'labelsWhitelist'   => $tagsContext->getTagsArray(),
+            'labelsWhitelist'   => $labelsWhitelist,
         ]);
     }
     
     public function updateAction( $id, Request $request ): Response
     {
-        $response       = $this->vsProject->getIssue( intval( $id ) );
-        $tagsContext    = $this->tagsWhitelistContextRepository->findByTaxonCode( 'project-issue-labels' );
+        $response           = $this->vsProject->getIssue( intval( $id ) );
+        $labelsWhitelist    = $this->vsProject->getIssueLabelWhitelist();
         
         //$issue  = $this->vsProject->getIssue( $id );
-        $form           = $this->createForm( ProjectIssueForm::class, $response );
+        $form               = $this->createForm( ProjectIssueForm::class, $response );
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {
             $formData   = $form->getData();
@@ -86,10 +81,10 @@ class VankosoftIssueController extends AbstractController
         }
         
         return $this->render( '@VSApplication/Pages/ProjectIssues/update.html.twig', [
-            'form'      => $form,
-            'itemId'    => $id,
+            'form'              => $form,
+            'itemId'            => $id,
             
-            'labelsWhitelist'   => $tagsContext->getTagsArray(),
+            'labelsWhitelist'   => $labelsWhitelist,
         ]);
     }
     
