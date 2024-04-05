@@ -12,9 +12,12 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Vankosoft\ApplicationBundle\Component\Application\ProjectIssue;
+use Vankosoft\CmsBundle\Form\Traits\FosCKEditor4Config;
 
 class ProjectIssueForm extends AbstractType
 {
+    use FosCKEditor4Config;
+    
     public function buildForm( FormBuilderInterface $builder, array $options ): void
     {
        $builder
@@ -56,59 +59,12 @@ class ProjectIssueForm extends AbstractType
     {
         parent::configureOptions( $resolver );
         
-        $resolver
-            ->setDefaults([
-                'csrf_protection'   => false,
-                
-                // CKEditor Options
-                'ckeditor_uiColor'              => '#ffffff',
-                'ckeditor_toolbar'              => 'full',
-                'ckeditor_extraPlugins'         => '',
-                'ckeditor_removeButtons'        => '',
-                'ckeditor_allowedContent'       => false,
-                'ckeditor_extraAllowedContent'  => '*[*]{*}(*)',
-            ])
-            
-            ->setDefined([
-                // CKEditor Options
-                'ckeditor_uiColor',
-                'ckeditor_toolbar',
-                'ckeditor_extraPlugins',
-                'ckeditor_removeButtons',
-                'ckeditor_allowedContent',
-                'ckeditor_extraAllowedContent',
-            ])
-            
-            ->setAllowedTypes( 'ckeditor_uiColor', 'string' )
-            ->setAllowedTypes( 'ckeditor_toolbar', 'string' )
-            ->setAllowedTypes( 'ckeditor_extraPlugins', 'string' )
-            ->setAllowedTypes( 'ckeditor_removeButtons', 'string' )
-            ->setAllowedTypes( 'ckeditor_allowedContent', ['boolean', 'string'] )
-            ->setAllowedTypes( 'ckeditor_extraAllowedContent', 'string' )
-        ;
+        $resolver->setDefaults( ['csrf_protection'   => false] );
+        $this->onfigureCkEditorOptions( $resolver );
     }
     
     public function getName()
     {
         return 'vs_application_project_issue';
-    }
-    
-    protected function ckEditorConfig( array $options ): array
-    {
-        $ckEditorConfig = [
-            'uiColor'                           => $options['ckeditor_uiColor'],
-            'toolbar'                           => $options['ckeditor_toolbar'],
-            'extraPlugins'                      => array_map( 'trim', explode( ',', $options['ckeditor_extraPlugins'] ) ),
-            'removeButtons'                     => $options['ckeditor_removeButtons'],
-        ];
-        
-        $ckEditorAllowedContent = (bool)$options['ckeditor_allowedContent'];
-        if ( $ckEditorAllowedContent ) {
-            $ckEditorConfig['allowedContent']       = $ckEditorAllowedContent;
-        } else {
-            $ckEditorConfig['extraAllowedContent']  = $options['ckeditor_extraAllowedContent'];
-        }
-        
-        return $ckEditorConfig;
     }
 }
