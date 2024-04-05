@@ -3,6 +3,7 @@
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\FormInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 use Vankosoft\ApplicationBundle\Component\Application\ProjectIssue;
@@ -34,7 +35,7 @@ class VankosoftIssueController extends AbstractController
         $labelsWhitelist    = $this->vsProject->getIssueLabelWhitelist();
         
         //$issue = $this->vsProject->createIssue();
-        $form           = $this->createForm( ProjectIssueForm::class );
+        $form               = $this->createIssueForm();
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {
             $formData   = $form->getData();
@@ -64,7 +65,7 @@ class VankosoftIssueController extends AbstractController
         $labelsWhitelist    = $this->vsProject->getIssueLabelWhitelist();
         
         //$issue  = $this->vsProject->getIssue( $id );
-        $form               = $this->createForm( ProjectIssueForm::class, $response );
+        $form               = $this->createIssueForm( $response );
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {
             $formData   = $form->getData();
@@ -93,5 +94,17 @@ class VankosoftIssueController extends AbstractController
         $response   = $this->vsProject->deleteIssue( intval( $id ) );
         
         return $this->redirect( $this->generateUrl( 'vs_application_project_issues_index' ) );
+    }
+    
+    private function createIssueForm( ?array $issueData = null ): FormInterface
+    {
+        return $this->createForm( ProjectIssueForm::class, $issueData, [
+            'ckeditor_uiColor'              => $this->getParameter( 'vs_cms.form.pages.ckeditor_uiColor' ),
+            'ckeditor_toolbar'              => $this->getParameter( 'vs_cms.form.pages.ckeditor_toolbar' ),
+            'ckeditor_extraPlugins'         => $this->getParameter( 'vs_cms.form.pages.ckeditor_extraPlugins' ),
+            'ckeditor_removeButtons'        => $this->getParameter( 'vs_cms.form.pages.ckeditor_removeButtons' ),
+            'ckeditor_allowedContent'       => $this->getParameter( 'vs_cms.form.pages.ckeditor_allowedContent' ),
+            'ckeditor_extraAllowedContent'  => $this->getParameter( 'vs_cms.form.pages.ckeditor_extraAllowedContent' ),
+        ]);
     }
 }
