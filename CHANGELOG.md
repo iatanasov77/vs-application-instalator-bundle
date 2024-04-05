@@ -1,3 +1,9 @@
+1.10.197	|	Release date: **05.04.2024**
+============================================
+* New Features:
+  - Project Issues API Get Labels Whitelist.
+
+
 1.10.196	|	Release date: **04.04.2024**
 ============================================
 * New Features and Improvements:
