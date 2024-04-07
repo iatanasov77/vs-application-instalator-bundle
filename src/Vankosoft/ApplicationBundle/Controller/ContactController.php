@@ -44,6 +44,7 @@ class ContactController extends AbstractController
             'contactEmail'      => $this->params['contactEmail'],
             'showAddress'       => $this->params['showAddress'],
             'showPhone'         => $this->params['showPhone'],
+            'showMap'           => $this->params['showMap'],
             'googleMap'         => $this->params['googleMap'],
             'googleLargeMap'    => $this->params['googleLargeMap'],
         ]);
