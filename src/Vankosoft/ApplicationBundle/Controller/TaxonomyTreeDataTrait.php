@@ -106,7 +106,7 @@ trait TaxonomyTreeDataTrait
         }
     }
     
-    protected function bootstrapTreeviewData( $tree, &$data, $useTarget = true, $taxonId = null, array $leafs = [] ): void
+    protected function bootstrapTreeviewData( $tree, &$data, $useTarget = true, $taxonId = null, array $leafs = [] ): bool
     {
         foreach( $tree as $k => $node ) {
             $node->setCurrentLocale(  $node->getParent()->getCurrentLocale() );
@@ -148,7 +148,8 @@ trait TaxonomyTreeDataTrait
             }
         }
         
-        return $taxonId == $node->getId();
+        $expandParent   = $node ? $taxonId == $node->getId() : false;
+        return $expandParent;
     }
     
     protected function targetCount( $taxonId )
