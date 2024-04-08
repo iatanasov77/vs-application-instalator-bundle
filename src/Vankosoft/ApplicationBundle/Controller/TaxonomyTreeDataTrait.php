@@ -111,22 +111,22 @@ trait TaxonomyTreeDataTrait
         foreach( $tree as $k => $node ) {
             $node->setCurrentLocale(  $node->getParent()->getCurrentLocale() );
             
-            $data[$node->getId()]   = [
+            $data[$k]   = [
                 'text'  => $node->getTranslation()->getName(),
                 'tags'  => ['0']
             ];
             
             if ( $node->getChildren()->count() ) {
-                $data[$node->getId()]['nodes']  = [];
-                $expandParent   = $this->bootstrapTreeviewData( $node->getChildren(), $data[$node->getId()]['nodes'], $useTarget, $taxonId, $leafs );
+                $data[$k]['nodes']  = [];
+                $expandParent   = $this->bootstrapTreeviewData( $node->getChildren(), $data[$k]['nodes'], $useTarget, $taxonId, $leafs );
             } else {
                 $expandParent   = false;
                 foreach ( $leafs as $l => $leaf ) {
                     if ( $leaf->getOwner()->getTaxon()->getId() == $node->getId() ) {
-                        if ( ! isset( $data[$node->getId()]['nodes'] ) ) {
-                            $data[$node->getId()]['nodes']  = [];
+                        if ( ! isset( $data[$k]['nodes'] ) ) {
+                            $data[$k]['nodes']  = [];
                         }
-                        $data[$node->getId()]['nodes'][$l]    = [
+                        $data[$k]['nodes'][$l]    = [
                             'text'  => $leaf->getTreeTitle(),
                             'icon'  => 'treeLeaf',
                             'tags'  => [$leaf->getTreeTag()],
@@ -136,7 +136,7 @@ trait TaxonomyTreeDataTrait
                 }
             }
             
-            $data[$node->getId()]['state']   = [
+            $data[$k]['state']   = [
                 'checked'   => false,
                 'disabled'  => false,
                 'expanded'  => $expandParent,
