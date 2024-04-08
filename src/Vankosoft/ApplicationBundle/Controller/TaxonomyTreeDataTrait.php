@@ -1,12 +1,17 @@
 <?php namespace Vankosoft\ApplicationBundle\Controller;
 
+use Vankosoft\ApplicationBundle\Repository\TaxonomyRepository;
+use Vankosoft\ApplicationBundle\Repository\TaxonRepository;
+
 trait TaxonomyTreeDataTrait
 {
+    /** @var TaxonomyRepository */
     protected $taxonomyRepository;
     
+    /** @var TaxonRepository */
     protected $taxonRepository;
     
-    protected function gtreeTableData( $taxonomyId, $parentId, $displayRootTaxon = false ) : array
+    protected function gtreeTableData( $taxonomyId, $parentId, $displayRootTaxon = false ): array
     {
         $ertt       = $this->getTaxonRepository();
         $ert        = $this->getTaxonomyRepository();
@@ -31,7 +36,7 @@ trait TaxonomyTreeDataTrait
         return ['nodes' => $gtreeTableData];
     }
     
-    protected function easyuiComboTreeData( $taxonomyId, array $selectedValues = [], array $leafs = [], $displayRootTaxon = false ) : array
+    protected function easyuiComboTreeData( $taxonomyId, array $selectedValues = [], array $leafs = [], $displayRootTaxon = false ): array
     {
         $rootTaxon      = $this->getTaxonomyRepository()->find( $taxonomyId )->getRootTaxon();
         $data           = [];
@@ -51,7 +56,7 @@ trait TaxonomyTreeDataTrait
         return $data;
     }
     
-    protected function easyuiComboTreeDataProvideTaxons( array $taxons, array $selectedValues = [], array $leafs = [] ) : array
+    protected function easyuiComboTreeDataProvideTaxons( array $taxons, array $selectedValues = [], array $leafs = [] ): array
     {
         $data           = [];
         $this->buildEasyuiCombotreeData( $taxons, $data, $selectedValues, $leafs, empty( $leafs) );
@@ -59,7 +64,7 @@ trait TaxonomyTreeDataTrait
         return $data;
     }
     
-    protected function buildGtreeTableData( $taxons )
+    protected function buildGtreeTableData( $taxons ): array
     {
         $data   = [];
         foreach ( $taxons as $t ) {
@@ -74,7 +79,7 @@ trait TaxonomyTreeDataTrait
         return $data;
     }
     
-    protected function buildEasyuiCombotreeData( $tree, &$data, array $selectedValues, array $leafs, $notLeafs )
+    protected function buildEasyuiCombotreeData( $tree, &$data, array $selectedValues, array $leafs, $notLeafs ): void
     {
         $key    = 0;
         foreach( $tree as $node ) {
@@ -101,7 +106,7 @@ trait TaxonomyTreeDataTrait
         }
     }
     
-    protected function bootstrapTreeviewData( $tree, &$data, $useTarget = true, $taxonId = null, array $leafs = [] )
+    protected function bootstrapTreeviewData( $tree, &$data, $useTarget = true, $taxonId = null, array $leafs = [] ): void
     {
         foreach( $tree as $k => $node ) {
             $node->setCurrentLocale(  $node->getParent()->getCurrentLocale() );
@@ -151,23 +156,23 @@ trait TaxonomyTreeDataTrait
         return 0;
     }
     
-    protected function targetUrl( $taxonId )
+    protected function targetUrl( $taxonId ): string
     {
         return '';
     }
     
-    protected function targetUrlLeaf( $leafId )
+    protected function targetUrlLeaf( $leafId ): string
     {
         return '';
     }
     
-    protected function getTaxonomyRepository()
+    protected function getTaxonomyRepository(): TaxonomyRepository
     {
         return $this->taxonomyRepository;
         //return $this->get( 'vs_application.repository.taxonomy' );
     }
     
-    protected function getTaxonRepository()
+    protected function getTaxonRepository(): TaxonRepository
     {
         return $this->taxonRepository;
         //return $this->get( 'vs_application.repository.taxon' );
