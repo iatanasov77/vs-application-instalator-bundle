@@ -30,6 +30,25 @@ trait TaxonDescendentEntity
         $this->taxon = $taxon;
     }
     
+    public function isEnabled(): bool
+    {
+        return $this->taxon ? $this->taxon->enabled : false;
+    }
+    
+    /**
+     * @param bool $enabled
+     */
+    public function setEnabled( ?bool $enabled ): self
+    {
+        if ( ! $this->taxon ) {
+            // Create new taxon into the controller and set the properties passed from form
+            return $this;
+        }
+        $this->taxon->setEnabled( $enabled );
+        
+        return $this;
+    }
+    
     public function getSlug(): string
     {
         return $this->getCode();
