@@ -1,6 +1,7 @@
 <?php namespace Vankosoft\ApplicationBundle\Repository;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Vankosoft\ApplicationBundle\Repository\Interfaces\ApplicationRepositoryInterface
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
 class ApplicationRepository extends EntityRepository implements ApplicationRepositoryInterface

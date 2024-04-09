@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Vankosoft\ApplicationBundle\Component\Context\ApplicationContextInterface;
 use Vankosoft\ApplicationBundle\Component\Context\ApplicationNotFoundException;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
-use Vankosoft\ApplicationBundle\Repository\ApplicationRepositoryInterface;
+use Vankosoft\ApplicationBundle\Repository\Interfaces\ApplicationRepositoryInterface;
 
 /**
  * Tutorial: https://symfony.com/doc/current/profiler/data_collector.html

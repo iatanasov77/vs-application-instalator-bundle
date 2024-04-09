@@ -1,4 +1,4 @@
-<?php namespace Vankosoft\ApplicationBundle\Repository;
+<?php namespace Vankosoft\ApplicationBundle\Repository\Traits;
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 

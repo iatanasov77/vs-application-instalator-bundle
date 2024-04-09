@@ -5,7 +5,7 @@ use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
 use Vankosoft\ApplicationBundle\Component\Context\ApplicationContextInterface;
-use Vankosoft\ApplicationBundle\Repository\SettingsRepositoryInterface;
+use Vankosoft\ApplicationBundle\Repository\Interfaces\SettingsRepositoryInterface;
 
 class ThemeChangeListener
 {

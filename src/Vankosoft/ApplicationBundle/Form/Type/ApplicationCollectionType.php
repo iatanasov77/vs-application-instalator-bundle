@@ -6,7 +6,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use Vankosoft\ApplicationBundle\Repository\ApplicationRepositoryInterface;
+use Vankosoft\ApplicationBundle\Repository\Interfaces\ApplicationRepositoryInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
 final class ApplicationCollectionType extends AbstractType
