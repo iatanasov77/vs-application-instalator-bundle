@@ -1,5 +1,8 @@
 <?php namespace Vankosoft\ApplicationBundle\Repository\Traits;
 
+use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonDescendentInterface;
+use Vankosoft\ApplicationBundle\Model\Taxon;
+
 trait TaxonRepositoryTrait
 {
     public function find( $id, $lockMode = null, $lockVersion = null ): ?object
@@ -42,5 +45,22 @@ trait TaxonRepositoryTrait
     public function findBySlug( $slug )
     {
         return $this->findByTaxonCode( $slug );
+    }
+    
+    public function getPathAsString( TaxonDescendentInterface $category ): string
+    {
+        $categoryPath       = '';
+        $taxonRepository    = $this->_em->getRepository( Taxon::class );
+        
+        $categoryPathArray  = $taxonRepository->getPath( $category->getTaxon() );
+        \array_shift( $categoryPathArray );
+        foreach ( $categoryPathArray as $key => $pathPart ) {
+            $categoryPath   .= $pathPart->getName();
+            if ( $key !== \array_key_last( $categoryPathArray ) ) {
+                $categoryPath   .= ' / ';
+            }
+        }
+        
+        return $categoryPath;
     }
 }
