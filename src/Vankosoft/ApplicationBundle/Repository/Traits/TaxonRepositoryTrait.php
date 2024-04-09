@@ -38,4 +38,9 @@ trait TaxonRepositoryTrait
         
         return null;
     }
+    
+    public function findBySlug( $slug )
+    {
+        return $this->findByTaxonCode( $slug );
+    }
 }
