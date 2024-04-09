@@ -15,4 +15,10 @@ services:
         calls:
             - [ setRootDir, [ '%kernel.project_dir%' ] ]
             - [ throwException, [ '%vs_application.taxon_repository_throw_exception%' ] ]
+            
+    Vankosoft\ApplicationBundle\Repository\TaxonDescendentRepository:
+    
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+        
 

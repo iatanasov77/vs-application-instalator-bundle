@@ -50,7 +50,8 @@ trait TaxonRepositoryTrait
     public function getPathAsString( TaxonDescendentInterface $category ): string
     {
         $categoryPath       = '';
-        $taxonRepository    = $this->_em->getRepository( Taxon::class );
+        //$taxonRepository    = $this->_em->getRepository( Taxon::class );
+        $taxonRepository    = $this->container->get( 'vs_application.repository.taxon' );
         
         $categoryPathArray  = $taxonRepository->getPath( $category->getTaxon() );
         \array_shift( $categoryPathArray );
