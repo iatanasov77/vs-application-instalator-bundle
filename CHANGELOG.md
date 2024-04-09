@@ -1,3 +1,16 @@
+1.10.199	|	Release date: **09.04.2024**
+============================================
+* New Features and Improvements:
+  - Add More Options in Application Contact Controller.
+  - Improve TaxonomyTreeDataTrait Controller.
+  - Refactoring of ApplicationBundle Repository Namespace.
+  - Improve TaxonRepositoryTrait .
+  - Add Some Documentation Comments.
+  - Improve TaxonDescendentTrait for Models.
+  - Improve TaxonDescendentEntity for Entities.
+  - Improve TaxonDescendentInterface for Models.
+
+
 1.10.198	|	Release date: **06.04.2024**
 ============================================
 * New Features:
