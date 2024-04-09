@@ -18,7 +18,7 @@ class WhitelistContextTagType extends AbstractType
         $this->dataClass    = $dataClass;
     }
     
-    public function buildForm( FormBuilderInterface $builder, array $options )
+    public function buildForm( FormBuilderInterface $builder, array $options ): void
     {
         $builder
             ->add( 'id', HiddenType::class, ['mapped' => false] )
@@ -29,7 +29,7 @@ class WhitelistContextTagType extends AbstractType
         ;
     }
     
-    public function configureOptions( OptionsResolver $resolver )
+    public function configureOptions( OptionsResolver $resolver ): void
     {
         $resolver->setDefaults(array(
             'csrf_protection'   => false,
