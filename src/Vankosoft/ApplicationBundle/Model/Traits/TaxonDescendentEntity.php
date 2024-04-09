@@ -32,7 +32,7 @@ trait TaxonDescendentEntity
     
     public function isEnabled(): bool
     {
-        return $this->taxon ? $this->taxon->enabled : false;
+        return $this->taxon ? $this->taxon->isEnabled() : false;
     }
     
     /**
