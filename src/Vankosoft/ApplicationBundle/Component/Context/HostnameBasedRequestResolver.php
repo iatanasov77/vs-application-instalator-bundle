@@ -2,7 +2,7 @@
 
 use Symfony\Component\HttpFoundation\Request;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
-use Vankosoft\ApplicationBundle\Repository\ApplicationRepositoryInterface;
+use Vankosoft\ApplicationBundle\Repository\Interfaces\ApplicationRepositoryInterface;
 
 final class HostnameBasedRequestResolver implements RequestResolverInterface
 {

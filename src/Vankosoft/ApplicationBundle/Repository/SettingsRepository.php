@@ -3,6 +3,7 @@
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Vankosoft\ApplicationBundle\Repository\Interfaces\SettingsRepositoryInterface;
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\SettingsInterface;
 
