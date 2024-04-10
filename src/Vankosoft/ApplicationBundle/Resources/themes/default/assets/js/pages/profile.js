@@ -86,11 +86,6 @@ $( function()
     
     $( '#notification-show-modal' ).on( 'hide.bs.modal', function ( e )
     {
-        document.location = document.location;
-    });
-    
-    $( '#btnNotificationShowClose' ).on( 'click', function ( e )
-    {
-        document.location = document.location;
+        window.location.reload();
     });
 });
