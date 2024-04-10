@@ -59,6 +59,6 @@ $( function()
     $( '.btnShowNotification' ).on( 'click', function ( e )
     {
         let hasBody = $( this ).attr( 'data-notificationHasBody' );
-        console.log( hasBody );
+        console.log( Boolean( hasBody ) );
     });
 });
