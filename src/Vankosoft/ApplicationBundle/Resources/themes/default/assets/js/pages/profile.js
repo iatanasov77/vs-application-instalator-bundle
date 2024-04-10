@@ -51,4 +51,14 @@ $( function()
         window.scrollTo( 0, 0 );
     });
     
+    $( '#btnSetAllNotificationsReaded' ).on( 'click', function ( e )
+    {
+    
+    });
+    
+    $( '.btnShowNotification' ).on( 'click', function ( e )
+    {
+        let hasBody = $( this ).attr( 'data-notificationHasBody' );
+        alert( hasBody );
+    });
 });
