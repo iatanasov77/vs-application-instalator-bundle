@@ -59,6 +59,28 @@ $( function()
     $( '.btnShowNotification' ).on( 'click', function ( e )
     {
         let hasBody = $( this ).attr( 'data-notificationHasBody' );
-        console.log( Boolean( hasBody ) );
+        if ( Boolean( hasBody ) ) {
+            let notificationId = $( this ).attr( 'data-notificationId' );
+            
+            $.ajax({
+                type: 'GET',
+                url: VsPath( 'vs_users_notifications_show', { 'id': notificationId } ),
+                success: function ( data )
+                {
+                    $( '#notificationShow > div.card-body' ).html( data.response );
+                    
+                    /** Bootstrap 5 Modal Toggle */
+                    const myModal = new bootstrap.Modal('#notification-show-modal', {
+                        keyboard: false
+                    });
+                    myModal.show( $( '#notification-show-modal' ).get( 0 ) );
+                }, 
+                error: function( XMLHttpRequest, textStatus, errorThrown )
+                {
+                    alert( 'ERROR !!!' );
+                }
+            });
+            
+        }
     });
 });
