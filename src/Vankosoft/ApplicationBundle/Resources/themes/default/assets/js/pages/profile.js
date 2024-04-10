@@ -53,7 +53,18 @@ $( function()
     
     $( '#btnSetAllNotificationsReaded' ).on( 'click', function ( e )
     {
-    
+        $.ajax({
+            type: 'GET',
+            url: VsPath( 'vs_users_notifications_set_all_readed' ),
+            success: function ( data )
+            {
+                window.location.reload();
+            }, 
+            error: function( XMLHttpRequest, textStatus, errorThrown )
+            {
+                alert( 'ERROR !!!' );
+            }
+        });
     });
     
     $( '.btnShowNotification' ).on( 'click', function ( e )
