@@ -70,10 +70,15 @@ $( function()
                     $( '#notificationShow > div.card-body' ).html( data.response );
                     
                     /** Bootstrap 5 Modal Toggle */
-                    const myModal = new bootstrap.Modal('#notification-show-modal', {
+                    const myModal = new bootstrap.Modal( '#notification-show-modal', {
                         keyboard: false
                     });
-                    myModal.show( $( '#notification-show-modal' ).get( 0 ) );
+                    
+                    let myModalEl = $( '#notification-show-modal' ).get( 0 );
+                    myModalEl.addEventListener( 'hidden.bs.modal', function (event) {
+                        document.location = document.location;
+                    })
+                    myModal.show( myModalEl );
                 }, 
                 error: function( XMLHttpRequest, textStatus, errorThrown )
                 {
@@ -82,10 +87,5 @@ $( function()
             });
             
         }
-    });
-    
-    $( '#notification-show-modal' ).on( 'hide.bs.modal', function ( e )
-    {
-        document.location = document.location;
     });
 });
