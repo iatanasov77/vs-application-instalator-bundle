@@ -83,4 +83,9 @@ $( function()
             
         }
     });
+    
+    $( '#notification-show-modal' ).on( 'hide.bs.modal', function ( e )
+    {
+        document.location = document.location;
+    });
 });
