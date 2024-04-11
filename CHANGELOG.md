@@ -1,3 +1,9 @@
+1.10.201	|	Release date: **11.04.2024**
+============================================
+* Bug-Fixes:
+  - Add Issue Data on VS Project Delete Issue Method.
+
+
 1.10.200	|	Release date: **11.04.2024**
 ============================================
 * New Features and Improvements:
