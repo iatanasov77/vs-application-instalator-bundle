@@ -87,10 +87,14 @@ final class ProjectIssue extends ProjectApiClient
         $apiToken       = $this->login();
         $issuesEndpoint = $this->apiConnection['host'] . '/project-issues/' . $id;
         
+        $formData       = [
+            'projectSlug'   => $this->projectSlug,
+        ];
         $response = $this->httpClient->request('DELETE', $issuesEndpoint, [
             'headers'   => [
                 'Authorization' => 'Bearer ' . $apiToken,
-            ]
+            ],
+            'json'      => $formData,
         ]);
         
         return $this->processApiResponse( $response );
