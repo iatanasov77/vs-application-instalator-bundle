@@ -12,14 +12,10 @@ use Vankosoft\ApplicationBundle\EventSubscriber\Mapping\Event\Adapter\ORM as Log
 
 class LoggableListener extends BaseLoggableListener
 {
-    /**
-     * @var string $defaultLocale
-     */
+    /** @var string $defaultLocale */
     private $defaultLocale;
     
-    /**
-     * @var TranslatableOrmAdapter $transEa
-     */
+    /** @var TranslatableOrmAdapter $transEa */
     private $transEa;
     
     public function __construct( $defaultLocale )

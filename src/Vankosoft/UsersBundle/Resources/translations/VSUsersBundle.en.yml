@@ -86,7 +86,7 @@ vs_users:
         profile_details_header: 'Profile Info'
         profile_change_password_header: 'Change Password'
         profile_activity_header: 'Activity'
-        profile_activity_name: Activity name
+        profile_activity_name: Activity
         profile_newsletter_subscriptions: Newsletter Subscriptions
         profile_paid_subscriptions: Paid Subscriptions
         profile_paid_subscription_title: Title
@@ -141,7 +141,13 @@ vs_users:
         users_roles_update_form_title: User Role
         
         profile_notifications: 'Notifications'
+        profile_notification_clear_all: Clear All
+        profile_activity_clear_all: Clear All
+        profile_notification_set_all_readed: Set All as Readed
         profile_notification_name: 'Notification'
+        profile_notification_readed: 'readed'
+        profile_notification_unreaded: 'unreaded'
+        profile_show_notification_title: Notification Sent to You
         profile_overview: Overview
         profile_activities: Activities
         profile_edit_profile: Edit Profile
@@ -152,3 +158,10 @@ vs_users:
         reset_password_description: Enter your email and instructions will be sent to you!
         reset_password_i_remember: Wait, I remember my password...
         reset_password_click_here: Click here
+        
+        notification:
+            notification_details: Notification Details
+            from: From
+            date: Date
+            subject: Subject
+            content: Content

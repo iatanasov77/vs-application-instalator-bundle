@@ -51,4 +51,84 @@ $( function()
         window.scrollTo( 0, 0 );
     });
     
+    $( '#btnClearAllActivities' ).on( 'click', function ( e )
+    {
+        $.ajax({
+            type: 'GET',
+            url: VsPath( 'vs_users_activities_clear_all' ),
+            success: function ( data )
+            {
+                window.location.reload();
+            }, 
+            error: function( XMLHttpRequest, textStatus, errorThrown )
+            {
+                alert( 'ERROR !!!' );
+            }
+        });
+    });
+    
+    $( '#btnClearAllNotifications' ).on( 'click', function ( e )
+    {
+        $.ajax({
+            type: 'GET',
+            url: VsPath( 'vs_users_notifications_clear_all' ),
+            success: function ( data )
+            {
+                window.location.reload();
+            }, 
+            error: function( XMLHttpRequest, textStatus, errorThrown )
+            {
+                alert( 'ERROR !!!' );
+            }
+        });
+    });
+    
+    $( '#btnSetAllNotificationsReaded' ).on( 'click', function ( e )
+    {
+        $.ajax({
+            type: 'GET',
+            url: VsPath( 'vs_users_notifications_set_all_readed' ),
+            success: function ( data )
+            {
+                window.location.reload();
+            }, 
+            error: function( XMLHttpRequest, textStatus, errorThrown )
+            {
+                alert( 'ERROR !!!' );
+            }
+        });
+    });
+    
+    $( '.btnShowNotification' ).on( 'click', function ( e )
+    {
+        let hasBody = $( this ).attr( 'data-notificationHasBody' );
+        if ( Boolean( hasBody ) ) {
+            let notificationId = $( this ).attr( 'data-notificationId' );
+            
+            $.ajax({
+                type: 'GET',
+                url: VsPath( 'vs_users_notifications_show', { 'id': notificationId } ),
+                success: function ( data )
+                {
+                    $( '#notificationShow > div.card-body' ).html( data.response );
+                    
+                    /** Bootstrap 5 Modal Toggle */
+                    const myModal = new bootstrap.Modal('#notification-show-modal', {
+                        keyboard: false
+                    });
+                    myModal.show( $( '#notification-show-modal' ).get( 0 ) );
+                }, 
+                error: function( XMLHttpRequest, textStatus, errorThrown )
+                {
+                    alert( 'ERROR !!!' );
+                }
+            });
+            
+        }
+    });
+    
+    $( '#notification-show-modal' ).on( 'hide.bs.modal', function ( e )
+    {
+        window.location.reload();
+    });
 });
