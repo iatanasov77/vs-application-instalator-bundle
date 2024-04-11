@@ -1,3 +1,16 @@
+1.10.200	|	Release date: **11.04.2024**
+============================================
+* New Features and Improvements:
+  - Update All Forms about New Symfony Interfaces.
+  - Improve User Profile View Page.
+  - Create User Notification Modal to Display Notification Body.
+  - User Profile Handle Button 'SetAllNotificationsReaded'.
+  - Improve Top Bar Notifications Menu.
+  - Make Profile Tabs Scrollable.
+  - Add a Feature in User Profile to Clear All Notifications and Activities.
+  - Improve Profile Notification Modal.
+
+
 1.10.199	|	Release date: **09.04.2024**
 ============================================
 * New Features and Improvements:
