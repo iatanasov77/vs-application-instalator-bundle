@@ -65,7 +65,9 @@ EOT
                             InstalationInfoInterface::VERSION_UNDEFINED;
         
         if ( $currentVersion === InstalationInfoInterface::VERSION_UNDEFINED ) {
-            return;
+            
+            
+            return Command::FAILURE;
         }
         
         $repo           = $this->get( 'vs_application_instalator.repository.instalation_info' );
