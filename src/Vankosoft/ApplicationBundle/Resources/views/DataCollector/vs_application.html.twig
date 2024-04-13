@@ -11,22 +11,23 @@
     {% endset %}
 
     {% set text %}
-        {# this is the content displayed when hovering the mouse over
-           the toolbar panel #}
-        <div class="sf-toolbar-info-group">
-            <div class="sf-toolbar-info-piece border-bottom">
+        {# this is the content displayed when hovering the mouse over the toolbar panel #}
+        <div class="sf-toolbar-info-group border-bottom">
+            <div class="sf-toolbar-info-piece">
                 <b>{{ 'vs_application.data_collector.title' | trans( {},'VSApplicationBundle' ) }} - {{ collector.projectType }}</b>
                 <span><a href="http://vankosoft.org">{{ collector.version }}</a></span>
-                {% if collector.projectVersion %}
-                    <br />
+                
+            </div>
+            {% if collector.projectVersion %}
+                <div class="sf-toolbar-info-piece">
                     <b>{{ 'vs_application.data_collector.project_version' | trans( {},'VSApplicationBundle' ) }}: </b>
                     <span><a href="http://vankosoft.org">{{ collector.projectVersion }}</a></span>
-                {% endif %}
-            </div>
-            <div class="sf-toolbar-info-piece">&nbsp;</div>
+                </div>
+            {% endif %}
         </div>
 
         <div class="sf-toolbar-info-group">
+            <div class="sf-toolbar-info-piece">&nbsp;</div>
             <div class="sf-toolbar-info-piece">
                 <b>{{ 'vs_application.data_collector.extensions' | trans( {},'VSApplicationBundle' ) }}</b>
                 {% for extension in collector.extensions %}
