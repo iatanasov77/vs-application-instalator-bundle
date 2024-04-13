@@ -7,6 +7,6 @@ class InstalationInfoRepository extends EntityRepository implements InstalationI
 {
     public function getLatestInstallation() : ?InstalationInfoInterface
     {
-        $this->findOneBy( [], ['id' => 'DESC'] );
+        return $this->findOneBy( [], ['id' => 'DESC'] );
     }
 }
