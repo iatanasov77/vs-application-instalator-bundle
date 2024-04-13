@@ -13,7 +13,6 @@ use Vankosoft\ApplicationInstalatorBundle\Installer\Executor\CommandExecutor;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
-
     /** @var CommandExecutor */
     protected $commandExecutor;
     
