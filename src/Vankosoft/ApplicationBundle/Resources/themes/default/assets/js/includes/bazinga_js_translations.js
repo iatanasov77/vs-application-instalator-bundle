@@ -4,7 +4,10 @@ import { VsPath } from '../includes/fos_js_routes.js';
 import Translator from 'bazinga-translator';
 
 var jsonTranslations    = {
-    'VSApplicationBundle': {}
+    'VSApplicationBundle': {},
+    'VSApplicationInstalatorBundle': {},
+    'VSCmsBundle': {},
+    'VSUsersBundle': {}
 };
 
 export function VsLoadTranslations( domains )
