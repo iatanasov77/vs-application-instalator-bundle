@@ -1,8 +1,8 @@
 {% if widget.isActive %}
-    {% if installationInfo %}
+    {% if widget.params.installationInfo %}
         <li class="nav-divider">
             {{ 'vs_application.menu.project_version' | trans( {},'VSApplicationBundle' ) }}: 
-            {{ installationInfo.version }}
+            {{ widget.params.installationInfo.version }}
         </li>
     {% endif %}
     
