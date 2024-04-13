@@ -80,6 +80,7 @@ services:
     Vankosoft\ApplicationBundle\EventListener\Widgets\ApplicationsMenuWidget:
         arguments:
             - '@vs_application.repository.application'
+            - '@vs_application_instalator.repository.instalation_info'
         tags:
             - { name: kernel.event_listener, event: widget.start, method: builder }
 

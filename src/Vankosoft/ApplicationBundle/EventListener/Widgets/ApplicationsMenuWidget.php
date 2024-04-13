@@ -13,9 +13,13 @@ class ApplicationsMenuWidget implements WidgetLoaderInterface
     /** @var EntityRepository */
     private $applicationsRepository;
     
-    public function __construct( EntityRepository $applicationsRepository )
+    /** @var EntityRepository */
+    private $installationInfoRepository;
+    
+    public function __construct( EntityRepository $applicationsRepository, EntityRepository $installationInfoRepository )
     {
-        $this->applicationsRepository   = $applicationsRepository;
+        $this->applicationsRepository       = $applicationsRepository;
+        $this->installationInfoRepository   = $installationInfoRepository;
     }
     
     public function builder( WidgetEvent $event )
@@ -26,8 +30,11 @@ class ApplicationsMenuWidget implements WidgetLoaderInterface
         /** @var Item */
         $widgetItem = $widgetContainer->createWidgetItem( 'main-menu-applications' );
         if( $widgetItem ) {
+            $installationInfo   = $this->installationInfoRepository->findOneBy( [], ['id' => 'DESC'] );
+            
             $widgetItem->setTemplate( '@VSApplication/Widgets/applications_menu.html.twig', [
-                'applications'  => $this->applicationsRepository->findAll(),
+                'applications'      => $this->applicationsRepository->findAll(),
+                'installationInfo'  => $installationInfo,
             ]);
             
             // Add Widgets

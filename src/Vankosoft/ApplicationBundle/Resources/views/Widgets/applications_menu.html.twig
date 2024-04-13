@@ -1,28 +1,37 @@
-{% if widget.isActive and ( widget.params.applications | length ) > 1 %}
-    <li class="nav-divider">{{ 'vs_application.menu.application_links' | trans( {},'VSApplicationBundle' ) }}</li>
+{% if widget.isActive %}
+    {% if installationInfo %}
+        <li class="nav-divider">
+            {{ 'vs_application.menu.project_version' | trans( {},'VSApplicationBundle' ) }}: 
+            {{ installationInfo.version }}
+        </li>
+    {% endif %}
     
-    <li class="nav-item ">
-        <a class="nav-link"
-            data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#submenu-applications" aria-controls="submenu-applications"
-            href="javascript:;"
-        >
-            <span>{{ 'vs_application.menu.applications' | trans( {},'VSApplicationBundle' ) }}</span>
-        </a>
+    {% if ( widget.params.applications | length ) > 1 %}
+        <li class="nav-divider">{{ 'vs_application.menu.application_links' | trans( {},'VSApplicationBundle' ) }}</li>
         
-        <div id="submenu-applications" class="collapse submenu" style="">
-            <ul class="nav flex-column">
-                {% for oApplication in widget.params.applications %}
-                    {% if oApplication.code != 'admin-panel' %}
-                        <li class="nav-item ">
-                            <a class="nav-link main-menu-button" href="http://{{ oApplication.hostname }}" target="_blank">
-                                {{ oApplication.title }}
-                            </a>
-                       </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </div>
-    </li>
+        <li class="nav-item ">
+            <a class="nav-link"
+                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#submenu-applications" aria-controls="submenu-applications"
+                href="javascript:;"
+            >
+                <span>{{ 'vs_application.menu.applications' | trans( {},'VSApplicationBundle' ) }}</span>
+            </a>
+            
+            <div id="submenu-applications" class="collapse submenu" style="">
+                <ul class="nav flex-column">
+                    {% for oApplication in widget.params.applications %}
+                        {% if oApplication.code != 'admin-panel' %}
+                            <li class="nav-item ">
+                                <a class="nav-link main-menu-button" href="http://{{ oApplication.hostname }}" target="_blank">
+                                    {{ oApplication.title }}
+                                </a>
+                           </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </li>
+    {% endif %}
     
     <li class="nav-divider"><hr /></li>
 {% endif %}

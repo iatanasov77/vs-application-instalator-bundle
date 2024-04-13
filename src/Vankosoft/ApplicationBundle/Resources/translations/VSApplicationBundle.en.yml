@@ -56,6 +56,7 @@ vs_application:
         browse_files: Browse Files
         upload_a_file: Upload a File
         application_links: Application Links
+        project_version: Project Version
         applications: Applications
         cookie_consent_translations: Cookie Consent Translations
         create_new_cookie_consent_translation: Create a New Cookie Consent Translation
