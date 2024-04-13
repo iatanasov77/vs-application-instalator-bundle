@@ -17,7 +17,7 @@
             <div class="sf-toolbar-info-piece border-bottom">
                 <b>{{ 'vs_application.data_collector.title' | trans( {},'VSApplicationBundle' ) }} - {{ collector.projectType }}</b>
                 <span><a href="http://vankosoft.org">{{ collector.version }}</a></span>
-                {% if projectVersion %}
+                {% if collector.projectVersion %}
                     <br />
                     <b>{{ 'vs_application.data_collector.project_version' | trans( {},'VSApplicationBundle' ) }}: </b>
                     <span><a href="http://vankosoft.org">{{ collector.projectVersion }}</a></span>
