@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 use Vankosoft\ApplicationBundle\Component\Application\Kernel;
 use Vankosoft\ApplicationBundle\Component\Application\Project;
+use Vankosoft\ApplicationInstalatorBundle\Repository\InstalationInfoRepositoryInterface;
 
 /**
  * Tutorial: https://symfony.com/doc/current/profiler/data_collector.html
@@ -24,6 +25,9 @@ final class VsApplicationCollector extends DataCollector
     /** @var string */
     private $version;
     
+    /** @var string */
+    private $projectVersion;
+    
     /** @var array */
     private $bundles;
     
@@ -33,6 +37,7 @@ final class VsApplicationCollector extends DataCollector
     public function __construct(
         Project $projectType,
         RepositoryInterface $localesRepository,
+        InstalationInfoRepositoryInterface $installationInfoRepository,
         string $version,
         array $bundles,
         string $defaultLocaleCode
@@ -42,6 +47,11 @@ final class VsApplicationCollector extends DataCollector
         $this->version              = $version;
         $this->bundles              = $bundles;
         $this->defaultLocaleCode    = $defaultLocaleCode;
+        
+        $instalationInfo            = $installationInfoRepository->getLatestInstallation();
+        if ( $instalationInfo ) {
+            $this->projectVersion   = $instalationInfo->getVersion();
+        }
     }
     
     public function getProjectType(): string
@@ -52,6 +62,11 @@ final class VsApplicationCollector extends DataCollector
     public function getVersion()
     {
         return $this->data['version'];
+    }
+    
+    public function getProjectVersion()
+    {
+        return $this->data['projectVersion'];
     }
     
     public function getExtensions(): array
@@ -95,6 +110,7 @@ final class VsApplicationCollector extends DataCollector
         $this->data = [
             'project_type'          => $this->projectType->projectType(),
             'version'               => $this->version,
+            'projectVersion'        => $this->projectVersion,
             'default_locale_code'   => $this->defaultLocaleCode,
             'locale_code'           => $currentLocale,
             'locales'               => $locales,

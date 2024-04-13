@@ -1,6 +1,7 @@
 <?php namespace Vankosoft\ApplicationBundle\EventListener\Widgets;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Vankosoft\ApplicationBundle\Repository\Interfaces\ApplicationRepositoryInterface;
+use Vankosoft\ApplicationInstalatorBundle\Repository\InstalationInfoRepositoryInterface;
 use Vankosoft\ApplicationBundle\Component\Widget\Widget;
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\Item;
 use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
@@ -10,14 +11,16 @@ use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
  */
 class ApplicationsMenuWidget implements WidgetLoaderInterface
 {
-    /** @var EntityRepository */
+    /** @var ApplicationRepositoryInterface */
     private $applicationsRepository;
     
-    /** @var EntityRepository */
+    /** @var InstalationInfoRepositoryInterface */
     private $installationInfoRepository;
     
-    public function __construct( EntityRepository $applicationsRepository, EntityRepository $installationInfoRepository )
-    {
+    public function __construct(
+        ApplicationRepositoryInterface $applicationsRepository,
+        InstalationInfoRepositoryInterface $installationInfoRepository
+    ) {
         $this->applicationsRepository       = $applicationsRepository;
         $this->installationInfoRepository   = $installationInfoRepository;
     }
@@ -30,7 +33,7 @@ class ApplicationsMenuWidget implements WidgetLoaderInterface
         /** @var Item */
         $widgetItem = $widgetContainer->createWidgetItem( 'main-menu-applications' );
         if( $widgetItem ) {
-            $installationInfo   = $this->installationInfoRepository->findOneBy( [], ['id' => 'DESC'] );
+            $installationInfo   = $this->installationInfoRepository->getLatestInstallation();
             
             $widgetItem->setTemplate( '@VSApplication/Widgets/applications_menu.html.twig', [
                 'applications'      => $this->applicationsRepository->findAll(),

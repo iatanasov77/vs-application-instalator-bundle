@@ -3,6 +3,7 @@ vs_application:
         applications: Applications
         change: change
         title: Vankosoft Application
+        project_version: Проект Версия
         extensions: Extensions
         locales: Locales
     
@@ -56,6 +57,7 @@ vs_application:
         browse_files: Преглед на Файлове
         upload_a_file: Добави Файл
         application_links: Приложения Връзки
+        project_version: Проект Версия
         applications: Приложения
         cookie_consent_translations: Преводи на съгласие за бисквитки
         create_new_cookie_consent_translation: Създаване Превод на съгласие за бисквитки

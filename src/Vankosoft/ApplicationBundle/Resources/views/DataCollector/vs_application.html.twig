@@ -16,7 +16,12 @@
         <div class="sf-toolbar-info-group">
             <div class="sf-toolbar-info-piece border-bottom">
                 <b>{{ 'vs_application.data_collector.title' | trans( {},'VSApplicationBundle' ) }} - {{ collector.projectType }}</b>
-                <span><a href="https://sylius.com">{{ collector.version }}</a></span>
+                <span><a href="http://vankosoft.org">{{ collector.version }}</a></span>
+                {% if projectVersion %}
+                    <br />
+                    <b>{{ 'vs_application.data_collector.project_version' | trans( {},'VSApplicationBundle' ) }}: </b>
+                    <span><a href="http://vankosoft.org">{{ collector.projectVersion }}</a></span>
+                {% endif %}
             </div>
             <div class="sf-toolbar-info-piece">&nbsp;</div>
         </div>

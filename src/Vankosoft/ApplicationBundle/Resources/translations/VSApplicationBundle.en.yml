@@ -3,6 +3,7 @@ vs_application:
         applications: Applications
         change: change
         title: Vankosoft Application
+        project_version: Project Version
         extensions: Extensions
         locales: Locales
     
