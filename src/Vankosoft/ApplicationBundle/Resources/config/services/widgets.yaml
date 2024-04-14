@@ -23,7 +23,8 @@ services:
         arguments:
             - '@security.helper'
             - '@event_dispatcher'
-            - '@cache.app'
+            #- '@cache.app'
+            - '@vs_application.doctrine_dbal_cache'
             - '@security.token_storage'
             - '@doctrine'
             - '@vs_application.repository.widgets_registry'
@@ -34,7 +35,8 @@ services:
         class: Vankosoft\ApplicationBundle\Twig\Renderer\WidgetRenderer
         arguments:
             - '@twig'
-            - '@cache.app'
+            #- '@cache.app'
+            - '@vs_application.doctrine_dbal_cache'
             - '@security.token_storage'
             - '%vs_application.widgets.base_template%'
     
@@ -49,7 +51,8 @@ services:
         tags: ['controller.service_arguments']
         autowire: true
         arguments:
-            - '@cache.app'
+            #- '@cache.app'
+            - '@vs_application.doctrine_dbal_cache'
             - '@doctrine'
             - '@vs_application.widgets_container'
             - '@vs_application.repository.widgets_registry'

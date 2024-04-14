@@ -5,7 +5,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Contracts\Cache\CacheInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
@@ -16,7 +16,7 @@ use Vankosoft\ApplicationBundle\Component\Widget\WidgetInterface;
  */
 class WidgetsConfigsController extends AbstractController
 {
-    /** @var CacheInterface */
+    /** @var CacheItemPoolInterface */
     protected $cache;
     
     /** @var ManagerRegistry */
@@ -38,7 +38,7 @@ class WidgetsConfigsController extends AbstractController
     protected $usersRepository;
     
     public function __construct(
-        CacheInterface $cache,
+        CacheItemPoolInterface $cache,
         ManagerRegistry $doctrine,
         WidgetInterface $widgets,
         EntityRepository $widgetConfigRepository,
