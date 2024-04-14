@@ -64,8 +64,11 @@ class WidgetsConfigsController extends AbstractController
     
     public function load( $widgetId, Request $request ): Response
     {
-        $this->widgets->addWidget( $this->widgets->createWidgetItem( $widgetId ) );
-        $this->widgets->loadWidgets( $this->getUser() );
+        $widget = $this->widgets->createWidgetItem( $widgetId );
+        if ( $widget ) {
+            $this->widgets->addWidget( $widget );
+            $this->widgets->loadWidgets( $this->getUser() );
+        }
         
         // Response
         return $this->redirect( $request->headers->get( 'referer', $this->generateUrl( $this->getParameter( 'vs_application.widgets.return_route' ) ) ) );
