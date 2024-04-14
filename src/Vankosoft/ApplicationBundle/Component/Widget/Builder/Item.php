@@ -11,7 +11,7 @@ class Item implements ItemInterface
 {
     private $id;
     private string $name        = '';
-    private string $description = '';
+    private $description        = '';
     private string $content     = '';
     private string $template    = '';
     private array $params       = [];
@@ -55,12 +55,12 @@ class Item implements ItemInterface
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription( string $description ): ItemInterface
+    public function setDescription( ?string $description ): ItemInterface
     {
         $this->description = $description;
 

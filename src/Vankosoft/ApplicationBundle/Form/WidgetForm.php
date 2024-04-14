@@ -68,13 +68,14 @@ class WidgetForm extends AbstractForm
             ])
         
             ->add( 'name', TextType::class, [
-                'label' => 'vs_application.form.title',
-                'translation_domain' => 'VSApplicationBundle',
+                'label'                 => 'vs_application.form.title',
+                'translation_domain'    => 'VSApplicationBundle',
             ])
             
             ->add( 'description', TextareaType::class, [
-                'label' => 'vs_application.form.description',
-                'translation_domain' => 'VSApplicationBundle',
+                'label'                 => 'vs_application.form.description',
+                'translation_domain'    => 'VSApplicationBundle',
+                'required'              => false,
             ])
             
             ->add( 'allowedRoles', EntityType::class, [

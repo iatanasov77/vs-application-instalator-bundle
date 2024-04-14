@@ -19,12 +19,12 @@ interface ItemInterface
     /**
      * Get Item Description.
      */
-    public function getDescription(): string;
+    public function getDescription(): ?string;
 
     /**
      * Set Item Description.
      */
-    public function setDescription( string $description ): self;
+    public function setDescription( ?string $description ): self;
 
     /**
      * Get Item Content.
