@@ -32,6 +32,9 @@ class Widget implements WidgetInterface
     protected $allowedRoles;
     
     /** @var bool */
+    protected $allowAnonymous = false;
+    
+    /** @var bool */
     protected $enabled = true;
     
     /** @var string */
@@ -137,6 +140,18 @@ class Widget implements WidgetInterface
         if ( $this->allowedRoles->contains( $allowedRole ) ) {
             $this->allowedRoles->removeElement( $allowedRole );
         }
+        
+        return $this;
+    }
+    
+    public function getAllowAnonymous(): ?bool
+    {
+        return $this->allowAnonymous;
+    }
+    
+    public function setAllowAnonymous( ?bool $allowAnonymous ): self
+    {
+        $this->allowAnonymous = (bool) $allowAnonymous;
         
         return $this;
     }

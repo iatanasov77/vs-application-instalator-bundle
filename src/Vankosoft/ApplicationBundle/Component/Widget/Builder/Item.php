@@ -28,6 +28,7 @@ class Item implements ItemInterface
     private $configProcess;
     private $order;
     private array $role     = [];
+    private bool $allowAnonymous    = false;
     private string $group   = '';
     private bool $active    = false;
     private int|bool $cacheExpires;
@@ -166,6 +167,18 @@ class Item implements ItemInterface
     {
         $this->role = $role;
 
+        return $this;
+    }
+    
+    public function getAllowAnonymous(): bool
+    {
+        return $this->allowAnonymous;
+    }
+    
+    public function setAllowAnonymous( bool $allow ): ItemInterface
+    {
+        $this->allowAnonymous = $allow;
+        
         return $this;
     }
 
