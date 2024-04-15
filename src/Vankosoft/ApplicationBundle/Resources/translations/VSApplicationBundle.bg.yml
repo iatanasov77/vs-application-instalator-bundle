@@ -267,6 +267,9 @@ vs_application:
         widget: Уиджет
         load_widget: Зареди Уиджет
         
+        widget_user_info:
+            users_count: Users Count
+        
         contact_page:
             my_address: 'бул. "Ал. Стамболийски", Пловдив 4000'
             visit_us: Посетете Ни

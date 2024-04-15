@@ -267,6 +267,9 @@ vs_application:
         widget: Widget
         load_widget: Load Widget
         
+        widget_user_info:
+            users_count: Users Count
+        
         contact_page:
             my_address: 'bul. "Al. Stamboliiski", Plovdiv 4000'
             visit_us: Visit us
