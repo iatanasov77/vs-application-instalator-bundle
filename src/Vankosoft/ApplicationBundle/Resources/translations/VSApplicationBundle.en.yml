@@ -102,6 +102,7 @@ vs_application:
         description: 'Description'
         group_label: Group
         group_placeholder: '-- Choose a Group --'
+        allowed_users: Allowed Users
         allowed_roles_label: Allowed Roles
         allowed_roles_placeholder: '-- Select Allowed Roles --'
         allow_anonymous: Allow Anonymous

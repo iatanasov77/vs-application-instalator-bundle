@@ -102,6 +102,7 @@ vs_application:
         description: 'Описание'
         group_label: Група
         group_placeholder: '-- Избери Група --'
+        allowed_users: Позволени Потребители
         allowed_roles_label: Позволени Потребителски Роли
         allowed_roles_placeholder: '-- Избери Потребителски Роли --'
         allow_anonymous: Позволи Анонимни
