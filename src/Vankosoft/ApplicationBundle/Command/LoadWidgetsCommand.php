@@ -13,7 +13,7 @@ use Vankosoft\ApplicationBundle\Component\Widget\WidgetInterface;
     description: 'Load widgets for all users.',
     hidden: false
 )]
-class LoadWidgetsCommand
+class LoadWidgetsCommand extends Command
 {
     /** @var RepositoryInterface */
     protected $usersRepository;
