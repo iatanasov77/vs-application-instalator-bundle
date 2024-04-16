@@ -90,6 +90,11 @@ class WidgetForm extends AbstractForm
                 // Combotree Makes Error on Chrome if field is required 
                 'required'              => false,
             ])
+            
+            ->add( 'allowAnonymous', CheckboxType::class, [
+                'label'                 => 'vs_application.form.allow_anonymous',
+                'translation_domain'    => 'VSApplicationBundle',
+            ])
         ;
     }
     

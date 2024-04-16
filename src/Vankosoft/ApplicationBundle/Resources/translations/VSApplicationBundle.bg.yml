@@ -104,6 +104,7 @@ vs_application:
         group_placeholder: '-- Избери Група --'
         allowed_roles_label: Позволени Потребителски Роли
         allowed_roles_placeholder: '-- Избери Потребителски Роли --'
+        allow_anonymous: Позволи Анонимни
         tags: 'Тагове'
         parent: 'Родител'
         parent_category: 'Родителска Категория'

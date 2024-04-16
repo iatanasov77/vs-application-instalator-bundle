@@ -104,6 +104,7 @@ vs_application:
         group_placeholder: '-- Choose a Group --'
         allowed_roles_label: Allowed Roles
         allowed_roles_placeholder: '-- Select Allowed Roles --'
+        allow_anonymous: Allow Anonymous
         tags: 'Tags'
         parent: 'Parent'
         parent_category: 'Parent Category'
