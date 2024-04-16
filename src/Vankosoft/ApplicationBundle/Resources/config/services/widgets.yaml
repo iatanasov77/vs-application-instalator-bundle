@@ -67,6 +67,14 @@ services:
             - '@vs_application.repository.widget'
             - '@vs_users.repository.user_roles'
             
+    vs_application.command.load_widgets:
+        class: Vankosoft\ApplicationBundle\Command\LoadWidgetsCommand
+        arguments:
+            - '@vs_users.repository.users'
+            - '@vs_application.widgets_container'
+        tags:
+            - 'console.command'
+            
     ###################################################################
     # Load Widgets
     ###################################################################
