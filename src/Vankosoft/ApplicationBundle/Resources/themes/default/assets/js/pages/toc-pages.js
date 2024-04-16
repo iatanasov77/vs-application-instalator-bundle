@@ -46,7 +46,7 @@ $( function ()
             url: VsPath( 'vs_cms_multipage_toc_page_edit', {'documentId': documentId, 'tocPageId': tocPageId} ),
             success: function( response )
             {
-                let modalTitle  = itemId == '0' ?
+                let modalTitle  = tocPageId == '0' ?
                                     _Translator.trans( 'vs_cms.modal.multipage_toc_page.create_title' ) :
                                     _Translator.trans( 'vs_cms.modal.multipage_toc_page.update_title' );
                                     

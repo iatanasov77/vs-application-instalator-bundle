@@ -9,6 +9,7 @@ services:
         arguments:
             - '@vs_application.project_type'
             - '@vs_application.repository.locale'
+            - '@vs_application_instalator.repository.instalation_info'
             - '%vs_application.version%'
             - '%kernel.bundles%'
             - '%locale%'

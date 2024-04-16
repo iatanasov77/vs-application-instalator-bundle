@@ -23,7 +23,8 @@ services:
         arguments:
             - '@security.helper'
             - '@event_dispatcher'
-            - '@cache.app'
+            #- '@cache.app'
+            - '@vs_application.doctrine_dbal_cache'
             - '@security.token_storage'
             - '@doctrine'
             - '@vs_application.repository.widgets_registry'
@@ -34,7 +35,8 @@ services:
         class: Vankosoft\ApplicationBundle\Twig\Renderer\WidgetRenderer
         arguments:
             - '@twig'
-            - '@cache.app'
+            #- '@cache.app'
+            - '@vs_application.doctrine_dbal_cache'
             - '@security.token_storage'
             - '%vs_application.widgets.base_template%'
     
@@ -49,7 +51,8 @@ services:
         tags: ['controller.service_arguments']
         autowire: true
         arguments:
-            - '@cache.app'
+            #- '@cache.app'
+            - '@vs_application.doctrine_dbal_cache'
             - '@doctrine'
             - '@vs_application.widgets_container'
             - '@vs_application.repository.widgets_registry'
@@ -63,6 +66,14 @@ services:
         arguments:
             - '@vs_application.repository.widget'
             - '@vs_users.repository.user_roles'
+            
+    vs_application.command.load_widgets:
+        class: Vankosoft\ApplicationBundle\Command\LoadWidgetsCommand
+        arguments:
+            - '@vs_users.repository.users'
+            - '@vs_application.widgets_container'
+        tags:
+            - 'console.command'
             
     ###################################################################
     # Load Widgets
@@ -80,6 +91,7 @@ services:
     Vankosoft\ApplicationBundle\EventListener\Widgets\ApplicationsMenuWidget:
         arguments:
             - '@vs_application.repository.application'
+            - '@vs_application_instalator.repository.instalation_info'
         tags:
             - { name: kernel.event_listener, event: widget.start, method: builder }
 

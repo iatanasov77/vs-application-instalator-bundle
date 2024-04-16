@@ -103,6 +103,7 @@ class Widget implements WidgetInterface
                             ->setDescription( $widget->getDescription() )
                             ->setActive( $widget->getActive() )
                             ->setRole( $widget->getAllowedRolesFromCollection() )
+                            ->setAllowAnonymous( $widget->getAllowAnonymous() )
                 ;
                 
                 return $widgetItem;

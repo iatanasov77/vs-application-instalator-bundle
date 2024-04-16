@@ -15,6 +15,7 @@ use Gedmo\Sluggable\Util as Sluggable;
 )]
 class RegenerateSlugsCommand extends Command
 {
+    /** @var ManagerRegistry */
     private $doctrine;
     
     public function __construct( ManagerRegistry $doctrine )

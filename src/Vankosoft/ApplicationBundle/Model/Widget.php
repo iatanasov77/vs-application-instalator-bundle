@@ -25,11 +25,14 @@ class Widget implements WidgetInterface
     /** @var string */
     protected $name;
     
-    /** @var string */
+    /** @var string | null */
     protected $description;
     
     /** @var Collection|UserRoleInterface[] */
     protected $allowedRoles;
+    
+    /** @var bool */
+    protected $allowAnonymous = false;
     
     /** @var bool */
     protected $enabled = true;
@@ -83,12 +86,12 @@ class Widget implements WidgetInterface
         return $this;
     }
     
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
     
-    public function setDescription( string $description ) : self
+    public function setDescription( ?string $description ) : self
     {
         $this->description = $description;
         
@@ -137,6 +140,18 @@ class Widget implements WidgetInterface
         if ( $this->allowedRoles->contains( $allowedRole ) ) {
             $this->allowedRoles->removeElement( $allowedRole );
         }
+        
+        return $this;
+    }
+    
+    public function getAllowAnonymous(): ?bool
+    {
+        return $this->allowAnonymous;
+    }
+    
+    public function setAllowAnonymous( ?bool $allowAnonymous ): self
+    {
+        $this->allowAnonymous = (bool) $allowAnonymous;
         
         return $this;
     }

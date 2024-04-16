@@ -4,12 +4,12 @@ services:
         autoconfigure: true
         public: true
     
-    vs_app.command.maintenance:
+    vs_application.command.maintenance:
         class: Vankosoft\ApplicationBundle\Command\MaintenanceModeCommand
         tags:
             - 'console.command'
 
-    vs_app.command.regenerate_slugs:
+    vs_application.command.regenerate_slugs:
         class: Vankosoft\ApplicationBundle\Command\RegenerateSlugsCommand
         tags:
             - 'console.command'

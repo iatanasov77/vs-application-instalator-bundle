@@ -3,6 +3,7 @@ vs_application:
         applications: Applications
         change: change
         title: Vankosoft Application
+        project_version: Проект Версия
         extensions: Extensions
         locales: Locales
     
@@ -56,6 +57,7 @@ vs_application:
         browse_files: Преглед на Файлове
         upload_a_file: Добави Файл
         application_links: Приложения Връзки
+        project_version: Проект Версия
         applications: Приложения
         cookie_consent_translations: Преводи на съгласие за бисквитки
         create_new_cookie_consent_translation: Създаване Превод на съгласие за бисквитки
@@ -100,8 +102,10 @@ vs_application:
         description: 'Описание'
         group_label: Група
         group_placeholder: '-- Избери Група --'
+        allowed_users: Позволени Потребители
         allowed_roles_label: Позволени Потребителски Роли
         allowed_roles_placeholder: '-- Избери Потребителски Роли --'
+        allow_anonymous: Позволи Анонимни
         tags: 'Тагове'
         parent: 'Родител'
         parent_category: 'Родителска Категория'
@@ -264,6 +268,9 @@ vs_application:
         widgets_update_title: Редакция Уиджет
         widget: Уиджет
         load_widget: Зареди Уиджет
+        
+        widget_user_info:
+            users_count: Users Count
         
         contact_page:
             my_address: 'бул. "Ал. Стамболийски", Пловдив 4000'

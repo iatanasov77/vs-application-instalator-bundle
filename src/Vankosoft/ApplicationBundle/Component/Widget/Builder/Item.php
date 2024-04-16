@@ -11,7 +11,7 @@ class Item implements ItemInterface
 {
     private $id;
     private string $name        = '';
-    private string $description = '';
+    private $description        = '';
     private string $content     = '';
     private string $template    = '';
     private array $params       = [];
@@ -28,6 +28,7 @@ class Item implements ItemInterface
     private $configProcess;
     private $order;
     private array $role     = [];
+    private bool $allowAnonymous    = false;
     private string $group   = '';
     private bool $active    = false;
     private int|bool $cacheExpires;
@@ -55,12 +56,12 @@ class Item implements ItemInterface
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription( string $description ): ItemInterface
+    public function setDescription( ?string $description ): ItemInterface
     {
         $this->description = $description;
 
@@ -166,6 +167,18 @@ class Item implements ItemInterface
     {
         $this->role = $role;
 
+        return $this;
+    }
+    
+    public function getAllowAnonymous(): bool
+    {
+        return $this->allowAnonymous;
+    }
+    
+    public function setAllowAnonymous( bool $allow ): ItemInterface
+    {
+        $this->allowAnonymous = $allow;
+        
         return $this;
     }
 

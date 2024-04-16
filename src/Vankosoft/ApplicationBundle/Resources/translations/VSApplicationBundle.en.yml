@@ -3,6 +3,7 @@ vs_application:
         applications: Applications
         change: change
         title: Vankosoft Application
+        project_version: Project Version
         extensions: Extensions
         locales: Locales
     
@@ -56,6 +57,7 @@ vs_application:
         browse_files: Browse Files
         upload_a_file: Upload a File
         application_links: Application Links
+        project_version: Project Version
         applications: Applications
         cookie_consent_translations: Cookie Consent Translations
         create_new_cookie_consent_translation: Create a New Cookie Consent Translation
@@ -100,8 +102,10 @@ vs_application:
         description: 'Description'
         group_label: Group
         group_placeholder: '-- Choose a Group --'
+        allowed_users: Allowed Users
         allowed_roles_label: Allowed Roles
         allowed_roles_placeholder: '-- Select Allowed Roles --'
+        allow_anonymous: Allow Anonymous
         tags: 'Tags'
         parent: 'Parent'
         parent_category: 'Parent Category'
@@ -264,6 +268,9 @@ vs_application:
         widgets_update_title: Edit Widget
         widget: Widget
         load_widget: Load Widget
+        
+        widget_user_info:
+            users_count: Users Count
         
         contact_page:
             my_address: 'bul. "Al. Stamboliiski", Plovdiv 4000'

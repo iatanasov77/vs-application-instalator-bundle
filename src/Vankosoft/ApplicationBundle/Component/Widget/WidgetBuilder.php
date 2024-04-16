@@ -63,12 +63,14 @@ class WidgetBuilder implements WidgetBuilderInterface
         // Output Widgets
         $outputWidget = [];
 
+        // getAllowAnonymous()
+        
         // Custom Items
         if ( $widgetId ) {
             foreach ( $widgetId as $id ) {
                 if ( isset( $widgets[$id] ) ) {
                     // Activate
-                    $widgets[$id]->setActive( $this->widgetConfig[$id]['status'] ?? false );
+                    $widgets[$id]->setActive( $this->widgetConfig[$id]['status'] ?? $widgets[$id]->getAllowAnonymous() );
 
                     // Set Widget Config
                     $widgets[$id]->setConfig( $this->widgetConfig[$id] ?? [] );
@@ -82,7 +84,7 @@ class WidgetBuilder implements WidgetBuilderInterface
 
         foreach ( $widgets as $widget ) {
             // Activate
-            $widget->setActive( $this->widgetConfig[$widget->getId()]['status'] ?? false );
+            $widget->setActive( $this->widgetConfig[$widget->getId()]['status'] ?? $widget->getAllowAnonymous() );
 
             // Set Widget Config
             $widget->setConfig( $this->widgetConfig[$widget->getId()] ?? [] );
