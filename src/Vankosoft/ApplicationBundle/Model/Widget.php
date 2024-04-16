@@ -25,7 +25,7 @@ class Widget implements WidgetInterface
     /** @var string */
     protected $name;
     
-    /** @var string */
+    /** @var string | null */
     protected $description;
     
     /** @var Collection|UserRoleInterface[] */
@@ -86,12 +86,12 @@ class Widget implements WidgetInterface
         return $this;
     }
     
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
     
-    public function setDescription( string $description ) : self
+    public function setDescription( ?string $description ) : self
     {
         $this->description = $description;
         
