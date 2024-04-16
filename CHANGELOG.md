@@ -1,3 +1,24 @@
+1.10.202	|	Release date: **16.04.2024**
+============================================
+* New Features and Improvements:
+  - Improve Installator InstalationInfo Model.
+  - Create an InstallationInfo Console Command.
+  - Improve AdminPanel Applications Menu.
+  - Improve VsApplication DataCollector.
+  - On Widget Model Make field 'description' not required.
+  - Change Widgets Cache with VsApplication DBAL Cache.
+  - Improve Test Widget UserInfo.
+  - Add Allow Anonymous Users Flag Into Widget Model.
+  - Use Allow Anonymous Users Flag Into Widget Builder.
+  - Create a Command to Load Widgets for All Users.
+* Bug-Fixes:
+  - Fix Document TOC Page Form View.
+  - Fix and Improve JS VsTranslator .
+  - Fix TOC Page Modal.
+  - Fix WidgetsConfigsController .
+  - Fix Widget Model.
+
+
 1.10.201	|	Release date: **11.04.2024**
 ============================================
 * Bug-Fixes:
