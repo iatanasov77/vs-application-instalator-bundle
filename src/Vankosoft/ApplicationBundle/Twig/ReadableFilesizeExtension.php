@@ -6,16 +6,11 @@ use Webmozart\Assert\Assert;
 
 final class ReadableFilesizeExtension extends AbstractExtension
 {
-    /**
-     * @return TwigFilter[]
-     */
+    /** @return TwigFilter[] */
     public function getFilters(): array
     {
         return [
-            new TwigFilter(
-                'readable_filesize',
-                [$this, 'readableFilesize']
-            ),
+            new TwigFilter( 'readable_filesize', [$this, 'readableFilesize'] ),
         ];
     }
     
