@@ -2,10 +2,12 @@
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use Webmozart\Assert\Assert;
+use Vankosoft\ApplicationBundle\Helper\TagsHelperTrait;
 
 final class VsTagsExtension extends AbstractExtension
 {
+    use TagsHelperTrait;
+    
     /** @return TwigFilter[] */
     public function getFilters(): array
     {
@@ -16,20 +18,6 @@ final class VsTagsExtension extends AbstractExtension
     
     public function decodeTags( ?string $tagsString ): ?string
     {
-        if( ! $tagsString ) {
-            return null;
-        }
-        
-        $tagsArray      = \json_decode( $tagsString, true );
-        $decodedTags    = '';
-        
-        foreach ( $tagsArray as $key => $tag ) {
-            $decodedTags    .= $tag['value'];
-            if ( $key !== \array_key_last( $tagsArray ) ) {
-                $decodedTags    .= ', ';
-            }
-        }
-        
-        return $decodedTags;
+        return $this->tagsToString( $tagsString );
     }
 }
