@@ -14,7 +14,7 @@ final class VsTagsExtension extends AbstractExtension
         ];
     }
     
-    public function decodeTags( string $tagsString ): string
+    public function decodeTags( ?string $tagsString ): string
     {
         Assert::string( $tagsString );
         
