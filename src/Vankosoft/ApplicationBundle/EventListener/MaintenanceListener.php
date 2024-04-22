@@ -43,7 +43,7 @@ final class MaintenanceListener
         RequestStack $requestStack,
         TokenStorageInterface $tokenStorage,
         ?int $applicationId = null,
-        ?string $applicationLayout
+        ?string $applicationLayout = null
     ) {
         $this->applicationId        = $applicationId;
         $this->applicationLayout    = $applicationLayout;
