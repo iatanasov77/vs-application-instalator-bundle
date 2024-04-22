@@ -11,24 +11,16 @@ use Vankosoft\ApplicationBundle\Component\Exception\SettingsException;
 
 class Settings
 {
-    /**
-     * @var ContainerInterface $container
-     */
+    /** @var ContainerInterface $container */
     private $container;
     
-    /**
-     * @var PhpArrayAdapter $cache
-     */
+    /** @var PhpArrayAdapter $cache */
     private $cache;
     
-    /**
-     * @var PropertyAccessor $propertyAccessor
-     */
+    /** @var PropertyAccessor $propertyAccessor */
     private $propertyAccessor;
     
-    /**
-     * @var array $settingsKeys
-     */
+    /** @var array $settingsKeys */
     private $settingsKeys;
     
     public function __construct( ContainerInterface $container )

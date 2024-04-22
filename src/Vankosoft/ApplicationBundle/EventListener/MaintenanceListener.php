@@ -62,9 +62,13 @@ final class MaintenanceListener
     //public function onKernelRequest( GetResponseEvent $event )
     public function onKernelRequest( RequestEvent $event )
     {
-        $request            = $event->getRequest();
-        $debug              = in_array( $this->container->get('kernel')->getEnvironment(), ['dev'] );
-        $settings           = $this->getSettingsManager()->getSettings( $this->applicationId );
+        $request    = $event->getRequest();
+        
+        $env        = $this->container->get( 'kernel' )->getEnvironment();
+        var_dump( $env ); die;
+        $debug      = \in_array( $env, ['dev'] );
+        
+        $settings   = $this->getSettingsManager()->getSettings( $this->applicationId );
         
         // If maintenance is active and in prod or test  environment and user is not admin
         if ( $settings['maintenanceMode'] ) {
