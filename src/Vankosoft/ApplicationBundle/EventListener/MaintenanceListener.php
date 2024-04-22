@@ -15,49 +15,43 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 use Vankosoft\ApplicationBundle\Twig\Alerts;
+use Vankosoft\UsersBundle\Model\UserInterface;
 
-class MaintenanceListener
+final class MaintenanceListener
 {
-    protected $container;
+    /** @var ContainerInterface */
+    private $container;
     
-    /**
-     * @var Environment $twig
-     */
-    protected $twig;
+    /** @var Environment $twig */
+    private $twig;
     
-    /**
-     * @var FlashBagInterface $flash
-     */
-    protected $flash;
+    /** @var RequestStack */
+    private $requestStack;
     
-    protected $user;
-    protected $applicationId;
-    protected $applicationLayout;
+    /** @var UserInterface */
+    private $user;
+    
+    /** @ int | null */
+    private $applicationId;
+    
+    /** @ string | null */
+    private $applicationLayout;
     
     public function __construct(
         ContainerInterface $container,
         Environment $twig,
         RequestStack $requestStack,
         TokenStorageInterface $tokenStorage,
-        int $applicationId = null,
+        ?int $applicationId = null,
         ?string $applicationLayout
     ) {
         $this->applicationId        = $applicationId;
         $this->applicationLayout    = $applicationLayout;
         $this->container            = $container;
         $this->twig                 = $twig;
+        $this->requestStack         = $requestStack;
         
-        $mainRequest                = $requestStack->getMainRequest();
-        if ( $mainRequest ) {
-            if ( $mainRequest->hasSession() ) {
-                $this->flash    = $mainRequest->getSession()->getFlashBag();
-            } else {
-                $session        = new Session();
-                $session->start();
-                
-                $mainRequest->setSession( $session );
-            }
-            
+        if ( $this->requestStack->getMainRequest() ) {
             $token  = $tokenStorage->getToken();
             if ( $token ) {
                 $this->user = $token->getUser();
@@ -68,6 +62,7 @@ class MaintenanceListener
     //public function onKernelRequest( GetResponseEvent $event )
     public function onKernelRequest( RequestEvent $event )
     {
+        $request            = $event->getRequest();
         $debug              = in_array( $this->container->get('kernel')->getEnvironment(), ['dev'] );
         $settings           = $this->getSettingsManager()->getSettings( $this->applicationId );
         
@@ -80,6 +75,7 @@ class MaintenanceListener
                 $maintenancePage    = $settings['maintenancePage'] ?
                                         $this->getPagesRepository()->find( $settings['maintenancePage'] ) :
                                         null;
+                
                 if ( $maintenancePage ) {
                     $event->setResponse( new Response( $this->renderMaintenancePage( $maintenancePage ), 503 ) );
                 } else {
@@ -88,9 +84,11 @@ class MaintenanceListener
                 
                 $event->stopPropagation();
             } else {
+                $flash  = $request->getSession()->getFlashBag();
+                
                 // Alerts::WARNINGS[]   = 'The System is in Maintenance Mode !';
-                if ( ! $this->flash->has( 'in-maintenance' ) ) { // Check if there is no Flash messages of type "in-maintenance"
-                    $this->flash->add( 'in-maintenance', 'The System is in Maintenance Mode !' );
+                if ( ! $flash->has( 'in-maintenance' ) ) { // Check if there is no Flash messages of type "in-maintenance"
+                    $flash->add( 'in-maintenance', 'The System is in Maintenance Mode !' );
                 }
             }
         }
