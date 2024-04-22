@@ -66,7 +66,7 @@ final class MaintenanceListener
         
 //         $env        = $this->container->get( 'kernel' )->getEnvironment();
 //         $debug      = \in_array( $env, ['dev'] );
-        $debug      = this->container->get( 'kernel' )->isDebug();
+        $debug      = $this->container->get( 'kernel' )->isDebug();
         
         $settings   = $this->getSettingsManager()->getSettings( $this->applicationId );
         
