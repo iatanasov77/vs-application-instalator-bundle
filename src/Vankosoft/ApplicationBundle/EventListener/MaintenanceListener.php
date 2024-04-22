@@ -64,9 +64,9 @@ final class MaintenanceListener
     {
         $request    = $event->getRequest();
         
-        $env        = $this->container->get( 'kernel' )->getEnvironment();
-        var_dump( $env ); die;
-        $debug      = \in_array( $env, ['dev'] );
+//         $env        = $this->container->get( 'kernel' )->getEnvironment();
+//         $debug      = \in_array( $env, ['dev'] );
+        $debug      = this->container->get( 'kernel' )->isDebug();
         
         $settings   = $this->getSettingsManager()->getSettings( $this->applicationId );
         
