@@ -23,8 +23,6 @@ parameters:
     
     vs_application.version: !php/const Vankosoft\ApplicationBundle\Component\Application\Kernel::VERSION
     vs_application.public_dir: "%kernel.project_dir%/public/admin-panel"
-    vs_application.settings.application_id: null
-    vs_application.settings.application_layout: null
     vs_application.supress_pdo_exception: false
     vs_application.page_categories.taxonomy_code: 'page-categories'
     vs_application.document_categories.taxonomy_code: 'document-categories'

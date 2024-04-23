@@ -11,7 +11,6 @@ services:
             - '@twig'
             - "@request_stack"
             - '@security.token_storage'
-            - '%vs_application.settings.application_id%'
-            - '%vs_application.settings.application_layout%'
+            - '@vs_application.context.application'
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.request', method: 'onKernelRequest' }

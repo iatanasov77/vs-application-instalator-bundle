@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+use Vankosoft\ApplicationBundle\Component\Context\ApplicationContextInterface;
 use Vankosoft\ApplicationBundle\Twig\Alerts;
 use Vankosoft\UsersBundle\Model\UserInterface;
 
@@ -31,25 +32,20 @@ final class MaintenanceListener
     /** @var UserInterface */
     private $user;
     
-    /** @ int | null */
-    private $applicationId;
-    
-    /** @ string | null */
-    private $applicationLayout;
+    /** @var ApplicationContextInterface */
+    private $applicationContext;
     
     public function __construct(
         ContainerInterface $container,
         Environment $twig,
         RequestStack $requestStack,
         TokenStorageInterface $tokenStorage,
-        ?int $applicationId = null,
-        ?string $applicationLayout = null
+        ApplicationContextInterface $applicationContext
     ) {
-        $this->applicationId        = $applicationId;
-        $this->applicationLayout    = $applicationLayout;
         $this->container            = $container;
         $this->twig                 = $twig;
         $this->requestStack         = $requestStack;
+        $this->applicationContext   = $applicationContext;
         
         if ( $this->requestStack->getMainRequest() ) {
             $token  = $tokenStorage->getToken();
@@ -69,16 +65,22 @@ final class MaintenanceListener
         $debug      = $this->container->get( 'kernel' )->isDebug();
         
         $settings   = $this->getSettingsManager()->getSettings( $this->applicationId );
+        //echo '<pre>'; var_dump( $settings ); die;
+        
+        $appSettings    = $this->applicationContext->getApplication()->getSettings();
+        if ( $appSettings->isEmpty() ) {
+            return;
+        }
+        $appSettings    = $appSettings[0];
+        //echo '<pre>'; var_dump( $appSettings ); die;
         
         // If maintenance is active and in prod or test  environment and user is not admin
-        if ( $settings['maintenanceMode'] ) {
+        if ( $appSettings->getMaintenanceMode() ) {
             if (
                 ( ! is_object( $this->user ) || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
                 && ! $debug
             ) {
-                $maintenancePage    = $settings['maintenancePage'] ?
-                                        $this->getPagesRepository()->find( $settings['maintenancePage'] ) :
-                                        null;
+                $maintenancePage    = $appSettings->getMaintenancePage();
                 
                 if ( $maintenancePage ) {
                     $event->setResponse( new Response( $this->renderMaintenancePage( $maintenancePage ), 503 ) );
@@ -113,7 +115,7 @@ final class MaintenanceListener
         return $this->twig->render( '@VSCms/Pages/Pages/show.html.twig',
             [
                 'page'              => $maintenancePage,
-                'applicationLayout' => $this->applicationLayout ?: '@VSApplication/layout.html.twig',
+                'applicationLayout' => '@VSApplication/layout.html.twig',
                 'inMainenance'      => true,
             ]
         );
