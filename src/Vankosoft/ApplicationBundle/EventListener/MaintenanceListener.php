@@ -64,15 +64,16 @@ final class MaintenanceListener
 //         $debug      = \in_array( $env, ['dev'] );
         $debug      = $this->container->get( 'kernel' )->isDebug();
         
-        $settings   = $this->getSettingsManager()->getSettings( $this->applicationId );
-        //echo '<pre>'; var_dump( $settings ); die;
-        
-        $appSettings    = $this->applicationContext->getApplication()->getSettings();
+        $application    = $this->applicationContext->getApplication();
+        $appSettings    = $application->getSettings();
         if ( $appSettings->isEmpty() ) {
             return;
         }
         $appSettings    = $appSettings[0];
         //echo '<pre>'; var_dump( $appSettings ); die;
+        
+        $settings   = $this->getSettingsManager()->getSettings( $application->getId() );
+        //echo '<pre>'; var_dump( $settings ); die;
         
         // If maintenance is active and in prod or test  environment and user is not admin
         if ( $appSettings->getMaintenanceMode() ) {
