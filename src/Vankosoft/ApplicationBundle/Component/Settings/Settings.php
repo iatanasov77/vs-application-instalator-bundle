@@ -141,7 +141,7 @@ final class Settings
         $generalizedSettings    = [];
         foreach( $this->settingsKeys as $key ) {
             $value  = $applicationSettings ? $this->propertyAccessor->getValue( $applicationSettings, $key ) : null;
-            if ( $value === null ) {
+            if ( $value === null || ( $key == 'maintenanceMode' && $value == false ) ) {
                 $value  = $this->propertyAccessor->getValue( $generalSettings, $key );
             }
             
