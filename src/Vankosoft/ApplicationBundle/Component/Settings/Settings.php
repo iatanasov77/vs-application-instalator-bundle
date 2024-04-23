@@ -61,7 +61,7 @@ final class Settings
         $applications  = $this->getApplicationRepository()->findAll();
         foreach ( $applications as $app ) {
             $settings   = $applicationId == $app->getId() || $applicationId == 0 ?
-                            $this->generalizeSettings( $applicationId ) : 
+                            $this->generalizeSettings( $app->getId() ) : 
                             $this->getSettings( $app->getId() );
             
             $allSettings["settings_application_{$app->getId()}"]  = json_encode( $settings );
