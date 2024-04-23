@@ -119,6 +119,7 @@ final class MaintenanceListener
             [
                 'page'              => $maintenancePage,
                 'applicationLayout' => '@VSApplication/layout.html.twig',
+                'siteLayout'        => '@VSApplication/layout.html.twig',
                 'inMainenance'      => true,
             ]
         );
