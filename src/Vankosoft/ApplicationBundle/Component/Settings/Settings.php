@@ -64,7 +64,12 @@ final class Settings
                             $this->generalizeSettings( $app->getId() ) : 
                             $this->getSettings( $app->getId() );
             
-            $allSettings["settings_application_{$app->getId()}"]  = json_encode( $settings );
+            $appCacheId = "settings_application_{$app->getId()}";
+            $allSettings[$appCacheId]  = json_encode( $settings );
+            
+            $appSettings    = $this->cache->getItem( $appCacheId );
+            $appSettings->set( $allSettings[$appCacheId] );
+            $this->cache->save( $appSettings );
         }
         
         // General Settings
