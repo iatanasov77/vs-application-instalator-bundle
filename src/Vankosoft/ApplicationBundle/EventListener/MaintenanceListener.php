@@ -115,7 +115,8 @@ final class MaintenanceListener
     
     private function renderMaintenancePage( $maintenancePage ): string
     {
-        return $this->twig->render( '@VSCms/Pages/Pages/show.html.twig',
+        //return $this->twig->render( '@VSCms/Pages/Pages/show.html.twig',
+        return $this->twig->render( '@VSApplication/MaintenancePages/cms_page.html.twig',
             [
                 'page'              => $maintenancePage,
                 'applicationLayout' => '@VSApplication/layout.html.twig',
