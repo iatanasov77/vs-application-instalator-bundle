@@ -8,4 +8,5 @@ services:
         class: Vankosoft\ApplicationBundle\Component\Settings\Settings
         arguments: 
             - '@service_container'
+            - '@vs_application.doctrine_dbal_cache'
 
