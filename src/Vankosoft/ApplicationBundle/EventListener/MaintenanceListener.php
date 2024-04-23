@@ -76,12 +76,14 @@ final class MaintenanceListener
         //echo '<pre>'; var_dump( $settings ); die;
         
         // If maintenance is active and in prod or test  environment and user is not admin
-        if ( $appSettings->getMaintenanceMode() ) {
+        if ( $settings['maintenanceMode'] ) {
+        //if ( $appSettings->getMaintenanceMode() ) {
             if (
                 ( ! is_object( $this->user ) || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
                 && ! $debug
             ) {
-                $maintenancePage    = $appSettings->getMaintenancePage();
+                $maintenancePage    = $this->getPagesRepository()->find( $settings['maintenancePage'] );
+                //$maintenancePage    = $appSettings->getMaintenancePage();
                 
                 if ( $maintenancePage ) {
                     $event->setResponse( new Response( $this->renderMaintenancePage( $maintenancePage ), 503 ) );
