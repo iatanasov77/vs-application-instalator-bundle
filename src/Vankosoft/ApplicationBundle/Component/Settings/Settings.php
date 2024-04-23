@@ -107,7 +107,12 @@ final class Settings
             $settings                                       = $this->getSettings( $app->getId() );
             $settings['maintenanceMode']                    = $maintenanceMode;
             
-            $allSettings["settings_application_{$app->getId()}"]  = json_encode( $settings );
+            $appCacheId = "settings_application_{$app->getId()}";
+            $allSettings[$appCacheId]  = json_encode( $settings );
+            
+            $appSettings    = $this->cache->getItem( $appCacheId );
+            $appSettings->set( $allSettings[$appCacheId] );
+            $this->cache->save( $appSettings );
         }
         
         // General Settings
