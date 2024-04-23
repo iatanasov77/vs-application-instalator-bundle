@@ -52,13 +52,18 @@ final class Settings
     
     public function saveSettings( $applicationId )
     {
-        $settingsCache  = $this->cache->getItem( 'settings_general' );
+        $cacheId    = $applicationId ? "settings_application_{$applicationId}" : 'settings_general';
+        
+        $settingsCache  = $this->cache->getItem( $cacheId );
         $allSettings    = [];
         
         // Applications Settings
         $applications  = $this->getApplicationRepository()->findAll();
         foreach ( $applications as $app ) {
-            $settings   = ( $applicationId == $app->getId() ) ? $this->generalizeSettings( $applicationId ) : $this->getSettings( $app->getId() );
+            $settings   = $applicationId == $app->getId() || $applicationId == 0 ?
+                            $this->generalizeSettings( $applicationId ) : 
+                            $this->getSettings( $app->getId() );
+            
             $allSettings["settings_application_{$app->getId()}"]  = json_encode( $settings );
         }
         
