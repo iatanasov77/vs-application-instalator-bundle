@@ -1,3 +1,11 @@
+1.10.204	|	Release date: **23.04.2024**
+============================================
+* New Features:
+  - Add some translations.
+  - Improve MaintenanceListener Service.
+  - Create a Maintenance Page.
+
+
 1.10.203	|	Release date: **17.04.2024**
 ============================================
 * New Features:

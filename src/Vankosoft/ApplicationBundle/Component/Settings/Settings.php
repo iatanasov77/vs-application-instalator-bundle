@@ -4,53 +4,33 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use Symfony\Component\Cache\Adapter\PhpArrayAdapter;
+use Psr\Cache\CacheItemPoolInterface;
+use Psr\Cache\InvalidArgumentException;
 
 use Vankosoft\ApplicationBundle\Component\Exception\SettingsException;
 
-class Settings
+final class Settings
 {
-    /**
-     * @var ContainerInterface $container
-     */
+    /** @var ContainerInterface $container */
     private $container;
     
-    /**
-     * @var PhpArrayAdapter $cache
-     */
+    /** @var CacheItemPoolInterface */
     private $cache;
     
-    /**
-     * @var PropertyAccessor $propertyAccessor
-     */
+    /** @var PropertyAccessor $propertyAccessor */
     private $propertyAccessor;
     
-    /**
-     * @var array $settingsKeys
-     */
+    /** @var array $settingsKeys */
     private $settingsKeys;
     
-    public function __construct( ContainerInterface $container )
+    public function __construct( ContainerInterface $container, CacheItemPoolInterface $cache )
     {
         $this->container        = $container;
         
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
         $this->settingsKeys     = ['maintenanceMode', 'maintenancePage', 'theme'];
         
-        // https://symfony.com/doc/current/components/cache/adapters/php_array_cache_adapter.html
-        //==========================================================================================
-        // This adapter requires turning on the opcache.enable php.ini setting.
-        /////////////////////////////////////////////////////////////////////////////////////////////
-        $cacheDir              = isset( $_ENV['DIR_VAR'] ) ? 
-                                    $_ENV['DIR_VAR'] . '/cache' : 
-                                    $this->container->getParameter( 'kernel.cache_dir' );
-        $this->cache            = new PhpArrayAdapter(
-            // single file where values are cached
-            $cacheDir . '/vankosoft_settings.cache',
-            // a backup adapter, if you set values after warmup
-            new FilesystemAdapter()
-        );
+        $this->cache            = $cache;
     }
     
     public function getSettings( $applicationId )
@@ -61,7 +41,8 @@ class Settings
         if ( ! $settingsCache->isHit() ) {
             $settings   = $applicationId ? $this->generalizeSettings( $applicationId ) : $this->generalSettings();
             
-            $this->cache->warmUp( [$cacheId => json_encode( $settings )] );
+            $settingsCache->set( \json_encode( $settings ) );
+            $this->cache->save( $settingsCache );
         } else {
             $settings   = json_decode( $settingsCache->get(), true );
         }
@@ -71,20 +52,32 @@ class Settings
     
     public function saveSettings( $applicationId )
     {
+        $cacheId    = $applicationId ? "settings_application_{$applicationId}" : 'settings_general';
+        
+        $settingsCache  = $this->cache->getItem( $cacheId );
         $allSettings    = [];
         
         // Applications Settings
         $applications  = $this->getApplicationRepository()->findAll();
         foreach ( $applications as $app ) {
-            $settings   = ( $applicationId == $app->getId() ) ? $this->generalizeSettings( $applicationId ) : $this->getSettings( $app->getId() );
-            $allSettings["settings_application_{$app->getId()}"]  = json_encode( $settings );
+            $settings   = $applicationId == $app->getId() || $applicationId == 0 ?
+                            $this->generalizeSettings( $app->getId() ) : 
+                            $this->getSettings( $app->getId() );
+            
+            $appCacheId = "settings_application_{$app->getId()}";
+            $allSettings[$appCacheId]  = json_encode( $settings );
+            
+            $appSettings    = $this->cache->getItem( $appCacheId );
+            $appSettings->set( $allSettings[$appCacheId] );
+            $this->cache->save( $appSettings );
         }
         
         // General Settings
         $settings   = ( $applicationId == null ) ? $this->generalSettings() : $this->getSettings( null );
         $allSettings['settings_general']    = json_encode( $settings );
         
-        $this->cache->warmUp( $allSettings );
+        $settingsCache->set( \json_encode( $allSettings ) );
+        $this->cache->save( $settingsCache );
     }
     
     public function clearCache( $applicationId, $all = false )
@@ -105,6 +98,7 @@ class Settings
     
     public function forceMaintenanceMode( bool $maintenanceMode )
     {
+        $settingsCache  = $this->cache->getItem( 'settings_general' );
         $allSettings    = [];
         
         // Applications Settings
@@ -113,7 +107,12 @@ class Settings
             $settings                                       = $this->getSettings( $app->getId() );
             $settings['maintenanceMode']                    = $maintenanceMode;
             
-            $allSettings["settings_application_{$app->getId()}"]  = json_encode( $settings );
+            $appCacheId = "settings_application_{$app->getId()}";
+            $allSettings[$appCacheId]  = json_encode( $settings );
+            
+            $appSettings    = $this->cache->getItem( $appCacheId );
+            $appSettings->set( $allSettings[$appCacheId] );
+            $this->cache->save( $appSettings );
         }
         
         // General Settings
@@ -121,7 +120,8 @@ class Settings
         $settings['maintenanceMode']        = $maintenanceMode;
         $allSettings['settings_general']    = json_encode( $settings );
         
-        $this->cache->warmUp( $allSettings );
+        $settingsCache->set( \json_encode( $allSettings ) );
+        $this->cache->save( $settingsCache );
     }
     
     // Used For Dump/Debug
@@ -151,7 +151,7 @@ class Settings
         $generalizedSettings    = [];
         foreach( $this->settingsKeys as $key ) {
             $value  = $applicationSettings ? $this->propertyAccessor->getValue( $applicationSettings, $key ) : null;
-            if ( $value === null ) {
+            if ( $value === null || ( $key == 'maintenanceMode' && $value == false ) ) {
                 $value  = $this->propertyAccessor->getValue( $generalSettings, $key );
             }
             
