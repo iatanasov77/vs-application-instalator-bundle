@@ -1,3 +1,11 @@
+1.10.208	|	Release date: **24.04.2024**
+============================================
+* New Features and Improvements:
+  - Make Slider Items Timestampable.
+  - Improve Slider Items Table in Slider Update Page.
+  - Add a Method of Slider Model to Get Only Published Items.
+
+
 1.10.207	|	Release date: **24.04.2024**
 ============================================
 * Bug-Fixes:
