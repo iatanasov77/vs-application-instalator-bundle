@@ -1,3 +1,9 @@
+1.10.207	|	Release date: **24.04.2024**
+============================================
+* Bug-Fixes:
+  - Fix HelpCenterQuestion Model Doctrine Mapping.
+
+
 1.10.206	|	Release date: **24.04.2024**
 ============================================
 * New Features:
