@@ -1,3 +1,9 @@
+1.10.206	|	Release date: **24.04.2024**
+============================================
+* New Features:
+  - Create a Custom Repository for Slider Resource.
+
+
 1.10.205	|	Release date: **24.04.2024**
 ============================================
 * Bug-Fixes:
