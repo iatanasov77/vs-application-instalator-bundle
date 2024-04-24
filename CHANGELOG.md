@@ -1,3 +1,9 @@
+1.10.209	|	Release date: **24.04.2024**
+============================================
+* Bug-Fixes:
+  - Fix Slider Item Form.
+
+
 1.10.208	|	Release date: **24.04.2024**
 ============================================
 * New Features and Improvements:
