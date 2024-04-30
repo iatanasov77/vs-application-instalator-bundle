@@ -208,3 +208,7 @@ input:invalid {
 .bio-graph-info {
 	height: 500px;
 }
+
+.project-issue-status-radio {
+    display: inline-block !important;
+}
