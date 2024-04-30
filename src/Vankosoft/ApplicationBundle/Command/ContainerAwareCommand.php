@@ -13,10 +13,13 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 abstract class ContainerAwareCommand extends Command implements ContainerAwareInterface
 {
+    /** @var ContainerInterface */
     private $container;
     
+    /** @var ManagerRegistry */
     private $doctrine;
     
+    /** @var ValidatorInterface */
     private $validator;
     
     public function __construct(

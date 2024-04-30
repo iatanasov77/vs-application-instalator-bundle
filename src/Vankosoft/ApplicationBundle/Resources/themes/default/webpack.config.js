@@ -106,6 +106,9 @@ Encore
     .addEntry( 'js/sliders-edit', applicationAssetsPath + '/js/pages/sliders-edit.js' )
     .addEntry( 'js/sliders-items', applicationAssetsPath + '/js/pages/sliders-items.js' )
     .addEntry( 'js/sliders-items-edit', applicationAssetsPath + '/js/pages/sliders-items-edit.js' )
+    
+    .addEntry( 'js/project-issues', applicationAssetsPath + '/js/pages/project-issues.js' )
+    .addEntry( 'js/project-issues-edit', applicationAssetsPath + '/js/pages/project-issues-edit.js' )
 ;
 
 //////////////////////////////////////////////////////////////////

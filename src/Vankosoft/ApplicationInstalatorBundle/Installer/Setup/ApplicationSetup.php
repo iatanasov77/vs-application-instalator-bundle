@@ -357,13 +357,21 @@ class ApplicationSetup
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml', $configLiipImagine );
         
         if ( $this->isCatalogProject() || $this->isExtendedProject() ) {
-            // Setup Services and Parameters
             $configServices = str_replace(
                 [ "__application_namespace__"],
                 [$this->applicationNamespace],
                 file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/vs_payment.yaml' )
             );
             $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/vs_payment.yaml', $configServices );
+        }
+        
+        if ( $this->isExtendedProject() ) {
+            $configServices = str_replace(
+                [ "__application_name__"],
+                [$this->applicationName],
+                file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/vs_api.yaml' )
+            );
+            $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/vs_api.yaml', $configServices );
         }
     }
     
@@ -455,7 +463,7 @@ class ApplicationSetup
             ["__application_name__"],
             [$this->applicationNamespace],
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/attributes.yaml' )
-            );
+        );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/attributes.yaml', $configRoutes );
         
         $configRoutes   = str_replace(
