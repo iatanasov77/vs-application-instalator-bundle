@@ -1,3 +1,15 @@
+1.10.210	|	Release date: **30.04.2024**
+============================================
+* New Features:
+  - Update Installator Configs.
+  - Add Some Comments.
+  - Add to custom.css
+  - Add JS Files for Project Issues Pages.
+  - Update Project Issues Twig Views.
+* Bug-Fixes:
+  - Fix Installator Application Setup Component.
+
+
 1.10.209	|	Release date: **24.04.2024**
 ============================================
 * Bug-Fixes:
