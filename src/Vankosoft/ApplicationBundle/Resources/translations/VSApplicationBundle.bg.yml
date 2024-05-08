@@ -276,6 +276,7 @@ vs_application:
             my_address: 'бул. "Ал. Стамболийски", Пловдив 4000'
             visit_us: Посетете Ни
             contact_details: Контакт Детайли
+            contact_text: 'Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.'
             opening_hours: Работно Време
             email_us: Пратете Е-Мейл
             view_larger_map: Вижте по-голяма карта

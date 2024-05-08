@@ -4,7 +4,9 @@
 
 {% block pageTitle %}
     <h2 class="pageheader-title"><i class="icon_genius"></i> {{ 'vs_application.template.contact_page.visit_us' | trans( {},'VSApplicationBundle' ) }}</h2>
-    <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+    <p class="pageheader-text">
+        {{ 'vs_application.template.contact_page.contact_text' | trans( {},'VSApplicationBundle' ) }}
+    </p>
 {% endblock %}
 
 {% block content %}
