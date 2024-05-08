@@ -2,7 +2,7 @@ parameters:
     ########################################################
     # Contact Page
     ########################################################
-    vs_application.contact_email: 'info@vankosoft.org'
+    vs_application.contact_email: '%env(resolve:CONTACT_EMAIL)%'
     vs_application.contact.show_map: true
     vs_application.contact.show_address: true
     vs_application.contact.show_phone: true
