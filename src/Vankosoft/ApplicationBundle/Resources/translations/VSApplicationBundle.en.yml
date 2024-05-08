@@ -276,6 +276,7 @@ vs_application:
             my_address: 'bul. "Al. Stamboliiski", Plovdiv 4000'
             visit_us: Visit us
             contact_details: Contact Details
+            contact_text: 'Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.'
             opening_hours: Opening Hours
             email_us: Email Us
             view_larger_map: View Larger Map

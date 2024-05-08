@@ -1,3 +1,13 @@
+1.10.211	|	Release date: **08.05.2024**
+============================================
+* New Features:
+  - Configure Mailer User From ENV Variables.
+  - Add Some Improvements on Application Contact Page.
+  - Get Contact Email From ENV Variables.
+* Bug-Fixes:
+  - Fix UserFormType .
+
+
 1.10.210	|	Release date: **30.04.2024**
 ============================================
 * New Features:
