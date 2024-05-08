@@ -1,3 +1,9 @@
+1.10.212	|	Release date: **08.05.2024**
+============================================
+* Bug-Fixes:
+  - Make User Notifications Service Public.
+
+
 1.10.211	|	Release date: **08.05.2024**
 ============================================
 * New Features:
