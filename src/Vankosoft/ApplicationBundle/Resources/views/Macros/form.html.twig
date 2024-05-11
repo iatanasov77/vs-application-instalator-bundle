@@ -4,6 +4,16 @@
 	https://twig.symfony.com/doc/3.x/tags/macro.html
 #}
 
+{% macro errors( formErrors ) %}
+    {% for field, errors in formErrors %}
+        {% for fieldError in errors %}
+            <div class="alert alert-danger mt-4 float-start text-left w-100" role="alert">
+                <span>{{ field }}: {{ fieldError | trans }}</span>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endmacro %}
+
 {% macro buttons( form, metadata = null ) %}
 	<div class="row">&nbsp;</div>
 	
