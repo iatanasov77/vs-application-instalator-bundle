@@ -1,12 +1,10 @@
+{% import "@VSApplication/Macros/form.html.twig" as vs_form %}
 {% import "@VSApplication/Macros/tree.html.twig" as vs_tree %}
-{% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
 
 {{ form_start(form, { 'action': path('vs_application_taxonomy_taxon_handle', {'taxonomyId': taxonomyId}) }) }}
     
-    {% if not form.vars.valid %}
-        {% for error in form.vars.errors %}
-            {{ alerts.error( error.message ) }}
-        {%endfor%}
+    {% if formErrors is defined %}
+        {{ vs_form.errors( formErrors ) }}     
     {% endif %}
 
     {% set comboDataSourceUrl  = url( 'vs_application_taxonomy_taxons_easyui_combotree', {'taxonomyId': taxonomyId} ) %}

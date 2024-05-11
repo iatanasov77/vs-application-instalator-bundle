@@ -27,10 +27,8 @@
             	<h5 class="card-header">{{ 'vs_application.template.tags_whitelist_contexts_details' | trans( {},'VSApplicationBundle' ) }}</h5>
             	<div class="card-body">
 					
-                    {% if not form.vars.valid %}
-                        {% for error in form.vars.errors %}
-                            {{ alerts.error( error.message ) }}
-                        {%endfor%}
+                    {% if formErrors is defined %}
+                        {{ vs_form.errors( formErrors ) }}     
                     {% endif %}
 		            
                     {% if(item.id) %}{% set method = "PUT" %}{% else %}{% set method = "POST" %}{% endif %}

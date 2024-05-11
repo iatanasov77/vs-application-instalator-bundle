@@ -3,7 +3,6 @@
 {# Import Macros #}
 {% import "@VSApplication/Macros/form.html.twig" as vs_form %}
 {% import "@VSApplication/Macros/tree.html.twig" as vs_tree %}
-{% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
 
 {% if( item.id ) %}
 	{% set pageTitle = 'vs_application.template.widgets_update_title' | trans( {},'VSApplicationBundle' ) %}
@@ -28,17 +27,11 @@
             	<h5 class="card-header">{{ 'vs_application.template.widget' | trans( {},'VSApplicationBundle' ) }}</h5>
             	<div class="card-body">
             	
-                    {% if not form.vars.valid %}
-                        {% for error in form.vars.errors %}
-                            {{ alerts.error( error.message ) }}
-                        {%endfor%}
+                    {% if formErrors is defined %}
+                        {{ vs_form.errors( formErrors ) }}     
                     {% endif %}
 		            
-                    {% if(item.id) %}
-                        {% set method = "PUT" %}
-                    {% else %}
-                        {% set method = "POST" %}
-                    {% endif %}
+                    {% if(item.id) %}{% set method = "PUT" %}{% else %}{% set method = "POST" %}{% endif %}
                     {{ form_start(form, { 'attr': {'class': 'form-horizontal '}, 'method': method }) }}
                         <label class="custom-control custom-checkbox">
                             <input type="checkbox" id="widget_form_enabled" name="widget_form[enabled]" 
