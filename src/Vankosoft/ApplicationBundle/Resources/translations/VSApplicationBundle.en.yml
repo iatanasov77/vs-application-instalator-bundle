@@ -112,6 +112,7 @@ vs_application:
         parent_category_placeholder: '-- Choose a Parent Category --'
         category: 'Category'
         category_placeholder: '-- Choose a Category --'
+        filter_by_category: Filter By Category
         parent_category_no_parent: No Parent
         maintenance_mode: 'Maintenance Mode'
         maintenance_page: 'Page in Maintenance Mode'

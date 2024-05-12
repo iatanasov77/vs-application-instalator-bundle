@@ -112,6 +112,7 @@ vs_application:
         parent_category_placeholder: '-- Избери Родителска Категория --'
         category: 'Категория'
         category_placeholder: '-- Избери Категория --'
+        filter_by_category: Филтриране по Категория
         parent_category_no_parent: Няма Родител
         maintenance_mode: 'В режим на поддръжка'
         maintenance_page: 'Страница в режим поддръжка'
