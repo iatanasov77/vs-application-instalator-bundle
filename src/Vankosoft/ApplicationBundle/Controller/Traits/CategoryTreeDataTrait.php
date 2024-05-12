@@ -45,12 +45,12 @@ trait CategoryTreeDataTrait
     {
         foreach ( $items as $item ) {
             $itemsTree[$item->getName()] = [
-                'id'        => $name->getId(),
+                'id'        => $item->getId(),
                 'name'      => $item->getName(),
                 'children'  => [],
             ];
             
-            if ( ! $name->getChildren()->isEmpty() ) {
+            if ( ! $item->getChildren()->isEmpty() ) {
                 $this->getItemsTree( $item->getChildren(), $itemsTree[$item->getName()]['children'] );
             }
         }
