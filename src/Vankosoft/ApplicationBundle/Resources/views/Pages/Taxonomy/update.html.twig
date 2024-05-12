@@ -1,7 +1,6 @@
 {% extends "@VSApplication/layout.html.twig" %}
 
 {% import "@VSApplication/Macros/form.html.twig" as vs_form %}
-{% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
 
 {% if( item.id ) %}
 	{% set pageTitle = 'vs_application.template.taxonomy_update_title' | trans( {},'VSApplicationBundle' ) %}
@@ -26,17 +25,11 @@
             	<h5 class="card-header">{{ 'vs_application.template.taxonomy_title' | trans( {},'VSApplicationBundle' ) }}</h5>
             	<div class="card-body">
             	
-                    {% if not form.vars.valid %}
-                        {% for error in form.vars.errors %}
-                            {{ alerts.error( error.message ) }}
-                        {%endfor%}
+                    {% if formErrors is defined %}
+                        {{ vs_form.errors( formErrors ) }}     
                     {% endif %}
 		            
-                    {% if(item.id) %}
-                        {% set method = "PUT" %}
-                    {% else %}
-                        {% set method = "POST" %}
-                    {% endif %}
+                    {% if(item.id) %}{% set method = "PUT" %}{% else %}{% set method = "POST" %}{% endif %}
                     {{ form_start(form, { 'attr': {'class': 'form-horizontal '}, 'method': method }) }}
                 		<div class="form-group">
                         	{{ form_label(form.locale, null, {

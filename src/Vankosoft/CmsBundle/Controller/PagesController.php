@@ -2,8 +2,13 @@
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+//use Pagerfanta\Adapter\DoctrineCollectionAdapter;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 use Vankosoft\ApplicationBundle\Controller\AbstractCrudController;
-use Vankosoft\ApplicationBundle\Controller\TaxonomyHelperTrait;
+use Vankosoft\ApplicationBundle\Controller\Traits\TaxonomyHelperTrait;
+use Vankosoft\ApplicationBundle\Controller\Traits\FilterFormTrait;
 
 use Vankosoft\CmsBundle\Form\ClonePageForm;
 use Vankosoft\CmsBundle\Form\PreviewPageForm;
@@ -11,6 +16,7 @@ use Vankosoft\CmsBundle\Form\PreviewPageForm;
 class PagesController extends AbstractCrudController
 {
     use TaxonomyHelperTrait;
+    use FilterFormTrait;
     
     protected function customData( Request $request, $entity = null ): array
     {
@@ -20,18 +26,31 @@ class PagesController extends AbstractCrudController
         $taxonomy       = $this->getTaxonomy( 'vs_application.page_categories.taxonomy_code' );
         $tagsContext    = $this->get( 'vs_application.repository.tags_whitelist_context' )->findByTaxonCode( 'static-pages' );
         
-        return [
-            'items'         => $this->getRepository()->findAll(),
-            'categories'    => $this->get( 'vs_cms.repository.page_categories' )->findAll(),
-            'taxonomyId'    => $taxonomy ? $taxonomy->getId() : 0,
-            'translations'  => $translations,
-            'versions'      => $versions,
+        $categoryClass  = $this->getParameter( 'vs_cms.model.page_categories.class' );
+        $filterCategory = $request->attributes->get( 'filterCategory' );
+        $filterForm     = $this->getFilterForm( $categoryClass, $filterCategory, $request );
+        
+        $params = [
+            'items'             => $this->getRepository()->findAll(),
+            'taxonomyId'        => $taxonomy ? $taxonomy->getId() : 0,
+            'translations'      => $translations,
+            'versions'          => $versions,
             
-            'formClone'     => $this->createForm( ClonePageForm::class )->createView(),
-            'formPreview'   => $this->createForm( PreviewPageForm::class )->createView(),
+            'formClone'         => $this->createForm( ClonePageForm::class )->createView(),
+            'formPreview'       => $this->createForm( PreviewPageForm::class )->createView(),
             
-            'pageTags'      => $tagsContext->getTagsArray(),
+            'pageTags'          => $tagsContext->getTagsArray(),
+            
+            'filterForm'        => $filterForm->createView(),
+            'filterCategory'    => $filterCategory,
         ];
+        
+        if ( $filterCategory ) {
+            $category               = $this->get( 'vs_cms.repository.page_categories' )->find( $filterCategory );
+            $params['resources']    = $this->getFilteredResources( $category->getPages() );
+        }
+        
+        return $params;
     }
     
     protected function prepareEntity( &$entity, &$form, Request $request )
@@ -46,21 +65,13 @@ class PagesController extends AbstractCrudController
             $entity->setTranslatableLocale( $formLocale );
         }
         
-        if ( isset( $formPost['category_taxon'] ) ) {
-            foreach ( $formPost['category_taxon'] as $taxonId ) {
-                $category       = $pcr->findOneBy( ['taxon' => $taxonId] );
-                if ( $category ) {
-                    $categories[]   = $category;
-                    $entity->addCategory( $category );
-                }
-            }
-            
-            foreach ( $entity->getCategories() as $cat ) {
-                if ( ! $categories->contains( $cat ) ) {
-                    $entity->removeCategory( $cat );
-                }
-            }
-        }
+        $selectedCategories = \json_decode( $request->request->get( 'selectedCategories' ), true );
+        $this->buildCategories( $entity, $selectedCategories );
+    }
+    
+    protected function getFilterRepository()
+    {
+        return $this->get( 'vs_cms.repository.page_categories' );
     }
     
     private function getTranslations()
@@ -91,5 +102,26 @@ class PagesController extends AbstractCrudController
         }
         
         return $versions;
+    }
+    
+    private function buildCategories( &$entity, array $categories )
+    {
+        $repo   = $this->get( 'vs_cms.repository.page_categories' );
+        
+        $entity->setCategories( new ArrayCollection() );
+        foreach ( $categories as $c ) {
+            $entity->addCategory( $repo->find( $c['id'] ) );
+        }
+    }
+    
+    private function getFilteredResources( Collection $items )
+    {
+        //$adapter    = new DoctrineCollectionAdapter( $items );
+        $adapter    = new ArrayAdapter( $items->toArray() );
+        $pagerfanta = new Pagerfanta( $adapter );
+        
+        $pagerfanta->setMaxPerPage( 10 );
+        
+        return $pagerfanta;
     }
 }

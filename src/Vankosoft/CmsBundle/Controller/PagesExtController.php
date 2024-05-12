@@ -5,12 +5,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 use Vankosoft\ApplicationBundle\Repository\LogEntryRepository;
 use Vankosoft\ApplicationBundle\Repository\TaxonomyRepository;
 use Vankosoft\ApplicationBundle\Repository\TaxonRepository;
-use Vankosoft\ApplicationBundle\Controller\TaxonomyTreeDataTrait;
+use Vankosoft\ApplicationBundle\Controller\Traits\TaxonomyTreeDataTrait;
+use Vankosoft\ApplicationBundle\Controller\Traits\CategoryTreeDataTrait;
 use Vankosoft\CmsBundle\Repository\PagesRepository;
 use Vankosoft\CmsBundle\Form\ClonePageForm;
 use Vankosoft\CmsBundle\Form\PageForm;
@@ -19,6 +22,7 @@ use Vankosoft\CmsBundle\Repository\PageCategoryRepository;
 class PagesExtController extends AbstractController
 {
     use TaxonomyTreeDataTrait;
+    use CategoryTreeDataTrait;
     
     /** @var ManagerRegistry */
     protected ManagerRegistry $doctrine;
@@ -35,6 +39,9 @@ class PagesExtController extends AbstractController
     /** @var Factory */
     protected Factory $pagesFactory;
     
+    /** @var EntityRepository */
+    protected $vsTagsWhitelistContextRepository;
+    
     public function __construct(
         ManagerRegistry $doctrine,
         TaxonomyRepository $taxonomyRepository,
@@ -42,15 +49,17 @@ class PagesExtController extends AbstractController
         PagesRepository $pagesRepository,
         PageCategoryRepository $pagesCategoriesRepository,
         LogEntryRepository $logentryRepository,
-        Factory $pagesFactory
+        Factory $pagesFactory,
+        EntityRepository $vsTagsWhitelistContextRepository,
     ) {
-        $this->doctrine                     = $doctrine;
-        $this->taxonomyRepository           = $taxonomyRepository;
-        $this->taxonRepository              = $taxonRepository;
-        $this->pagesRepository              = $pagesRepository;
-        $this->pagesCategoriesRepository    = $pagesCategoriesRepository;
-        $this->logentryRepository           = $logentryRepository;
-        $this->pagesFactory                 = $pagesFactory;
+        $this->doctrine                         = $doctrine;
+        $this->taxonomyRepository               = $taxonomyRepository;
+        $this->taxonRepository                  = $taxonRepository;
+        $this->pagesRepository                  = $pagesRepository;
+        $this->pagesCategoriesRepository        = $pagesCategoriesRepository;
+        $this->logentryRepository               = $logentryRepository;
+        $this->pagesFactory                     = $pagesFactory;
+        $this->vsTagsWhitelistContextRepository = $vsTagsWhitelistContextRepository;
     }
     
     public function getPageForm( $itemId, $locale, Request $request ): Response
@@ -63,15 +72,18 @@ class PagesExtController extends AbstractController
             $em->refresh( $item );
         }
         
-        $taxonomy   = $this->taxonomyRepository->findByCode(
+        $taxonomy       = $this->taxonomyRepository->findByCode(
                                                     $this->getParameter( 'vs_application.page_categories.taxonomy_code' )
                                                 );
+        $tagsContext    = $this->vsTagsWhitelistContextRepository->findByTaxonCode( 'static-pages' );
         
         return $this->render( '@VSCms/Pages/Pages/partial/page_form.html.twig', [
             'categories'    => $this->pagesCategoriesRepository->findAll(),
             'taxonomyId'    => $taxonomy ? $taxonomy->getId() : 0,
             'item'          => $item,
             'form'          => $this->createForm( PageForm::class, $item )->createView(),
+            
+            'pageTags'      => $tagsContext->getTagsArray(),
         ]);
     }
     
@@ -141,7 +153,20 @@ class PagesExtController extends AbstractController
     
     public function easyuiComboTreeWithSelectedSource( $pageId, $taxonomyId, Request $request ): Response
     {
-        return new JsonResponse( $this->easyuiComboTreeData( $taxonomyId, $this->getSelectedCategoryTaxons( $pageId ) ) );
+        // OLD WAY
+        //return new JsonResponse( $this->easyuiComboTreeData( $taxonomyId, $this->getSelectedCategoryTaxons( $pageId ) ) );
+        
+        $editPage           = $pageId ? $this->pagesRepository->find( $pageId ) : null;
+        $selectedCategories = $editPage  ? $editPage->getCategories()->toArray() : [];
+        $data               = [];
+        
+        $topCategories      = new ArrayCollection( $this->pagesCategoriesRepository->findBy( ['parent' => null] ) );
+        
+        $categoriesTree     = [];
+        $this->getItemsTree( $topCategories, $categoriesTree );
+        $this->buildEasyuiCombotreeDataFromCollection( $categoriesTree, $data, $selectedCategories );
+        
+        return new JsonResponse( $data );
     }
     
     public function easyuiComboTreeWithLeafsSource( $taxonomyId, Request $request ): Response

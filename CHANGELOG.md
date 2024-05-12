@@ -1,3 +1,20 @@
+1.10.213	|	Release date: **12.05.2024**
+============================================
+* New Features:
+  - Create a Twig Macros to Display Resource Form Errors.
+  - Use Created Macros in All Forms.
+  - Improve Some Templates.
+  - Moving Controller Traits in Another Namespace.
+  - Create a CategoryTreeDataTrait for Category Controllers.
+  - Use CategoryTreeDataTrait in All Category Controllers.
+  - Use CategoryTreeDataTrait in Entity with Categories.
+  - Improve CMS Pages Index View.
+* Bug-Fixes:
+  - Fix Static Page Edit on Change Locale Request.
+  - Fix CMS Page Form.
+  - Fix CMS PageCategory Form.
+
+
 1.10.212	|	Release date: **08.05.2024**
 ============================================
 * Bug-Fixes:

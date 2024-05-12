@@ -2,10 +2,8 @@
 
 {{ form_start(form, { 'action': path('vs_application_settings_handle', {'applicationId': applicationId}), 'attr': {'id': 'formSettings_' ~ applicationId, 'class': 'form-horizontal '} }) }}
     
-    {% if not form.vars.valid %}
-        {% for error in form.vars.errors %}
-            {{ alerts.error( error.message ) }}
-        {%endfor%}
+    {% if formErrors is defined %}
+        {{ vs_form.errors( formErrors ) }}     
     {% endif %}
     
     <label class="custom-control custom-checkbox">  

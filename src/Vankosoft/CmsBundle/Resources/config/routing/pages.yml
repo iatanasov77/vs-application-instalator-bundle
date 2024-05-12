@@ -12,6 +12,25 @@ vs_cms_pages:
                 ckeditor_allowedContent: '%vs_cms.form.pages.ckeditor_allowedContent%'
                 ckeditor_extraAllowedContent: '%vs_cms.form.pages.ckeditor_extraAllowedContent%'
     type: sylius.resource
+    options:
+        expose: true
+
+vs_cms_pages_index_filtered:
+    path: /pages/filter/{filterCategory}/
+    methods: [GET]
+    defaults:
+        _controller: vs_cms.controller.pages::indexAction
+        _sylius:
+            paginate: 10
+            sortable: true
+            sorting:
+                position: asc
+            filterable: true
+            criteria:
+                category: $filterCategory
+            template: "@VSCms/Pages/Pages/index.html.twig"
+    options:
+        expose: true
 
 vs_cms_pages_show_by_id:
     path: /pages/{id}
@@ -68,6 +87,10 @@ vs_cms_pages_tree_combo_with_leafs:
 vs_cms_pages_tree_table:
     path: /json/pages-categories-{taxonomyId}/gtreetable
     controller: Vankosoft\CmsBundle\Controller\PagesExtController::gtreeTableSource
+    
+vs_cms_pages_category_tree:
+    path: /json/pages-categories/easyui-combotree-{categoryId}
+    controller: Vankosoft\CmsBundle\Controller\PagesCategoryExtController::easyuiComboTreeWithSelectedSource
 
 # Custom Routes
 vs_cms_pages_categories_update_by_taxon:

@@ -104,7 +104,7 @@ final class MakeTaxonomyResourceCrud extends AbstractResourceMaker
         $useStatements = new UseStatementGenerator([
             \Vankosoft\ApplicationBundle\Controller\AbstractCrudController::class,
             \Symfony\Component\HttpFoundation\Request::class,
-            \Vankosoft\ApplicationBundle\Controller\TaxonomyHelperTrait::class,
+            \Vankosoft\ApplicationBundle\Controller\Traits\TaxonomyHelperTrait::class,
         ]);
         
         $generator->generateController(

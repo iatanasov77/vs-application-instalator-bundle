@@ -1,4 +1,4 @@
-<?php namespace Vankosoft\ApplicationBundle\Controller;
+<?php namespace Vankosoft\ApplicationBundle\Controller\Traits;
 
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
