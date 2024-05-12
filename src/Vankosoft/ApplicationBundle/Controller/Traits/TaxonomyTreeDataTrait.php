@@ -1,4 +1,4 @@
-<?php namespace Vankosoft\ApplicationBundle\Controller;
+<?php namespace Vankosoft\ApplicationBundle\Controller\Traits;
 
 use Vankosoft\ApplicationBundle\Repository\TaxonomyRepository;
 use Vankosoft\ApplicationBundle\Repository\TaxonRepository;

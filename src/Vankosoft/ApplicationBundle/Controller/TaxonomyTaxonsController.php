@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\Persistence\ManagerRegistry;
 
+use Vankosoft\ApplicationBundle\Controller\Traits\TaxonomyTreeDataTrait;
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 use Vankosoft\ApplicationBundle\Form\TaxonForm;
 use Vankosoft\ApplicationBundle\Repository\TaxonomyRepository;
