@@ -74,5 +74,18 @@ $( function()
             });
         }
     });
+    
+    /**
+     * Submit Checked Roles Tree
+     */
+    $( 'form[name="page_form"]' ).on( 'submit', function ( e )
+    {
+        let treeModule  = require( '../includes/tree.js' );
+        var element = treeModule.createCheckedTreeElement(
+            "selectedCategories",
+            $( '#page_form_category_taxon' ).combotree( 'tree' ).tree( 'getChecked' )
+        );
+        $( this ).append( element );
+    });
 });
  
