@@ -11,7 +11,7 @@ trait CategoryTreeDataTrait
      * @param array $data
      * @param array $selectedValues
      */
-    protected function buildEasyuiCombotreeData( array $tree, array &$data, array $selectedValues ): void
+    protected function buildEasyuiCombotreeDataFromCollection( array $tree, array &$data, array $selectedValues ): void
     {
         $key    = 0;
         
@@ -27,7 +27,7 @@ trait CategoryTreeDataTrait
                 }
                 
                 if ( ! empty( $node['children'] ) ) {
-                    $this->buildEasyuiCombotreeData( $node['children'], $data[$key]['children'], $selectedValues );
+                    $this->buildEasyuiCombotreeDataFromCollection( $node['children'], $data[$key]['children'], $selectedValues );
                 }
                 
                 $key++;
