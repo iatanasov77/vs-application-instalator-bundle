@@ -30,6 +30,7 @@ class TagsWhitelistTagsRepository extends EntityRepository
         foreach ( $newTags as $tag ) {
             $oTag   = new $entityClass();
             $oTag->setTag( $tag );
+            $oTag->setContext( $context );
             $em->persist( $oTag );
         }
         $em->flush();
