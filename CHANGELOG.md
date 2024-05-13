@@ -1,3 +1,11 @@
+1.10.214	|	Release date: **13.05.2024**
+============================================
+* Bug Fixes and Improvements:
+  - Default Theme Load Bootstrap Only in app.js
+  - Fix Some Missing Twig Macros Imported.
+  - Improve TagsWhitelistTagsRepository .
+
+
 1.10.213	|	Release date: **12.05.2024**
 ============================================
 * New Features:
