@@ -1,8 +1,8 @@
 const $ = require( 'jquery' );
-//global.$ = $;
 window.$ = $;
 
-require( 'bootstrap' ); // bootstrap should be before jquery-ui
+const bootstrap = require( 'bootstrap' );  // bootstrap should be before jquery-ui
+window.bootstrap = bootstrap;
 
 /* AdminPanel Layout */
 require( '../vendor/slimscroll/jquery.slimscroll.js' );

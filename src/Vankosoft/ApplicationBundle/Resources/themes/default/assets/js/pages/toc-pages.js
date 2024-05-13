@@ -15,8 +15,6 @@ VsLoadTranslations(['VSCmsBundle']);
 import VsSortable from '../includes/sortable';
 const tocSortable   = new VsSortable( 'vs_cms_multipage_toc_page_sort_action' );
 
-const bootstrap = require( 'bootstrap' );
-
 // WORKAROUND: Prevent Double Submiting
 global.btnSaveTocPageClicked = window.btnSaveTocPageClicked = false;
 
