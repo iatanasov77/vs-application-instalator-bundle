@@ -1,5 +1,3 @@
-const bootstrap = require( 'bootstrap' );
-
 $( function()
 {
 	//////////////////////

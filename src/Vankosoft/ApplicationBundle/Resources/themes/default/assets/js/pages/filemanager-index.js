@@ -1,8 +1,6 @@
 require( '../includes/resource-delete.js' );
 //require ( 'jquery-duplicate-fields/jquery.duplicateFields.js' );
 
-const bootstrap = require( 'bootstrap' );
-
 $( function()
 {
     $( '.btnUploadFiles' ).on( 'click', function()

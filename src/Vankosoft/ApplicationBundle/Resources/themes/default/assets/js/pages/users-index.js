@@ -1,7 +1,5 @@
 require( '../includes/resource-delete.js' );
 
-const bootstrap = require( 'bootstrap' );
-
 $( function()
 {
     $( '.btnUserInfo' ).on( 'click', function()

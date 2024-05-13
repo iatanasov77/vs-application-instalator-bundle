@@ -1,6 +1,5 @@
 //require ( '../../css/custom.css' );
 //require ( 'jquery-duplicate-fields/jquery.duplicateFields.js' );
-const bootstrap = require( 'bootstrap' );
 
 $( function ()
 {
