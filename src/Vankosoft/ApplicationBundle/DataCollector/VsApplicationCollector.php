@@ -1,6 +1,7 @@
 <?php namespace Vankosoft\ApplicationBundle\DataCollector;
 
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use Doctrine\DBAL\Exception\TableNotFoundException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,9 +49,13 @@ final class VsApplicationCollector extends DataCollector
         $this->bundles              = $bundles;
         $this->defaultLocaleCode    = $defaultLocaleCode;
         
-        $instalationInfo            = $installationInfoRepository->getLatestInstallation();
-        if ( $instalationInfo ) {
-            $this->projectVersion   = $instalationInfo->getVersion();
+        try {
+            $instalationInfo            = $installationInfoRepository->getLatestInstallation();
+            if ( $instalationInfo ) {
+                $this->projectVersion   = $instalationInfo->getVersion();
+            }
+        } catch ( TableNotFoundException $e ) {
+            // DO Nothing
         }
     }
     
