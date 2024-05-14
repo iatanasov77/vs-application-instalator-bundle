@@ -1,3 +1,9 @@
+1.10.215	|	Release date: **14.05.2024**
+============================================
+* Bug-Fixes:
+  - Fix DataCollector that Load Installator Installation Info.
+
+
 1.10.214	|	Release date: **13.05.2024**
 ============================================
 * Bug Fixes and Improvements:
