@@ -8,6 +8,7 @@ vs_application:
         locales: Locales
     
     menu:
+        menu: Меню
         dashboard: Табло
         system: Система
         cms: Съдържание
