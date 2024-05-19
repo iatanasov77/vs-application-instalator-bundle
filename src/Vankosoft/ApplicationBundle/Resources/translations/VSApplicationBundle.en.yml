@@ -8,6 +8,7 @@ vs_application:
         locales: Locales
     
     menu:
+        menu: Menu
         dashboard: Dashboard
         system: System
         cms: CMS
