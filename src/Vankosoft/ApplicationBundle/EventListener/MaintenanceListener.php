@@ -76,7 +76,7 @@ final class MaintenanceListener
         //echo '<pre>'; var_dump( $settings ); die;
         
         // If maintenance is active and in prod or test  environment and user is not admin
-        if ( $settings['maintenanceMode'] ) {
+        if ( isset( $settings['maintenanceMode'] ) && $settings['maintenanceMode'] ) {
         //if ( $appSettings->getMaintenanceMode() ) {
             if (
                 ( ! is_object( $this->user ) || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
