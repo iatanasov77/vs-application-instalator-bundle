@@ -25,3 +25,31 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 {% endmacro %}
+
+{% macro primary(text) %}
+<div class="alert alert-primary alert-dismissible" role="alert">
+  {{ text }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endmacro %}
+
+{% macro secondary(text) %}
+<div class="alert alert-secondary alert-dismissible" role="alert">
+  {{ text }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endmacro %}
+
+{% macro light(text) %}
+<div class="alert alert-light alert-dismissible" role="alert">
+  {{ text }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endmacro %}
+
+{% macro dark(text) %}
+<div class="alert alert-dark alert-dismissible" role="alert">
+  {{ text }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endmacro %}
