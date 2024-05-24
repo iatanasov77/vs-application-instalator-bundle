@@ -1,3 +1,11 @@
+1.10.217	|	Release date: **24.05.2024**
+============================================
+* New Features and Improvements:
+  - Update Application Installator Configs.
+  - Improve Twig Macros 'alerts'.
+  - Improve UsersCrud Index Page.
+
+
 1.10.216	|	Release date: **19.05.2024**
 ============================================
 * Bug-Fixes:
