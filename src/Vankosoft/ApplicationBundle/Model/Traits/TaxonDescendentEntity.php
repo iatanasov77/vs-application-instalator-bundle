@@ -136,4 +136,9 @@ trait TaxonDescendentEntity
         
         return $this;
     }
+    
+    public function getNameTranslated( string $locale ): string
+    {
+        return $this->taxon ? $this->taxon->getTranslation( $locale )->getName() : '';
+    }
 }
