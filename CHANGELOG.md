@@ -1,3 +1,11 @@
+1.10.218	|	Release date: **28.05.2024**
+============================================
+* New Features:
+  - Improve TaxonDescendentTrait .
+* Bug-Fixes:
+  - Fix DataCollector that Load Installator Installation Info.
+
+
 1.10.217	|	Release date: **24.05.2024**
 ============================================
 * New Features and Improvements:

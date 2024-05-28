@@ -2,6 +2,7 @@
 
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Doctrine\DBAL\Exception\TableNotFoundException;
+use Doctrine\DBAL\Exception\ConnectionException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,6 +56,8 @@ final class VsApplicationCollector extends DataCollector
                 $this->projectVersion   = $instalationInfo->getVersion();
             }
         } catch ( TableNotFoundException $e ) {
+            // DO Nothing
+        } catch ( ConnectionException $e ) {
             // DO Nothing
         }
     }
