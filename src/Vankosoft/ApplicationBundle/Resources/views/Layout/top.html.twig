@@ -108,7 +108,7 @@
                 <div class="nav-user-dropdown dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink2">
                     <div class="nav-user-info">
                         <h5 class="mb-0 text-white nav-user-name">{{ app.user.info.fullName }}</h5>
-                        <span class="status"></span><span class="ml-2">Available</span>
+                        <span class="status"></span><span class="ml-2">{{ app.user.info.designation }}</span>
                     </div>
                     
                     {{ knp_menu_render('profile', {'template': '@VSApplication/Menu/profile.html.twig'}) }}
