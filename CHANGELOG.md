@@ -1,3 +1,11 @@
+1.10.220	|	Release date: **06.06.2024**
+============================================
+* New Features and Improvements:
+  - Improve AdminPanel Default Theme Layout.
+  - Update Application Installator Application Configs.
+  - Improve Quick Links Model.
+
+
 1.10.219	|	Release date: **28.05.2024**
 ============================================
 * New Features:
