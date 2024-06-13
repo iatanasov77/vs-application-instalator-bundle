@@ -27,9 +27,31 @@ export function VsFormSubmit( formData, submitUrl, redirectUrl )
     });
 }
 
+export function VsGetSubmitButton()
+{
+    var clickedName = $( 'input[type=submit][clicked=true]' ).attr( 'name' );
+    if ( clickedName == undefined ) {
+        clickedName = $( 'button[type=submit][clicked=true]' ).attr( 'name' );
+    }
+    
+    return clickedName;
+}
+
 $( function()
 {
     window.addEventListener( 'VsFormSubmitError', event => {
         alert( 'VsFormSubmit Error: ' + event.detail.message );
+    });
+    
+    $( 'form input[type=submit]' ).on( 'click', function()
+    {
+        $( 'input[type=submit]', $( this ).parents( 'form' ) ).removeAttr( 'clicked' );
+        $( this ).attr( 'clicked', 'true' );
+    });
+    
+    $( 'form button[type=submit]' ).on( 'click', function()
+    {
+        $( 'input[type=submit]', $( this ).parents( 'form' ) ).removeAttr( 'clicked' );
+        $( this ).attr( 'clicked', 'true' );
     });
 });
