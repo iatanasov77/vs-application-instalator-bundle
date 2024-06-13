@@ -1,3 +1,11 @@
+1.10.221	|	Release date: **13.06.2024**
+============================================
+* New Features and Improvements:
+  - Improve QuickLinks Index Page.
+  - Update Application Installator Configs.
+  - Improve VsForm JS Helper.
+
+
 1.10.220	|	Release date: **06.06.2024**
 ============================================
 * New Features and Improvements:
