@@ -1,3 +1,9 @@
+1.10.222	|	Release date: **15.06.2024**
+============================================
+* New Features and Improvements:
+  - Improve VsFormSubmit JS Helper.
+
+
 1.10.221	|	Release date: **13.06.2024**
 ============================================
 * New Features and Improvements:
