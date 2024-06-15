@@ -6,8 +6,9 @@ export function VsFormSubmit( formData, submitUrl, redirectUrl )
         data: formData,
         success: function ( response ) {
             if ( response.status == 'ok' ) {
-                document.location = redirectUrl;
-                
+                if ( redirectUrl ) {
+                    document.location = redirectUrl;
+                }
             } else {
                 window.dispatchEvent(
                     new CustomEvent( "VsFormSubmitError", {
