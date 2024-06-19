@@ -7,7 +7,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Vankosoft\CmsBundle\Model\Interfaces\PageInterface;
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 
-class PagesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface, ExampleTranslationsFactoryInterface
+class PagesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface //, ExampleTranslationsFactoryInterface
 {
     /** @var FactoryInterface */
     private $pagesFactory;
