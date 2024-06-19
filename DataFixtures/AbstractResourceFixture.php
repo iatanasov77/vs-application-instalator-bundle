@@ -70,12 +70,14 @@ abstract class AbstractResourceFixture implements FixtureInterface
                     if ( $resource instanceof TranslatableInterface ) {
                         if ( $translationResource->getTranslatableLocale() != $resource->getTranslatableLocale() ) {
                             $this->objectManager->persist( $translationResource );
-                            $this->objectManager->flush();
+                            //$this->objectManager->flush();
                         }
                     } else {
                         $this->objectManager->persist( $translationResource );
-                        $this->objectManager->flush();
+                        //$this->objectManager->flush();
                     }
+                    
+                    ++$i;
                 }
             }
 
