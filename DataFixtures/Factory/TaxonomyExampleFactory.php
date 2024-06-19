@@ -67,6 +67,10 @@ class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFa
 //         $taxonomyRootTaxonEntity->getTranslation()->setTranslatable( $taxonomyRootTaxonEntity );
         
 //         $entity->setRootTaxon( $taxonomyRootTaxonEntity );
+
+        $entity->setTranslatableLocale( $localeCode );
+        $entity->setName( $options['title'] );
+        $entity->setDescription( $options['description'] );
         
         return $entity;
     }
