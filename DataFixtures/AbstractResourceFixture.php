@@ -63,6 +63,10 @@ abstract class AbstractResourceFixture implements FixtureInterface
                 //$this->objectManager->flush();
                 
                 foreach ( $resourceOptions['translations'] as $localeCode => $translationOptions ) {
+                    if ( isset( $resourceOptions['locale'] ) && $resourceOptions['locale'] == $localeCode ) {
+                        continue;
+                    }
+                    
                     $translationResource = $this->exampleFactory->createTranslation( $resource, $localeCode, $translationOptions );
                     
                     if ( $resource instanceof TranslatableInterface ) {
