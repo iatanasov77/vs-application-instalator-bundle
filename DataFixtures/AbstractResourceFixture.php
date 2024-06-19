@@ -67,8 +67,8 @@ abstract class AbstractResourceFixture implements FixtureInterface
                         continue;
                     }
                     
-                    $resourceCopy           = clone $resource;
-                    $translationResource    = $this->exampleFactory->createTranslation( $resourceCopy, $localeCode, $translationOptions );
+                    //$resourceCopy           = clone $resource;
+                    $translationResource    = $this->exampleFactory->createTranslation( $resource, $localeCode, $translationOptions );
                     
                     if ( $resource instanceof TranslatableInterface ) {
                         if ( $translationResource->getTranslatableLocale() != $resource->getTranslatableLocale() ) {
