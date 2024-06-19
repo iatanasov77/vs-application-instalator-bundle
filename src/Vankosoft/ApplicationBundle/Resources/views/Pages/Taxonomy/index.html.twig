@@ -3,6 +3,7 @@
 {# Import Macros #}
 {% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
 {% from "@VSApplication/Macros/pagination.html.twig" import pagination %}
+{% import "@VSApplication/Macros/translations.html.twig" as vs_translations %}
 
 {% block title %}{{ parent() }} :: {{ 'vs_application.template.taxonomy_index_title' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
 
@@ -21,6 +22,7 @@
                         <th></th>
                         <th>{{ 'vs_application.template.items_index_row_name' | trans( {},'VSApplicationBundle' ) }}</th>
                         <th>{{ 'vs_application.template.items_index_row_code' | trans( {},'VSApplicationBundle' ) }}</th>
+                        <th>{{ 'vs_application.template.items_index_row_translations' | trans( {},'VSApplicationBundle' ) }}</th>
                         <th width="150">{{ 'vs_application.template.items_index_row_action' | trans( {},'VSApplicationBundle' ) }}</th>
                     </tr>
                 </thead>
@@ -30,7 +32,7 @@
                         <td>{{ loop.index }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.code }}</td>
-
+                        <td>{{ vs_translations.flags( translations[item.id] ) }}</td>
                         <td>
                             <div class="btn-group">
                                 <div class="btn-group">

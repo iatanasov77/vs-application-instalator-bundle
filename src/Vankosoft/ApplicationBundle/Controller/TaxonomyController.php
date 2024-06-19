@@ -8,9 +8,11 @@ class TaxonomyController extends AbstractCrudController
 {
     protected function customData( Request $request, $entity = null ): array
     {
-        $taxonTranslations   = $this->classInfo['action'] == 'updateAction' ? $this->getTaxonTranslations() : [];
+        $translations       = $this->classInfo['action'] == 'indexAction' ? $this->getTranslations() : [];
+        $taxonTranslations  = $this->classInfo['action'] == 'updateAction' ? $this->getTaxonTranslations() : [];
         
         return [
+            'translations'      => $translations,
             'taxonTranslations' => $taxonTranslations,
         ];
     }
@@ -43,6 +45,19 @@ class TaxonomyController extends AbstractCrudController
         $rootTaxon->getTranslation()->setTranslatable( $rootTaxon );
         
         return $rootTaxon;
+    }
+    
+    private function getTranslations(): array
+    {
+        $translations   = [];
+        $transRepo      = $this->get( 'vs_application.repository.translation' );
+        
+        foreach ( $this->getRepository()->findAll() as $taxonomy ) {
+            $translations[$taxonomy->getId()] = array_keys( $transRepo->findTranslations( $taxonomy ) );
+        }
+        
+        
+        return $translations;
     }
     
     private function getTaxonTranslations()
