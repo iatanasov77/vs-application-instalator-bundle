@@ -18,21 +18,21 @@
             </options>
         </field>
         
-        <field name="btnAcceptAll" column="btn_accept_all" type="string" length="32" />
-        <field name="btnRejectAll" column="btn_reject_all" type="string" length="32" />
-        <field name="title" type="string" length="32" />
+        <field name="btnAcceptAll" column="btn_accept_all" type="string" length="64" />
+        <field name="btnRejectAll" column="btn_reject_all" type="string" length="64" />
+        <field name="title" type="string" length="64" />
         <field name="description" type="text" />
-        <field name="label" type="string" length="32">
+        <field name="label" type="string" length="64">
             <options>
                 <option name="default">Cookie Consent</option>
             </options>
         </field>
-        <field name="btnAcceptNecessary" column="btn_accept_necessary" type="string" length="32">
+        <field name="btnAcceptNecessary" column="btn_accept_necessary" type="string" length="64">
             <options>
                 <option name="default">Accept necessary</option>
             </options>
         </field>
-        <field name="btnShowPreferences" column="btn_show_preferences" type="string" length="32">
+        <field name="btnShowPreferences" column="btn_show_preferences" type="string" length="64">
             <options>
                 <option name="default">Manage individual preferences</option>
             </options>

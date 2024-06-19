@@ -15,6 +15,7 @@ Installation ( Setup Project )
 -------------------------------
 ```
 $ php bin/console vankosoft:install
+$ php bin/console vankosoft:load-widgets
 $ yarn install
 $ yarn run dev
 ```

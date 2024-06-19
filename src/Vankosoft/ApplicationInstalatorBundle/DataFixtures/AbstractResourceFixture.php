@@ -50,18 +50,21 @@ abstract class AbstractResourceFixture implements FixtureInterface
     {
         $options = $this->optionsResolver->resolve( $options );
 
-        $i = 0;
         foreach ( $options['custom'] as $resourceOptions ) {
             
             $resource = $this->exampleFactory->create( $resourceOptions );
             $this->objectManager->persist( $resource );
+            $this->objectManager->flush();
+            $this->objectManager->refresh( $resource );
             
             if ( isset( $resourceOptions['translations'] ) && $this->exampleFactory instanceof ExampleTranslationsFactoryInterface ) {
-                // This Makes an Exception
-                //$this->objectManager->flush();
-                    
                 foreach ( $resourceOptions['translations'] as $localeCode => $translationOptions ) {
-                    $translationResource = $this->exampleFactory->createTranslation( $resource, $localeCode, $translationOptions );
+                    if ( isset( $resourceOptions['locale'] ) && $resourceOptions['locale'] == $localeCode ) {
+                        continue;
+                    }
+                    
+                    //$resourceCopy           = clone $resource;
+                    $translationResource    = $this->exampleFactory->createTranslation( $resource, $localeCode, $translationOptions );
                     
                     if ( $resource instanceof TranslatableInterface ) {
                         if ( $translationResource->getTranslatableLocale() != $resource->getTranslatableLocale() ) {
@@ -74,16 +77,8 @@ abstract class AbstractResourceFixture implements FixtureInterface
                     }
                 }
             }
-
-            ++$i;
-
-            if ( 0 === ( $i % 10 ) ) {
-                $this->objectManager->flush();
-                $this->objectManager->clear();
-            }
         }
 
-        $this->objectManager->flush();
         $this->objectManager->clear();
     }
 

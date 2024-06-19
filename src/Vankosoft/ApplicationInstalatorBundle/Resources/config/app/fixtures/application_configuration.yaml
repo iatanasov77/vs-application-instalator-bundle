@@ -17,7 +17,7 @@ sylius_fixtures:
                         custom:
                             - title: 'English (US)'
                               code: 'en_US'
-                              translatableLocale:  '%locale%'
+                              locale:  '%locale%'
                               translations:
                                   en_US:
                                       title: 'English (US)'
@@ -25,7 +25,7 @@ sylius_fixtures:
                                       title: 'Английски'
                             - title: 'Bulgarian'
                               code: 'bg_BG'
-                              translatableLocale:  '%locale%'
+                              locale:  '%locale%'
                               translations:
                                   en_US:
                                       title: 'Bulgarian'

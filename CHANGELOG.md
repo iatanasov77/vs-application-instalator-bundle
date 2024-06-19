@@ -1,3 +1,12 @@
+1.10.223	|	Release date: **19.06.2024**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix cookie_consent_translations Doctrine Mapping.
+  - Update ReadMe File.
+  - Improve Taxonomy Index Page.
+  - Fix Installator to Create Translatable Resources.
+
+
 1.10.222	|	Release date: **15.06.2024**
 ============================================
 * New Features and Improvements:
