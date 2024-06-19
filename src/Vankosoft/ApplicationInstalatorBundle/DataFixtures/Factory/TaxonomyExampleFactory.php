@@ -60,12 +60,30 @@ class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFa
     public function createTranslation( $entity, $localeCode, $options = [] )
     {
         $taxonomyRootTaxonEntity    = $entity->getRootTaxon();
-            
+        
+        $this->slugGenerator->setLocaleCode( $localeCode );
+        $slug                       = $this->slugGenerator->generate( $options['title'] );
+        
+        $taxonomyRootTaxonEntity->getTranslation( $localeCode );
         $taxonomyRootTaxonEntity->setCurrentLocale( $localeCode );
-        $taxonomyRootTaxonEntity->getTranslation()->setName( $options['title'] );
-        $taxonomyRootTaxonEntity->getTranslation()->setDescription( $options['description'] );
-        $taxonomyRootTaxonEntity->getTranslation()->setTranslatable( $taxonomyRootTaxonEntity );
-
+        if ( ! in_array( $localeCode, $taxonomyRootTaxonEntity->getExistingTranslations() ) ) {
+            $translation    = $taxonomyRootTaxonEntity->createNewTranslation();
+            
+            $translation->setLocale( $localeCode );
+            $translation->setName( $options['title'] );
+            $translation->setDescription( $options['description'] );
+            
+            $this->slugGenerator->setLocaleCode( $localeCode );
+            $translation->setSlug( $this->slugGenerator->generate( $options['title'] ) );
+            
+            $taxonomyRootTaxonEntity->addTranslation( $translation );
+        } else {
+            $translation   = $taxonomyRootTaxonEntity->getTranslation( $localeCode );
+            
+            $translation->setName( $options['title'] );
+            $translation->setDescription( $options['description'] );
+        }
+        
         $entity->setTranslatableLocale( $localeCode );
         $entity->setName( $options['title'] );
         $entity->setDescription( $options['description'] );
