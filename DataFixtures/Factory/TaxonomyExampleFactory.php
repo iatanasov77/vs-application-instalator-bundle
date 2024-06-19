@@ -59,18 +59,17 @@ class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFa
     
     public function createTranslation( $entity, $localeCode, $options = [] )
     {
-//         $taxonomyRootTaxonEntity    = $entity->getRootTaxon();
+        $taxonomyRootTaxonEntity    = $entity->getRootTaxon();
             
-//         $taxonomyRootTaxonEntity->setCurrentLocale( $localeCode );
-//         $taxonomyRootTaxonEntity->getTranslation()->setName( $options['title'] );
-//         $taxonomyRootTaxonEntity->getTranslation()->setDescription( $options['description'] );
-//         $taxonomyRootTaxonEntity->getTranslation()->setTranslatable( $taxonomyRootTaxonEntity );
-        
-//         $entity->setRootTaxon( $taxonomyRootTaxonEntity );
+        $taxonomyRootTaxonEntity->setCurrentLocale( $localeCode );
+        $taxonomyRootTaxonEntity->getTranslation()->setName( $options['title'] );
+        $taxonomyRootTaxonEntity->getTranslation()->setDescription( $options['description'] );
+        $taxonomyRootTaxonEntity->getTranslation()->setTranslatable( $taxonomyRootTaxonEntity );
 
         $entity->setTranslatableLocale( $localeCode );
         $entity->setName( $options['title'] );
         $entity->setDescription( $options['description'] );
+        $entity->setRootTaxon( $taxonomyRootTaxonEntity );
         
         return $entity;
     }
