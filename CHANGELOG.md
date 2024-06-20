@@ -1,3 +1,10 @@
+1.10.225	|	Release date: **20.06.2024**
+============================================
+* New Features:
+  - Update Application Installator Configs.
+  - Add a Webpack Entry for a PaymentBundle Js.
+
+
 1.10.224	|	Release date: **19.06.2024**
 ============================================
 * New Features:
