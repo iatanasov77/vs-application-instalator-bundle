@@ -10,7 +10,7 @@
         <div class="alert alert-danger mt-4 float-start text-left w-100" role="alert">
             {% for field, errors in formErrors %}
                 {% for fieldError in errors %}
-                    <span>{{ field }}: {{ fieldError | trans }}</span>
+                    <p>{{ field }}: {{ fieldError | trans }}</p>
                 {% endfor %}
             {% endfor %}
         </div>
