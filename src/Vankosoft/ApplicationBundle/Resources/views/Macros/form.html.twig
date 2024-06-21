@@ -6,13 +6,15 @@
 
 {% macro errors( formErrors ) %}
 
-    {% for field, errors in formErrors %}
-        {% for fieldError in errors %}
-            <div class="alert alert-danger mt-4 float-start text-left w-100" role="alert">
-                <span>{{ field }}: {{ fieldError | trans }}</span>
-            </div>
-        {% endfor %}
-    {% endfor %}
+    {% if formErrors is not empty %}
+        <div class="alert alert-danger mt-4 float-start text-left w-100" role="alert">
+            {% for field, errors in formErrors %}
+                {% for fieldError in errors %}
+                    <span>{{ field }}: {{ fieldError | trans }}</span>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% endif %}
     
     {#
     {% if form_errors(form) is not empty %}
