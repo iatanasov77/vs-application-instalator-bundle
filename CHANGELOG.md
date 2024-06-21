@@ -1,3 +1,9 @@
+1.10.226	|	Release date: **21.06.2024**
+============================================
+* New Features:
+  - Improve a Twig Macros for Form Errors.
+
+
 1.10.225	|	Release date: **20.06.2024**
 ============================================
 * New Features:
