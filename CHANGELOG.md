@@ -1,3 +1,12 @@
+1.10.227	|	Release date: **23.06.2024**
+============================================
+* New Features and Improvements:
+  - Add Some Translations.
+  - Use getTaxonomy Method of TaxonomyHelperTrait.
+  - Improve Some Twig View.
+  - Add Some CSS Styles into Default AdminPanel Theme
+
+
 1.10.226	|	Release date: **21.06.2024**
 ============================================
 * New Features:
