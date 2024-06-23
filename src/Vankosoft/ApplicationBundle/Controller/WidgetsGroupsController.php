@@ -33,9 +33,8 @@ class WidgetsGroupsController extends AbstractCrudController
             /*
              * @WORKAROUND Create Taxon If not exists
              */
-            $taxonomy   = $this->get( 'vs_application.repository.taxonomy' )->findByCode(
-                $this->getParameter( 'vs_application.widgets_groups.taxonomy_code' )
-            );
+            $taxonomy   = $this->getTaxonomy( 'vs_application.widgets_groups.taxonomy_code' );
+            
             $newTaxon   = $this->createTaxon(
                 $categoryName,
                 $request->getLocale(),

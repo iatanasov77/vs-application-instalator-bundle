@@ -230,6 +230,7 @@ vs_application:
         items_index_row_hostname: Хост
         items_index_row_theme: Тема
         items_index_row_action_settings: Настройки
+        items_index_row_action_create: Създай Нов
         items_index_row_action_edit: Редактирай
         items_index_row_action_delete: Изтрий
         items_index_row_action_download: Даунлоуд

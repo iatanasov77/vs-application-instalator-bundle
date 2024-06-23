@@ -230,6 +230,7 @@ vs_application:
         items_index_row_hostname: Hostname
         items_index_row_theme: Theme
         items_index_row_action_settings: Settings
+        items_index_row_action_create: Create New
         items_index_row_action_edit: Edit
         items_index_row_action_delete: Delete
         items_index_row_action_download: Download
