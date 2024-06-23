@@ -160,6 +160,11 @@ input[type=file] {
     margin: 0 5px 0 5px !important;
 }
 
+.combobox-item input[type='checkbox'] {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 .combobox-item-selected {
     background-color: #ffffff !important;
 }
