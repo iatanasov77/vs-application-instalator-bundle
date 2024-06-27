@@ -13,6 +13,20 @@ const siSortable  = new VsSortable( 'vs_cms_slider_item_ext_sort_action' );
 // WORKAROUND: Prevent Double Submiting
 global.btnSaveSliderItemClicked = window.btnSaveSliderItemClicked = false;
 
+function initSliderItemPhotoField()
+{
+    $( '#sliderItemModal' ).on( 'change', 'div.form-field-file input[type=file]', function()
+    {
+        var label       = $( this ).next();
+        var fileName    = $( this ).val().split( '\\' ).pop();
+        if ( fileName ) { 
+            $( label ).html( fileName );
+        } else { 
+            $( label ).html( '' );
+        }
+    });
+}
+
 $( function()
 {
     // bin/console fos:js-routing:dump --format=json --target=public/shared_assets/js/fos_js_routes_admin.json
@@ -53,6 +67,7 @@ $( function()
                                     
                 $( '#modalTitle' ).text( modalTitle );
                 $( '#modalBodySliderItem > div.card-body' ).html( response );
+                
                 
                 /** Bootstrap 5 Modal Toggle */
                 const myModal = new bootstrap.Modal('#sliderItemModal', {
@@ -139,4 +154,6 @@ $( function()
             siSortable.changeOrderNew( itemId, insertAfterId );
         }
     });
+    
+    initSliderItemPhotoField();
 });
