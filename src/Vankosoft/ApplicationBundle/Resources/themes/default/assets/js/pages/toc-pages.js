@@ -118,7 +118,9 @@ $( function ()
         var documentId  = $( '#DocumentFormContainer' ).attr( 'data-documentId' );
         var formData    = new FormData( $( '#form_toc_page' )[ 0 ] );
         var submitUrl   = $( '#form_toc_page' ).attr( 'action' );
-        var redirectUrl = VsPath( 'vs_cms_document_update', {'id': documentId} );
+        
+        var redirectUrl = submitUrl;
+        //var redirectUrl = VsPath( 'vs_cms_document_update', {'id': documentId} );
         
         var pageText    = CKEDITOR.instances.toc_page_form_text.getData();
         formData.set( "toc_page_form[text]", pageText );

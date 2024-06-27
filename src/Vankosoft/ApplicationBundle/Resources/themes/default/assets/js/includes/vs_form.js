@@ -5,6 +5,11 @@ export function VsFormSubmit( formData, submitUrl, redirectUrl )
         url: submitUrl,
         data: formData,
         success: function ( response ) {
+            // Sometimes Not Need Adjax Response
+            if ( ! response.status ) {
+                document.location = redirectUrl;
+            }
+            
             if ( response.status == 'ok' ) {
                 if ( redirectUrl ) {
                     document.location = redirectUrl;
