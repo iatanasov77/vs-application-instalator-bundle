@@ -14,7 +14,7 @@ export function VsFormSubmit( formData, submitUrl, redirectUrl )
                     // Response Can to Be Form With Errors
                     new CustomEvent( "VsFormSubmitError", {
                         detail: {
-                            message: response.message ? response.message : response;
+                            message: response.message ? response.message : response
                         },
                     })
                 );
