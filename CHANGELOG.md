@@ -1,3 +1,9 @@
+1.10.230	|	Release date: **27.06.2024**
+============================================
+* New Features and Improvements:
+  - Improve TocPage Model.
+
+
 1.10.229	|	Release date: **27.06.2024**
 ============================================
 * Bug-Fixes and Improvements:
