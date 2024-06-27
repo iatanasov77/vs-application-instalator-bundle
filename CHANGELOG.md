@@ -1,3 +1,10 @@
+1.10.228	|	Release date: **27.06.2024**
+============================================
+* Bug-Fixes:
+  - Add a Missing JavaScript File.
+  - Fix TocPage Edit Template.
+
+
 1.10.227	|	Release date: **23.06.2024**
 ============================================
 * New Features and Improvements:
