@@ -18,7 +18,7 @@ export function VsFormSubmit( formData, submitUrl, redirectUrl )
                 window.dispatchEvent(
                     new CustomEvent( "VsFormSubmitError", {
                         detail: {
-                            message: response.message
+                            message: response.message ? response.message : response;
                         },
                     })
                 );
@@ -46,7 +46,9 @@ export function VsGetSubmitButton()
 $( function()
 {
     window.addEventListener( 'VsFormSubmitError', event => {
-        alert( 'VsFormSubmit Error: ' + event.detail.message );
+        if ( event.detail.message ) {
+            alert( 'VsFormSubmit Error: ' + event.detail.message );
+        }
     });
     
     $( 'form input[type=submit]' ).on( 'click', function()
