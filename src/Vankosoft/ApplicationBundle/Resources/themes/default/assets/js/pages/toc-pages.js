@@ -154,7 +154,7 @@ $( function ()
     });
     
     window.addEventListener( 'VsFormSubmitError', event => {
-        $( '#modalBodyTocPage > div.card-body' ).html( event.detail.message );
+        $( '#modalBodyTocPage > div.card-body' ).html( event.detail.response );
         $( '#toc_page_form_parent' ).combotree();
     });
         
