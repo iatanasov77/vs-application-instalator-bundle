@@ -1,3 +1,10 @@
+1.10.229	|	Release date: **27.06.2024**
+============================================
+* Bug-Fixes and Improvements:
+  - Improve TOC Page Form.
+  - Improve Slider Item Form.
+
+
 1.10.228	|	Release date: **27.06.2024**
 ============================================
 * Bug-Fixes:
