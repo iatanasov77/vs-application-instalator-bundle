@@ -85,6 +85,7 @@ Encore
     .addEntry( 'js/documents-edit', applicationAssetsPath + '/js/pages/documents-edit.js' )
     .addEntry( 'js/toc-pages', applicationAssetsPath + '/js/pages/toc-pages.js' )
     .addEntry( 'js/toc-pages-delete', applicationAssetsPath + '/js/pages/toc-pages-delete.js' )
+    .addEntry( 'js/multipage-toc-update', applicationAssetsPath + '/js/pages/multipage-toc-update.js' )
     
     .addEntry( 'js/users-index', applicationAssetsPath + '/js/pages/users-index.js' )
     .addEntry( 'js/users-edit', applicationAssetsPath + '/js/pages/users-edit.js' )
