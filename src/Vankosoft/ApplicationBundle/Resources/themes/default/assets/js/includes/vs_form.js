@@ -5,17 +5,13 @@ export function VsFormSubmit( formData, submitUrl, redirectUrl )
         url: submitUrl,
         data: formData,
         success: function ( response ) {
-            // Sometimes Not Need Adjax Response
-            if ( ! response.status ) {
-                document.location = redirectUrl;
-            }
-            
             if ( response.status == 'ok' ) {
                 if ( redirectUrl ) {
                     document.location = redirectUrl;
                 }
             } else {
                 window.dispatchEvent(
+                    // Response Can to Be Form With Errors
                     new CustomEvent( "VsFormSubmitError", {
                         detail: {
                             message: response.message ? response.message : response;
