@@ -11,9 +11,10 @@ export function VsFormSubmit( formData, submitUrl, redirectUrl )
                 }
             } else {
                 window.dispatchEvent(
+                    // Response Can to Be Form With Errors
                     new CustomEvent( "VsFormSubmitError", {
                         detail: {
-                            message: response.message
+                            response: response
                         },
                     })
                 );
@@ -41,7 +42,9 @@ export function VsGetSubmitButton()
 $( function()
 {
     window.addEventListener( 'VsFormSubmitError', event => {
-        alert( 'VsFormSubmit Error: ' + event.detail.message );
+        if ( event.detail.response.message ) {
+            alert( 'VsFormSubmit Error: ' + event.detail.response.message );
+        }
     });
     
     $( 'form input[type=submit]' ).on( 'click', function()
