@@ -1,3 +1,9 @@
+1.10.232	|	Release date: **28.06.2024**
+============================================
+* New Features:
+  - Make SliderItemExtController Extendable.
+
+
 1.10.231	|	Release date: **28.06.2024**
 ============================================
 * New Features:
