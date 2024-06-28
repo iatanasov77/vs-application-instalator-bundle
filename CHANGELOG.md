@@ -1,3 +1,9 @@
+1.10.231	|	Release date: **28.06.2024**
+============================================
+* New Features:
+  - Improve SliderItem Model.
+
+
 1.10.230	|	Release date: **27.06.2024**
 ============================================
 * New Features and Improvements:
