@@ -164,9 +164,13 @@ vs_application:
             btn_close: Close
         website_contact:
             name: 'Name'
+            name_placeHolder: 'Your Name'
             email: 'Email'
+            email_placeHolder: 'Your Email'
             subject: 'Subject'
-            message: 'Message' 
+            subject_placeHolder: 'Subject'
+            message: 'Message'
+            message_placeHolder: 'Message'
             submit: 'Send Message'
         cookie_consent_translation:
             language_code: Language

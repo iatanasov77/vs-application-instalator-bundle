@@ -164,9 +164,13 @@ vs_application:
             btn_close: Затвори
         website_contact:
             name: 'Име'
+            name_placeHolder: 'Вашето Име'
             email: 'Емейл'
+            email_placeHolder: 'Вашият Емейл'
             subject: 'Тема'
-            message: 'Съобщение' 
+            subject_placeHolder: 'Тема'
+            message: 'Съобщение'
+            message_placeHolder: 'Съобщение'
             submit: 'Изпрати'
         cookie_consent_translation:
             language_code: Език
