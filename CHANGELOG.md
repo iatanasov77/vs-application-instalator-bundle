@@ -1,3 +1,9 @@
+1.10.234	|	Release date: **29.06.2024**
+============================================
+* New Features:
+  - Add JQuery Custom Widgets into Default AdminPanel Theme.
+
+
 1.10.233	|	Release date: **28.06.2024**
 ============================================
 * New Features:
