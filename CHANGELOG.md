@@ -1,3 +1,9 @@
+1.10.235	|	Release date: **29.06.2024**
+============================================
+* New Features:
+  - Improve Default Theme ajax-widget.js Helper.
+
+
 1.10.234	|	Release date: **29.06.2024**
 ============================================
 * New Features:

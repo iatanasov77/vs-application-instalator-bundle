@@ -11,12 +11,14 @@ $( function()
         // default options
         options: {
             callback: 'default-callback-url',
+            afterLoad: null,
         },
  
         // The constructor
         _create: function() {
             var getSuggestionsUrl       = this.options.callback;
             var suggestionsContainer    = this.element;
+            var afterLoad               = this.options.afterLoad;
             
             $.ajax({
                 type: "GET",
@@ -24,6 +26,10 @@ $( function()
                 success: function( response )
                 {
                     suggestionsContainer.html( response );
+                    
+                    if ( afterLoad ) {
+                        afterLoad();
+                    }
                 },
                 error: function()
                 {
