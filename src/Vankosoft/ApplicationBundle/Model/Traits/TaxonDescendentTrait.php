@@ -54,7 +54,7 @@ trait TaxonDescendentTrait
         return $this;
     }
     
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->taxon ? $this->taxon->getCode() : '';
     }
@@ -70,7 +70,7 @@ trait TaxonDescendentTrait
         return $this;
     }
     
-    public function getName(): string
+    public function getName(): ?string
     {
         if ( $this->taxon ) {
             /**
@@ -130,7 +130,7 @@ trait TaxonDescendentTrait
         return $this;
     }
     
-    public function getNameTranslated( string $locale ): string
+    public function getNameTranslated( string $locale ): ?string
     {
         return $this->taxon ? $this->taxon->getTranslation( $locale )->getName() : '';
     }
