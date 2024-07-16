@@ -1,3 +1,9 @@
+1.10.236	|	Release date: **16.07.2024**
+============================================
+* New Features and Improvements:
+  - Improve TaxonDescendentTrait
+
+
 1.10.235	|	Release date: **29.06.2024**
 ============================================
 * New Features:
