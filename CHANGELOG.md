@@ -1,3 +1,9 @@
+1.10.240	|	Release date: **19.07.2024**
+============================================
+* New Features:
+  - Update Application Installator Configs.
+
+
 1.10.239	|	Release date: **19.07.2024**
 ============================================
 * New Features:
