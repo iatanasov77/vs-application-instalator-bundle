@@ -107,6 +107,7 @@ class ApplicationSetup
         $this->setupApplicationKernel();
         $this->setupApplicationHomePage();
         $this->setupApplicationLoginPage();
+        $this->setupApplicationStandardPages();
         $this->setupApplicationConfigs();
         
         if ( $this->isCatalogProject() ) {
@@ -539,7 +540,7 @@ class ApplicationSetup
         }
     }
     
-    private function setupApplicationCatalogPages()
+    private function setupApplicationStandardPages()
     {
         $filesystem             = new Filesystem();
         $projectRootDir         = $this->container->get( 'kernel' )->getProjectDir();
@@ -548,36 +549,42 @@ class ApplicationSetup
             ["__application_name__", "__application_slug__"],
             [$this->applicationNamespace, $this->applicationSlug],
             file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/GlobalFormsTrait.php' )
-        );
+            );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/GlobalFormsTrait.php', $applicationAuthController );
         
         $applicationAuthController  = str_replace(
             ["__application_name__", "__application_slug__"],
             [$this->applicationNamespace, $this->applicationSlug],
             file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ContactController.php' )
-        );
+            );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ContactController.php', $applicationAuthController );
         
         $applicationAuthController  = str_replace(
             ["__application_name__", "__application_slug__"],
             [$this->applicationNamespace, $this->applicationSlug],
             file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ForgotPasswordController.php' )
-        );
+            );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ForgotPasswordController.php', $applicationAuthController );
         
         $applicationAuthController  = str_replace(
             ["__application_name__", "__application_slug__"],
             [$this->applicationNamespace, $this->applicationSlug],
             file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/RegisterController.php' )
-        );
+            );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/RegisterController.php', $applicationAuthController );
         
         $applicationAuthController  = str_replace(
             ["__application_name__", "__application_slug__"],
             [$this->applicationNamespace, $this->applicationSlug],
             file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ProfileController.php' )
-        );
+            );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/ProfileController.php', $applicationAuthController );
+    }
+    
+    private function setupApplicationCatalogPages()
+    {
+        $filesystem             = new Filesystem();
+        $projectRootDir         = $this->container->get( 'kernel' )->getProjectDir();
         
         $applicationAuthController  = str_replace(
             ["__application_name__", "__application_slug__"],
