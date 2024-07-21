@@ -9,57 +9,41 @@ use Twig\Environment;
 
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 use Vankosoft\ApplicationBundle\Component\Application\Project;
+use Vankosoft\ApplicationInstalatorBundle\Command\AbstractInstallCommand;
 
 class ApplicationSetup
 {
-    /**
-     * @var ContainerInterface $container
-     */
+    /** @var ContainerInterface $container */
     private $container;
     
-    /**
-     * @var Environment $twig
-     */
+    /** @var Environment $twig */
     private $twig;
     
-    /**
-     * @var string $applicationSlug
-     */
+    /** @var string $applicationSlug */
     private $applicationSlug;
     
-    /**
-     * @var string $applicationName
-     */
+    /** @var string $applicationName */
     private $applicationName;
     
-    /**
-     * @var string $applicationNamespace
-     */
+    /** @var string $applicationNamespace */
     private $applicationNamespace;
     
-    /**
-     * @var string $applicationVersion
-     */
+    /** @var string $applicationVersion */
     private $applicationVersion;
     
-    /**
-     * @var string $applicationDefaultLocale
-     */
+    /** @var string $applicationType */
+    private $applicationType;
+    
+    /** @var string $applicationDefaultLocale */
     private $applicationDefaultLocale;
     
-    /**
-     * @var boolean $newProjectInstall
-     */
+    /** @var boolean $newProjectInstall */
     private $newProjectInstall;
     
-    /**
-     * @var boolean $newProjectInstall
-     */
+    /** @var boolean $newProjectInstall */
     private $isExtendedProject;
     
-    /** 
-     * @var SlugGenerator
-     */
+    /** @var SlugGenerator */
     private $slugGenerator;
     
     public function __construct( ContainerInterface $container, Environment $twig, SlugGenerator $slugGenerator )
@@ -93,10 +77,11 @@ class ApplicationSetup
      * @param string $applicationName
      * @param boolean $newProjectInstall
      */
-    public function setupApplication( $applicationName, $localeCode, $newProjectInstall = false )
+    public function setupApplication( $applicationName, $localeCode, $newProjectInstall = false, $applcationType = null )
     {
         $this->applicationDefaultLocale = $localeCode;
         $this->newProjectInstall        = $newProjectInstall;
+        $this->applicationType          = $applcationType;
         $this->_initialize();
         
         $applicationDirs                = $this->getApplicationDirectories( $applicationName );
@@ -115,8 +100,17 @@ class ApplicationSetup
         }
         
         if ( $this->isExtendedProject() ) {
-            $this->setupApplicationCatalogPages();
-            $this->setupApplicationExtendedPages();
+            switch ( $this->applicationType ) {
+                case AbstractInstallCommand::APPLICATION_TYPE_STANDRD:
+                    
+                    break;
+                case AbstractInstallCommand::APPLICATION_TYPE_CATALOG:
+                    $this->setupApplicationCatalogPages();
+                    break;
+                default:
+                    $this->setupApplicationCatalogPages();
+                    $this->setupApplicationExtendedPages();
+            }
         }
         
         /*
@@ -205,13 +199,11 @@ class ApplicationSetup
     
     private function isCatalogProject(): bool
     {
-        // \array_key_exists( 'VSPaymentBundle', $this->container->getParameter( 'kernel.bundles' ) );
         return $this->getProjectType() == Project::PROJECT_TYPE_CATALOG;
     }
     
     private function isExtendedProject(): bool
     {
-        // \array_key_exists( 'VSPaymentBundle', $this->container->getParameter( 'kernel.bundles' ) );
         return $this->getProjectType() == Project::PROJECT_TYPE_EXTENDED;
     }
     
@@ -228,6 +220,9 @@ class ApplicationSetup
                 break;
             case Project::PROJECT_TYPE_EXTENDED:
                 $configsRootDir = '@VSApplicationInstalatorBundle/Resources/application-extended/';
+                break;
+            case Project::PROJECT_TYPE_API:
+                $configsRootDir = '@VSApplicationInstalatorBundle/Resources/application-api/';
                 break;
             default:
                 throw new SetupException( 'Unknown Project Type !' );
