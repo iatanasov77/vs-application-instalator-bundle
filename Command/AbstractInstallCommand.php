@@ -13,6 +13,10 @@ use Vankosoft\ApplicationInstalatorBundle\Installer\Executor\CommandExecutor;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
+    const APPLICATION_TYPE_STANDRD  = 'standard';
+    const APPLICATION_TYPE_CATALOG  = 'catalog';
+    const APPLICATION_TYPE_EXTENDED = 'extended';
+    
     /** @var CommandExecutor */
     protected $commandExecutor;
     

@@ -41,6 +41,7 @@ final class CreateApplicationCommand extends AbstractInstallCommand
 The <info>%command.name%</info> command allows user to create a VankoSoft Application.
 EOT
             )
+            ->addArgument( 'applicationType', InputArgument::OPTIONAL, 'The Application Type to be Created.' )
             ->addOption(
                 'new-project',
                 'p',
@@ -69,6 +70,8 @@ EOT
     {
         $localeCode         = $this->getApplicationDefaultLocale( $input, $output );
         
+        $applicationType    = $input->getArgument( 'applicationType' );
+        
         $newProjectOption   = $input->getOption( 'new-project' );
         $newProject         = ( $newProjectOption !== false );
         
@@ -81,6 +84,8 @@ EOT
         $appSetup           = $this->get( 'vs_application.installer.setup_application' );
         $outputStyle        = new SymfonyStyle( $input, $output );
         
+        $applcationType     = $this->createApplicationTypeQuestion();
+        
         // Add Database Records
         $outputStyle->writeln( 'Create Application Database Records.' );
         $this->createApplicationDatabaseRecords( $input, $output, $applicationName, $localeCode );
@@ -89,7 +94,7 @@ EOT
         
         // Create Directories
         $outputStyle->writeln( 'Create Application Directories.' );
-        $appSetup->setupApplication( $applicationName, $localeCode, $newProject );
+        $appSetup->setupApplication( $applicationName, $localeCode, $newProject, $applcationType );
         $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
         $outputStyle->newLine();
         
@@ -335,5 +340,32 @@ EOT
         }
         
         return $applicationThemeName;
+    }
+    
+    private function createApplicationTypeQuestion( InputInterface $input, OutputInterface $output ): ?string
+    {
+        $applicationTypes   = [
+            self::APPLICATION_TYPE_STANDRD,
+            self::APPLICATION_TYPE_CATALOG,
+            self::APPLICATION_TYPE_EXTENDED,
+        ];
+        
+        $default            = $applicationTypes[2];
+        $questionMessage    = sprintf( 'Please select an application type to be created (defaults to %s): ', $default );
+        
+        $choiceQuestion     = new ChoiceQuestion(
+            $questionMessage,
+            // choices can also be PHP objects that implement __toString() method
+            $applicationTypes,
+            $default
+        );
+        
+        $applicationType    = $this->getHelper( 'question' )->ask(
+            $input,
+            $output,
+            $choiceQuestion
+        );
+        
+        return $applicationType;
     }
 }
