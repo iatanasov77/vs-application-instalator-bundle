@@ -275,9 +275,10 @@ EOT
         $settings->setApplication( $this->application );
         $settings->setMaintenanceMode( 0 );
         
+        $theme                  = null;
         if ( $applicationType != self::APPLICATION_TYPE_API ) {
             $applicationThemeName   = $this->createApplicationThemeQuestion( $input, $output );
-            $theme                  = null;
+            
             if ( $applicationThemeName && $applicationThemeName !== self::THEME_NONE_ID ) {
                 $theme                  = $this->get( 'vs_app.theme_repository' )->findOneByName( $applicationThemeName );
                 if ( $theme ) {
