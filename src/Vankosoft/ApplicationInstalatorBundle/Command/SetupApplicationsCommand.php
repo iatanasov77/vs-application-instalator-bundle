@@ -84,7 +84,7 @@ EOT
                 
                 switch ( $applicationType ) {
                     case self::APPLICATION_TYPE_STANDRD:
-                        $commandParameters  = \array_unshift( $commandParameters, self::APPLICATION_TYPE_STANDRD );
+                        $commandParameters['--type']    = self::APPLICATION_TYPE_STANDRD;
                         
                         $this->commandExecutor->runCommand(
                             'vankosoft:application:create',
@@ -94,9 +94,7 @@ EOT
                         
                         $commandParameters['--name']    = $commandParameters['--name'] . " API";
                         $commandParameters['--url']     = "api." . $commandParameters['--url'];
-                        
-                        \array_shift( $commandParameters );
-                        $commandParameters              = \array_unshift( $commandParameters, self::APPLICATION_TYPE_API );
+                        $commandParameters['--type']    = self::APPLICATION_TYPE_API;
                         
                         $this->commandExecutor->runCommand(
                             'vankosoft:application:create',
@@ -106,7 +104,7 @@ EOT
                         
                         break;
                     case self::APPLICATION_TYPE_CATALOG:
-                        $commandParameters  = \array_unshift( $commandParameters, self::APPLICATION_TYPE_CATALOG );
+                        $commandParameters['--type']    = self::APPLICATION_TYPE_CATALOG;
                         
                         $this->commandExecutor->runCommand(
                             'vankosoft:application:create',
@@ -116,9 +114,7 @@ EOT
                         
                         $commandParameters['--name']    = $commandParameters['--name'] . " API";
                         $commandParameters['--url']     = "api." . $commandParameters['--url'];
-                        
-                        \array_shift( $commandParameters );
-                        $commandParameters              = \array_unshift( $commandParameters, self::APPLICATION_TYPE_API );
+                        $commandParameters['--type']    = self::APPLICATION_TYPE_API;
                         
                         $this->commandExecutor->runCommand(
                             'vankosoft:application:create',
@@ -128,7 +124,7 @@ EOT
                         
                         break;
                     default:
-                        $commandParameters  = \array_unshift( $commandParameters, self::APPLICATION_TYPE_EXTENDED );
+                        $commandParameters['--type']    = self::APPLICATION_TYPE_EXTENDED;
                         
                         $this->commandExecutor->runCommand(
                             'vankosoft:application:create',

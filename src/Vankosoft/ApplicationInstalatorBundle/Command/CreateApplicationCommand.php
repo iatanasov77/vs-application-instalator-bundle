@@ -41,7 +41,13 @@ final class CreateApplicationCommand extends AbstractInstallCommand
 The <info>%command.name%</info> command allows user to create a VankoSoft Application.
 EOT
             )
-            ->addArgument( 'applicationType', InputArgument::OPTIONAL, 'The Application Type to be Created.' )
+            ->addOption(
+                'type',
+                'y',
+                InputOption::VALUE_OPTIONAL,
+                'The Application Type to be Created.',
+                null
+            )
             ->addOption(
                 'name',
                 'n',
@@ -84,7 +90,7 @@ EOT
     {
         $localeCode         = $this->getApplicationDefaultLocale( $input, $output );
         
-        $applicationType    = $input->getArgument( 'applicationType' );
+        $applicationType    = $input->getOption( 'type' );
         $applicationName    = $input->getOption( 'name' );
         
         $newProjectOption   = $input->getOption( 'new-project' );
