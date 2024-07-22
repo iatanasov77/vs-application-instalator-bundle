@@ -68,6 +68,8 @@ class ApplicationSetup
             'controller'    => $projectRootDir . '/src/Controller/' . $this->applicationNamespace,
         ];
         
+        
+        
         return $applicationDirs;
     }
     
@@ -90,10 +92,13 @@ class ApplicationSetup
         $this->setupApplicationDirectories( $applicationDirs );
         
         $this->setupApplicationKernel();
-        $this->setupApplicationHomePage();
-        $this->setupApplicationLoginPage();
-        $this->setupApplicationStandardPages();
         $this->setupApplicationConfigs();
+        
+        if ( $this->applicationType !== AbstractInstallCommand::APPLICATION_TYPE_API ) {
+            $this->setupApplicationHomePage();
+            $this->setupApplicationLoginPage();
+            $this->setupApplicationStandardPages();
+        }
         
         if ( $this->isCatalogProject() ) {
             $this->setupApplicationCatalogPages();
@@ -101,15 +106,13 @@ class ApplicationSetup
         
         if ( $this->isExtendedProject() ) {
             switch ( $this->applicationType ) {
-                case AbstractInstallCommand::APPLICATION_TYPE_STANDRD:
-                    
-                    break;
                 case AbstractInstallCommand::APPLICATION_TYPE_CATALOG:
                     $this->setupApplicationCatalogPages();
                     break;
-                default:
+                case AbstractInstallCommand::APPLICATION_TYPE_EXTENDED:
                     $this->setupApplicationCatalogPages();
                     $this->setupApplicationExtendedPages();
+                    break;
             }
         }
         
@@ -211,21 +214,21 @@ class ApplicationSetup
     {
         $zip            = new \ZipArchive;
         
-        switch ( $this->getProjectType() ) {
-            case Project::PROJECT_TYPE_APPLICATION:
+        switch ( $this->applicationType ) {
+            case AbstractInstallCommand::APPLICATION_TYPE_STANDRD:
                 $configsRootDir = '@VSApplicationInstalatorBundle/Resources/application/';
                 break;
-            case Project::PROJECT_TYPE_CATALOG:
+            case AbstractInstallCommand::APPLICATION_TYPE_CATALOG:
                 $configsRootDir = '@VSApplicationInstalatorBundle/Resources/application-catalog/';
                 break;
-            case Project::PROJECT_TYPE_EXTENDED:
+            case AbstractInstallCommand::APPLICATION_TYPE_EXTENDED:
                 $configsRootDir = '@VSApplicationInstalatorBundle/Resources/application-extended/';
                 break;
-            case Project::PROJECT_TYPE_API:
+            case AbstractInstallCommand::APPLICATION_TYPE_API:
                 $configsRootDir = '@VSApplicationInstalatorBundle/Resources/application-api/';
                 break;
             default:
-                throw new SetupException( 'Unknown Project Type !' );
+                throw new SetupException( 'Unknown Application Type !' );
         }
         
         try {
