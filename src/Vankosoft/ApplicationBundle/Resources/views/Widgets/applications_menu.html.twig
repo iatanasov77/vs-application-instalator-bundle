@@ -23,8 +23,15 @@
                 <ul class="nav flex-column">
                     {% for oApplication in widget.params.applications %}
                         {% if oApplication.code != 'admin-panel' %}
+                        	
+                        	{% if oApplication.hostname[:3] == 'api' %}
+                                {% set appHost = oApplication.hostname ~ '/api/api-docs' %}
+                            {% else %}
+                            	{% set appHost = oApplication.hostname %}
+                            {% endif %}
+                            
                             <li class="nav-item ">
-                                <a class="nav-link main-menu-button" href="http://{{ oApplication.hostname }}" target="_blank">
+                                <a class="nav-link main-menu-button" href="http://{{ appHost }}" target="_blank">
                                     {{ oApplication.title }}
                                 </a>
                            </li>
