@@ -50,7 +50,7 @@ EOT
             )
             ->addOption(
                 'name',
-                'n',
+                'a',
                 InputOption::VALUE_OPTIONAL,
                 'Application Name.',
                 null
