@@ -84,40 +84,54 @@ EOT
                 
                 switch ( $applicationType ) {
                     case self::APPLICATION_TYPE_STANDRD:
+                        $commandParameters  = \array_unshift( $commandParameters, self::APPLICATION_TYPE_STANDRD );
+                        
                         $this->commandExecutor->runCommand(
-                            \sprintf( 'vankosoft:application:create %s', self::APPLICATION_TYPE_STANDRD ),
+                            'vankosoft:application:create',
                             $commandParameters,
                             $output
                         );
                         
                         $commandParameters['--name']    = $commandParameters['--name'] . " API";
                         $commandParameters['--url']     = "api." . $commandParameters['--url'];
+                        
+                        \array_shift( $commandParameters );
+                        $commandParameters              = \array_unshift( $commandParameters, self::APPLICATION_TYPE_API );
+                        
                         $this->commandExecutor->runCommand(
-                            \sprintf( 'vankosoft:application:create %s', self::APPLICATION_TYPE_API ),
+                            'vankosoft:application:create',
                             $commandParameters,
                             $output
                          );
                         
                         break;
                     case self::APPLICATION_TYPE_CATALOG:
+                        $commandParameters  = \array_unshift( $commandParameters, self::APPLICATION_TYPE_CATALOG );
+                        
                         $this->commandExecutor->runCommand(
-                            \sprintf( 'vankosoft:application:create %s', self::APPLICATION_TYPE_CATALOG ),
+                            'vankosoft:application:create',
                             $commandParameters,
                             $output
                         );
                         
                         $commandParameters['--name']    = $commandParameters['--name'] . " API";
                         $commandParameters['--url']     = "api." . $commandParameters['--url'];
+                        
+                        \array_shift( $commandParameters );
+                        $commandParameters              = \array_unshift( $commandParameters, self::APPLICATION_TYPE_API );
+                        
                         $this->commandExecutor->runCommand(
-                            \sprintf( 'vankosoft:application:create %s', self::APPLICATION_TYPE_API ),
+                            'vankosoft:application:create',
                             $commandParameters,
                             $output
                         );
                         
                         break;
                     default:
+                        $commandParameters  = \array_unshift( $commandParameters, self::APPLICATION_TYPE_EXTENDED );
+                        
                         $this->commandExecutor->runCommand(
-                            \sprintf( 'vankosoft:application:create %s', self::APPLICATION_TYPE_EXTENDED ),
+                            'vankosoft:application:create',
                             $commandParameters,
                             $output
                         );
