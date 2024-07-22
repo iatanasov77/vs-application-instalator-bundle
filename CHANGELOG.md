@@ -1,3 +1,9 @@
+1.10.243	|	Release date: **22.07.2024**
+============================================
+* Bug-Fixes:
+  - Fix Installator SetupApplicationsCommand .
+
+
 1.10.242	|	Release date: **22.07.2024**
 ============================================
 * New Features and Improvements:
