@@ -73,6 +73,9 @@ EOT
             case Project::PROJECT_TYPE_EXTENDED:
                 $applicationType                = $this->createApplicationTypeQuestion( $input, $output );
                 
+                /** @var QuestionHelper $questionHelper */
+                $questionHelper     = $this->getHelper( 'question' );
+                
                 $questionName                   = $this->createApplicationNameQuestion();
                 $commandParameters['--name']    = $questionHelper->ask( $input, $output, $questionName );
                 
