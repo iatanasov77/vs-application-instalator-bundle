@@ -64,8 +64,10 @@ EOT
         $appSetup           = $this->get( 'vs_application.installer.setup_application' );
         switch ( $appSetup->getProjectType() ) {
            case Project::PROJECT_TYPE_CATALOG:
+               $commandParameters['--type']    = self::APPLICATION_TYPE_CATALOG;
+               
                $this->commandExecutor->runCommand(
-                    \sprintf( 'vankosoft:application:create %s', self::APPLICATION_TYPE_CATALOG ),
+                   'vankosoft:application:create',
                     $commandParameters,
                     $output
                 );
@@ -137,8 +139,10 @@ EOT
                 
                 break;
             default:
+                $commandParameters['--type']    = self::APPLICATION_TYPE_STANDRD;
+                
                 $this->commandExecutor->runCommand(
-                    \sprintf( 'vankosoft:application:create %s', self::APPLICATION_TYPE_STANDRD ),
+                    'vankosoft:application:create',
                     $commandParameters,
                     $output
                 );
