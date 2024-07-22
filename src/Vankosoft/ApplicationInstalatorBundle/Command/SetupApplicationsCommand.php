@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 
-use Vankosoft\ApplicationBundle\Component\Slug;
+use Vankosoft\ApplicationBundle\Component\Application\Project;
 
 #[AsCommand(
     name: 'vankosoft:install:setup-applications',
@@ -59,9 +59,90 @@ EOT
     private function setupApplication( InputInterface $input, OutputInterface $output, string $localeCode ): int
     {
         $outputStyle        = new SymfonyStyle( $input, $output );
+        $commandParameters  = ['--new-project' => true, '--locale' => $localeCode, '--theme' => 'vankosoft/application-theme-2'];
         
-        $parameters         = ['--new-project' => true, '--locale' => $localeCode, '--theme' => 'vankosoft/application-theme-2'];
-        $this->commandExecutor->runCommand( 'vankosoft:application:create', $parameters, $output );
+        $appSetup           = $this->get( 'vs_application.installer.setup_application' );
+        switch ( $appSetup->getProjectType() ) {
+           case Project::PROJECT_TYPE_CATALOG:
+               $this->commandExecutor->runCommand(
+                    \sprintf( 'vankosoft:application:create %s', self::APPLICATION_TYPE_CATALOG ),
+                    $commandParameters,
+                    $output
+                );
+                break;
+            case Project::PROJECT_TYPE_EXTENDED:
+                $applicationType                = $this->createApplicationTypeQuestion( $input, $output );
+                
+                /** @var QuestionHelper $questionHelper */
+                $questionHelper     = $this->getHelper( 'question' );
+                
+                $questionName                   = $this->createApplicationNameQuestion();
+                $commandParameters['--name']    = $questionHelper->ask( $input, $output, $questionName );
+                
+                $questionUrl                    = $this->createApplicationUrlQuestion();
+                $commandParameters['--url']     = $questionHelper->ask( $input, $output, $questionUrl );
+                
+                switch ( $applicationType ) {
+                    case self::APPLICATION_TYPE_STANDRD:
+                        $commandParameters['--type']    = self::APPLICATION_TYPE_STANDRD;
+                        
+                        $this->commandExecutor->runCommand(
+                            'vankosoft:application:create',
+                            $commandParameters,
+                            $output
+                        );
+                        
+                        $outputStyle->writeln( '<info>Create a Separate API Application.</info>' );
+                        $commandParameters['--name']    = $commandParameters['--name'] . " API";
+                        $commandParameters['--url']     = "api." . $commandParameters['--url'];
+                        $commandParameters['--type']    = self::APPLICATION_TYPE_API;
+                        
+                        $this->commandExecutor->runCommand(
+                            'vankosoft:application:create',
+                            $commandParameters,
+                            $output
+                         );
+                        
+                        break;
+                    case self::APPLICATION_TYPE_CATALOG:
+                        $commandParameters['--type']    = self::APPLICATION_TYPE_CATALOG;
+                        
+                        $this->commandExecutor->runCommand(
+                            'vankosoft:application:create',
+                            $commandParameters,
+                            $output
+                        );
+                        
+                        $outputStyle->writeln( '<info>Create a Separate API Application.</info>' );
+                        $commandParameters['--name']    = $commandParameters['--name'] . " API";
+                        $commandParameters['--url']     = "api." . $commandParameters['--url'];
+                        $commandParameters['--type']    = self::APPLICATION_TYPE_API;
+                        
+                        $this->commandExecutor->runCommand(
+                            'vankosoft:application:create',
+                            $commandParameters,
+                            $output
+                        );
+                        
+                        break;
+                    default:
+                        $commandParameters['--type']    = self::APPLICATION_TYPE_EXTENDED;
+                        
+                        $this->commandExecutor->runCommand(
+                            'vankosoft:application:create',
+                            $commandParameters,
+                            $output
+                        );
+                }
+                
+                break;
+            default:
+                $this->commandExecutor->runCommand(
+                    \sprintf( 'vankosoft:application:create %s', self::APPLICATION_TYPE_STANDRD ),
+                    $commandParameters,
+                    $output
+                );
+        }
         
         $outputStyle->newLine();
         $outputStyle->writeln( '<info>Default Application created successfully.</info>' );

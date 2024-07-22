@@ -6,6 +6,10 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 use Vankosoft\ApplicationBundle\Component\Application\Project;
 use Vankosoft\ApplicationBundle\Command\ContainerAwareCommand;
@@ -13,6 +17,11 @@ use Vankosoft\ApplicationInstalatorBundle\Installer\Executor\CommandExecutor;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
+    const APPLICATION_TYPE_STANDRD  = 'standard';
+    const APPLICATION_TYPE_CATALOG  = 'catalog';
+    const APPLICATION_TYPE_EXTENDED = 'extended';
+    const APPLICATION_TYPE_API      = 'api';
+    
     /** @var CommandExecutor */
     protected $commandExecutor;
     
@@ -113,5 +122,79 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         
         $checker->ensureDirectoryExists( $directory, $output );
         $checker->ensureDirectoryIsWritable( $directory, $output );
+    }
+    
+    protected function createApplicationTypeQuestion( InputInterface $input, OutputInterface $output ): ?string
+    {
+        $applicationTypes   = [
+            self::APPLICATION_TYPE_STANDRD,
+            self::APPLICATION_TYPE_CATALOG,
+            self::APPLICATION_TYPE_EXTENDED,
+            self::APPLICATION_TYPE_API,
+        ];
+        
+        $default            = $applicationTypes[2];
+        $questionMessage    = sprintf( 'Please select an application type to be created (defaults to %s): ', $default );
+        
+        $choiceQuestion     = new ChoiceQuestion(
+            $questionMessage,
+            // choices can also be PHP objects that implement __toString() method
+            $applicationTypes,
+            $default
+        );
+        
+        $applicationType    = $this->getHelper( 'question' )->ask(
+            $input,
+            $output,
+            $choiceQuestion
+        );
+        
+        return $applicationType;
+    }
+    
+    protected function createApplicationNameQuestion(): Question
+    {
+        return ( new Question( 'Application Name: ' ) )
+            ->setValidator(
+                function ( $value ): string {
+                    /** @var ConstraintViolationListInterface $errors */
+                    $errors = $this->get( 'validator' )->validate( (string) $value, [new Length([
+                        'min' => 3,
+                        'max' => 50,
+                        'minMessage' => 'Your application name must be at least {{ limit }} characters long',
+                        'maxMessage' => 'Your application name cannot be longer than {{ limit }} characters',
+                    ])]);
+                    foreach ( $errors as $error ) {
+                        throw new \DomainException( $error->getMessage() );
+                    }
+                    
+                    return $value;
+                }
+            )
+            ->setMaxAttempts( 3 )
+        ;
+    }
+    
+    protected function createApplicationUrlQuestion(): Question
+    {
+        return ( new Question( 'Application Domain: ' ) )
+            ->setValidator(
+                function ( $value ): string {
+                    /** @var ConstraintViolationListInterface $errors */
+                    $errors = $this->get( 'validator' )->validate( (string) $value, [new Length([
+                        'min' => 6,
+                        'max' => 256,
+                        'minMessage' => 'Your application url must be at least {{ limit }} characters long',
+                        'maxMessage' => 'Your application url cannot be longer than {{ limit }} characters',
+                    ])]);
+                    foreach ( $errors as $error ) {
+                        throw new \DomainException( $error->getMessage() );
+                    }
+                    
+                    return $value;
+                }
+            )
+            ->setMaxAttempts( 3 )
+        ;
     }
 }

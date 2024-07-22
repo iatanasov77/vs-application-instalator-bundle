@@ -9,57 +9,41 @@ use Twig\Environment;
 
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 use Vankosoft\ApplicationBundle\Component\Application\Project;
+use Vankosoft\ApplicationInstalatorBundle\Command\AbstractInstallCommand;
 
 class ApplicationSetup
 {
-    /**
-     * @var ContainerInterface $container
-     */
+    /** @var ContainerInterface $container */
     private $container;
     
-    /**
-     * @var Environment $twig
-     */
+    /** @var Environment $twig */
     private $twig;
     
-    /**
-     * @var string $applicationSlug
-     */
+    /** @var string $applicationSlug */
     private $applicationSlug;
     
-    /**
-     * @var string $applicationName
-     */
+    /** @var string $applicationName */
     private $applicationName;
     
-    /**
-     * @var string $applicationNamespace
-     */
+    /** @var string $applicationNamespace */
     private $applicationNamespace;
     
-    /**
-     * @var string $applicationVersion
-     */
+    /** @var string $applicationVersion */
     private $applicationVersion;
     
-    /**
-     * @var string $applicationDefaultLocale
-     */
+    /** @var string $applicationType */
+    private $applicationType;
+    
+    /** @var string $applicationDefaultLocale */
     private $applicationDefaultLocale;
     
-    /**
-     * @var boolean $newProjectInstall
-     */
+    /** @var boolean $newProjectInstall */
     private $newProjectInstall;
     
-    /**
-     * @var boolean $newProjectInstall
-     */
+    /** @var boolean $newProjectInstall */
     private $isExtendedProject;
     
-    /** 
-     * @var SlugGenerator
-     */
+    /** @var SlugGenerator */
     private $slugGenerator;
     
     public function __construct( ContainerInterface $container, Environment $twig, SlugGenerator $slugGenerator )
@@ -84,6 +68,8 @@ class ApplicationSetup
             'controller'    => $projectRootDir . '/src/Controller/' . $this->applicationNamespace,
         ];
         
+        
+        
         return $applicationDirs;
     }
     
@@ -93,30 +79,41 @@ class ApplicationSetup
      * @param string $applicationName
      * @param boolean $newProjectInstall
      */
-    public function setupApplication( $applicationName, $localeCode, $newProjectInstall = false )
+    public function setupApplication( $applicationName, $localeCode, $newProjectInstall = false, $applcationType = null )
     {
         $this->applicationDefaultLocale = $localeCode;
         $this->newProjectInstall        = $newProjectInstall;
+        $this->applicationType          = $applcationType;
         $this->_initialize();
         
         $applicationDirs                = $this->getApplicationDirectories( $applicationName );
         
         // Setup The Application
-        $this->setupApplicationDirectories( $applicationDirs  );
+        $this->setupApplicationDirectories( $applicationDirs );
         
         $this->setupApplicationKernel();
-        $this->setupApplicationHomePage();
-        $this->setupApplicationLoginPage();
-        $this->setupApplicationStandardPages();
         $this->setupApplicationConfigs();
+        
+        if ( $this->applicationType !== AbstractInstallCommand::APPLICATION_TYPE_API ) {
+            $this->setupApplicationHomePage();
+            $this->setupApplicationLoginPage();
+            $this->setupApplicationStandardPages();
+        }
         
         if ( $this->isCatalogProject() ) {
             $this->setupApplicationCatalogPages();
         }
         
         if ( $this->isExtendedProject() ) {
-            $this->setupApplicationCatalogPages();
-            $this->setupApplicationExtendedPages();
+            switch ( $this->applicationType ) {
+                case AbstractInstallCommand::APPLICATION_TYPE_CATALOG:
+                    $this->setupApplicationCatalogPages();
+                    break;
+                case AbstractInstallCommand::APPLICATION_TYPE_EXTENDED:
+                    $this->setupApplicationCatalogPages();
+                    $this->setupApplicationExtendedPages();
+                    break;
+            }
         }
         
         /*
@@ -180,6 +177,26 @@ class ApplicationSetup
         return $this->applicationVersion;
     }
     
+    public function getProjectType(): ?string
+    {
+        return $this->container->getParameter( 'vs_application.project_type' );
+    }
+    
+    public function isBaseProject(): bool
+    {
+        return $this->getProjectType() == Project::PROJECT_TYPE_APPLICATION;
+    }
+    
+    public function isCatalogProject(): bool
+    {
+        return $this->getProjectType() == Project::PROJECT_TYPE_CATALOG;
+    }
+    
+    public function isExtendedProject(): bool
+    {
+        return $this->getProjectType() == Project::PROJECT_TYPE_EXTENDED;
+    }
+    
     private function _initialize()
     {
         $filesystem     = new Filesystem();
@@ -193,44 +210,25 @@ class ApplicationSetup
         }
     }
     
-    private function getProjectType(): ?string
-    {
-        return $this->container->getParameter( 'vs_application.project_type' );
-    }
-    
-    private function isBaseProject(): bool
-    {
-        return $this->getProjectType() == Project::PROJECT_TYPE_APPLICATION;
-    }
-    
-    private function isCatalogProject(): bool
-    {
-        // \array_key_exists( 'VSPaymentBundle', $this->container->getParameter( 'kernel.bundles' ) );
-        return $this->getProjectType() == Project::PROJECT_TYPE_CATALOG;
-    }
-    
-    private function isExtendedProject(): bool
-    {
-        // \array_key_exists( 'VSPaymentBundle', $this->container->getParameter( 'kernel.bundles' ) );
-        return $this->getProjectType() == Project::PROJECT_TYPE_EXTENDED;
-    }
-    
     private function setupApplicationDirectories( $applicationDirs ): void
     {
         $zip            = new \ZipArchive;
         
-        switch ( $this->getProjectType() ) {
-            case Project::PROJECT_TYPE_APPLICATION:
+        switch ( $this->applicationType ) {
+            case AbstractInstallCommand::APPLICATION_TYPE_STANDRD:
                 $configsRootDir = '@VSApplicationInstalatorBundle/Resources/application/';
                 break;
-            case Project::PROJECT_TYPE_CATALOG:
+            case AbstractInstallCommand::APPLICATION_TYPE_CATALOG:
                 $configsRootDir = '@VSApplicationInstalatorBundle/Resources/application-catalog/';
                 break;
-            case Project::PROJECT_TYPE_EXTENDED:
+            case AbstractInstallCommand::APPLICATION_TYPE_EXTENDED:
                 $configsRootDir = '@VSApplicationInstalatorBundle/Resources/application-extended/';
                 break;
+            case AbstractInstallCommand::APPLICATION_TYPE_API:
+                $configsRootDir = '@VSApplicationInstalatorBundle/Resources/application-api/';
+                break;
             default:
-                throw new SetupException( 'Unknown Project Type !' );
+                throw new SetupException( 'Unknown Application Type !' );
         }
         
         try {
@@ -334,30 +332,39 @@ class ApplicationSetup
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml', $configServices );
         
         // Setup Services and Parameters
-        $configServices = str_replace(
-            ["__application_name__", "__application_slug__", "__kernel_class__", "__application_namespace__"],
-            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel', $this->applicationNamespace],
-            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/controller.yaml' )
-        );
-        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/controller.yaml', $configServices );
+        if ( $this->applicationType != AbstractInstallCommand::APPLICATION_TYPE_API ) {
+            $configServices = str_replace(
+                ["__application_name__", "__application_slug__", "__kernel_class__", "__application_namespace__"],
+                [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel', $this->applicationNamespace],
+                file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/controller.yaml' )
+            );
+            $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/controller.yaml', $configServices );
+            
+            // Setup Services and Parameters
+            $configServices = str_replace(
+                ["__application_name__", "__application_slug__", "__kernel_class__", "__application_namespace__"],
+                [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel', $this->applicationNamespace],
+                file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/menu.yaml' )
+            );
+            $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/menu.yaml', $configServices );
+            
+            // Setup Liip Imagine
+            $configLiipImagine  = str_replace(
+                ["__application_slug__"],
+                [$this->applicationSlug],
+                file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml' )
+            );
+            $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml', $configLiipImagine );
+        }
         
-        // Setup Services and Parameters
-        $configServices = str_replace(
-            ["__application_name__", "__application_slug__", "__kernel_class__", "__application_namespace__"],
-            [$this->applicationName, $this->applicationSlug, $this->applicationNamespace . 'Kernel', $this->applicationNamespace],
-            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/menu.yaml' )
-        );
-        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services/menu.yaml', $configServices );
-        
-        // Setup Liip Imagine
-        $configLiipImagine  = str_replace(
-            ["__application_slug__"],
-            [$this->applicationSlug],
-            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml' )
-        );
-        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/liip_imagine.yaml', $configLiipImagine );
-        
-        if ( $this->isCatalogProject() || $this->isExtendedProject() ) {
+        if (
+            $this->isCatalogProject() || $this->isExtendedProject() &&
+            (
+                $this->applicationType == AbstractInstallCommand::APPLICATION_TYPE_CATALOG ||
+                $this->applicationType == AbstractInstallCommand::APPLICATION_TYPE_EXTENDED ||
+                $this->applicationType == AbstractInstallCommand::APPLICATION_TYPE_API
+            )
+        ) {
             $configServices = str_replace(
                 [ "__application_namespace__"],
                 [$this->applicationNamespace],
@@ -366,7 +373,13 @@ class ApplicationSetup
             $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/vs_payment.yaml', $configServices );
         }
         
-        if ( $this->isExtendedProject() ) {
+        if (
+            $this->isExtendedProject() && 
+            (
+                $this->applicationType == AbstractInstallCommand::APPLICATION_TYPE_EXTENDED ||
+                $this->applicationType == AbstractInstallCommand::APPLICATION_TYPE_API
+            )
+        ) {
             $configServices = str_replace(
                 [ "__application_name__"],
                 [$this->applicationName],

@@ -19,6 +19,7 @@ final class WidgetsFixture extends AbstractResourceFixture
                 ->scalarNode( 'description' )->end()
                 ->scalarNode( 'group_code' )->end()
                 ->booleanNode( 'active' )->defaultTrue()->end()
+                ->booleanNode( 'allowAnonymous' )->defaultFalse()->end()
                 ->arrayNode( 'allowedRoles' )
                     ->arrayPrototype()
                         ->children()

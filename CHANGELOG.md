@@ -1,3 +1,14 @@
+1.10.241	|	Release date: **22.07.2024**
+============================================
+* New Features:
+  - Add a New Project Type in Installator.
+  - Create an API Application on new Application in Extended Project Installation.
+  - Update Installator API Configs.
+  - Installator Ask for Application Type only For Extended Projects.
+  - Final Fixes on Current Version Changes.
+  - Add 'Allow Annonymous' Option to WidgetsFixture .
+
+
 1.10.240	|	Release date: **19.07.2024**
 ============================================
 * New Features:

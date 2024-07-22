@@ -19,6 +19,7 @@ use Webmozart\Assert\Assert;
 use Gedmo\Sluggable\Util\Urlizer;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Vankosoft\ApplicationBundle\Component\Application\Project;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use Vankosoft\UsersBundle\Model\UserRoleInterface;
 
@@ -40,6 +41,27 @@ final class CreateApplicationCommand extends AbstractInstallCommand
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command allows user to create a VankoSoft Application.
 EOT
+            )
+            ->addOption(
+                'type',
+                'y',
+                InputOption::VALUE_OPTIONAL,
+                'The Application Type to be Created.',
+                null
+            )
+            ->addOption(
+                'name',
+                'a',
+                InputOption::VALUE_OPTIONAL,
+                'Application Name.',
+                null
+            )
+            ->addOption(
+                'url',
+                'u',
+                InputOption::VALUE_OPTIONAL,
+                'Application URL.',
+                null
             )
             ->addOption(
                 'new-project',
@@ -69,17 +91,32 @@ EOT
     {
         $localeCode         = $this->getApplicationDefaultLocale( $input, $output );
         
+        $applicationType    = $input->getOption( 'type' );
+        $applicationName    = $input->getOption( 'name' );
+        
         $newProjectOption   = $input->getOption( 'new-project' );
         $newProject         = ( $newProjectOption !== false );
         
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
         
-        $questionName       = $this->createApplicationNameQuestion();
-        $applicationName    = $questionHelper->ask( $input, $output, $questionName );
+        if ( ! $applicationName ) {
+            $questionName       = $this->createApplicationNameQuestion();
+            $applicationName    = $questionHelper->ask( $input, $output, $questionName );
+        }
         
         $appSetup           = $this->get( 'vs_application.installer.setup_application' );
         $outputStyle        = new SymfonyStyle( $input, $output );
+        
+        if ( ! $applicationType ) {
+            if ( $appSetup->getProjectType() == Project::PROJECT_TYPE_EXTENDED ) {
+                $applicationType     = $this->createApplicationTypeQuestion( $input, $output );
+            } else {
+                $applicationType     = $appSetup->getProjectType() == Project::PROJECT_TYPE_CATALOG ?
+                                            AbstractInstallCommand::APPLICATION_TYPE_CATALOG :
+                                            AbstractInstallCommand::APPLICATION_TYPE_STANDRD;
+            }
+        }
         
         // Add Database Records
         $outputStyle->writeln( 'Create Application Database Records.' );
@@ -89,14 +126,14 @@ EOT
         
         // Create Directories
         $outputStyle->writeln( 'Create Application Directories.' );
-        $appSetup->setupApplication( $applicationName, $localeCode, $newProject );
+        $appSetup->setupApplication( $applicationName, $localeCode, $newProject, $applicationType );
         $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
         $outputStyle->newLine();
         
         // Setup Application Theme
         $outputStyle->newLine();
         $outputStyle->writeln( 'Setup Application Theme.' );
-        $theme  = $this->setupApplicationTheme( $input, $output );
+        $theme  = $this->setupApplicationTheme( $input, $output, $applicationType );
         if ( $theme ) {
             $outputStyle->writeln( '<info>Application Theme is setted up.</info>' );
         } else {
@@ -147,13 +184,17 @@ EOT
     
     private function createApplication( InputInterface $input, OutputInterface $output, $applicationName ): ApplicationInterface
     {
+        $applicationUrl     = $input->getOption( 'url' );
         $entityManager      = $this->get( 'doctrine' )->getManager();
         
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
         
-        $questionUrl        = $this->createApplicationUrlQuestion();
-        $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
+        if ( ! $applicationUrl ) {
+            $questionUrl        = $this->createApplicationUrlQuestion();
+            $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
+        }
+        
         $applicationSlug    = $this->get( 'vs_application.slug_generator' )->generate( $applicationName );
         $applicationCreated = new \DateTime;
         
@@ -228,7 +269,7 @@ EOT
         $outputStyle->newLine();
     }
     
-    private function setupApplicationTheme( InputInterface $input, OutputInterface $output ): ?ThemeInterface
+    private function setupApplicationTheme( InputInterface $input, OutputInterface $output, string $applicationType ): ?ThemeInterface
     {
         $entityManager          = $this->get( 'doctrine' )->getManager();
         $settingsRepository     = $this->get( 'vs_application.repository.settings' );
@@ -241,12 +282,15 @@ EOT
         $settings->setApplication( $this->application );
         $settings->setMaintenanceMode( 0 );
         
-        $applicationThemeName   = $this->createApplicationThemeQuestion( $input, $output );
         $theme                  = null;
-        if ( $applicationThemeName && $applicationThemeName !== self::THEME_NONE_ID ) {
-            $theme                  = $this->get( 'vs_app.theme_repository' )->findOneByName( $applicationThemeName );
-            if ( $theme ) {
-                $settings->setTheme( $applicationThemeName );
+        if ( $applicationType != self::APPLICATION_TYPE_API ) {
+            $applicationThemeName   = $this->createApplicationThemeQuestion( $input, $output );
+            
+            if ( $applicationThemeName && $applicationThemeName !== self::THEME_NONE_ID ) {
+                $theme                  = $this->get( 'vs_app.theme_repository' )->findOneByName( $applicationThemeName );
+                if ( $theme ) {
+                    $settings->setTheme( $applicationThemeName );
+                }
             }
         }
         
@@ -254,52 +298,6 @@ EOT
         $entityManager->flush();
         
         return $theme;
-    }
-    
-    private function createApplicationNameQuestion(): Question
-    {
-        return ( new Question( 'Application Name: ' ) )
-            ->setValidator(
-                function ( $value ): string {
-                    /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->get( 'validator' )->validate( (string) $value, [new Length([
-                        'min' => 3,
-                        'max' => 50,
-                        'minMessage' => 'Your application name must be at least {{ limit }} characters long',
-                        'maxMessage' => 'Your application name cannot be longer than {{ limit }} characters',
-                    ])]);
-                    foreach ( $errors as $error ) {
-                        throw new \DomainException( $error->getMessage() );
-                    }
-                    
-                    return $value;
-                }
-            )
-            ->setMaxAttempts( 3 )
-        ;
-    }
-    
-    private function createApplicationUrlQuestion(): Question
-    {
-        return ( new Question( 'Application Domain: ' ) )
-            ->setValidator(
-                function ( $value ): string {
-                    /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->get( 'validator' )->validate( (string) $value, [new Length([
-                        'min' => 6,
-                        'max' => 256,
-                        'minMessage' => 'Your application url must be at least {{ limit }} characters long',
-                        'maxMessage' => 'Your application url cannot be longer than {{ limit }} characters',
-                    ])]);
-                    foreach ( $errors as $error ) {
-                        throw new \DomainException( $error->getMessage() );
-                    }
-                    
-                    return $value;
-                }
-            )
-            ->setMaxAttempts( 3 )
-        ;
     }
     
     private function createApplicationThemeQuestion( InputInterface $input, OutputInterface $output ): ?string

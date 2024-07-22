@@ -398,6 +398,7 @@ sylius_fixtures:
                               name: 'Main Menu Applications'
                               description: 'Main Menu Applications'
                               active: true
+                              allowAnonymous: false
                               allowedRoles:
                                 - role: 'ROLE_SUPER_ADMIN'
                                 - role: 'ROLE_ADMIN'
@@ -407,6 +408,7 @@ sylius_fixtures:
                               name: 'Profile Menu Locales'
                               description: 'Profile Menu Locales'
                               active: true
+                              allowAnonymous: false
                               allowedRoles:
                                 - role: 'ROLE_SUPER_ADMIN'
                                 - role: 'ROLE_ADMIN'
@@ -416,6 +418,7 @@ sylius_fixtures:
                               name: 'User Info'
                               description: 'User Info'
                               active: true
+                              allowAnonymous: false
                               allowedRoles:
                                 - role: 'ROLE_SUPER_ADMIN'
                                 - role: 'ROLE_ADMIN'
@@ -425,6 +428,7 @@ sylius_fixtures:
                               name: 'Test Widget 1'
                               description: 'Test Widget 1'
                               active: true
+                              allowAnonymous: false
                               allowedRoles:
                                 - role: 'ROLE_ANONYMOUS_USER'
                                 - role: 'ROLE_SUPER_ADMIN'
