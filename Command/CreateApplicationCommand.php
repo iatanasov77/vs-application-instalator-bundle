@@ -19,6 +19,7 @@ use Webmozart\Assert\Assert;
 use Gedmo\Sluggable\Util\Urlizer;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Vankosoft\ApplicationBundle\Component\Application\Project;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use Vankosoft\UsersBundle\Model\UserRoleInterface;
 
@@ -108,7 +109,13 @@ EOT
         $outputStyle        = new SymfonyStyle( $input, $output );
         
         if ( ! $applicationType ) {
-            $applicationType     = $this->createApplicationTypeQuestion( $input, $output );
+            if ( $appSetup->getProjectType() == Project::PROJECT_TYPE_EXTENDED ) {
+                $applicationType     = $this->createApplicationTypeQuestion( $input, $output );
+            } else {
+                $applicationType     = $appSetup->getProjectType() == Project::PROJECT_TYPE_CATALOG ?
+                                            AbstractInstallCommand::APPLICATION_TYPE_CATALOG :
+                                            AbstractInstallCommand::APPLICATION_TYPE_STANDRD;
+            }
         }
         
         // Add Database Records
