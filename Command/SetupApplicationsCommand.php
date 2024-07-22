@@ -92,6 +92,7 @@ EOT
                             $output
                         );
                         
+                        $outputStyle->writeln( '<info>Create a Separate API Application.</info>' );
                         $commandParameters['--name']    = $commandParameters['--name'] . " API";
                         $commandParameters['--url']     = "api." . $commandParameters['--url'];
                         $commandParameters['--type']    = self::APPLICATION_TYPE_API;
@@ -112,6 +113,7 @@ EOT
                             $output
                         );
                         
+                        $outputStyle->writeln( '<info>Create a Separate API Application.</info>' );
                         $commandParameters['--name']    = $commandParameters['--name'] . " API";
                         $commandParameters['--url']     = "api." . $commandParameters['--url'];
                         $commandParameters['--type']    = self::APPLICATION_TYPE_API;
