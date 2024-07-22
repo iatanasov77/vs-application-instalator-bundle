@@ -119,7 +119,7 @@ EOT
         
         // Create Directories
         $outputStyle->writeln( 'Create Application Directories.' );
-        $appSetup->setupApplication( $applicationName, $localeCode, $newProject, $applcationType );
+        $appSetup->setupApplication( $applicationName, $localeCode, $newProject, $applicationType );
         $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
         $outputStyle->newLine();
         
