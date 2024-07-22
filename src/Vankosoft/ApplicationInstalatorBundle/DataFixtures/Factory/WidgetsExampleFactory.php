@@ -56,6 +56,8 @@ class WidgetsExampleFactory extends AbstractExampleFactory implements ExampleFac
         $group          = $this->widgetsGroupsRepository->findByTaxonCode( $options['group_code'] );
         $widgetEntity->setGroup( $group );
         
+        $widgetEntity->setAllowAnonymous( $options['allowAnonymous'] );
+        
         if ( isset( $options['allowedRoles'] ) && null !== $options['allowedRoles'] ) {
             $this->addWidgetAllowedRoles( $widgetEntity, $options['allowedRoles'] );
         }
@@ -80,6 +82,9 @@ class WidgetsExampleFactory extends AbstractExampleFactory implements ExampleFac
             
             ->setDefault( 'active', true )
             ->setAllowedTypes( 'active', ['bool'] )
+            
+            ->setDefault( 'allowAnonymous', false )
+            ->setAllowedTypes( 'allowAnonymous', ['bool'] )
             
             ->setDefault( 'allowedRoles', null )
         ;
