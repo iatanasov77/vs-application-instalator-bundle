@@ -43,6 +43,20 @@ EOT
             )
             ->addArgument( 'applicationType', InputArgument::OPTIONAL, 'The Application Type to be Created.' )
             ->addOption(
+                'name',
+                'n',
+                InputOption::VALUE_OPTIONAL,
+                'Application Name.',
+                null
+            )
+            ->addOption(
+                'url',
+                'u',
+                InputOption::VALUE_OPTIONAL,
+                'Application URL.',
+                null
+            )
+            ->addOption(
                 'new-project',
                 'p',
                 InputOption::VALUE_OPTIONAL,
@@ -71,6 +85,7 @@ EOT
         $localeCode         = $this->getApplicationDefaultLocale( $input, $output );
         
         $applicationType    = $input->getArgument( 'applicationType' );
+        $applicationName    = $input->getOption( 'name' );
         
         $newProjectOption   = $input->getOption( 'new-project' );
         $newProject         = ( $newProjectOption !== false );
@@ -78,13 +93,17 @@ EOT
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
         
-        $questionName       = $this->createApplicationNameQuestion();
-        $applicationName    = $questionHelper->ask( $input, $output, $questionName );
+        if ( ! $applicationName ) {
+            $questionName       = $this->createApplicationNameQuestion();
+            $applicationName    = $questionHelper->ask( $input, $output, $questionName );
+        }
         
         $appSetup           = $this->get( 'vs_application.installer.setup_application' );
         $outputStyle        = new SymfonyStyle( $input, $output );
         
-        $applcationType     = $this->createApplicationTypeQuestion();
+        if ( ! $applicationType ) {
+            $applicationType     = $this->createApplicationTypeQuestion( $input, $output );
+        }
         
         // Add Database Records
         $outputStyle->writeln( 'Create Application Database Records.' );
@@ -101,7 +120,7 @@ EOT
         // Setup Application Theme
         $outputStyle->newLine();
         $outputStyle->writeln( 'Setup Application Theme.' );
-        $theme  = $this->setupApplicationTheme( $input, $output );
+        $theme  = $this->setupApplicationTheme( $input, $output, $applicationType );
         if ( $theme ) {
             $outputStyle->writeln( '<info>Application Theme is setted up.</info>' );
         } else {
@@ -152,13 +171,17 @@ EOT
     
     private function createApplication( InputInterface $input, OutputInterface $output, $applicationName ): ApplicationInterface
     {
+        $applicationUrl     = $input->getOption( 'url' );
         $entityManager      = $this->get( 'doctrine' )->getManager();
         
         /** @var QuestionHelper $questionHelper */
         $questionHelper     = $this->getHelper( 'question' );
         
-        $questionUrl        = $this->createApplicationUrlQuestion();
-        $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
+        if ( ! $applicationUrl ) {
+            $questionUrl        = $this->createApplicationUrlQuestion();
+            $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
+        }
+        
         $applicationSlug    = $this->get( 'vs_application.slug_generator' )->generate( $applicationName );
         $applicationCreated = new \DateTime;
         
@@ -233,7 +256,7 @@ EOT
         $outputStyle->newLine();
     }
     
-    private function setupApplicationTheme( InputInterface $input, OutputInterface $output ): ?ThemeInterface
+    private function setupApplicationTheme( InputInterface $input, OutputInterface $output, string $applicationType ): ?ThemeInterface
     {
         $entityManager          = $this->get( 'doctrine' )->getManager();
         $settingsRepository     = $this->get( 'vs_application.repository.settings' );
@@ -246,12 +269,14 @@ EOT
         $settings->setApplication( $this->application );
         $settings->setMaintenanceMode( 0 );
         
-        $applicationThemeName   = $this->createApplicationThemeQuestion( $input, $output );
-        $theme                  = null;
-        if ( $applicationThemeName && $applicationThemeName !== self::THEME_NONE_ID ) {
-            $theme                  = $this->get( 'vs_app.theme_repository' )->findOneByName( $applicationThemeName );
-            if ( $theme ) {
-                $settings->setTheme( $applicationThemeName );
+        if ( $applicationType != self::APPLICATION_TYPE_API ) {
+            $applicationThemeName   = $this->createApplicationThemeQuestion( $input, $output );
+            $theme                  = null;
+            if ( $applicationThemeName && $applicationThemeName !== self::THEME_NONE_ID ) {
+                $theme                  = $this->get( 'vs_app.theme_repository' )->findOneByName( $applicationThemeName );
+                if ( $theme ) {
+                    $settings->setTheme( $applicationThemeName );
+                }
             }
         }
         
@@ -259,52 +284,6 @@ EOT
         $entityManager->flush();
         
         return $theme;
-    }
-    
-    private function createApplicationNameQuestion(): Question
-    {
-        return ( new Question( 'Application Name: ' ) )
-            ->setValidator(
-                function ( $value ): string {
-                    /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->get( 'validator' )->validate( (string) $value, [new Length([
-                        'min' => 3,
-                        'max' => 50,
-                        'minMessage' => 'Your application name must be at least {{ limit }} characters long',
-                        'maxMessage' => 'Your application name cannot be longer than {{ limit }} characters',
-                    ])]);
-                    foreach ( $errors as $error ) {
-                        throw new \DomainException( $error->getMessage() );
-                    }
-                    
-                    return $value;
-                }
-            )
-            ->setMaxAttempts( 3 )
-        ;
-    }
-    
-    private function createApplicationUrlQuestion(): Question
-    {
-        return ( new Question( 'Application Domain: ' ) )
-            ->setValidator(
-                function ( $value ): string {
-                    /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->get( 'validator' )->validate( (string) $value, [new Length([
-                        'min' => 6,
-                        'max' => 256,
-                        'minMessage' => 'Your application url must be at least {{ limit }} characters long',
-                        'maxMessage' => 'Your application url cannot be longer than {{ limit }} characters',
-                    ])]);
-                    foreach ( $errors as $error ) {
-                        throw new \DomainException( $error->getMessage() );
-                    }
-                    
-                    return $value;
-                }
-            )
-            ->setMaxAttempts( 3 )
-        ;
     }
     
     private function createApplicationThemeQuestion( InputInterface $input, OutputInterface $output ): ?string
@@ -340,32 +319,5 @@ EOT
         }
         
         return $applicationThemeName;
-    }
-    
-    private function createApplicationTypeQuestion( InputInterface $input, OutputInterface $output ): ?string
-    {
-        $applicationTypes   = [
-            self::APPLICATION_TYPE_STANDRD,
-            self::APPLICATION_TYPE_CATALOG,
-            self::APPLICATION_TYPE_EXTENDED,
-        ];
-        
-        $default            = $applicationTypes[2];
-        $questionMessage    = sprintf( 'Please select an application type to be created (defaults to %s): ', $default );
-        
-        $choiceQuestion     = new ChoiceQuestion(
-            $questionMessage,
-            // choices can also be PHP objects that implement __toString() method
-            $applicationTypes,
-            $default
-        );
-        
-        $applicationType    = $this->getHelper( 'question' )->ask(
-            $input,
-            $output,
-            $choiceQuestion
-        );
-        
-        return $applicationType;
     }
 }
