@@ -1,3 +1,10 @@
+1.10.242	|	Release date: **22.07.2024**
+============================================
+* New Features and Improvements:
+  - Clear Unneeded Installator Configs.
+  - Improve an AdminPanel Widget.
+
+
 1.10.241	|	Release date: **22.07.2024**
 ============================================
 * New Features:
