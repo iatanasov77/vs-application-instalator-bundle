@@ -87,7 +87,7 @@ class ApplicationSetup
         $applicationDirs                = $this->getApplicationDirectories( $applicationName );
         
         // Setup The Application
-        $this->setupApplicationDirectories( $applicationDirs  );
+        $this->setupApplicationDirectories( $applicationDirs );
         
         $this->setupApplicationKernel();
         $this->setupApplicationHomePage();
@@ -174,6 +174,26 @@ class ApplicationSetup
         return $this->applicationVersion;
     }
     
+    public function getProjectType(): ?string
+    {
+        return $this->container->getParameter( 'vs_application.project_type' );
+    }
+    
+    public function isBaseProject(): bool
+    {
+        return $this->getProjectType() == Project::PROJECT_TYPE_APPLICATION;
+    }
+    
+    public function isCatalogProject(): bool
+    {
+        return $this->getProjectType() == Project::PROJECT_TYPE_CATALOG;
+    }
+    
+    public function isExtendedProject(): bool
+    {
+        return $this->getProjectType() == Project::PROJECT_TYPE_EXTENDED;
+    }
+    
     private function _initialize()
     {
         $filesystem     = new Filesystem();
@@ -185,26 +205,6 @@ class ApplicationSetup
         } elseif( ! $this->newProjectInstall ) {
             $this->applicationVersion   = \App\AdminPanelKernel::VERSION;
         }
-    }
-    
-    private function getProjectType(): ?string
-    {
-        return $this->container->getParameter( 'vs_application.project_type' );
-    }
-    
-    private function isBaseProject(): bool
-    {
-        return $this->getProjectType() == Project::PROJECT_TYPE_APPLICATION;
-    }
-    
-    private function isCatalogProject(): bool
-    {
-        return $this->getProjectType() == Project::PROJECT_TYPE_CATALOG;
-    }
-    
-    private function isExtendedProject(): bool
-    {
-        return $this->getProjectType() == Project::PROJECT_TYPE_EXTENDED;
     }
     
     private function setupApplicationDirectories( $applicationDirs ): void
