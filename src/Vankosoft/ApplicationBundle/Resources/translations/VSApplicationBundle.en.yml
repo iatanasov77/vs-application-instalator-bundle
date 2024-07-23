@@ -149,6 +149,7 @@ vs_application:
             button_register: 'Create An Account'
             button_forgot_password: 'Forgot Password'
             welcome_back: 'Welcome Back !'
+            welcome: Welcome
             sign_in_to_continue: 'Sign in to continue to'
             forgot_password_question: Forgot password?
         register:

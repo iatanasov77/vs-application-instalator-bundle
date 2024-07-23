@@ -149,6 +149,7 @@ vs_application:
             button_register: 'Създай Акаунт'
             button_forgot_password: 'Забравена Парола'
             welcome_back: 'Добре Дошъл Отново !'
+            welcome: Добре Дошъл
             sign_in_to_continue: 'Влезте, за да продължите към'
             forgot_password_question: Забравена парола?
         register:
