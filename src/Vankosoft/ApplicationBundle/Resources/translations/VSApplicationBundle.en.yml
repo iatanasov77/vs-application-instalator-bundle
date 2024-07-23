@@ -148,6 +148,9 @@ vs_application:
             button_login: 'Login'
             button_register: 'Create An Account'
             button_forgot_password: 'Forgot Password'
+            welcome_back: 'Welcome Back !'
+            sign_in_to_continue: 'Sign in to continue to'
+            forgot_password_question: Forgot password?
         register:
             alert_success: 'Your registration were saved! Check your email and confirm your account.'
             alert_verified: 'Your e-mail address has been verified.'

@@ -148,6 +148,9 @@ vs_application:
             button_login: 'Влез'
             button_register: 'Създай Акаунт'
             button_forgot_password: 'Забравена Парола'
+            welcome_back: 'Добре Дошъл Отново !'
+            sign_in_to_continue: 'Влезте, за да продължите към'
+            forgot_password_question: Забравена парола?
         register:
             alert_success: 'Your registration were saved! Check your email and confirm your account.'
             alert_verified: 'Your e-mail address has been verified.'
