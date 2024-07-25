@@ -1,3 +1,10 @@
+1.10.244	|	Release date: **25.07.2024**
+============================================
+* Bug-Fixes and Improvements:
+  - Add Some Translations.
+  - Fix Upload Files Form Template.
+
+
 1.10.243	|	Release date: **22.07.2024**
 ============================================
 * Bug-Fixes:
