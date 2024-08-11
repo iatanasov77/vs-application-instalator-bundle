@@ -23,7 +23,8 @@ window.TestUploadProgressBarData    = {
  *     fileInputFieldName: "file",
  *     fileResourceId: 0,
  *     fileResourceKey: "",
- *     fileResourceClass: ""
+ *     fileResourceClass: "",
+ *     maxChunkSize: 10000000
  * }
  */
 export function InitOneUpFileUpload( options, preFormSubmit = null )
@@ -38,7 +39,7 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
         type: 'POST',
         dropZone: null,
         fileInput: $( options.fileinputSelector  ),
-        maxChunkSize: 1000000,
+        maxChunkSize: options.maxChunkSize,
         autoUpload: false,
         add: function ( e, data )
         {
@@ -84,7 +85,6 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
                 },
                 {
                     name: 'fileResourceId',
-                    //value: getFormFieldValue( form, 'id' )
                     value: options.fileResourceId
                 },
                 {
