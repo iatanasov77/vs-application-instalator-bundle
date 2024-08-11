@@ -1,3 +1,10 @@
+1.10.245	|	Release date: **11.08.2024**
+============================================
+* New Features and Improvements:
+  - Update Application Installator Configs.
+  - Improve OneUpUpload JS Helpers.
+
+
 1.10.244	|	Release date: **25.07.2024**
 ============================================
 * Bug-Fixes and Improvements:
