@@ -37,7 +37,7 @@
             </order-by>
         </one-to-many>
         
-        <many-to-many field="users" target-entity="Vankosoft\UsersBundle\Model\UserInterface" inversed-by="applications" >
+        <many-to-many field="users" target-entity="Vankosoft\UsersBundle\Model\Interfaces\UserInterface" inversed-by="applications" >
             <join-table name="VSAPP_Applications_Users">
                 <join-columns>
                     <join-column name="application_id" referenced-column-name="id" />

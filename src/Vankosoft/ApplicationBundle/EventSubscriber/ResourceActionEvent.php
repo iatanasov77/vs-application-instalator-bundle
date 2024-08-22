@@ -1,7 +1,7 @@
 <?php namespace Vankosoft\ApplicationBundle\EventSubscriber;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Vankosoft\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 
 /**
  * MANUAL: https://q.agency/blog/custom-events-with-symfony5/

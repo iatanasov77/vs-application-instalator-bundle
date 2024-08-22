@@ -4,7 +4,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Doctrine\ORM\EntityManager;
-use Vankosoft\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 
 /**
  * MANUAL: https://q.agency/blog/custom-events-with-symfony5/

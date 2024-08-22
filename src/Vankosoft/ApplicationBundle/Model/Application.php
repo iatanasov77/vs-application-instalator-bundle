@@ -5,7 +5,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
-use Vankosoft\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 
 class Application implements ApplicationInterface
 {
