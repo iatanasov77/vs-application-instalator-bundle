@@ -18,7 +18,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Webmozart\Assert\Assert;
 
 use Vankosoft\CmsBundle\Component\Uploader\FileUploaderInterface;
-use Vankosoft\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 use Vankosoft\UsersBundle\Repository\UsersRepositoryInterface;
 use Vankosoft\UsersBundle\Component\UserInfo;
 
