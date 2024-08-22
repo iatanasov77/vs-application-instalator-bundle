@@ -21,7 +21,7 @@ use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Vankosoft\ApplicationBundle\Component\Application\Project;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
-use Vankosoft\UsersBundle\Model\UserRoleInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserRoleInterface;
 
 #[AsCommand(
     name: 'vankosoft:application:create',
