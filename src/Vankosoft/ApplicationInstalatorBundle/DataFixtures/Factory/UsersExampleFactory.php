@@ -8,7 +8,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 use Vankosoft\UsersBundle\Security\UserManager;
 
-use Vankosoft\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 use Vankosoft\UsersBundle\Model\UserInfoInterface;
 
 class UsersExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface

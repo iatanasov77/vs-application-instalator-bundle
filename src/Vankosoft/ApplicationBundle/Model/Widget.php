@@ -2,7 +2,7 @@
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetGroupInterface;
-use Vankosoft\UsersBundle\Model\UserRoleInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserRoleInterface;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Vankosoft\ApplicationBundle\Model\Traits\TranslatableTrait;
 use Doctrine\Common\Collections\ArrayCollection;

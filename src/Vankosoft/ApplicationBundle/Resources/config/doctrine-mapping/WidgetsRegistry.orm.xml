@@ -10,7 +10,7 @@
             <generator strategy="AUTO" />
         </id>
         
-        <one-to-one field="owner" target-entity="Vankosoft\UsersBundle\Model\UserInterface">
+        <one-to-one field="owner" target-entity="Vankosoft\UsersBundle\Model\Interfaces\UserInterface">
             <join-column name="owner_id" referenced-column-name="id" nullable="true" on-delete="CASCADE"/>
         </one-to-one>
         

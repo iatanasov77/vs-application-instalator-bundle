@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 use Vankosoft\ApplicationBundle\Component\Context\ApplicationContextInterface;
 use Vankosoft\ApplicationBundle\Twig\Alerts;
-use Vankosoft\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 
 final class MaintenanceListener
 {

@@ -13,7 +13,7 @@ use Vankosoft\ApplicationBundle\Component\Widget\Builder\Item;
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\ItemInterface;
 use Vankosoft\ApplicationBundle\EventListener\Event\WidgetEvent;
 use Vankosoft\ApplicationBundle\Model\Interfaces\WidgetInterface as WidgetModelInterface;
-use Vankosoft\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 use Vankosoft\UsersBundle\Model\UserRole;
 
 class Widget implements WidgetInterface

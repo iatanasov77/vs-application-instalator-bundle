@@ -1,7 +1,7 @@
 <?php namespace Vankosoft\ApplicationBundle\Component\Widget;
 
 use Vankosoft\ApplicationBundle\Component\Widget\Builder\ItemInterface;
-use Vankosoft\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 
 interface WidgetInterface
 {

@@ -1,6 +1,6 @@
 <?php namespace Vankosoft\ApplicationBundle\Model\Traits;
 
-use Vankosoft\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 
 /**
  * Created From \Pd\WidgetBundle\Entity\WidgetUser
