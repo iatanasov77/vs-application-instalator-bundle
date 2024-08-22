@@ -1,3 +1,10 @@
+1.10.246	|	Release date: **22.08.2024**
+============================================
+* New Features:
+  - Change Namspace of UsersBundle Models Interfaces.
+  - Create an ApiUserEntity Trait and Use it in LoginFormAuthenticator.
+
+
 1.10.245	|	Release date: **11.08.2024**
 ============================================
 * New Features and Improvements:
