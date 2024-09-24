@@ -1,3 +1,11 @@
+1.10.247	|	Release date: **24.09.2024**
+============================================
+* New Features:
+  - Create a Twig Extension with helper functions.
+* Bug-Fixes:
+  - Remove bootstrap-sass from Webpack Config of Default Admin Panel Theme.
+
+
 1.10.246	|	Release date: **22.08.2024**
 ============================================
 * New Features:

@@ -52,11 +52,6 @@ Encore
     .copyFiles([
         {from: applicationAssetsPath + '/vendor/ckeditor4_plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
     ])
-    
-    .copyFiles([
-        {from: applicationAssetsPath + '/images', to: 'images/[path][name].[ext]'},
-        {from: './node_modules/bootstrap-sass/assets/fonts/bootstrap', to: 'fonts/bootstrap/[name].[ext]'},
-    ])
      
     //////////////////////////////////////////////////////////////////
     // ASSETS
