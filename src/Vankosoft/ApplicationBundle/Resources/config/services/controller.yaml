@@ -16,11 +16,11 @@ services:
         public: true
 
     Vankosoft\ApplicationBundle\Controller\SettingsController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         
     Vankosoft\ApplicationBundle\Controller\AuthController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         arguments:
             - '@vs_users.security_bridge'
@@ -28,13 +28,13 @@ services:
             - [ setContainer, [ '@service_container' ] ]
         
     Vankosoft\ApplicationBundle\Controller\DashboardController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         calls:
             - [ setContainer, [ '@service_container' ] ]
     
     Vankosoft\ApplicationBundle\Controller\ApplicationExtController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         arguments:
             - '@doctrine'
@@ -44,7 +44,7 @@ services:
             - [ setContainer, [ '@service_container' ] ]
             
     Vankosoft\ApplicationBundle\Controller\SettingsExtController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         arguments:
             - '@doctrine'
@@ -57,7 +57,7 @@ services:
             - [ setContainer, [ '@service_container' ] ]
         
     Vankosoft\ApplicationBundle\Controller\TaxonomyTaxonsController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         arguments:
             - '@doctrine'
@@ -68,14 +68,14 @@ services:
             - [ setContainer, [ '@service_container' ] ]
             
     Vankosoft\ApplicationBundle\Controller\PasswordGeneratorController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         arguments:
             - '@hackzilla.password_generator.computer'
         calls:
             - [ setContainer, [ '@service_container' ] ]
         
     Vankosoft\ApplicationBundle\Controller\ContactController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         arguments:
             - {
@@ -92,7 +92,7 @@ services:
             - [ setContainer, [ '@service_container' ] ]
             
     Vankosoft\ApplicationBundle\Controller\CookieConsentTranslationsExtController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         arguments:
             - '@vs_application.doctrine_dbal_cache'
@@ -101,7 +101,7 @@ services:
             - [ setContainer, [ '@service_container' ] ]
             
     Vankosoft\ApplicationBundle\Controller\TagsWhitelistContextsExtController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         arguments:
             - '@doctrine'

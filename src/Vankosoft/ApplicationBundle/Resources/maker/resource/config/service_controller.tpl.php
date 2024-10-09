@@ -1,3 +1,3 @@
 <?= $controller_class ?>:
     arguments: []
-    tags: ['controller.service_arguments']
+    tags: ['container.service_subscriber', 'controller.service_arguments']

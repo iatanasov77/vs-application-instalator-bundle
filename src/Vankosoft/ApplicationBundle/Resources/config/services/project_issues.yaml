@@ -19,7 +19,7 @@ services:
             - '%vs_application.vankosoft_api.project%'
     
     Vankosoft\ApplicationBundle\Controller\VankosoftIssueController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         arguments:
             - '@vs_application.project_issues'
 
