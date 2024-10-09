@@ -10,7 +10,7 @@ use Hackzilla\PasswordGenerator\Exception\CharactersNotFoundException;
 
 use Vankosoft\ApplicationBundle\Component\Status;
 
-class PasswordGeneratorController
+class PasswordGeneratorController extends AbstractController
 {
     /** @var ComputerPasswordGenerator */
     private $computerPasswordGenerator;
