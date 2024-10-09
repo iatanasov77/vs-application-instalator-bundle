@@ -82,6 +82,10 @@ services:
         class: Vankosoft\ApplicationInstalatorBundle\Command\InstallSampleDataCommand
         tags:
             - 'console.command'
+        arguments:
+            - '@service_container'
+            - '@doctrine'
+            - '@validator'
             
     vs_app.command.install.extended_sample_data:
         class: Vankosoft\ApplicationInstalatorBundle\Command\InstallExtendedSampleDataCommand
