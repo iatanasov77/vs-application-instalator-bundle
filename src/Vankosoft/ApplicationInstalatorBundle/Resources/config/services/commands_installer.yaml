@@ -8,6 +8,10 @@ services:
         class: Vankosoft\ApplicationInstalatorBundle\Command\InstallCommand
         tags:
             - 'console.command'
+        arguments:
+            - '@service_container'
+            - '@doctrine'
+            - '@validator'
             
     vs_app.command.check_requirements:
         class: Vankosoft\ApplicationInstalatorBundle\Command\CheckRequirementsCommand
