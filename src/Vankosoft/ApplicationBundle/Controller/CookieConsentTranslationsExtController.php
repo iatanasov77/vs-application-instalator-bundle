@@ -8,7 +8,7 @@ use Psr\Cache\CacheItemPoolInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Vankosoft\ApplicationBundle\Component\Status;
 
-class CookieConsentTranslationsExtController
+class CookieConsentTranslationsExtController extends AbstractController
 {
     /** @var CacheItemPoolInterface */
     protected $cache;

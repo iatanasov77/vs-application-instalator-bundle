@@ -16,27 +16,35 @@ services:
         public: true
 
     Vankosoft\ApplicationBundle\Controller\SettingsController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         
     Vankosoft\ApplicationBundle\Controller\AuthController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
+        arguments:
+            - '@vs_users.security_bridge'
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
         
     Vankosoft\ApplicationBundle\Controller\DashboardController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
     
     Vankosoft\ApplicationBundle\Controller\ApplicationExtController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         arguments:
             - '@doctrine'
             - '@vs_application.repository.application'
             - '@vs_application.factory.application'
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
             
     Vankosoft\ApplicationBundle\Controller\SettingsExtController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         arguments:
             - '@doctrine'
@@ -45,23 +53,29 @@ services:
             - '@vs_application.repository.settings'
             - '@vs_application.factory.settings'
             - '@vs_application.repository.taxonomy'
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
         
     Vankosoft\ApplicationBundle\Controller\TaxonomyTaxonsController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         arguments:
             - '@doctrine'
             - '@vs_application.repository.taxonomy'
             - '@vs_application.repository.taxon'
             - '@vs_application.slug_generator'
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
             
     Vankosoft\ApplicationBundle\Controller\PasswordGeneratorController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         arguments:
             - '@hackzilla.password_generator.computer'
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
         
     Vankosoft\ApplicationBundle\Controller\ContactController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         arguments:
             - {
@@ -74,18 +88,23 @@ services:
             }
             - '@mailer'
             - '@vs_users.notifications'
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
             
     Vankosoft\ApplicationBundle\Controller\CookieConsentTranslationsExtController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         arguments:
             - '@vs_application.doctrine_dbal_cache'
             - '@vs_application.repository.cookie_consent_translation'
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
             
     Vankosoft\ApplicationBundle\Controller\TagsWhitelistContextsExtController:
-        tags: ['controller.service_arguments']
+        tags: ['container.service_subscriber', 'controller.service_arguments']
         autowire: true
         arguments:
             - '@doctrine'
             - '@vs_application.repository.tags_whitelist_context'
-
+        calls:
+            - [ setContainer, [ '@service_container' ] ]

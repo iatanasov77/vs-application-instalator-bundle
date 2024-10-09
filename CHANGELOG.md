@@ -1,3 +1,13 @@
+1.10.248	|	Release date: **09.10.2024**
+============================================
+* Bug Fixes:
+  - Fix Missing Command Services Arguments.
+  - Fix Missing SetContainer Calls in Extending Symfony Framework AbstractController .
+  - Fix Missing getUser Method in Symfony Framework.
+  - Fix Controller Services.
+  - Fix Controllers that use isGranted method.
+
+
 1.10.247	|	Release date: **24.09.2024**
 ============================================
 * New Features:
