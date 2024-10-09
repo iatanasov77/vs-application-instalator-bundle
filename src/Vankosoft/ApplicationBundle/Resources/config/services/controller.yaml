@@ -22,6 +22,8 @@ services:
     Vankosoft\ApplicationBundle\Controller\AuthController:
         tags: ['controller.service_arguments']
         autowire: true
+        arguments:
+            - '@vs_users.security_bridge'
         calls:
             - [ setContainer, [ '@service_container' ] ]
         

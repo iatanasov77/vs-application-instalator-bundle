@@ -3,12 +3,21 @@
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Vankosoft\UsersBundle\Security\SecurityBridge;
 
 class AuthController extends AbstractController
 {
+    /** @var SecurityBridge */
+    protected $securityBridge;
+    
+    public function __construct( SecurityBridge $securityBridge )
+    {
+        $this->securityBridge   = $securityBridge;
+    }
+    
     public function login( AuthenticationUtils $authenticationUtils ): Response
     {
-        if ( $this->getUser() && $this->isGranted( 'ROLE_SUPER_ADMIN', $this->getUser() ) ) {
+        if ( $this->securityBridge->getUser() && $this->isGranted( 'ROLE_SUPER_ADMIN', $this->securityBridge->getUser() ) ) {
             return $this->redirectToRoute( 'vs_application_dashboard' );
         }
         
