@@ -17,7 +17,7 @@ class AuthController extends AbstractController
     
     public function login( AuthenticationUtils $authenticationUtils ): Response
     {
-        if ( $this->securityBridge->getUser() && $this->isGranted( 'ROLE_SUPER_ADMIN', $this->securityBridge->getUser() ) ) {
+        if ( $this->securityBridge->getUser() ) { //  && $this->isGranted( 'ROLE_SUPER_ADMIN', $this->securityBridge->getUser() )
             return $this->redirectToRoute( 'vs_application_dashboard' );
         }
         
