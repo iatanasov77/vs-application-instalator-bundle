@@ -45,5 +45,7 @@ services:
         class: Vankosoft\ApplicationInstalatorBundle\Command\InstallationInfoCommand
         tags:
             - 'console.command'
-
-
+        arguments:
+            - '@service_container'
+            - '@doctrine'
+            - '@validator'
