@@ -127,6 +127,7 @@ final class VsApplicationCollector extends DataCollector
                 'VSPaymentBundle'               => ['name' => 'Payment', 'enabled' => false],
                 'VSCatalogBundle'               => ['name' => 'Catalog', 'enabled' => false],
                 'VSApiBundle'                   => ['name' => 'API', 'enabled' => false],
+                'VSThruwayBundle'               => ['name' => 'WAMP', 'enabled' => false],
             ],
         ];
         
