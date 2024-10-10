@@ -1,3 +1,9 @@
+1.10.249	|	Release date: **10.10.2024**
+============================================
+* New Features:
+  - Add a New WAMP Extension in Data Collector.
+
+
 1.10.248	|	Release date: **09.10.2024**
 ============================================
 * Bug Fixes:
