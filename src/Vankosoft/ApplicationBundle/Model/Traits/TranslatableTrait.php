@@ -11,13 +11,6 @@ trait TranslatableTrait
         BaseTranslatableTrait::getTranslations as parentGetTranslations;
     }
     
-    /**
-     * Override Sylius\Component\Resource\Model\TranslatableTrait property with set a default value
-     * 
-     * @var string
-     */
-    protected $fallbackLocale   = 'en_US';
-    
     /** @var string */
     protected $locale;
     
