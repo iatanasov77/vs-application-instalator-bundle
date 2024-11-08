@@ -43,6 +43,7 @@ class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFa
         $slug                       = $this->slugGenerator->generate( $options['title'] );
         
         $taxonomyRootTaxonEntity->setCurrentLocale( $options['locale'] );
+        $taxonomyRootTaxonEntity->setFallbackLocale( 'en_US' );
         $taxonomyRootTaxonEntity->setCode( $slug );
         $taxonomyRootTaxonEntity->getTranslation()->setName( 'Root taxon of Taxonomy: "' . $options['title'] );
         $taxonomyRootTaxonEntity->getTranslation()->setDescription( 'Root taxon of Taxonomy: "' . $options['title'] . '"' );
