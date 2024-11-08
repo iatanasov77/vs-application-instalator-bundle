@@ -49,6 +49,7 @@ class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFa
         $taxonomyRootTaxonEntity->getTranslation()->setSlug( $slug );
         $taxonomyRootTaxonEntity->getTranslation()->setTranslatable( $taxonomyRootTaxonEntity );
         
+        $taxonomyEntity->setFallbackLocale( 'en_US' );
         $taxonomyEntity->setTranslatableLocale( $options['locale'] );
         $taxonomyEntity->setCode( $options['code'] );
         $taxonomyEntity->setName( $options['title'] );

@@ -43,6 +43,7 @@ class PagesExampleFactory extends AbstractExampleFactory implements ExampleFacto
         
         $pageEntity->setSlug( $slug );
         $pageEntity->setTranslatableLocale( $options['locale'] );
+        $pageEntity->setFallbackLocale( 'en_US' );
         $pageEntity->setTitle( $options['title'] );
         $pageEntity->setDescription( $options['description'] );
         $pageEntity->setText( $options['text'] );

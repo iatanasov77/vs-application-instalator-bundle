@@ -43,6 +43,7 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
             $localeEntity->setTranslatableLocale( $options['locale'] );
             $localeEntity->setTitle( $options['title'] );
         }
+        $localeEntity->setFallbackLocale( 'en_US' );
         
         return $localeEntity;
     }
