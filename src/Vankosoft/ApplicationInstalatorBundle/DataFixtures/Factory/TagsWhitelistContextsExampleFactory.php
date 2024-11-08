@@ -50,6 +50,7 @@ class TagsWhitelistContextsExampleFactory extends AbstractExampleFactory impleme
         $slug                       = $this->slugGenerator->generate( $options['title'] );
         
         $taxonEntity->setCurrentLocale( $options['locale'] );
+        $taxonEntity->setFallbackLocale( 'en_US' );
         $taxonEntity->setCode( $slug );
         $taxonEntity->getTranslation()->setName( $options['title'] );
         $taxonEntity->getTranslation()->setDescription( $options['description'] );
