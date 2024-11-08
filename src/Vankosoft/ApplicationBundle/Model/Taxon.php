@@ -120,4 +120,13 @@ class Taxon extends BaseTaxon implements VsTaxonInterface, Comparable
     {
         return $this->createTranslation();
     }
+    
+    protected function createTranslation(): TaxonTranslationInterface
+    {
+        $translation   = new TaxonTranslation();
+        $translation->setLocale( 'en_US' );
+        $translation->setTranslatable( $this );
+        
+        return $translation;
+    }
 }
