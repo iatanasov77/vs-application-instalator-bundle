@@ -1,3 +1,9 @@
+1.10.250	|	Release date: **08.11.2024**
+============================================
+* New Features and Improvements:
+  - Update Application Installator Packages.
+
+
 1.10.249	|	Release date: **10.10.2024**
 ============================================
 * New Features:
