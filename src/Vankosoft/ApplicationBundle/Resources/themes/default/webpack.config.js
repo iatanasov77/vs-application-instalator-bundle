@@ -37,7 +37,7 @@ Encore
     
     // Default Theme Images
     .copyFiles({
-         from: path.resolve( __dirname, applicationAssetsPath ) + '/images',
+         from: applicationAssetsPath + '/images',
          to: 'images/[path][name].[ext]',
      })
     
