@@ -1,3 +1,18 @@
+1.10.251	|	Release date: **09.11.2024**
+============================================
+* Bug-Fixes and Improvements:
+  - Improve TranslatableTrait .
+  - Set Fallback Locale in Constructor of all Models that use TranslatableTrait .
+  - Installator Fixtures Factories Set Fallback Locale for All Translatable Models.
+  - Fix Seters Return Value of UserRole Model.
+  - Override 'createTranslation()' method of Taxon Model.
+  - Create a My Own TaxonTranslationInterface .
+  - Fix UserRole Model.
+  - Fix Installator CreateApplicationCommand .
+  - Copy Default Theme Images into WebPack Config.
+  - Update Application Installator Configs.
+
+
 1.10.250	|	Release date: **08.11.2024**
 ============================================
 * New Features and Improvements:
