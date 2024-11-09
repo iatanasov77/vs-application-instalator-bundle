@@ -4,8 +4,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Comparable;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
+
+// use Sylius\Component\Taxonomy\Model\TaxonInterface;
+// use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonTranslationInterface;
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface as VsTaxonInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
@@ -119,14 +122,5 @@ class Taxon extends BaseTaxon implements VsTaxonInterface, Comparable
     public function createNewTranslation(): TaxonTranslationInterface
     {
         return $this->createTranslation();
-    }
-    
-    protected function createTranslation(): TaxonTranslationInterface
-    {
-        $translation   = new TaxonTranslation();
-        $translation->setLocale( 'en_US' );
-        $translation->setTranslatable( $this );
-        
-        return $translation;
     }
 }
