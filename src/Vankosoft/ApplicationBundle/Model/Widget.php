@@ -42,6 +42,7 @@ class Widget implements WidgetInterface
     
     public function __construct()
     {
+        $this->fallbackLocale   = 'en_US';
         $this->allowedRoles = new ArrayCollection();
     }
     

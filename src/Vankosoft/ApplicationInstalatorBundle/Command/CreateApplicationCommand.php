@@ -226,6 +226,7 @@ EOT
                                                     ->findOneBy( ['code' => 'role-application-admin'] );
         
         $roleTaxon->setCurrentLocale( 'en_US' );
+        $roleTaxon->setFallbackLocale( 'en_US' );
         $roleTaxon->setParent( $taxonParent ?: $taxonomyRootTaxon );
         $roleTaxon->setCode( $taxonSlug );
         $roleTaxon->getTranslation()->setName( 'Role ' . $applicationName );

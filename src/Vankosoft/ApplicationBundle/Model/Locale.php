@@ -13,6 +13,11 @@ class Locale extends BaseLocale implements LocaleInterface
      */
     protected $title;
     
+    public function __construct()
+    {
+        $this->fallbackLocale   = 'en_US';
+    }
+    
     /**
      * There is getName() Method at \Sylius\Component\Locale\Model\Locale
      * 

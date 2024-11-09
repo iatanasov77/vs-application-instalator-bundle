@@ -45,6 +45,7 @@ class WidgetsExampleFactory extends AbstractExampleFactory implements ExampleFac
         
         $widgetEntity   = $this->widgetsFactory->createNew();
         $widgetEntity->setTranslatableLocale( $options['locale'] );
+        $widgetEntity->setFallbackLocale( 'en_US' );
         
         $slug           = $this->slugGenerator->generate( $options['name'] );
         $widgetEntity->setCode( $slug );

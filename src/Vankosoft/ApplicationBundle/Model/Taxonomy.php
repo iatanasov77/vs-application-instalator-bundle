@@ -23,6 +23,11 @@ class Taxonomy implements TaxonomyInterface
     /** @var TaxonInterface */
     protected $rootTaxon;
     
+    public function __construct()
+    {
+        $this->fallbackLocale   = 'en_US';
+    }
+    
     public function getCode()
     {
         return $this->code;

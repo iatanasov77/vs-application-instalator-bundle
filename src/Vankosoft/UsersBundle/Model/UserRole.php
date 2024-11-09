@@ -4,8 +4,10 @@ use Doctrine\Common\Comparable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Vankosoft\ApplicationBundle\Model\Traits\TaxonDescendentTrait;
+use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserRoleInterface;
 
-class UserRole implements Interfaces\UserRoleInterface, Comparable
+class UserRole implements UserRoleInterface, Comparable
 {
     use TaxonDescendentTrait;
     
@@ -49,7 +51,7 @@ class UserRole implements Interfaces\UserRoleInterface, Comparable
         return $this->role;
     }
     
-    public function setRole( $role ) : UserRoleInterface
+    public function setRole( $role ): self
     {
         $this->role = $role;
         
@@ -67,7 +69,7 @@ class UserRole implements Interfaces\UserRoleInterface, Comparable
     /**
      * {@inheritdoc}
      */
-    public function setParent(?UserRoleInterface $parent) : UserRoleInterface
+    public function setParent(?UserRoleInterface $parent): self
     {
         $this->parent = $parent;
         
@@ -87,7 +89,7 @@ class UserRole implements Interfaces\UserRoleInterface, Comparable
         return $this->users;
     }
     
-    public function addUser( UserInterface $user ): UserRoleInterface
+    public function addUser( UserInterface $user ): self
     {
         if ( ! $this->users->contains( $user ) ) {
             $this->users[] = $user;
@@ -97,7 +99,7 @@ class UserRole implements Interfaces\UserRoleInterface, Comparable
         return $this;
     }
     
-    public function removeUser( UserInterface $user ): UserRoleInterface
+    public function removeUser( UserInterface $user ): self
     {
         if ( ! $this->users->contains( $user ) ) {
             $this->users->removeElement( $user );

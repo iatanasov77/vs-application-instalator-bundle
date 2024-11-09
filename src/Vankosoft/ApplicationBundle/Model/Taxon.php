@@ -4,8 +4,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Comparable;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
+
+/** Use Sylius Interfaces for Parameter and Return Types For Parent Models Compatibility */
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
+// use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface;
+// use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonTranslationInterface;
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface as VsTaxonInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
