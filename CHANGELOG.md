@@ -1,3 +1,22 @@
+1.11.0	|	Release date: **10.11.2024**
+============================================
+* New Features and Update Git Subtree:
+  - Remove Component: ApplicationBundle
+  - Squashed 'src/Vankosoft/ApplicationBundle/' content from commit 91dbf4d2
+  - Merge commit '0aec8f011639f64c47c6ec65e4fed7d7e99e442a' as 'src/Vankosoft/ApplicationBundle'
+  - Update Subtree Manual docs.
+  - Remove Somme artifacts that was removed before and arrive now from SubTree Repository.
+  - Remove Component: ApplicationInstalatorBundle
+  - Squashed 'src/Vankosoft/ApplicationInstalatorBundle/' content from commit d649bfce
+  - Merge commit 'f3762b9b6412a259b13aad76b58edd139b4a49e8' as 'src/Vankosoft/ApplicationInstalatorBundle'
+  - Remove Component: CmsBundle
+  - Squashed 'src/Vankosoft/CmsBundle/' content from commit 03912f9e
+  - Merge commit 'c93c866ae58efcbc96bfb2ef0efd507b3d2add3f' as 'src/Vankosoft/CmsBundle'
+  - Remove Component: UsersBundle
+  - Squashed 'src/Vankosoft/UsersBundle/' content from commit 858f6489
+  - Merge commit '4854dff6402207ccc577c411945e2ab04cfba8f2' as 'src/Vankosoft/UsersBundle'
+
+
 1.10.251	|	Release date: **09.11.2024**
 ============================================
 * Bug-Fixes and Improvements:
