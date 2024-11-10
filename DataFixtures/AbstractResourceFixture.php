@@ -9,6 +9,8 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 
 use Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\ExampleFactoryInterface;
+use Vankosoft\ApplicationInstalatorBundle\DataFixtures\Factory\ExampleTranslationsFactoryInterface;
+use Vankosoft\ApplicationBundle\Model\Interfaces\TranslatableInterface;
 
 abstract class AbstractResourceFixture implements FixtureInterface
 {
@@ -48,21 +50,35 @@ abstract class AbstractResourceFixture implements FixtureInterface
     {
         $options = $this->optionsResolver->resolve( $options );
 
-        $i = 0;
         foreach ( $options['custom'] as $resourceOptions ) {
+            
             $resource = $this->exampleFactory->create( $resourceOptions );
-
             $this->objectManager->persist( $resource );
-
-            ++$i;
-
-            if ( 0 === ( $i % 10 ) ) {
-                $this->objectManager->flush();
-                $this->objectManager->clear();
+            $this->objectManager->flush();
+            $this->objectManager->refresh( $resource );
+            
+            if ( isset( $resourceOptions['translations'] ) && $this->exampleFactory instanceof ExampleTranslationsFactoryInterface ) {
+                foreach ( $resourceOptions['translations'] as $localeCode => $translationOptions ) {
+                    if ( isset( $resourceOptions['locale'] ) && $resourceOptions['locale'] == $localeCode ) {
+                        continue;
+                    }
+                    
+                    //$resourceCopy           = clone $resource;
+                    $translationResource    = $this->exampleFactory->createTranslation( $resource, $localeCode, $translationOptions );
+                    
+                    if ( $resource instanceof TranslatableInterface ) {
+                        if ( $translationResource->getTranslatableLocale() != $resource->getTranslatableLocale() ) {
+                            $this->objectManager->persist( $translationResource );
+                            $this->objectManager->flush();
+                        }
+                    } else {
+                        $this->objectManager->persist( $translationResource );
+                        $this->objectManager->flush();
+                    }
+                }
             }
         }
 
-        $this->objectManager->flush();
         $this->objectManager->clear();
     }
 

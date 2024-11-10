@@ -8,8 +8,8 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
 
-use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfoInterface;
 use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfo;
+use Vankosoft\ApplicationInstalatorBundle\Repository\InstalationInfoRepository;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -21,7 +21,7 @@ class Configuration implements ConfigurationInterface
     /**
      * {@inheritDoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder    = new TreeBuilder( 'vs_application_instalator' );
         $rootNode       = $treeBuilder->getRootNode();
@@ -55,8 +55,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( InstalationInfo::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( InstalationInfoInterface::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( InstalationInfoRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()

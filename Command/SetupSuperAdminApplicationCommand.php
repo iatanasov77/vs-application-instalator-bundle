@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,14 +12,16 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 
+#[AsCommand(
+    name: 'vankosoft:install:setup-super-admin-application',
+    description: 'VankoSoft Application SuperAdmin User setup.',
+    hidden: false
+)]
 final class SetupSuperAdminApplicationCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'vankosoft:install:setup-super-admin-application';
-    
     protected function configure(): void
     {
         $this
-            ->setDescription( 'VankoSoft Application configuration setup.' )
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command allows user to configure basic VankoSoft Application data.
 EOT
@@ -43,6 +46,15 @@ EOT
     private function setupSuperAdminPanelApplication( InputInterface $input, OutputInterface $output, string $localeCode ): void
     {
         $outputStyle    = new SymfonyStyle( $input, $output );
+        $appSetup       = $this->get( 'vs_application.installer.setup_application' );
+        
+        // Debug
+//         $outputStyle->writeln( 'DEBUG APPLICATION VERSION:' );
+//         $outputStyle->newLine();
+//         $outputStyle->writeln( $appSetup->getApplicationVersion() );
+//         $outputStyle->newLine();
+//         $outputStyle->newLine();
+//         die;
         
         // Add Database Records
         $outputStyle->writeln( 'Create SuperAdmin Application Database Records.' );
@@ -51,10 +63,15 @@ EOT
         $outputStyle->newLine();
         
         // Setup SuperAdmin Kernel
-        $appSetup           = $this->getContainer()->get( 'vs_application.installer.setup_application' );
         $outputStyle->writeln( 'Create SuperAdmin Application Kernel.' );
         $appSetup->setupAdminPanelKernel();
         $outputStyle->writeln( '<info>SuperAdmin Application Kernel successfully created.</info>' );
+        $outputStyle->newLine();
+        
+        // Setup SuperAdmin Default Locale
+        $outputStyle->writeln( 'Setup SuperAdmin Application Default Locale.' );
+        $appSetup->setupAdminPanelDefaultLocale( $localeCode );
+        $outputStyle->writeln( '<info>SuperAdmin Application Default Locale successfully setuped.</info>' );
         $outputStyle->newLine();
         
         $outputStyle->newLine();
@@ -64,8 +81,8 @@ EOT
     
     private function createApplicationDatabaseRecords( InputInterface $input, OutputInterface $output, $applicationName, $localeCode )
     {
-        $entityManager      = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
-        $applicationSlug    = $this->getContainer()->get( 'vs_application.slug_generator' )->generate( $applicationName );
+        $entityManager      = $this->get( 'doctrine' )->getManager();
+        $applicationSlug    = $this->get( 'vs_application.slug_generator' )->generate( $applicationName );
         
         $outputStyle    = new SymfonyStyle( $input, $output );
         $outputStyle->writeln( 'Create SuperAdminPanel Application.' );
@@ -76,7 +93,7 @@ EOT
         $applicationUrl     = $questionHelper->ask( $input, $output, $questionUrl );
         $applicationCreated = new \DateTime;
         
-        $application        = $this->getContainer()->get( 'vs_application.factory.application' )->createNew();
+        $application        = $this->get( 'vs_application.factory.application' )->createNew();
         $application->setCode( $applicationSlug );
         $application->setTitle( $applicationName );
         $application->setHostname( $applicationUrl );
@@ -94,7 +111,8 @@ EOT
         $parameters     = [
             '--application' => 'Super Admin',
             '--roles'       => ['ROLE_SUPER_ADMIN'],
-            '--locale'      => $localeCode
+            '--locale'      => $localeCode,
+            '--designation' => 'Lead Designer / Developer',
         ];
         $this->commandExecutor->runCommand( 'vankosoft:application:create-user', $parameters, $output );
         
@@ -108,7 +126,7 @@ EOT
             ->setValidator(
                 function ( $value ): string {
                     /** @var ConstraintViolationListInterface $errors */
-                    $errors = $this->getContainer()->get( 'validator' )->validate( (string) $value, [new Length([
+                    $errors = $this->get( 'validator' )->validate( (string) $value, [new Length([
                         'min' => 6,
                         'max' => 256,
                         'minMessage' => 'Your application url must be at least {{ limit }} characters long',

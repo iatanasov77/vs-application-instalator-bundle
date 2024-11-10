@@ -14,9 +14,10 @@ final class LocalesFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-                ->scalarNode( 'translatableLocale' )->end()
+                ->scalarNode( 'locale' )->end()
                 ->scalarNode( 'title' )->end()
                 ->scalarNode( 'code' )->end()
+                ->variableNode( 'translations' )->cannotBeEmpty()->defaultValue( [] )->end()
         ;
     }
 }

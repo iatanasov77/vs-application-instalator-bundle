@@ -8,11 +8,19 @@ services:
         class: Vankosoft\ApplicationInstalatorBundle\Command\CreateApplicationCommand
         tags:
             - 'console.command'
+        arguments:
+            - '@service_container'
+            - '@doctrine'
+            - '@validator'
 
     vs_app.command.clear_install:
         class: Vankosoft\ApplicationInstalatorBundle\Command\ClearInstallCommand
         tags:
             - 'console.command'
+        arguments:
+            - '@service_container'
+            - '@doctrine'
+            - '@validator'
             
     vs_app.command.bumpversion:
         class: Vankosoft\ApplicationInstalatorBundle\Command\BumpVersionCommand
@@ -32,3 +40,12 @@ services:
             - '@filesystem'
         tags:
             - 'console.command'
+            
+    vs_app.command.installation_info:
+        class: Vankosoft\ApplicationInstalatorBundle\Command\InstallationInfoCommand
+        tags:
+            - 'console.command'
+        arguments:
+            - '@service_container'
+            - '@doctrine'
+            - '@validator'

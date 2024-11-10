@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
@@ -28,13 +29,17 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
  *
  * @final
  */
+
+#[AsCommand(
+    name: 'assets:sources',
+    description: 'copy bundles asset sources under the projects assets directory',
+    hidden: false
+)]
 class AssetsSourcesCommand extends Command
 {
     const METHOD_COPY               = 'copy';
     const METHOD_ABSOLUTE_SYMLINK   = 'absolute symlink';
     const METHOD_RELATIVE_SYMLINK   = 'relative symlink';
-    
-    protected static $defaultName   = 'assets:sources';
     
     private $filesystem;
     
@@ -48,7 +53,7 @@ class AssetsSourcesCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDefinition(array(
@@ -57,26 +62,25 @@ class AssetsSourcesCommand extends Command
             ->addOption( 'symlink', null, InputOption::VALUE_NONE, 'Symlinks the assets instead of copying it' )
             ->addOption( 'relative', null, InputOption::VALUE_NONE, 'Make relative symlinks' )
             ->addOption( 'no-cleanup', null, InputOption::VALUE_NONE, 'Do not remove the assets of the bundles that no longer exist' )
-            ->setDescription( 'copy bundles asset sources under the projects assets directory' )
             ->setHelp(<<<'EOT'
-    The <info>%command.name%</info> command installs bundle assets into a given
-    directory (e.g. the <comment>assets</comment> directory).
-                
-      <info>php %command.full_name% assets</info>
-                
-    A "bundles" directory will be created inside the target directory and the
-    "assets" directory of each bundle will be copied into it.
-                
-    To create a symlink to each bundle instead of copying its assets, use the
-    <info>--symlink</info> option (will fall back to hard copies when symbolic links aren't possible:
-                
-      <info>php %command.full_name% assets --symlink</info>
-                
-    To make symlink relative, add the <info>--relative</info> option:
-                
-      <info>php %command.full_name% assets --symlink --relative</info>
-                
-    EOT
+The <info>%command.name%</info> command installs bundle assets into a given
+directory (e.g. the <comment>assets</comment> directory).
+            
+  <info>php %command.full_name% assets</info>
+            
+A "bundles" directory will be created inside the target directory and the
+"assets" directory of each bundle will be copied into it.
+            
+To create a symlink to each bundle instead of copying its assets, use the
+<info>--symlink</info> option (will fall back to hard copies when symbolic links aren't possible:
+            
+  <info>php %command.full_name% assets --symlink</info>
+            
+To make symlink relative, add the <info>--relative</info> option:
+            
+  <info>php %command.full_name% assets --symlink --relative</info>
+            
+EOT
             )
         ;
     }
@@ -84,7 +88,7 @@ class AssetsSourcesCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute( InputInterface $input, OutputInterface $output)
+    protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $kernel     = $this->getApplication()->getKernel();
         $targetArg  = rtrim($input->getArgument( 'target'), '/' );
@@ -150,12 +154,12 @@ class AssetsSourcesCommand extends Command
                     $copyUsed = true;
                 }
                 
-                if ($method === $expectedMethod) {
+                if ( $method === $expectedMethod ) {
                     $rows[] = array( sprintf( '<fg=green;options=bold>%s</>', '\\' === \DIRECTORY_SEPARATOR ? 'OK' : "\xE2\x9C\x94" /* HEAVY CHECK MARK (U+2714) */ ), $message, $method );
                 } else {
                     $rows[] = array( sprintf( '<fg=yellow;options=bold>%s</>', '\\' === \DIRECTORY_SEPARATOR ? 'WARNING' : '!'), $message, $method );
                 }
-            } catch (\Exception $e) {
+            } catch ( \Exception $e ) {
                 $exitCode = 1;
                 $rows[] = array( sprintf( '<fg=red;options=bold>%s</>', '\\' === \DIRECTORY_SEPARATOR ? 'ERROR' : "\xE2\x9C\x98" /* HEAVY BALLOT X (U+2718) */), $message, $e->getMessage() );
             }
