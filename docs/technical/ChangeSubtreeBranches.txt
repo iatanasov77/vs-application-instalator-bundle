@@ -2,7 +2,8 @@
 # From Vankosoft Library Directory Run:
 bin/subtree -apush -v1.4
         OR
-# From Vankosoft Library Directory Copy Every Bundle Files into The Your Subrepository Current Version Branch:
+# From Your Subrepository Current Version Branch Remove all files before to paste from Vankosoft Library Directory to prevent removed files to be here again.
+# From Vankosoft Library Directory Copy Every Bundle Files into The Your Subrepository Current Version Branch
 
 # After That From Every Component Repository Run To Create New Branches:
 git pull origin 1.4
