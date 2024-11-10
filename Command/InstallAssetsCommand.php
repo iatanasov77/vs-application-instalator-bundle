@@ -1,16 +1,20 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+    name: 'vankosoft:install:assets',
+    description: 'Installs all VankoSoft Application assets.',
+    hidden: false
+)]
 final class InstallAssetsCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'vankosoft:install:assets';
-
     protected function configure(): void
     {
         $this
-            ->setDescription( 'Installs all VankoSoft Application assets.')
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command downloads and installs all VankoSoft Application media assets.
 EOT
@@ -25,7 +29,7 @@ EOT
             $this->getEnvironment()
         ) );
 
-        $publicDir = $this->getContainer()->getParameter( 'vs_application.public_dir' );
+        $publicDir = $this->getParameter( 'vs_application.public_dir' );
         
         try {
             $this->ensureDirectoryExistsAndIsWritable( $publicDir . '/assets/', $output );
@@ -33,7 +37,7 @@ EOT
         } catch ( \RuntimeException $exception ) {
             $output->writeln( $exception->getMessage() );
 
-            return 1;
+            return Command::FAILURE;
         }
 
         $commands = [
@@ -42,6 +46,6 @@ EOT
 
         $this->runCommands( $commands, $output );
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

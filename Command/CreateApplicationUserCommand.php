@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,25 +13,36 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Config\FileLocatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Webmozart\Assert\Assert;
 
 use Vankosoft\CmsBundle\Component\Uploader\FileUploaderInterface;
-use Vankosoft\UsersBundle\Model\UserInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 use Vankosoft\UsersBundle\Repository\UsersRepositoryInterface;
+use Vankosoft\UsersBundle\Component\UserInfo;
 
+#[AsCommand(
+    name: 'vankosoft:application:create-user',
+    description: 'VankoSoft Application User Setup.',
+    hidden: false
+)]
 final class CreateApplicationUserCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'vankosoft:application:create-user';
-    
+    /** @var FileLocatorInterface|null */
     private ?FileLocatorInterface $fileLocator;
+    
+    /** @var FileUploaderInterface|null */
     private ?FileUploaderInterface $imageUploader;
     
     public function __construct(
         ContainerInterface $container,
+        ManagerRegistry $doctrine,
+        ValidatorInterface $validator,
         ?FileLocatorInterface $fileLocator = null,
         ?FileUploaderInterface $imageUploader = null
     ) {
-            parent::__construct( $container );
+        parent::__construct( $container, $doctrine, $validator );
             
             $this->fileLocator      = $fileLocator;
             $this->imageUploader    = $imageUploader;
@@ -39,7 +51,6 @@ final class CreateApplicationUserCommand extends AbstractInstallCommand
     protected function configure(): void
     {
         $this
-            ->setDescription( 'VankoSoft Application User Setup.' )
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command allows user to configure Admin User for the VankoSoft Application.
 EOT
@@ -65,6 +76,13 @@ EOT
                 'Prefered User Locale.',
                 'en_US'
             )
+            ->addOption(
+                'designation',
+                'd',
+                InputOption::VALUE_REQUIRED,
+                'User Designation.',
+                'Project User'
+            )
         ;
     }
     
@@ -73,15 +91,20 @@ EOT
         $application    = $input->getOption( 'application' );
         $roles          = $input->getOption( 'roles' );
         $locale         = $input->getOption( 'locale' );
-        $userManager    = $this->getContainer()->get( 'vs_users.manager.user' );
+        $designation    = $input->getOption( 'designation' );
+        $userManager    = $this->get( 'vs_users.manager.user' );
         
         // Setup UserInfo Object
         try {
             $user = $this->createNewUser( $userManager, $input, $output );
             
-            $userNames  = explode( ' ', $application );
+            $userNames      = explode( ' ', $application );
+            $userInfoTitles = UserInfo::choices();
+            
+            $user->getInfo()->setTitle( $userInfoTitles[UserInfo::TITLE_MISS] );
             $user->getInfo()->setFirstName( $userNames[0] );
             $user->getInfo()->setLastName( end( $userNames ) );
+            $user->getInfo()->setDesignation( $designation );
         } catch ( \InvalidArgumentException $exception ) {
             return Command::FAILURE;
         }
@@ -110,7 +133,7 @@ EOT
         $username       = $this->getAdministratorUsername( $input, $output, $email );
         $plainPassword  = $this->getAdministratorPassword( $input, $output );
         
-        $userRepository = $this->getContainer()->get( 'vs_users.repository.users' );
+        $userRepository = $this->get( 'vs_users.repository.users' );
         Assert::null( $userRepository->findOneByEmail( $email ) );
         //Assert::null( $userRepository->findOneByUsername( $username ) );
         $user   = $userManager->createUser( $username, $email, $plainPassword );
@@ -138,8 +161,8 @@ EOT
             return;
         }
         
-        $appRepo        = $this->getContainer()->get( 'vs_application.repository.application' );
-        $application    = $appRepo->findOneBy( ['code' => $this->getContainer()->get( 'vs_application.slug_generator' )->generate( $applicationName )] );
+        $appRepo        = $this->get( 'vs_application.repository.application' );
+        $application    = $appRepo->findOneBy( ['code' => $this->get( 'vs_application.slug_generator' )->generate( $applicationName )] );
         
         if ( $application ) {
             $user->addApplication( $application );
@@ -151,7 +174,7 @@ EOT
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper( 'question' );
         /** @var UsersRepositoryInterface $userRepository */
-        $userRepository = $this->getContainer()->get( 'vs_users.repository.users' );
+        $userRepository = $this->get( 'vs_users.repository.users' );
         
         do {
             $question   = $this->createEmailQuestion();
@@ -171,7 +194,7 @@ EOT
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper( 'question' );
         /** @var UsersRepositoryInterface $userRepository */
-        $userRepository = $this->getContainer()->get( 'vs_users.repository.users' );
+        $userRepository = $this->get( 'vs_users.repository.users' );
         
         do {
             $question   = new Question( 'Username (press enter to use email): ', $email );
@@ -217,7 +240,7 @@ EOT
         $imagePath      = $this->fileLocator->locate( '@VSApplicationInstalatorBundle/Resources/fixtures/adminAvatars/' . $avatarFile );
         $uploadedImage  = new UploadedFile( $imagePath, basename( $imagePath ) );
         
-        $avatarImage    = $this->getContainer()->get( 'vs_users.factory.avatar_image' )->createNew();
+        $avatarImage    = $this->get( 'vs_users.factory.avatar_image' )->createNew();
         $avatarImage->setFile( $uploadedImage );
         $avatarImage->setOriginalName( $avatarFile );
         
@@ -234,7 +257,7 @@ EOT
              */
             function ( $value ): string {
                 /** @var ConstraintViolationListInterface $errors */
-                $errors = $this->getContainer()->get( 'validator' )->validate( (string) $value, [new Email(), new NotBlank()] );
+                $errors = $this->get( 'validator' )->validate( (string) $value, [new Email(), new NotBlank()] );
                 foreach ( $errors as $error ) {
                     throw new \DomainException( $error->getMessage() );
                 }
@@ -250,7 +273,7 @@ EOT
             /** @param mixed $value */
             function ( $value ): string {
                 /** @var ConstraintViolationListInterface $errors */
-                $errors     = $this->getContainer()->get( 'validator' )->validate( $value, [new NotBlank()] );
+                $errors     = $this->get( 'validator' )->validate( $value, [new NotBlank()] );
                 foreach ( $errors as $error ) {
                     throw new \DomainException( $error->getMessage() );
                 }

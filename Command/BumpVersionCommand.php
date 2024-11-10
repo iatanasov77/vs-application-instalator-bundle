@@ -1,23 +1,26 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
+#[AsCommand(
+    name: 'vankosoft:bumpversion',
+    description: 'Bump the release version.',
+    hidden: false
+)]
 class BumpVersionCommand extends Command
 {    
-    protected static $defaultName = 'vankosoft:bumpversion';
-    
-    protected function configure()
+    protected function configure(): void
     {
         $this
-            ->setDescription( 'Bump the release version.' )
             ->setHelp( 'Bump the version and add CHANGES info from commit messages.' )
         ;
     }
     
-    protected function execute( InputInterface $input, OutputInterface $output )
+    protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $versionFile		= 'VERSION';
         $changesFile		= 'CHANGELOG.md';

@@ -1,5 +1,6 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -10,10 +11,13 @@ use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\Table;
 
+#[AsCommand(
+    name: 'vankosoft:install',
+    description: 'Installs VankoSoft Application in your preferred environment.',
+    hidden: false
+)]
 final class InstallCommand extends AbstractInstallCommand
 {
-    protected static $defaultName   = 'vankosoft:install';
-    
     private $defaultLocale          = null;
     
     /**
@@ -43,18 +47,16 @@ final class InstallCommand extends AbstractInstallCommand
             'message' => 'Setup Main Application Layout.',
         ],
         
+        [
+            'command' => 'sample-data',
+            'message' => 'Install Application Simple Data.',
+        ],
+        
         // I think this Command Is Not Needed Anymore
         //
         // [
         //     'command' => 'assets',
         //     'message' => 'Installing assets.',
-        // ],
-        
-        // For Now Sample Data is In Construction and is Not Available
-        //
-        // [
-        //     'command' => 'sample-data',
-        //     'message' => 'Install Application Simple Data.',
         // ],
         
         [
@@ -66,13 +68,13 @@ final class InstallCommand extends AbstractInstallCommand
     protected function configure(): void
     {
         $this
-            ->setDescription( 'Installs VankoSoft Application in your preferred environment.' )
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command installs VankoSoft Application.
 EOT
             )
-            ->addOption( 'fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
             ->addOption( 'debug-commands', 'd', InputOption::VALUE_OPTIONAL, 'Debug Executed Commands', null )
+            ->addOption( 'app-config-fixture-suite', 'c', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
+            ->addOption( 'sample-data-fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
         ;
     }
     
@@ -83,11 +85,12 @@ EOT
         //$outputStyle->writeln( $this->getSyliusLogo() );
         $outputStyle->writeln( $this->getVankoSoftLogo() );
         
-        $this->ensureDirectoryExistsAndIsWritable( (string) $this->getContainer()->getParameter( 'kernel.cache_dir' ), $output );
+        $this->ensureDirectoryExistsAndIsWritable( (string) $this->getParameter( 'kernel.cache_dir' ), $output );
         
         $errored        = false;
         try {
             $this->executeCommands( $input, $output );
+            $this->loadWidgets();
         } catch ( RuntimeException $exception ) {
             $errored = true;
         }
@@ -102,9 +105,11 @@ EOT
     
     private function executeCommands( InputInterface $input, OutputInterface $output )
     {
-        $suite          = $input->getOption( 'fixture-suite' );
-        $debug          = $input->getOption( 'debug-commands' );
-        $outputStyle    = new SymfonyStyle( $input, $output );
+        $debug              = $input->getOption( 'debug-commands' );
+        $appConfigSuite     = $input->getOption( 'app-config-fixture-suite' );
+        $sampleDataSuite    = $input->getOption( 'sample-data-fixture-suite' );
+        
+        $outputStyle        = new SymfonyStyle( $input, $output );
         
         foreach ( $this->commands as $step => $command ) {
             
@@ -119,15 +124,17 @@ EOT
             $parameters = [];
             switch ( $command['command'] ) {
                 case 'database':
-                    if ( $suite )
-                        $parameters['--fixture-suite']  = $suite;
                     if ( $debug )
                         $parameters['--debug-commands'] = $debug;
                     
                      break;
                 case 'application-configuration':
                     // Database is already Installed. Setup Default Locale.
-                    $this->defaultLocale  = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
+                    $this->defaultLocale  = $this->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
+                    
+                    if ( $appConfigSuite ) {
+                        $parameters['--fixture-suite']  = $appConfigSuite;
+                    }
                     
                     break;
                 case 'setup-super-admin-application':
@@ -139,13 +146,26 @@ EOT
                     
                     break;
                 case 'sample-data':
-                    $parameters['--fixture-suite']  = 'vankosoft_sampledata_suite';
+                    if ( $sampleDataSuite ) {
+                        $parameters['--fixture-suite']  = $sampleDataSuite;
+                    }
                     
                     break;
             }
             
             $this->commandExecutor->runCommand( 'vankosoft:install:' . $command['command'], $parameters, $output );
         }
+    }
+    
+    private function loadWidgets(): void
+    {
+        $widgetsContainer   = $this->get( 'vs_application.widgets_container' );
+        
+        $users  = $this->get( 'vs_users.repository.users' )->findAll();
+        foreach ( $users as $user ) {
+            $widgetsContainer->loadWidgets( $user, false, true );
+        }
+        $widgetsContainer->loadWidgets( null, false, true );
     }
     
     private function getProperFinalMessage( bool $errored ): string

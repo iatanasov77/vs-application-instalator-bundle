@@ -6,7 +6,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
 
-class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface, ExampleTranslationsFactoryInterface
 {
     /** @var FactoryInterface */
     private $taxonomyFactory;
@@ -43,18 +43,56 @@ class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFa
         $slug                       = $this->slugGenerator->generate( $options['title'] );
         
         $taxonomyRootTaxonEntity->setCurrentLocale( $options['locale'] );
+        $taxonomyRootTaxonEntity->setFallbackLocale( 'en_US' );
         $taxonomyRootTaxonEntity->setCode( $slug );
         $taxonomyRootTaxonEntity->getTranslation()->setName( 'Root taxon of Taxonomy: "' . $options['title'] );
         $taxonomyRootTaxonEntity->getTranslation()->setDescription( 'Root taxon of Taxonomy: "' . $options['title'] . '"' );
         $taxonomyRootTaxonEntity->getTranslation()->setSlug( $slug );
         $taxonomyRootTaxonEntity->getTranslation()->setTranslatable( $taxonomyRootTaxonEntity );
         
+        $taxonomyEntity->setFallbackLocale( 'en_US' );
+        $taxonomyEntity->setTranslatableLocale( $options['locale'] );
         $taxonomyEntity->setCode( $options['code'] );
         $taxonomyEntity->setName( $options['title'] );
         $taxonomyEntity->setDescription( $options['description'] );
         $taxonomyEntity->setRootTaxon( $taxonomyRootTaxonEntity );
         
         return $taxonomyEntity;
+    }
+    
+    public function createTranslation( $entity, $localeCode, $options = [] )
+    {
+        $taxonomyRootTaxonEntity    = $entity->getRootTaxon();
+        
+        $this->slugGenerator->setLocaleCode( $localeCode );
+        $slug                       = $this->slugGenerator->generate( $options['title'] );
+        
+        $taxonomyRootTaxonEntity->getTranslation( $localeCode );
+        $taxonomyRootTaxonEntity->setCurrentLocale( $localeCode );
+        if ( ! in_array( $localeCode, $taxonomyRootTaxonEntity->getExistingTranslations() ) ) {
+            $translation    = $taxonomyRootTaxonEntity->createNewTranslation();
+            
+            $translation->setLocale( $localeCode );
+            $translation->setName( $options['title'] );
+            $translation->setDescription( $options['description'] );
+            
+            $this->slugGenerator->setLocaleCode( $localeCode );
+            $translation->setSlug( $this->slugGenerator->generate( $options['title'] ) );
+            
+            $taxonomyRootTaxonEntity->addTranslation( $translation );
+        } else {
+            $translation   = $taxonomyRootTaxonEntity->getTranslation( $localeCode );
+            
+            $translation->setName( $options['title'] );
+            $translation->setDescription( $options['description'] );
+        }
+        
+        $entity->setTranslatableLocale( $localeCode );
+        $entity->setName( $options['title'] );
+        $entity->setDescription( $options['description'] );
+        $entity->setRootTaxon( $taxonomyRootTaxonEntity );
+        
+        return $entity;
     }
     
     protected function configureOptions( OptionsResolver $resolver ): void
@@ -71,6 +109,9 @@ class TaxonomyExampleFactory extends AbstractExampleFactory implements ExampleFa
             
             ->setDefault( 'locale', 'en_US' )
             ->setAllowedTypes( 'locale', ['string'] )
+            
+            ->setDefault( 'translations', [] )
+            ->setAllowedTypes( 'translations', ['array'] )
         ;
     }
 }

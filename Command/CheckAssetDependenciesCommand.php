@@ -1,7 +1,6 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Command;
 
-use Composer\Semver\Semver;
-use Composer\Semver\VersionParser;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
@@ -13,16 +12,22 @@ use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use Composer\Semver\Semver;
+use Composer\Semver\VersionParser;
 
 /**
  *
  * @author Christoph Singer <singer@webagentur72.de>
  *
  */
+
+#[AsCommand(
+    name: 'assets:dependencies',
+    description: 'check whether npm packages required from bundles are there',
+    hidden: false
+)]
 class CheckAssetDependenciesCommand extends Command
 {
-    protected static $defaultName = 'assets:dependencies';
-    
     private $filesystem;
     
     public function __construct( Filesystem $filesystem )
@@ -37,7 +42,6 @@ class CheckAssetDependenciesCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription( 'check whether npm packages required from bundles are there' )
             ->setHelp(<<<'EOT'
 The <info>%command.name%</info> searches all installed bundles for package.json files
 and checks whether the dependencies are met in the project's package.json file.
@@ -49,7 +53,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute( InputInterface $input, OutputInterface $output )
+    protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $io             = new SymfonyStyle( $input, $output );
         $io->newLine();

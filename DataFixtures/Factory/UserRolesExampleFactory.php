@@ -6,10 +6,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 use Vankosoft\ApplicationBundle\Repository\TaxonRepository;
-use Vankosoft\UsersBundle\Model\UserRoleInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserRoleInterface;
 use Vankosoft\UsersBundle\Repository\UserRolesRepository;
 
-class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface, ExampleTranslationsFactoryInterface
 {
     /** @var RepositoryInterface */
     private $taxonomyRepository;
@@ -60,6 +60,7 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
         $slug                       = $this->slugGenerator->generate( $options['title'] );
         
         $taxonEntity->setCurrentLocale( $options['locale'] );
+        $taxonEntity->setFallbackLocale( 'en_US' );
         $taxonEntity->setCode( $slug );
         $taxonEntity->getTranslation()->setName( $options['title'] );
         $taxonEntity->getTranslation()->setDescription( $options['description'] );
@@ -77,6 +78,36 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
         $userRoleEntity->setRole( $options['role'] );
         
         return $userRoleEntity;
+    }
+    
+    public function createTranslation( $entity, $localeCode, $options = [] )
+    {
+        $taxonEntity    = $entity->getTaxon();
+        
+        $taxonEntity->getTranslation( $localeCode );
+        $taxonEntity->setCurrentLocale( $localeCode );
+        
+        if ( ! in_array( $localeCode, $taxonEntity->getExistingTranslations() ) ) {
+            $translation    = $taxonEntity->createNewTranslation();
+            
+            $translation->setLocale( $localeCode );
+            $translation->setName( $options['title'] );
+            $translation->setDescription( $options['description'] );
+            
+            $this->slugGenerator->setLocaleCode( $localeCode );
+            $translation->setSlug( $this->slugGenerator->generate( $options['title'] ) );
+            
+            $taxonEntity->addTranslation( $translation );
+        } else {
+            $translation   = $taxonEntity->getTranslation( $localeCode );
+            
+            $translation->setName( $options['title'] );
+            $translation->setDescription( $options['description'] );
+        }
+        
+        $entity->setTaxon( $taxonEntity );
+        
+        return $entity;
     }
     
     protected function configureOptions( OptionsResolver $resolver ): void
@@ -99,6 +130,9 @@ class UserRolesExampleFactory extends AbstractExampleFactory implements ExampleF
             
             ->setDefault( 'parent', null )
             ->setAllowedTypes( 'parent', ['string', 'null'] )
+            
+            ->setDefault( 'translations', [] )
+            ->setAllowedTypes( 'translations', ['array'] )
         ;
     }
     

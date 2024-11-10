@@ -4,10 +4,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-use Vankosoft\CmsBundle\Model\PageInterface;
+use Vankosoft\CmsBundle\Model\Interfaces\PageInterface;
 use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 
-class PagesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class PagesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface //, ExampleTranslationsFactoryInterface
 {
     /** @var FactoryInterface */
     private $pagesFactory;
@@ -43,6 +43,7 @@ class PagesExampleFactory extends AbstractExampleFactory implements ExampleFacto
         
         $pageEntity->setSlug( $slug );
         $pageEntity->setTranslatableLocale( $options['locale'] );
+        $pageEntity->setFallbackLocale( 'en_US' );
         $pageEntity->setTitle( $options['title'] );
         $pageEntity->setDescription( $options['description'] );
         $pageEntity->setText( $options['text'] );
@@ -52,6 +53,16 @@ class PagesExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $pageEntity->addCategory( $category );
         
         return $pageEntity;
+    }
+    
+    public function createTranslation( $entity, $localeCode, $options = [] )
+    {
+        $entity->setTranslatableLocale( $localeCode );
+        $entity->setTitle( $options['title'] );
+        $entity->setDescription( $options['description'] );
+        $entity->setText( $options['text'] );
+        
+        return $entity;
     }
     
     protected function configureOptions( OptionsResolver $resolver ): void
@@ -74,6 +85,9 @@ class PagesExampleFactory extends AbstractExampleFactory implements ExampleFacto
             
             ->setDefault( 'category_code', null )
             ->setAllowedTypes( 'category_code', ['string'] )
+            
+            ->setDefault( 'translations', [] )
+            ->setAllowedTypes( 'translations', ['array'] )
         ;
     }
 }

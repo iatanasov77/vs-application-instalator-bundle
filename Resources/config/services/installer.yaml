@@ -22,9 +22,10 @@ services:
     vs_app.setup.locale:
         class: Vankosoft\ApplicationInstalatorBundle\Installer\Setup\LocaleSetup
         arguments:
+            - '@stof_doctrine_extensions.listener.translatable'
             - '@vs_application.repository.locale'
             - '@vs_application.factory.locale'
-            - '%locale%'
+            - 'en_US'
     
     vs_application.installer.setup_application:
         class: Vankosoft\ApplicationInstalatorBundle\Installer\Setup\ApplicationSetup

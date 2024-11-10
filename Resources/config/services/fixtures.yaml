@@ -68,3 +68,43 @@ services:
             - '@vs_application.fixture.example_factory.users'
         tags:
             - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.cookie_consent_translations:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\CookieConsentTranslationsFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.cookie_consent_translations'
+        tags:
+            - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.tags_whitelist_contexts:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\TagsWhitelistContextsFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.tags_whitelist_contexts'
+        tags:
+            - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.tags_whitelist_tags:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\TagsWhitelistTagsFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.tags_whitelist_tags'
+        tags:
+            - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.widgets_groups:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\WidgetsGroupsFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.widgets_groups'
+        tags:
+            - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.widgets:
+        class: Vankosoft\ApplicationInstalatorBundle\DataFixtures\VankosoftApplicationFixtures\WidgetsFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.widgets'
+        tags:
+            - 'sylius_fixtures.fixture'
