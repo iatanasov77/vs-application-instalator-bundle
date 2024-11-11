@@ -1,3 +1,11 @@
+1.11.1	|	Release date: **11.11.2024**
+============================================
+* New Features:
+  - Update 'hackzilla/password-generator-bundle' Composer requirement Version.
+* Bug-Fixes:
+  - Fix User Model with Wrong Namespace Paths.
+
+
 1.11.0	|	Release date: **10.11.2024**
 ============================================
 * New Features and Update Git Subtree:
