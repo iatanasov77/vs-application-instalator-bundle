@@ -13,7 +13,6 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-        public: true
 
     Vankosoft\ApplicationBundle\Controller\SettingsController:
         tags: ['container.service_subscriber', 'controller.service_arguments']
@@ -44,7 +43,7 @@ services:
             - [ setContainer, [ '@service_container' ] ]
             
     Vankosoft\ApplicationBundle\Controller\SettingsExtController:
-        tags: ['container.service_subscriber', 'controller.service_arguments']
+        tags: ['controller.service_arguments']
         autowire: true
         arguments:
             - '@doctrine'
@@ -53,8 +52,6 @@ services:
             - '@vs_application.repository.settings'
             - '@vs_application.factory.settings'
             - '@vs_application.repository.taxonomy'
-        calls:
-            - [ setContainer, [ '@service_container' ] ]
         
     Vankosoft\ApplicationBundle\Controller\TaxonomyTaxonsController:
         tags: ['container.service_subscriber', 'controller.service_arguments']
