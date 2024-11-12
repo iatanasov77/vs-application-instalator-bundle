@@ -1,3 +1,9 @@
+1.11.4	|	Release date: **12.11.2024**
+============================================
+* Bug-Fixes:
+  - Fix Controller Services Configuration.
+
+
 1.11.3	|	Release date: **12.11.2024**
 ============================================
 * Bug-Fixes and Improvements:
