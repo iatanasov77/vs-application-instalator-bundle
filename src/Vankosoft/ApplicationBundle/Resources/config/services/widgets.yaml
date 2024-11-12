@@ -48,7 +48,7 @@ services:
             - '@vs_application.widgets_container'
         
     Vankosoft\ApplicationBundle\Controller\WidgetsConfigsController:
-        tags: ['container.service_subscriber', 'controller.service_arguments']
+        tags: ['controller.service_arguments']
         autowire: true
         arguments:
             #- '@cache.app'
@@ -61,7 +61,7 @@ services:
             - '@vs_users.repository.users'
             
     Vankosoft\ApplicationBundle\Controller\WidgetsExtController:
-        tags: ['container.service_subscriber', 'controller.service_arguments']
+        tags: ['controller.service_arguments']
         autowire: true
         arguments:
             - '@vs_application.repository.widget'
