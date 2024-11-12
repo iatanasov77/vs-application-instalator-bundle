@@ -1,3 +1,10 @@
+1.11.2	|	Release date: **12.11.2024**
+============================================
+* Bug-Fixes and Improvements:
+  - Add Some Translations.
+  - Fix TaxonomyHelperTrait for Creating Taxons.
+
+
 1.11.1	|	Release date: **11.11.2024**
 ============================================
 * New Features:

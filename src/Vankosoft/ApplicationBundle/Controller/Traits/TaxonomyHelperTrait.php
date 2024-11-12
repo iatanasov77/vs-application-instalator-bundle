@@ -42,6 +42,7 @@ trait TaxonomyHelperTrait
         $taxon  = $this->get( 'vs_application.factory.taxon' )->createNew();
         
         $taxon->setCurrentLocale( $locale );
+        $taxon->setFallbackLocale( 'en_US' );
         $taxon->setName( $name );
         
         $slug   = $this->createTaxonCode( $name );
