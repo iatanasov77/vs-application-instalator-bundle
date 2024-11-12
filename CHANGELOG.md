@@ -1,3 +1,9 @@
+1.11.3	|	Release date: **12.11.2024**
+============================================
+* Bug-Fixes and Improvements:
+  - Initialize Locale in Constructor in TaxonTranslation Model.
+
+
 1.11.2	|	Release date: **12.11.2024**
 ============================================
 * Bug-Fixes and Improvements:
