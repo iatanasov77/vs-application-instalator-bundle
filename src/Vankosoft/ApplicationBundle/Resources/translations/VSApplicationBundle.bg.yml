@@ -14,6 +14,7 @@ vs_application:
         cms: Съдържание
         
         home: Начало
+        about: За нас
         contact: За Контакт
         login: Вход
         logout: Изход
@@ -88,6 +89,15 @@ vs_application:
         sliders_update: Редакция Слайдер
         project_issues: Проблеми в Проекта
         create_issue: Създай Нов Проблем
+        
+        test_mercure: Test Mercure
+        mercure_dashboard: Mercure Dashboard
+        recieve_updates: Recieve Updates
+        publish_update: Publish Update
+        test_webSocket: Test WebSocket
+        test_wamp_with_zmq: Test WAMP with ZMQ
+        client_1: Client 1
+        client_2: Client 2
 
     form:
         errors_title: 'Грешка!'
@@ -198,6 +208,7 @@ vs_application:
         save_tags: 'Запази Таговете'
             
     template:
+        about_application: За Приложението
         vankosoft_application: ВанкоСофт Приложение
         super_admin_panel: Админ Панел
         there_are_no_items_to_display: Няма елементи за показване
