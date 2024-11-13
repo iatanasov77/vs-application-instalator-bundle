@@ -32,6 +32,7 @@ EOT
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper( 'question' );
         $suite          = $input->getOption( 'fixture-suite' );
+        $outputStyle    = new SymfonyStyle( $input, $output );
         
         if ( $suite ) {
             return $this->installApplicationSampleData( $input, $output, $suite );
@@ -41,6 +42,8 @@ EOT
             if ( $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Do you want to load sample data? (y/N) ', false ) ) ) {
                 return $this->installApplicationSampleData( $input, $output, 'vankosoft_catalog_sample_data_suite' );
                 //return $this->loadExtendedSampleData( $input, $output );
+            } else {
+                $outputStyle->writeln( 'Cancelled loading sample data.' );
             }
         }
         
@@ -59,13 +62,6 @@ EOT
             $this->getEnvironment(),
             $suite ?? 'vankosoft_sampledata_suite'
         ) );
-        $outputStyle->writeln( '<error>Warning! This action will erase your database.</error>' );
-
-        if ( ! $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Continue? (y/N) ', null !== $suite ) ) ) {
-            $outputStyle->writeln( 'Cancelled loading sample data.' );
-
-            return Command::SUCCESS;
-        }
 
         try {
             $publicDir = $this->getParameter( 'vs_application.public_dir' );
