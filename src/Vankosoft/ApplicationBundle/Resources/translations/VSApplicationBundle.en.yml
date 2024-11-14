@@ -17,6 +17,7 @@ vs_application:
         about: About
         contact: Contact
         login: Login
+        register: Register
         logout: Logout
         my_profile: My Profile
         documentation: Documentation

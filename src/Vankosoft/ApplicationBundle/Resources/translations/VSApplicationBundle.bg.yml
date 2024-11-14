@@ -17,6 +17,7 @@ vs_application:
         about: За нас
         contact: За Контакт
         login: Вход
+        register: Регистрация
         logout: Изход
         my_profile: Моят Профил
         documentation: Документация
