@@ -1,3 +1,12 @@
+1.11.5	|	Release date: **14.11.2024**
+============================================
+* New Features:
+  - Add Some Translations.
+  - Add a Static Page at Application Installation.
+  - Improve an Installator Command.
+  - Update Application Installator Configs.
+
+
 1.11.4	|	Release date: **12.11.2024**
 ============================================
 * Bug-Fixes:
