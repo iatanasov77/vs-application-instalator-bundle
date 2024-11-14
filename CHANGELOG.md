@@ -1,3 +1,10 @@
+1.11.6	|	Release date: **14.11.2024**
+============================================
+* Bug-Fixes:
+  - Fix Installator Application Setup.
+  - Update Installator Configs.
+
+
 1.11.5	|	Release date: **14.11.2024**
 ============================================
 * New Features:
