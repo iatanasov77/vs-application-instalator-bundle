@@ -88,6 +88,11 @@ vs_application:
         sliders_list: Слайдери
         sliders_create: Създаване Слайдер
         sliders_update: Редакция Слайдер
+        
+        banner_places_list: Места за банери
+        banner_places_create: Създаване място за банер
+        banner_places_update: Редакция място за банер
+        
         project_issues: Проблеми в Проекта
         create_issue: Създай Нов Проблем
         
