@@ -11,7 +11,7 @@ import VsSortable from '../includes/sortable';
 const siSortable  = new VsSortable( 'vs_cms_slider_item_ext_sort_action' );
 
 // WORKAROUND: Prevent Double Submiting
-global.btnSaveSliderItemClicked = window.btnSaveSliderItemClicked = false;
+global.btnSaveBannerClicked = window.btnSaveBannerClicked = false;
 
 function initBannerImageField()
 {
@@ -48,17 +48,17 @@ $( function()
         }
     });
     
-    $( '#containerSliderItems' ).on( 'click', '.btnSliderItem', function( e )
+    $( '#containerBanners' ).on( 'click', '.btnBanner', function( e )
     {
         e.preventDefault();
         
-        var sliderId    = $( this ).attr( 'data-sliderId' );
+        var placeId     = $( this ).attr( 'data-placeId' );
         var itemId      = $( this ).attr( 'data-itemId' );
         var _Translator = VsTranslator( 'VSCmsBundle' );
         
         $.ajax({
             type: "GET",
-            url: VsPath( 'vs_cms_slider_item_ext_edit', {'sliderId': sliderId, 'itemId': itemId} ),
+            url: VsPath( 'vs_cms_banner_ext_edit', {'placeId': placeId, 'itemId': itemId} ),
             success: function( response )
             {
                 let modalTitle  = itemId == '0' ?
@@ -92,16 +92,16 @@ $( function()
         });
     });
     
-    $( '#sliderItemModal' ).on( 'change', '#slider_item_form_locale', function( e )
+    $( '#bannerModal' ).on( 'change', '#slider_item_form_locale', function( e )
     {
-        var sliderId    = parseInt( $( '#sliderItemModal' ).attr( 'data-sliderId' ) );
-        var itemId      = parseInt( $( '#sliderItemModal' ).attr( 'data-itemId' ) );
-        var locale      = $( this ).val()
+        var placeId = parseInt( $( '#bannerModal' ).attr( 'data-placeId' ) );
+        var itemId  = parseInt( $( '#bannerModal' ).attr( 'data-itemId' ) );
+        var locale  = $( this ).val()
         
         if ( itemId ) {
             $.ajax({
                 type: 'GET',
-                url: VsPath( 'vs_cms_slider_item_ext_edit', {'sliderId': sliderId, 'itemId': itemId, 'locale': locale} ),
+                url: VsPath( 'vs_cms_banner_ext_edit', {'placeId': placeId, 'itemId': itemId, 'locale': locale} ),
                 success: function ( response ) {
                     $( '#modalBodyBanner > div.card-body' ).html( response );
                 }, 
@@ -112,35 +112,32 @@ $( function()
         }
     });
     
-    $( '#btnSaveSliderItem' ).on( 'click', function( e )
+    $( '#btnSaveBanner' ).on( 'click', function( e )
     {
-        if ( window.btnSaveSliderItemClicked ) {
+        if ( window.btnSaveBannerClicked ) {
             return;
         }
-        window.btnSaveSliderItemClicked = true;
+        window.btnSaveBannerClicked = true;
         
-        var sliderId    = $( '#SliderFormContainer' ).attr( 'data-sliderId' );
-        var formData    = new FormData( $( '#FormSliderItem' )[ 0 ] );
-        var submitUrl   = $( '#FormSliderItem' ).attr( 'action' );
+        var placeId    = $( '#FormContainer' ).attr( 'data-itemId' );
+        var formData    = new FormData( $( '#FormBanner' )[ 0 ] );
+        var submitUrl   = $( '#FormBanner' ).attr( 'action' );
         var redirectUrl = VsPath( 'vs_cms_slider_update', {'id': sliderId} );
-        
-        var description = CKEDITOR.instances.slider_item_form_description.getData();
-        formData.set( "slider_item_form[description]", description );
         
         VsFormSubmit( formData, submitUrl, redirectUrl );
     });
     
     let sortableIds;
-    $( "#sliderItemsTableBody" ).sortable({
+    $( "#bannersTableBody" ).sortable({
         start: function( event, ui ) {
-            sortableIds = $( "#sliderItemsTableBody" ).sortable( "toArray" );
+            sortableIds = $( "#bannersTableBody" ).sortable( "toArray" );
             //console.log( sortableIds );
         },
         
         update: function( event, ui ) {
             var itemId      = ui.item.attr( "data-node-id" );
-            var sortedIDs   = $( "#sliderItemsTableBody" ).sortable( "toArray" );
-            var itemIndex   = sortedIDs.indexOf( 'sliderItem-' + itemId );
+            var sortedIDs   = $( "#bannersTableBody" ).sortable( "toArray" );
+            var itemIndex   = sortedIDs.indexOf( 'banner-' + itemId );
             
             var sortedItems = [];
             for ( let i = 0; i < sortedIDs.length; i++ ) {
