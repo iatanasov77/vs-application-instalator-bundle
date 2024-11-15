@@ -140,6 +140,18 @@ sylius_fixtures:
                                   bg_BG:
                                       title: 'Слайдери'
                                       description: 'Слайдери'
+                            
+                            - code: 'banner-places'
+                              title: 'Banner Places'
+                              description: 'Banner Places'
+                              locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Banner Places'
+                                      description: 'Banner Places'
+                                  bg_BG:
+                                      title: 'Места за банери'
+                                      description: 'Места за банери'
 
                 pages_categories:
                     name: page_categories
