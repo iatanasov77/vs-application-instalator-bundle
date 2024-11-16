@@ -29,7 +29,7 @@ class BannersRotatorController extends AbstractController
         $place  = $this->bannerPlaceRepository->findByTaxonCode( $place );
         
         $data   = [];
-        foreach ( $place->getBanners() as $banner ) {
+        foreach ( $place->getPublishedBanners() as $banner ) {
             $data[] = [
                 'url'   => $banner->getUrl(),
                 'img'   => $this->imagineCacheManager->getBrowserPath(
