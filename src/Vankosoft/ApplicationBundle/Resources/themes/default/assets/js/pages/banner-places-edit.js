@@ -8,7 +8,7 @@ VsLoadTranslations(['VSCmsBundle']);
 import { VsFormSubmit } from '../includes/vs_form.js';
 
 import VsSortable from '../includes/sortable';
-const siSortable  = new VsSortable( 'vs_cms_slider_item_ext_sort_action' );
+const siSortable  = new VsSortable( 'vs_cms_banner_ext_sort_action' );
 
 // WORKAROUND: Prevent Double Submiting
 global.btnSaveBannerClicked = window.btnSaveBannerClicked = false;
@@ -30,7 +30,7 @@ function initBannerImageField()
 $( function()
 {
     // bin/console fos:js-routing:dump --format=json --target=public/shared_assets/js/fos_js_routes_admin.json
-    $( '#FormContainer' ).on( 'change', '#slider_form_locale', function( e ) {
+    $( '#FormContainer' ).on( 'change', '#banner_place_form_locale', function( e ) {
         var placeId  = $( '#FormContainer' ).attr( 'data-itemId' );
         var locale  = $( this ).val();
         
@@ -62,28 +62,28 @@ $( function()
             success: function( response )
             {
                 let modalTitle  = itemId == '0' ?
-                                    _Translator.trans( 'vs_cms.modal.slider_item.create_title' ) :
-                                    _Translator.trans( 'vs_cms.modal.slider_item.update_title' );
+                                    _Translator.trans( 'vs_cms.modal.banner.create_title' ) :
+                                    _Translator.trans( 'vs_cms.modal.banner.update_title' );
                                     
                 $( '#modalTitle' ).text( modalTitle );
                 $( '#modalBodyBanner > div.card-body' ).html( response );
                 
                 
                 /** Bootstrap 5 Modal Toggle */
-                const myModal = new bootstrap.Modal('#sliderItemModal', {
+                const myModal = new bootstrap.Modal('#bannerModal', {
                     keyboard: false
                 });
-                myModal.show( $( '#sliderItemModal' ).get( 0 ) );
+                myModal.show( $( '#bannerModal' ).get( 0 ) );
                 
                 /**
                  * FIXING THE MODAL/CKEDITOR ISSUE. При мен се случваше само на диалога за Снимка.
                  * --------------------------------------------------------------------------------------
                  * https://stackoverflow.com/questions/19570661/ckeditor-plugin-text-fields-not-editable
                  */
-                $( '#sliderItemModal' ).removeAttr( "tabindex" );
+                $( '#bannerModal' ).removeAttr( "tabindex" );
                 
-                $( '#sliderItemModal' ).attr( "data-sliderId", sliderId );
-                $( '#sliderItemModal' ).attr( "data-itemId", itemId );
+                $( '#bannerModal' ).attr( "data-placeId", placeId );
+                $( '#bannerModal' ).attr( "data-itemId", itemId );
             },
             error: function()
             {
@@ -92,7 +92,7 @@ $( function()
         });
     });
     
-    $( '#bannerModal' ).on( 'change', '#slider_item_form_locale', function( e )
+    $( '#bannerModal' ).on( 'change', '#banner_form_locale', function( e )
     {
         var placeId = parseInt( $( '#bannerModal' ).attr( 'data-placeId' ) );
         var itemId  = parseInt( $( '#bannerModal' ).attr( 'data-itemId' ) );
@@ -122,7 +122,7 @@ $( function()
         var placeId    = $( '#FormContainer' ).attr( 'data-itemId' );
         var formData    = new FormData( $( '#FormBanner' )[ 0 ] );
         var submitUrl   = $( '#FormBanner' ).attr( 'action' );
-        var redirectUrl = VsPath( 'vs_cms_slider_update', {'id': sliderId} );
+        var redirectUrl = VsPath( 'vs_cms_banner_place_update', {'id': placeId} );
         
         VsFormSubmit( formData, submitUrl, redirectUrl );
     });
