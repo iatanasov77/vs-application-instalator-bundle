@@ -89,3 +89,10 @@ services:
         arguments:
             - '@doctrine'
             - '@vs_application.repository.tags_whitelist_context'
+    
+    Vankosoft\ApplicationBundle\Controller\BannersRotatorController:
+        tags: ['controller.service_arguments']
+        autowire: true
+        arguments:
+            - '@vs_cms.repository.banner_place'
+            - '@liip_imagine.cache.manager'

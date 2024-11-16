@@ -21,4 +21,7 @@ vs_application_project_issues_delete:
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueController::deleteAction
     methods: DELETE
 
-
+vs_application_banner_rotator_banners_for_place:
+    path: /banner-rotator/{place}
+    controller: Vankosoft\ApplicationBundle\Controller\BannersRotatorController::getBannersForPlaceAction
+    methods: GET
