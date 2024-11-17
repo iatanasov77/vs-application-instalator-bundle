@@ -1,3 +1,29 @@
+1.11.7	|	Release date: **17.11.2024**
+============================================
+* New Features , Fixes and Improvements:
+  - Create Banners Functionality and Resources in CMS Bundle Website Elements.
+  - Update Application Installator Configs.
+  - Add a Doctrine Migration.
+  - Make TOC Pages Slug Field Not Translatable.
+  - Add a Doctrine Migration.
+  - Fix Missing Macros Import in Taxonomy Update Page.
+  - Translate all Banner Templates and Forms.
+  - Add Menu Links Translations for Banner Places.
+  - Add some Missing Translations.
+  - Fixing Banner Form.
+  - Fixing Banner Models.
+  - Fixing Banner Form.
+  - Fixing Banner Place Edit JS.
+  - Fixing Banner Form Submit.
+  - Create a Controller to Get Banners for Frontend Scripts.
+  - Improve Banner Place Model.
+  - Add a Doctrine Migration.
+  - Add a Field into  Banner Place Form.
+  - Improve Banner Doctrine Mapping.
+  - Update Application Installator Configs.
+  - Improve BannersRotatorController .
+
+
 1.11.6	|	Release date: **14.11.2024**
 ============================================
 * Bug-Fixes:

@@ -35,6 +35,7 @@ class TaxonomyController extends AbstractCrudController
         
         // @NOTE Force generation of slug
         $rootTaxon->setCurrentLocale( $locale );
+        $rootTaxon->setFallbackLocale( 'en_US' );
         $rootTaxon->getTranslation()->setName( $taxonomy->getName() );
         $rootTaxon->getTranslation()->setDescription( 'Root taxon of Taxonomy: "' . $taxonomy->getName() . '"' );
         

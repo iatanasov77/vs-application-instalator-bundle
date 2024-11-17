@@ -88,6 +88,11 @@ vs_application:
         sliders_list: Sliders
         sliders_create: Create a Slider
         sliders_update: Edit Slider
+        
+        banner_places_list: Banner Places
+        banner_places_create: Create a Banner Place
+        banner_places_update: Edit Banner Place
+        
         project_issues: Project Issues
         create_issue: Create Issue
         

@@ -30,6 +30,7 @@ parameters:
     vs_application.tags_whitelist_contexts.taxonomy_code: 'tags-whitelist-contexts'
     vs_application.widgets_groups.taxonomy_code: 'widgets-groups'
     vs_application.sliders.taxonomy_code: 'sliders'
+    vs_application.banner_places.taxonomy_code: 'banner-places'
     vs_application.mailer_user: '%env(resolve:MAILER_USER)%'
 
 services:
