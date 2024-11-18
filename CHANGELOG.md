@@ -1,3 +1,9 @@
+1.11.8	|	Release date: **18.11.2024**
+============================================
+* New Features and Improvements:
+  - Improve Banner Edit Form.
+
+
 1.11.7	|	Release date: **17.11.2024**
 ============================================
 * New Features , Fixes and Improvements:
