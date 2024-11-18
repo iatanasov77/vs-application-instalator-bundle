@@ -3,11 +3,14 @@ require( 'jquery-easyui/js/jquery.easyui.min.js' );
 
 require( '../includes/bootstrap-5/file-input.js' );
 import { VsPath } from '../includes/fos_js_routes.js';
-import { EasyuiCombobox } from 'jquery-easyui-extensions/EasyuiCombobox.js';
-import { VsRemoveDuplicates } from '@/js/includes/vs_remove_duplicates.js';
 import { VsFormSubmit } from '../includes/vs_form.js';
 import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_translations.js';
 VsLoadTranslations(['VSCmsBundle']);
+
+
+import { EasyuiCombobox } from 'jquery-easyui-extensions/EasyuiCombobox.js';
+import { VsRemoveDuplicates } from '@/js/includes/vs_remove_duplicates.js';
+require( 'jquery-easyui-extensions/EasyuiCombobox.css' );
 
 // WORKAROUND: Prevent Double Submiting
 global.btnSaveBannerClicked = window.btnSaveBannerClicked = false;
