@@ -113,6 +113,7 @@ Encore
     .addEntry( 'js/banner-places-edit', applicationAssetsPath + '/js/pages/banner-places-edit.js' )
     .addEntry( 'js/banners', applicationAssetsPath + '/js/pages/banners.js' )
     .addEntry( 'js/banners-edit', applicationAssetsPath + '/js/pages/banners-edit.js' )
+    .addEntry( 'js/banner-modal', applicationAssetsPath + '/js/pages/banner-modal.js' )
     
     .addEntry( 'js/project-issues', applicationAssetsPath + '/js/pages/project-issues.js' )
     .addEntry( 'js/project-issues-edit', applicationAssetsPath + '/js/pages/project-issues-edit.js' )
