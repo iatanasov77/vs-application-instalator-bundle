@@ -7,6 +7,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -39,6 +40,11 @@ class BannerForm extends AbstractForm
         $entity         = $builder->getData();
         $currentLocale  = $entity->getTranslatableLocale() ?: $this->requestStack->getCurrentRequest()->getLocale();
         
+        $selectedPlaces = [];
+        foreach ( $entity->getPlaces() as $place ) {
+            $selectedPlaces[] = $place->getId();
+        }
+        
         $builder
             ->add( 'locale', ChoiceType::class, [
                 'label'                 => 'vs_cms.form.locale',
@@ -53,6 +59,7 @@ class BannerForm extends AbstractForm
                 'translation_domain'    => 'VSCmsBundle',
             ])
             
+            ->add( 'selectedPlaces', HiddenType::class, ['mapped' => false, 'data' => \json_encode( $selectedPlaces )] )
             ->add( 'places', EntityType::class, [
                 'required'              => true,
                 'multiple'              => true,
