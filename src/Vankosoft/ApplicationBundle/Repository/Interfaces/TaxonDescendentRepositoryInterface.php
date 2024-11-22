@@ -9,4 +9,5 @@ interface TaxonDescendentRepositoryInterface extends RepositoryInterface
     public function findByTaxonCode( $code );
     public function getPathAsString( TaxonDescendentInterface $category ): string;
     public function getPathAsPath( TaxonDescendentInterface $category ): string;
+    public function findByPath( string $path ): TaxonDescendentInterface;
 }

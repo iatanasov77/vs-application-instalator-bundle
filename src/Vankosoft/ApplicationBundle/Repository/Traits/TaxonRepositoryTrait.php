@@ -78,10 +78,19 @@ trait TaxonRepositoryTrait
         foreach ( $categoryPathArray as $key => $pathPart ) {
             $categoryPath   .= $pathPart->getCode();
             if ( $key !== \array_key_last( $categoryPathArray ) ) {
-                $categoryPath   .= ' / ';
+                $categoryPath   .= '/';
             }
         }
         
         return $categoryPath;
+    }
+    
+    public function findByPath( string $path ): TaxonDescendentInterface
+    {
+        $pathParts  = \explode( '/', $path );
+        $slug       = \end( $pathParts );
+        $category   = $this->findBySlug( $slug );
+        
+        return $category;
     }
 }
