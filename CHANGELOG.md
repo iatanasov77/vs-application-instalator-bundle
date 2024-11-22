@@ -1,3 +1,9 @@
+1.11.10	|	Release date: **22.11.2024**
+============================================
+* New Features:
+  - Add a New Helper Method in TaxonDescendentRepository's.
+
+
 1.11.9	|	Release date: **22.11.2024**
 ============================================
 * New Features:
