@@ -51,12 +51,32 @@ trait TaxonRepositoryTrait
     {
         $categoryPath       = '';
         //$taxonRepository    = $this->_em->getRepository( Taxon::class );
-        $taxonRepository    = $this->container->get( 'vs_application.repository.taxon' );
+        //$taxonRepository    = $this->container->get( 'vs_application.repository.taxon' );
+        $taxonRepository    = $this->_em->getRepository( get_class( $category->getTaxon() ) );
         
         $categoryPathArray  = $taxonRepository->getPath( $category->getTaxon() );
         \array_shift( $categoryPathArray );
         foreach ( $categoryPathArray as $key => $pathPart ) {
             $categoryPath   .= $pathPart->getName();
+            if ( $key !== \array_key_last( $categoryPathArray ) ) {
+                $categoryPath   .= ' / ';
+            }
+        }
+        
+        return $categoryPath;
+    }
+    
+    public function getPathAsPath( TaxonDescendentInterface $category ): string
+    {
+        $categoryPath       = '';
+        //$taxonRepository    = $this->_em->getRepository( Taxon::class );
+        //$taxonRepository    = $this->container->get( 'vs_application.repository.taxon' );
+        $taxonRepository    = $this->_em->getRepository( get_class( $category->getTaxon() ) );
+        
+        $categoryPathArray  = $taxonRepository->getPath( $category->getTaxon() );
+        \array_shift( $categoryPathArray );
+        foreach ( $categoryPathArray as $key => $pathPart ) {
+            $categoryPath   .= $pathPart->getCode();
             if ( $key !== \array_key_last( $categoryPathArray ) ) {
                 $categoryPath   .= ' / ';
             }
