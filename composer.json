@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.11.10",
+    "version": "v1.11.11",
     "description": "VankoSoft Symfony Application Core Library",
     "keywords": [
         "symfony",
@@ -38,7 +38,7 @@
         "knplabs\/knp-time-bundle": "^2.2",
         "knplabs\/knp-gaufrette-bundle": "^0.9",
         "friendsofsymfony\/ckeditor-bundle": "^2.5",
-        "daddl3/symfony-ckeditor-5-webpack": "^1.2",
+        "daddl3\/symfony-ckeditor-5-webpack": "^1.2",
         "liip\/imagine-bundle": "^2.12",
         "artgris\/filemanager-bundle": "^2.10",
         "sylius\/resource-bundle": "^1.10",
