@@ -1,3 +1,9 @@
+1.11.11	|	Release date: **18.12.2024**
+============================================
+* New Features:
+  - Add Symfony CKEditor 5 Webpack Vite Bundle.
+
+
 1.11.10	|	Release date: **22.11.2024**
 ============================================
 * New Features:
