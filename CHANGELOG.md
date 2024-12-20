@@ -1,3 +1,9 @@
+1.11.12	|	Release date: **21.12.2024**
+============================================
+* New Features:
+  - Combine Doctrine Migrations.
+
+
 1.11.11	|	Release date: **18.12.2024**
 ============================================
 * New Features:
