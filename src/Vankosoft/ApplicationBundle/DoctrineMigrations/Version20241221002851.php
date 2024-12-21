@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20241220224910 extends AbstractMigration
+final class Version20241221002851 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -38,6 +38,10 @@ final class Version20241220224910 extends AbstractMigration
         $this->addSql('CREATE TABLE VSAPP_Widgets (id INT AUTO_INCREMENT NOT NULL, group_id INT NOT NULL, code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, description LONGTEXT DEFAULT NULL, allow_anonymous TINYINT(1) DEFAULT 0 NOT NULL, active TINYINT(1) DEFAULT 1 NOT NULL, UNIQUE INDEX UNIQ_72F1C48A77153098 (code), INDEX IDX_72F1C48AFE54D947 (group_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE VSAPP_Widgets_Roles (widget_id INT NOT NULL, role_id INT NOT NULL, INDEX IDX_37D65906FBE885E2 (widget_id), INDEX IDX_37D65906D60322AC (role_id), PRIMARY KEY(widget_id, role_id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE VSAPP_WidgetsRegistry (id INT AUTO_INCREMENT NOT NULL, owner_id INT DEFAULT NULL, config LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', UNIQUE INDEX UNIQ_93AB24C57E3C61F9 (owner_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE VSCMS_BannerImages (id INT AUTO_INCREMENT NOT NULL, owner_id INT DEFAULT NULL, type VARCHAR(255) DEFAULT NULL, path VARCHAR(255) NOT NULL, original_name VARCHAR(255) DEFAULT \'\' NOT NULL COMMENT \'The Original Name of the File.\', UNIQUE INDEX UNIQ_317C4867E3C61F9 (owner_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE VSCMS_BannerPlaces (id INT AUTO_INCREMENT NOT NULL, taxon_id INT DEFAULT NULL, imagine_filter VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_1DA716B9DE13F470 (taxon_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE VSCMS_Banners (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, url VARCHAR(255) NOT NULL, published TINYINT(1) NOT NULL, priority INT DEFAULT 0 NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE VSCMS_Banners_Places (banner_id INT NOT NULL, place_id INT NOT NULL, INDEX IDX_61CCBD18684EC833 (banner_id), INDEX IDX_61CCBD18DA6A219 (place_id), PRIMARY KEY(banner_id, place_id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE VSCMS_DocumentCategories (id INT AUTO_INCREMENT NOT NULL, taxon_id INT DEFAULT NULL, UNIQUE INDEX UNIQ_E0054AF0DE13F470 (taxon_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE VSCMS_Documents (id INT AUTO_INCREMENT NOT NULL, category_id INT DEFAULT NULL, toc_root_page_id INT NOT NULL, title VARCHAR(255) NOT NULL, INDEX IDX_E15A147F12469DE2 (category_id), UNIQUE INDEX UNIQ_E15A147FB4CE9742 (toc_root_page_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE VSCMS_FileManager (id INT AUTO_INCREMENT NOT NULL, taxon_id INT DEFAULT NULL, UNIQUE INDEX UNIQ_8B912DE4DE13F470 (taxon_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
@@ -59,10 +63,6 @@ final class Version20241220224910 extends AbstractMigration
         $this->addSql('CREATE TABLE VSUM_UsersActivities (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, activity VARCHAR(255) NOT NULL, date DATETIME NOT NULL, INDEX IDX_54103277A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE VSUM_UsersInfo (id INT AUTO_INCREMENT NOT NULL, title ENUM(\'mr\', \'mrs\', \'miss\'), first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, designation VARCHAR(255) DEFAULT NULL, birthday DATETIME DEFAULT NULL, phone VARCHAR(255) DEFAULT NULL, mobile VARCHAR(255) DEFAULT NULL, country VARCHAR(255) DEFAULT NULL, city VARCHAR(255) DEFAULT NULL, state VARCHAR(255) DEFAULT NULL, zip VARCHAR(255) DEFAULT NULL, address VARCHAR(255) DEFAULT NULL, website VARCHAR(255) DEFAULT NULL, occupation VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE VSUM_UsersNotifications (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, notification_from VARCHAR(255) NOT NULL, notification VARCHAR(255) NOT NULL, notification_body LONGTEXT DEFAULT NULL, readed TINYINT(1) DEFAULT NULL, date DATETIME NOT NULL, INDEX IDX_8D75FA15A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE banner (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, url VARCHAR(255) NOT NULL, published TINYINT(1) NOT NULL, priority INT DEFAULT 0 NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE VSCMS_Banners_Places (banner_id INT NOT NULL, place_id INT NOT NULL, INDEX IDX_61CCBD18684EC833 (banner_id), INDEX IDX_61CCBD18DA6A219 (place_id), PRIMARY KEY(banner_id, place_id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE banner_image (id INT AUTO_INCREMENT NOT NULL, owner_id INT DEFAULT NULL, type VARCHAR(255) DEFAULT NULL, path VARCHAR(255) NOT NULL, original_name VARCHAR(255) DEFAULT \'\' NOT NULL COMMENT \'The Original Name of the File.\', UNIQUE INDEX UNIQ_685235487E3C61F9 (owner_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE banner_place (id INT AUTO_INCREMENT NOT NULL, taxon_id INT DEFAULT NULL, imagine_filter VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_D97262DADE13F470 (taxon_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE VSAPP_Applications_Users ADD CONSTRAINT FK_4F97A75D3E030ACD FOREIGN KEY (application_id) REFERENCES VSAPP_Applications (id)');
         $this->addSql('ALTER TABLE VSAPP_Applications_Users ADD CONSTRAINT FK_4F97A75DA76ED395 FOREIGN KEY (user_id) REFERENCES VSUM_Users (id)');
         $this->addSql('ALTER TABLE VSAPP_Settings ADD CONSTRAINT FK_4A491FD3E030ACD FOREIGN KEY (application_id) REFERENCES VSAPP_Applications (id)');
@@ -79,6 +79,10 @@ final class Version20241220224910 extends AbstractMigration
         $this->addSql('ALTER TABLE VSAPP_Widgets_Roles ADD CONSTRAINT FK_37D65906FBE885E2 FOREIGN KEY (widget_id) REFERENCES VSAPP_Widgets (id)');
         $this->addSql('ALTER TABLE VSAPP_Widgets_Roles ADD CONSTRAINT FK_37D65906D60322AC FOREIGN KEY (role_id) REFERENCES VSUM_UserRoles (id)');
         $this->addSql('ALTER TABLE VSAPP_WidgetsRegistry ADD CONSTRAINT FK_93AB24C57E3C61F9 FOREIGN KEY (owner_id) REFERENCES VSUM_Users (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE VSCMS_BannerImages ADD CONSTRAINT FK_317C4867E3C61F9 FOREIGN KEY (owner_id) REFERENCES VSCMS_Banners (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE VSCMS_BannerPlaces ADD CONSTRAINT FK_1DA716B9DE13F470 FOREIGN KEY (taxon_id) REFERENCES VSAPP_Taxons (id)');
+        $this->addSql('ALTER TABLE VSCMS_Banners_Places ADD CONSTRAINT FK_61CCBD18684EC833 FOREIGN KEY (banner_id) REFERENCES VSCMS_Banners (id)');
+        $this->addSql('ALTER TABLE VSCMS_Banners_Places ADD CONSTRAINT FK_61CCBD18DA6A219 FOREIGN KEY (place_id) REFERENCES VSCMS_BannerPlaces (id)');
         $this->addSql('ALTER TABLE VSCMS_DocumentCategories ADD CONSTRAINT FK_E0054AF0DE13F470 FOREIGN KEY (taxon_id) REFERENCES VSAPP_Taxons (id)');
         $this->addSql('ALTER TABLE VSCMS_Documents ADD CONSTRAINT FK_E15A147F12469DE2 FOREIGN KEY (category_id) REFERENCES VSCMS_DocumentCategories (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE VSCMS_Documents ADD CONSTRAINT FK_E15A147FB4CE9742 FOREIGN KEY (toc_root_page_id) REFERENCES VSCMS_TocPage (id) ON DELETE CASCADE');
@@ -102,10 +106,6 @@ final class Version20241220224910 extends AbstractMigration
         $this->addSql('ALTER TABLE VSUM_Users_Roles ADD CONSTRAINT FK_82E26E77D60322AC FOREIGN KEY (role_id) REFERENCES VSUM_UserRoles (id)');
         $this->addSql('ALTER TABLE VSUM_UsersActivities ADD CONSTRAINT FK_54103277A76ED395 FOREIGN KEY (user_id) REFERENCES VSUM_Users (id)');
         $this->addSql('ALTER TABLE VSUM_UsersNotifications ADD CONSTRAINT FK_8D75FA15A76ED395 FOREIGN KEY (user_id) REFERENCES VSUM_Users (id)');
-        $this->addSql('ALTER TABLE VSCMS_Banners_Places ADD CONSTRAINT FK_61CCBD18684EC833 FOREIGN KEY (banner_id) REFERENCES banner (id)');
-        $this->addSql('ALTER TABLE VSCMS_Banners_Places ADD CONSTRAINT FK_61CCBD18DA6A219 FOREIGN KEY (place_id) REFERENCES banner_place (id)');
-        $this->addSql('ALTER TABLE banner_image ADD CONSTRAINT FK_685235487E3C61F9 FOREIGN KEY (owner_id) REFERENCES banner (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE banner_place ADD CONSTRAINT FK_D97262DADE13F470 FOREIGN KEY (taxon_id) REFERENCES VSAPP_Taxons (id)');
     }
 
     public function down(Schema $schema): void
@@ -127,6 +127,10 @@ final class Version20241220224910 extends AbstractMigration
         $this->addSql('ALTER TABLE VSAPP_Widgets_Roles DROP FOREIGN KEY FK_37D65906FBE885E2');
         $this->addSql('ALTER TABLE VSAPP_Widgets_Roles DROP FOREIGN KEY FK_37D65906D60322AC');
         $this->addSql('ALTER TABLE VSAPP_WidgetsRegistry DROP FOREIGN KEY FK_93AB24C57E3C61F9');
+        $this->addSql('ALTER TABLE VSCMS_BannerImages DROP FOREIGN KEY FK_317C4867E3C61F9');
+        $this->addSql('ALTER TABLE VSCMS_BannerPlaces DROP FOREIGN KEY FK_1DA716B9DE13F470');
+        $this->addSql('ALTER TABLE VSCMS_Banners_Places DROP FOREIGN KEY FK_61CCBD18684EC833');
+        $this->addSql('ALTER TABLE VSCMS_Banners_Places DROP FOREIGN KEY FK_61CCBD18DA6A219');
         $this->addSql('ALTER TABLE VSCMS_DocumentCategories DROP FOREIGN KEY FK_E0054AF0DE13F470');
         $this->addSql('ALTER TABLE VSCMS_Documents DROP FOREIGN KEY FK_E15A147F12469DE2');
         $this->addSql('ALTER TABLE VSCMS_Documents DROP FOREIGN KEY FK_E15A147FB4CE9742');
@@ -150,10 +154,6 @@ final class Version20241220224910 extends AbstractMigration
         $this->addSql('ALTER TABLE VSUM_Users_Roles DROP FOREIGN KEY FK_82E26E77D60322AC');
         $this->addSql('ALTER TABLE VSUM_UsersActivities DROP FOREIGN KEY FK_54103277A76ED395');
         $this->addSql('ALTER TABLE VSUM_UsersNotifications DROP FOREIGN KEY FK_8D75FA15A76ED395');
-        $this->addSql('ALTER TABLE VSCMS_Banners_Places DROP FOREIGN KEY FK_61CCBD18684EC833');
-        $this->addSql('ALTER TABLE VSCMS_Banners_Places DROP FOREIGN KEY FK_61CCBD18DA6A219');
-        $this->addSql('ALTER TABLE banner_image DROP FOREIGN KEY FK_685235487E3C61F9');
-        $this->addSql('ALTER TABLE banner_place DROP FOREIGN KEY FK_D97262DADE13F470');
         $this->addSql('DROP TABLE VSAPP_Applications');
         $this->addSql('DROP TABLE VSAPP_Applications_Users');
         $this->addSql('DROP TABLE VSAPP_CookieConsentTranslations');
@@ -172,6 +172,10 @@ final class Version20241220224910 extends AbstractMigration
         $this->addSql('DROP TABLE VSAPP_Widgets');
         $this->addSql('DROP TABLE VSAPP_Widgets_Roles');
         $this->addSql('DROP TABLE VSAPP_WidgetsRegistry');
+        $this->addSql('DROP TABLE VSCMS_BannerImages');
+        $this->addSql('DROP TABLE VSCMS_BannerPlaces');
+        $this->addSql('DROP TABLE VSCMS_Banners');
+        $this->addSql('DROP TABLE VSCMS_Banners_Places');
         $this->addSql('DROP TABLE VSCMS_DocumentCategories');
         $this->addSql('DROP TABLE VSCMS_Documents');
         $this->addSql('DROP TABLE VSCMS_FileManager');
@@ -193,9 +197,5 @@ final class Version20241220224910 extends AbstractMigration
         $this->addSql('DROP TABLE VSUM_UsersActivities');
         $this->addSql('DROP TABLE VSUM_UsersInfo');
         $this->addSql('DROP TABLE VSUM_UsersNotifications');
-        $this->addSql('DROP TABLE banner');
-        $this->addSql('DROP TABLE VSCMS_Banners_Places');
-        $this->addSql('DROP TABLE banner_image');
-        $this->addSql('DROP TABLE banner_place');
     }
 }
