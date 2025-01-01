@@ -1,10 +1,10 @@
-###> Eclipse project files ###
+### Eclipse project files ###
 /.buildpath
 /.project
 /.settings
-###< Eclipse project files ###
 
-###> VisualParadigm Meta Files ###
-/docs/technical/VisualParadigm/.VankosoftApplication.vpp.lck
-/docs/technical/VisualParadigm/VankosoftApplication.vpp.bak_*
-###< VisualParadigm Meta Files ###
+### Symfony files ###
+/.env
+/.env.local
+/.env.local.php
+/.env.*.local
