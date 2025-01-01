@@ -140,6 +140,18 @@ sylius_fixtures:
                                   bg_BG:
                                       title: 'Слайдери'
                                       description: 'Слайдери'
+                            
+                            - code: 'banner-places'
+                              title: 'Banner Places'
+                              description: 'Banner Places'
+                              locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'Banner Places'
+                                      description: 'Banner Places'
+                                  bg_BG:
+                                      title: 'Места за банери'
+                                      description: 'Места за банери'
 
                 pages_categories:
                     name: page_categories
@@ -220,6 +232,22 @@ sylius_fixtures:
                                       title: 'Правила и условия'
                                       description: 'Страница с правила и условия за приложението'
                                       text: '<p>Правила и условия</p>'
+                            
+                            - title: 'About application'
+                              description: 'About this application and his owner'
+                              text: '<p>About this application and his owner</p>'
+                              published: true
+                              category_code: 'vs-application-pages'
+                              locale:  '%locale%'
+                              translations:
+                                  en_US:
+                                      title: 'About application'
+                                      description: 'About this application and his owner'
+                                      text: '<p>About this application and his owner</p>'
+                                  bg_BG:
+                                      title: 'Относно приложението'
+                                      description: 'За това приложение и неговия собственик'
+                                      text: '<p>За това приложение и неговия собственик</p>'
                               
                 user_roles__top_level:
                     name: user_roles
