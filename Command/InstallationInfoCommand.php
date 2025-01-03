@@ -35,7 +35,7 @@ EOT
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $outputStyle    = new SymfonyStyle( $input, $output );
-        $outputStyle->writeln( \sprintf( '<info>Current Library Version: %s</info>', $this->getVankosoftApplicationLibraryVersion() );
+        $outputStyle->writeln( \sprintf( '<info>Current Library Version: %s</info>', $this->getVankosoftApplicationLibraryVersion() ) );
         return Command::SUCCESS;
         
         $action = $input->getArgument( 'action' );
