@@ -147,6 +147,7 @@ EOT
     private function getVankosoftApplicationLibraryVersion(): string
     {
         $composerInfo   = $this->get( 'vs_application.composer_info' )->getInstalledPackagesInfo();
+        var_dump( \array_keys( $composerInfo ) ); exit;
         
         return $composerInfo['vankosoft/application']->getRawVersion();
     }
