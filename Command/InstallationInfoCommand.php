@@ -137,7 +137,7 @@ EOT
         $this->commandExecutor->runCommand( 'doctrine:migrations:current', [], $output );
         $currentMigration   = $output->fetch();
         
-        return $currentMigration;
+        return \trim( $currentMigration );
     }
     
     private function getVankosoftApplicationLibraryVersion(): string
