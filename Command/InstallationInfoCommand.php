@@ -49,14 +49,14 @@ EOT
     {
         $outputStyle    = new SymfonyStyle( $input, $output );
         
-        $currentVersion = $this->getCurrentVersion();
+        $currentVersion = $this->get( 'vs_application.version_info' )->getCurrentVersion();
         if ( $currentVersion === InstalationInfoInterface::VERSION_UNDEFINED ) {
             $outputStyle->writeln( '<error>Missing VERSION file.</error>' );
             
             return Command::FAILURE;
         }
         
-        $versionInfo    = $this->getVersionInfo( $currentVersion );
+        $versionInfo    = $this->get( 'vs_application.version_info' )->getVersionInfo( $currentVersion );
         
         if ( ! $versionInfo->getId() ) {
             $outputStyle->writeln( \sprintf( '<error>Missing Version Info for Version: %s.</error>', $currentVersion ) );
@@ -76,14 +76,14 @@ EOT
     {
         $outputStyle    = new SymfonyStyle( $input, $output );
         
-        $currentVersion = $this->getCurrentVersion();
+        $currentVersion = $this->get( 'vs_application.version_info' )->getCurrentVersion();
         if ( $currentVersion === InstalationInfoInterface::VERSION_UNDEFINED ) {
             $outputStyle->writeln( '<error>Missing VERSION file.</error>' );
             
             return Command::FAILURE;
         }
         
-        $versionInfo    = $this->getVersionInfo( $currentVersion );
+        $versionInfo    = $this->get( 'vs_application.version_info' )->getVersionInfo( $currentVersion );
         $versionData        = [
             InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION                  => $currentVersion,
             InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION               => $this->getCurrentDoctrineMigration(),
@@ -96,31 +96,6 @@ EOT
         $entityManager->flush();
         
         return Command::SUCCESS;
-    }
-    
-    private function getCurrentVersion(): string
-    {
-        $filesystem     = new Filesystem();
-        $versionFile    = $this->getParameter( 'kernel.project_dir' ) . '/VERSION';
-        $currentVersion = $filesystem->exists( $versionFile ) ?
-                            \file_get_contents( $versionFile ) :
-                            InstalationInfoInterface::VERSION_UNDEFINED;
-        
-        return \trim( $currentVersion );
-    }
-    
-    private function getVersionInfo( string $currentVersion ): InstalationInfoInterface
-    {
-        $repo           = $this->get( 'vs_application_instalator.repository.instalation_info' );
-        $versionInfo    = $repo->findOneBy( ['version' => $currentVersion] );
-        if ( ! $versionInfo ) {
-            $factory        = $this->get( 'vs_application_instalator.factory.instalation_info' );
-            
-            $versionInfo    = $factory->createNew();
-            $versionInfo->setVersion( $currentVersion );
-        }
-        
-        return $versionInfo;
     }
     
     /**
