@@ -9,7 +9,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Vankosoft\UsersBundle\Security\UserManager;
 
 use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
-use Vankosoft\UsersBundle\Model\UserInfoInterface;
+use Vankosoft\UsersBundle\Model\Interfaces\UserInfoInterface;
 
 class UsersExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
