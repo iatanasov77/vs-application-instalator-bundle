@@ -58,6 +58,7 @@ final class LocaleSetup implements LocaleSetupInterface
         /** @var LocaleInterface $locale */
         $locale = $this->localeFactory->createNew();
         
+        $locale->setActive( true );
         $locale->setTranslatableLocale( $language['code'] );
         $locale->setCode( $language['code'] );
         $locale->setTitle( $language['language'] );

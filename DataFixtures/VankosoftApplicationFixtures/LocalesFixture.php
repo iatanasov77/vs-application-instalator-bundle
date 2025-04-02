@@ -14,6 +14,7 @@ final class LocalesFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
+                ->scalarNode( 'active' )->end()
                 ->scalarNode( 'locale' )->end()
                 ->scalarNode( 'title' )->end()
                 ->scalarNode( 'code' )->end()
