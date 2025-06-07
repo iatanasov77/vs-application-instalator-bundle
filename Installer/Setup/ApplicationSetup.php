@@ -123,8 +123,12 @@ class ApplicationSetup
         //$this->ignoreApplicationControllersInAdminPanelServices();
         
         $this->setupApplicationRoutes();
-        $this->setupApplicationAssets();
-        $this->setupApplicationThemes();
+        
+        if ( $this->applicationType !== AbstractInstallCommand::APPLICATION_TYPE_API ) {
+            $this->setupApplicationAssets();
+            $this->setupApplicationThemes();
+        }
+        
         $this->setupInstalationInfo();
     }
     

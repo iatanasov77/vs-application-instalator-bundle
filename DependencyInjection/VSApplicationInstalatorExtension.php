@@ -15,12 +15,12 @@ class VSApplicationInstalatorExtension extends AbstractResourceExtension
     /**
      * {@inheritDoc}
      */
-    public function load( array $config, ContainerBuilder $container )
+    public function load( array $config, ContainerBuilder $container ): void
     {
         $config = $this->processConfiguration( $this->getConfiguration([], $container), $config );
         $loader = new Loader\YamlFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
 
-        $loader->load( 'services.yml' );
+        $loader->load( 'services.yaml' );
         
         // Register resources
         $this->registerResources( 'vs_application_instalator', $config['orm_driver'], $config['resources'], $container );

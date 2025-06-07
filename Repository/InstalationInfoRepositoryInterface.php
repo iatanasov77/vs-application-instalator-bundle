@@ -1,7 +1,7 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Repository;
 
 use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfoInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 interface InstalationInfoRepositoryInterface extends RepositoryInterface
 {

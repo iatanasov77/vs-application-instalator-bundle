@@ -2,7 +2,7 @@
 
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Gedmo\Translatable\TranslatableListener;
 
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -58,6 +58,7 @@ final class LocaleSetup implements LocaleSetupInterface
         /** @var LocaleInterface $locale */
         $locale = $this->localeFactory->createNew();
         
+        $locale->setActive( true );
         $locale->setTranslatableLocale( $language['code'] );
         $locale->setCode( $language['code'] );
         $locale->setTitle( $language['language'] );

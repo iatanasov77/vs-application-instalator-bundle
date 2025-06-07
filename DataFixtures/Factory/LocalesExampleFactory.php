@@ -2,7 +2,7 @@
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
 
@@ -36,6 +36,7 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
         if ( ! $localeEntity ) {
             $localeEntity = $this->localesFactory->createNew();
             
+            $localeEntity->setActive( $options['active'] );
             $localeEntity->setTranslatableLocale( $options['locale'] );
             $localeEntity->setTitle( $options['title'] );
             $localeEntity->setCode( $options['code'] );
@@ -59,6 +60,9 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
     protected function configureOptions( OptionsResolver $resolver ): void
     {
         $resolver
+            ->setDefault( 'active', true )
+            ->setAllowedTypes( 'active', ['bool'] )
+            
             ->setDefault( 'locale', 'en_US' )
             ->setAllowedTypes( 'locale', ['string'] )
             

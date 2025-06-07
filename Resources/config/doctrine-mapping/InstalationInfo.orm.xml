@@ -12,7 +12,7 @@
         </id>
 
         <field name="version" column="version" type="string" length="12" />
-        <field name="data" type="array" />
+        <field name="data" type="json" />
         
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
