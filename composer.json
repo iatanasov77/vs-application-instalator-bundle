@@ -13,11 +13,11 @@
 		}
 	],
 	"require" : {
-		"php" : "^8.1",
-		"symfony/templating" : "^6.4",
+		"php" : "^8.2",
+		"symfony/templating" : "^6.4 || ^7.4",
 		"doctrine/doctrine-migrations-bundle" : "^3.3",
 		"doctrine/doctrine-fixtures-bundle" : "^3.5",
-		"sylius/resource-bundle" : "^1.12",
+		"sylius/resource-bundle" : "^1.13",
 		"sylius/fixtures-bundle" : "^1.9"
 	},
 	"autoload" : {
