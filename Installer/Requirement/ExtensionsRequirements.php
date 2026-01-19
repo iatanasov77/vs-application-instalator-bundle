@@ -7,104 +7,104 @@ final class ExtensionsRequirements extends RequirementCollection
 {
     public function __construct( TranslatorInterface $translator )
     {
-        parent::__construct( $translator->trans( 'sylius.installer.extensions.header', [] ) );
+        parent::__construct( $translator->trans( 'vs_application_instalator.installer.extensions.header', [], 'VSApplicationInstalatorBundle' ) );
 
         $this
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.json_encode', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.json_encode', [], 'VSApplicationInstalatorBundle' ),
                 function_exists( 'json_encode' ),
                 true,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'JSON'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'JSON'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.session_start', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.session_start', [], 'VSApplicationInstalatorBundle' ),
                 function_exists( 'session_start' ),
                 true,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'session'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'session'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.ctype', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.ctype', [], 'VSApplicationInstalatorBundle' ),
                 function_exists( 'ctype_alpha' ),
                 true,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'ctype'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'ctype'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.token_get_all', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.token_get_all', [], 'VSApplicationInstalatorBundle' ),
                 function_exists( 'token_get_all' ),
                 true,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'JSON'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'JSON'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add (new Requirement(
-                $translator->trans( 'sylius.installer.extensions.simplexml_import_dom', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.simplexml_import_dom', [], 'VSApplicationInstalatorBundle' ),
                 function_exists( 'simplexml_import_dom' ),
                 true,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'SimpleXML'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'SimpleXML'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.apc', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.apc', [], 'VSApplicationInstalatorBundle' ),
                 ! ( function_exists( 'apc_store' ) && ini_get( 'apc.enabled' )) || version_compare( phpversion( 'apc' ), '3.0.17', '>=' ),
                 true,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'APC (>=3.0.17)'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'APC (>=3.0.17)'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.pcre', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.pcre', [], 'VSApplicationInstalatorBundle' ),
                 defined( 'PCRE_VERSION' ) ? ( (float ) substr( \PCRE_VERSION, 0, (int) strpos( \PCRE_VERSION, ' ') ) ) > 8.0 : false,
                 true,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'PCRE (>=8.0)'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'PCRE (>=8.0)'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.php_xml', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.php_xml', [], 'VSApplicationInstalatorBundle' ),
                 class_exists( \DOMDocument::class ),
                 false,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'PHP-XML'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'PHP-XML'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.mbstring', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.mbstring', [], 'VSApplicationInstalatorBundle' ),
                 function_exists('mb_strlen'),
                 false,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'mbstring'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'mbstring'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.iconv', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.iconv', [], 'VSApplicationInstalatorBundle' ),
                 function_exists( 'iconv' ),
                 false,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'iconv'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'iconv'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.exif', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.exif', [], 'VSApplicationInstalatorBundle' ),
                 function_exists( 'exif_read_data' ),
                 true,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'exif'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'exif'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.intl', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.intl', [], 'VSApplicationInstalatorBundle' ),
                 extension_loaded( 'intl' ),
                 true,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'intl'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'intl'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.fileinfo', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.fileinfo', [], 'VSApplicationInstalatorBundle' ),
                 extension_loaded( 'fileinfo' ),
                 true,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'fileinfo'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'fileinfo'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.accelerator.header', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.accelerator.header', [], 'VSApplicationInstalatorBundle' ),
                 ! empty( ini_get( 'opcache.enable' ) ),
                 false,
-                $translator->trans( 'sylius.installer.extensions.accelerator.help', [] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.accelerator.help', [], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.pdo', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.pdo', [], 'VSApplicationInstalatorBundle' ),
                 class_exists( 'PDO' ),
                 false,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'PDO'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'PDO'], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.gd', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.gd', [], 'VSApplicationInstalatorBundle' ),
                 defined( 'GD_VERSION' ),
                 true,
-                $translator->trans( 'sylius.installer.extensions.help', ['%extension%' => 'gd'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'gd'], 'VSApplicationInstalatorBundle' )
             ) )
         ;
 
@@ -123,10 +123,10 @@ final class ExtensionsRequirements extends RequirementCollection
             }
 
             $this->add( new Requirement(
-                $translator->trans( 'sylius.installer.extensions.icu', [] ),
+                $translator->trans( 'vs_application_instalator.installer.extensions.icu', [], 'VSApplicationInstalatorBundle' ),
                 version_compare( $version, '4.0', '>=' ),
                 false,
-                $translator->trans(' sylius.installer.extensions.help', ['%extension%' => 'ICU (>=4.0)'] )
+                $translator->trans( 'vs_application_instalator.installer.extensions.help', ['%extension%' => 'ICU (>=4.0)'], 'VSApplicationInstalatorBundle' )
             ) );
         }
     }

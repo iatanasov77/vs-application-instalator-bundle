@@ -1,3 +1,64 @@
 vs_application_instalator:
-
-
+    installer:
+        extensions:
+            header: extensions
+            accelerator:
+                header: Accelerator
+                help: Enable Zend OpCache (highly recommended).
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: Install and enable the %extension% extension.
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Fileinfo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
+            off: off
+            on: on
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: file system
+            cache:
+                header: cache
+                help: "To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            exists: exists
+            logs:
+                header: logs
+                help: "To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            not_exists: not exists
+            not_writable: not writable
+            parameters:
+                header: parameters.yml
+                help: "To set permissions run: sudo chmod a+w %path%"
+            vendors: vendors
+            writable: writable
+        settings:
+            header: PHP version and settings
+            any: any
+            detect_unicode: detect_unicode
+            detect_unicode_help: Set 'detect_unicode = Off' in your php.ini file
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: non deprecated
+            off: off
+            on: on
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+                auto_start_help: Set 'session.auto_start  = Off' in your php.ini file
+            short_open_tag: short_open_tag
+            timezone: timezone
+            timezone_help: Set 'date.timezone' in your php.ini file (e.g. date.timezone = "Europe/Amsterdam")
+            timezone_deprecated:
+                header: Deprecated timezone
+                help: Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).
+            version: PHP version
+            version_recommended: Recommended PHP version
+            version_help: Sylius recommends %recommended% PHP version, your current version is %current%. Please upgrade.

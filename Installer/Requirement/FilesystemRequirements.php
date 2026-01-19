@@ -7,32 +7,22 @@ final class FilesystemRequirements extends RequirementCollection
     /**
      * @param string $rootDir Deprecated.
      */
-    public function __construct( TranslatorInterface $translator, string $cacheDir, string $logsDir, ?string $rootDir = null )
+    public function __construct( TranslatorInterface $translator, string $cacheDir, string $logsDir )
     {
-        parent::__construct( $translator->trans( 'sylius.installer.filesystem.header', [] ) );
-
-        if ( func_num_args() >= 4 ) {
-            @trigger_error( sprintf(
-                'Passing root directory to "%s" constructor as the second argument is deprecated since 1.2 ' .
-                'and this argument will be removed in 2.0.',
-                self::class
-            ), \E_USER_DEPRECATED );
-
-            [$rootDir, $cacheDir, $logsDir] = [$cacheDir, $logsDir, $rootDir];
-        }
+        parent::__construct( $translator->trans( 'vs_application_instalator.installer.filesystem.header', [], 'VSApplicationInstalatorBundle' ) );
 
         $this
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.filesystem.cache.header', [] ),
+                $translator->trans( 'vs_application_instalator.installer.filesystem.cache.header', [], 'VSApplicationInstalatorBundle' ),
                 is_writable( $cacheDir ),
                 true,
-                $translator->trans( 'sylius.installer.filesystem.cache.help', ['%path%' => $cacheDir] )
+                $translator->trans( 'vs_application_instalator.installer.filesystem.cache.help', ['%path%' => $cacheDir], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.filesystem.logs.header', [] ),
+                $translator->trans( 'vs_application_instalator.installer.filesystem.logs.header', [] ),
                 is_writable( $logsDir ),
                 true,
-                $translator->trans( 'sylius.installer.filesystem.logs.help', ['%path%' => $logsDir] )
+                $translator->trans( 'vs_application_instalator.installer.filesystem.logs.help', ['%path%' => $logsDir], 'VSApplicationInstalatorBundle' )
             ) )
         ;
     }
