@@ -8,35 +8,35 @@ final class SettingsRequirements extends RequirementCollection
 
     public function __construct( TranslatorInterface $translator )
     {
-        parent::__construct( $translator->trans( 'sylius.installer.settings.header', [] ) );
+        parent::__construct( $translator->trans( 'vs_application_instalator.installer.settings.header', [], 'VSApplicationInstalatorBundle' ) );
 
         $this
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.settings.timezone' ),
+                $translator->trans( 'vs_application_instalator.installer.settings.timezone', [], 'VSApplicationInstalatorBundle' ),
                 $this->isOn( 'date.timezone' ),
                 true,
-                $translator->trans( 'sylius.installer.settings.timezone_help' )
+                $translator->trans( 'vs_application_instalator.installer.settings.timezone_help', [], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.settings.version_recommended' ),
+                $translator->trans( 'vs_application_instalator.installer.settings.version_recommended', [], 'VSApplicationInstalatorBundle' ),
                 version_compare( \PHP_VERSION, self::RECOMMENDED_PHP_VERSION, '>=' ),
                 false,
-                $translator->trans( 'sylius.installer.settings.version_help', [
+                $translator->trans( 'vs_application_instalator.installer.settings.version_help', [
                     '%current%'     => \PHP_VERSION,
                     '%recommended%' => self::RECOMMENDED_PHP_VERSION,
-                ])
+                ], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.settings.detect_unicode' ),
+                $translator->trans( 'vs_application_instalator.installer.settings.detect_unicode', [], 'VSApplicationInstalatorBundle' ),
                 !$this->isOn( 'detect_unicode' ),
                 false,
-                $translator->trans( 'sylius.installer.settings.detect_unicode_help' )
+                $translator->trans( 'vs_application_instalator.installer.settings.detect_unicode_help', [], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'sylius.installer.settings.session.auto_start' ),
+                $translator->trans( 'vs_application_instalator.installer.settings.session.auto_start', [], 'VSApplicationInstalatorBundle' ),
                 ! $this->isOn( 'session.auto_start' ),
                 false,
-                $translator->trans( 'sylius.installer.settings.session.auto_start_help' )
+                $translator->trans( 'vs_application_instalator.installer.settings.session.auto_start_help', [], 'VSApplicationInstalatorBundle' )
             ) )
         ;
     }
